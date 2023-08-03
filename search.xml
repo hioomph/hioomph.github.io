@@ -59,4 +59,36 @@
         <tag>algorithm</tag>
       </tags>
   </entry>
+  <entry>
+    <title>操作系统</title>
+    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1、daemon进程"><a href="#1、daemon进程" class="headerlink" title="1、daemon进程"></a>1、daemon进程</h2><p>又称守护进程、精灵进程。</p>
+<p><code>daemon进程</code>的特点：</p>
+<p>1）独立于控制终端；</p>
+<p>2）名字一般以<code>d</code>结尾；</p>
+<p>3）所有的服务存在于<code>etc/init.d</code></p>
+<p>4）是一个特殊的孤儿进程；</p>
+<p>5）输入被关闭，输出存在于日志中：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
+<h2 id="2、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#2、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="2、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>2、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
+<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
+<p>2）查看当前<code>tail</code>进程是否存在</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
+<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
+<p>输出被追加到<code>nohup.out</code>中</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
+<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
+<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
+<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
+]]></content>
+      <categories>
+        <category>Fundamentals of Computer</category>
+        <category>operating system</category>
+      </categories>
+  </entry>
 </search>
