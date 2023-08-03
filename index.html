@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-08-03 20:57:16 / 修改时间：21:01:29" itemprop="dateCreated datePublished" datetime="2023-08-03T20:57:16+08:00">2023-08-03</time>
+              <time title="创建时间：2023-08-03 20:57:16 / 修改时间：21:11:09" itemprop="dateCreated datePublished" datetime="2023-08-03T20:57:16+08:00">2023-08-03</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>113</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -259,21 +259,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1、Failed-to-stop-mysqld-service-Unit-mysqld-service-not-loaded"><a href="#1、Failed-to-stop-mysqld-service-Unit-mysqld-service-not-loaded" class="headerlink" title="1、Failed to stop mysqld.service: Unit mysqld.service not loaded."></a>1、Failed to stop mysqld.service: Unit mysqld.service not loaded.</h2><p>停止mysql服务，输入命令，出现报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~# service mysqld stop</span><br><span class="line">Failed to stop mysqld.service: Unit mysqld.service not loaded.</span><br></pre></td></tr></table></figure>
-
-<p>输入命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~<span class="comment"># systemctl enable mysql.service</span></span><br><span class="line">Synchronizing state of mysql.service with SysV service script with /lib/systemd/systemd<span class="literal">-sysv-install</span>.</span><br><span class="line">Executing: /lib/systemd/systemd<span class="literal">-sysv-install</span> enable mysql</span><br></pre></td></tr></table></figure>
-
-<p>此时，停止mysql服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~# systemctl stop mysql</span><br></pre></td></tr></table></figure>
-
-<p>同时当前已不存在mysql进程：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~# ps -aux|grep mysql</span><br><span class="line">root      628680  0.0  0.0   9032   724 pts/5    S+   20:56   0:00 grep --color=auto mysql</span><br></pre></td></tr></table></figure>
-
-
-
-
+          
       
     </div>
 

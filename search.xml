@@ -21,6 +21,28 @@
       </categories>
   </entry>
   <entry>
+    <title>graph_based model调试报错信息</title>
+    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
+
+<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>Graph_Based</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-mysql相关报错</title>
+    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>linux</category>
+        <category>mysql</category>
+      </categories>
+  </entry>
+  <entry>
     <title>hexo相关报错</title>
     <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/</url>
     <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
@@ -38,18 +60,6 @@
       <categories>
         <category>各种报错信息</category>
         <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>graph_based model调试报错信息</title>
-    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
-
-<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>Graph_Based</category>
       </categories>
   </entry>
   <entry>
@@ -73,30 +83,6 @@
       <categories>
         <category>Code相关</category>
         <category>vscode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>linux-mysql相关报错</title>
-    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<h2 id="1、Failed-to-stop-mysqld-service-Unit-mysqld-service-not-loaded"><a href="#1、Failed-to-stop-mysqld-service-Unit-mysqld-service-not-loaded" class="headerlink" title="1、Failed to stop mysqld.service: Unit mysqld.service not loaded."></a>1、Failed to stop mysqld.service: Unit mysqld.service not loaded.</h2><p>停止mysql服务，输入命令，出现报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@iisayhi:~# service mysqld stop</span><br><span class="line">Failed to stop mysqld.service: Unit mysqld.service not loaded.</span><br></pre></td></tr></table></figure>
-
-<p>输入命令：</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">root@iisayhi:~<span class="comment"># systemctl enable mysql.service</span></span><br><span class="line">Synchronizing state of mysql.service with SysV service script with /lib/systemd/systemd<span class="literal">-sysv-install</span>.</span><br><span class="line">Executing: /lib/systemd/systemd<span class="literal">-sysv-install</span> enable mysql</span><br></pre></td></tr></table></figure>
-
-<p>此时，停止mysql服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@iisayhi:~# systemctl stop mysql</span><br></pre></td></tr></table></figure>
-
-<p>同时当前已不存在mysql进程：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root@iisayhi:~# ps -aux|grep mysql</span><br><span class="line">root      628680  0.0  0.0   9032   724 pts/5    S+   20:56   0:00 grep --color=auto mysql</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>linux</category>
-        <category>mysql</category>
       </categories>
   </entry>
   <entry>
