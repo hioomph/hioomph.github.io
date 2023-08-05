@@ -189,6 +189,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/04/webserver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/04/webserver/" class="post-title-link" itemprop="url">webserver</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-04 12:22:30" itemprop="dateCreated datePublished" datetime="2023-08-04T12:22:30+08:00">2023-08-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-05 17:01:55" itemprop="dateModified" datetime="2023-08-05T17:01:55+08:00">2023-08-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、Reactor模式"><a href="#一、Reactor模式" class="headerlink" title="一、Reactor模式"></a>一、Reactor模式</h1><h2 id="1、Reactor的关键结构"><a href="#1、Reactor的关键结构" class="headerlink" title="1、Reactor的关键结构"></a>1、Reactor的关键结构</h2><p><code>Reactor</code>核心的事件分发机制，即将<code>IO multiplexing</code>拿到的<code>IO</code>事件分发给各个文件描述符<code>fd</code>的事件处理函数。</p>
+<p><code>Reactor</code>是一种事件驱动机制，和普通函数调用的不同之处在于：</p>
+<ul>
+<li>应用程序不是主动地调用某个<code>API</code>来完成处理；其逆置了事件处理流程，<strong>应用程序需要提供相应的接口并注册到<code>Reactor</code>上</strong>，如果相应的事件发生，<code>Reactor</code>将主动调用应用程序注册的接口，这些接口又称为<strong>回调函数</strong>。</li>
+</ul>
+<h3 id="（1）EventLoop：-事件循环"><a href="#（1）EventLoop：-事件循环" class="headerlink" title="（1）EventLoop： 事件循环"></a>（1）EventLoop： 事件循环</h3><p>从<code>EventLoop</code>的类定义中可以看出，除了⼀些状态量以外，每个<code>EventLoop</code>持有⼀个<code>Poller</code>的智能指针（对<code>epoll / poll</code>的封装），⼀个⽤于<code>EventLoop</code>之间通信的<code>Channel</code>，⾃⼰的线程<code>id</code>，互斥锁以及装有等待处理函数的<code>vector</code>。很明显，<code>EventLoop</code>并不直接管理各个连接的<code>Channel</code>（⽂件描述符的封装），⽽是通过<code>Poller</code>来进⾏的。<code>EventLoop</code>中最核⼼的函数就是<code>EventLoop::Loop()</code>。</p>
+<p><code>EventLoop</code>不可拷贝，且每个线程只能有一个<code>EventLoop</code>对象。<code>EventLoop</code>对象的生命周期通常和其所属的线程一样长。</p>
+<p><code>EventLoop</code>的头文件定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class EventLoop : boost::noncopyable</span><br><span class="line">&#123;</span><br><span class="line"> public:</span><br><span class="line"></span><br><span class="line">  EventLoop();</span><br><span class="line">  ~EventLoop();</span><br><span class="line"></span><br><span class="line">  void loop();</span><br><span class="line"></span><br><span class="line">  void assertInLoopThread()</span><br><span class="line">  &#123;</span><br><span class="line">    if (!isInLoopThread())</span><br><span class="line">    &#123;</span><br><span class="line">      abortNotInLoopThread();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  bool isInLoopThread() const &#123; return threadId_ == CurrentThread::tid(); &#125;</span><br><span class="line"></span><br><span class="line"> private:</span><br><span class="line"></span><br><span class="line">  void abortNotInLoopThread();</span><br><span class="line"></span><br><span class="line">  bool looping_; /* atomic */</span><br><span class="line">  const pid_t threadId_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>loop()</code>的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  /*</span><br><span class="line">  	在该函数中会循环执行以下过程：</span><br><span class="line">  		调用Poller::poll()，通过此调用获得一个vector&lt;channel*&gt;activeChannels_的就绪事件集合;</span><br><span class="line">  		再遍历该容器，执行每个Channel的Channel::handleEvent()完成相应就绪事件回调;</span><br><span class="line">  		最后执行pendingFunctors_排队的函数。</span><br><span class="line">  	上述一次循环就是一次Reactor模式完成。</span><br><span class="line">  */</span><br><span class="line">void EventLoop::loop()</span><br><span class="line">&#123;</span><br><span class="line">  assert(!looping_);</span><br><span class="line">  assertInLoopThread();</span><br><span class="line">  looping_ = true;</span><br><span class="line">  quit_ = false;</span><br><span class="line"></span><br><span class="line">  while (!quit_)</span><br><span class="line">  &#123;</span><br><span class="line">    activeChannels_.clear();</span><br><span class="line">    poller_-&gt;poll(kPollTimeMs, &amp;activeChannels_);</span><br><span class="line">    for (ChannelList::iterator it = activeChannels_.begin();</span><br><span class="line">        it != activeChannels_.end(); ++it)</span><br><span class="line">    &#123;</span><br><span class="line">      (*it)-&gt;handleEvent();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  LOG_TRACE &lt;&lt; &quot;EventLoop &quot; &lt;&lt; this &lt;&lt; &quot; stop looping&quot;;</span><br><span class="line">  looping_ = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="（2）Channel：事件分发器"><a href="#（2）Channel：事件分发器" class="headerlink" title="（2）Channel：事件分发器"></a>（2）Channel：事件分发器</h3><p>每个<code>Channel</code>对象自始至终只属于一个<code>EventLoop</code>，因此每个<code>Channel</code>对象都只属于一个<code>IO</code>线程。每个<code>Channel</code>对象只负责一个<code>fd</code>的事件分发，但不拥有这个<code>fd</code>，也不会在析构的时候关闭这个<code>fd</code>。</p>
+<p><code>Channel</code>不是基类，用户无须继承，一般使用更上层的封装，如<code>TcpConnection</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Channel : boost::noncopyable</span><br><span class="line">&#123;</span><br><span class="line"> public:</span><br><span class="line">  typedef boost::function&lt;void()&gt; EventCallback;</span><br><span class="line"></span><br><span class="line">  Channel(EventLoop* loop, int fd);</span><br><span class="line"></span><br><span class="line">  // Channel作为是事件分发器其核心结构是Channel::handleEvent()</span><br><span class="line">  // 该函数调用Channel::handleEventWithGuard()</span><br><span class="line">  // 在其内根据Channel::revents的值分发调用相应的事件回调。</span><br><span class="line">  void handleEvent();</span><br><span class="line">  </span><br><span class="line">  // set Callback()系列函数，接受`Channel`所属的类注册相应的事件回调函数。</span><br><span class="line">  void setReadCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; readCallback_ = cb; &#125;</span><br><span class="line">  void setWriteCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; writeCallback_ = cb; &#125;</span><br><span class="line">  void setErrorCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; errorCallback_ = cb; &#125;</span><br><span class="line"></span><br><span class="line">  int fd() const &#123; return fd_; &#125;</span><br><span class="line">  int events() const &#123; return events_; &#125;</span><br><span class="line">  void set_revents(int revt) &#123; revents_ = revt; &#125;</span><br><span class="line">  bool isNoneEvent() const &#123; return events_ == kNoneEvent; &#125;</span><br><span class="line"></span><br><span class="line">  void enableReading() &#123; events_ |= kReadEvent; update(); &#125;</span><br><span class="line">  // void enableWriting() &#123; events_ |= kWriteEvent; update(); &#125;</span><br><span class="line">  // void disableWriting() &#123; events_ &amp;= ~kWriteEvent; update(); &#125;</span><br><span class="line">  // void disableAll() &#123; events_ = kNoneEvent; update(); &#125;</span><br><span class="line"></span><br><span class="line">  // for Poller</span><br><span class="line">  int index() &#123; return index_; &#125;</span><br><span class="line">  void set_index(int idx) &#123; index_ = idx; &#125;</span><br><span class="line"></span><br><span class="line">  EventLoop* ownerLoop() &#123; return loop_; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）Polloer：IO-multiplexing的封装"><a href="#（3）Polloer：IO-multiplexing的封装" class="headerlink" title="（3）Polloer：IO multiplexing的封装"></a>（3）Polloer：IO multiplexing的封装</h3><p><code>Poller Class</code>是<code>IO multiplexing</code>的封装，它现在是个具体类，而在<code>muduo</code>中是个抽象基类，因为<code>muduo</code>同时支持<code>poll(2)</code>和<code>epoll(4)</code>两种<code>IO multiplexing</code>机制。<br><code>Poller</code>是<code>EventLoop</code>的间接成员，只供其<code>owner</code> <code>EventLoop</code>在<code>IO</code>线程调用，因此无需加锁。其生命与<code>EventLoop</code>相等。<code>Poller</code>并不拥有<code>Channel</code>，<code>Channel</code>在析构之前必须自己<code>unregister(EventLoop::removeChannel())</code>，避免空悬指针。</p>
+<p><code>Poller</code>类的作⽤就是<strong>负责监听⽂件描述符事件是否触发</strong>以及<strong>返回发⽣事件的⽂件描述符以及具体事件</strong>。所以⼀个<code>Poller</code>对象对应⼀个<code>IO</code>多路复⽤模块。在<code>muduo</code>中，⼀个<code>EventLoop</code>对应⼀个<code>Poller</code>。</p>
+<p><code>Poller</code>的主要成员变量就三个：</p>
+<ol>
+<li><code>epollFd_</code>：就是⽤<code>epoll_create</code>⽅法返回的<code>epoll</code>句柄，这个是常识。</li>
+<li><code>events_</code>：存放<code>epoll_wait()</code>返回的活动事件（是⼀个结构体）</li>
+<li><code>channelMap_ </code>：这个变量是<code>std::unordered_map&lt;int, std::shared_ptr&lt;Channel&gt;&gt;</code>类型，负责记录<br>⽂件描述符<code>fd -&gt; Channel</code>的映射，也帮忙保管所有注册在这个<code>Poller</code>上的<code>Channel</code>。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void Epoll::poll(std::vector&lt;sp_Channel&gt;&amp; req) &#123;</span><br><span class="line"> int event_count =</span><br><span class="line"> Epoll_wait(epollFd_, &amp;*events_.begin(), events_.size(), EPOLLWAIT_TIME);</span><br><span class="line"> for(int i = 0; i &lt; event_count; ++i) &#123;</span><br><span class="line"> int fd = events_[i].data.fd;</span><br><span class="line"> sp_Channel temp = channelMap_[fd];</span><br><span class="line"> temp-&gt;setRevents(events_[i].events);</span><br><span class="line"> req.emplace_back(std::move(temp));</span><br><span class="line"> &#125;</span><br><span class="line"> // LOG &lt;&lt; &quot;Epoll finished&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当外部调⽤<code>poll</code>⽅法的时候，该⽅法底层其实是通过<code>epoll_wait</code>获取这个事件监听器上发⽣事件的<code>fd</code>及其对应发⽣的事件，我们知道每个<code>fd</code>都是由⼀个<code>Channel</code>封装的，通过哈希表<code>channelMap_</code>可以根据<code>fd</code>找到封装这个<code>fd</code>的<code>Channel</code>。将<code>IO</code>多路复⽤模块监听到该<code>fd</code>发⽣的事件写进这个<code>Channel</code>中的<code>revents</code>成员变量中。然后把这个<code>Channel</code>装进<code>req</code>中。这样，当外界调⽤完<code>poll</code>之后就能拿到<code>IO</code>多路复⽤模块的<strong>监听结果</strong><code>(std::vector&lt;sp_Channel&gt;&amp; req)</code>。</p>
+<h3 id="（4）Reactor模式的核心架构"><a href="#（4）Reactor模式的核心架构" class="headerlink" title="（4）Reactor模式的核心架构"></a>（4）Reactor模式的核心架构</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308051524737.png" alt="Reactor模式的核心架构"></p>
+<h1 id="二、WebServer"><a href="#二、WebServer" class="headerlink" title="二、WebServer"></a>二、WebServer</h1><h2 id="1、项目框架"><a href="#1、项目框架" class="headerlink" title="1、项目框架"></a>1、项目框架</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-webserver.cpp</span><br><span class="line">-webserver.h</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、webserver-cpp"><a href="#2、webserver-cpp" class="headerlink" title="2、webserver.cpp"></a>2、webserver.cpp</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">WebServer();</span><br><span class="line">~WebServer();</span><br><span class="line"></span><br><span class="line">bool dealclientdata();</span><br><span class="line">bool dealwithsignal(bool&amp; timeout, bool&amp; stop_server);</span><br><span class="line">void dealwithread(int sockfd);</span><br><span class="line">void dealwithwrite(int sockfd);</span><br><span class="line">void eventLoop();</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -857,14 +983,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -900,12 +1026,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">1k</span>
+    <span title="站点总字数">2k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5 分钟</span>
+    <span title="站点阅读时长">9 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

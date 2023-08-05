@@ -53,35 +53,47 @@
       </categories>
   </entry>
   <entry>
-    <title>linux-mysql相关报错</title>
-    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>linux</category>
-        <category>mysql</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+    <title>webserver</title>
+    <url>/2023/08/04/webserver/</url>
+    <content><![CDATA[<h1 id="一、Reactor模式"><a href="#一、Reactor模式" class="headerlink" title="一、Reactor模式"></a>一、Reactor模式</h1><h2 id="1、Reactor的关键结构"><a href="#1、Reactor的关键结构" class="headerlink" title="1、Reactor的关键结构"></a>1、Reactor的关键结构</h2><p><code>Reactor</code>核心的事件分发机制，即将<code>IO multiplexing</code>拿到的<code>IO</code>事件分发给各个文件描述符<code>fd</code>的事件处理函数。</p>
+<p><code>Reactor</code>是一种事件驱动机制，和普通函数调用的不同之处在于：</p>
+<ul>
+<li>应用程序不是主动地调用某个<code>API</code>来完成处理；其逆置了事件处理流程，<strong>应用程序需要提供相应的接口并注册到<code>Reactor</code>上</strong>，如果相应的事件发生，<code>Reactor</code>将主动调用应用程序注册的接口，这些接口又称为<strong>回调函数</strong>。</li>
+</ul>
+<h3 id="（1）EventLoop：-事件循环"><a href="#（1）EventLoop：-事件循环" class="headerlink" title="（1）EventLoop： 事件循环"></a>（1）EventLoop： 事件循环</h3><p>从<code>EventLoop</code>的类定义中可以看出，除了⼀些状态量以外，每个<code>EventLoop</code>持有⼀个<code>Poller</code>的智能指针（对<code>epoll / poll</code>的封装），⼀个⽤于<code>EventLoop</code>之间通信的<code>Channel</code>，⾃⼰的线程<code>id</code>，互斥锁以及装有等待处理函数的<code>vector</code>。很明显，<code>EventLoop</code>并不直接管理各个连接的<code>Channel</code>（⽂件描述符的封装），⽽是通过<code>Poller</code>来进⾏的。<code>EventLoop</code>中最核⼼的函数就是<code>EventLoop::Loop()</code>。</p>
+<p><code>EventLoop</code>不可拷贝，且每个线程只能有一个<code>EventLoop</code>对象。<code>EventLoop</code>对象的生命周期通常和其所属的线程一样长。</p>
+<p><code>EventLoop</code>的头文件定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class EventLoop : boost::noncopyable</span><br><span class="line">&#123;</span><br><span class="line"> public:</span><br><span class="line"></span><br><span class="line">  EventLoop();</span><br><span class="line">  ~EventLoop();</span><br><span class="line"></span><br><span class="line">  void loop();</span><br><span class="line"></span><br><span class="line">  void assertInLoopThread()</span><br><span class="line">  &#123;</span><br><span class="line">    if (!isInLoopThread())</span><br><span class="line">    &#123;</span><br><span class="line">      abortNotInLoopThread();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  bool isInLoopThread() const &#123; return threadId_ == CurrentThread::tid(); &#125;</span><br><span class="line"></span><br><span class="line"> private:</span><br><span class="line"></span><br><span class="line">  void abortNotInLoopThread();</span><br><span class="line"></span><br><span class="line">  bool looping_; /* atomic */</span><br><span class="line">  const pid_t threadId_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<p><code>loop()</code>的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  /*</span><br><span class="line">  	在该函数中会循环执行以下过程：</span><br><span class="line">  		调用Poller::poll()，通过此调用获得一个vector&lt;channel*&gt;activeChannels_的就绪事件集合;</span><br><span class="line">  		再遍历该容器，执行每个Channel的Channel::handleEvent()完成相应就绪事件回调;</span><br><span class="line">  		最后执行pendingFunctors_排队的函数。</span><br><span class="line">  	上述一次循环就是一次Reactor模式完成。</span><br><span class="line">  */</span><br><span class="line">void EventLoop::loop()</span><br><span class="line">&#123;</span><br><span class="line">  assert(!looping_);</span><br><span class="line">  assertInLoopThread();</span><br><span class="line">  looping_ = true;</span><br><span class="line">  quit_ = false;</span><br><span class="line"></span><br><span class="line">  while (!quit_)</span><br><span class="line">  &#123;</span><br><span class="line">    activeChannels_.clear();</span><br><span class="line">    poller_-&gt;poll(kPollTimeMs, &amp;activeChannels_);</span><br><span class="line">    for (ChannelList::iterator it = activeChannels_.begin();</span><br><span class="line">        it != activeChannels_.end(); ++it)</span><br><span class="line">    &#123;</span><br><span class="line">      (*it)-&gt;handleEvent();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  LOG_TRACE &lt;&lt; &quot;EventLoop &quot; &lt;&lt; this &lt;&lt; &quot; stop looping&quot;;</span><br><span class="line">  looping_ = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+
+
+<h3 id="（2）Channel：事件分发器"><a href="#（2）Channel：事件分发器" class="headerlink" title="（2）Channel：事件分发器"></a>（2）Channel：事件分发器</h3><p>每个<code>Channel</code>对象自始至终只属于一个<code>EventLoop</code>，因此每个<code>Channel</code>对象都只属于一个<code>IO</code>线程。每个<code>Channel</code>对象只负责一个<code>fd</code>的事件分发，但不拥有这个<code>fd</code>，也不会在析构的时候关闭这个<code>fd</code>。</p>
+<p><code>Channel</code>不是基类，用户无须继承，一般使用更上层的封装，如<code>TcpConnection</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Channel : boost::noncopyable</span><br><span class="line">&#123;</span><br><span class="line"> public:</span><br><span class="line">  typedef boost::function&lt;void()&gt; EventCallback;</span><br><span class="line"></span><br><span class="line">  Channel(EventLoop* loop, int fd);</span><br><span class="line"></span><br><span class="line">  // Channel作为是事件分发器其核心结构是Channel::handleEvent()</span><br><span class="line">  // 该函数调用Channel::handleEventWithGuard()</span><br><span class="line">  // 在其内根据Channel::revents的值分发调用相应的事件回调。</span><br><span class="line">  void handleEvent();</span><br><span class="line">  </span><br><span class="line">  // set Callback()系列函数，接受`Channel`所属的类注册相应的事件回调函数。</span><br><span class="line">  void setReadCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; readCallback_ = cb; &#125;</span><br><span class="line">  void setWriteCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; writeCallback_ = cb; &#125;</span><br><span class="line">  void setErrorCallback(const EventCallback&amp; cb)</span><br><span class="line">  &#123; errorCallback_ = cb; &#125;</span><br><span class="line"></span><br><span class="line">  int fd() const &#123; return fd_; &#125;</span><br><span class="line">  int events() const &#123; return events_; &#125;</span><br><span class="line">  void set_revents(int revt) &#123; revents_ = revt; &#125;</span><br><span class="line">  bool isNoneEvent() const &#123; return events_ == kNoneEvent; &#125;</span><br><span class="line"></span><br><span class="line">  void enableReading() &#123; events_ |= kReadEvent; update(); &#125;</span><br><span class="line">  // void enableWriting() &#123; events_ |= kWriteEvent; update(); &#125;</span><br><span class="line">  // void disableWriting() &#123; events_ &amp;= ~kWriteEvent; update(); &#125;</span><br><span class="line">  // void disableAll() &#123; events_ = kNoneEvent; update(); &#125;</span><br><span class="line"></span><br><span class="line">  // for Poller</span><br><span class="line">  int index() &#123; return index_; &#125;</span><br><span class="line">  void set_index(int idx) &#123; index_ = idx; &#125;</span><br><span class="line"></span><br><span class="line">  EventLoop* ownerLoop() &#123; return loop_; &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）Polloer：IO-multiplexing的封装"><a href="#（3）Polloer：IO-multiplexing的封装" class="headerlink" title="（3）Polloer：IO multiplexing的封装"></a>（3）Polloer：IO multiplexing的封装</h3><p><code>Poller Class</code>是<code>IO multiplexing</code>的封装，它现在是个具体类，而在<code>muduo</code>中是个抽象基类，因为<code>muduo</code>同时支持<code>poll(2)</code>和<code>epoll(4)</code>两种<code>IO multiplexing</code>机制。<br><code>Poller</code>是<code>EventLoop</code>的间接成员，只供其<code>owner</code> <code>EventLoop</code>在<code>IO</code>线程调用，因此无需加锁。其生命与<code>EventLoop</code>相等。<code>Poller</code>并不拥有<code>Channel</code>，<code>Channel</code>在析构之前必须自己<code>unregister(EventLoop::removeChannel())</code>，避免空悬指针。</p>
+<p><code>Poller</code>类的作⽤就是<strong>负责监听⽂件描述符事件是否触发</strong>以及<strong>返回发⽣事件的⽂件描述符以及具体事件</strong>。所以⼀个<code>Poller</code>对象对应⼀个<code>IO</code>多路复⽤模块。在<code>muduo</code>中，⼀个<code>EventLoop</code>对应⼀个<code>Poller</code>。</p>
+<p><code>Poller</code>的主要成员变量就三个：</p>
+<ol>
+<li><code>epollFd_</code>：就是⽤<code>epoll_create</code>⽅法返回的<code>epoll</code>句柄，这个是常识。</li>
+<li><code>events_</code>：存放<code>epoll_wait()</code>返回的活动事件（是⼀个结构体）</li>
+<li><code>channelMap_ </code>：这个变量是<code>std::unordered_map&lt;int, std::shared_ptr&lt;Channel&gt;&gt;</code>类型，负责记录<br>⽂件描述符<code>fd -&gt; Channel</code>的映射，也帮忙保管所有注册在这个<code>Poller</code>上的<code>Channel</code>。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">void Epoll::poll(std::vector&lt;sp_Channel&gt;&amp; req) &#123;</span><br><span class="line"> int event_count =</span><br><span class="line"> Epoll_wait(epollFd_, &amp;*events_.begin(), events_.size(), EPOLLWAIT_TIME);</span><br><span class="line"> for(int i = 0; i &lt; event_count; ++i) &#123;</span><br><span class="line"> int fd = events_[i].data.fd;</span><br><span class="line"> sp_Channel temp = channelMap_[fd];</span><br><span class="line"> temp-&gt;setRevents(events_[i].events);</span><br><span class="line"> req.emplace_back(std::move(temp));</span><br><span class="line"> &#125;</span><br><span class="line"> // LOG &lt;&lt; &quot;Epoll finished&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当外部调⽤<code>poll</code>⽅法的时候，该⽅法底层其实是通过<code>epoll_wait</code>获取这个事件监听器上发⽣事件的<code>fd</code>及其对应发⽣的事件，我们知道每个<code>fd</code>都是由⼀个<code>Channel</code>封装的，通过哈希表<code>channelMap_</code>可以根据<code>fd</code>找到封装这个<code>fd</code>的<code>Channel</code>。将<code>IO</code>多路复⽤模块监听到该<code>fd</code>发⽣的事件写进这个<code>Channel</code>中的<code>revents</code>成员变量中。然后把这个<code>Channel</code>装进<code>req</code>中。这样，当外界调⽤完<code>poll</code>之后就能拿到<code>IO</code>多路复⽤模块的<strong>监听结果</strong><code>(std::vector&lt;sp_Channel&gt;&amp; req)</code>。</p>
+<h3 id="（4）Reactor模式的核心架构"><a href="#（4）Reactor模式的核心架构" class="headerlink" title="（4）Reactor模式的核心架构"></a>（4）Reactor模式的核心架构</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308051524737.png" alt="Reactor模式的核心架构"></p>
+<h1 id="二、WebServer"><a href="#二、WebServer" class="headerlink" title="二、WebServer"></a>二、WebServer</h1><h2 id="1、项目框架"><a href="#1、项目框架" class="headerlink" title="1、项目框架"></a>1、项目框架</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-webserver.cpp</span><br><span class="line">-webserver.h</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、webserver-cpp"><a href="#2、webserver-cpp" class="headerlink" title="2、webserver.cpp"></a>2、webserver.cpp</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">WebServer();</span><br><span class="line">~WebServer();</span><br><span class="line"></span><br><span class="line">bool dealclientdata();</span><br><span class="line">bool dealwithsignal(bool&amp; timeout, bool&amp; stop_server);</span><br><span class="line">void dealwithread(int sockfd);</span><br><span class="line">void dealwithwrite(int sockfd);</span><br><span class="line">void eventLoop();</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>各种报错信息</category>
-        <category>vscode</category>
+        <category>项目</category>
+        <category>c++</category>
       </categories>
   </entry>
   <entry>
@@ -134,6 +146,38 @@
 ]]></content>
       <categories>
         <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>vscode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-mysql相关报错</title>
+    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>linux</category>
+        <category>mysql</category>
       </categories>
   </entry>
 </search>
