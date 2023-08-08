@@ -29,10 +29,13 @@
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
 <meta property="og:description" content="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.1234567891011121314Traceback (most recent call last):  File &quot;&#x2F;tmp&#x2F;pycharm_project_917&#x2F;utils&#x2F;UCSD&#x2F;make_mask.py&amp;qu">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png">
 <meta property="article:published_time" content="2023-08-03T11:46:41.758Z">
-<meta property="article:modified_time" content="2023-08-03T12:11:32.449Z">
+<meta property="article:modified_time" content="2023-08-08T07:20:15.042Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png">
 
 <link rel="canonical" href="http://example.com/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/">
 
@@ -216,10 +219,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-08-03 19:46:41 / 修改时间：20:11:32" itemprop="dateCreated datePublished" datetime="2023-08-03T19:46:41+08:00">2023-08-03</time>
+              <time title="创建时间：2023-08-03 19:46:41" itemprop="dateCreated datePublished" datetime="2023-08-03T19:46:41+08:00">2023-08-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-08 15:20:15" itemprop="dateModified" datetime="2023-08-08T15:20:15+08:00">2023-08-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,14 +249,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>258</span>
+              <span>477</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -263,6 +272,20 @@
 
 <p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
+<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
+<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
+<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
+
     </div>
 
     
@@ -342,7 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Could-not-run-%E2%80%98aten-slow-conv3d-forward%E2%80%99-with-arguments-from-the-%E2%80%98CUDA%E2%80%99-backend"><span class="nav-number">1.</span> <span class="nav-text">1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81Could-not-run-%E2%80%98aten-slow-conv3d-forward%E2%80%99-with-arguments-from-the-%E2%80%98CUDA%E2%80%99-backend"><span class="nav-number">1.</span> <span class="nav-text">1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81test-annos%E9%83%A8%E5%88%86%E4%B8%BA%E7%A9%BA"><span class="nav-number">2.</span> <span class="nav-text">2、test_annos部分为空</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -406,7 +429,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">21 分钟</span>
+    <span title="站点阅读时长">22 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
