@@ -3,101 +3,34 @@
   <entry>
     <title>C++基础</title>
     <url>/2023/08/06/C++%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h2 id="1、动态分配内存"><a href="#1、动态分配内存" class="headerlink" title="1、动态分配内存"></a>1、动态分配内存</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">class MyClass &#123;</span><br><span class="line">private:</span><br><span class="line">    T* m_array;</span><br><span class="line">    size_t max_size;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    MyClass(size_t size) : max_size(size) &#123; // 此处为构造函数的成员初始化列表</span><br><span class="line">        m_array = new T[max_size];</span><br><span class="line">        // 创建一个大小为 max_size 的数组，并将数组的首地址赋值给指针 m_array</span><br><span class="line">		// 这里的 T 是一个类型模板参数，可以是任意类型</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~MyClass() &#123;</span><br><span class="line">        delete[] m_array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>m_array</code>将指向一片<strong>连续</strong>的内存区域。</p>
-<p><strong>注意</strong>：如果在类中使用了动态内存分配，应该同时实现复制构造函数和赋值运算符，并根据需要管理动态内存的拷贝。这是因为默认的复制构造函数和赋值运算符只进行浅拷贝，可能导致多个对象共享同一块内存，造成潜在的错误和内存问题。</p>
-<h2 id="2、函数"><a href="#2、函数" class="headerlink" title="2、函数"></a>2、函数</h2><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>函数原型</th>
-<th>定义</th>
-<th>参数解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>strrchr</td>
-<td>#include &lt;string.h&gt;<br/> extern char * strrchr(const char *s, int c)</td>
-<td>查找一个字符串在另一个字符串中 末次 出现的位置，并返回从字符串中的这个位置起，一直到字符串结束的所有字符；<br/>  如果未能找到指定字符，那么函数将返回False。</td>
-<td>s为一个字符串的指针；<br/>c为一个待查找字符。</td>
-</tr>
-<tr>
-<td>snprintf</td>
-<td>int snprintf(char *str, int n, char * format [, argument, …]);</td>
-<td>参数n表示向str中写入n个字符，包括’\0’字符，并且返回实际的字符串长度</td>
-<td>str为要写入的字符串；n为要写入的字符的最大数目，超过n会被截断；format为<a href="https://so.csdn.net/so/search?q=%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2&spm=1001.2101.3001.7020">格式化字符串</a>，与printf()函数相同；argument为变量。</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
+    <content><![CDATA[]]></content>
       <categories>
         <category>code相关</category>
         <category>c++</category>
-        <category>内存</category>
       </categories>
   </entry>
   <entry>
-    <title>C++基础</title>
-    <url>/2023/08/06/C++%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h2 id="5、单项队列"><a href="#5、单项队列" class="headerlink" title="5、单项队列"></a>5、单项队列</h2><p>队列（<code>queue</code>）是一种线性数据结构，其元素<strong>先入先出</strong><code>FIFO</code>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308061426148.png" alt="队列"></p>
-<p>采用链表实现。</p>
-<h3 id="（1）初始化"><a href="#（1）初始化" class="headerlink" title="（1）初始化"></a>（1）初始化</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;cassert&gt;</span><br><span class="line"></span><br><span class="line">typedef int QDataType;</span><br><span class="line"></span><br><span class="line">// 链式结构表示队列</span><br><span class="line">typedef struct QueueNode</span><br><span class="line">&#123;</span><br><span class="line">    QDataType data;         // 节点的数据域</span><br><span class="line">    struct QueueNode* next; // 节点的指针域</span><br><span class="line">&#125;QNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 队列的结构 （找到队列的头和尾的）</span><br><span class="line">// 因为我们要控制队列，队列里面不止一个值，而是有多个值，要方便头删和尾插</span><br><span class="line">typedef struct Queue</span><br><span class="line">&#123;</span><br><span class="line">	QNode* head; // 队列的头指针</span><br><span class="line">	QNode* tail; // 队列的尾指针</span><br><span class="line">&#125;Queue;</span><br><span class="line"></span><br><span class="line">// 初始化队列 </span><br><span class="line">void QueueInit(Queue* pq) &#123;</span><br><span class="line">	assert(pq); // 队列可以为空，但是管理队列的头指针和尾指针不能为空</span><br><span class="line">	pq-&gt;head = nullptr;</span><br><span class="line">	pq-&gt;tail = nullptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Python jpg和bmp转化为RGB格式</title>
+    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
 
-<h3 id="（2）队尾入队列"><a href="#（2）队尾入队列" class="headerlink" title="（2）队尾入队列"></a>（2）队尾入队列</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 队尾入队列（尾插）</span><br><span class="line">void QueuePush(Queue* pq, QDataType x) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line"></span><br><span class="line">	/* 开辟一个新结点 */</span><br><span class="line">	QNode* newnode = (QNode*)malloc(sizeof(QNode));</span><br><span class="line">	if (newnode == NULL) </span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;malloc fail\n&quot;);</span><br><span class="line">		exit(-1);</span><br><span class="line">	&#125;</span><br><span class="line">	newnode-&gt;data = x;		// 把x赋给newnode的数据域</span><br><span class="line">	newnode-&gt;next = NULL;	// 因为是尾插，所以尾部的结点的next要指向NULL</span><br><span class="line"></span><br><span class="line">	/* 如果头、尾都为空，那么说明队列还是空的，还没有结点 */</span><br><span class="line">	if (pq-&gt;head == NULL &amp;&amp; pq-&gt;tail == NULL) </span><br><span class="line">	&#123;</span><br><span class="line">		assert(pq);</span><br><span class="line">		pq-&gt;head = pq-&gt;tail = newnode;</span><br><span class="line">	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123; </span><br><span class="line">		// 说明队列已经有结点了，直接到插入到尾部即可</span><br><span class="line">		pq-&gt;tail-&gt;next = newnode;	// 把newnode链接到tail的next</span><br><span class="line">		pq-&gt;tail = newnode; 		// 然后让tail指向newnode</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
 
-<h3 id="（3）队头出队列"><a href="#（3）队头出队列" class="headerlink" title="（3）队头出队列"></a>（3）队头出队列</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 队头出队列 </span><br><span class="line">void QueuePop(Queue* pq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line">	assert(pq-&gt;head &amp;&amp; pq-&gt;tail); // 队列的head和tail不能为空,不然怎么头删呢？</span><br><span class="line"></span><br><span class="line">	// 如果head的next为空，那么说明只有一个结点</span><br><span class="line">	if (pq-&gt;head-&gt;next == NULL) </span><br><span class="line">	&#123;</span><br><span class="line">		free(pq-&gt;head); // 直接释放掉head</span><br><span class="line">		pq-&gt;head = pq-&gt;tail = NULL; // 然后把head和tail置为空</span><br><span class="line">	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123;</span><br><span class="line">		QNode* next = pq-&gt;head-&gt;next; // 保存头结点的下一个结点地址</span><br><span class="line">		free(pq-&gt;head);		// 释放head</span><br><span class="line">		pq-&gt;head = next;	// 改变队头指针指向</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（4）获取元素"><a href="#（4）获取元素" class="headerlink" title="（4）获取元素"></a>（4）获取元素</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1) 获取队列头部元素 </span><br><span class="line">QDataType QueueFront(Queue* pq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line">	assert(pq-&gt;head); 		// 检查队列是否为空</span><br><span class="line">	return pq-&gt;head-&gt;data;	// 返回队头指针指向的数据</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2) 获取队列队尾元素 </span><br><span class="line">QDataType QueueBack(Queue* pq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line">	assert(pq-&gt;tail); 		// 取队尾的数据，那么tail肯定不能为空</span><br><span class="line">	return pq-&gt;tail-&gt;data;	// 返回队尾指针指向的数据</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 3) 获取队列中有效元素个数 </span><br><span class="line">int QueueSize(Queue* pq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line">	</span><br><span class="line">	QNode* cur = pq-&gt;head;	// 使用cur遍历整个队列</span><br><span class="line">	int count = 0;			// 统计队列结点个数</span><br><span class="line">	while (cur) </span><br><span class="line">	&#123; </span><br><span class="line">		//当cur不为空,就进入循环,开始遍历</span><br><span class="line">		count++;</span><br><span class="line">		cur = cur-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	return count; // 返回队列中的结点数</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（5）检测队列是否为空"><a href="#（5）检测队列是否为空" class="headerlink" title="（5）检测队列是否为空"></a>（5）检测队列是否为空</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 检测队列是否为空，如果为空返回非零结果，如果非空返回0 </span><br><span class="line">bool QueueEmpty(Queue* pq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pq);</span><br><span class="line"></span><br><span class="line">	// 如果head或者tail等于空，说明队列为空</span><br><span class="line">	return pq-&gt;head == NULL &amp;&amp; pq-&gt;tail == NULL;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（6）销毁队列"><a href="#（6）销毁队列" class="headerlink" title="（6）销毁队列"></a>（6）销毁队列</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 销毁队列 </span><br><span class="line">void QueueDestroy(Queue* pq) &#123;</span><br><span class="line">	assert(pq);</span><br><span class="line">	</span><br><span class="line">	QNode* cur = pq-&gt;head;		//使用cur遍历整个队列</span><br><span class="line">	QNode* next = cur-&gt;next;	//存储cur的下一个结点</span><br><span class="line">	</span><br><span class="line">	while (cur) </span><br><span class="line">	&#123; </span><br><span class="line">		// 开始遍历队列</span><br><span class="line">		free(cur);	// 释放掉cur</span><br><span class="line">		cur = next; // 把cur的下一个结点赋给cur</span><br><span class="line">	&#125;</span><br><span class="line">	pq-&gt;head = NULL; // 队头置空</span><br><span class="line">	pq-&gt;tail = NULL; // 队尾置空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6、循环队列"><a href="#6、循环队列" class="headerlink" title="6、循环队列"></a>6、循环队列</h2><p>在循环队列中，当队列为空时，有<code>front=rear</code>，而当所有队列空间全占满时，也有<code>front=rear</code>。为了区别这两种情况，规定循环队列最多只能有<code>MaxSize-1</code>个队列元素，当循环队列中只剩下一个空存储单元时，队列就已经满了。</p>
-<p>因此，<strong>队列判空</strong>的条件是<code>front=rear</code>，而<strong>队列判满</strong>的条件是<code>front=（rear+1)%MaxSize</code>。</p>
-<h3 id="（1）初始化队列"><a href="#（1）初始化队列" class="headerlink" title="（1）初始化队列"></a>（1）初始化队列</h3><p>用<strong>数组</strong>来初始化，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308061511998.png" alt="39b30d93bca540d096b610ff01408b4e"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">typedef int CQDataType;</span><br><span class="line"></span><br><span class="line">typedef struct CircularQueue</span><br><span class="line">&#123;</span><br><span class="line">	CQDataType* a;	// 队列</span><br><span class="line">	int head; 		// 头</span><br><span class="line">	int tail; 		// 尾</span><br><span class="line">	int size; 		// 存储数据个数</span><br><span class="line">&#125;CQ;</span><br><span class="line"></span><br><span class="line">// 环形队列初始化，设置队列长度为k </span><br><span class="line">void CQueueInit(CQ* pcq, int k) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	pcq-&gt;a = (int*)malloc(sizeof(int) * (k + 1));  // 这里的k+1即代表多开一个空间</span><br><span class="line">	pcq-&gt;head = pcq-&gt;tail = 0;</span><br><span class="line">	pcq-&gt;size = k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）入队列"><a href="#（2）入队列" class="headerlink" title="（2）入队列"></a>（2）入队列</h3><p>向循环队列插入一个元素，很简单直接插入即可。</p>
-<p>但是有一点要注意，如果<code>tail</code> 等于<code>size</code>，那么说明<code>tail</code>已经走到边界了，所以<code>tail</code>需要置为<code>0</code>，也就是重新返回到<strong>初始位置</strong>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 入队列</span><br><span class="line">void CQueuePush(CQ* pcq, CQDataType x) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	/* 如果队列满了,那么肯定不能插入 */</span><br><span class="line">	if (CQueueFull(pcq)) </span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;队满\n&quot;);</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 当程序走到这里说明队列还没有满 */</span><br><span class="line">	pcq-&gt;a[pcq-&gt;tail] = x; // 把x存到tail指向的位置</span><br><span class="line"></span><br><span class="line">	/* 如果队尾指针tail等于size,说明tail已经到边界了 */</span><br><span class="line">	if (pcq-&gt;tail == pcq-&gt;size) </span><br><span class="line">	&#123; </span><br><span class="line">		pcq-&gt;tail = 0; // 把tail指向0的位置</span><br><span class="line">	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123; </span><br><span class="line">		/* 如果tail不等于size,那么tail就向后挪动 */</span><br><span class="line">		pcq-&gt;tail++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（3）出队列"><a href="#（3）出队列" class="headerlink" title="（3）出队列"></a>（3）出队列</h3><p>从循环队列中删除一个元素。</p>
-<p>在<strong>循环队列</strong>不为空的时候，直接把<code>head</code>向后挪动。<br> <img src="https://img-blog.csdnimg.cn/31ddf3175ae7466bbedb19f3253e5960.png" alt="在这里插入图片描述"></p>
-<p>注意，和<strong>入队列</strong>一样，当<code>head</code>等于<code>size</code>时，<code>head</code>需要置为<code>0</code>，也就是重新返回到<strong>初始位置</strong>。<br> <img src="https://img-blog.csdnimg.cn/1abdf7abf22b44359e8942e4b435c451.png" alt="在这里插入图片描述"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 出队列</span><br><span class="line">void CQueuePop(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	/* 如果队列为空, 那么肯定就不能删除 */</span><br><span class="line">	if (CQueueEmpty(pcq)) &#123;</span><br><span class="line">		printf(&quot;队空\n&quot;);</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 如果head等于size,那么head置为0 */</span><br><span class="line">	if (pcq-&gt;head == pcq-&gt;size) </span><br><span class="line">	&#123;</span><br><span class="line">		pcq-&gt;head = 0;</span><br><span class="line">	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123; </span><br><span class="line">		/* 否则head就往后挪动 */</span><br><span class="line">		pcq-&gt;head++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（4）获取元素-1"><a href="#（4）获取元素-1" class="headerlink" title="（4）获取元素"></a>（4）获取元素</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1) 获取队头元素</span><br><span class="line">CQDataType CQueueFront(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	/* 如果队列为空,那么直接返回 */</span><br><span class="line">	if (CQueueEmpty(pcq)) </span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;队空\n&quot;);</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 如果不为空,直接返回head的值 */</span><br><span class="line">	return pcq-&gt;a[pcq-&gt;head];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2) 获取队尾元素</span><br><span class="line">CQDataType CQueueBack(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	/* 如果队列为空,那么直接返回 */</span><br><span class="line">	if (CQueueEmpty(pcq)) </span><br><span class="line">	&#123;</span><br><span class="line">		printf(&quot;队空\n&quot;);</span><br><span class="line">		exit(0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/* 队尾有两种存在的方式 */</span><br><span class="line">	if (pcq-&gt;tail == 0) </span><br><span class="line">	&#123;</span><br><span class="line">		return pcq-&gt;a[pcq-&gt;size]; // 如果tail在0的位置,那么tail的上一个位置应该是k</span><br><span class="line">	&#125;</span><br><span class="line">	else </span><br><span class="line">	&#123;</span><br><span class="line">		return pcq-&gt;a[pcq-&gt;tail - 1]; // 如果tail不在0的位置，那么直接返回tail的上一个位置</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="（5）检测队列是否为空-1"><a href="#（5）检测队列是否为空-1" class="headerlink" title="（5）检测队列是否为空"></a>（5）检测队列是否为空</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 检测队列是否为空</span><br><span class="line">bool CQueueEmpty(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	return pcq-&gt;head == pcq-&gt;tail; // 当head和tail指向同一个位置时,说明为空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（6）检测队列是否为满"><a href="#（6）检测队列是否为满" class="headerlink" title="（6）检测队列是否为满"></a>（6）检测队列是否为满</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 检测队列是否满了</span><br><span class="line">bool CQueueFull(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	// 1、当tail在最后一个位置（空），head在第一个位置，说明满了</span><br><span class="line">	if (pcq-&gt;tail == pcq-&gt;size &amp;&amp; pcq-&gt;head == 0) </span><br><span class="line">	&#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	// 2、tail的下一个位置为head,说明满了</span><br><span class="line">	else </span><br><span class="line">	&#123; </span><br><span class="line">		return pcq-&gt;tail + 1 == pcq-&gt;head;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（7）销毁队列"><a href="#（7）销毁队列" class="headerlink" title="（7）销毁队列"></a>（7）销毁队列</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 销毁队列</span><br><span class="line">void CQueueDestroy(CQ* pcq) </span><br><span class="line">&#123;</span><br><span class="line">	assert(pcq);</span><br><span class="line"></span><br><span class="line">	/* 要free两次 */</span><br><span class="line">	free(pcq-&gt;a);	// 释放结构体</span><br><span class="line">	free(pcq);		// 释放结构体里面的数组</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
+<ul>
+<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
+</li>
+<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>code相关</category>
-        <category>c++</category>
-        <category>数据结构</category>
+        <category>Python</category>
       </categories>
   </entry>
   <entry>
-    <title>graph_based model调试报错信息</title>
+    <title>graph_based model调试相关</title>
     <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
 
@@ -116,6 +49,13 @@
 
 <p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
+<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
+<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
+<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
+<p>みどり:<br>尝试重新提取训练集的特征</p>
+<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
+<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
+<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
 ]]></content>
       <categories>
         <category>各种报错信息</category>
@@ -140,26 +80,6 @@
       <categories>
         <category>各种报错信息</category>
         <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Python jpg和bmp转化为RGB格式</title>
-    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
-
-<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
-<ul>
-<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
-</li>
-<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code相关</category>
-        <category>Python</category>
       </categories>
   </entry>
   <entry>
@@ -192,58 +112,6 @@
       <categories>
         <category>各种报错信息</category>
         <category>vscode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>操作系统</title>
-    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
-<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
-<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
-<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
-<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
-<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
-<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
-
-<p>此时，若以当前进程创建会话，会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
-<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
-<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
-<p><code>daemon进程</code>的特点：</p>
-<p>1）独立于控制终端；</p>
-<p>2）名字一般以<code>d</code>结尾；</p>
-<p>3）所有的服务存在于<code>etc/init.d</code></p>
-<p>4）是一个特殊的孤儿进程；</p>
-<p>5）输入被关闭，输出存在于日志中：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
-<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
-<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
-<p>2）查看当前<code>tail</code>进程是否存在</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
-<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
-<p>输出被追加到<code>nohup.out</code>中</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
-<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
-<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
-<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
@@ -325,6 +193,69 @@
       <categories>
         <category>项目</category>
         <category>webserver</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>操作系统</title>
+    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
+<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
+<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
+<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
+<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
+<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
+<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
+
+<p>此时，若以当前进程创建会话，会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
+<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
+<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
+<p><code>daemon进程</code>的特点：</p>
+<p>1）独立于控制终端；</p>
+<p>2）名字一般以<code>d</code>结尾；</p>
+<p>3）所有的服务存在于<code>etc/init.d</code></p>
+<p>4）是一个特殊的孤儿进程；</p>
+<p>5）输入被关闭，输出存在于日志中：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
+<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
+<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
+<p>2）查看当前<code>tail</code>进程是否存在</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
+<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
+<p>输出被追加到<code>nohup.out</code>中</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
+<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
+<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
+<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++基础</title>
+    <url>/2023/08/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>抽象数据类型：ADTs（Abstract data types)。作为数据和操作的定义，但没有任何实现的定义。</p>
+<p>定义一个抽象的模型，而可以使用c&#x2F;c++等不同的语言去实现。</p>
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>数据结构</category>
       </categories>
   </entry>
 </search>

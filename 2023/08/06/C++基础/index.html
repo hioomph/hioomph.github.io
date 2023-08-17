@@ -22,15 +22,13 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1、动态分配内存123456789101112131415161718template&lt;typename T&gt;class MyClass &amp;#123;private:    T* m_array;    size_t max_size;public:    MyClass(size_t size) : max_size(size) &amp;#123; &#x2F;&#x2F; 此处为构造函数的成员初始化列表">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="C++基础">
 <meta property="og:url" content="http://example.com/2023/08/06/C++%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
-<meta property="og:description" content="1、动态分配内存123456789101112131415161718template&lt;typename T&gt;class MyClass &amp;#123;private:    T* m_array;    size_t max_size;public:    MyClass(size_t size) : max_size(size) &amp;#123; &#x2F;&#x2F; 此处为构造函数的成员初始化列表">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-08-06T06:09:41.645Z">
-<meta property="article:modified_time" content="2023-08-08T03:26:26.300Z">
+<meta property="article:modified_time" content="2023-08-16T08:53:20.116Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 
@@ -224,7 +222,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-08 11:26:26" itemprop="dateModified" datetime="2023-08-08T11:26:26+08:00">2023-08-08</time>
+                <time title="修改时间：2023-08-16 16:53:20" itemprop="dateModified" datetime="2023-08-16T16:53:20+08:00">2023-08-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,10 +236,6 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/code%E7%9B%B8%E5%85%B3/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/code%E7%9B%B8%E5%85%B3/c/%E5%86%85%E5%AD%98/" itemprop="url" rel="index"><span itemprop="name">内存</span></a>
-                </span>
             </span>
 
           <br>
@@ -250,7 +244,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>407</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -269,45 +263,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1、动态分配内存"><a href="#1、动态分配内存" class="headerlink" title="1、动态分配内存"></a>1、动态分配内存</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">class MyClass &#123;</span><br><span class="line">private:</span><br><span class="line">    T* m_array;</span><br><span class="line">    size_t max_size;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    MyClass(size_t size) : max_size(size) &#123; // 此处为构造函数的成员初始化列表</span><br><span class="line">        m_array = new T[max_size];</span><br><span class="line">        // 创建一个大小为 max_size 的数组，并将数组的首地址赋值给指针 m_array</span><br><span class="line">		// 这里的 T 是一个类型模板参数，可以是任意类型</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~MyClass() &#123;</span><br><span class="line">        delete[] m_array;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>m_array</code>将指向一片<strong>连续</strong>的内存区域。</p>
-<p><strong>注意</strong>：如果在类中使用了动态内存分配，应该同时实现复制构造函数和赋值运算符，并根据需要管理动态内存的拷贝。这是因为默认的复制构造函数和赋值运算符只进行浅拷贝，可能导致多个对象共享同一块内存，造成潜在的错误和内存问题。</p>
-<h2 id="2、函数"><a href="#2、函数" class="headerlink" title="2、函数"></a>2、函数</h2><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>函数原型</th>
-<th>定义</th>
-<th>参数解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>strrchr</td>
-<td>#include &lt;string.h&gt;<br/> extern char * strrchr(const char *s, int c)</td>
-<td>查找一个字符串在另一个字符串中 末次 出现的位置，并返回从字符串中的这个位置起，一直到字符串结束的所有字符；<br/>  如果未能找到指定字符，那么函数将返回False。</td>
-<td>s为一个字符串的指针；<br/>c为一个待查找字符。</td>
-</tr>
-<tr>
-<td>snprintf</td>
-<td>int snprintf(char *str, int n, char * format [, argument, …]);</td>
-<td>参数n表示向str中写入n个字符，包括’\0’字符，并且返回实际的字符串长度</td>
-<td>str为要写入的字符串；n为要写入的字符的最大数目，超过n会被截断；format为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2&spm=1001.2101.3001.7020">格式化字符串</a>，与printf()函数相同；argument为变量。</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-
+        
     </div>
 
     
@@ -326,7 +282,7 @@
       <i class="fa fa-chevron-left"></i> webserver
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/08/06/C++%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="next" title="C++基础">
+    <a href="/2023/08/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="next" title="C++基础">
       C++基础 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -387,7 +343,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D%E5%86%85%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">1、动态分配内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2、函数</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +365,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -446,12 +401,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">6k</span>
+    <span title="站点总字数">4k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
