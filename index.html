@@ -296,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/06/C++%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">C++基础</a>
+            <a href="/2023/08/06/C++%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">c++ primer 习题集</a>
         </h2>
 
         <div class="post-meta">
@@ -313,7 +313,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-16 16:53:20" itemprop="dateModified" datetime="2023-08-16T16:53:20+08:00">2023-08-16</time>
+                <time title="修改时间：2023-09-13 12:54:56" itemprop="dateModified" datetime="2023-09-13T12:54:56+08:00">2023-09-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -335,14 +335,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>478</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -354,7 +354,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
+<p>一些常见的返回值含义如下：</p>
+<pre><code>0 : 命令成功执行，没有错误。
+1 : 一般错误，没有具体的错误代码。
+2 : 语法错误或命令执行失败。
+126 : 命令无法执行，可能缺少执行权限。
+127 : 命令不存在或无法找到。
+128 : 无效的退出参数。
+130 : 命令被中断，通常由用户按下Ctrl+C导致。
+255 : 命令执行失败，通常由于出现无效的返回值。
+</code></pre>
+<h2 id="练习-1-6"><a href="#练习-1-6" class="headerlink" title="练习 1.6"></a>练习 1.6</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1;</span><br><span class="line">	      &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2;</span><br><span class="line">		  &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>这是很容易出现的错误。前两行的末尾有分号，表示语句结束，因此第2、3行为两条新的语句，缺少了<code>std::cout</code>。</p>
+<h2 id="练习1-14"><a href="#练习1-14" class="headerlink" title="练习1.14"></a>练习1.14</h2><p>对比<code>for</code>循环和<code>while</code>循环：</p>
+<p>在循环次数已知的情况下，<code>for</code>循环的形式显然更为简洁。</p>
+<p>而循环次数无法预知时，用<code>while</code>循环实现更适合。用特定条件控制循环是否执行，循环体中执行的语句可能导致循环判定条件发生变化。</p>
+<h2 id="练习1-16"><a href="#练习1-16" class="headerlink" title="练习1.16"></a>练习1.16</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入一组数，按ctrl+d表示结束：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(; cin &gt;&gt; value; )</span><br><span class="line">        sum += value;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;读入的数的和为：&quot;</span> &lt;&lt; sum &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题重要的是<code>for(; cin &gt;&gt; value ;)</code>，以及后面的题中出现的<code>while(cin &gt;&gt; book)</code>，这种对输入流的结束判断。</p>
+<p>注意，当从键盘向程序输入数据时，对于如何指出文件结束，不同操作系统有不同的约定。在Window系统中，输入<strong>文件结束符</strong>的方法是<code>Ctrl+Z</code>，然后按<code>Enter/Return</code>。在<code>Unix</code>系统中，包括<code>MacOSX</code>系统中，文件结束符输入是用<code>Ctrl+D</code>。</p>
+
       
     </div>
 
@@ -1274,12 +1295,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">5k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15 分钟</span>
+    <span title="站点阅读时长">17 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

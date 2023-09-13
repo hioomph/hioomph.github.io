@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++基础</title>
+    <title>c++ primer 习题集</title>
     <url>/2023/08/06/C++%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>code相关</category>
-        <category>c++</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Python jpg和bmp转化为RGB格式</title>
-    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
+<p>一些常见的返回值含义如下：</p>
+<pre><code>0 : 命令成功执行，没有错误。
+1 : 一般错误，没有具体的错误代码。
+2 : 语法错误或命令执行失败。
+126 : 命令无法执行，可能缺少执行权限。
+127 : 命令不存在或无法找到。
+128 : 无效的退出参数。
+130 : 命令被中断，通常由用户按下Ctrl+C导致。
+255 : 命令执行失败，通常由于出现无效的返回值。
+</code></pre>
+<h2 id="练习-1-6"><a href="#练习-1-6" class="headerlink" title="练习 1.6"></a>练习 1.6</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1;</span><br><span class="line">	      &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2;</span><br><span class="line">		  &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
+<p>这是很容易出现的错误。前两行的末尾有分号，表示语句结束，因此第2、3行为两条新的语句，缺少了<code>std::cout</code>。</p>
+<h2 id="练习1-14"><a href="#练习1-14" class="headerlink" title="练习1.14"></a>练习1.14</h2><p>对比<code>for</code>循环和<code>while</code>循环：</p>
+<p>在循环次数已知的情况下，<code>for</code>循环的形式显然更为简洁。</p>
+<p>而循环次数无法预知时，用<code>while</code>循环实现更适合。用特定条件控制循环是否执行，循环体中执行的语句可能导致循环判定条件发生变化。</p>
+<h2 id="练习1-16"><a href="#练习1-16" class="headerlink" title="练习1.16"></a>练习1.16</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入一组数，按ctrl+d表示结束：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(; cin &gt;&gt; value; )</span><br><span class="line">        sum += value;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;读入的数的和为：&quot;</span> &lt;&lt; sum &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
-<ul>
-<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
-</li>
-<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
-</li>
-</ul>
+<p>这道题重要的是<code>for(; cin &gt;&gt; value ;)</code>，以及后面的题中出现的<code>while(cin &gt;&gt; book)</code>，这种对输入流的结束判断。</p>
+<p>注意，当从键盘向程序输入数据时，对于如何指出文件结束，不同操作系统有不同的约定。在Window系统中，输入<strong>文件结束符</strong>的方法是<code>Ctrl+Z</code>，然后按<code>Enter/Return</code>。在<code>Unix</code>系统中，包括<code>MacOSX</code>系统中，文件结束符输入是用<code>Ctrl+D</code>。</p>
 ]]></content>
       <categories>
         <category>code相关</category>
-        <category>Python</category>
+        <category>c++</category>
       </categories>
   </entry>
   <entry>
@@ -60,6 +61,26 @@
       <categories>
         <category>各种报错信息</category>
         <category>Graph_Based</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Python jpg和bmp转化为RGB格式</title>
+    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
+
+<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
+<ul>
+<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
+</li>
+<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>Python</category>
       </categories>
   </entry>
   <entry>
