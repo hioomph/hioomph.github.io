@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="第一章 开始练习1.2在linux系统中，通过echo $?可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。 一些常见的返回值含义如下： 0 : 命令成功执行，没有错误。 1 : 一般错误，没有具体的错误代码。 2 : 语法错误或命令执行失败。 126 : 命令无法执行，可能缺少执行权限。 127 : 命令不存在或无法找到。 128 : 无效的退出参数。 130 : 命令被中断，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++ primer 习题集">
+<meta property="og:url" content="http://example.com/2023/09/14/C++%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="第一章 开始练习1.2在linux系统中，通过echo $?可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。 一些常见的返回值含义如下： 0 : 命令成功执行，没有错误。 1 : 一般错误，没有具体的错误代码。 2 : 语法错误或命令执行失败。 126 : 命令无法执行，可能缺少执行权限。 127 : 命令不存在或无法找到。 128 : 无效的退出参数。 130 : 命令被中断，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-14T01:16:30.264Z">
+<meta property="article:modified_time" content="2023-09-14T03:04:07.473Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/14/C++%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>c++ primer 习题集 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/14/C++%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c++ primer 习题集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-14 09:16:30 / 修改时间：11:04:07" itemprop="dateCreated datePublished" datetime="2023-09-14T09:16:30+08:00">2023-09-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">code相关</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code%E7%9B%B8%E5%85%B3/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
+<p>一些常见的返回值含义如下：</p>
+<pre><code>0 : 命令成功执行，没有错误。
+1 : 一般错误，没有具体的错误代码。
+2 : 语法错误或命令执行失败。
+126 : 命令无法执行，可能缺少执行权限。
+127 : 命令不存在或无法找到。
+128 : 无效的退出参数。
+130 : 命令被中断，通常由用户按下Ctrl+C导致。
+255 : 命令执行失败，通常由于出现无效的返回值。
+</code></pre>
+<h2 id="练习-1-6"><a href="#练习-1-6" class="headerlink" title="练习 1.6"></a>练习 1.6</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1;</span><br><span class="line">	      &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2;</span><br><span class="line">		  &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>这是很容易出现的错误。前两行的末尾有分号，表示语句结束，因此第2、3行为两条新的语句，缺少了<code>std::cout</code>。</p>
+<h2 id="练习1-14"><a href="#练习1-14" class="headerlink" title="练习1.14"></a>练习1.14</h2><p>对比<code>for</code>循环和<code>while</code>循环：</p>
+<p>在循环次数已知的情况下，<code>for</code>循环的形式显然更为简洁。</p>
+<p>而循环次数无法预知时，用<code>while</code>循环实现更适合。用特定条件控制循环是否执行，循环体中执行的语句可能导致循环判定条件发生变化。</p>
+<h2 id="练习1-16"><a href="#练习1-16" class="headerlink" title="练习1.16"></a>练习1.16</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入一组数，按ctrl+d表示结束：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(; cin &gt;&gt; value; )</span><br><span class="line">        sum += value;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;读入的数的和为：&quot;</span> &lt;&lt; sum &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题重要的是<code>for(; cin &gt;&gt; value ;)</code>，以及后面的题中出现的<code>while(cin &gt;&gt; book)</code>，这种对输入流的结束判断。</p>
+<p>注意，当从键盘向程序输入数据时，对于如何指出文件结束，不同操作系统有不同的约定。在Window系统中，输入<strong>文件结束符</strong>的方法是<code>Ctrl+Z</code>，然后按<code>Enter/Return</code>。在<code>Unix</code>系统中，包括<code>MacOSX</code>系统中，文件结束符输入是用<code>Ctrl+D</code>。</p>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="练习2-3"><a href="#练习2-3" class="headerlink" title="练习2.3"></a>练习2.3</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> u = <span class="number">10</span>, u2 = <span class="number">42</span>;</span><br><span class="line">cout &lt;&lt; u2 - u &lt;&lt; endl; <span class="comment">// 32</span></span><br><span class="line">cout &lt;&lt; u - u2 &lt;&lt; endl; <span class="comment">//4294967264 </span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i = <span class="number">10</span>, i2 = <span class="number">42</span>;</span><br><span class="line">cout &lt;&lt; i - i2 &lt;&lt; endl; <span class="comment">// -32</span></span><br><span class="line">cout &lt;&lt; i2 - i &lt;&lt; endl; <span class="comment">// 32</span></span><br><span class="line">cout &lt;&lt; i - u &lt;&lt; endl;  <span class="comment">// 0 </span></span><br><span class="line">cout &lt;&lt; u - i &lt;&lt; endl;  <span class="comment">// 0 </span></span><br><span class="line">cout &lt;&lt; i - u2 &lt;&lt; endl; <span class="comment">//4294967264</span></span><br><span class="line">cout &lt;&lt; u2 - i &lt;&lt; endl; <span class="comment">// 32</span></span><br></pre></td></tr></table></figure>
+
+<p>42 &#x3D; 32 + 8 +2 &#x3D; 0010 1010 &#x3D; 00 00 00 2AH<br>10 &#x3D; 8 + 2 &#x3D; 00 00 00 0AH<br>所以 10 - 42 &#x3D; FF FF FF E0H &#x3D; 4,294,967,264</p>
+<h2 id="练习2-5"><a href="#练习2-5" class="headerlink" title="练习2.5"></a>练习2.5</h2><ol>
+<li><code>wchar_t</code>是什么</li>
+</ol>
+<p><code>wchar_t</code>，宽字符，是<code>C/C++</code>的字符类型，是一种扩展的存储方式。<code>wchar_t</code>类型主要用在国际化程序的实现中，但它不等同于<code>unicode</code>编码。<code>unicode</code>编码的字符一般以<code>wchar_t</code>类型存储。</p>
+<p><code>char</code>是<code>8</code>位字符类型，最多只能包含<code>256</code>种字符，许多外文字符集所含的字符数目超过<code>256</code>个，<code>char</code>型无法表示。<code>wchar_t</code>数据类型一般为<code>16</code>位或<code>32</code>位，所能表示的字符数远超<code>char</code>型。</p>
+<p>比如对于汉字，韩文以及日文这样的字符，它们的每一个文字都占据两个字节，所以<code>C++</code>提出了<code>wchar_t</code>类型，也称为<strong>双字节类型</strong>，或<strong>宽字符类型</strong>。<br>2. <code>wchar_t</code>操作</p>
+<p>标准C中的<code>wprintf()</code>函数以及标准<code>C++</code>的<code>iostream</code>类库中的类和对象能提供<code>wchar_t</code>宽字符类型的相关操作。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;locale&gt;</span>           <span class="comment">//setlocale函数在locale头文件中定义</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//使用setlocale函数将本机的语言设置为中文简体</span></span><br><span class="line">	<span class="comment">//LC_ALL表示设置所有的选项（包括金融货币、小数点，时间日期格式、语言字符串的使用习惯等），chs表示中文简体</span></span><br><span class="line">	<span class="built_in">setlocale</span>(LC_ALL, <span class="string">&quot;chs&quot;</span>);</span><br><span class="line">	<span class="type">wchar_t</span> wt[] = <span class="string">L&quot;中国伟大复兴梦&quot;</span>;   <span class="comment">//大写字母L告诉编译器为&quot;中&quot;字分配两个字节的空间</span></span><br><span class="line">	wcout &lt;&lt; wt &lt;&lt; endl;               <span class="comment">//使用wcout来代替cout输出宽字符</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-7"><a href="#练习2-7" class="headerlink" title="练习2.7"></a>练习2.7</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string a = <span class="string">&quot;Who goes with F\145rgus?\012&quot;</span>;  <span class="comment">// \145=e  \012=\n</span></span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> b = <span class="number">3.14e1</span>L;</span><br><span class="line">    <span class="type">float</span> c = <span class="number">1024.f</span>; <span class="comment">// 注意不能写成 1024f</span></span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> d = <span class="number">3.14L</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a=&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;b=&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;c=&quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;d=&quot;</span> &lt;&lt; d &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-9"><a href="#练习2-9" class="headerlink" title="练习2.9"></a>练习2.9</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// cin &gt;&gt; int input_value;  错误，cin右侧需要一个明确的变量名称</span></span><br><span class="line">    <span class="type">int</span> input_value;</span><br><span class="line">    cin &gt;&gt; input_value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// int i = &#123;3.14&#125;;  引发警告，尝试用列表初始化将3.14赋值给i，将造成小数部分丢失，是不被建议的窄化操作</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// double salary = wage = 9999.99;  错误，声明变量时不能使用赋值运算符连接多个变量，应用逗号</span></span><br><span class="line">    <span class="type">double</span> salary, wage;</span><br><span class="line">    salary = wage = <span class="number">9999.99</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// int i = 3.14;  引发警告，造成小数部分丢失，是不被建议的窄化操作</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-10"><a href="#练习2-10" class="headerlink" title="练习2.10"></a>练习2.10</h2><p><code>string</code>不论在函数体内外，都默认初始化为空值；</p>
+<p><code>int</code>在函数体外部默认初始化为<code>0</code>，函数体内部就不被初始化。</p>
+<h2 id="练习2-11"><a href="#练习2-11" class="headerlink" title="练习2.11"></a>练习2.11</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> ix = <span class="number">1024</span>; <span class="comment">// 定义</span></span><br><span class="line"><span class="type">int</span> iy;               <span class="comment">// 声明并定义，但未初始化</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> iz;        <span class="comment">// 声明</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-12"><a href="#练习2-12" class="headerlink" title="练习2.12"></a>练习2.12</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> Double = <span class="number">3.14</span>; <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-15"><a href="#练习2-15" class="headerlink" title="练习2.15"></a>练习2.15</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ival = <span class="number">1.01</span>;</span><br><span class="line"><span class="type">int</span> &amp;rval1 = <span class="number">1.01</span>;  <span class="comment">// 引用必须指向一个实际存在的对象，而非字面值常量</span></span><br><span class="line"><span class="type">int</span> &amp;rval2 = ival;</span><br><span class="line"><span class="type">int</span> &amp;rval3;         <span class="comment">// 引用必须初始化</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-18"><a href="#练习2-18" class="headerlink" title="练习2.18"></a>练习2.18</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;a;</span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    p = &amp;b; <span class="comment">// 更改p本身</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    *p = <span class="number">3</span>; <span class="comment">// 改p指向的对象的值</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    b = <span class="number">2</span>; <span class="comment">// 更改p指向的对象的值</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-21"><a href="#练习2-21" class="headerlink" title="练习2.21"></a>练习2.21</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// double *dp = &amp;i; 错误，double指针和int变量不匹配</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// int *ip = i;     错误，不能直接给指针赋值变量</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    因为创建一个指针时，系统只分配了存储指针本身的内存，并未分配存储数据的内存，因此在用指针之前必须用已分配的地址初始化它。</span></span><br><span class="line"><span class="comment">    上述意思就是把5存储在ip所指向的位置，但是ip没有初始化，其值是一个随机值，所以不知道5将存储在何处。程序会崩溃</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> *p = &amp;i; <span class="comment">// 合法</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-26"><a href="#练习2-26" class="headerlink" title="练习2.26"></a>练习2.26</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> buf;  <span class="comment">// const对象必须初始化</span></span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> sz = cnt;</span><br><span class="line">++cnt;</span><br><span class="line">++sz;  <span class="comment">// 非法</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-27"><a href="#练习2-27" class="headerlink" title="练习2.27"></a>练习2.27</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// &amp;r = 0非法，非常量引用不能引用字面值常量0</span></span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p2 = &amp;i2;        <span class="comment">// 合法，p2为常量指针，因此p2永远指向变量i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// 合法，常量i和常量引用r</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3 = &amp;i2;  <span class="comment">// 合法，常量指针p3指向变量i2，且由于p3指向const，不能通过p3修改i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p1 = &amp;i2;        <span class="comment">// 合法，p1指向const，不能通过p1修改i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;<span class="type">const</span> r2;        <span class="comment">// 非法，引用非对象，不能让引用恒定不变</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> i2 = i, &amp;r = i;   <span class="comment">// 合法，常量i2和常量引用r</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-28"><a href="#练习2-28" class="headerlink" title="练习2.28"></a>练习2.28</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (a) 以下四条均非法，记住涉及到某类型为常量时必须初始化，如这里的常量指针 </span></span><br><span class="line"><span class="type">int</span> i, *<span class="type">const</span> cp;           </span><br><span class="line"><span class="type">int</span> *p1, *<span class="type">const</span> p2;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ic, &amp;r = ic;  </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3;</span><br><span class="line"><span class="comment">// (b) 合法，指针常量，但p没有指向任何实际的对象</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习2-30c"><a href="#练习2-30c" class="headerlink" title="练习2.30c"></a>练习2.30c</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 顶层const：表示任意的对象是常量； </span></span><br><span class="line"><span class="comment">// 底层const：所指的对象是常量，与指针和引用等复合类型的基本数据类型部分有关</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.32</span></span><br><span class="line"><span class="comment">// int null = 0, *p = null; 非法</span></span><br><span class="line"><span class="type">int</span> null = <span class="number">0</span>, *p = <span class="literal">nullptr</span>;  <span class="comment">// nullptr是表示空指针的字面值常量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-36"><a href="#练习2-36" class="headerlink" title="练习2.36"></a>练习2.36</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;</span><br><span class="line"><span class="keyword">decltype</span>((b)) d = a;  <span class="comment">// int &amp;d = a;</span></span><br><span class="line">++c;</span><br><span class="line">++d;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;a=&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;b=&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 5</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;c=&quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;d=&quot;</span> &lt;&lt; d &lt;&lt; endl;  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="prev" title="C++基础">
+      <i class="fa fa-chevron-left"></i> C++基础
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">第一章 开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-2"><span class="nav-number">1.1.</span> <span class="nav-text">练习1.2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-1-6"><span class="nav-number">1.2.</span> <span class="nav-text">练习 1.6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-14"><span class="nav-number">1.3.</span> <span class="nav-text">练习1.14</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A01-16"><span class="nav-number">1.4.</span> <span class="nav-text">练习1.16</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-3"><span class="nav-number">2.1.</span> <span class="nav-text">练习2.3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-5"><span class="nav-number">2.2.</span> <span class="nav-text">练习2.5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-7"><span class="nav-number">2.3.</span> <span class="nav-text">练习2.7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-9"><span class="nav-number">2.4.</span> <span class="nav-text">练习2.9</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-10"><span class="nav-number">2.5.</span> <span class="nav-text">练习2.10</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-11"><span class="nav-number">2.6.</span> <span class="nav-text">练习2.11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-12"><span class="nav-number">2.7.</span> <span class="nav-text">练习2.12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-15"><span class="nav-number">2.8.</span> <span class="nav-text">练习2.15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-18"><span class="nav-number">2.9.</span> <span class="nav-text">练习2.18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-21"><span class="nav-number">2.10.</span> <span class="nav-text">练习2.21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-26"><span class="nav-number">2.11.</span> <span class="nav-text">练习2.26</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-27"><span class="nav-number">2.12.</span> <span class="nav-text">练习2.27</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-28"><span class="nav-number">2.13.</span> <span class="nav-text">练习2.28</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-30c"><span class="nav-number">2.13.1.</span> <span class="nav-text">练习2.30c</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-36"><span class="nav-number">2.14.</span> <span class="nav-text">练习2.36</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">6k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">23 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>c++ primer 习题集</title>
-    <url>/2023/08/06/C++%E5%9F%BA%E7%A1%80/</url>
+    <url>/2023/08/06/c++%20primer%20%E4%B9%A0%E9%A2%98%E9%9B%86/</url>
     <content><![CDATA[<h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
 <p>一些常见的返回值含义如下：</p>
 <pre><code>0 : 命令成功执行，没有错误。
@@ -28,6 +28,94 @@
       <categories>
         <category>code相关</category>
         <category>c++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>c++ primer 习题集</title>
+    <url>/2023/09/14/C++%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
+<p>一些常见的返回值含义如下：</p>
+<pre><code>0 : 命令成功执行，没有错误。
+1 : 一般错误，没有具体的错误代码。
+2 : 语法错误或命令执行失败。
+126 : 命令无法执行，可能缺少执行权限。
+127 : 命令不存在或无法找到。
+128 : 无效的退出参数。
+130 : 命令被中断，通常由用户按下Ctrl+C导致。
+255 : 命令执行失败，通常由于出现无效的返回值。
+</code></pre>
+<h2 id="练习-1-6"><a href="#练习-1-6" class="headerlink" title="练习 1.6"></a>练习 1.6</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::cout &lt;&lt; <span class="string">&quot;The sum of &quot;</span> &lt;&lt; v1;</span><br><span class="line">	      &lt;&lt; <span class="string">&quot; and &quot;</span> &lt;&lt; v2;</span><br><span class="line">		  &lt;&lt; <span class="string">&quot; is &quot;</span> &lt;&lt; v1 + v2 &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>这是很容易出现的错误。前两行的末尾有分号，表示语句结束，因此第2、3行为两条新的语句，缺少了<code>std::cout</code>。</p>
+<h2 id="练习1-14"><a href="#练习1-14" class="headerlink" title="练习1.14"></a>练习1.14</h2><p>对比<code>for</code>循环和<code>while</code>循环：</p>
+<p>在循环次数已知的情况下，<code>for</code>循环的形式显然更为简洁。</p>
+<p>而循环次数无法预知时，用<code>while</code>循环实现更适合。用特定条件控制循环是否执行，循环体中执行的语句可能导致循环判定条件发生变化。</p>
+<h2 id="练习1-16"><a href="#练习1-16" class="headerlink" title="练习1.16"></a>练习1.16</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;请输入一组数，按ctrl+d表示结束：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(; cin &gt;&gt; value; )</span><br><span class="line">        sum += value;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;读入的数的和为：&quot;</span> &lt;&lt; sum &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题重要的是<code>for(; cin &gt;&gt; value ;)</code>，以及后面的题中出现的<code>while(cin &gt;&gt; book)</code>，这种对输入流的结束判断。</p>
+<p>注意，当从键盘向程序输入数据时，对于如何指出文件结束，不同操作系统有不同的约定。在Window系统中，输入<strong>文件结束符</strong>的方法是<code>Ctrl+Z</code>，然后按<code>Enter/Return</code>。在<code>Unix</code>系统中，包括<code>MacOSX</code>系统中，文件结束符输入是用<code>Ctrl+D</code>。</p>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="练习2-3"><a href="#练习2-3" class="headerlink" title="练习2.3"></a>练习2.3</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">unsigned</span> u = <span class="number">10</span>, u2 = <span class="number">42</span>;</span><br><span class="line">cout &lt;&lt; u2 - u &lt;&lt; endl; <span class="comment">// 32</span></span><br><span class="line">cout &lt;&lt; u - u2 &lt;&lt; endl; <span class="comment">//4294967264 </span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i = <span class="number">10</span>, i2 = <span class="number">42</span>;</span><br><span class="line">cout &lt;&lt; i - i2 &lt;&lt; endl; <span class="comment">// -32</span></span><br><span class="line">cout &lt;&lt; i2 - i &lt;&lt; endl; <span class="comment">// 32</span></span><br><span class="line">cout &lt;&lt; i - u &lt;&lt; endl;  <span class="comment">// 0 </span></span><br><span class="line">cout &lt;&lt; u - i &lt;&lt; endl;  <span class="comment">// 0 </span></span><br><span class="line">cout &lt;&lt; i - u2 &lt;&lt; endl; <span class="comment">//4294967264</span></span><br><span class="line">cout &lt;&lt; u2 - i &lt;&lt; endl; <span class="comment">// 32</span></span><br></pre></td></tr></table></figure>
+
+<p>42 &#x3D; 32 + 8 +2 &#x3D; 0010 1010 &#x3D; 00 00 00 2AH<br>10 &#x3D; 8 + 2 &#x3D; 00 00 00 0AH<br>所以 10 - 42 &#x3D; FF FF FF E0H &#x3D; 4,294,967,264</p>
+<h2 id="练习2-5"><a href="#练习2-5" class="headerlink" title="练习2.5"></a>练习2.5</h2><ol>
+<li><code>wchar_t</code>是什么</li>
+</ol>
+<p><code>wchar_t</code>，宽字符，是<code>C/C++</code>的字符类型，是一种扩展的存储方式。<code>wchar_t</code>类型主要用在国际化程序的实现中，但它不等同于<code>unicode</code>编码。<code>unicode</code>编码的字符一般以<code>wchar_t</code>类型存储。</p>
+<p><code>char</code>是<code>8</code>位字符类型，最多只能包含<code>256</code>种字符，许多外文字符集所含的字符数目超过<code>256</code>个，<code>char</code>型无法表示。<code>wchar_t</code>数据类型一般为<code>16</code>位或<code>32</code>位，所能表示的字符数远超<code>char</code>型。</p>
+<p>比如对于汉字，韩文以及日文这样的字符，它们的每一个文字都占据两个字节，所以<code>C++</code>提出了<code>wchar_t</code>类型，也称为<strong>双字节类型</strong>，或<strong>宽字符类型</strong>。<br>2. <code>wchar_t</code>操作</p>
+<p>标准C中的<code>wprintf()</code>函数以及标准<code>C++</code>的<code>iostream</code>类库中的类和对象能提供<code>wchar_t</code>宽字符类型的相关操作。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;locale&gt;</span>           <span class="comment">//setlocale函数在locale头文件中定义</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//使用setlocale函数将本机的语言设置为中文简体</span></span><br><span class="line">	<span class="comment">//LC_ALL表示设置所有的选项（包括金融货币、小数点，时间日期格式、语言字符串的使用习惯等），chs表示中文简体</span></span><br><span class="line">	<span class="built_in">setlocale</span>(LC_ALL, <span class="string">&quot;chs&quot;</span>);</span><br><span class="line">	<span class="type">wchar_t</span> wt[] = <span class="string">L&quot;中国伟大复兴梦&quot;</span>;   <span class="comment">//大写字母L告诉编译器为&quot;中&quot;字分配两个字节的空间</span></span><br><span class="line">	wcout &lt;&lt; wt &lt;&lt; endl;               <span class="comment">//使用wcout来代替cout输出宽字符</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-7"><a href="#练习2-7" class="headerlink" title="练习2.7"></a>练习2.7</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string a = <span class="string">&quot;Who goes with F\145rgus?\012&quot;</span>;  <span class="comment">// \145=e  \012=\n</span></span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> b = <span class="number">3.14e1</span>L;</span><br><span class="line">    <span class="type">float</span> c = <span class="number">1024.f</span>; <span class="comment">// 注意不能写成 1024f</span></span><br><span class="line">    <span class="type">long</span> <span class="type">double</span> d = <span class="number">3.14L</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a=&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;b=&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;c=&quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot; &quot;</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;d=&quot;</span> &lt;&lt; d &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-9"><a href="#练习2-9" class="headerlink" title="练习2.9"></a>练习2.9</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// cin &gt;&gt; int input_value;  错误，cin右侧需要一个明确的变量名称</span></span><br><span class="line">    <span class="type">int</span> input_value;</span><br><span class="line">    cin &gt;&gt; input_value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// int i = &#123;3.14&#125;;  引发警告，尝试用列表初始化将3.14赋值给i，将造成小数部分丢失，是不被建议的窄化操作</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// double salary = wage = 9999.99;  错误，声明变量时不能使用赋值运算符连接多个变量，应用逗号</span></span><br><span class="line">    <span class="type">double</span> salary, wage;</span><br><span class="line">    salary = wage = <span class="number">9999.99</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// int i = 3.14;  引发警告，造成小数部分丢失，是不被建议的窄化操作</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-10"><a href="#练习2-10" class="headerlink" title="练习2.10"></a>练习2.10</h2><p><code>string</code>不论在函数体内外，都默认初始化为空值；</p>
+<p><code>int</code>在函数体外部默认初始化为<code>0</code>，函数体内部就不被初始化。</p>
+<h2 id="练习2-11"><a href="#练习2-11" class="headerlink" title="练习2.11"></a>练习2.11</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">int</span> ix = <span class="number">1024</span>; <span class="comment">// 定义</span></span><br><span class="line"><span class="type">int</span> iy;               <span class="comment">// 声明并定义，但未初始化</span></span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> iz;        <span class="comment">// 声明</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-12"><a href="#练习2-12" class="headerlink" title="练习2.12"></a>练习2.12</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">double</span> Double = <span class="number">3.14</span>; <span class="comment">// 合法</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-15"><a href="#练习2-15" class="headerlink" title="练习2.15"></a>练习2.15</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> ival = <span class="number">1.01</span>;</span><br><span class="line"><span class="type">int</span> &amp;rval1 = <span class="number">1.01</span>;  <span class="comment">// 引用必须指向一个实际存在的对象，而非字面值常量</span></span><br><span class="line"><span class="type">int</span> &amp;rval2 = ival;</span><br><span class="line"><span class="type">int</span> &amp;rval3;         <span class="comment">// 引用必须初始化</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-18"><a href="#练习2-18" class="headerlink" title="练习2.18"></a>练习2.18</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> *p = &amp;a;</span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    p = &amp;b; <span class="comment">// 更改p本身</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    *p = <span class="number">3</span>; <span class="comment">// 改p指向的对象的值</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    b = <span class="number">2</span>; <span class="comment">// 更改p指向的对象的值</span></span><br><span class="line">    cout &lt;&lt; p &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; *p &lt;&lt; endl;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-21"><a href="#练习2-21" class="headerlink" title="练习2.21"></a>练习2.21</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// double *dp = &amp;i; 错误，double指针和int变量不匹配</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// int *ip = i;     错误，不能直接给指针赋值变量</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    因为创建一个指针时，系统只分配了存储指针本身的内存，并未分配存储数据的内存，因此在用指针之前必须用已分配的地址初始化它。</span></span><br><span class="line"><span class="comment">    上述意思就是把5存储在ip所指向的位置，但是ip没有初始化，其值是一个随机值，所以不知道5将存储在何处。程序会崩溃</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> *p = &amp;i; <span class="comment">// 合法</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-26"><a href="#练习2-26" class="headerlink" title="练习2.26"></a>练习2.26</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> buf;  <span class="comment">// const对象必须初始化</span></span><br><span class="line"><span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> sz = cnt;</span><br><span class="line">++cnt;</span><br><span class="line">++sz;  <span class="comment">// 非法</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-27"><a href="#练习2-27" class="headerlink" title="练习2.27"></a>练习2.27</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// &amp;r = 0非法，非常量引用不能引用字面值常量0</span></span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p2 = &amp;i2;        <span class="comment">// 合法，p2为常量指针，因此p2永远指向变量i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// 合法，常量i和常量引用r</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3 = &amp;i2;  <span class="comment">// 合法，常量指针p3指向变量i2，且由于p3指向const，不能通过p3修改i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p1 = &amp;i2;        <span class="comment">// 合法，p1指向const，不能通过p1修改i2</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> &amp;<span class="type">const</span> r2;        <span class="comment">// 非法，引用非对象，不能让引用恒定不变</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> i2 = i, &amp;r = i;   <span class="comment">// 合法，常量i2和常量引用r</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-28"><a href="#练习2-28" class="headerlink" title="练习2.28"></a>练习2.28</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// (a) 以下四条均非法，记住涉及到某类型为常量时必须初始化，如这里的常量指针 </span></span><br><span class="line"><span class="type">int</span> i, *<span class="type">const</span> cp;           </span><br><span class="line"><span class="type">int</span> *p1, *<span class="type">const</span> p2;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ic, &amp;r = ic;  </span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3;</span><br><span class="line"><span class="comment">// (b) 合法，指针常量，但p没有指向任何实际的对象</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p;</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习2-30c"><a href="#练习2-30c" class="headerlink" title="练习2.30c"></a>练习2.30c</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 顶层const：表示任意的对象是常量； </span></span><br><span class="line"><span class="comment">// 底层const：所指的对象是常量，与指针和引用等复合类型的基本数据类型部分有关</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.32</span></span><br><span class="line"><span class="comment">// int null = 0, *p = null; 非法</span></span><br><span class="line"><span class="type">int</span> null = <span class="number">0</span>, *p = <span class="literal">nullptr</span>;  <span class="comment">// nullptr是表示空指针的字面值常量</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="练习2-36"><a href="#练习2-36" class="headerlink" title="练习2.36"></a>练习2.36</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;</span><br><span class="line"><span class="keyword">decltype</span>((b)) d = a;  <span class="comment">// int &amp;d = a;</span></span><br><span class="line">++c;</span><br><span class="line">++d;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;a=&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;b=&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 5</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;c=&quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">    &lt;&lt; <span class="string">&quot;d=&quot;</span> &lt;&lt; d &lt;&lt; endl;  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>c++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Python jpg和bmp转化为RGB格式</title>
+    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
+
+<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
+<ul>
+<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
+</li>
+<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>Python</category>
       </categories>
   </entry>
   <entry>
@@ -64,26 +152,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Python jpg和bmp转化为RGB格式</title>
-    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
-
-<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
-<ul>
-<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
-</li>
-<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code相关</category>
-        <category>Python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>hexo相关报错</title>
     <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
@@ -104,35 +172,55 @@
       </categories>
   </entry>
   <entry>
-    <title>linux-mysql相关报错</title>
-    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>linux</category>
-        <category>mysql</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+    <title>操作系统</title>
+    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
+<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
+<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
+<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
+<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
+<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
+<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
 
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<p>此时，若以当前进程创建会话，会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
+<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
+<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
+<p><code>daemon进程</code>的特点：</p>
+<p>1）独立于控制终端；</p>
+<p>2）名字一般以<code>d</code>结尾；</p>
+<p>3）所有的服务存在于<code>etc/init.d</code></p>
+<p>4）是一个特殊的孤儿进程；</p>
+<p>5）输入被关闭，输出存在于日志中：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
+<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
+<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
+<p>2）查看当前<code>tail</code>进程是否存在</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
+<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
+<p>输出被追加到<code>nohup.out</code>中</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
+<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
+<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
+<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
 ]]></content>
       <categories>
-        <category>各种报错信息</category>
-        <category>vscode</category>
+        <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
@@ -217,55 +305,35 @@
       </categories>
   </entry>
   <entry>
-    <title>操作系统</title>
-    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
-<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
-<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
-<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
-<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
-<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
-<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>vscode相关</title>
+    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
 
-<p>运行结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 
-<p>此时，若以当前进程创建会话，会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
-<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
-<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
-<p><code>daemon进程</code>的特点：</p>
-<p>1）独立于控制终端；</p>
-<p>2）名字一般以<code>d</code>结尾；</p>
-<p>3）所有的服务存在于<code>etc/init.d</code></p>
-<p>4）是一个特殊的孤儿进程；</p>
-<p>5）输入被关闭，输出存在于日志中：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
-<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
-<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
-<p>2）查看当前<code>tail</code>进程是否存在</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
-<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
-<p>输出被追加到<code>nohup.out</code>中</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
-<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
-<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
-<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
 ]]></content>
       <categories>
-        <category>计算机基础</category>
+        <category>各种报错信息</category>
+        <category>vscode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-mysql相关报错</title>
+    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>linux</category>
+        <category>mysql</category>
       </categories>
   </entry>
   <entry>
