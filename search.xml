@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Python jpg和bmp转化为RGB格式</title>
+    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
+
+<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
+<ul>
+<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
+</li>
+<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>Python</category>
+      </categories>
+  </entry>
+  <entry>
     <title>c++ primer 习题集</title>
     <url>/2023/08/06/c++%20primer%20%E4%B9%A0%E9%A2%98%E9%9B%86/</url>
     <content><![CDATA[<h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
@@ -24,6 +44,10 @@
 
 <p>这道题重要的是<code>for(; cin &gt;&gt; value ;)</code>，以及后面的题中出现的<code>while(cin &gt;&gt; book)</code>，这种对输入流的结束判断。</p>
 <p>注意，当从键盘向程序输入数据时，对于如何指出文件结束，不同操作系统有不同的约定。在Window系统中，输入<strong>文件结束符</strong>的方法是<code>Ctrl+Z</code>，然后按<code>Enter/Return</code>。在<code>Unix</code>系统中，包括<code>MacOSX</code>系统中，文件结束符输入是用<code>Ctrl+D</code>。</p>
+<h1 id="第二章-变量和基本类型"><a href="#第二章-变量和基本类型" class="headerlink" title="第二章 变量和基本类型"></a>第二章 变量和基本类型</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 2.26</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> buf;  <span class="comment">// const对象必须初始化</span></span><br><span class="line">    <span class="type">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> sz = cnt;</span><br><span class="line">    ++cnt;</span><br><span class="line">    ++sz;  <span class="comment">// 非法</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.27</span></span><br><span class="line">    <span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;         <span class="comment">// &amp;r = 0非法，非常量引用不能引用字面值常量0</span></span><br><span class="line">    <span class="type">int</span> *<span class="type">const</span> p2 = &amp;i2;        <span class="comment">// 合法，p2为常量指针，因此p2永远指向变量i2</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> i = <span class="number">-1</span>, &amp;r = <span class="number">0</span>;   <span class="comment">// 合法，常量i和常量引用r</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3 = &amp;i2;  <span class="comment">// 合法，常量指针p3指向变量i2，且由于p3指向const，不能通过p3修改i2</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> *p1 = &amp;i2;        <span class="comment">// 合法，p1指向const，不能通过p1修改i2</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> &amp;<span class="type">const</span> r2;        <span class="comment">// 非法，引用非对象，不能让引用恒定不变</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> i2 = i, &amp;r = i;   <span class="comment">// 合法，常量i2和常量引用r</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.28</span></span><br><span class="line">    <span class="comment">// (a) 以下四条均非法，记住涉及到某类型为常量时必须初始化，如这里的常量指针 </span></span><br><span class="line">    <span class="type">int</span> i, *<span class="type">const</span> cp;           </span><br><span class="line">    <span class="type">int</span> *p1, *<span class="type">const</span> p2;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ic, &amp;r = ic;  </span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3;</span><br><span class="line">    <span class="comment">// (b) 合法，指针常量，但p没有指向任何实际的对象</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> *p;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.30</span></span><br><span class="line">    <span class="comment">// 顶层const：表示任意的对象是常量； </span></span><br><span class="line">    <span class="comment">// 底层const：所指的对象是常量，与指针和引用等复合类型的基本数据类型部分有关</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.32</span></span><br><span class="line">    <span class="comment">// int null = 0, *p = null; 非法</span></span><br><span class="line">    <span class="type">int</span> null = <span class="number">0</span>, *p = <span class="literal">nullptr</span>;  <span class="comment">// nullptr是表示空指针的字面值常量</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.36</span></span><br><span class="line">    <span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">decltype</span>(a) c = a;</span><br><span class="line">    <span class="keyword">decltype</span>((b)) d = a;  <span class="comment">// int &amp;d = a;</span></span><br><span class="line">    ++c;</span><br><span class="line">    ++d;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;a=&quot;</span> &lt;&lt; a &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;b=&quot;</span> &lt;&lt; b &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 5</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;c=&quot;</span> &lt;&lt; c &lt;&lt; <span class="string">&quot; &quot;</span>    <span class="comment">// 4</span></span><br><span class="line">         &lt;&lt; <span class="string">&quot;d=&quot;</span> &lt;&lt; d &lt;&lt; endl;  <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三章-字符串、向量和数组"><a href="#第三章-字符串、向量和数组" class="headerlink" title="第三章 字符串、向量和数组"></a>第三章 字符串、向量和数组</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// string</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 3.2</span></span><br><span class="line">    <span class="comment">// 一次读入一行</span></span><br><span class="line">    string line;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">getline</span>(cin, line))</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; line &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 一次读入一个词</span></span><br><span class="line">    string word;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; word)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; word &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.3</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        1、标准库string的输入运算符自动忽略字符串开头的空白(包括空格符、换行符、制表符等),从第一个真正的字符开始读起，直到遇见下一处空白为止。</span></span><br><span class="line"><span class="comment">        2、如果希望在最终的字符串中保留输入时的空白符，应该使用getline函数代替原来的&gt;&gt;运算符，</span></span><br><span class="line"><span class="comment">            getline从给定的输入流中读取数据，直到遇到换行符为止，此时换行符也被读取进来，但是并不存储在最后的字符串中。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.4</span></span><br><span class="line">    string str1, str2;</span><br><span class="line">    cin &gt;&gt; str1 &gt;&gt; str2;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;str1=&quot;</span> &lt;&lt; str1 &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; <span class="string">&quot;str2=&quot;</span> &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;输出较大的字符串：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">if</span>(str1 != str2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str1 &gt; str2)</span><br><span class="line">            cout &lt;&lt; str1 &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            cout &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;输出较长的字符串：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">if</span>(str1.<span class="built_in">size</span>() != str2.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(str1.<span class="built_in">size</span>() &gt; str2.<span class="built_in">size</span>())</span><br><span class="line">            cout &lt;&lt; str1 &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            cout &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.5 </span></span><br><span class="line">    string str, str_sum;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; str)</span><br><span class="line">    &#123;</span><br><span class="line">        str_sum += str;</span><br><span class="line">        str_sum += <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; str_sum &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3.6</span></span><br><span class="line">    string str;</span><br><span class="line">    cin &gt;&gt; str;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;at begin str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c : str)</span><br><span class="line">        c = <span class="string">&#x27;x&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;now str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.7</span></span><br><span class="line">    string str;</span><br><span class="line">    cin &gt;&gt; str;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;at begin str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> &amp;c : str)</span><br><span class="line">        c = <span class="string">&#x27;x&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;now str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.8</span></span><br><span class="line">    string str;</span><br><span class="line">    cin &gt;&gt; str;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;at begin str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// while</span></span><br><span class="line">    string::size_type i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; str.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        str[i] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;now str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// for（传统）</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">decltype</span>(str.<span class="built_in">size</span>()) i = <span class="number">0</span>; i &lt; str.<span class="built_in">size</span>(); i++)</span><br><span class="line">        str[i] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;now str=&quot;</span> &lt;&lt; str &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.9</span></span><br><span class="line">    string s;</span><br><span class="line">    cout &lt;&lt; s[<span class="number">0</span>] &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.10</span></span><br><span class="line">    string line, new_line;</span><br><span class="line">    <span class="built_in">getline</span>(cin, line);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;at begin line=&quot;</span> &lt;&lt; line &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">decltype</span>(line.<span class="built_in">size</span>()) i = <span class="number">0</span>; i &lt; line.<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">ispunct</span>(line[i]))</span><br><span class="line">            new_line += line[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;now str=&quot;</span> &lt;&lt; new_line &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.11</span></span><br><span class="line">    <span class="type">const</span> string s = <span class="string">&quot;Keep out!&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c : s)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">typeid</span>(c).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.14</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ivec;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; i)</span><br><span class="line">    &#123;</span><br><span class="line">        ivec.<span class="built_in">push_back</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.15</span></span><br><span class="line">    vector&lt;string&gt; svec;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; s)</span><br><span class="line">    &#123;</span><br><span class="line">        ivec.<span class="built_in">push_back</span>(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.17</span></span><br><span class="line">    vector&lt;string&gt; svec;</span><br><span class="line">    string str;</span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; str)</span><br><span class="line">    &#123;</span><br><span class="line">        svec.<span class="built_in">push_back</span>(str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;s : svec)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;c : s)</span><br><span class="line">        &#123;</span><br><span class="line">            c = <span class="built_in">toupper</span>(c);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.18</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ivec;</span><br><span class="line">    <span class="comment">// ivec[0] = 42;</span></span><br><span class="line">    ivec.<span class="built_in">push_back</span>(<span class="number">42</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.19</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ivec1</span><span class="params">(<span class="number">10</span>, <span class="number">42</span>)</span></span>;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ivec2&#123;<span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ivec3;</span><br><span class="line">    <span class="keyword">for</span>(vector&lt;<span class="type">int</span>&gt;::size_type i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">        ivec3.<span class="built_in">push_back</span>(<span class="number">42</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.20</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; ivec;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">while</span>(cin &gt;&gt; i)</span><br><span class="line">        ivec.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="keyword">for</span>(vector&lt;<span class="type">int</span>&gt;::size_type i = <span class="number">0</span>; i &lt; ivec.<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">&quot;和第&quot;</span> &lt;&lt; i+<span class="number">2</span> &lt;&lt; <span class="string">&quot;的和是&quot;</span> &lt;&lt; ivec[i] + ivec[i+<span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(vector&lt;<span class="type">int</span>&gt;::size_type i = <span class="number">0</span>; i &lt; ivec.<span class="built_in">size</span>()/<span class="number">2</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;第&quot;</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">&quot;和第&quot;</span> &lt;&lt; ivec.<span class="built_in">size</span>()-i &lt;&lt; <span class="string">&quot;的和是&quot;</span> &lt;&lt; ivec[i] + ivec[ivec.<span class="built_in">size</span>()-i<span class="number">-1</span>] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>code相关</category>
@@ -99,26 +123,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Python jpg和bmp转化为RGB格式</title>
-    <url>/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="1、PIL库"><a href="#1、PIL库" class="headerlink" title="1、PIL库"></a>1、PIL库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line"></span><br><span class="line">img0 = Image.open((&#x27;pic0.jpg&#x27;))  # pic0.bmp</span><br><span class="line">img1 = img0.convert(&quot;RGB&quot;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、cv2库"><a href="#2、cv2库" class="headerlink" title="2、cv2库"></a>2、cv2库</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 读取BMP图像</span><br><span class="line">img0 = cv2.imread(&#x27;pic0.bmp)&#x27;</span><br><span class="line">img1 = cv2.cvtColor(img0, cv2.COLOR_BGR2RGB)  # BGR转RGB格式</span><br></pre></td></tr></table></figure>
-
-<p><strong>cv2.cvtColor(p1, p2) 是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。</strong></p>
-<ul>
-<li><p>cv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式</p>
-</li>
-<li><p>cv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>code相关</category>
-        <category>Python</category>
-      </categories>
-  </entry>
-  <entry>
     <title>graph_based model调试相关</title>
     <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
@@ -149,6 +153,16 @@
       <categories>
         <category>各种报错信息</category>
         <category>Graph_Based</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-mysql相关报错</title>
+    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>linux</category>
+        <category>mysql</category>
       </categories>
   </entry>
   <entry>
@@ -221,6 +235,39 @@
 ]]></content>
       <categories>
         <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>vscode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++基础</title>
+    <url>/2023/08/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>抽象数据类型：ADTs（Abstract data types)。作为数据和操作的定义，但没有任何实现的定义。</p>
+<p>定义一个抽象的模型，而可以使用c&#x2F;c++等不同的语言去实现。</p>
+]]></content>
+      <categories>
+        <category>code相关</category>
+        <category>数据结构</category>
       </categories>
   </entry>
   <entry>
@@ -302,49 +349,6 @@
       <categories>
         <category>项目</category>
         <category>webserver</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>vscode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>linux-mysql相关报错</title>
-    <url>/2023/08/03/linux-mysql%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>linux</category>
-        <category>mysql</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++基础</title>
-    <url>/2023/08/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>抽象数据类型：ADTs（Abstract data types)。作为数据和操作的定义，但没有任何实现的定义。</p>
-<p>定义一个抽象的模型，而可以使用c&#x2F;c++等不同的语言去实现。</p>
-]]></content>
-      <categories>
-        <category>code相关</category>
-        <category>数据结构</category>
       </categories>
   </entry>
 </search>
