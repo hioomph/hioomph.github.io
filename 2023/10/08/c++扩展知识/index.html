@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解1、指针 1int *p &#x3D; &amp;a; &#x2F;&#x2F; 初始化一个int *类型指针，同时将变量a的地址存入p指针  这里是一个特殊用法，仅在初始化变量的时候可以使用，应分为两个部分去进行理解。 1int *p;	&#x2F;&#x2F; 初始化一个int * 类型指针p  1p &#x3D; &amp;a; &#x2F;&#x2F; 将变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++扩展知识">
+<meta property="og:url" content="http://example.com/2023/10/08/c++%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解1、指针 1int *p &#x3D; &amp;a; &#x2F;&#x2F; 初始化一个int *类型指针，同时将变量a的地址存入p指针  这里是一个特殊用法，仅在初始化变量的时候可以使用，应分为两个部分去进行理解。 1int *p;	&#x2F;&#x2F; 初始化一个int * 类型指针p  1p &#x3D; &amp;a; &#x2F;&#x2F; 将变量">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-08T06:00:48.625Z">
+<meta property="article:modified_time" content="2023-10-08T06:24:55.831Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/10/08/c++%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>c++扩展知识 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/08/c++%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          c++扩展知识
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-08 14:00:48 / 修改时间：14:24:55" itemprop="dateCreated datePublished" datetime="2023-10-08T14:00:48+08:00">2023-10-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code%E7%9B%B8%E5%85%B3/" itemprop="url" rel="index"><span itemprop="name">code相关</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/code%E7%9B%B8%E5%85%B3/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>939</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1、int-p-a、p-a、-p-a的正确理解"><a href="#1、int-p-a、p-a、-p-a的正确理解" class="headerlink" title="1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解"></a>1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解</h2><p>1、指针</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p = &amp;a; <span class="comment">// 初始化一个int *类型指针，同时将变量a的地址存入p指针</span></span><br></pre></td></tr></table></figure>
+
+<p>这里是一个<strong>特殊用法，仅在初始化变量的时候可以使用</strong>，应分为两个部分去进行理解。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p;	<span class="comment">// 初始化一个int * 类型指针p</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = &amp;a; <span class="comment">// 将变量a的地址存入p指针，此时p表示变量a的地址</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*p = a; <span class="comment">// 表示指针p指向变量a，这时*p表示变量a的数值</span></span><br></pre></td></tr></table></figure>
+
+<p><em>注：区别在于在指针中p表示一个地址，存储的是变量的位置。</em></p>
+<p>  <code>*p</code>表示一个变量，存储的是一个值。在初始化变量之外使用<code>*p = &amp;a;</code>是错误的，提示不能将<code>int *</code>类型的值分配到<code>int</code>类型的实体。<br>2、引用</p>
+<p>  同时在<code>C++</code>中存在引用方法，引用和指针的差异在引用绑定后不可更改绑定对象，指针可以更改指向对象。<br>例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> m = <span class="number">3</span>;  <span class="comment">// 定义一个int类型变量m</span></span><br><span class="line"><span class="type">int</span> &amp;r = m; <span class="comment">// 定义引用r表示变量m，后续所有的r都可以作为m来使用，改变r的值会同步修改m</span></span><br></pre></td></tr></table></figure>
+
+<p>相当于把<code>m</code>的地址赋给<code>r</code>，此时两个变量地址是相同的内容。<br>注：引用使用的时候需要进行初始化，指针可以不用初始化。</p>
+<p>未初始化的指针可以编译通过，但可能造成野指针问题。</p>
+<p>3、野指针</p>
+<p>  野指针常出现在空间分配当中，例如在调用的函数中声明了返回地址类型的变量，但是由于声明的位置是在小的空间域当中，因此在调用下一个函数的时候会造成声明处于栈内存中的局部变量被析构掉，最终<strong>只有第一次使用的是正确的数值，第二个函数调用后就默认指向随机位置，获取到的值也是随机获取数值</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int *testa()</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">// 	int a = 3;</span></span><br><span class="line"><span class="comment">// 	return &amp;a;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// 上述代码产生报错：warning: address of local variable ‘a’ returned [-Wreturn-local-addr]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">testa</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *temp = <span class="keyword">new</span> <span class="type">int</span>;</span><br><span class="line">	*temp = <span class="number">3</span>;</span><br><span class="line">	<span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> *num = <span class="built_in">testa</span>();</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;第一次函数调用的数值是：&quot;</span> &lt;&lt; *num &lt;&lt; std::endl;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;第二次函数调用的数值是：&quot;</span> &lt;&lt; *num &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、ifndef"><a href="#2、ifndef" class="headerlink" title="2、ifndef"></a>2、ifndef</h2><p>​		<code>#ifndef</code> 是<code>&quot;if not defined&quot;</code>的简写，是预处理功能（宏定义、文件包含、条件编译）当中的条件编译，在实际开发中可以用于做<code>test</code>或者不同版本的不同适配。<br> 在<code>vscode</code>中可以通过<code>json</code>脚本的<code>define</code>来定义<code>ifndef</code>的值，或者在通过<code>gcc</code>编译的时候添加上宏来进行条件编译。</p>
+<p>​		<code>ifndef</code>可以根据是否已经定义了一个变量来进行分支选择，其作用是：</p>
+<pre><code>1. 防止头文件的重复包含和编译；
+2. 便于程序的调试和移植；
+</code></pre>
+<p>一般格式是这样的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> <span class="string">&lt;标识&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> <span class="string">&lt;标识&gt;</span></span></span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>**&lt;标识&gt;**在理论上来说是可以自由命名的，但每个头文件的这个“标识”都应该是唯一的。标识的明明规则一般是头文件名全大写，前面加下划线，并把文件名中的<code>.</code>也变成下划线，如：<code>stdio.h</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _STDIO_H</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> _STDIO_H</span></span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>#ifndef</code>起到的效果是防止一个源文件多次包含同一个头文件，而不是防止两个源文件包含同一个头文件。事实上，防止同一头文件被两个不同的源文件包含这种要求本身就是不合理的，头文件存在的价值就是被不同的源文件包含。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/08/06/c++%20primer%20%E4%B9%A0%E9%A2%98%E9%9B%86/" rel="prev" title="c++ primer 习题集">
+      <i class="fa fa-chevron-left"></i> c++ primer 习题集
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81int-p-a%E3%80%81p-a%E3%80%81-p-a%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81ifndef"><span class="nav-number">2.</span> <span class="nav-text">2、ifndef</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">9k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">32 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
