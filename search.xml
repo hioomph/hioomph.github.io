@@ -64,10 +64,52 @@
 <p>例如：</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> p1 = &amp;i;    		<span class="comment">// 不能改变p1的值，是一个顶层const</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> ci = <span class="number">42</span>;     		<span class="comment">// 不能改变ci的值，是一个顶层const</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *p2 = &amp;ci;   		<span class="comment">// 允许改变p2的值，是一个底层const</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> p3 = p2;	<span class="comment">// 靠右的const是顶层const，靠左的是底层const</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="5、string的size类型为什么是string-size-t而不是int"><a href="#5、string的size类型为什么是string-size-t而不是int" class="headerlink" title="5、string的size类型为什么是string::size_t而不是int"></a>5、string的size类型为什么是string::size_t而不是int</h2><p><code>std::string</code> 的 <code>size</code> 类型被定义为 <code>string::size_t</code> 而不是 <code>int</code>，是为了提高通用性和可移植性。这是因为字符串的大小（长度）可能非常大，而 <code>int</code> 类型的范围是有限的，因此可能无法表示所有可能的字符串大小。</p>
+<p><code>string::size_t</code> 是一个无符号整数类型，通常被定义为一个足够大的整数，以便可以容纳字符串的任何合法大小。它的大小通常与系统架构和编译器有关，但通常足够大以容纳大多数字符串的长度。</p>
+<p>使用 <code>string::size_t</code> 而不是 <code>int</code> 有以下几个好处：</p>
+<ol>
+<li><strong>能够表示更大的字符串：</strong> 无符号整数类型 <code>size_t</code> 可以容纳比 <code>int</code> 更大的值，这对于处理非常大的字符串是必要的。</li>
+<li><strong>提高可移植性：</strong> 使用 <code>string::size_t</code> 可以确保代码在不同的平台上具有相同的行为，因为 <code>size_t</code> 的大小会根据平台而变化，而不是固定的。</li>
+<li><strong>避免符号问题：</strong> <code>size_t</code> 是无符号类型，避免了符号整数的问题，如溢出等。</li>
+</ol>
+<p>综上所述，使用 <code>string::size_t</code> 作为字符串大小的类型是一种良好的设计选择，可以确保代码能够处理各种大小的字符串，并提高了代码的可移植性。如果你需要与其他整数类型进行比较，你可以将 <code>size_t</code> 强制类型转换为 <code>int</code> 或其他整数类型。</p>
 ]]></content>
       <categories>
         <category>code相关</category>
         <category>c++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>graph_based model调试相关</title>
+    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
+
+<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
+<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
+<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
+<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
+<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
+<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
+<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
+<p>みどり:<br>尝试重新提取训练集的特征</p>
+<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
+<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
+<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>Graph_Based</category>
       </categories>
   </entry>
   <entry>
@@ -120,59 +162,6 @@
       </categories>
   </entry>
   <entry>
-    <title>graph_based model调试相关</title>
-    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
-
-<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
-<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
-<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
-<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
-
-<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
-<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
-<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
-<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
-<p>みどり:<br>尝试重新提取训练集的特征</p>
-<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
-<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
-<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>Graph_Based</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo相关报错</title>
-    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
-<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
@@ -195,55 +184,23 @@
       </categories>
   </entry>
   <entry>
-    <title>操作系统</title>
-    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
-<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
-<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
-<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
-<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
-<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
-<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>hexo相关报错</title>
+    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
 
-<p>运行结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
+<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
 
-<p>此时，若以当前进程创建会话，会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
 
-<p>报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
+<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
+<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 
-<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
-<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
-<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
-<p><code>daemon进程</code>的特点：</p>
-<p>1）独立于控制终端；</p>
-<p>2）名字一般以<code>d</code>结尾；</p>
-<p>3）所有的服务存在于<code>etc/init.d</code></p>
-<p>4）是一个特殊的孤儿进程；</p>
-<p>5）输入被关闭，输出存在于日志中：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
-<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
-<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
-<p>2）查看当前<code>tail</code>进程是否存在</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
-<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
-<p>输出被追加到<code>nohup.out</code>中</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
-<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
-<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
-<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
 ]]></content>
       <categories>
-        <category>计算机基础</category>
+        <category>各种报错信息</category>
+        <category>hexo</category>
       </categories>
   </entry>
   <entry>
@@ -325,6 +282,58 @@
       <categories>
         <category>项目</category>
         <category>webserver</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>操作系统</title>
+    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
+<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
+<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
+<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
+<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
+<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
+<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
+
+<p>此时，若以当前进程创建会话，会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
+<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
+<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
+<p><code>daemon进程</code>的特点：</p>
+<p>1）独立于控制终端；</p>
+<p>2）名字一般以<code>d</code>结尾；</p>
+<p>3）所有的服务存在于<code>etc/init.d</code></p>
+<p>4）是一个特殊的孤儿进程；</p>
+<p>5）输入被关闭，输出存在于日志中：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
+<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
+<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
+<p>2）查看当前<code>tail</code>进程是否存在</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
+<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
+<p>输出被追加到<code>nohup.out</code>中</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
+<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
+<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
+<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
       </categories>
   </entry>
 </search>
