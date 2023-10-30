@@ -21,59 +21,6 @@
       </categories>
   </entry>
   <entry>
-    <title>graph_based model调试相关</title>
-    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
-
-<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
-<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
-<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
-<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
-
-<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
-<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
-<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
-<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
-<p>みどり:<br>尝试重新提取训练集的特征</p>
-<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
-<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
-<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>Graph_Based</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo相关报错</title>
-    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
-<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
     <title>c++ primer 习题集</title>
     <url>/2023/08/06/c++%20primer%20%E4%B9%A0%E9%A2%98%E9%9B%86/</url>
     <content><![CDATA[<h1 id="第一章-开始"><a href="#第一章-开始" class="headerlink" title="第一章 开始"></a>第一章 开始</h1><h2 id="练习1-2"><a href="#练习1-2" class="headerlink" title="练习1.2"></a>练习1.2</h2><p>在<code>linux</code>系统中，通过<code>echo $?</code>可以获取该命令的返回值。返回值是一个整数，用于表示命令执行的结果。</p>
@@ -123,28 +70,6 @@
       <categories>
         <category>code相关</category>
         <category>c++</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>vscode</category>
       </categories>
   </entry>
   <entry>
@@ -227,10 +152,97 @@
 
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//main.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;a.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="function">QApplication <span class="title">aaa</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line">      <span class="function">A <span class="title">a</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line">      a.<span class="built_in">display</span>();</span><br><span class="line">      a.<span class="built_in">display</span>();</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;call func &quot;</span> &lt;&lt; a.<span class="built_in">getCount</span>() &lt;&lt; <span class="string">&quot; times.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">return</span> aaa.<span class="built_in">exec</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># <span class="string">&quot;call func display()&quot;</span></span><br><span class="line"># <span class="string">&quot;call func display()&quot;</span></span><br><span class="line"># <span class="string">&quot;call func 2 times.&quot;</span></span><br></pre></td></tr></table></figure>
 
+<h2 id="8、不完全类型"><a href="#8、不完全类型" class="headerlink" title="8、不完全类型"></a>8、不完全类型</h2><p>在一个给定的源文件中，一个类只能被定义一次，如果在多个文件中定义一个类，那么每个文件中的定义必须是完全相同的。一旦遇到花括号，类的定义就结束了。并且一旦定义了类，我们就知道所有类的成员，以及存储该类的对象所需的存储空间。</p>
+<p>将类定义放在头文件中，可以保证在每个使用类的文件中以同样的方式定义类。使用头文件保护符，来保证即使头文件在同一个文件中被包含多次，类定义也只出现一次。</p>
+<p>只声明却没有定义的类称为<strong>不完全类型</strong>，不完全类型不能定义该类型的对象，只能用于定义指向该类型的指针及引用，或者用于声明（不是定义）使用该类型作为形参类型或返回类型的函数。</p>
+<p><strong>在创建类的对象之前，必须完整地定义该类。必须定义，而不是声明类，这样，编译器就会给类的对象预定相应的存储空间。同样的，在使用引用或指针访问类的成员之前，必须已经定义类。</strong>只有当类定义已经在前面出现过，数据成员才能被制定为该类类型。<strong>如果该类型是不完全类型，那么数据成员只能是指向该类类型的指针或引用。</strong></p>
+<p>可以声明一个类而不定义它：这个声明称为<strong>前向声明</strong>。类的前向声明一般用来编写相互依赖的类。在声明之后，定义之前，类称为<strong>不完全类型</strong>，即已知Screen类是一个类型，但不知道包含哪些成员。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Screen</span>；</span><br></pre></td></tr></table></figure>
+
+<p>因为只有当类定义体完成后才能定义类，因此<strong>类不能具有自身类型的数据成员</strong>，然而，只要类名一出现就可以认为该类已经声明，因此，<strong>类的数据成员可以是指向自身类型的指针或引用</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LinkScreen</span>&#123;</span><br><span class="line">    Screen window;</span><br><span class="line">    LinkScreen *next;</span><br><span class="line">    LinkScreen *prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>static</code>数据成员也可以是该成员所属的类类型。<code>非static</code>成员被限定声明为其自身类对象的指针或引用：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bar</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">   <span class="type">static</span> Bar mem1;<span class="comment">//ok</span></span><br><span class="line">   Bar *mem2;<span class="comment">//ok</span></span><br><span class="line">   Bar mem3;<span class="comment">//no!!!!因为Bar是一个不完全类型，所以只能定义它的非static的指针或引用。</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>code相关</category>
         <category>c++</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>graph_based model调试相关</title>
+    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
+
+<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
+<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
+<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
+<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
+<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
+<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
+<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
+<p>みどり:<br>尝试重新提取训练集的特征</p>
+<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
+<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
+<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>Graph_Based</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo相关报错</title>
+    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
+
+<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
+
+<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
+<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>vscode</category>
       </categories>
   </entry>
   <entry>
