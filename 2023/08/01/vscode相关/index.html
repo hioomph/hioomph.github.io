@@ -31,8 +31,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png">
 <meta property="article:published_time" content="2023-08-01T10:54:22.222Z">
-<meta property="article:modified_time" content="2023-08-04T03:52:09.122Z">
+<meta property="article:modified_time" content="2023-12-07T08:10:13.262Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png">
@@ -227,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-08-04 11:52:09" itemprop="dateModified" datetime="2023-08-04T11:52:09+08:00">2023-08-04</time>
+                <time title="修改时间：2023-12-07 16:10:13" itemprop="dateModified" datetime="2023-12-07T16:10:13+08:00">2023-12-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,14 +251,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>110</span>
+              <span>817</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -281,6 +283,49 @@
 <p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
 <p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
+<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
+<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
+<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
+</li>
+<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
+</li>
+<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
+<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
+</ul>
+<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
+<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+</li>
+<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
+<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
+<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
+<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
+<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
+<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
+</blockquote>
+<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
+<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+<ol>
+<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
+<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+</ol>
+<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
+<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
+<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
 
     </div>
 
@@ -361,7 +406,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81-vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E5%A6%82%E4%BD%95%E5%85%8D%E5%AF%86%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">1、 vscode连接阿里云如何免密？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">windows端：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">linux端：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81-vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E5%A6%82%E4%BD%95%E5%85%8D%E5%AF%86%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">1、 vscode连接阿里云如何免密？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">windows端：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux%E7%AB%AF%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">linux端：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81Linux%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8VSCode%E8%B0%83%E8%AF%95%E7%AE%80%E5%8D%95C-%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">2、Linux环境使用VSCode调试简单C++代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%EF%BC%89%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%9B%E8%A1%8C%E7%BC%96%E8%AF%91%E3%80%81%E8%B0%83%E8%AF%95"><span class="nav-number">2.1.</span> <span class="nav-text">1）终端命令行进行编译、调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%EF%BC%89%E9%80%9A%E8%BF%87VSCode%E8%BF%9B%E8%A1%8C%E7%BC%96%E8%AF%91%E3%80%81%E8%B0%83%E8%AF%95"><span class="nav-number">2.2.</span> <span class="nav-text">2）通过VSCode进行编译、调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">（1）前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E9%85%8D%E7%BD%AEtasks-json"><span class="nav-number">2.2.2.</span> <span class="nav-text">（2）配置tasks.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%89%A7%E8%A1%8C%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.3.</span> <span class="nav-text">（3）执行编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E8%B0%83%E8%AF%95%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.4.</span> <span class="nav-text">（4）调试文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AElaunch-json"><span class="nav-number">2.2.5.</span> <span class="nav-text">（5）个性化配置launch.json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E6%80%BB%E7%BB%93"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">（6）总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E5%A4%8D%E7%94%A8C-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.6.</span> <span class="nav-text">（7）复用C++配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81VSCode%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E5%A4%B4%E6%96%87%E4%BB%B6%E7%9A%84-ifndef-define-endif"><span class="nav-number">3.</span> <span class="nav-text">3、VSCode自动生成头文件的 #ifndef #define #endif</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -377,14 +422,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -420,12 +465,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">13k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">48 分钟</span>
+    <span title="站点阅读时长">51 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
