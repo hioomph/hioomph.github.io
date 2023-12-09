@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-07 10:02:33" itemprop="dateModified" datetime="2023-12-07T10:02:33+08:00">2023-12-07</time>
+                <time title="修改时间：2023-12-09 20:00:38" itemprop="dateModified" datetime="2023-12-09T20:00:38+08:00">2023-12-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>115</span>
+              <span>279</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -274,6 +274,20 @@
 <h1 id="2-线性表"><a href="#2-线性表" class="headerlink" title="2 线性表"></a>2 线性表</h1><h2 id="2-1-顺序表（SeqList）"><a href="#2-1-顺序表（SeqList）" class="headerlink" title="2.1 顺序表（SeqList）"></a>2.1 顺序表（SeqList）</h2><p>顺序表通过一组地址连续的空间对数据进行存储。</p>
 <h2 id="2-2-单链表"><a href="#2-2-单链表" class="headerlink" title="2.2 单链表"></a>2.2 单链表</h2><p>不要求逻辑上相邻的元素在物理位置上也相邻，因此无法实现随机存取。</p>
 <p>分清“谁的谁是谁”。 </p>
+<p>操作时要时刻注意<code>last</code>这一项。</p>
+<p><strong>头部插入时易错：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头部插入</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">push_front</span><span class="params">(List *<span class="built_in">list</span>, ElemType x)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *s = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    assert(s != <span class="literal">NULL</span>);</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    s-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = s;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如下图所示，当使用头插法向<code>空list</code>中插入<code>1</code>后，<code>list-&gt;last</code>仍然指向头结点。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312091056865.png" alt="image-20231209105649826"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312091054319.png" alt="image-20231209105418153"></p>
+<p> 对<code>pop_front</code>进行修改，加入对<code>size</code>的判断：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">list</span>-&gt;last = s; <span class="comment">// 当list为空时，对last进行移动</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312091058534.png" alt="image-20231209105844499"></p>
+<p><strong>头部删除时同理</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头部删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">pop_front</span><span class="params">(List *<span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    Node *p = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">list</span>-&gt;last = <span class="built_in">list</span>-&gt;first;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1484,7 +1498,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">51 分钟</span>
+    <span title="站点阅读时长">52 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
