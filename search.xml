@@ -84,59 +84,6 @@
       </categories>
   </entry>
   <entry>
-    <title>graph_based model调试相关</title>
-    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
-
-<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
-<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
-
-<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
-<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
-<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
-
-<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
-<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
-<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
-<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
-<p>みどり:<br>尝试重新提取训练集的特征</p>
-<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
-<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
-<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>Graph_Based</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo相关报错</title>
-    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
-
-<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
-<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>各种报错信息</category>
-        <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
     <title>c++扩展知识</title>
     <url>/2023/10/08/c++%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="1、int-p-a、p-a、-p-a的正确理解"><a href="#1、int-p-a、p-a、-p-a的正确理解" class="headerlink" title="1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解"></a>1、int *p &#x3D; &amp;a、p &#x3D; &amp;a、*p &#x3D; a的正确理解</h2><p>1、指针</p>
@@ -235,6 +182,59 @@
       </categories>
   </entry>
   <entry>
+    <title>graph_based model调试相关</title>
+    <url>/2023/08/03/graph_based%20model%E8%B0%83%E8%AF%95%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend"><a href="#1、Could-not-run-‘aten-slow-conv3d-forward’-with-arguments-from-the-‘CUDA’-backend" class="headerlink" title="1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend."></a>1、Could not run ‘aten::slow_conv3d_forward’ with arguments from the ‘CUDA’ backend.</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/utils/UCSD/make_mask.py&quot;, line 77, in &lt;module&gt;</span><br><span class="line">    temp_feature = net(temp_frames)  # (4, 4096)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/tmp/pycharm_project_917/nets/feature_extract/C3D_Nonlocal.py&quot;, line 43, in forward</span><br><span class="line">    x = self.relu(self.conv1a(x))   # (1, 64, 16, 224, 224)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/module.py&quot;, line 1102, in _call_impl</span><br><span class="line">    return forward_call(*input, **kwargs)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 590, in forward</span><br><span class="line">    return self._conv_forward(input, self.weight, self.bias)</span><br><span class="line">  File &quot;/root/miniconda3/lib/python3.8/site-packages/torch/nn/modules/conv.py&quot;, line 585, in _conv_forward</span><br><span class="line">    return F.conv3d(</span><br><span class="line">NotImplementedError: Could not run &#x27;aten::slow_conv3d_forward&#x27; with arguments from the &#x27;CUDA&#x27; backend. This could be because the operator doesn&#x27;t exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. &#x27;aten::slow_conv3d_forward&#x27; is only available for these backends: [CPU, BackendSelect, Python, Named, Conjugate, Negative, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradLazy, AutogradXPU, AutogradMLC, AutogradHPU, AutogradNestedTensor, AutogradPrivateUse1, AutogradPrivateUse2, AutogradPrivateUse3, Tracer, UNKNOWN_TENSOR_TYPE_ID, Autocast, Batched, VmapMode].</span><br></pre></td></tr></table></figure>
+
+<p>分析代码，发现是因为对于要进行运算的数据<code>temp_frames</code>没有转到<code>cuda</code>设备上，因此：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># temp_frames = temp_frames.reshape(1, 3, 16, 224, 224)</span><br><span class="line">temp_frames = temp_frames.reshape(1, 3, 16, 224, 224).cuda()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、test-annos部分为空"><a href="#2、test-annos部分为空" class="headerlink" title="2、test_annos部分为空"></a>2、test_annos部分为空</h2><p><code>debug</code>发现<code>test_annos</code>中正常帧对应的<code>anno</code>为空。</p>
+<p>在<code>dataset.py</code>中，正常帧的<code>anno</code>主要是通过这两行实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">else:  # line_split[1] == &#x27;0&#x27;</span><br><span class="line">    anno = np.zeros(int(line_split[-1]))</span><br><span class="line">    labels.append(&#x27;Normal&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>参照<code>UCSD</code>的训练过程，<code>ped2_Test.txt</code>中每一行包含：名字，label，帧数</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081515123.png" alt="image-20230808151522984"></p>
+<p>而最开始使用的<code>SH_Test_label.txt</code>不包含帧数。所以异常帧可以直接通过<code>test_frame_mask/</code>中的<code>.npy</code>文件获取对应的<code>anno</code>，而正常帧的<code>anno</code>则为空。</p>
+<p>解决方法：在<code>video_to_c3d.py</code>中新增加一个类函数，返回正常帧（<code>.avi</code>视频）对应的名称和帧数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def save_frames(self):</span><br><span class="line">    vr = decord.VideoReader(self.path, ctx=cpu(0))</span><br><span class="line">    num_frame = vr._num_frame  # 单个视频（如01_001.avi）的总帧数</span><br><span class="line">    base_name = os.path.basename(self.path)  # 01_001.avi</span><br><span class="line">    return base_name, num_frame  # 名称，帧数</span><br></pre></td></tr></table></figure>
+
+<p>接下来就可以根据函数返回的结果在<code>SH_Test_label.txt</code>中，正常帧的后面加上对应的帧数，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308081520957.png" alt="image-20230808152013907"></p>
+<h2 id="3、ValueError-Input-contains-NaN"><a href="#3、ValueError-Input-contains-NaN" class="headerlink" title="3、ValueError: Input contains NaN."></a>3、ValueError: Input contains NaN.</h2><p><code>total_scores</code>中出现<code>NaN</code>。</p>
+<p>みどり:<br>SHT：dataloader &#x3D;&gt; BatchSampler &#x3D;15</p>
+<p>みどり:<br>ucsd：dataloader &#x3D;&gt; BatchSampler &#x3D;1</p>
+<p>みどり:<br>尝试重新提取训练集的特征</p>
+<p>みどり:<br>每16帧提取一次，而不是将0-15帧的数据拼接在一起形成一组数据 &#x3D;&#x3D;&#x3D;&gt; 目前推测是这个原因</p>
+<p>みどり:<br>ucsd：每16帧暂存为一个temp_frames合集，从这个合集中提取新的特征</p>
+<p>みどり:<br>SHT：每16帧为一个集合，分别提取16次特征，再拼接起来</p>
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>Graph_Based</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo相关报错</title>
+    <url>/2023/07/30/hexo%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="1、OpnSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#1、OpnSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="1、OpnSSL SSL_read: Connection was reset, errno 10054"></a>1、OpnSSL SSL_read: Connection was reset, errno 10054</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/hioomph/hioomph.github.io.git/&#x27;: OpnSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
+
+<h3 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h3><p>一般是这是因为服务器的SSL证书没有经过第三方机构的签署，所以才报错</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>解除ssl验证后，再上传就OK了</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Error-Spawn-failed"><a href="#2、Error-Spawn-failed" class="headerlink" title="2、Error: Spawn failed"></a>2、Error: Spawn failed</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; (D:\blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">    at ChildProcess.emit (node:events:514:28)</span><br><span class="line">    at cp.emit (D:\blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:291:12)</span><br></pre></td></tr></table></figure>
+
+<h3 id="产生原因-1"><a href="#产生原因-1" class="headerlink" title="产生原因"></a>产生原因</h3><p>hexo的_config.yml配置里git仓库地址填写错误，应将https方式改成ssh方式</p>
+<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # repository: https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git  # https方式</span><br><span class="line">  repository: git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git		  # ssh方式</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>各种报错信息</category>
+        <category>hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
@@ -297,83 +297,6 @@
       <categories>
         <category>各种报错信息</category>
         <category>vscode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《数据结构（C语言实现）》_b站鲍松山</title>
-    <url>/2023/12/05/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%EF%BC%89%E3%80%8B_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/</url>
-    <content><![CDATA[<h1 id="1-绪论"><a href="#1-绪论" class="headerlink" title="1 绪论"></a>1 绪论</h1><p>数据结构（Data Struct）：数据之间的组织架构&#x2F;结构。</p>
-<p>DS：</p>
-<ul>
-<li>线性结构<ul>
-<li>SeqList&#x2F;List&#x2F;Stack&#x2F;Queue&#x2F;String&#x2F;Array</li>
-</ul>
-</li>
-<li>非线性结构<ul>
-<li>Tree&#x2F;Graph</li>
-</ul>
-</li>
-<li>排序&#x2F;搜索</li>
-<li>算法</li>
-</ul>
-<h1 id="2-线性表"><a href="#2-线性表" class="headerlink" title="2 线性表"></a>2 线性表</h1><h2 id="2-1-顺序表（SeqList）"><a href="#2-1-顺序表（SeqList）" class="headerlink" title="2.1 顺序表（SeqList）"></a>2.1 顺序表（SeqList）</h2><p>顺序表通过一组地址连续的空间对数据进行存储。</p>
-<h2 id="2-2-单链表（List）"><a href="#2-2-单链表（List）" class="headerlink" title="2.2 单链表（List）"></a>2.2 单链表（List）</h2><p>不要求逻辑上相邻的元素在物理位置上也相邻，因此无法实现随机存取。</p>
-<p>分清“谁的谁是谁”。 </p>
-<p>操作时要时刻注意<code>last</code>这一项。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120918067.png" alt="image-20231212091813193"></p>
-<p><strong>头部插入时易错：</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 头部插入</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">push_front</span><span class="params">(List *<span class="built_in">list</span>, ElemType x)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *s = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    assert(s != <span class="literal">NULL</span>);</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    s-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = s;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如下图所示，当使用头插法向<code>空list</code>中插入<code>1</code>后，<code>list-&gt;last</code>仍然指向头结点。‘</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915222.png" alt="1"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915816.png" alt="2"></p>
-<p> 对<code>pop_front</code>进行修改，加入对<code>size</code>的判断：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">list</span>-&gt;last = s; <span class="comment">// 当list为空时，对last进行移动</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915584.png" alt="3"></p>
-<p><strong>头部删除时同理</strong>：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 头部删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">pop_front</span><span class="params">(List *<span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    Node *p = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">list</span>-&gt;last = <span class="built_in">list</span>-&gt;first;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-3-静态链表（StaticList）"><a href="#2-3-静态链表（StaticList）" class="headerlink" title="2.3 静态链表（StaticList）"></a>2.3 静态链表（StaticList）</h2><p>使用<strong>静态链表</strong>可以便于在不设<em>指针</em>类型的高级程序设计语言中使用链表结构。</p>
-<p>静态链表实际上就是用数组去模拟链表。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915948.png" alt="4"></p>
-<p>这里的<code>pool</code>指明下一个备用空间的地址。</p>
-<h2 id="2-4-单循环链表（SCList）"><a href="#2-4-单循环链表（SCList）" class="headerlink" title="2.4 单循环链表（SCList）"></a>2.4 单循环链表（SCList）</h2><p>特点：尾节点指向头节点，整个链表形成一个环。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312121129584.png" alt="image-20231212112956184"></p>
-<p>循环链表的操作和线性链表基本一致,差别仪在于算法中的循环条件不是<code>p</code>或<code>p-&gt;next</code>是否为空，而是它们是否等于头指针。但有的时候，若在循环链表中设立尾指针而不设头指针，可使某些操作简化。例如将两个线性表合并成一个表时，仅需将一个表的表尾和另一个表的表头相接。</p>
-<p>初始化时，注意：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>-&gt;first = <span class="built_in">list</span>-&gt;last = s;</span><br><span class="line"><span class="built_in">list</span>-&gt;last-&gt;next = <span class="built_in">list</span>-&gt;first;</span><br><span class="line"><span class="built_in">list</span>-&gt;size = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120928507.png" alt="image-20231212092812466"></p>
-<p>尾插时的各节点地址：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120954889.png" alt="image-20231212095457800"></p>
-<p><strong>掌握按值删除这里的的思想：</strong></p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按值删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_val</span><span class="params">(List *<span class="built_in">list</span>, ElemType key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    Node *p = find(<span class="built_in">list</span>, key);</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;要删除的数据不存在！\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(p == <span class="built_in">list</span>-&gt;last)</span><br><span class="line">        pop_back(<span class="built_in">list</span>);</span><br><span class="line">    <span class="comment">////////////////////////////////***</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 即不是删除当前节点，而是将下一个节点的值赋值给当前节点，然后删除下一个节点</span></span><br><span class="line">        <span class="comment">// 这样做避免从头遍历链表</span></span><br><span class="line">        Node *q = p-&gt;next;</span><br><span class="line">        p-&gt;data = q-&gt;data;</span><br><span class="line">        p-&gt;next = q-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(q);</span><br><span class="line">        <span class="built_in">list</span>-&gt;size--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">////////////////////////////////***</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>申请节点：Node *s<br>遍历节点：Node *p<br>删除节点：Node *q</p>
-</blockquote>
-<h2 id="2-5-双向链表（DList）"><a href="#2-5-双向链表（DList）" class="headerlink" title="2.5 双向链表（DList）"></a>2.5 双向链表（DList）</h2><p>每次操作时涉及4个指针：</p>
-<ul>
-<li>当前节点的前驱；</li>
-<li>当前节点的后继；</li>
-<li>前一个节点的后继；</li>
-<li>后一个节点的前驱。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312131154818.png" alt="image-20231213115430268"></p>
-<h2 id="2-6-双向循环链表"><a href="#2-6-双向循环链表" class="headerlink" title="2.6 双向循环链表"></a>2.6 双向循环链表</h2><p>存在两个环。</p>
-<p><strong>环1是<code>list-&gt;last-&gt;next</code></strong></p>
-<p><strong>环2是<code>list-&gt;first-&gt;prev</code></strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312140920009.png" alt="image-20231214092024742"></p>
-<h1 id="3-栈和队列"><a href="#3-栈和队列" class="headerlink" title="3 栈和队列"></a>3 栈和队列</h1><p><strong>栈和队列的基本操作是线性表操作的子集，是操作受限的线性表。</strong></p>
-<p>栈：限定仅在表尾插入或删除操作的线性表。表尾称为<strong>栈顶</strong>，表头称为<strong>栈底</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312141056107.png" alt="image-20231214105656926"></p>
-<h2 id="3-1-顺序栈"><a href="#3-1-顺序栈" class="headerlink" title="3.1 顺序栈"></a>3.1 顺序栈</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Stack st</span><br><span class="line">	base</span><br><span class="line">	top</span><br><span class="line">	capacity</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312141103006.png" alt="image-20231214110346157"></p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
       </categories>
   </entry>
   <entry>
@@ -504,6 +427,90 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
 <p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《数据结构（C语言实现）》_b站鲍松山</title>
+    <url>/2023/12/05/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0%EF%BC%89%E3%80%8B_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/</url>
+    <content><![CDATA[<h1 id="1-绪论"><a href="#1-绪论" class="headerlink" title="1 绪论"></a>1 绪论</h1><p>数据结构（Data Struct）：数据之间的组织架构&#x2F;结构。</p>
+<p>DS：</p>
+<ul>
+<li>线性结构<ul>
+<li>SeqList&#x2F;List&#x2F;Stack&#x2F;Queue&#x2F;String&#x2F;Array</li>
+</ul>
+</li>
+<li>非线性结构<ul>
+<li>Tree&#x2F;Graph</li>
+</ul>
+</li>
+<li>排序&#x2F;搜索</li>
+<li>算法</li>
+</ul>
+<h1 id="2-线性表"><a href="#2-线性表" class="headerlink" title="2 线性表"></a>2 线性表</h1><h2 id="2-1-顺序表（SeqList）"><a href="#2-1-顺序表（SeqList）" class="headerlink" title="2.1 顺序表（SeqList）"></a>2.1 顺序表（SeqList）</h2><p>顺序表通过一组地址连续的空间对数据进行存储。</p>
+<h2 id="2-2-单链表（List）"><a href="#2-2-单链表（List）" class="headerlink" title="2.2 单链表（List）"></a>2.2 单链表（List）</h2><p>不要求逻辑上相邻的元素在物理位置上也相邻，因此无法实现随机存取。</p>
+<p>分清“谁的谁是谁”。 </p>
+<p>操作时要时刻注意<code>last</code>这一项。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120918067.png" alt="image-20231212091813193"></p>
+<p><strong>头部插入时易错：</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 头部插入</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">push_front</span><span class="params">(List *<span class="built_in">list</span>, ElemType x)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *s = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    assert(s != <span class="literal">NULL</span>);</span><br><span class="line">    s-&gt;data = x;</span><br><span class="line">    s-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = s;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如下图所示，当使用头插法向<code>空list</code>中插入<code>1</code>后，<code>list-&gt;last</code>仍然指向头结点。‘</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915222.png" alt="1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915816.png" alt="2"></p>
+<p> 对<code>pop_front</code>进行修改，加入对<code>size</code>的判断：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">    <span class="built_in">list</span>-&gt;last = s; <span class="comment">// 当list为空时，对last进行移动</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915584.png" alt="3"></p>
+<p><strong>头部删除时同理</strong>：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 头部删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">pop_front</span><span class="params">(List *<span class="built_in">list</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    Node *p = <span class="built_in">list</span>-&gt;first-&gt;next;</span><br><span class="line">    <span class="built_in">list</span>-&gt;first-&gt;next = <span class="built_in">list</span>-&gt;first-&gt;next-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">list</span>-&gt;last = <span class="built_in">list</span>-&gt;first;</span><br><span class="line">    <span class="built_in">list</span>-&gt;size--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-静态链表（StaticList）"><a href="#2-3-静态链表（StaticList）" class="headerlink" title="2.3 静态链表（StaticList）"></a>2.3 静态链表（StaticList）</h2><p>使用<strong>静态链表</strong>可以便于在不设<em>指针</em>类型的高级程序设计语言中使用链表结构。</p>
+<p>静态链表实际上就是用数组去模拟链表。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120915948.png" alt="4"></p>
+<p>这里的<code>pool</code>指明下一个备用空间的地址。</p>
+<h2 id="2-4-单循环链表（SCList）"><a href="#2-4-单循环链表（SCList）" class="headerlink" title="2.4 单循环链表（SCList）"></a>2.4 单循环链表（SCList）</h2><p>特点：尾节点指向头节点，整个链表形成一个环。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312121129584.png" alt="image-20231212112956184"></p>
+<p>循环链表的操作和线性链表基本一致,差别仪在于算法中的循环条件不是<code>p</code>或<code>p-&gt;next</code>是否为空，而是它们是否等于头指针。但有的时候，若在循环链表中设立尾指针而不设头指针，可使某些操作简化。例如将两个线性表合并成一个表时，仅需将一个表的表尾和另一个表的表头相接。</p>
+<p>初始化时，注意：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="built_in">list</span>-&gt;first = <span class="built_in">list</span>-&gt;last = s;</span><br><span class="line"><span class="built_in">list</span>-&gt;last-&gt;next = <span class="built_in">list</span>-&gt;first;</span><br><span class="line"><span class="built_in">list</span>-&gt;size = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120928507.png" alt="image-20231212092812466"></p>
+<p>尾插时的各节点地址：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312120954889.png" alt="image-20231212095457800"></p>
+<p><strong>掌握按值删除这里的的思想：</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按值删除</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">delete_val</span><span class="params">(List *<span class="built_in">list</span>, ElemType key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">list</span>-&gt;size == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    Node *p = find(<span class="built_in">list</span>, key);</span><br><span class="line">    <span class="keyword">if</span>(p == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;要删除的数据不存在！\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(p == <span class="built_in">list</span>-&gt;last)</span><br><span class="line">        pop_back(<span class="built_in">list</span>);</span><br><span class="line">    <span class="comment">////////////////////////////////***</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 即不是删除当前节点，而是将下一个节点的值赋值给当前节点，然后删除下一个节点</span></span><br><span class="line">        <span class="comment">// 这样做避免从头遍历链表</span></span><br><span class="line">        Node *q = p-&gt;next;</span><br><span class="line">        p-&gt;data = q-&gt;data;</span><br><span class="line">        p-&gt;next = q-&gt;next;</span><br><span class="line">        <span class="built_in">free</span>(q);</span><br><span class="line">        <span class="built_in">list</span>-&gt;size--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">////////////////////////////////***</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>申请节点：Node *s<br>遍历节点：Node *p<br>删除节点：Node *q</p>
+</blockquote>
+<h2 id="2-5-双向链表（DList）"><a href="#2-5-双向链表（DList）" class="headerlink" title="2.5 双向链表（DList）"></a>2.5 双向链表（DList）</h2><p>每次操作时涉及4个指针：</p>
+<ul>
+<li>当前节点的前驱；</li>
+<li>当前节点的后继；</li>
+<li>前一个节点的后继；</li>
+<li>后一个节点的前驱。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312131154818.png" alt="image-20231213115430268"></p>
+<h2 id="2-6-双向循环链表"><a href="#2-6-双向循环链表" class="headerlink" title="2.6 双向循环链表"></a>2.6 双向循环链表</h2><p>存在两个环。</p>
+<p><strong>环1是<code>list-&gt;last-&gt;next</code></strong></p>
+<p><strong>环2是<code>list-&gt;first-&gt;prev</code></strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312140920009.png" alt="image-20231214092024742"></p>
+<h1 id="3-栈和队列"><a href="#3-栈和队列" class="headerlink" title="3 栈和队列"></a>3 栈和队列</h1><p><strong>栈和队列的基本操作是线性表操作的子集，是操作受限的线性表。</strong></p>
+<p>栈：限定仅在表尾插入或删除操作的线性表。表尾称为<strong>栈顶</strong>，表头称为<strong>栈底</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312141056107.png" alt="image-20231214105656926"></p>
+<h2 id="3-1-顺序栈（SeqStack）"><a href="#3-1-顺序栈（SeqStack）" class="headerlink" title="3.1 顺序栈（SeqStack）"></a>3.1 顺序栈（SeqStack）</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312141103006.png" alt="image-20231214110346157"></p>
+<h2 id="3-2-链栈（LinkStack）"><a href="#3-2-链栈（LinkStack）" class="headerlink" title="3.2 链栈（LinkStack）"></a>3.2 链栈（LinkStack）</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312151207109.png" alt="image-20231215120659701"></p>
+<h2 id="3-3-栈的应用"><a href="#3-3-栈的应用" class="headerlink" title="3.3 栈的应用"></a>3.3 栈的应用</h2><h3 id="1、数制转换"><a href="#1、数制转换" class="headerlink" title="1、数制转换"></a>1、数制转换</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312151258969.png" alt="image-20231215125804838"></p>
+<p>由于结果要从下往上读取，因此用一个栈来依次存放余数。最终依次取栈顶元素，就可以得到转换后的结果。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&quot;SeqStack.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 数制转换</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Convert_8</span><span class="params">(<span class="type">int</span> value)</span></span><br><span class="line">&#123;</span><br><span class="line">    SeqStack st;</span><br><span class="line">    InitStack(&amp;st);</span><br><span class="line">    <span class="type">int</span> v;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(value)</span><br><span class="line">    &#123;</span><br><span class="line">        Push(&amp;st, value%<span class="number">8</span>);</span><br><span class="line">        value /= <span class="number">8</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Show(&amp;st);</span></span><br><span class="line">    <span class="keyword">while</span> (!(IsEmpty(&amp;st)))</span><br><span class="line">    &#123;</span><br><span class="line">        GetTop(&amp;st, &amp;v);</span><br><span class="line">        Pop(&amp;st);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.数制转换 ElemType int</span></span><br><span class="line">    <span class="type">int</span> value = <span class="number">47183</span>;</span><br><span class="line">    Convert_8(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、括号匹配"><a href="#2、括号匹配" class="headerlink" title="2、括号匹配"></a>2、括号匹配</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 括号匹配</span></span><br><span class="line"><span class="type">bool</span> <span class="title function_">Check</span><span class="params">(<span class="type">char</span> *str)</span></span><br><span class="line">&#123;</span><br><span class="line">    SeqStack st;</span><br><span class="line">    InitStack(&amp;st);</span><br><span class="line">    <span class="type">char</span> v;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(*str != <span class="string">&#x27;\0&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*str == <span class="string">&#x27;[&#x27;</span> || *str == <span class="string">&#x27;&#123;&#x27;</span> || *str == <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">            Push(&amp;st, *str);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(*str == <span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            GetTop(&amp;st, &amp;v);</span><br><span class="line">            <span class="keyword">if</span>(v != <span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            Pop(&amp;st);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(*str == <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            GetTop(&amp;st, &amp;v);</span><br><span class="line">            <span class="keyword">if</span>(v != <span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            Pop(&amp;st);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(*str == <span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            GetTop(&amp;st, &amp;v);</span><br><span class="line">            <span class="keyword">if</span>(v != <span class="string">&#x27;&#123;&#x27;</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            Pop(&amp;st);</span><br><span class="line">        &#125; </span><br><span class="line">        *str++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> IsEmpty(&amp;st);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 2.括号匹配 ElemType char</span></span><br><span class="line">    <span class="type">char</span> *str = <span class="string">&quot;[([][])]&quot;</span>; <span class="comment">// char *str    str是一个指向字符数组的指针</span></span><br><span class="line">    <span class="type">bool</span> flag = Check(str);</span><br><span class="line">    <span class="keyword">if</span>(flag)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Ok!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Error!\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、行编辑程序"><a href="#3、行编辑程序" class="headerlink" title="3、行编辑程序"></a>3、行编辑程序</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 3.行编辑程序</span></span><br><span class="line">    SeqStack st;</span><br><span class="line">    InitStack(&amp;st);</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch != <span class="string">&#x27;$&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(ch !=<span class="string">&#x27;$&#x27;</span> &amp;&amp; ch != <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">switch</span>(ch)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                    Pop(&amp;st);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;@&#x27;</span>:</span><br><span class="line">                    Clear(&amp;st);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    Push(&amp;st, ch);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            ch = getchar();</span><br><span class="line">        &#125;</span><br><span class="line">        Print(&amp;st);</span><br><span class="line">        ch = getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    Destroy(&amp;st);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>计算机基础</category>
