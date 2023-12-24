@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-23 20:26:54" itemprop="dateModified" datetime="2023-12-23T20:26:54+08:00">2023-12-23</time>
+                <time title="修改时间：2023-12-24 19:55:04" itemprop="dateModified" datetime="2023-12-24T19:55:04+08:00">2023-12-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +238,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.1k</span>
+              <span>5.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
+              <span>19 分钟</span>
             </span>
 
         </div>
@@ -490,6 +490,69 @@
 </blockquote>
 <p>举例：对下面这棵二叉树按照中序遍历线索化</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312232026443.png" alt="image-20231223202641174"></p>
+<h2 id="6-6-树和森林"><a href="#6-6-树和森林" class="headerlink" title="6.6 树和森林"></a>6.6 树和森林</h2><p>讨论树的表示及其遍历操作，并建立森林与二叉树的对应关系。</p>
+<p>注意这里的树<em>不局限于二叉树</em>。</p>
+<h3 id="1、双亲表示法（仅了解即可）"><a href="#1、双亲表示法（仅了解即可）" class="headerlink" title="1、双亲表示法（仅了解即可）"></a>1、双亲表示法（仅了解即可）</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241441068.png" alt="image-20231224144144837" style="zoom: 80%;" />
+
+<p><strong>缺点</strong>：求父结点很方便，但求孩子结点时需要遍历整个结构。</p>
+<h3 id="2、孩子表示法（仅了解即可）"><a href="#2、孩子表示法（仅了解即可）" class="headerlink" title="2、孩子表示法（仅了解即可）"></a>2、孩子表示法（仅了解即可）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241517749.png" alt="image-20231224151751633"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241518866.png" alt="image-20231224151800720"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241517901.png" alt="image-20231224151730578"></p>
+<h3 id="3、孩子兄弟表示法（重要）"><a href="#3、孩子兄弟表示法（重要）" class="headerlink" title="3、孩子兄弟表示法（重要）"></a>3、孩子兄弟表示法（重要）</h3><p>又称二叉树表示法或二叉链表表示法。即以二叉链表作为树的存储结构。</p>
+<p>链表中结点的两个链域分别指向该结点的第一个<strong>孩子结点</strong>和下一个<strong>兄弟结点</strong>。<em>（即左孩子，右兄弟）</em></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241541154.png" alt="image-20231224154137327" style="zoom: 33%;" />
+
+<p>对其进行遍历可得：</p>
+<p>（1）先序遍历<strong>（先访问根，再依次访问根的每棵子树）</strong>：<code>A B C D E</code></p>
+<p>（2）后序遍历<strong>（先依次访问根的每棵子树，再访问根）</strong>：<code>B D C E A</code></p>
+<p><strong>树不包含中序遍历！</strong></p>
+<h3 id="4、森林和二叉树的转换"><a href="#4、森林和二叉树的转换" class="headerlink" title="4、森林和二叉树的转换"></a>4、森林和二叉树的转换</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241530772.png" alt="image-20231224153024529" style="zoom: 67%;" />
+
+<p>上图依然遵循“左孩子右兄弟”的概念。当三棵树的树根相连时，树根结点之间的关系即为“兄弟”的关系。</p>
+<p>对其进行遍历可得：</p>
+<p>（1）先序遍历：<code>A B C D E F G H I J</code></p>
+<ul>
+<li>访问第一棵树的根结点；</li>
+<li>先序遍历第一棵树的根结点的子树森林；</li>
+<li>先序遍历除去第一棵树之后剩余的树构成的森林。</li>
+</ul>
+<p>（2）中序遍历：<code>B C D A F E H J I G</code></p>
+<ul>
+<li>中序遍历森林中第一棵树的根结点的子树森林；</li>
+<li>访问第一棵树的根结点；</li>
+<li>中序遍历除去第一棵树之后剩余的树构成的森林。</li>
+</ul>
+<blockquote>
+<p>对比图6.15和图6.17可以发现，若以二叉链表的形式表示时：</p>
+<ul>
+<li>如果仅包含左孩子，则为一棵树的二叉链表表示；</li>
+<li>否则，则是森林的二叉链表表示。</li>
+</ul>
+</blockquote>
+<h3 id="5、在树中查找父结点和在二叉树中查找父结点"><a href="#5、在树中查找父结点和在二叉树中查找父结点" class="headerlink" title="5、在树中查找父结点和在二叉树中查找父结点"></a>5、在树中查找父结点和在二叉树中查找父结点</h3><h4 id="（1）在树中查找父结点"><a href="#（1）在树中查找父结点" class="headerlink" title="（1）在树中查找父结点"></a>（1）在树中查找父结点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找父结点</span></span><br><span class="line">TreeNode* <span class="title function_">Parent</span><span class="params">(Tree *tree, TreeNode *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> Parent(tree-&gt;root, p);</span><br><span class="line">&#125;</span><br><span class="line">TreeNode* <span class="title function_">Parent</span><span class="params">(TreeNode *t, TreeNode *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(t == <span class="literal">NULL</span> || p == <span class="literal">NULL</span> || p == t)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    TreeNode *q = t-&gt;firstChild;</span><br><span class="line">    TreeNode *parent;</span><br><span class="line">    <span class="keyword">while</span>(q != <span class="literal">NULL</span> &amp;&amp; q != p)</span><br><span class="line">    &#123;</span><br><span class="line">        parent = Parent(q, p);  <span class="comment">// 在第一个孩子结点中查找parent结点</span></span><br><span class="line">        <span class="keyword">if</span>(parent != <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> parent;</span><br><span class="line">        q = q-&gt;nextSilbing;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(q != <span class="literal">NULL</span> &amp;&amp; q == p)  <span class="comment">// q(t-&gt;firstChild)==p说明要查找的结点p的父结点即为t</span></span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312241742171.png" alt="image-20231224174224376" style="zoom: 33%;" />
+
+<h4 id="（2）在二叉树中查找父结点"><a href="#（2）在二叉树中查找父结点" class="headerlink" title="（2）在二叉树中查找父结点"></a>（2）在二叉树中查找父结点</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查找父节点</span></span><br><span class="line">BinTreeNode* <span class="title function_">Parent</span><span class="params">(BinTree *bt, BinTreeNode *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> Parent(bt-&gt;root, p);</span><br><span class="line">&#125;</span><br><span class="line">BinTreeNode* <span class="title function_">Parent</span><span class="params">(BinTreeNode *t, BinTreeNode *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(t == <span class="literal">NULL</span> || p == <span class="literal">NULL</span>)  <span class="comment">// 树为空或查找的节点为空</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;    </span><br><span class="line">    <span class="keyword">if</span>(t-&gt;leftChild == p || t-&gt;leftChild == p)</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    </span><br><span class="line">    BinTreeNode *q = Parent(t-&gt;leftChild, p);</span><br><span class="line">    <span class="keyword">if</span>(q != <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> q;</span><br><span class="line">    <span class="keyword">return</span> Parent(t-&gt;rightChild, p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-图"><a href="#7-图" class="headerlink" title="7 图"></a>7 图</h1><h2 id="7-1-图的定义与概念"><a href="#7-1-图的定义与概念" class="headerlink" title="7.1 图的定义与概念"></a>7.1 图的定义与概念</h2><p>图中的数据元素称为<strong>顶点</strong>(<code>Vertex</code>)，<code>V</code>是顶点的有穷非空集合。<code>E</code>是两个顶点之间的集合。</p>
+<ul>
+<li><p><code>&lt;v, w&gt;</code>：从顶点<code>v</code>到顶点<code>w</code>的有向边；</p>
+</li>
+<li><p><code>(v, w)</code>：从顶点<code>v</code>到顶点<code>w</code>的无向边。</p>
+</li>
+</ul>
+<p>图中共<code>n</code>个顶点，此时：</p>
+<ul>
+<li>对无向图来说边的个数范围为<code>0~1/2(n(n-1))</code>，当有<code>1/2(n(n-1)</code>条边时为<strong>无向完全图</strong>。</li>
+<li>对有向图来说边的个数范围为<code>0~n(n-1)</code>，当有<code>n(n-1)</code>条边时为<strong>有向完全图</strong>。</li>
+</ul>
+<p>图（<code>Graph</code>）与子图（<code>Subgraph</code>）</p>
+<p>权（<code>Weight</code>）</p>
+<p>邻接点</p>
+<p>顶点<code>v</code>的度（<code>Degree</code>）是和<code>v</code>相关联的边的数目。在有向图中还要分<strong>入度</strong>和<strong>出度</strong>。</p>
+<p>从顶点<code>v</code>到顶点<code>v&#39;</code>的路径（<code>Path</code>）是一个顶点序列。路径的长度是路径上的边或弧的数目。第一个顶点和最后一个顶点相同的路径称为回路或环（<code>Cycle</code>）。在无向图<code>G</code>中，若从顶点<code>v</code>到顶点<code>v&#39;</code>有路径，则称<code>v</code>和<code>v&#39;</code>是连通的。若图中任意两个顶点都是连通的，则称<code>G</code>为<strong>连通图</strong>。而<strong>连通分量</strong>（<code>Connected Component</code>）是指无向图中的<strong>极大连通子图</strong>。</p>
+<p>一个连通图的<strong>生成树</strong>是一个极小连通子图。如果在一棵生成树上添加一条边，必定形成一个环。</p>
 
       
     </div>
@@ -1695,12 +1758,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">18k</span>
+    <span title="站点总字数">19k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:06</span>
+    <span title="站点阅读时长">1:10</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
