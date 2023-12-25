@@ -24,8 +24,8 @@
 
   <meta name="description" content="1、终端与进程组（1）终端 1）运行前台进程 sleep 30002）运行后台进程 sleep 3000 &amp; 3）查看后台进程 jobs 4）将后台进程变为前台进程 fg +%&lt;进程编号&gt; 5）查看当前终端名字 tty （2）进程组其中，PGID即为进程组ID。  2、会话123456789101112131415161718#include &lt;unistd.h&gt;#">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作系统">
-<meta property="og:url" content="http://example.com/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:title" content="《操作系统》">
+<meta property="og:url" content="http://example.com/2023/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
 <meta property="og:description" content="1、终端与进程组（1）终端 1）运行前台进程 sleep 30002）运行后台进程 sleep 3000 &amp; 3）查看后台进程 jobs 4）将后台进程变为前台进程 fg +%&lt;进程编号&gt; 5）查看当前终端名字 tty （2）进程组其中，PGID即为进程组ID。  2、会话123456789101112131415161718#include &lt;unistd.h&gt;#">
 <meta property="og:locale" content="zh_CN">
@@ -45,12 +45,12 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png">
 <meta property="article:published_time" content="2023-08-03T03:24:15.696Z">
-<meta property="article:modified_time" content="2023-08-03T12:11:53.167Z">
+<meta property="article:modified_time" content="2023-12-25T04:32:50.726Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png">
 
-<link rel="canonical" href="http://example.com/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+<link rel="canonical" href="http://example.com/2023/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
 
 <script id="page-configurations">
@@ -63,7 +63,7 @@
   };
 </script>
 
-  <title>操作系统 | MIDORII'S JOURNEY</title>
+  <title>《操作系统》 | MIDORII'S JOURNEY</title>
   
 
 
@@ -210,7 +210,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -223,7 +223,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          操作系统
+          《操作系统》
         </h1>
 
         <div class="post-meta">
@@ -232,10 +232,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-08-03 11:24:15 / 修改时间：20:11:53" itemprop="dateCreated datePublished" datetime="2023-08-03T11:24:15+08:00">2023-08-03</time>
+              <time title="创建时间：2023-08-03 11:24:15" itemprop="dateCreated datePublished" datetime="2023-08-03T11:24:15+08:00">2023-08-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-25 12:32:50" itemprop="dateModified" datetime="2023-12-25T12:32:50+08:00">2023-12-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -330,12 +336,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/08/01/vscode%E7%9B%B8%E5%85%B3/" rel="prev" title="vscode相关">
+    <a href="/2023/08/01/%E6%8A%A5%E9%94%99%E4%BF%A1%E6%81%AF/vscode%E7%9B%B8%E5%85%B3/" rel="prev" title="vscode相关">
       <i class="fa fa-chevron-left"></i> vscode相关
     </a></div>
       <div class="post-nav-item">
-    <a href="/2023/08/03/Python%20jpg%E5%92%8Cbmp%E8%BD%AC%E5%8C%96%E4%B8%BARGB%E6%A0%BC%E5%BC%8F/" rel="next" title="小程序">
-      小程序 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/08/03/code%E7%9B%B8%E5%85%B3/Python/%E9%9B%B6%E6%95%A3%E7%A8%8B%E5%BA%8F/" rel="next" title="零散程序">
+      零散程序 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -418,7 +424,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -459,7 +465,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:10</span>
+    <span title="站点阅读时长">1:08</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
