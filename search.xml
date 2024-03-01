@@ -227,6 +227,78 @@
       </categories>
   </entry>
   <entry>
+    <title>CMU15-445 Project 0 (Spring 2023)</title>
+    <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
+    <content><![CDATA[<h2 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h2><p>在trie.cpp中实现COW Trie。</p>
+<p>COW即代表，对Trie的添加&#x2F;删除操作不会在原Trie上进行，而是对原Trie进行拷贝后再进行修改。</p>
+<h3 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h3><p>（1）考虑key为空的边界情况，此时看root_是否是一个<em>TrieNodeWithVal</em>节点；</p>
+<p>（2）考虑root为空的边界情况，此时直接返回一个nullptr；</p>
+<p>（3）若非上述两种边界情况，则通过遍历进行Get操作：</p>
+<ul>
+<li>定义一个cur指向当前根节点，注意root的类型是std::shared_ptr<const bustub::TrieNode></li>
+<li>对key的所有字符进行遍历，cur不断更新迭代指向cur-&gt;children-&gt;second，直到找到key的键尾为止；</li>
+<li>判断此时的cur是否是一个<em>TrieNodeWithVal</em>节点</li>
+</ul>
+<p>注意：返回的value——std::shared_ptr<T> value_</p>
+<h3 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h3><p>Put操作最需要注意的点在于：在插入新的kv节点时，已有的节点执行Clone()操作，新建的节点执行make_shared操作，如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
+<p>逻辑如下：</p>
+<p>（1）考虑key为空的边界情况，此时在root处插入</p>
+<ul>
+<li>创建新的shared_ptr指针指向value和为空的new_root</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>判断原root是否有子节点，处理后返回新的Trie的根结点new_root</p>
+<ul>
+<li><p>若无，则直接对new_root进行修改；</p>
+</li>
+<li><p>若有，则构造一个新节点指向root的children，如图</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>（2）若key非空</p>
+<ul>
+<li><p>首先拷贝根节点root</p>
+<ul>
+<li>若root空，直接新建空的Trie</li>
+<li>若root非空，调用Clone()操作，拷贝root的已有children给new_root</li>
+</ul>
+</li>
+<li><p>Put1()函数递归插入</p>
+<ul>
+<li><p>遍历new_root的children，找到是否有哪一个children的key等于传入key的key[0]</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>判断完key[0]后，对key剩余的值进行判断<ul>
+<li>若到达key的键尾，新建一个节点并覆盖掉pair的second</li>
+<li>若未到达键尾，拷贝已有节点、递归调用Put1写入key、将写入完成后的节点重新拷贝给pair.second</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>若未找到匹配的key[0]，则直接新建节点插入。注意判断key的长度以决定是否需要递归操作。</p>
+</li>
+</ul>
+</li>
+<li><p>返回新的Trie</p>
+</li>
+</ul>
+<h3 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h3><p>Remove的思想和Put一致，不再赘述。</p>
+<h2 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h2><p>注意加锁的时机即可。</p>
+<p>read操作只需要在获取根节点时加锁。</p>
+<p>write操作则需要全程添加写锁，从而保证只有一名writer。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
