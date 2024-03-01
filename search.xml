@@ -5,6 +5,8 @@
     <url>/2024/02/28/Homework1_SQL/</url>
     <content><![CDATA[<h2 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
+
 <h2 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
@@ -229,70 +231,72 @@
   <entry>
     <title>CMU15-445 Project 0 (Spring 2023)</title>
     <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
-    <content><![CDATA[<h2 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h2><p>在trie.cpp中实现COW Trie。</p>
-<p>COW即代表，对Trie的添加&#x2F;删除操作不会在原Trie上进行，而是对原Trie进行拷贝后再进行修改。</p>
-<h3 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h3><p>（1）考虑key为空的边界情况，此时看root_是否是一个<em>TrieNodeWithVal</em>节点；</p>
-<p>（2）考虑root为空的边界情况，此时直接返回一个nullptr；</p>
-<p>（3）若非上述两种边界情况，则通过遍历进行Get操作：</p>
+    <content><![CDATA[<h2 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h2><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
+<p><code>COW</code>即代表，对<code>Trie</code>的添加&#x2F;删除操作不会在原<code>Trie</code>上进行，而是对原<code>Trie</code>进行拷贝后再进行修改。</p>
+<span id="more"></span>
+
+<h3 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h3><p>（1）考虑<code>key</code>为空的边界情况，此时看<code>root</code>是否是一个<code>TrieNodeWithVal</code>节点；</p>
+<p>（2）考虑<code>root</code>为空的边界情况，此时直接返回一个<code>nullptr</code>；</p>
+<p>（3）若非上述两种边界情况，则通过遍历进行<code>Get</code>操作：</p>
 <ul>
-<li>定义一个cur指向当前根节点，注意root的类型是std::shared_ptr<const bustub::TrieNode></li>
-<li>对key的所有字符进行遍历，cur不断更新迭代指向cur-&gt;children-&gt;second，直到找到key的键尾为止；</li>
-<li>判断此时的cur是否是一个<em>TrieNodeWithVal</em>节点</li>
+<li>定义一个<code>cur</code>指向当前根节点，注意<code>root</code>的类型是<code>std::shared_ptr&lt;const bustub::TrieNode&gt;</code></li>
+<li>对<code>key</code>的所有字符进行遍历，<code>cur</code>不断更新迭代指向<code>cur-&gt;children-&gt;second</code>，直到找到<code>key</code>的键尾为止；</li>
+<li>判断此时的<code>cur</code>是否是一个<code>TrieNodeWithVal</code>节点</li>
 </ul>
-<p>注意：返回的value——std::shared_ptr<T> value_</p>
-<h3 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h3><p>Put操作最需要注意的点在于：在插入新的kv节点时，已有的节点执行Clone()操作，新建的节点执行make_shared操作，如下图：</p>
+<p>注意：返回的<code>value</code>——<code>std::shared_ptr&lt;T&gt; value_</code></p>
+<h3 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h3><p><code>Put</code>操作最需要注意的点在于：在插入时，已有的节点执行<code>Clone()</code>操作，新建的节点执行<code>make_shared</code>操作，如下图：</p>
 <p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
 <p>逻辑如下：</p>
-<p>（1）考虑key为空的边界情况，此时在root处插入</p>
+<p>（1）考虑<code>key</code>为空的边界情况，此时在<code>root</code>处插入</p>
 <ul>
-<li>创建新的shared_ptr指针指向value和为空的new_root</li>
+<li>创建新的<code>shared_ptr</code>指针指向<code>value</code>和为空的<code>new_root</code></li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>判断原root是否有子节点，处理后返回新的Trie的根结点new_root</p>
+<li><p>判断原<code>root</code>是否有子节点，处理后返回新的<code>Trie</code>的根结点<code>new_root</code></p>
 <ul>
-<li><p>若无，则直接对new_root进行修改；</p>
+<li><p>若无，则直接对<code>new_root</code>进行修改；</p>
 </li>
-<li><p>若有，则构造一个新节点指向root的children，如图</p>
+<li><p>若有，则构造一个新节点指向<code>root</code>的<code>children</code>，如图</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
 </li>
 </ul>
 </li>
 </ul>
-<p>（2）若key非空</p>
+<p>（2）若<code>key</code>非空</p>
 <ul>
-<li><p>首先拷贝根节点root</p>
+<li><p>首先拷贝根节点<code>root</code></p>
 <ul>
-<li>若root空，直接新建空的Trie</li>
-<li>若root非空，调用Clone()操作，拷贝root的已有children给new_root</li>
+<li>若<code>root</code>空，直接新建空的<code>Trie</code></li>
+<li>若<code>root</code>非空，调用<code>Clone()</code>操作，拷贝<code>root</code>的已有<code>children</code>给<code>new_root</code></li>
 </ul>
 </li>
-<li><p>Put1()函数递归插入</p>
+<li><p><code>Put1()</code>函数递归插入</p>
 <ul>
-<li><p>遍历new_root的children，找到是否有哪一个children的key等于传入key的key[0]</p>
+<li><p>遍历<code>new_root</code>的<code>children</code>，找到是否有哪一个<code>children</code>的<code>key</code>等于传入<code>key</code>的<code>key[0]</code></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>判断完key[0]后，对key剩余的值进行判断<ul>
-<li>若到达key的键尾，新建一个节点并覆盖掉pair的second</li>
-<li>若未到达键尾，拷贝已有节点、递归调用Put1写入key、将写入完成后的节点重新拷贝给pair.second</li>
+<li>判断完<code>key[0]</code>后，对<code>key</code>剩余的值进行判断<ul>
+<li>若到达<code>key</code>的键尾，新建一个节点并覆盖掉<code>pair</code>的<code>second</code></li>
+<li>若未到达键尾，拷贝已有节点、递归调用<code>Put1</code>写入<code>key</code>、将写入完成后的节点重新拷贝给<code>pair.second</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>若未找到匹配的key[0]，则直接新建节点插入。注意判断key的长度以决定是否需要递归操作。</p>
+<li><p>若未找到匹配的<code>key[0]</code>，则直接新建节点插入。注意判断<code>key</code>的长度以决定是否需要递归操作。</p>
 </li>
 </ul>
 </li>
-<li><p>返回新的Trie</p>
+<li><p>返回新的<code>Trie</code></p>
 </li>
 </ul>
-<h3 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h3><p>Remove的思想和Put一致，不再赘述。</p>
+<h3 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h3><p><code>Remove</code>的思想和<code>Put</code>一致，不再赘述。</p>
 <h2 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h2><p>注意加锁的时机即可。</p>
-<p>read操作只需要在获取根节点时加锁。</p>
-<p>write操作则需要全程添加写锁，从而保证只有一名writer。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+<p><code>read</code>操作只需要在获取根节点时加锁。</p>
+<p><code>write</code>操作则需要全程添加写锁，从而保证只有一名<code>writer</code>。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
+]]></content>
       <categories>
         <category>Project</category>
         <category>cmu15-445</category>
@@ -362,60 +366,6 @@
 ]]></content>
       <categories>
         <category>报错信息</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>《操作系统》</title>
-    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
-<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
-<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
-<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
-<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
-<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
-<span id="more"></span>
-
-<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
-
-<p>此时，若以当前进程创建会话，会报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>报错为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
-
-<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
-<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
-<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
-<p><code>daemon进程</code>的特点：</p>
-<p>1）独立于控制终端；</p>
-<p>2）名字一般以<code>d</code>结尾；</p>
-<p>3）所有的服务存在于<code>etc/init.d</code></p>
-<p>4）是一个特殊的孤儿进程；</p>
-<p>5）输入被关闭，输出存在于日志中：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
-<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
-<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
-<p>2）查看当前<code>tail</code>进程是否存在</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
-<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
-<p>输出被追加到<code>nohup.out</code>中</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
-<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
-<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
-<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
@@ -916,6 +866,60 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202401262157878.png" alt="image-20240126215723896"></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 基数排序</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">getkey</span><span class="params">(T value, <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="keyword">while</span>(k &gt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        key = value % <span class="number">10</span>;</span><br><span class="line">        value /= <span class="number">10</span>;</span><br><span class="line">        k--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Distribute</span><span class="params">(SqList &amp;L, <span class="type">int</span> n, List (&amp;lt)[<span class="number">10</span>], <span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">clear</span>(&amp;lt[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> key;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        key = <span class="built_in">getkey</span>(L[i], k);  <span class="comment">// 取得需要比对的位置上的值</span></span><br><span class="line">        <span class="built_in">push_back</span>(&amp;lt[key], L[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Collect</span><span class="params">(SqList &amp;L, List (&amp;lt)[<span class="number">10</span>])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        Node *p = lt[i].first-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            L[k++] = p-&gt;data;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RadixSort</span><span class="params">(SqList &amp;L, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    List list[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">InitList</span>(&amp;list[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">Distribute</span>(L, n, list, i);</span><br><span class="line">        <span class="built_in">Collect</span>(L, list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>《操作系统》</title>
+    <url>/2023/08/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1、终端与进程组"><a href="#1、终端与进程组" class="headerlink" title="1、终端与进程组"></a>1、终端与进程组</h2><h3 id="（1）终端"><a href="#（1）终端" class="headerlink" title="（1）终端"></a>（1）终端</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031335344.png" alt="image-20230803133540713"></p>
+<h4 id="1）运行前台进程-sleep-3000"><a href="#1）运行前台进程-sleep-3000" class="headerlink" title="1）运行前台进程 sleep 3000"></a>1）运行前台进程 <code>sleep 3000</code></h4><h4 id="2）运行后台进程-sleep-3000"><a href="#2）运行后台进程-sleep-3000" class="headerlink" title="2）运行后台进程 sleep 3000 &amp;"></a>2）运行后台进程 <code>sleep 3000 &amp;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031337505.png" alt="image-20230803133741336"></p>
+<h4 id="3）查看后台进程-jobs"><a href="#3）查看后台进程-jobs" class="headerlink" title="3）查看后台进程 jobs"></a>3）查看后台进程 <code>jobs</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340236.png" alt="image-20230803134010984"></p>
+<h4 id="4）将后台进程变为前台进程-fg"><a href="#4）将后台进程变为前台进程-fg" class="headerlink" title="4）将后台进程变为前台进程 fg +%&lt;进程编号&gt;"></a>4）将后台进程变为前台进程 <code>fg +%&lt;进程编号&gt;</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031340037.png" alt="image-20230803134030968"></p>
+<h4 id="5）查看当前终端名字-tty"><a href="#5）查看当前终端名字-tty" class="headerlink" title="5）查看当前终端名字 tty"></a>5）查看当前终端名字 <code>tty</code></h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031341611.png" alt="image-20230803134150192"></p>
+<h3 id="（2）进程组"><a href="#（2）进程组" class="headerlink" title="（2）进程组"></a>（2）进程组</h3><p>其中，<code>PGID</code>即为进程组<code>ID</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031346173.png" alt="image-20230803134636774"></p>
+<span id="more"></span>
+
+<h2 id="2、会话"><a href="#2、会话" class="headerlink" title="2、会话"></a>2、会话</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br></pre></td></tr></table></figure>
+
+<p>此时，若以当前进程创建会话，会报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">// 测试setsid和geysid</span><br><span class="line">int main() &#123;</span><br><span class="line">    pid_t pid = -1;</span><br><span class="line"></span><br><span class="line">    // 获取当前进程组会话ID</span><br><span class="line">    pid = getsid(0);</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;getsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    // 新建一个会话</span><br><span class="line">    pid = setsid();</span><br><span class="line">    if(-1 == pid)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(&quot;setsid&quot;);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;sid:%d\n&quot;, pid);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>报错为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sid:620400</span><br><span class="line">setsid: Operation not permitted</span><br></pre></td></tr></table></figure>
+
+<p>查看当前进程的<code>PID</code>和<code>PGID</code>可以发现</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031401546.png" alt="image-20230803140116366"></p>
+<p>当前<code>test</code>本身就是一个组长（<code>PID</code>和<code>PGID</code>一致），所以新建一个会话时报错，因为<strong>创建会话时，调用进程不能是进程组的组长，因为这个进程会变成新会话的首进程（组长）</strong>。</p>
+<h2 id="3、daemon进程"><a href="#3、daemon进程" class="headerlink" title="3、daemon进程"></a>3、daemon进程</h2><p>又称守护进程、精灵进程。</p>
+<p><code>daemon进程</code>的特点：</p>
+<p>1）独立于控制终端；</p>
+<p>2）名字一般以<code>d</code>结尾；</p>
+<p>3）所有的服务存在于<code>etc/init.d</code></p>
+<p>4）是一个特殊的孤儿进程；</p>
+<p>5）输入被关闭，输出存在于日志中：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031134687.png" alt="image-20230803113433643"></p>
+<h2 id="4、nohup和-命令使进程忽略hangup（挂起）信号"><a href="#4、nohup和-命令使进程忽略hangup（挂起）信号" class="headerlink" title="4、nohup和&amp;命令使进程忽略hangup（挂起）信号"></a>4、nohup和&amp;命令使进程忽略hangup（挂起）信号</h2><p>1）创建一个一般进程</p>
+<p>使用<code>tail</code>命令跟踪<code>/var/log/syslog</code>文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031135972.png" alt="image-20230803113507931"></p>
+<p>2）查看当前<code>tail</code>进程是否存在</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031136769.png" alt="image-20230803113609741"></p>
+<p>3）此时若关闭掉<code>tail</code>进程所在的终端，则该进程自动结束。为了使得关闭终端进程依旧可以运行，使用<code>nohup+&amp;</code>指令（此时处于关闭掉tail进程所在终端的状态）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031148740.png" alt="image-20230803114850706"></p>
+<p>输出被追加到<code>nohup.out</code>中</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149569.png" alt="image-20230803114920537"></p>
+<p>此时用<code>ps -ef</code>过滤，仍然有<code>tail</code>进程</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031149918.png" alt="image-20230803114957901"></p>
+<p>此时，关闭终端（执行<code>nohup</code>的那个终端），再调用<code>ps -ef</code>，<code>tail</code>进程仍存在，但此时它变为孤儿进程，其父进程分配为<code>1</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031258186.png" alt="image-20230803125857148"></p>
+<p>查看当前进程的标准输入和标准输出，可以看到，输入<code>（0）</code>被关闭，输出<code>（1、2）</code>被定向到<code>nohup.out</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308031301970.png" alt="image-20230803130115916"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
