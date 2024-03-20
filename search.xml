@@ -1,121 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>cmu15-445 Course Related (Spring 2023)</title>
-    <url>/2024/03/02/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>PPT</th>
-<th>Project</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1-5</td>
-<td>P0 &amp; P1</td>
-<td>2.26-</td>
-</tr>
-<tr>
-<td>6-9</td>
-<td>P2</td>
-<td></td>
-</tr>
-<tr>
-<td>10-14</td>
-<td>P3</td>
-<td></td>
-</tr>
-<tr>
-<td>15-21</td>
-<td>P4</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
-<ul>
-<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
-<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
-<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
-<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<p>整体图片：</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
-<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
-<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
-<ul>
-<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
-</li>
-<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
-</li>
-<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
-</li>
-</ul>
-<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
-<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
-<ul>
-<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
-<li>持有直到事务结束</li>
-<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
-<li>保护元组（行），表，索引</li>
-</ul>
-<p><code>Latches/Mutex</code>（偏底层的）</p>
-<ul>
-<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
-<li>持有直到一个操作结束</li>
-<li><strong>不需要支持回滚</strong></li>
-</ul>
-<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
-
-<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
-<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
-<ul>
-<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
-<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
-</ul>
-<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
-<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
-<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
-<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
-<blockquote>
-<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
-<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
-</blockquote>
-<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
-<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
-<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
-<ul>
-<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
-<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
-</ul>
-<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
-<ul>
-<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
-</li>
-<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
-</li>
-</ul>
-<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
-<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
-<ul>
-<li><code>Sorting + Join Buffers</code></li>
-<li><code>Query Caches</code></li>
-<li><code>Maintenance Buffers</code></li>
-<li><code>Log Buffers</code></li>
-<li><code>Dictionary Caches</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
     <url>/2024/02/28/cmu15-445%20Homework1_SQL/</url>
     <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
@@ -216,96 +101,114 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Project 1 (Spring 2023)</title>
-    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
-    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
-<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
-<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
+    <title>cmu15-445 Course Related (Spring 2023)</title>
+    <url>/2024/03/02/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>PPT</th>
+<th>Project</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1-5</td>
+<td>P0 &amp; P1</td>
+<td>2.26-</td>
+</tr>
+<tr>
+<td>6-9</td>
+<td>P2</td>
+<td>3.20-</td>
+</tr>
+<tr>
+<td>10-14</td>
+<td>P3</td>
+<td></td>
+</tr>
+<tr>
+<td>15-21</td>
+<td>P4</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
+<ul>
+<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
+<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
+<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
+<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
+</ul>
+</li>
+</ul>
 <span id="more"></span>
 
-<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
-<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
-<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
-<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
-<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
-<p>错误代码处为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
+<p>整体图片：</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
+<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
+<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
+<ul>
+<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
+</li>
+<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
+</li>
+<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
+</li>
+</ul>
+<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
+<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
+<ul>
+<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
+<li>持有直到事务结束</li>
+<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
+<li>保护元组（行），表，索引</li>
+</ul>
+<p><code>Latches/Mutex</code>（偏底层的）</p>
+<ul>
+<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
+<li>持有直到一个操作结束</li>
+<li><strong>不需要支持回滚</strong></li>
+</ul>
+<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
 
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
-
-<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
-<p>修正后为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
-<p>错误代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
-<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
-
-<p>此时上述代码可修改为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
-<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
-<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
-<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
-<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
+<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
+<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
+<ul>
+<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
+<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
+</ul>
+<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
+<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
+<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
+<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
+<blockquote>
+<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
+<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
-
+<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
+<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
+<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
 <ul>
-<li><p><code>NewPage</code>：</p>
+<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
+<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
+</ul>
+<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
 <ul>
-<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
-<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>创建新<code>page</code>；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
+<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
 </li>
-<li><p><code>FetchPage</code>：</p>
+<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
+</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
+<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
 <ul>
-<li>找<code>page_id</code>对应的页：<ul>
-<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
-<li>若找到，<code>pin_count_</code>自增；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+<li><code>Sorting + Join Buffers</code></li>
+<li><code>Query Caches</code></li>
+<li><code>Maintenance Buffers</code></li>
+<li><code>Log Buffers</code></li>
+<li><code>Dictionary Caches</code></li>
 </ul>
-</li>
-<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
-<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
-<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>UnpinPage</code>：</p>
-<ul>
-<li>若<code>page_id</code>不存在，直接返回；</li>
-<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并1）设置<code>frame</code>可驱逐；2）内存中删去该页；</li>
-<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
-</ul>
-</li>
-<li></li>
-</ul>
-<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
-<p>正确的顺序应该是：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
-<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
-<p>引起错误的代码行为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
-
-<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
-<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>Project</category>
@@ -421,6 +324,103 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Project 1 (Spring 2023)</title>
+    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
+    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
+<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
+<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
+<span id="more"></span>
+
+<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
+<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
+<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
+<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
+<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
+<p>错误代码处为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
+
+<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
+<p>修正后为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
+<p>错误代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
+<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
+
+<p>此时上述代码可修改为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
+<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
+<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
+<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
+<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>NewPage</code>：</p>
+<ul>
+<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
+<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>创建新<code>page</code>；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
+</ul>
+</li>
+<li><p><code>FetchPage</code>：</p>
+<ul>
+<li>找<code>page_id</code>对应的页：<ul>
+<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
+<li>若找到，<code>pin_count_</code>自增；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+</ul>
+</li>
+<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
+<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>UnpinPage</code>：</p>
+<ul>
+<li>若<code>page_id</code>不存在，直接返回；</li>
+<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并1）设置<code>frame</code>可驱逐；2）内存中删去该页；</li>
+<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
+<p>正确的顺序应该是：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
+<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
+<p>引起错误的代码行为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
+
+<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
+<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
@@ -484,46 +484,6 @@
 ]]></content>
       <categories>
         <category>无从属类别</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>洛谷刷题</title>
-    <url>/2024/03/15/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><p><a href="https://www.luogu.com.cn/training/108#problems">洛谷官方题单_算法1-3_暴力枚举</a></p>
-<h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="P2089-烤鸡"><a href="#P2089-烤鸡" class="headerlink" title="P2089 烤鸡"></a>P2089 烤鸡</h4><h4 id="P1618-三连击"><a href="#P1618-三连击" class="headerlink" title="P1618 三连击"></a>P1618 三连击</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> standard[] = <span class="string">&quot;123456789&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量数组法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> a, b, c, flag=<span class="number">1</span>;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">329</span>; i++) &#123;\</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(buf, <span class="string">&quot;%d%d%d&quot;</span>, a*i, b*i, c*i);</span><br><span class="line">    <span class="built_in">sort</span>(buf, buf+<span class="number">9</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(standard, buf) == <span class="number">0</span>) &#123;</span><br><span class="line">      flag = <span class="number">0</span>;</span><br><span class="line">      cout &lt;&lt; a*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; c*i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;No!!!&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这道题的解题用到了常量数组法。一开始我想着正推，但是没有头绪。看了题解之后我才发现可以反着从比例开始推。先遍历所有满足<code>A:B:C</code>的三位数的情况，然后将这三个三位数，共9个数看成一个整体的<code>buf</code>数组，和<code>123456789</code>对比是否一致。</p>
-<h4 id="P3392-涂国旗"><a href="#P3392-涂国旗" class="headerlink" title="P3392 涂国旗"></a>P3392 涂国旗</h4><p>思想实际很简单，注意两个调试中发现的错误点：</p>
-<p>1、输入格式为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 5</span><br><span class="line">WRWRW</span><br><span class="line">BWRWB</span><br><span class="line">WRWRW</span><br><span class="line">RWBWR</span><br></pre></td></tr></table></figure>
-
-<p>因此对应的代码为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> a[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    string row;</span><br><span class="line">    cin &gt;&gt; row; <span class="comment">// 读取一行数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将字符串转换为字符数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        a[i][j] = row[j];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误！</span></span><br><span class="line"><span class="comment">// 这种方法会尝试直接读取整个输入流，也就是说一次读取n*m个数据，而不是逐行逐个读取</span></span><br><span class="line"><span class="comment">// for (int i=0; i&lt;n; i++) &#123;</span></span><br><span class="line"><span class="comment">//     for (int j=0; j&lt;m; ++j) &#123;</span></span><br><span class="line"><span class="comment">//         cin &gt;&gt; a[i][j];</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、在统计每一行转换为<code>w\b\r</code>需要的个数时，因为<code>wc\bc\rc</code>定义为全局变量，因此要记得及时清零；</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">int</span> wc = <span class="number">0</span>, bc = <span class="number">0</span>, rc = <span class="number">0</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 预处理：每一行转换成w\b\r的需转换的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (a[i][j]) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;W&#x27;</span>:</span><br><span class="line">            wc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">            bc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>:</span><br><span class="line">            rc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      cnt[i][<span class="number">0</span>] = m-wc;</span><br><span class="line">      cnt[i][<span class="number">1</span>] = m-bc;</span><br><span class="line">      cnt[i][<span class="number">2</span>] = m-rc;</span><br><span class="line"></span><br><span class="line">      wc = bc = rc= <span class="number">0</span>;  <span class="comment">// important!!!</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    ...       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="P3654-First-Step"><a href="#P3654-First-Step" class="headerlink" title="P3654 First Step"></a>P3654 First Step</h4><p>由于这个题算的是<code>1×K</code>的排列方式，因此遗漏掉的一点是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.###.</span><br><span class="line">##.#.</span><br><span class="line">..#..</span><br><span class="line">#..#.</span><br><span class="line">#.###</span><br></pre></td></tr></table></figure>
-
-<p>针对上述的情况，<code>K=1</code>是横着排和竖着排是一样的，因此属于特例，结果要除<code>2</code>。</p>
-<h3 id="1-1-2-子集枚举"><a href="#1-1-2-子集枚举" class="headerlink" title="1.1.2 子集枚举"></a>1.1.2 子集枚举</h3><h4 id="P1036-选数"><a href="#P1036-选数" class="headerlink" title="P1036 选数"></a>P1036 选数</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k;</span><br><span class="line"><span class="type">int</span> x[<span class="number">25</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否为素数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_prime</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=num; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归遍历查询</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> sum, <span class="type">int</span> startx)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m      当前选择了多少个数</span></span><br><span class="line">  <span class="comment">// sum    当前和</span></span><br><span class="line">  <span class="comment">// startx 升序排列</span></span><br><span class="line">  <span class="keyword">if</span> (m == k) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_prime</span>(sum)) &#123;</span><br><span class="line">      ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=startx; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>, sum+x[i], i+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    cin &gt;&gt; x[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="P1157-组合的输出※"><a href="#P1157-组合的输出※" class="headerlink" title="P1157 组合的输出※"></a>P1157 组合的输出※</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, r;</span><br><span class="line"><span class="type">int</span> a[<span class="number">25</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m ==&gt; 为当前选择的数</span></span><br><span class="line">  <span class="comment">// 已经选了足够的数</span></span><br><span class="line">  <span class="keyword">if</span> (m &gt; r) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=r; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">3</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 未选够，继续遍历</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=a[m<span class="number">-1</span>]+<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    <span class="comment">// i=a[m-1]+1指i从上一个选取的整数a[m-1]的下一个数开始</span></span><br><span class="line">    a[m] = i; <span class="comment">// 把上一行提到的那个数赋给当前a[k]</span></span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>); <span class="comment">// 递归调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; r;</span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-1-3-排列枚举"><a href="#1-1-3-排列枚举" class="headerlink" title="1.1.3 排列枚举"></a>1.1.3 排列枚举</h3><h4 id="P1706-全排列"><a href="#P1706-全排列" class="headerlink" title="P1706 全排列"></a>P1706 全排列</h4><p>1、直接用<code>c++</code>的<code>next_permutation</code>函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    a[i] = i+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">sort</span>(a, a+n);</span><br><span class="line">  <span class="comment">// sort(a, a+n, greater&lt;&gt;());  -- prev_permutation(a, a+n)</span></span><br><span class="line">  <span class="comment">// greater&lt;int&gt;() 是一个函数对象，用于比较两个同类型的值</span></span><br><span class="line">  <span class="comment">// 第一个参数比第二个参数大时返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(a, a+n));</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2、深度搜索：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, pos=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>], b[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深搜函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">search</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;  <span class="comment">// 用i遍历所有可能的n种可能（因为这道题遍历的对象即为自然数，因此也就是i本身）</span></span><br><span class="line">    <span class="keyword">if</span> (!b[i]) &#123;  <span class="comment">// 当前b[i]为未使用状态</span></span><br><span class="line">      b[i] = <span class="number">1</span>;  <span class="comment">// 则首先将b[i]设置为使用状态</span></span><br><span class="line">      a[pos] = i;  <span class="comment">// 存储当前i值，</span></span><br><span class="line">      pos++;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (k == n) &#123;</span><br><span class="line">        <span class="built_in">print</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">search</span>(k+<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      pos--;  <span class="comment">// 执行到这一步说明已经打印完了一组数据，因此进行回溯</span></span><br><span class="line">      b[i] = <span class="number">0</span>;  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">search</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="P1088-火星人"><a href="#P1088-火星人" class="headerlink" title="P1088 火星人"></a>P1088 火星人</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;  <span class="comment">// 火星人手指数</span></span><br><span class="line"><span class="type">int</span> m;  <span class="comment">// 要加上的数B</span></span><br><span class="line"><span class="type">int</span> k[<span class="number">10005</span>];  <span class="comment">// 加数A</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cout &lt;&lt; k[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  cin &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; k[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) &#123;</span><br><span class="line">    <span class="built_in">next_permutation</span>(k, k+n);</span><br><span class="line">    <span class="keyword">if</span> (i == m) &#123;</span><br><span class="line">      <span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
       </categories>
   </entry>
   <entry>
@@ -1027,6 +987,67 @@
 ]]></content>
       <categories>
         <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>洛谷刷题</title>
+    <url>/2024/03/15/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><p><a href="https://www.luogu.com.cn/training/108#problems">洛谷官方题单_算法1-3_暴力枚举</a></p>
+<h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="P2089-烤鸡"><a href="#P2089-烤鸡" class="headerlink" title="P2089 烤鸡"></a>P2089 烤鸡</h4><h4 id="P1618-三连击"><a href="#P1618-三连击" class="headerlink" title="P1618 三连击"></a>P1618 三连击</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> standard[] = <span class="string">&quot;123456789&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量数组法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> a, b, c, flag=<span class="number">1</span>;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">329</span>; i++) &#123;\</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(buf, <span class="string">&quot;%d%d%d&quot;</span>, a*i, b*i, c*i);</span><br><span class="line">    <span class="built_in">sort</span>(buf, buf+<span class="number">9</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(standard, buf) == <span class="number">0</span>) &#123;</span><br><span class="line">      flag = <span class="number">0</span>;</span><br><span class="line">      cout &lt;&lt; a*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; c*i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;No!!!&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题的解题用到了常量数组法。一开始我想着正推，但是没有头绪。看了题解之后我才发现可以反着从比例开始推。先遍历所有满足<code>A:B:C</code>的三位数的情况，然后将这三个三位数，共9个数看成一个整体的<code>buf</code>数组，和<code>123456789</code>对比是否一致。</p>
+<h4 id="P3392-涂国旗"><a href="#P3392-涂国旗" class="headerlink" title="P3392 涂国旗"></a>P3392 涂国旗</h4><p>思想实际很简单，注意两个调试中发现的错误点：</p>
+<p>1、输入格式为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 5</span><br><span class="line">WRWRW</span><br><span class="line">BWRWB</span><br><span class="line">WRWRW</span><br><span class="line">RWBWR</span><br></pre></td></tr></table></figure>
+
+<p>因此对应的代码为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> a[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    string row;</span><br><span class="line">    cin &gt;&gt; row; <span class="comment">// 读取一行数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将字符串转换为字符数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        a[i][j] = row[j];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误！</span></span><br><span class="line"><span class="comment">// 这种方法会尝试直接读取整个输入流，也就是说一次读取n*m个数据，而不是逐行逐个读取</span></span><br><span class="line"><span class="comment">// for (int i=0; i&lt;n; i++) &#123;</span></span><br><span class="line"><span class="comment">//     for (int j=0; j&lt;m; ++j) &#123;</span></span><br><span class="line"><span class="comment">//         cin &gt;&gt; a[i][j];</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、在统计每一行转换为<code>w\b\r</code>需要的个数时，因为<code>wc\bc\rc</code>定义为全局变量，因此要记得及时清零；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">int</span> wc = <span class="number">0</span>, bc = <span class="number">0</span>, rc = <span class="number">0</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 预处理：每一行转换成w\b\r的需转换的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (a[i][j]) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;W&#x27;</span>:</span><br><span class="line">            wc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">            bc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>:</span><br><span class="line">            rc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      cnt[i][<span class="number">0</span>] = m-wc;</span><br><span class="line">      cnt[i][<span class="number">1</span>] = m-bc;</span><br><span class="line">      cnt[i][<span class="number">2</span>] = m-rc;</span><br><span class="line"></span><br><span class="line">      wc = bc = rc= <span class="number">0</span>;  <span class="comment">// important!!!</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    ...       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="P3654-First-Step"><a href="#P3654-First-Step" class="headerlink" title="P3654 First Step"></a>P3654 First Step</h4><p>由于这个题算的是<code>1×K</code>的排列方式，因此遗漏掉的一点是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.###.</span><br><span class="line">##.#.</span><br><span class="line">..#..</span><br><span class="line">#..#.</span><br><span class="line">#.###</span><br></pre></td></tr></table></figure>
+
+<p>针对上述的情况，<code>K=1</code>是横着排和竖着排是一样的，因此属于特例，结果要除<code>2</code>。</p>
+<h3 id="1-1-2-子集枚举"><a href="#1-1-2-子集枚举" class="headerlink" title="1.1.2 子集枚举"></a>1.1.2 子集枚举</h3><h4 id="P1036-选数"><a href="#P1036-选数" class="headerlink" title="P1036 选数"></a>P1036 选数</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k;</span><br><span class="line"><span class="type">int</span> x[<span class="number">25</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否为素数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_prime</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=num; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归遍历查询</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> sum, <span class="type">int</span> startx)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m      当前选择了多少个数</span></span><br><span class="line">  <span class="comment">// sum    当前和</span></span><br><span class="line">  <span class="comment">// startx 升序排列</span></span><br><span class="line">  <span class="keyword">if</span> (m == k) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_prime</span>(sum)) &#123;</span><br><span class="line">      ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=startx; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>, sum+x[i], i+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    cin &gt;&gt; x[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="P1157-组合的输出※"><a href="#P1157-组合的输出※" class="headerlink" title="P1157 组合的输出※"></a>P1157 组合的输出※</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, r;</span><br><span class="line"><span class="type">int</span> a[<span class="number">25</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m ==&gt; 为当前选择的数</span></span><br><span class="line">  <span class="comment">// 已经选了足够的数</span></span><br><span class="line">  <span class="keyword">if</span> (m &gt; r) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=r; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">3</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 未选够，继续遍历</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=a[m<span class="number">-1</span>]+<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    <span class="comment">// i=a[m-1]+1指i从上一个选取的整数a[m-1]的下一个数开始</span></span><br><span class="line">    a[m] = i; <span class="comment">// 把上一行提到的那个数赋给当前a[k]</span></span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>); <span class="comment">// 递归调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; r;</span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-排列枚举"><a href="#1-1-3-排列枚举" class="headerlink" title="1.1.3 排列枚举"></a>1.1.3 排列枚举</h3><h4 id="P1706-全排列"><a href="#P1706-全排列" class="headerlink" title="P1706 全排列"></a>P1706 全排列</h4><p>1、直接用<code>c++</code>的<code>next_permutation</code>函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    a[i] = i+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">sort</span>(a, a+n);</span><br><span class="line">  <span class="comment">// sort(a, a+n, greater&lt;&gt;());  -- prev_permutation(a, a+n)</span></span><br><span class="line">  <span class="comment">// greater&lt;int&gt;() 是一个函数对象，用于比较两个同类型的值</span></span><br><span class="line">  <span class="comment">// 第一个参数比第二个参数大时返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(a, a+n));</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、深度搜索：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, pos=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>], b[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深搜函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">search</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;  <span class="comment">// 用i遍历所有可能的n种可能（因为这道题遍历的对象即为自然数，因此也就是i本身）</span></span><br><span class="line">    <span class="keyword">if</span> (!b[i]) &#123;  <span class="comment">// 当前b[i]为未使用状态</span></span><br><span class="line">      b[i] = <span class="number">1</span>;  <span class="comment">// 则首先将b[i]设置为使用状态</span></span><br><span class="line">      a[pos] = i;  <span class="comment">// 存储当前i值，</span></span><br><span class="line">      pos++;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (k == n) &#123;</span><br><span class="line">        <span class="built_in">print</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">search</span>(k+<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      pos--;  <span class="comment">// 执行到这一步说明已经打印完了一组数据，因此进行回溯</span></span><br><span class="line">      b[i] = <span class="number">0</span>;  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">search</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="P1088-火星人"><a href="#P1088-火星人" class="headerlink" title="P1088 火星人"></a>P1088 火星人</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;  <span class="comment">// 火星人手指数</span></span><br><span class="line"><span class="type">int</span> m;  <span class="comment">// 要加上的数B</span></span><br><span class="line"><span class="type">int</span> k[<span class="number">10005</span>];  <span class="comment">// 加数A</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cout &lt;&lt; k[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  cin &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; k[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) &#123;</span><br><span class="line">    <span class="built_in">next_permutation</span>(k, k+n);</span><br><span class="line">    <span class="keyword">if</span> (i == m) &#123;</span><br><span class="line">      <span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-贪心"><a href="#1-2-贪心" class="headerlink" title="1.2 贪心"></a>1.2 贪心</h2><p>贪心算法中常见的定义<code>结构体</code>并排序：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Oj</span>&#123;</span><br><span class="line">    <span class="type">int</span> begin;</span><br><span class="line">    <span class="type">int</span> end;</span><br><span class="line">&#125;a[<span class="number">1001000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(Oj o1, Oj o2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> o1.end &lt;= o2.end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">1</span>, cmp);  <span class="comment">// 按结束时间对所有oj排序</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-1-线段覆盖"><a href="#1-2-1-线段覆盖" class="headerlink" title="1.2.1 线段覆盖"></a>1.2.1 线段覆盖</h3><blockquote>
+<p>通用问题表述：</p>
+<p>在一个数轴上有<code>n</code>条线段，现要选取其中<code>k</code>条选段使得这<code>k</code>条线段两两没有重合部分，问最大的<code>k</code>为多少？</p>
+</blockquote>
+<p>1、最左边的线段放<code>右端点最靠左的线段</code>；</p>
+<p>2、剩下的其他线段<code>按右端点排序</code>，贪心放置线段，即能放就放。</p>
+<h2 id="1-3-二分法"><a href="#1-3-二分法" class="headerlink" title="1.3 二分法"></a>1.3 二分法</h2><p>易错点：</p>
+<p>1、取边界条件时是选择<code>while(left&lt;right)</code>还是<code>while(left&lt;=right)</code>？</p>
+<p>2、当中间值大于（或小于）所需查找的目标时，下一步要迭代更新的<code>right</code>（或<code>left</code>）应该取<code>middle</code>还是<code>middle-1</code>？</p>
+<p>解答：</p>
+<p>对上述边界条件的选取要参考解法选择“<strong>左闭右闭</strong>”的区间还是“<strong>左闭右开</strong>”的区间。</p>
+<ul>
+<li><p>左闭右闭：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle<span class="number">-1</span>; &amp;&amp; left = middle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>左闭右开：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle; &amp;&amp; left = midlle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
       </categories>
   </entry>
 </search>
