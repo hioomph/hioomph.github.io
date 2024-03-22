@@ -30,7 +30,7 @@
 <meta property="og:description" content="Task #1 - LRU-K Replacement Policy跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页(frame)。 src&#x2F;include&#x2F;buffer&#x2F;lru_k_replacer.h  &#x3D;&#x3D;&gt; 实现LRUKReplacer的新类，且独立 src&#x2F;buffer&#x2F;lru_k_replacer.cpp &#x3D;&#x3D;&gt; 对应实现，实现L">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-02T02:35:26.678Z">
-<meta property="article:modified_time" content="2024-03-16T13:25:18.505Z">
+<meta property="article:modified_time" content="2024-03-22T02:18:38.539Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 
@@ -224,7 +224,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-16 21:25:18" itemprop="dateModified" datetime="2024-03-16T21:25:18+08:00">2024-03-16</time>
+                <time title="修改时间：2024-03-22 10:18:38" itemprop="dateModified" datetime="2024-03-22T10:18:38+08:00">2024-03-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>8 分钟</span>
             </span>
 
         </div>
@@ -304,16 +304,14 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p><code>NewPage</code>：</p>
-<ul>
+<li><code>NewPage</code>：<ul>
 <li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
 <li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
 <li>创建新<code>page</code>；</li>
 <li>写回内存（<code>page_table_</code>）。</li>
 </ul>
 </li>
-<li><p><code>FetchPage</code>：</p>
-<ul>
+<li><code>FetchPage</code>：<ul>
 <li>找<code>page_id</code>对应的页：<ul>
 <li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
 <li>若找到，<code>pin_count_</code>自增；</li>
@@ -331,14 +329,12 @@
 </li>
 </ul>
 </li>
-<li><p><code>UnpinPage</code>：</p>
-<ul>
+<li><code>UnpinPage</code>：<ul>
 <li>若<code>page_id</code>不存在，直接返回；</li>
 <li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并1）设置<code>frame</code>可驱逐；2）内存中删去该页；</li>
 <li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
 </ul>
 </li>
-<li></li>
 </ul>
 <h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
 <p>正确的顺序应该是：</p>
@@ -353,6 +349,26 @@
 <p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
 
+<h1 id="Task-3-Read-Write-Page-Guards"><a href="#Task-3-Read-Write-Page-Guards" class="headerlink" title="Task #3 - Read&#x2F;Write Page Guards"></a>Task #3 - Read&#x2F;Write Page Guards</h1><blockquote>
+<p>您将实现BasicPageGuard，它存储指向BufferPoolManager和Page对象的指针。页面保护确保在相应的page对象超出作用域时立即在其上调用UnpinPage。注意，它仍然应该为程序员提供一个方法来手动解除页面的锁定。</p>
+<p>由于BasicPageGuard隐藏了底层的Page指针，它还可以提供只读&#x2F;写数据api，提供编译时检查，以确保针对每种用例正确设置is_dirty标志。</p>
+<p>在未来的项目中，多个线程将从同一个页面读取和写入，因此需要读写锁存器来确保数据的正确性。请注意，在Page类中，有用于此目的的相关锁存方法。与页面的解锁类似，程序员在使用页面后可能会忘记解锁页面。为了缓解这个问题，你将实现ReadPageGuard和WritePageGuard，它们会在页面超出范围时自动解锁。</p>
+<p>你需要为所有的BasicPageGuard, ReadPageGuard和WritePageGuard实现以下函数。</p>
+<ul>
+<li><code>PageGuard(PageGuard &amp;&amp;that)</code> : Move constructor.</li>
+<li><code>operator=(PageGuard &amp;&amp;that)</code> : Move operator.</li>
+<li><code>Drop()</code> : Unpin and&#x2F;or unlatch.</li>
+<li><code>~PageGuard()</code> : Destructor.</li>
+</ul>
+<p>使用新的页面保护，在BufferPoolManager中实现以下wrappers。</p>
+<ul>
+<li><code>FetchPageBasic(page_id_t page_id)</code></li>
+<li><code>FetchPageRead(page_id_t page_id)</code></li>
+<li><code>FetchPageWrite(page_id_t page_id)</code></li>
+<li><code>NewPageGuarded(page_id_t *page_id)</code></li>
+</ul>
+</blockquote>
+<p>这个<code>task</code>的重点就是实现移动构造、移动幅值、<code>Drop</code>和析构这四个函数。</p>
 
     </div>
 
@@ -433,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Task-1-LRU-K-Replacement-Policy"><span class="nav-number">1.</span> <span class="nav-text">Task #1 - LRU-K Replacement Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task1%E8%B8%A9%E5%9D%91%E5%A4%84"><span class="nav-number">1.1.</span> <span class="nav-text">Task1踩坑处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89-17474-ERROR-LeakSanitizer-detected-memory-leaks"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task-2-Buffer-Pool-Manager"><span class="nav-number">2.</span> <span class="nav-text">Task #2 - Buffer Pool Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task2%E8%B8%A9%E5%9D%91%E5%A4%84"><span class="nav-number">2.1.</span> <span class="nav-text">Task2踩坑处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89unknown-file-Failure-C-exception-with-description-%E2%80%9CThe-id-not-found-in-cache%E2%80%9D-thrown-in-the-test-body"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-%E3%80%81"><span class="nav-number">2.1.2.</span> <span class="nav-text">（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Task-1-LRU-K-Replacement-Policy"><span class="nav-number">1.</span> <span class="nav-text">Task #1 - LRU-K Replacement Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task1%E8%B8%A9%E5%9D%91%E5%A4%84"><span class="nav-number">1.1.</span> <span class="nav-text">Task1踩坑处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89-17474-ERROR-LeakSanitizer-detected-memory-leaks"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task-2-Buffer-Pool-Manager"><span class="nav-number">2.</span> <span class="nav-text">Task #2 - Buffer Pool Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task2%E8%B8%A9%E5%9D%91%E5%A4%84"><span class="nav-number">2.1.</span> <span class="nav-text">Task2踩坑处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89unknown-file-Failure-C-exception-with-description-%E2%80%9CThe-id-not-found-in-cache%E2%80%9D-thrown-in-the-test-body"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-%E3%80%81"><span class="nav-number">2.1.2.</span> <span class="nav-text">（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Task-3-Read-Write-Page-Guards"><span class="nav-number">3.</span> <span class="nav-text">Task #3 - Read&#x2F;Write Page Guards</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -492,12 +508,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">21k</span>
+    <span title="站点总字数">22k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:17</span>
+    <span title="站点阅读时长">1:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
