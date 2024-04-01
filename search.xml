@@ -1,6 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2024/04/01/CSAPP/</url>
+    <content><![CDATA[<h1 id="Ch4-处理器体系结构"><a href="#Ch4-处理器体系结构" class="headerlink" title="Ch4 处理器体系结构"></a>Ch4 处理器体系结构</h1><p>CSAPP自定义了一个Y86-64</p>
+<h2 id="1、指令系统结构"><a href="#1、指令系统结构" class="headerlink" title="1、指令系统结构"></a>1、指令系统结构</h2><h3 id="（1）Programmer-Visible-State"><a href="#（1）Programmer-Visible-State" class="headerlink" title="（1）Programmer-Visible State"></a>（1）Programmer-Visible State</h3><p>可见状态：每条指令都会去读取或修改处理器某些部分，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011539557.png" alt="image-20240401153926464" style="zoom:33%;" />
+
+<h3 id="（2）指令编码"><a href="#（2）指令编码" class="headerlink" title="（2）指令编码"></a>（2）指令编码</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011540371.png" alt="image-20240401154030167" style="zoom:33%;" />
+
+<p>如上图最后一条：</p>
+<ul>
+<li><p>5 指令代码</p>
+</li>
+<li><p>0 指令功能</p>
+</li>
+<li><p>rA&#x2F;rB 寄存器指示符字节</p>
+<ul>
+<li><p>对寄存器编码，用16进制数<strong>0~0xE</strong>表示</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011531970.png" alt="image-20240401153138807" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<p>举例：（小端法存储）</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011536946.png" alt="image-20240401153606853" style="zoom:33%;" />
+
+<h3 id="（3）处理异常"><a href="#（3）处理异常" class="headerlink" title="（3）处理异常"></a>（3）处理异常</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011540188.png" alt="image-20240401154055033" style="zoom:33%;" />
+
+<h2 id="2、数字电路与处理器设计"><a href="#2、数字电路与处理器设计" class="headerlink" title="2、数字电路与处理器设计"></a>2、数字电路与处理器设计</h2><p>Register File 寄存器文件（寄存器堆）输出端口与ALU的输入端口串联。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011545861.png" alt="image-20240401154517784" style="zoom:33%;" />
+
+<ul>
+<li>读写操作共用地址线；</li>
+<li>定义15个寄存器，因此地址线设计成4为即可；</li>
+<li>we_（写使能信号）&#x2F;reeset（复位信号）</li>
+</ul>
+<p>下图为Register File的内部结构：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011547329.png" alt="image-20240401154700867" style="zoom: 50%;" />
+
+<p>逻辑门，这些门结构可通过P管和N管（CMOS管）组合表现。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011548500.png" alt="image-20240401154803404" style="zoom: 33%;" />
+
+<h2 id="3、Y86-64的顺序实现"><a href="#3、Y86-64的顺序实现" class="headerlink" title="3、Y86-64的顺序实现"></a>3、Y86-64的顺序实现</h2><p>举例：sum程序对应的汇编代码和二进制指令：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011554476.png" alt="image-20240401155427243" style="zoom: 50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011554403.png" alt="image-20240401155410294" style="zoom:50%;" />
+
+<h3 id="（1）处理器六大阶段"><a href="#（1）处理器六大阶段" class="headerlink" title="（1）处理器六大阶段"></a>（1）处理器六大阶段</h3><ul>
+<li><p>取指：分析指令；</p>
+</li>
+<li><p>译码：读寄存器文件；</p>
+</li>
+<li><p>执行：ALU执行 1)算术逻辑运算； 2)计算内存引用的有效地址； 3)执行push和pop指令；</p>
+</li>
+<li><p>访存：针对内存的读写操作；</p>
+</li>
+<li><p>写回：写寄存器文件；</p>
+</li>
+<li><p>更新PC：将PC的内容设置为下一条指令的地址。</p>
+</li>
+</ul>
+<h3 id="（2）各阶段的硬件结构"><a href="#（2）各阶段的硬件结构" class="headerlink" title="（2）各阶段的硬件结构"></a>（2）各阶段的硬件结构</h3><p>总体结构（<strong>其中从valP到Data的橙色线错误，应该为从valC到Data！</strong>），对于顺序操作，这6个阶段在一个时钟周期内完成。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011906322.png" alt="image-20240401190602950"></p>
+<ul>
+<li><p>取指</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011619659.png" alt="image-20240401161926457" style="zoom: 33%;" />
+</li>
+<li><p>译码</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011621480.png" alt="image-20240401162105328" style="zoom: 33%;" />
+</li>
+<li><p>执行</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011622684.png" alt="image-20240401162222519" style="zoom: 33%;" />
+</li>
+<li><p>访存</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011622546.png" alt="image-20240401162255349" style="zoom: 33%;" />
+</li>
+<li><p>写回</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011623806.png" alt="image-20240401162342626" style="zoom: 33%;" />
+</li>
+<li><p>更新PC</p>
+<ol>
+<li>call指令常数字段；</li>
+<li>在访存阶段从内存（栈）中读出的返回地址；</li>
+<li>跳转指令的常数字段；</li>
+<li>当前PC+当前指令长度。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011624170.png" alt="image-20240401162430019" style="zoom: 33%;" /></li>
+</ul>
+<h3 id="（3）举例"><a href="#（3）举例" class="headerlink" title="（3）举例"></a>（3）举例</h3><p>举例1：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011600331.png" alt="image-20240401160018132" style="zoom: 33%;" />
+
+<p>举例2：（下图中的<strong>valE&#x3D;0+8</strong>是因为寄存器文件的写入端与ALU的输出端相连）</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011605541.png" alt="image-20240401160504446" style="zoom:33%;" />
+
+<p>举例3：</p>
+<p>该指令为<strong>将寄存器 <code>%rsp</code> 中的值存储到以 <code>%rbx</code> 寄存器的值为基地址偏移100个字节的内存单元中</strong>，因此不涉及写寄存器操作。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011608224.png" alt="image-20240401160808121" style="zoom:33%;" />
+
+<p>举例4：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011612305.png" alt="image-20240401161239187" style="zoom:33%;" />
+
+<p>举例5：跳转指令</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011613911.png" alt="image-20240401161359730" style="zoom:33%;" />
+
+<h2 id="4、流水线"><a href="#4、流水线" class="headerlink" title="4、流水线"></a>4、流水线</h2><h3 id="（1）属性及原理"><a href="#（1）属性及原理" class="headerlink" title="（1）属性及原理"></a>（1）属性及原理</h3><p>假设有一个非流水线设计，如下图所示，该系统的吞吐量约为<strong>3.12GIPS</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011659177.png" alt="image-20240401165925089" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011659832.png" alt="image-20240401165943770" style="zoom:33%;" />
+
+<p>若采用流水线设计，将组合逻辑单元阶段分为三个阶段，每个阶段120ps，此时吞吐量为<strong>8.33GIPS</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011701350.png" alt="image-20240401170120155" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011702592.png" alt="image-20240401170206480" style="zoom:33%;" />
+
+<ul>
+<li>流水线的局限性：此时各个阶段的延迟可能都是不等的，此时时钟的速率受最慢阶段的限制（木桶效应）：</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011706596.png" alt="image-20240401170631392" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011836974.png" alt="image-20240401183610851" style="zoom:33%;" />
+
+<ul>
+<li>此外，过深的流水线会导致系统性能的下降。实际中的指令间存在数据依赖，以及指令控制流造成的控制依赖。</li>
+</ul>
+<h3 id="（2）硬件结构"><a href="#（2）硬件结构" class="headerlink" title="（2）硬件结构"></a>（2）硬件结构</h3><p>在顺序实现的硬件结构中，取指发生在时钟周期刚开始时，而更新PC发生在时钟快要结束时，如下图所示（<strong>橙色线需勘误</strong>）。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011906322.png" alt="image-20240401190602950"></p>
+<p>为了实现流水线的硬件结构，将更新PC的操作从时钟周期快要结束时移动到时钟刚开始执行时（即最左侧新增的寄存器）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011910589.png" alt="image-20240401191048453"></p>
+<p>从宏观上来说，也就是在各个阶段前加入流水线寄存器。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011911529.png" alt="image-20240401191145449"></p>
+<p>其展开后的整体逻辑如下：</p>
+<ul>
+<li>寄存器F保存PC的预测值；</li>
+<li>寄存器D保存刚取出的指令信息；</li>
+<li>寄存器E保存最新译码指令的状态以及从寄存器文件中读出的数值；</li>
+<li>寄存器M保存最新执行指令的结果，包含ALU处理的那三类；</li>
+<li>寄存器W保存访存执行的结果，而反馈路径将结果写回寄存器文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011924576.png" alt="image-20240401192450295"></p>
+<h3 id="（3）数据冒险"><a href="#（3）数据冒险" class="headerlink" title="（3）数据冒险"></a>（3）数据冒险</h3><p>在下图的时钟周期4中，读取到的值并非所期望的10和3，而是默认值0，这是因为此时指令1处于访存阶段，10仍未写回%rdx中；而指令2处于执行阶段，3也未写回%rax。这种情况称为<strong>冒险&#x2F;冲突</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011937082.png" alt="image-20240401193745913" style="zoom:50%;" />
+
+<p>解决方法：</p>
+<ul>
+<li><p>暂停技术</p>
+<ul>
+<li><p>在D阶段读取寄存器的ID值，分别于执行阶段、访存阶段及写回阶段所执行指令的目的寄存器ID比较，若相等，则存在数据相关，需要在译码阶段等待；</p>
+</li>
+<li><p>方式为插入气泡：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011941588.png" alt="image-20240401194157407"></p>
+</li>
+</ul>
+</li>
+<li><p>数据转发&#x2F;旁路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011943090.png" alt="image-20240401194351754"></p>
+</li>
+</ul>
+<h3 id="（4）控制冒险"><a href="#（4）控制冒险" class="headerlink" title="（4）控制冒险"></a>（4）控制冒险</h3><p>控制冒险的情况例举如下：</p>
+<ul>
+<li>若取出的是ret指令，下一条指令的地址需要等到访存结束后才能从栈中取出；  —— 解决：暂停处理新指令</li>
+<li>若取出的是分支条件指令，需要经过执行阶段后才能确定是否跳转。—— 解决：分支预测（预测其总是跳转或总是不跳转）</li>
+</ul>
+<p>暂停和插入气泡是如何实现的？</p>
+<p>流水线寄存器是通过时钟的上升沿来改变输出的值，遇到上升沿时，加载其输入作为新的输出。因此，给每个流水线寄存器引入stall信号和bubble信号，<strong>当需要暂停时</strong>，将halt信号设为1，寄存器保存原状态；<strong>当需要插入气泡时</strong>，将bubble信号设为1，寄存器的状态设置成某个固定的复位配置，等效于nop。</p>
+<h2 id="5、Y86-64的流水线实现"><a href="#5、Y86-64的流水线实现" class="headerlink" title="5、Y86-64的流水线实现"></a>5、Y86-64的流水线实现</h2><h3 id="（1）取指阶段"><a href="#（1）取指阶段" class="headerlink" title="（1）取指阶段"></a>（1）取指阶段</h3><ul>
+<li><p>顺序执行：valP &#x3D; 当前PC + 指令长度</p>
+</li>
+<li><p>跳转执行：valP &#x3D; （指令中的常数字段）valC</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012055519.png" alt="image-20240401205520162" style="zoom:50%;" />
+</li>
+<li><p>为了应对出错的情况，设置<strong>select PC部件</strong>纠错：</p>
+<ul>
+<li><p>若取到<strong>ret</strong>，需要等到译码、执行和访存后，才能从内存中读到正确的返回地址，此时的改正方法为：<strong>将流水线寄存器W中的访存结果（W_valM）作为下一条指令的地址；</strong></p>
+</li>
+<li><p>若取到<strong>条件分支指令</strong>，需要等到译码、执行后才能判断是否跳转，此时的改正方法为：<strong>根据Cnd信号判断是否跳转，若不跳转，则从流水线寄存器M读取（M_valA）下一条指令的地址</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012104691.png" alt="image-20240401210442459"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）译码阶段"><a href="#（2）译码阶段" class="headerlink" title="（2）译码阶段"></a>（2）译码阶段</h3><ul>
+<li><p>需要判断是1）<strong>直接使用转发的数据</strong>；还是2）<strong>从寄存器文件中读取数据</strong>。</p>
+</li>
+<li><p>哪些数据需要转发？</p>
+<ul>
+<li><strong>ALU的输出结果</strong><ul>
+<li>正常需要经访存和写回后，才能完成寄存器的数据更新；</li>
+<li>采用转发设计时，ALU的输出结果可以马上作为译码阶段的结果。</li>
+</ul>
+</li>
+<li><strong>内存的输出数据</strong><ul>
+<li>和ALU类似</li>
+</ul>
+</li>
+<li><strong>访存阶段时，寄存器写入端口E还没有写入的数据</strong></li>
+<li><strong>写回阶段时，寄存器写入端口M还没有写入的数据</strong></li>
+<li><strong>写回阶段时，寄存器写入端口E还没有写入的数据</strong></li>
+</ul>
+</li>
+<li><p>每个转发源包括：1）<strong>寄存器的ID值</strong>；2）<strong>转发数据</strong>。</p>
+</li>
+<li><p>Sel+Fwd A与Fwd B相比，<strong>多了一个valP输入</strong>。这里将valA与valP合并，可以合并的原因是只有函数调用指令和跳转指令在后面的阶段才需要用到valP，而这两类指令并不需要从A端口读取数据（见3(3).举例5.跳转指令）</p>
+<ul>
+<li>valP是顺序执行时下一条指令的地址，而跳转执行指令在译码阶段不需要valP；</li>
+<li>根据icode判断是否为这两类指令，如果是则可以进行合并。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012117651.png" alt="image-20240401211720521"></p>
+</li>
+</ul>
+<p>其他阶段和顺序设计相差不大，不再赘述。</p>
+<h2 id="6、流水线的控制逻辑"><a href="#6、流水线的控制逻辑" class="headerlink" title="6、流水线的控制逻辑"></a>6、流水线的控制逻辑</h2><h3 id="（1）加载-使用冒险"><a href="#（1）加载-使用冒险" class="headerlink" title="（1）加载&#x2F;使用冒险"></a>（1）加载&#x2F;使用冒险</h3><h3 id="（2）分支预测发生错误"><a href="#（2）分支预测发生错误" class="headerlink" title="（2）分支预测发生错误"></a>（2）分支预测发生错误</h3><h3 id="（3）返回阶段的处理"><a href="#（3）返回阶段的处理" class="headerlink" title="（3）返回阶段的处理"></a>（3）返回阶段的处理</h3><h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380"></p>
+<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，因此不能将add2用于优化add1。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>cmu15-445 Course Related (Spring 2023)</title>
     <url>/2024/03/02/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
     <content><![CDATA[<table>
@@ -14,12 +228,12 @@
 <tbody><tr>
 <td>1-5</td>
 <td>P0 &amp; P1</td>
-<td>2.26-</td>
+<td>2.26-3.24</td>
 </tr>
 <tr>
 <td>6-9</td>
 <td>P2</td>
-<td>3.20-</td>
+<td>3.24-</td>
 </tr>
 <tr>
 <td>10-14</td>
@@ -45,6 +259,7 @@
 
 <p>整体图片：</p>
 <p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242055708.png" alt="image-20240324205507545"></p>
 <h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
 <p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
 <ul>
@@ -109,6 +324,257 @@
 <li><code>Log Buffers</code></li>
 <li><code>Dictionary Caches</code></li>
 </ul>
+<h1 id="2-B-Tree-Index"><a href="#2-B-Tree-Index" class="headerlink" title="2 B+Tree Index"></a>2 B+Tree Index</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271651204.png" alt="image-20240327165111130"></p>
+<h2 id="2-1-Hash-Tables"><a href="#2-1-Hash-Tables" class="headerlink" title="2.1 Hash Tables"></a>2.1 Hash Tables</h2><h3 id="2-1-1-Hash-Functions"><a href="#2-1-1-Hash-Functions" class="headerlink" title="2.1.1 Hash Functions"></a>2.1.1 Hash Functions</h3><p>由于<code>DBMS</code>内使用的<code>Hash Function</code>并不会暴露在外，因此<strong>没必要使用加密（<code>cryptographic</code>）哈希函数</strong>，我们希望它速度越快，<code>collision rate</code>越低越好。</p>
+<p>目前各 DBMS 主要在用的 Hash Functions 包括：</p>
+<ul>
+<li><a href="https://github.com/aappleby/smhasher">MurmurHash (2008)</a></li>
+<li><a href="https://github.com/google/cityhash">Google CityHash (2011)</a></li>
+<li><a href="https://github.com/google/farmhash">Google FarmHash (2014)</a></li>
+<li><a href="https://github.com/lemire/clhash">CLHash (2016)</a></li>
+</ul>
+<h4 id="SHA256算法"><a href="#SHA256算法" class="headerlink" title="SHA256算法"></a>SHA256算法</h4><h3 id="2-1-2-Static-Hashing-Scheme"><a href="#2-1-2-Static-Hashing-Scheme" class="headerlink" title="2.1.2 Static Hashing Scheme"></a>2.1.2 Static Hashing Scheme</h3><p>（1）Linear Probe Hashing 开放地址哈希</p>
+<p>“开放”的意思就是说：对于所有的key来说地址是开放的。碰撞时则往下一个地址存。</p>
+<p>在删除时可能会因为前项被删除导致的空白，造成找不到当前项，这时有两个解决思路：</p>
+<ul>
+<li>Tombstone；</li>
+<li>Movement</li>
+</ul>
+<p>重复key出现时的解决思路：</p>
+<ul>
+<li>Separate Linked List，把当前key作为指针指向一个新的区域：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120365.png" alt="image-20240324212003301"></p>
+<ul>
+<li>Redundant Keys，把key和value拼在一起作为新的key：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120828.png" alt="image-20240324212049757"></p>
+<p>（2）Robin Hood Hashing，是开放地址哈希的变种，其基本思想是“劫富济贫”。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123712.png" alt="image-20240324212329536"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123232.png" alt="image-20240324212342001"></p>
+<p>简单来说就是，当E和A碰撞时，正常E偏移3位，但为了不让自己比D“惨”太多，它就把D推到后面去，自己占了D的位置。此时D和E均为2。</p>
+<p>（3）Cuckoo Hashing</p>
+<blockquote>
+<p>静态的哈希结构的问题在于需要DBMS能够预判所存数据的总量，否则每次数量超过范围时都需要重建 Hash Table。这显然是很困难的。</p>
+</blockquote>
+<h3 id="2-1-3-Dynamic-Hash-Tables"><a href="#2-1-3-Dynamic-Hash-Tables" class="headerlink" title="2.1.3 Dynamic Hash Tables"></a>2.1.3 Dynamic Hash Tables</h3><p>（1）Chained Hashing（※）</p>
+<p>每个 key 对应一个链表，每个节点是一个 bucket，装满了就再往后挂一个 bucket。需要写操作时，需要请求 latch。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242129786.png" alt="image-20240324212955629"></p>
+<ul>
+<li>好处：简单；</li>
+<li>坏处：最坏的情况下Hash Table可能降级为链表，操作的时间复杂度降格为 O(n)。</li>
+</ul>
+<p>（2）Extendible Hashing</p>
+<p>Extendible Hashing 的基本思路是一边扩容，一边 rehash。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134200.png" alt="image-20240324213443953"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134195.png" alt="image-20240324213451869"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134845.png" alt="image-20240324213459513"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135620.png" alt="image-20240324213509210"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135275.png" alt="image-20240324213516681"></p>
+<p>（3）Linear Hashing</p>
+<p>基本思想：维护一个指针，指向下一个将被拆分的 bucket，每当任意一个 bucket 溢出（标准自定，如利用率到达阈值等）时，将指针指向的 bucket 拆分。</p>
+<h3 id="2-1-4-总结"><a href="#2-1-4-总结" class="headerlink" title="2.1.4 总结"></a>2.1.4 总结</h3><p>Hash Tables 提供 O(1)O(1) 的访问效率，因此它被大量地应用于 DBMS 的内部实现中。即便如此，它并不适合作为 table index 的数据结构，而 table index 的首选就是下节将介绍的 B+ Tree。</p>
+<p><strong>哈希表对于范围索引是效率极低的。</strong></p>
+<h2 id="2-2-Tree-Indexes（B-索引）"><a href="#2-2-Tree-Indexes（B-索引）" class="headerlink" title="2.2 Tree Indexes（B+索引）"></a>2.2 Tree Indexes（B+索引）</h2><blockquote>
+<p>table index 为提供 DBMS 数据查询的快速索引，它本身存储着某表某列排序后的数据，并包含指向相应 tuple 的指针。DBMS 需要保证表信息与索引信息在逻辑上保持同步。用户可以在 DBMS 中为任意表建立多个索引，DBMS 负责选择最优的索引提升查询效率。但索引自身需要占用存储空间，因此在索引数量与索引存储、维护成本之间存在权衡。</p>
+</blockquote>
+<p>索引本质上就是一种小表，是把大表中的某些列抽取出来。</p>
+<h3 id="2-2-1-B-Tree"><a href="#2-2-1-B-Tree" class="headerlink" title="2.2.1 B+ Tree"></a>2.2.1 B+ Tree</h3><p>B+ Tree 是一种自平衡树，它将数据有序地存储，且在 search、sequential access、insertions 以及 deletions 操作的复杂度上都满足 O(logn)，其中 sequential access 的最终复杂度还与所需数据总量有关。</p>
+<blockquote>
+<p>这里的O(logn)的意义在于，随着数据的增长，操作的复杂度增长是要慢于数据的增长速度的。比如数据增长到原来的2倍，但搜索时间不会变成原来的2倍。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242151303.png" alt="image-20240324215134042"></p>
+<h4 id="B-Tree-Nodes"><a href="#B-Tree-Nodes" class="headerlink" title="B+ Tree Nodes"></a>B+ Tree Nodes</h4><p>B+ Tree 中的每个 node 都包含一列按 key 排好序的 key&#x2F;value pairs，key 就是 table index 对应的 column，value 的取值与 node 类型相关，在 inner nodes 和 leaf nodes 中存的内容不同。</p>
+<p>values主要有两种存法：</p>
+<ul>
+<li>Record IDs，存储指向最终 tuple 的指针。</li>
+<li>Tuple Data，直接将 tuple data 存在 leaf node 中。key为ID，v为整个行数据。如主键索引，其key为主键，value即为这张表的全部内容。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242154259.png" alt="image-20240324215455186"></p>
+<h4 id="B-Tree-Operations"><a href="#B-Tree-Operations" class="headerlink" title="B+ Tree Operations"></a>B+ Tree Operations</h4><p><em>Insert</em></p>
+<ol>
+<li>找到对应的 leaf node，L</li>
+<li>将 key&#x2F;value pair 按顺序插入到 L 中</li>
+<li>如果 L 还有足够的空间，操作结束；如果空间不足，则需要将 L 分裂成两个节点，同时在 parent node 上新增 entry，若 parent node 也空间不足，则递归地分裂，直到 root node 为止。</li>
+</ol>
+<p><em>Delete</em></p>
+<ol>
+<li>从 root 开始，找到目标 entry 所处的 leaf node, L</li>
+<li>删除该 entry</li>
+<li>如果 L 仍然至少处于半满状态，则操作结束；否则先尝试从 siblings 那里拆借 entries，如果失败，则将 L 与相应的 sibling 合并</li>
+<li>如果合并发生了，则可能需要递归地删除 parent node 中的 entry</li>
+</ol>
+<h4 id="Clustered-Indexes-聚簇索引"><a href="#Clustered-Indexes-聚簇索引" class="headerlink" title="Clustered Indexes 聚簇索引"></a>Clustered Indexes 聚簇索引</h4><h3 id="2-2-2-B-Tree-Design-Choices"><a href="#2-2-2-B-Tree-Design-Choices" class="headerlink" title="2.2.2 B+ Tree Design Choices"></a>2.2.2 B+ Tree Design Choices</h3><h4 id="Node-Size"><a href="#Node-Size" class="headerlink" title="Node Size"></a>Node Size</h4><p>通常来说，disk 的数据读取速度越慢，node size 就越大：</p>
+<table>
+<thead>
+<tr>
+<th>Disk Type</th>
+<th>Node Size</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HDD</td>
+<td>~1MB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~10KB</td>
+</tr>
+<tr>
+<td>In-Memory</td>
+<td>~512B</td>
+</tr>
+</tbody></table>
+<p>具体情境下的最优大小由 workload 决定。</p>
+<h4 id="Merge-Threshold"><a href="#Merge-Threshold" class="headerlink" title="Merge Threshold"></a>Merge Threshold</h4><p>由于 merge 操作引起的修改较大，有些 DBMS 选择延迟 merge 操作的发生时间，甚至可以利用其它进程来负责周期性地重建 table index。</p>
+<h4 id="Variable-Length-Keys"><a href="#Variable-Length-Keys" class="headerlink" title="Variable Length Keys"></a>Variable Length Keys</h4><p>B+ Tree 中存储的 key 经常是变长的，通常有三种手段来应对：</p>
+<ul>
+<li>Pointers：存储指向 key 的指针；</li>
+<li>Variable Length Nodes：需要精细的内存管理操作，不推荐；</li>
+<li>Padding：给每个变长的key都强制转成一致的长度；</li>
+<li>key Map：内嵌一个指针数组，指向 node 中的 key&#x2F;val list</li>
+</ul>
+<h4 id="Non-unique-Indexes-变长字段"><a href="#Non-unique-Indexes-变长字段" class="headerlink" title="Non-unique Indexes 变长字段"></a>Non-unique Indexes 变长字段</h4><p>索引针对的 key 可能是非唯一的，通常有两种手段来应对：</p>
+<ul>
+<li><p>Duplicate Keys：存储多次相同的 key；</p>
+</li>
+<li><p>Value Lists：每个 key 只出现一次，但同时维护另一个链表，存储 key 对应的多个 values，类似 chained hashing</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235897.png" alt="image-20240325123534595"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235251.png" alt="image-20240325123553069"></p>
+<h4 id="Intra-node-Search-结点的内部搜素"><a href="#Intra-node-Search-结点的内部搜素" class="headerlink" title="Intra-node Search 结点的内部搜素"></a>Intra-node Search 结点的内部搜素</h4><p>在节点内部搜索，就是在排好序的序列中检索元素，手段通常有：</p>
+<ul>
+<li>Linear Scan，这种线性扫描虽然似乎很费时，但相比把page从磁盘读到内存的时间来看几乎已经不算什么了；</li>
+<li>Binary Search，用二分来优化线性搜索；</li>
+<li>Interpolation：通过 keys 的分布统计信息来估计大概位置进行检索</li>
+</ul>
+<h3 id="2-2-3-Optimizations"><a href="#2-2-3-Optimizations" class="headerlink" title="2.2.3 Optimizations"></a>2.2.3 Optimizations</h3><h4 id="Prefix-Compression"><a href="#Prefix-Compression" class="headerlink" title="Prefix Compression"></a>Prefix Compression</h4><p>同一个 leaf node 中的 keys 通常有相同的 prefix，如下图所示。为了节省空间，可以只存所有 keys 的不同的 suffix。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251240293.png" alt="image-20240325124020194"></p>
+<h4 id="Suffix-Truncation"><a href="#Suffix-Truncation" class="headerlink" title="Suffix Truncation"></a>Suffix Truncation</h4><p>由于 inner nodes 只用于引导搜索，因此没有必要在 inner nodes 中储存完整的 key，我们可以<strong>只存储足够的 prefix 即可</strong>，如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241456.png" alt="image-20240325124132291"></p>
+<h4 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h4><p>建 B+ Tree 的最快方式是先将 keys 排好序后，再从下往上建树，如下图所示。因此如果有<strong>大量插入操作</strong>，可以利用这种方式提高效率。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241413.png" alt="image-20240325124150282"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251242426.png" alt="image-20240325124207283"></p>
+<h4 id="Pointer-Swizzling"><a href="#Pointer-Swizzling" class="headerlink" title="Pointer Swizzling"></a>Pointer Swizzling</h4><p>Nodes 使用 page id 来存储其它 nodes 的引用，DBMS 每次需要首先从 page table 中获取对应的内存地址，然后才能获取相应的 nodes 本身，如果 page 已经在 buffer pool 中，我们可以直接存储其它 page 在 buffer pool 中的内存地址作为引用，从而提高访问效率。</p>
+<h2 id="2-3-Index-Concurrency-Control"><a href="#2-3-Index-Concurrency-Control" class="headerlink" title="2.3 Index Concurrency Control"></a>2.3 Index Concurrency Control</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251246471.png" alt="image-20240325124646316"></p>
+<h3 id="2-3-1-Latch-Modes"><a href="#2-3-1-Latch-Modes" class="headerlink" title="2.3.1 Latch Modes"></a>2.3.1 Latch Modes</h3><h4 id="Read-Mode"><a href="#Read-Mode" class="headerlink" title="Read Mode"></a>Read Mode</h4><ul>
+<li>多个线程可以同时读取相同的数据</li>
+<li>针对相同的数据，当别的线程已经获得处于 read mode 的 latch，新的线程也可以继续获取 read mode 的 latch</li>
+</ul>
+<h4 id="Write-Mode"><a href="#Write-Mode" class="headerlink" title="Write Mode"></a>Write Mode</h4><ul>
+<li>同一时间只有单个线程可以访问</li>
+<li>针对相同的数据，如果获取前已经有别的线程获得任何 mode 的 latch，新的线程就无法获取 write mode  的 latch</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251249774.png" alt="image-20240325124932586"></p>
+<p><strong>锁的实现：</strong></p>
+<ul>
+<li><p>Blocking OS Mutex：如std::mutex，好处是竞争的线程会陷入sleep，但坏处是需要OS去进行唤醒，极度浪费资源；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251251222.png" alt="image-20240325125111105"></p>
+</li>
+<li><p>Test-ans-Set Spin Latch(TAS)：自旋锁，如std::atomic<T>，不需要OS操作，自己在死循环内不断旋转，直到可以获取到该锁；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251253634.png" alt="image-20240325125323436"></p>
+</li>
+<li><p>Reader-Writer Latches：自旋锁的基础上实现。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251255541.png" alt="image-20240325125549330"></p>
+<p>这里注意：若有线程需要加写锁，那么此时如果再有线程希望加读锁也会被阻塞。只有等之前的读锁都释放，写锁成功加上后，后续的读锁才能正常上锁。（这样做是为了避免写锁被无止境地锁住）</p>
+</li>
+</ul>
+<h4 id="hash-table-latching"><a href="#hash-table-latching" class="headerlink" title="hash table latching"></a><strong>hash table latching</strong></h4><p>相较于B+ Tree，Hash Table不容易遇到死锁，尤其是开放地址哈希，因为大家都是朝着一个方向去进行的。一般在扩容（resize）操作时，加一个全局的写锁，因为此时哈希表内部的数据需要进行一个整理。</p>
+<ul>
+<li>page latches：块与块之间的锁独立。线程会给所有块加分段锁。例如下图，块1的写锁和块2的读锁独立。这样的优势是：1）锁的粒度不会太细；2）支持一定的并发操作。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271610143.png" alt="image-20240327161025853"></p>
+<ul>
+<li><p>slot latches：以槽为单位进行加锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271611923.png" alt="image-20240327161157762"></p>
+</li>
+<li><p>compare-and-swap，CAS，使得hash table实现无锁插入。例如下图：让os先0判断是否为20，若是再加到30，属于原子操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271629958.png" alt="image-20240327162902774"></p>
+</li>
+</ul>
+<h3 id="2-3-2-Index-Crabbing-Coupling"><a href="#2-3-2-Index-Crabbing-Coupling" class="headerlink" title="2.3.2 Index Crabbing&#x2F;Coupling"></a>2.3.2 Index Crabbing&#x2F;Coupling</h3><p>B+Tree考虑两方面的并发问题：</p>
+<ul>
+<li>1）结点内部的数据，即多个线程同时修改一个node；</li>
+<li>2）结点间的合并和分裂操作，即一个线程正在遍历 B+ Tree 的同时，另一个线程正在 splits&#x2F;merges nodes。</li>
+</ul>
+<p><strong>Latch Crabbing 的基本思想如下：</strong></p>
+<ul>
+<li>获取 parent 的 latch</li>
+<li>获取 child 的 latch</li>
+<li>如果<strong>安全</strong>，可以释放 parent 的 latch</li>
+</ul>
+<p><strong>这里的“安全”指的是，当发生更新操作时，该节点不会发生 split 或 merge 的操作，即：</strong></p>
+<ul>
+<li>在插入元素时，节点未满</li>
+<li>在删除元素时，节点超过半满</li>
+</ul>
+<p>按照上述方法，无论对叶子结点执行何种操作，第一步都是先锁住根节点，这是一种“悲观”的做法。“乐观”的做法是：一路加读锁，最后加写锁。当然也有可能出现到了最后一步，发现会改动前面的parent，因此需要放弃当前的操作，重新从root开始加写锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271638410.png" alt="image-20240327163836210"></p>
+<h3 id="2-3-3-Leaf-Scans"><a href="#2-3-3-Leaf-Scans" class="headerlink" title="2.3.3 Leaf Scans"></a>2.3.3 Leaf Scans</h3><p>之前的分析中我们仅仅关注了从上到下的访问模式，而没有考虑到左右方向的访问模式，在 range query 中，常常需要横向访问相邻的 nodes。</p>
+<p>当遇到横向扫描无法获取下一个节点的 latch 时，该线程将释放 latch 后自杀。这种策略逻辑简单，尽管有理论上的优化空间，但在实践中是常见的避免死锁的方式。</p>
+<h3 id="2-3-4-Delayed-Parent-Updates"><a href="#2-3-4-Delayed-Parent-Updates" class="headerlink" title="2.3.4 Delayed Parent Updates"></a>2.3.4 Delayed Parent Updates</h3><p>从上文中，我们可以观察到：每当 leaf node 溢出时，我们都需要更新至少 3 个节点：</p>
+<ul>
+<li>即将被拆分的 leaf node</li>
+<li>新的 leaf node</li>
+<li>parent node</li>
+</ul>
+<p>修改的成本较高，因此 B-link Tree 提出了一种优化策略：<strong>每当 leaf node 溢出时，只是标记一下而暂时不更新 parent node，等下一次有别的线程获取 parnet node 的 write latch 时，一并修改。</strong></p>
+<h2 id="2-4-Sorting-and-Aggregations"><a href="#2-4-Sorting-and-Aggregations" class="headerlink" title="2.4 Sorting and Aggregations"></a>2.4 Sorting and Aggregations</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271648356.png" alt="image-20240327164819130"></p>
+<p>一个disk-oriented DBMS不能假定query results和内存大小完全适配。有可能筛选出来的query results也需要存到磁盘中，和buffer pool互相配合来实现操作。需要最大化利用sequential I&#x2F;O。</p>
+<p><strong>为什么需要排序：关系型数据库是unsorted的。</strong></p>
+<h3 id="2-4-1-Sorting-Algorithm"><a href="#2-4-1-Sorting-Algorithm" class="headerlink" title="2.4.1 Sorting Algorithm"></a>2.4.1 Sorting Algorithm</h3><ul>
+<li>early materialization：排序时value直接存储当前key那一行的剩余数据；</li>
+<li>later materialization：排序时value存储ID值。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271703469.png" alt="image-20240327170300327"></p>
+<h4 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h4><p>外部排序通常有两个步骤：</p>
+<p>1、Sorting Phase：将数据分成多个 chunks，每个 chunk 可以完全读入到 memory 中，在 memory 中排好序后再写回到 disk 中</p>
+<p>2、Merge Phase：将多个子文件合并成一个大文件</p>
+<ul>
+<li><p>2-Way External Merge Sort：这里的“2-way”即是指每次读入两页。</p>
+</li>
+<li><p>General External Merge Sort：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271947535.png" alt="image-20240327194734264"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271949041.png" alt="image-20240327194933847"></p>
+</li>
+</ul>
+<h4 id="Using-B-Tree-for-Sorting"><a href="#Using-B-Tree-for-Sorting" class="headerlink" title="Using B+Tree for Sorting"></a>Using B+Tree for Sorting</h4><p>注意包含聚簇和非聚簇两种情况。</p>
+<h3 id="2-4-2-Aggregations"><a href="#2-4-2-Aggregations" class="headerlink" title="2.4.2 Aggregations"></a>2.4.2 Aggregations</h3><h4 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271953093.png" alt="image-20240327195346706"></p>
+<p>但很多时候我们并不需要排好序的数据，如：</p>
+<ul>
+<li>Forming groups in GROUP BY</li>
+<li>Removing duplicates in DISTINCT</li>
+</ul>
+<p>在这样的场景下 hashing 是更好的选择，它能有效减少排序所需的额外工作。</p>
+<h4 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h4><p>利用一个临时 (ephemeral) 的 hash table 来记录必要的信息，即检查 hash table 中是否存在已经记录过的元素并作出相应操作：</p>
+<ul>
+<li>DISTINCT: Discard duplicate</li>
+<li>GROUP BY: Perform aggregate computation</li>
+</ul>
+<p>如果所有信息都能一次性读入内存，那事情就很简单了，但如若不然，我们就得变得更聪明。</p>
+<p>hashing aggregation 同样分成两步：</p>
+<ul>
+<li>Partition Phase: 将 tuples 根据 hash key 放入不同的 buckets<ul>
+<li>use a hash function h1 to split tuples into partitions on disk<ul>
+<li>all matches live in the same partition</li>
+<li>partitions are “spilled” to disk via output buffers</li>
+</ul>
+</li>
+<li>这里有个额外的假设，即每个 partition 能够被放到 memory 中</li>
+</ul>
+</li>
+<li>ReHash Phase: 在内存中针对每个 partition 利用 hash table 计算 aggregation 的结果</li>
+</ul>
+<p>如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000471.png" alt="image-20240327200043163"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000726.png" alt="image-20240327200052468"></p>
+<p>在 ReHash phase 中，存着 (GroupKey→RunningVal)(GroupKey→RunningVal) 的键值对，当我们需要向 hash table 中插入新的 tuple 时：</p>
+<ul>
+<li>如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以</li>
+<li>反之，则插入新的 GroupKey 到 RunningVal 的键值对</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272001082.png" alt="image-20240327200117774"></p>
 ]]></content>
       <categories>
         <category>Project</category>
@@ -977,6 +1443,190 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Project 2 (Spring 2023)</title>
+    <url>/2024/03/27/cmu15-445%20Project%202%20(Spring%202023)/</url>
+    <content><![CDATA[<p>Overview：</p>
+<blockquote>
+<p>In this programming project you will implement a <a href="https://en.wikipedia.org/wiki/B%2B_tree">B+Tree</a> index in your database system. <strong>A B+Tree is a balanced search tree in which the internal pages direct the search and leaf pages contain the actual data entries.</strong> The index provides fast data retrieval without needing to search every row in a database table, enabling rapid random lookups and efficient scans of ordered records. Your implementation will support thread-safe search, insertion, deletion (including splitting and merging nodes), and an iterator to support in-order leaf scans.</p>
+<p>在这个编程项目中，您将在数据库系统中实现B+树索引。B+树是一种平衡搜索树，其中internal pages指导搜索，leaf pages包含实际的数据项。索引提供了快速的数据检索，而不需要搜索数据库表中的每一行，支持快速随机查找和高效的有序记录扫描。你的实现将支持<strong>线程安全</strong>的搜索、插入、删除(包括节点拆分和合并)，以及一个支持按序叶扫描的迭代器。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>Project2的实现依赖于Project1的buffer pool和page guards。</p>
+<h1 id="Checkpoint-1-15-points"><a href="#Checkpoint-1-15-points" class="headerlink" title="Checkpoint #1 (15 points)"></a><strong>Checkpoint #1 (15 points)</strong></h1><h2 id="Task-1-B-Tree-Pages"><a href="#Task-1-B-Tree-Pages" class="headerlink" title="Task #1 - B+Tree Pages"></a>Task #1 - B+Tree Pages</h2><p>实现三个Page Classes去存储B+Tree的数据：</p>
+<ul>
+<li><p>B+Tree Page</p>
+<ul>
+<li>Base class，以供下面两个类继承。</li>
+</ul>
+</li>
+<li><p>B+Tree Internal Page</p>
+<ul>
+<li><strong>存储m个ordered keys和m+1个child pointers</strong>（即page_ids，指向其他的B+Tree Pages），表现为<code>key/page_id</code>pairs；</li>
+</ul>
+<blockquote>
+<p>Because the number of pointers does not equal the number of keys, the first key is set to be invalid, and lookups should always start with the second key.</p>
+</blockquote>
+<ul>
+<li>在任意时刻，internal page必须至少为<code>half full</code>。<ul>
+<li>删除时，两个<code>half full pages</code>可以合并，或<code>keys and pointers</code>重新分布来避免合并；</li>
+<li>插入时，一个<code>full pages</code>可以拆分成两个，或<code>keys and pointers</code>重新分布来避免拆分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>B+Tree Leaf Page</p>
+<ul>
+<li><strong>存储m个ordered keys和m个相对应的value。</strong>value需要被设置为<strong>64-bit record-id</strong>。</li>
+<li>其余设置和internal pages一致。</li>
+</ul>
+<blockquote>
+<p>即使叶子页和内部页包含相同类型的键，它们的值类型也可能不同。因此，max_size 也可能不同。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：</p>
+<p>1、每个 B+Tree 的叶子页&#x2F;内部页都与缓冲池获取的内存页的内容（即 data_ 部分）相对应；</p>
+<p>2、每次read&#x2F;write一个leaf&#x2F;internal page时：</p>
+<p>（1）从buffer pool中fetch该页；（page id）</p>
+<p>（2）reinterpret cast to leaf&#x2F;internal page；</p>
+<p>（3）读&#x2F;写完后Unpin该page。</p>
+<ul>
+<li><p>flexible array</p>
+<ul>
+<li><p>flexible array 必须是类中的最后一个成员，并且仅能有一个。在为对象分配内存时，flexible array 会自动填充，占用未被其他变量使用的内存。这样就可以确定自己的长度了。</p>
+</li>
+<li><p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例如有一个类 C：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="type">int</span> a; <span class="comment">// 4 byte</span></span><br><span class="line">    <span class="type">int</span> array[<span class="number">1</span>]; <span class="comment">// unknown size</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在初始化一个 C 的对象，并为其分配了 24 byte 的内存。a 占了 4 byte 内存</span></span><br><span class="line"><span class="comment">// 那么 array 会尝试填充剩下的内存，大小变为 5。</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="B-PLUS-TREE-INTERNAL-PAGE"><a href="#B-PLUS-TREE-INTERNAL-PAGE" class="headerlink" title="B_PLUS_TREE_INTERNAL_PAGE"></a><strong>B_PLUS_TREE_INTERNAL_PAGE</strong></h3><ul>
+<li><p>对于 Internal Page 其储存的节点数最大正好是 internal_max_size，可能被存满</p>
+<ul>
+<li>由于先插入会导致空间溢出，因此考虑单独开辟一块内存空间，在完成插入与分裂后释放。</li>
+</ul>
+</li>
+<li><p>要求第一个key为空的原因：在 internal page 中，n 个 key 可以将数轴划分为 n+1 个区域，也就对应着 n+1 个 value。</p>
+</li>
+<li><p>internal page 中的 key 并不代表实际上的索引值，仅仅是作为一个向导，引导需要插入&#x2F;删除&#x2F;查询的 key 找到这个 key 真正所在的 leaf page。</p>
+</li>
+<li><p>Header大小为24Byte：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">IndexPageType page_type_;   <span class="comment">// leaf or internal. 4 Byte</span></span><br><span class="line"><span class="type">lsn_t</span> lsn_  <span class="comment">// temporarily unused. 4 Byte</span></span><br><span class="line"><span class="type">int</span> size_;  <span class="comment">// tree page data size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">int</span> max_size_;  <span class="comment">// tree page data max size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> parent_page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="comment">// 24 Byte in total</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>internal page的KV对</strong>中：</p>
+<ul>
+<li>K-比较大小的索引；</li>
+<li>V-page_id，指向下一层的节点。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403291930057.png" alt="image-20240329193009583"></p>
+<h3 id="B-PLUS-TREE-LEAF-PAGE"><a href="#B-PLUS-TREE-LEAF-PAGE" class="headerlink" title="B_PLUS_TREE_LEAF_PAGE"></a><strong>B_PLUS_TREE_LEAF_PAGE</strong></h3><ul>
+<li>对于 Leaf Page 其储存的节点数最大永远是 leaf_max_size - 1，永远存不满、<ul>
+<li>对于Leaf Page，直接先插入再分裂；</li>
+</ul>
+</li>
+<li>Header大小为28Byte，多了一个成员变量 <code>next_page_id</code>。</li>
+<li><strong>leaf page的KV对</strong>中：<ul>
+<li>K-实际的索引；</li>
+<li>V-Record ID，用于识别表中的某一条数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Task-2a-B-Tree-Data-Structure-Insertion-Point-Search"><a href="#Task-2a-B-Tree-Data-Structure-Insertion-Point-Search" class="headerlink" title="Task #2a - B+Tree Data Structure (Insertion, Point Search)"></a>Task #2a - B+Tree Data Structure (Insertion, Point Search)</h2><ul>
+<li>目标：实现1）<code>insertion：Insert()</code>；2）<code>Search：Getvalue()</code></li>
+</ul>
+<blockquote>
+<p>index仅支持unique keys。</p>
+<p>如果插入会改变树的不变形，需要进行结点的拆分或keys的重组。</p>
+<p>若改变了root的page ID，必须更新<code>root_page_id</code>。为此，可以访问构造函数中给出的 <code>header_page_id_</code> 页面。然后，通过使用 <code>reinterpret cast</code>，可以将该页面解释为 <code>BPlusTreeHeaderPage</code>，并从这里更新root的page ID。此外，必须实现 <code>GetRootPageId</code>（目前默认返回 0）。</p>
+<p>推荐使用<code>FetchPageBasic</code>来访问页。</p>
+</blockquote>
+<ul>
+<li><p>对于取得的页进行操作：1）根据page_id取得guard；2）将其数据部分<code>data_</code>强制转换成对应的类型（reinterpret_cast&#x2F;As&#x2F;AsMut）。</p>
+  <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将内部存储的指针按照指定的类型进行类型转换</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">As</span><span class="params">()</span> -&gt; <span class="type">const</span> T * </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> guard_.<span class="built_in">As</span>&lt;T&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><em><strong>（under analyze）补充</strong></em></p>
+<h3 id="src-storage-page-b-plus-tree-internal-page-cpp"><a href="#src-storage-page-b-plus-tree-internal-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br><span class="line">// ==under analyze 2: lambda 表达式 &amp; [comparator]</span><br><span class="line">// ==under analyze 2: std::lower_bound &amp; std::prev</span><br></pre></td></tr></table></figure>
+
+<h3 id="src-storage-page-b-plus-tree-leaf-page-cpp"><a href="#src-storage-page-b-plus-tree-leaf-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br></pre></td></tr></table></figure>
+
+<h3 id="src-storage-index-b-plus-tree-cpp"><a href="#src-storage-index-b-plus-tree-cpp" class="headerlink" title="src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp"></a>src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze1: emplace_back()</span><br></pre></td></tr></table></figure>
+
+<h1 id="Checkpoint-2-85-points"><a href="#Checkpoint-2-85-points" class="headerlink" title="Checkpoint #2 (85 points)"></a><strong>Checkpoint #2 (85 points)</strong></h1><h2 id="Task-2b-B-Tree-Data-Structure-Deletion"><a href="#Task-2b-B-Tree-Data-Structure-Deletion" class="headerlink" title="Task #2b - B+Tree Data Structure (Deletion)"></a>Task #2b - B+Tree Data Structure (Deletion)</h2><h2 id="Task-3-Index-Iterator"><a href="#Task-3-Index-Iterator" class="headerlink" title="Task #3 - Index Iterator"></a>Task #3 - Index Iterator</h2><h2 id="Task-4-Concurrency-Control"><a href="#Task-4-Concurrency-Control" class="headerlink" title="Task #4 - Concurrency Control"></a>Task #4 - Concurrency Control</h2>]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<span id="more"></span>
+
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
+<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
+<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
+<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
+</li>
+<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
+</li>
+<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
+<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
+</ul>
+<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
+<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+</li>
+<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
+<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
+<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
+<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
+<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
+<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
+</blockquote>
+<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
+<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+<ol>
+<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
+<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+</ol>
+<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
+<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
+<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
+]]></content>
+      <categories>
+        <category>无从属类别</category>
+      </categories>
+  </entry>
+  <entry>
     <title>洛谷刷题</title>
     <url>/2024/03/15/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
     <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1090,75 +1740,12 @@
 <p><code>while(r-l&gt;=0.001)</code> 这个条件是用来控制二分法的精度，它的含义是在区间的长度小于等于0.001时停止循环。这里的0.001是一个预先设定的精度值，表示当根的范围缩小到小于等于0.001时，认为已经找到了一个满足要求的根。</p>
 <p>使用 <code>while(r-l&gt;=0.001)</code> 的原因是为了控制二分法的迭代次数，从而提高程序的效率和准确性。当根的范围缩小到足够小的时候，再继续迭代寻找根就没有必要了，因为已经达到了所需的精度要求。</p>
 <p>而如果使用 <code>while(l&lt;=r)</code> 作为条件，则无法直接控制迭代的精度。在这种情况下，循环会一直进行，直到区间的长度小于等于0时才停止，这可能会导致不必要的迭代次数，影响程序的效率。因此，使用 <code>while(r-l&gt;=0.001)</code> 能够更好地控制迭代的精度，从而提高程序的性能。</p>
+<h1 id="2-搜索算法"><a href="#2-搜索算法" class="headerlink" title="2 搜索算法"></a>2 搜索算法</h1><h2 id="2-1-深度搜索DFS"><a href="#2-1-深度搜索DFS" class="headerlink" title="2.1 深度搜索DFS"></a>2.1 深度搜索DFS</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 判断是否满足终止搜索条件</span></span><br><span class="line">  <span class="keyword">if</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 进行相应操作</span></span><br><span class="line">    <span class="keyword">return</span>;  <span class="comment">// 回溯</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历所有可能的情况</span></span><br><span class="line">  <span class="keyword">for</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 标记当前状态，或执行当前操作</span></span><br><span class="line">    <span class="built_in">dfs</span>(...);  <span class="comment">// dfs搜索</span></span><br><span class="line">    <span class="comment">// 回溯状态</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="P1605-迷宫"><a href="#P1605-迷宫" class="headerlink" title="P1605 迷宫"></a>P1605 迷宫</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251029500.png" alt="image-20240325102955228"></p>
 ]]></content>
       <categories>
         <category>算法</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<span id="more"></span>
-
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
-<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
-<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
-<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
-</li>
-<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
-</li>
-<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
-<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
-</ul>
-<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
-<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
-</li>
-<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
-<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
-<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
-<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
-<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
-<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
-</blockquote>
-<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
-<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
-<ol>
-<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
-<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
-</ol>
-<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
-<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
-<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
-]]></content>
-      <categories>
-        <category>无从属类别</category>
       </categories>
   </entry>
 </search>
