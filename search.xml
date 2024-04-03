@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Ch2 信息的表示和处理</title>
-    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
+    <title>Ch10 系统级I/O</title>
+    <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
+    <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -30,9 +24,15 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch10 系统级I/O</title>
-    <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
-    <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
+    <title>Ch2 信息的表示和处理</title>
+    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -51,6 +51,179 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126892.png" alt="CSAPP Ch1-Ch3_11"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126616.png" alt="CSAPP Ch1-Ch3_12"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126789.png" alt="CSAPP Ch1-Ch3_13"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch6 存储器层次结构</title>
+    <url>/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><span id="more"></span>
+
+<h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
+<ul>
+<li><p>静态RAM（SRAM）</p>
+<ul>
+<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
+</ul>
+</li>
+<li><p>动态RAM（DRAM）</p>
+<ul>
+<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
+</li>
+<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
+</li>
+<li><p>举例：</p>
+<ul>
+<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
+<li>8：每个超单元存储8比特数据</li>
+<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
+</li>
+<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
+
+<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
+
+<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
+
+<p>磁盘访问数据花费时间：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
+
+<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
+<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
+<ul>
+<li><p>闪存芯片（falsh chip）</p>
+<ul>
+<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
+</li>
+<li><p>包含读、写和擦除三个操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
+<li>时间局部性<ul>
+<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
+</ul>
+</li>
+<li>空间局部性<ul>
+<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
+<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
+<ul>
+<li><p>缓存命中（cache Hit）</p>
+<ul>
+<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
+<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
+<li>步骤分三步：<ul>
+<li>set selection（组选择）</li>
+<li>line matching（行匹配）</li>
+<li>word extraction（字抽取）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内部结构</p>
+<ul>
+<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
+</li>
+<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
+</li>
+<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
+<ul>
+<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
+<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
+<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
+<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
+</ul>
+</li>
+<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
+</li>
+<li><p>Issues With Writes</p>
+<ul>
+<li>写命中（Write Hit）<ul>
+<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
+<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
+</ul>
+</li>
+<li>写不命中（Write Miss）<ul>
+<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
+<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
+<li><p>直接映射：每个Set只包含1行cache line</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
+</li>
+<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
+<ul>
+<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
+</li>
+<li><p><strong>s2、行匹配</strong>：</p>
+<ul>
+<li>1、valid是否为1？</li>
+<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
+</ul>
+</li>
+<li><p><strong>s3、字抽取</strong></p>
+<ul>
+<li>若一致，根据Block offset找到确切的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
+
+<ul>
+<li><p>举例说明：假设有一个cache如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
+
+<ul>
+<li>当地址是4位时，整个地址空间用编号0-15表示</li>
+<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
+<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
+</li>
+<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
+</li>
+</ul>
+<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
+<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
+</li>
+<li><p>全相联cache只有一个set</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
+</ul>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -344,179 +517,6 @@
 <ul>
 <li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
 <li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch6 存储器层次结构</title>
-    <url>/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><span id="more"></span>
-
-<h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
-<ul>
-<li><p>静态RAM（SRAM）</p>
-<ul>
-<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
-</ul>
-</li>
-<li><p>动态RAM（DRAM）</p>
-<ul>
-<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
-</li>
-<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
-</li>
-<li><p>举例：</p>
-<ul>
-<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
-<li>8：每个超单元存储8比特数据</li>
-<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
-</li>
-<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
-
-<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
-
-<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
-
-<p>磁盘访问数据花费时间：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
-
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
-
-<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
-<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
-<ul>
-<li><p>闪存芯片（falsh chip）</p>
-<ul>
-<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
-</li>
-<li><p>包含读、写和擦除三个操作。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
-<li>时间局部性<ul>
-<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
-</ul>
-</li>
-<li>空间局部性<ul>
-<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
-</ul>
-</li>
-</ul>
-<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
-<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
-<ul>
-<li><p>缓存命中（cache Hit）</p>
-<ul>
-<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
-<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
-<li>步骤分三步：<ul>
-<li>set selection（组选择）</li>
-<li>line matching（行匹配）</li>
-<li>word extraction（字抽取）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>内部结构</p>
-<ul>
-<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
-</li>
-<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
-</li>
-<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
-<ul>
-<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
-<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
-<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
-<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
-</ul>
-</li>
-<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
-</li>
-<li><p>Issues With Writes</p>
-<ul>
-<li>写命中（Write Hit）<ul>
-<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
-<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
-</ul>
-</li>
-<li>写不命中（Write Miss）<ul>
-<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
-<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
-<li><p>直接映射：每个Set只包含1行cache line</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
-</li>
-<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
-<ul>
-<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
-</li>
-<li><p><strong>s2、行匹配</strong>：</p>
-<ul>
-<li>1、valid是否为1？</li>
-<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
-</ul>
-</li>
-<li><p><strong>s3、字抽取</strong></p>
-<ul>
-<li>若一致，根据Block offset找到确切的地址</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
-
-<ul>
-<li><p>举例说明：假设有一个cache如下图所示：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
-
-<ul>
-<li>当地址是4位时，整个地址空间用编号0-15表示</li>
-<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
-<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
-</li>
-<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
-</li>
-</ul>
-<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
-<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
-</li>
-<li><p>全相联cache只有一个set</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
 </ul>
 ]]></content>
       <categories>
@@ -941,110 +941,116 @@
 
 <p>计算机系统三大件：CPU&#x2F;内存&#x2F;Disk</p>
 <h2 id="1、虚拟内存"><a href="#1、虚拟内存" class="headerlink" title="1、虚拟内存"></a>1、虚拟内存</h2><p>“虚拟”这两个字究竟指的是什么？</p>
+<h3 id="（1）两种寻址方法"><a href="#（1）两种寻址方法" class="headerlink" title="（1）两种寻址方法"></a>（1）两种寻址方法</h3><ul>
+<li><p>物理地址</p>
+<ul>
+<li><p>将内存看作一个非常大的数组，将地址看作下标。</p>
+</li>
+<li><p>CPU访问时通过总线将物理地址发给内存控制器，取出具体的数据并返回给CPU。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032355663.png" alt="image-20240403235534488" style="zoom:50%;" /></li>
+</ul>
+</li>
+<li><p>虚拟寻址</p>
+<ul>
+<li><p>在CPU和内存中加入MMU（Memory Management Unit），通过MMU将物理地址转换为虚拟地址</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032355710.png" alt="image-20240403235558629"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）虚拟内存"><a href="#（2）虚拟内存" class="headerlink" title="（2）虚拟内存"></a>（2）虚拟内存</h3><ul>
+<li><p><strong>地址空间</strong></p>
+<ul>
+<li><p>虚拟地址空间：用于存放进程运行时所需的代码、数据和堆栈等信息</p>
+</li>
+<li><p>如下图所示，<strong>8位</strong>的虚拟地址位数可以表示<strong>2^8个</strong>虚拟地址</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040006809.png" alt="image-20240404000647696"></p>
+</li>
+<li><p>物理地址空间</p>
+</li>
+</ul>
+</li>
+<li><p>CPU-Cache-内存-Disk</p>
+</li>
+<li><p>如下图所示的Virtual Pages，共N个字节，每个字节成为一个页（Page），每个页约为4KB-2MB。<strong>页是内存和磁盘间数据交换的单位。在虚拟内存中，数据通常被分割成称为页面（Page）或者页面帧（Page Frame）的固定大小的块，这些页面可以存储在物理内存中，也可以存储在磁盘上。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040017251.png" alt="image-20240404001727055"></p>
+</li>
+<li><p>虚拟内存中页的状态：</p>
+<ul>
+<li><p><code>Unallocated</code>：未分配数据，不占用磁盘空间；当调用<code>malloc()</code>函数时会用到这些未分配的页</p>
+<blockquote>
+<p><strong>malloc()分配的内存在堆上，为什么会分配一个虚拟页呢？</strong></p>
+</blockquote>
+</li>
+<li><p><code>Cached</code>：该页的数据已经缓存到物理内存中，访问时CPU直接访问内存即可</p>
+</li>
+<li><p><code>UnCached</code>：已分配数据，但仍未缓存到物理内存中</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040020594.png" alt="image-20240404002021516"></p>
+</li>
+<li><p><strong>区分SRAM缓存和DRAM缓存</strong></p>
+<ul>
+<li>其中DRAM执行的是<strong>写回策略</strong>而非写穿透策略</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040022266.png" alt="image-20240404002223222" style="zoom:50%;" /></li>
+</ul>
+<h3 id="（3）页表"><a href="#（3）页表" class="headerlink" title="（3）页表"></a>（3）页表</h3><ul>
+<li><p><strong>页表中的每一项页表项</strong>与<strong>虚拟内存中的每一页</strong>是一一对应的</p>
+</li>
+<li><p>MMU使用页表做虚拟地址到物理地址的映射</p>
+</li>
+<li><p><strong>页命中</strong>：要访问的目的数据页已经缓存到物理内存中</p>
+<ul>
+<li>若未命中，会触发缺页故障&#x2F;缺页异常，异常处理程序将页加载到物理内存中</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040029732.png" alt="image-20240404002955643" style="zoom:67%;" /></li>
+</ul>
+<h2 id="2、地址翻译"><a href="#2、地址翻译" class="headerlink" title="2、地址翻译"></a>2、地址翻译</h2><p><strong>地址翻译即为：将虚拟地址映射到真实物理地址</strong></p>
+<ul>
+<li>虚拟地址（VA） &#x3D; 虚拟页号（VPN）+ 虚拟页偏移量（VPO）<ul>
+<li>虚拟页号：虚拟地址中用来索引页表的部分，<strong>表示了虚拟页在页表中的索引位置，用于确定对应的物理页框</strong></li>
+<li>虚拟页偏移量：虚拟地址中用于表示页内偏移的部分，<strong>表示了虚拟页内的地址偏移量，用于在物理页框中定位具体的数据</strong>；每个页通常为<strong>4KB(&#x3D;4096Byte&#x3D;2^12，即12位)</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040038957.png" alt="image-20240404003849872"></p>
+<ul>
+<li><p><strong>页命中的情况</strong></p>
+<ul>
+<li>VA：虚拟地址 &#x2F; PA：物理地址</li>
+<li>PTEA：页表项地址 &#x2F; PTE：页表项</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040053564.png" alt="image-20240404005347498"></p>
+</li>
+<li><p><strong>缺页的情况</strong></p>
+<ul>
+<li>牺牲页（victim page）需要写回磁盘</li>
+<li><strong>注意步骤7</strong>：<ul>
+<li>步骤7在此处是因为当发现异常并处理完成后，会返回到原来引发异常的那条指令</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040054592.png" alt="image-20240404005427513"></p>
+</li>
+<li><p><strong>TLB&#x2F;Translation Lookaside Buffer</strong></p>
+<ul>
+<li>高速缓存，用于存储虚拟地址到物理地址的转换信息。它位于CPU和内存之间，用于加速虚拟地址到物理地址的转换过程。</li>
+<li>虚拟页号(VPN) &#x3D; TLBT(TLB Tag) + TLBI(TLB Index)</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040102671.png" alt="image-20240404010233622" style="zoom: 67%;" />
+</li>
+<li><p><strong>TLB Hit</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040106432.png" alt="image-20240404010601364"></p>
+</li>
+<li><p><strong>TLB Miss</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040106189.png" alt="image-20240404010620118"></p>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>计算机基础</category>
         <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
-    <url>/2024/02/28/cmu15-445%20Homework1_SQL/</url>
-    <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> s.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(<span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> o.ShippedDate <span class="operator">&gt;</span> o.RequiredDate <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="operator">*</span> <span class="number">100.0</span> <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>), <span class="number">2</span>) <span class="keyword">AS</span> Percentage</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Shipper <span class="keyword">as</span> s</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] <span class="keyword">as</span> o <span class="keyword">ON</span> s.Id <span class="operator">=</span> o.ShipVia</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> s.CompanyName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Percentage <span class="keyword">DESC</span>; </span><br><span class="line"></span><br><span class="line">United Package<span class="operator">|</span><span class="number">23.44</span></span><br><span class="line">Speedy Express<span class="operator">|</span><span class="number">23.46</span></span><br><span class="line">Federal Shipping<span class="operator">|</span><span class="number">23.61</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> a.CategoryName,</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">COUNT</span>(a.Id) <span class="keyword">AS</span> TotalCategoryCount,</span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(((<span class="keyword">SELECT</span> <span class="built_in">SUM</span>(UnitPrice) <span class="keyword">FROM</span> Category b, Product c <span class="keyword">WHERE</span> b.Id <span class="operator">=</span> c.CategoryId <span class="keyword">AND</span> b.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) <span class="operator">/</span> ((<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> Category d, Product e <span class="keyword">WHERE</span> d.Id <span class="operator">=</span> e.CategoryId <span class="keyword">AND</span> d.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) , <span class="number">2</span>),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MIN</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MAX</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">SUM</span>(f.UnitsOnOrder)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Category a, Product f</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> f.CategoryId</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.CategoryName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> a.Id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">Beverages<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">37.98</span><span class="operator">|</span><span class="number">4.5</span><span class="operator">|</span><span class="number">263.5</span><span class="operator">|</span><span class="number">60</span></span><br><span class="line">Condiments<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">23.06</span><span class="operator">|</span><span class="number">10</span><span class="operator">|</span><span class="number">43.9</span><span class="operator">|</span><span class="number">170</span></span><br><span class="line">Confections<span class="operator">|</span><span class="number">13</span><span class="operator">|</span><span class="number">25.16</span><span class="operator">|</span><span class="number">9.2</span><span class="operator">|</span><span class="number">81</span><span class="operator">|</span><span class="number">180</span></span><br><span class="line">Seafood<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">20.68</span><span class="operator">|</span><span class="number">6</span><span class="operator">|</span><span class="number">62.5</span><span class="operator">|</span><span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> b.CategoryName <span class="operator">=</span> a.CategoryName 这个条件确保了在计算每个类别的商品价格总和时，只考虑了与当前类别相关的商品</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 这是为了满足 <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span> 中的条件</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">*</span><span class="number">1.0</span> 的目的是将整数值转换为浮点数。这是为了确保在计算平均商品价格时，得到的结果是一个浮点数，而不是整数</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q6"><a href="#Q6" class="headerlink" title="Q6*"></a>Q6*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">SELECT</span> p.ProductName, </span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  c1.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> c1.ContactName </span><br><span class="line">  <span class="keyword">FROM</span> Customer c1 </span><br><span class="line">  <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o1 <span class="keyword">ON</span> o1.CustomerId <span class="operator">=</span> c1.Id</span><br><span class="line">  <span class="keyword">JOIN</span> OrderDetail od1 <span class="keyword">ON</span> o1.Id <span class="operator">=</span> od1.OrderID</span><br><span class="line">  <span class="keyword">WHERE</span> od1.ProductId <span class="operator">=</span> p.Id</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> o1.OrderDate <span class="keyword">ASC</span> LIMIT <span class="number">1</span>) <span class="keyword">AS</span> CustomerInfo</span><br><span class="line"><span class="keyword">FROM</span> Product p</span><br><span class="line"><span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> p.Id <span class="operator">=</span> od.ProductId</span><br><span class="line"><span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line"><span class="keyword">JOIN</span> CUSTOMER c <span class="keyword">ON</span> o.CustomerID <span class="operator">=</span> c.Id</span><br><span class="line"><span class="keyword">WHERE</span> p.Discontinued <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.ProductName;</span><br><span class="line"></span><br><span class="line">Alice Mutton<span class="operator">|</span>Consolidated Holdings<span class="operator">|</span>Elizabeth Brown</span><br><span class="line">Chef Anton<span class="string">&#x27;s Gumbo Mix|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Guaraná Fantástica|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Mishi Kobe Niku|Old World Delicatessen|Rene Phillips</span></span><br><span class="line"><span class="string">Perth Pasties|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Rössle Sauerkraut|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Singaporean Hokkien Fried Mee|Vins et alcools Chevalier|Paul Henriot</span></span><br><span class="line"><span class="string">Thüringer Rostbratwurst|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// c1		==&gt; FROM Customer c1 </span></span><br><span class="line"><span class="string">// c1-&gt;o1	==&gt; JOIN [Order] o1 ON o1.CustomerId = c1.Id</span></span><br><span class="line"><span class="string">// o1-&gt;od1	==&gt; JOIN OrderDetail od1 ON o1.Id = od1.OrderID</span></span><br><span class="line"><span class="string">// od1-&gt;p	==&gt; (将子查询和外部主查询联系起来)WHERE od1.ProductId = p.Id</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Q7"><a href="#Q7" class="headerlink" title="Q7*"></a>Q7*</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id, Orderdate, pre_OrderDate, ROUND(julianday(OrderDate)<span class="operator">-</span>julianday(pre_orderdate) , <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> Id, OrderDate, <span class="built_in">LAG</span>(Orderdate, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> CustomerId <span class="keyword">ORDER</span> <span class="keyword">BY</span> OrderDate <span class="keyword">ASC</span>) pre_OrderDate</span><br><span class="line">      <span class="keyword">FROM</span> [<span class="keyword">Order</span>]</span><br><span class="line">      <span class="keyword">WHERE</span> CustomerId <span class="operator">=</span> <span class="string">&#x27;BLONP&#x27;</span></span><br><span class="line">      LIMIT <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">16766</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0</span><span class="operator">|</span><span class="number">2456131.47</span></span><br><span class="line"><span class="number">10265</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2.03</span></span><br><span class="line"><span class="number">12594</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">22.52</span></span><br><span class="line"><span class="number">20249</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.18</span></span><br><span class="line"><span class="number">20882</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2.1</span></span><br><span class="line"><span class="number">18443</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">9.43</span></span><br><span class="line"><span class="number">10297</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">6.77</span></span><br><span class="line"><span class="number">11694</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">13.02</span></span><br><span class="line"><span class="number">25613</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">1.92</span></span><br><span class="line"><span class="number">17361</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-19</span> <span class="number">12</span>:<span class="number">13</span>:<span class="number">21</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.57</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">SELECT</span> julianday(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">Result</span>: <span class="number">2458220.59892027</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 返回从格林尼治时间的公元前 <span class="number">4714</span> 年 <span class="number">11</span> 月 <span class="number">24</span> 日正午算起的天数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">LAG</span>(expr, <span class="keyword">offset</span>, <span class="keyword">default</span>) <span class="keyword">OVER</span> (partition_by_clause order_by_clause)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 计算当前行向前数若干行的值，该函数专门用作窗口函数(<span class="keyword">window</span> functions)，<span class="keyword">partition</span> <span class="keyword">by</span>功能类似<span class="keyword">group</span> <span class="keyword">by</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q8"><a href="#Q8" class="headerlink" title="Q8*"></a>Q8*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">WITH</span> expenditures <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span> </span><br><span class="line">   ...<span class="operator">&gt;</span>                        IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        o.CustomerId,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        ROUND((<span class="built_in">SUM</span>(od.Quantity <span class="operator">*</span> od.UnitPrice)) , <span class="number">2</span>) <span class="keyword">AS</span> totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> [<span class="keyword">Order</span>] o</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.CustomerId),</span><br><span class="line">   ...<span class="operator">&gt;</span>      quartiles <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="operator">*</span>,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> expenditures)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CompanyName, CustomerId, totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> quartiles</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ExpenditureQuartile <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">MISSING_NAME<span class="operator">|</span>DUMO<span class="operator">|</span><span class="number">1615.9</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>OCEA<span class="operator">|</span><span class="number">3460.2</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>ANTO<span class="operator">|</span><span class="number">7515.35</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>QUEE<span class="operator">|</span><span class="number">30226.1</span></span><br><span class="line">Trail<span class="string">&#x27;s Head Gourmet Provisioners|TRAIH|3874502.02</span></span><br><span class="line"><span class="string">Blondesddsl père et fils|BLONP|3879728.69</span></span><br><span class="line"><span class="string">Around the Horn|AROUT|4395636.28</span></span><br><span class="line"><span class="string">Hungry Owl All-Night Grocers|HUNGO|4431457.1</span></span><br><span class="line"><span class="string">Bon app|BONAP|4485708.49</span></span><br><span class="line"><span class="string">Bólido Comidas preparadas|BOLID|4520121.88</span></span><br><span class="line"><span class="string">Galería del gastrónomo|GALED|4533089.9</span></span><br><span class="line"><span class="string">FISSA Fabrica Inter. Salchichas S.A.|FISSA|4554591.02</span></span><br><span class="line"><span class="string">Maison Dewey|MAISD|4555931.37</span></span><br><span class="line"><span class="string">Cactus Comidas para llevar|CACTU|4559046.87</span></span><br><span class="line"><span class="string">Spécialités du monde|SPECD|4571764.89</span></span><br><span class="line"><span class="string">Magazzini Alimentari Riuniti|MAGAA|4572382.35</span></span><br><span class="line"><span class="string">Toms Spezialitäten|TOMSP|4628403.36</span></span><br><span class="line"><span class="string">Split Rail Beer &amp; Ale|SPLIR|4641383.53</span></span><br><span class="line"><span class="string">Santé Gourmet|SANTG|4647668.15</span></span><br><span class="line"><span class="string">Morgenstern Gesundkost|MORGK|4676234.2</span></span><br><span class="line"><span class="string">White Clover Markets|WHITC|4681531.74</span></span><br><span class="line"><span class="string">La corne d&#x27;</span>abondance<span class="operator">|</span>LACOR<span class="operator">|</span><span class="number">4724494.22</span></span><br><span class="line">Victuailles en stock<span class="operator">|</span>VICTE<span class="operator">|</span><span class="number">4726476.33</span></span><br><span class="line">Lonesome Pine Restaurant<span class="operator">|</span>LONEP<span class="operator">|</span><span class="number">4735780.66</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 处理<span class="keyword">NULL</span>值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 这种连接类型包含左表的所有行，以及右表中满足连接条件的行。如果右表中没有匹配的行，那么结果集中将包含 <span class="keyword">NULL</span> 值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 它将结果集划分为指定数量的桶（buckets），并为每个桶分配一个标识号（bucket number）</span><br></pre></td></tr></table></figure>
-<p>现在，假设有以下支出数据：</p>
-<table>
-<thead>
-<tr>
-<th>CompanyName</th>
-<th>CustomerId</th>
-<th>totalcost</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Company1</td>
-<td>1</td>
-<td>100</td>
-</tr>
-<tr>
-<td>Company2</td>
-<td>2</td>
-<td>150</td>
-</tr>
-<tr>
-<td>Company3</td>
-<td>3</td>
-<td>200</td>
-</tr>
-<tr>
-<td>Company4</td>
-<td>4</td>
-<td>250</td>
-</tr>
-<tr>
-<td>Company5</td>
-<td>5</td>
-<td>300</td>
-</tr>
-</tbody></table>
-<p><code>NTILE(4) OVER (ORDER BY totalcost ASC) AS ExpenditureQuartile</code>将分配 ExpenditureQuartile 值，结果如下：</p>
-<table>
-<thead>
-<tr>
-<th>CompanyName</th>
-<th>CustomerId</th>
-<th>totalcost</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Company1</td>
-<td>1</td>
-<td>100</td>
-</tr>
-<tr>
-<td>Company2</td>
-<td>2</td>
-<td>150</td>
-</tr>
-<tr>
-<td>Company3</td>
-<td>3</td>
-<td>200</td>
-</tr>
-<tr>
-<td>Company4</td>
-<td>4</td>
-<td>250</td>
-</tr>
-<tr>
-<td>Company5</td>
-<td>5</td>
-<td>300</td>
-</tr>
-</tbody></table>
-<h1 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> r.RegionDescription, e.FirstName, e.LastName, <span class="built_in">MAX</span>(e.BirthDate)</span><br><span class="line"><span class="keyword">FROM</span> Region r</span><br><span class="line"><span class="keyword">JOIN</span> Territory t <span class="keyword">ON</span> t.RegionId <span class="operator">=</span> r.Id</span><br><span class="line"><span class="keyword">JOIN</span> EmployeeTerritory et <span class="keyword">ON</span> et.TerritoryId <span class="operator">=</span> t.Id</span><br><span class="line"><span class="keyword">JOIN</span> Employee e <span class="keyword">On</span> e.Id <span class="operator">=</span> et.EmployeeId</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.RegionId;</span><br><span class="line"></span><br><span class="line">Eastern<span class="operator">|</span>Steven<span class="operator">|</span>Buchanan<span class="operator">|</span><span class="number">1987</span><span class="number">-03</span><span class="number">-04</span></span><br><span class="line">Western<span class="operator">|</span>Michael<span class="operator">|</span>Suyama<span class="operator">|</span><span class="number">1995</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line">Northern<span class="operator">|</span>Anne<span class="operator">|</span>Dodsworth<span class="operator">|</span><span class="number">1998</span><span class="number">-01</span><span class="number">-27</span></span><br><span class="line">Southern<span class="operator">|</span>Janet<span class="operator">|</span>Leverling<span class="operator">|</span><span class="number">1995</span><span class="number">-08</span><span class="number">-30</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">MAX</span>(e.BirthDate)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WITH</span> temptable <span class="keyword">AS</span>(</span><br><span class="line">                  <span class="keyword">SELECT</span> </span><br><span class="line">                    d.ProductName myproductname,</span><br><span class="line">                    strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span></span><br><span class="line">                  <span class="keyword">FROM</span> Customer a, [<span class="keyword">Order</span>] b, OrderDetail c, Product d</span><br><span class="line">                  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId </span><br><span class="line">                    <span class="keyword">AND</span> b.Id <span class="operator">=</span> c.OrderId </span><br><span class="line">                    <span class="keyword">AND</span> c.ProductId <span class="operator">=</span> d.Id </span><br><span class="line">                    <span class="keyword">AND</span> a.CompanyName <span class="operator">=</span> <span class="string">&#x27;Queen Cozinha&#x27;</span> </span><br><span class="line">                    <span class="keyword">AND</span> <span class="type">date</span> <span class="operator">=</span> <span class="string">&#x27;2014-12-25&#x27;</span></span><br><span class="line">                  <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.Id <span class="keyword">ASC</span>)</span><br><span class="line"><span class="keyword">SELECT</span> group_concat(myproductname)</span><br><span class="line"><span class="keyword">FROM</span> temptable;</span><br><span class="line"></span><br><span class="line">Mishi Kobe Niku,NuNuCa Nuß<span class="operator">-</span>Nougat<span class="operator">-</span>Creme,Schoggi Schokolade,Mascarpone Fabioli,Sasquatch Ale,Boston Crab Meat,Manjimup Dried Apples,Longlife Tofu,Lakkalikööri</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span>  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 将日期和时间格式化为字符串，将原始日期格式转换为 &quot;年-月-日&quot; 的字符串格式</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
       </categories>
   </entry>
   <entry>
@@ -1110,114 +1116,6 @@
 ]]></content>
       <categories>
         <category>深度学习算法</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cmu15-445 Project 0 (Spring 2023)</title>
-    <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
-    <content><![CDATA[<h1 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h1><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
-<p><code>COW</code>即代表，对<code>Trie</code>的添加&#x2F;删除操作不会在原<code>Trie</code>上进行，而是对原<code>Trie</code>进行拷贝后再进行修改。</p>
-<span id="more"></span>
-
-<p><code>trie.h</code>中共有三个类：</p>
-<ul>
-<li>​	<code>TrieNode</code>：表示Trie树不包含value的普通节点。<ul>
-<li>组成：<ul>
-<li><code>bool is_value_node_&#123;false&#125;;</code></li>
-<li><code>std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children_;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>TrieNodeWithValue</code>：<code>Trie</code>树包含<code>value</code>的节点，由<code>TrieNode</code>派生而来。<ul>
-<li>新增组成：<ul>
-<li><code>std::shared_ptr&lt;T&gt; value_;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Trie</code>：<code>Trie</code> 树的本体，<ul>
-<li>组成：<ul>
-<li><code>std::shared_ptr&lt;const TrieNode&gt; root_&#123;nullptr&#125;;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>注意：</p>
-<p>1、一个 <code>shared_ptr&lt;const TrieNode&gt;</code> 智能指针（<code>root</code>）指向一个 <code>TrieNode</code> 节点，而 <code>TrieNode</code> 节点中的 <code>map</code> 则含有多个可以指向下一个 <code>TrieNode</code> 节点的智能指针。也就是说，当 <code>TrieNode</code> 调用 <code>Clone()</code> 时，会复制一份<strong>当前节点</strong>并返回。由于返回的是 <code>unique_ptr</code>，因此我们只能用 <code>shared_ptr</code> 的构造函数来接收，然后再对 <code>shared_ptr</code> 进行赋值，类似于：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;TrieNode&gt; new_root = std::<span class="built_in">shared_ptr</span>&lt;TrieNode&gt;(<span class="keyword">this</span>-&gt;root_-&gt;<span class="built_in">Clone</span>());</span><br></pre></td></tr></table></figure>
-
-<h2 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h2><p>（1）考虑<code>key</code>为空的边界情况，此时看<code>root</code>是否是一个<code>TrieNodeWithVal</code>节点；</p>
-<p>（2）考虑<code>root</code>为空的边界情况，此时直接返回一个<code>nullptr</code>；</p>
-<p>（3）若非上述两种边界情况，则通过遍历进行<code>Get</code>操作：</p>
-<ul>
-<li>定义一个<code>cur</code>指向当前根节点，注意<code>root</code>的类型是<code>std::shared_ptr&lt;const bustub::TrieNode&gt;</code></li>
-<li>对<code>key</code>的所有字符进行遍历，<code>cur</code>不断更新迭代指向<code>cur-&gt;children-&gt;second</code>，直到找到<code>key</code>的键尾为止；</li>
-<li>判断此时的<code>cur</code>是否是一个<code>TrieNodeWithVal</code>节点</li>
-</ul>
-<p>注意：返回的<code>value</code>——<code>std::shared_ptr&lt;T&gt; value_</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> *twnv = <span class="keyword">dynamic_cast</span>&lt;<span class="type">const</span> bustub::TrieNodeWithValue&lt;T&gt; *&gt;(root_.<span class="built_in">get</span>());</span><br><span class="line"><span class="comment">// const确保twnv是一个指向常量对象的指针，最好保留以明确这种限制</span></span><br><span class="line"><span class="comment">// dynamic_cast的目的是为了检查在运行时root_所指向的对象是否实际上是TrieNodeWithValue&lt;T&gt;或其派生类型</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h2><p><code>Put</code>操作最需要注意的点在于：在插入时，已有的节点执行<code>Clone()</code>操作，新建的节点执行<code>make_shared</code>操作，如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
-<p>逻辑如下：</p>
-<p>（1）考虑<code>key</code>为空的边界情况，此时在<code>root</code>处插入</p>
-<ul>
-<li>创建新的<code>shared_ptr</code>指针指向<code>value</code>和为空的<code>new_root</code></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>判断原<code>root</code>是否有子节点，处理后返回新的<code>Trie</code>的根结点<code>new_root</code></p>
-<ul>
-<li><p>若无，则直接对<code>new_root</code>进行修改；</p>
-</li>
-<li><p>若有，则构造一个新节点指向<code>root</code>的<code>children</code>，如图</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
-</li>
-</ul>
-</li>
-</ul>
-<p>（2）若<code>key</code>非空</p>
-<ul>
-<li><p>首先拷贝根节点<code>root</code></p>
-<ul>
-<li>若<code>root</code>空，直接新建空的<code>Trie</code></li>
-<li>若<code>root</code>非空，调用<code>Clone()</code>操作，拷贝<code>root</code>的已有<code>children</code>给<code>new_root</code></li>
-</ul>
-</li>
-<li><p><code>Put1()</code>函数递归插入</p>
-<ul>
-<li><p>遍历<code>new_root</code>的<code>children</code>，找到是否有哪一个<code>children</code>的<code>key</code>等于传入<code>key</code>的<code>key[0]</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>判断完<code>key[0]</code>后，对<code>key</code>剩余的值进行判断<ul>
-<li>若到达<code>key</code>的键尾，新建一个节点并覆盖掉<code>pair</code>的<code>second</code></li>
-<li>若未到达键尾，拷贝已有节点、递归调用<code>Put1</code>写入<code>key</code>、将写入完成后的节点重新拷贝给<code>pair.second</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>若未找到匹配的<code>key[0]</code>，则直接新建节点插入。注意判断<code>key</code>的长度以决定是否需要递归操作。</p>
-</li>
-</ul>
-</li>
-<li><p>返回新的<code>Trie</code></p>
-</li>
-</ul>
-<p>注意：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;bustub::TrieNode&gt; ptr = pair.second-&gt;<span class="built_in">Clone</span>();</span><br><span class="line"><span class="comment">// Clone()返回的对象是std::unique_ptr&lt;TrieNode&gt;类型，为了确保ptr能够在程序的其他地方被共享所有权，因此</span></span><br><span class="line"><span class="comment">// 用std::shared_ptr&lt;bustub::TrieNode&gt;接收</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h2><p><code>Remove</code>的思想和<code>Put</code>一致，不再赘述。</p>
-<h1 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h1><p>注意加锁的时机即可。</p>
-<p><code>read</code>操作只需要在获取根节点时加锁。</p>
-<p><code>write</code>操作则需要全程添加写锁，从而保证只有一名<code>writer</code>。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
       </categories>
   </entry>
   <entry>
@@ -1588,6 +1486,106 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
+    <url>/2024/02/28/cmu15-445%20Homework1_SQL/</url>
+    <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> s.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(<span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> o.ShippedDate <span class="operator">&gt;</span> o.RequiredDate <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="operator">*</span> <span class="number">100.0</span> <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>), <span class="number">2</span>) <span class="keyword">AS</span> Percentage</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Shipper <span class="keyword">as</span> s</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] <span class="keyword">as</span> o <span class="keyword">ON</span> s.Id <span class="operator">=</span> o.ShipVia</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> s.CompanyName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Percentage <span class="keyword">DESC</span>; </span><br><span class="line"></span><br><span class="line">United Package<span class="operator">|</span><span class="number">23.44</span></span><br><span class="line">Speedy Express<span class="operator">|</span><span class="number">23.46</span></span><br><span class="line">Federal Shipping<span class="operator">|</span><span class="number">23.61</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> a.CategoryName,</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">COUNT</span>(a.Id) <span class="keyword">AS</span> TotalCategoryCount,</span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(((<span class="keyword">SELECT</span> <span class="built_in">SUM</span>(UnitPrice) <span class="keyword">FROM</span> Category b, Product c <span class="keyword">WHERE</span> b.Id <span class="operator">=</span> c.CategoryId <span class="keyword">AND</span> b.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) <span class="operator">/</span> ((<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> Category d, Product e <span class="keyword">WHERE</span> d.Id <span class="operator">=</span> e.CategoryId <span class="keyword">AND</span> d.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) , <span class="number">2</span>),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MIN</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MAX</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">SUM</span>(f.UnitsOnOrder)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Category a, Product f</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> f.CategoryId</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.CategoryName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> a.Id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">Beverages<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">37.98</span><span class="operator">|</span><span class="number">4.5</span><span class="operator">|</span><span class="number">263.5</span><span class="operator">|</span><span class="number">60</span></span><br><span class="line">Condiments<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">23.06</span><span class="operator">|</span><span class="number">10</span><span class="operator">|</span><span class="number">43.9</span><span class="operator">|</span><span class="number">170</span></span><br><span class="line">Confections<span class="operator">|</span><span class="number">13</span><span class="operator">|</span><span class="number">25.16</span><span class="operator">|</span><span class="number">9.2</span><span class="operator">|</span><span class="number">81</span><span class="operator">|</span><span class="number">180</span></span><br><span class="line">Seafood<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">20.68</span><span class="operator">|</span><span class="number">6</span><span class="operator">|</span><span class="number">62.5</span><span class="operator">|</span><span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> b.CategoryName <span class="operator">=</span> a.CategoryName 这个条件确保了在计算每个类别的商品价格总和时，只考虑了与当前类别相关的商品</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 这是为了满足 <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span> 中的条件</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">*</span><span class="number">1.0</span> 的目的是将整数值转换为浮点数。这是为了确保在计算平均商品价格时，得到的结果是一个浮点数，而不是整数</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q6"><a href="#Q6" class="headerlink" title="Q6*"></a>Q6*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">SELECT</span> p.ProductName, </span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  c1.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> c1.ContactName </span><br><span class="line">  <span class="keyword">FROM</span> Customer c1 </span><br><span class="line">  <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o1 <span class="keyword">ON</span> o1.CustomerId <span class="operator">=</span> c1.Id</span><br><span class="line">  <span class="keyword">JOIN</span> OrderDetail od1 <span class="keyword">ON</span> o1.Id <span class="operator">=</span> od1.OrderID</span><br><span class="line">  <span class="keyword">WHERE</span> od1.ProductId <span class="operator">=</span> p.Id</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> o1.OrderDate <span class="keyword">ASC</span> LIMIT <span class="number">1</span>) <span class="keyword">AS</span> CustomerInfo</span><br><span class="line"><span class="keyword">FROM</span> Product p</span><br><span class="line"><span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> p.Id <span class="operator">=</span> od.ProductId</span><br><span class="line"><span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line"><span class="keyword">JOIN</span> CUSTOMER c <span class="keyword">ON</span> o.CustomerID <span class="operator">=</span> c.Id</span><br><span class="line"><span class="keyword">WHERE</span> p.Discontinued <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.ProductName;</span><br><span class="line"></span><br><span class="line">Alice Mutton<span class="operator">|</span>Consolidated Holdings<span class="operator">|</span>Elizabeth Brown</span><br><span class="line">Chef Anton<span class="string">&#x27;s Gumbo Mix|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Guaraná Fantástica|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Mishi Kobe Niku|Old World Delicatessen|Rene Phillips</span></span><br><span class="line"><span class="string">Perth Pasties|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Rössle Sauerkraut|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Singaporean Hokkien Fried Mee|Vins et alcools Chevalier|Paul Henriot</span></span><br><span class="line"><span class="string">Thüringer Rostbratwurst|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// c1		==&gt; FROM Customer c1 </span></span><br><span class="line"><span class="string">// c1-&gt;o1	==&gt; JOIN [Order] o1 ON o1.CustomerId = c1.Id</span></span><br><span class="line"><span class="string">// o1-&gt;od1	==&gt; JOIN OrderDetail od1 ON o1.Id = od1.OrderID</span></span><br><span class="line"><span class="string">// od1-&gt;p	==&gt; (将子查询和外部主查询联系起来)WHERE od1.ProductId = p.Id</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Q7"><a href="#Q7" class="headerlink" title="Q7*"></a>Q7*</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id, Orderdate, pre_OrderDate, ROUND(julianday(OrderDate)<span class="operator">-</span>julianday(pre_orderdate) , <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> Id, OrderDate, <span class="built_in">LAG</span>(Orderdate, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> CustomerId <span class="keyword">ORDER</span> <span class="keyword">BY</span> OrderDate <span class="keyword">ASC</span>) pre_OrderDate</span><br><span class="line">      <span class="keyword">FROM</span> [<span class="keyword">Order</span>]</span><br><span class="line">      <span class="keyword">WHERE</span> CustomerId <span class="operator">=</span> <span class="string">&#x27;BLONP&#x27;</span></span><br><span class="line">      LIMIT <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">16766</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0</span><span class="operator">|</span><span class="number">2456131.47</span></span><br><span class="line"><span class="number">10265</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2.03</span></span><br><span class="line"><span class="number">12594</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">22.52</span></span><br><span class="line"><span class="number">20249</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.18</span></span><br><span class="line"><span class="number">20882</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2.1</span></span><br><span class="line"><span class="number">18443</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">9.43</span></span><br><span class="line"><span class="number">10297</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">6.77</span></span><br><span class="line"><span class="number">11694</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">13.02</span></span><br><span class="line"><span class="number">25613</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">1.92</span></span><br><span class="line"><span class="number">17361</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-19</span> <span class="number">12</span>:<span class="number">13</span>:<span class="number">21</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.57</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">SELECT</span> julianday(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">Result</span>: <span class="number">2458220.59892027</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 返回从格林尼治时间的公元前 <span class="number">4714</span> 年 <span class="number">11</span> 月 <span class="number">24</span> 日正午算起的天数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">LAG</span>(expr, <span class="keyword">offset</span>, <span class="keyword">default</span>) <span class="keyword">OVER</span> (partition_by_clause order_by_clause)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 计算当前行向前数若干行的值，该函数专门用作窗口函数(<span class="keyword">window</span> functions)，<span class="keyword">partition</span> <span class="keyword">by</span>功能类似<span class="keyword">group</span> <span class="keyword">by</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q8"><a href="#Q8" class="headerlink" title="Q8*"></a>Q8*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">WITH</span> expenditures <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span> </span><br><span class="line">   ...<span class="operator">&gt;</span>                        IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        o.CustomerId,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        ROUND((<span class="built_in">SUM</span>(od.Quantity <span class="operator">*</span> od.UnitPrice)) , <span class="number">2</span>) <span class="keyword">AS</span> totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> [<span class="keyword">Order</span>] o</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.CustomerId),</span><br><span class="line">   ...<span class="operator">&gt;</span>      quartiles <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="operator">*</span>,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> expenditures)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CompanyName, CustomerId, totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> quartiles</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ExpenditureQuartile <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">MISSING_NAME<span class="operator">|</span>DUMO<span class="operator">|</span><span class="number">1615.9</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>OCEA<span class="operator">|</span><span class="number">3460.2</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>ANTO<span class="operator">|</span><span class="number">7515.35</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>QUEE<span class="operator">|</span><span class="number">30226.1</span></span><br><span class="line">Trail<span class="string">&#x27;s Head Gourmet Provisioners|TRAIH|3874502.02</span></span><br><span class="line"><span class="string">Blondesddsl père et fils|BLONP|3879728.69</span></span><br><span class="line"><span class="string">Around the Horn|AROUT|4395636.28</span></span><br><span class="line"><span class="string">Hungry Owl All-Night Grocers|HUNGO|4431457.1</span></span><br><span class="line"><span class="string">Bon app|BONAP|4485708.49</span></span><br><span class="line"><span class="string">Bólido Comidas preparadas|BOLID|4520121.88</span></span><br><span class="line"><span class="string">Galería del gastrónomo|GALED|4533089.9</span></span><br><span class="line"><span class="string">FISSA Fabrica Inter. Salchichas S.A.|FISSA|4554591.02</span></span><br><span class="line"><span class="string">Maison Dewey|MAISD|4555931.37</span></span><br><span class="line"><span class="string">Cactus Comidas para llevar|CACTU|4559046.87</span></span><br><span class="line"><span class="string">Spécialités du monde|SPECD|4571764.89</span></span><br><span class="line"><span class="string">Magazzini Alimentari Riuniti|MAGAA|4572382.35</span></span><br><span class="line"><span class="string">Toms Spezialitäten|TOMSP|4628403.36</span></span><br><span class="line"><span class="string">Split Rail Beer &amp; Ale|SPLIR|4641383.53</span></span><br><span class="line"><span class="string">Santé Gourmet|SANTG|4647668.15</span></span><br><span class="line"><span class="string">Morgenstern Gesundkost|MORGK|4676234.2</span></span><br><span class="line"><span class="string">White Clover Markets|WHITC|4681531.74</span></span><br><span class="line"><span class="string">La corne d&#x27;</span>abondance<span class="operator">|</span>LACOR<span class="operator">|</span><span class="number">4724494.22</span></span><br><span class="line">Victuailles en stock<span class="operator">|</span>VICTE<span class="operator">|</span><span class="number">4726476.33</span></span><br><span class="line">Lonesome Pine Restaurant<span class="operator">|</span>LONEP<span class="operator">|</span><span class="number">4735780.66</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 处理<span class="keyword">NULL</span>值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 这种连接类型包含左表的所有行，以及右表中满足连接条件的行。如果右表中没有匹配的行，那么结果集中将包含 <span class="keyword">NULL</span> 值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 它将结果集划分为指定数量的桶（buckets），并为每个桶分配一个标识号（bucket number）</span><br></pre></td></tr></table></figure>
+<p>现在，假设有以下支出数据：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<p><code>NTILE(4) OVER (ORDER BY totalcost ASC) AS ExpenditureQuartile</code>将分配 ExpenditureQuartile 值，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<h1 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> r.RegionDescription, e.FirstName, e.LastName, <span class="built_in">MAX</span>(e.BirthDate)</span><br><span class="line"><span class="keyword">FROM</span> Region r</span><br><span class="line"><span class="keyword">JOIN</span> Territory t <span class="keyword">ON</span> t.RegionId <span class="operator">=</span> r.Id</span><br><span class="line"><span class="keyword">JOIN</span> EmployeeTerritory et <span class="keyword">ON</span> et.TerritoryId <span class="operator">=</span> t.Id</span><br><span class="line"><span class="keyword">JOIN</span> Employee e <span class="keyword">On</span> e.Id <span class="operator">=</span> et.EmployeeId</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.RegionId;</span><br><span class="line"></span><br><span class="line">Eastern<span class="operator">|</span>Steven<span class="operator">|</span>Buchanan<span class="operator">|</span><span class="number">1987</span><span class="number">-03</span><span class="number">-04</span></span><br><span class="line">Western<span class="operator">|</span>Michael<span class="operator">|</span>Suyama<span class="operator">|</span><span class="number">1995</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line">Northern<span class="operator">|</span>Anne<span class="operator">|</span>Dodsworth<span class="operator">|</span><span class="number">1998</span><span class="number">-01</span><span class="number">-27</span></span><br><span class="line">Southern<span class="operator">|</span>Janet<span class="operator">|</span>Leverling<span class="operator">|</span><span class="number">1995</span><span class="number">-08</span><span class="number">-30</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">MAX</span>(e.BirthDate)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WITH</span> temptable <span class="keyword">AS</span>(</span><br><span class="line">                  <span class="keyword">SELECT</span> </span><br><span class="line">                    d.ProductName myproductname,</span><br><span class="line">                    strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span></span><br><span class="line">                  <span class="keyword">FROM</span> Customer a, [<span class="keyword">Order</span>] b, OrderDetail c, Product d</span><br><span class="line">                  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId </span><br><span class="line">                    <span class="keyword">AND</span> b.Id <span class="operator">=</span> c.OrderId </span><br><span class="line">                    <span class="keyword">AND</span> c.ProductId <span class="operator">=</span> d.Id </span><br><span class="line">                    <span class="keyword">AND</span> a.CompanyName <span class="operator">=</span> <span class="string">&#x27;Queen Cozinha&#x27;</span> </span><br><span class="line">                    <span class="keyword">AND</span> <span class="type">date</span> <span class="operator">=</span> <span class="string">&#x27;2014-12-25&#x27;</span></span><br><span class="line">                  <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.Id <span class="keyword">ASC</span>)</span><br><span class="line"><span class="keyword">SELECT</span> group_concat(myproductname)</span><br><span class="line"><span class="keyword">FROM</span> temptable;</span><br><span class="line"></span><br><span class="line">Mishi Kobe Niku,NuNuCa Nuß<span class="operator">-</span>Nougat<span class="operator">-</span>Creme,Schoggi Schokolade,Mascarpone Fabioli,Sasquatch Ale,Boston Crab Meat,Manjimup Dried Apples,Longlife Tofu,Lakkalikööri</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span>  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 将日期和时间格式化为字符串，将原始日期格式转换为 &quot;年-月-日&quot; 的字符串格式</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>cmu15-445 Project 1 (Spring 2023)</title>
     <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
     <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
@@ -1731,6 +1729,114 @@
 <h3 id="WritePageGuard"><a href="#WritePageGuard" class="headerlink" title="WritePageGuard"></a>WritePageGuard</h3><p>和ReadPageGuard同理。</p>
 <p>最后，历时许久，第一个Project终于通过了！</p>
 <p><img src="C:/Users/86135/Desktop/202403242032692.png" alt="image-20240324203210481"></p>
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cmu15-445 Project 0 (Spring 2023)</title>
+    <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
+    <content><![CDATA[<h1 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h1><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
+<p><code>COW</code>即代表，对<code>Trie</code>的添加&#x2F;删除操作不会在原<code>Trie</code>上进行，而是对原<code>Trie</code>进行拷贝后再进行修改。</p>
+<span id="more"></span>
+
+<p><code>trie.h</code>中共有三个类：</p>
+<ul>
+<li>​	<code>TrieNode</code>：表示Trie树不包含value的普通节点。<ul>
+<li>组成：<ul>
+<li><code>bool is_value_node_&#123;false&#125;;</code></li>
+<li><code>std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children_;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>TrieNodeWithValue</code>：<code>Trie</code>树包含<code>value</code>的节点，由<code>TrieNode</code>派生而来。<ul>
+<li>新增组成：<ul>
+<li><code>std::shared_ptr&lt;T&gt; value_;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Trie</code>：<code>Trie</code> 树的本体，<ul>
+<li>组成：<ul>
+<li><code>std::shared_ptr&lt;const TrieNode&gt; root_&#123;nullptr&#125;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<p>1、一个 <code>shared_ptr&lt;const TrieNode&gt;</code> 智能指针（<code>root</code>）指向一个 <code>TrieNode</code> 节点，而 <code>TrieNode</code> 节点中的 <code>map</code> 则含有多个可以指向下一个 <code>TrieNode</code> 节点的智能指针。也就是说，当 <code>TrieNode</code> 调用 <code>Clone()</code> 时，会复制一份<strong>当前节点</strong>并返回。由于返回的是 <code>unique_ptr</code>，因此我们只能用 <code>shared_ptr</code> 的构造函数来接收，然后再对 <code>shared_ptr</code> 进行赋值，类似于：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;TrieNode&gt; new_root = std::<span class="built_in">shared_ptr</span>&lt;TrieNode&gt;(<span class="keyword">this</span>-&gt;root_-&gt;<span class="built_in">Clone</span>());</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h2><p>（1）考虑<code>key</code>为空的边界情况，此时看<code>root</code>是否是一个<code>TrieNodeWithVal</code>节点；</p>
+<p>（2）考虑<code>root</code>为空的边界情况，此时直接返回一个<code>nullptr</code>；</p>
+<p>（3）若非上述两种边界情况，则通过遍历进行<code>Get</code>操作：</p>
+<ul>
+<li>定义一个<code>cur</code>指向当前根节点，注意<code>root</code>的类型是<code>std::shared_ptr&lt;const bustub::TrieNode&gt;</code></li>
+<li>对<code>key</code>的所有字符进行遍历，<code>cur</code>不断更新迭代指向<code>cur-&gt;children-&gt;second</code>，直到找到<code>key</code>的键尾为止；</li>
+<li>判断此时的<code>cur</code>是否是一个<code>TrieNodeWithVal</code>节点</li>
+</ul>
+<p>注意：返回的<code>value</code>——<code>std::shared_ptr&lt;T&gt; value_</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> *twnv = <span class="keyword">dynamic_cast</span>&lt;<span class="type">const</span> bustub::TrieNodeWithValue&lt;T&gt; *&gt;(root_.<span class="built_in">get</span>());</span><br><span class="line"><span class="comment">// const确保twnv是一个指向常量对象的指针，最好保留以明确这种限制</span></span><br><span class="line"><span class="comment">// dynamic_cast的目的是为了检查在运行时root_所指向的对象是否实际上是TrieNodeWithValue&lt;T&gt;或其派生类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h2><p><code>Put</code>操作最需要注意的点在于：在插入时，已有的节点执行<code>Clone()</code>操作，新建的节点执行<code>make_shared</code>操作，如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
+<p>逻辑如下：</p>
+<p>（1）考虑<code>key</code>为空的边界情况，此时在<code>root</code>处插入</p>
+<ul>
+<li>创建新的<code>shared_ptr</code>指针指向<code>value</code>和为空的<code>new_root</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>判断原<code>root</code>是否有子节点，处理后返回新的<code>Trie</code>的根结点<code>new_root</code></p>
+<ul>
+<li><p>若无，则直接对<code>new_root</code>进行修改；</p>
+</li>
+<li><p>若有，则构造一个新节点指向<code>root</code>的<code>children</code>，如图</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>（2）若<code>key</code>非空</p>
+<ul>
+<li><p>首先拷贝根节点<code>root</code></p>
+<ul>
+<li>若<code>root</code>空，直接新建空的<code>Trie</code></li>
+<li>若<code>root</code>非空，调用<code>Clone()</code>操作，拷贝<code>root</code>的已有<code>children</code>给<code>new_root</code></li>
+</ul>
+</li>
+<li><p><code>Put1()</code>函数递归插入</p>
+<ul>
+<li><p>遍历<code>new_root</code>的<code>children</code>，找到是否有哪一个<code>children</code>的<code>key</code>等于传入<code>key</code>的<code>key[0]</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>判断完<code>key[0]</code>后，对<code>key</code>剩余的值进行判断<ul>
+<li>若到达<code>key</code>的键尾，新建一个节点并覆盖掉<code>pair</code>的<code>second</code></li>
+<li>若未到达键尾，拷贝已有节点、递归调用<code>Put1</code>写入<code>key</code>、将写入完成后的节点重新拷贝给<code>pair.second</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>若未找到匹配的<code>key[0]</code>，则直接新建节点插入。注意判断<code>key</code>的长度以决定是否需要递归操作。</p>
+</li>
+</ul>
+</li>
+<li><p>返回新的<code>Trie</code></p>
+</li>
+</ul>
+<p>注意：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;bustub::TrieNode&gt; ptr = pair.second-&gt;<span class="built_in">Clone</span>();</span><br><span class="line"><span class="comment">// Clone()返回的对象是std::unique_ptr&lt;TrieNode&gt;类型，为了确保ptr能够在程序的其他地方被共享所有权，因此</span></span><br><span class="line"><span class="comment">// 用std::shared_ptr&lt;bustub::TrieNode&gt;接收</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h2><p><code>Remove</code>的思想和<code>Put</code>一致，不再赘述。</p>
+<h1 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h1><p>注意加锁的时机即可。</p>
+<p><code>read</code>操作只需要在获取根节点时加锁。</p>
+<p><code>write</code>操作则需要全程添加写锁，从而保证只有一名<code>writer</code>。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
 ]]></content>
       <categories>
         <category>Project</category>
