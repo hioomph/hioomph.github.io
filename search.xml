@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Ch10 系统级I/O</title>
-    <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
-    <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Ch1 计算机系统漫游</title>
     <url>/2024/04/03/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
     <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
@@ -24,15 +14,9 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch2 信息的表示和处理</title>
-    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
+    <title>Ch10 系统级I/O</title>
+    <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
+    <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -58,172 +42,15 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch6 存储器层次结构</title>
-    <url>/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><span id="more"></span>
+    <title>Ch2 信息的表示和处理</title>
+    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
 
-<h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
-<ul>
-<li><p>静态RAM（SRAM）</p>
-<ul>
-<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
-</ul>
-</li>
-<li><p>动态RAM（DRAM）</p>
-<ul>
-<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
-</li>
-<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
-</li>
-<li><p>举例：</p>
-<ul>
-<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
-<li>8：每个超单元存储8比特数据</li>
-<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
-</li>
-<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
-
-<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
-
-<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
-
-<p>磁盘访问数据花费时间：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
-
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
-
-<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
-<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
-<ul>
-<li><p>闪存芯片（falsh chip）</p>
-<ul>
-<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
-</li>
-<li><p>包含读、写和擦除三个操作。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
-<li>时间局部性<ul>
-<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
-</ul>
-</li>
-<li>空间局部性<ul>
-<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
-</ul>
-</li>
-</ul>
-<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
-<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
-<ul>
-<li><p>缓存命中（cache Hit）</p>
-<ul>
-<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
-<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
-<li>步骤分三步：<ul>
-<li>set selection（组选择）</li>
-<li>line matching（行匹配）</li>
-<li>word extraction（字抽取）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>内部结构</p>
-<ul>
-<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
-</li>
-<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
-</li>
-<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
-<ul>
-<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
-<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
-<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
-<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
-</ul>
-</li>
-<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
-</li>
-<li><p>Issues With Writes</p>
-<ul>
-<li>写命中（Write Hit）<ul>
-<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
-<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
-</ul>
-</li>
-<li>写不命中（Write Miss）<ul>
-<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
-<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
-<li><p>直接映射：每个Set只包含1行cache line</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
-</li>
-<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
-<ul>
-<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
-</li>
-<li><p><strong>s2、行匹配</strong>：</p>
-<ul>
-<li>1、valid是否为1？</li>
-<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
-</ul>
-</li>
-<li><p><strong>s3、字抽取</strong></p>
-<ul>
-<li>若一致，根据Block offset找到确切的地址</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
-
-<ul>
-<li><p>举例说明：假设有一个cache如下图所示：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
-
-<ul>
-<li>当地址是4位时，整个地址空间用编号0-15表示</li>
-<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
-<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
-</li>
-<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
-</li>
-</ul>
-<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
-<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
-</li>
-<li><p>全相联cache只有一个set</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
-</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -517,6 +344,179 @@
 <ul>
 <li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
 <li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch6 存储器层次结构</title>
+    <url>/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><span id="more"></span>
+
+<h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
+<ul>
+<li><p>静态RAM（SRAM）</p>
+<ul>
+<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
+</ul>
+</li>
+<li><p>动态RAM（DRAM）</p>
+<ul>
+<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
+</li>
+<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
+</li>
+<li><p>举例：</p>
+<ul>
+<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
+<li>8：每个超单元存储8比特数据</li>
+<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
+</li>
+<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
+
+<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
+
+<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
+
+<p>磁盘访问数据花费时间：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
+
+<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
+<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
+<ul>
+<li><p>闪存芯片（falsh chip）</p>
+<ul>
+<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
+</li>
+<li><p>包含读、写和擦除三个操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
+<li>时间局部性<ul>
+<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
+</ul>
+</li>
+<li>空间局部性<ul>
+<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
+<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
+<ul>
+<li><p>缓存命中（cache Hit）</p>
+<ul>
+<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
+<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
+<li>步骤分三步：<ul>
+<li>set selection（组选择）</li>
+<li>line matching（行匹配）</li>
+<li>word extraction（字抽取）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内部结构</p>
+<ul>
+<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
+</li>
+<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
+</li>
+<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
+<ul>
+<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
+<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
+<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
+<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
+</ul>
+</li>
+<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
+</li>
+<li><p>Issues With Writes</p>
+<ul>
+<li>写命中（Write Hit）<ul>
+<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
+<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
+</ul>
+</li>
+<li>写不命中（Write Miss）<ul>
+<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
+<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
+<li><p>直接映射：每个Set只包含1行cache line</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
+</li>
+<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
+<ul>
+<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
+</li>
+<li><p><strong>s2、行匹配</strong>：</p>
+<ul>
+<li>1、valid是否为1？</li>
+<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
+</ul>
+</li>
+<li><p><strong>s3、字抽取</strong></p>
+<ul>
+<li>若一致，根据Block offset找到确切的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
+
+<ul>
+<li><p>举例说明：假设有一个cache如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
+
+<ul>
+<li>当地址是4位时，整个地址空间用编号0-15表示</li>
+<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
+<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
+</li>
+<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
+</li>
+</ul>
+<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
+<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
+</li>
+<li><p>全相联cache只有一个set</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
 </ul>
 ]]></content>
       <categories>
@@ -935,6 +935,71 @@
       </categories>
   </entry>
   <entry>
+    <title>OpenPose原理及编译</title>
+    <url>/2023/12/25/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/</url>
+    <content><![CDATA[<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
+<p>识别人体骨干躯干的关键点，并进行定位与拼接。</p>
+<span id="more"></span>
+
+<p>2、姿态估计中的难点是什么？</p>
+<p><strong>（1）遮挡；（2）匹配。</strong></p>
+<p>3、COCO数据集的关键点有几个，分别是？</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524168.png" alt="COCO数据集关键点" style="zoom: 50%;" />
+
+<p>数据集中是<code>17</code>个点，实际上训练时候还要加上<code>1</code>个脖子的点，共<code>18</code>个点。</p>
+<p>4、姿态估计方法分为几个大类？</p>
+<p>（1）<code>Top-down</code>（自顶向下）：先检测所有的人，再对每个框的人进行姿态估计输出结果</p>
+<p>优点：准确率高，点的回归率高；</p>
+<p>缺点：算法性能依赖检测效果，复杂度较高，实时性比较差。</p>
+<p>主要用于一些离线的项目，对实时性没要求。</p>
+<p>（2）<code>bottom-up</code>（自底向上）：先检测所有关键点，再进行匹配连接</p>
+<p>优点：计算量较小，可以达到实时性的效果；</p>
+<p>缺点：精度较差，匹配策略比较复杂。</p>
+<h2 id="2-论文解读"><a href="#2-论文解读" class="headerlink" title="2 论文解读"></a>2 论文解读</h2><p>论文地址：<a href="https://arxiv.org/pdf/1611.08050.pdf">https://arxiv.org/pdf/1611.08050.pdf</a></p>
+<h3 id="1、网络框架"><a href="#1、网络框架" class="headerlink" title="1、网络框架"></a>1、网络框架</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524273.png" alt="网络整体流程图">	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251532476.jpg" alt="网络框架1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251534898.png" alt="网络框架2"></p>
+<p>其中的重点：</p>
+<p>（1）关键点的<code>heatmap</code>标注生成，采用高斯热度图的方式；</p>
+<p>（2）<code>PAF</code>：部分亲和域。这也是论文中的重点和难点；</p>
+<p>（3）匹配策略：匈牙利匹配。</p>
+<h3 id="2、数据制作"><a href="#2、数据制作" class="headerlink" title="2、数据制作"></a>2、数据制作</h3><p>采用的数据集为<code>COCO</code>数据集，其中人体骨骼点的标注信息为<code>[x, y, label]</code>。</p>
+<p><code>label</code>取值为<code>0</code>、<code>1</code>、<code>2</code>，分别表示不存在、遮挡、正常，其中不存在的关键点是需要去除的。</p>
+<p>（1）关键点高斯热力图实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putGaussianMaps</span>(<span class="params">center, accumulate_confid_map, sigma, grid_y, grid_x, stride</span>):</span><br><span class="line"></span><br><span class="line">    start = stride / <span class="number">2.0</span> - <span class="number">0.5</span></span><br><span class="line">    y_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_y))]</span><br><span class="line">    x_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_x))]</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)      <span class="comment"># 构建棋盘</span></span><br><span class="line">    xx = xx * stride + start                    <span class="comment"># 每个点在原始图像上的位置</span></span><br><span class="line">    yy = yy * stride + start</span><br><span class="line">    d2 = (xx - center[<span class="number">0</span>]) ** <span class="number">2</span> + (yy - center[<span class="number">1</span>]) ** <span class="number">2</span>  <span class="comment"># 计算每个点和GT点的距离</span></span><br><span class="line">    exponent = d2 / <span class="number">2.0</span> / sigma / sigma                 <span class="comment"># 这里在做一个高斯计算</span></span><br><span class="line">    mask = exponent &lt;= <span class="number">4.6052</span>                           <span class="comment"># 将在这个阈值范围内的点用True记录</span></span><br><span class="line">    cofid_map = np.exp(-exponent)                       <span class="comment"># 这里做一个标准化</span></span><br><span class="line">    cofid_map = np.multiply(mask, cofid_map)            <span class="comment"># 取出对应关系为True的点</span></span><br><span class="line">    accumulate_confid_map += cofid_map                  <span class="comment"># 将每个点计算的结果都累加到上一次的特征中</span></span><br><span class="line">    accumulate_confid_map[accumulate_confid_map &gt; <span class="number">1.0</span>] = <span class="number">1.0</span>      <span class="comment"># 对结果大于1的值，只取1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> accumulate_confid_map    <span class="comment"># 返回热力图（heatmap）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（2）PAF数据计算的实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putVecMaps</span>(<span class="params">centerA, centerB, accumulate_vec_map, count, grid_y, grid_x, stride</span>):</span><br><span class="line">    centerA = centerA.astype(<span class="built_in">float</span>)</span><br><span class="line">    centerB = centerB.astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line">    thre = <span class="number">1</span>  <span class="comment"># 表示宽度，也就是一个设定好的参数</span></span><br><span class="line">    centerB = centerB / stride  <span class="comment"># 缩放比例特定到特征图中</span></span><br><span class="line">    centerA = centerA / stride</span><br><span class="line"></span><br><span class="line">    limb_vec = centerB - centerA  <span class="comment"># 求出两个点的向量</span></span><br><span class="line">    norm = np.linalg.norm(limb_vec)  <span class="comment"># 是需要求单位向量，所以先计算范数，也就是向量模长</span></span><br><span class="line">    <span class="keyword">if</span> (norm == <span class="number">0.0</span>):  <span class="comment"># 这里表示两个点基本重合了</span></span><br><span class="line">        <span class="comment"># print &#x27;limb is too short, ignore it...&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line">    limb_vec_unit = limb_vec / norm  <span class="comment"># 向量除以模长，得到单位向量</span></span><br><span class="line">    <span class="comment"># print &#x27;limb unit vector: &#123;&#125;&#x27;.format(limb_vec_unit)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To make sure not beyond the border of this two points</span></span><br><span class="line">    <span class="comment"># 得到所有可能存在方向的区域(这里就用到了之前的超参数阈值)</span></span><br><span class="line">    min_x = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_x = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) + thre)), grid_x)</span><br><span class="line">    min_y = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_y = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) + thre)), grid_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到一个可能存在向量的矩形框</span></span><br><span class="line">    range_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_x), <span class="built_in">int</span>(max_x), <span class="number">1</span>))</span><br><span class="line">    range_y = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_y), <span class="built_in">int</span>(max_y), <span class="number">1</span>))</span><br><span class="line">    xx, yy = np.meshgrid(range_x, range_y)  <span class="comment"># 制作一个网格</span></span><br><span class="line">    ba_x = xx - centerA[<span class="number">0</span>]  <span class="comment"># the vector from (x,y) to centerA 根据位置判断是否在该区域上（分别得到X和Y方向的）</span></span><br><span class="line">    ba_y = yy - centerA[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 向量叉乘根据阈值选择赋值区域，任何向量与单位向量的叉乘即为四边形的面积</span></span><br><span class="line">    <span class="comment"># 这里是重点步骤，也就是论文中的公式，表示计算出两个向量组成四边形的面积</span></span><br><span class="line">    limb_width = np.<span class="built_in">abs</span>(ba_x * limb_vec_unit[<span class="number">1</span>] - ba_y * limb_vec_unit[<span class="number">0</span>])</span><br><span class="line">    mask = limb_width &lt; thre  <span class="comment"># mask is 2D （小于阈值的表示在该区域上）</span></span><br><span class="line"></span><br><span class="line">    vec_map = np.copy(accumulate_vec_map) * <span class="number">0.0</span>  <span class="comment"># 构建一个全为0的矩阵</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这行代码主要作用是将mask扩展一个维度并且赋值给vec_map数组</span></span><br><span class="line">    vec_map[yy, xx] = np.repeat(mask[:, :, np.newaxis], <span class="number">2</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 在该区域上的都用对应的方向向量表示（根据mask结果表示是否在，通过乘法的方式）</span></span><br><span class="line">    vec_map[yy, xx] *= limb_vec_unit[np.newaxis, np.newaxis, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #在特征图中（46*46）中 哪些区域是该躯干所在区域，判断x或者y向量都不为0</span></span><br><span class="line">    mask = np.logical_or.reduce(</span><br><span class="line">        (np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">0</span>]) &gt; <span class="number">0</span>, np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每次返回的accumulate_vec_map都是平均值，现在还原成实际值</span></span><br><span class="line">    accumulate_vec_map = np.multiply(</span><br><span class="line">        accumulate_vec_map, count[:, :, np.newaxis])</span><br><span class="line">    accumulate_vec_map += vec_map  <span class="comment"># 加上当前关键点位置形成的向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] += <span class="number">1</span>  <span class="comment"># 该区域计算次数都+1</span></span><br><span class="line"></span><br><span class="line">    mask = count == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">1</span>  <span class="comment"># 没有被计算过的地方就等于自身（因为一会要除法）</span></span><br><span class="line"></span><br><span class="line">    accumulate_vec_map = np.divide(accumulate_vec_map, count[:, :, np.newaxis])  <span class="comment"># 算平均向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">0</span>  <span class="comment"># 还原回去</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这两个函数是最重要的两个部分，也就是对训练数据的处理，生成出需要的训练数据。</p>
+<h3 id="3、预测推理"><a href="#3、预测推理" class="headerlink" title="3、预测推理"></a>3、预测推理</h3><p>预测模型这里，在官方源码中是将<code>paf</code>的处理封装在一个<code>cpp</code>库中，<strong>通过编译得到静态库，代码中可以调用</strong>。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">swig -python -c++ pafprocess.i</span><br><span class="line">python3 setup.py build_ext --inplace</span><br></pre></td></tr></table></figure>
+
+<p>这里PAF的处理主要是采用积分计算的方式，也就是对于连线的点的方向选择，采用积分的方式计算最佳连线策略。</p>
+<h2 id="3-OpenPose-Windows-cpu-only-编译"><a href="#3-OpenPose-Windows-cpu-only-编译" class="headerlink" title="3 OpenPose_Windows_cpu_only 编译"></a>3 OpenPose_Windows_cpu_only 编译</h2><p>主要步骤参考：</p>
+<p><a href="https://blog.csdn.net/qq_51209492/article/details/124185106?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AE%89%E8%A3%85openpose%E5%B9%B6%E4%BD%BF%E7%94%A8python%E8%B0%83%E7%94%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124185106.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">CSDN——win10环境下下载安装openpose(only cpu)并在pycharm中运行代码（超详细）</a></p>
+<p>基本按照这上面来走就可以正确编译，但其中要注意以下几点：</p>
+<p><strong>1、<code>bat</code>批处理命令运行时给的网站我根本无法访问，一直<code>retry</code></strong></p>
+<p>最后选择用迅雷下载，然后放进<code>\openpose\3rdparty\windows</code>文件夹下。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272200864.png" alt="image-20231227220003816"></p>
+<p>同时这里面的<code>caffe_cpu</code>不是用这4个<code>bat</code>文件下载的，但是由于网址同样进不去，也选择先用迅雷下载好后放进去。</p>
+<p>我这里的4个<code>zip</code>文件大小显示为<code>0kb</code>似乎是<code>cmake</code>编译后自己更改的，不用去管。</p>
+<p><strong>2、用迅雷提前下载好<code>\openpose\models</code>后，<code>cmake</code>编译依然会重新下载模型。</strong></p>
+<p>这里我参考了<a href="https://zhuanlan.zhihu.com/p/446981890">OpenPose-CPU版本安装</a>的方法：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272207425.png" alt="image-20231227220706339"></p>
+<p>修改<code>CmakeLists.txt</code>文件后就不会再重新下载模型了。</p>
+<p><strong>3、用<code>CMAKE</code>编译<code>openpose</code>项目时，一定要在第一次<code>configure</code>之前，点击<code>Add Entry</code>选择<code>Python</code>版本。</strong></p>
+<p>如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272202637.png" alt="在这里插入图片描述"></p>
+<p>实际上这一步就是要确保在<code>cmake</code>编译时访问的<code>python</code>解释器和最后在<code>pycharm</code>中运行时选择的python解释器一致，否则可能会在<code>pycharm</code>中报错<code>No module named pyopenpose</code>。</p>
+<p>我第一次在这里就是因为没有关注这个细节，导致<code>cmake</code>选择的是<code>python 3.6.5</code>的编译器，而<code>pycharm</code>选择的是<code>3.7.6</code>的编译器，出现错误。</p>
+<p><strong>4、最好采用本地<code>python</code>解释器，不要用<code>anaconda</code>虚拟环境。</strong></p>
+<p>我也不知道为什么虚拟环境会报错，可能还是路径的问题吧。</p>
+]]></content>
+      <categories>
+        <category>深度学习算法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ch9 虚拟内存</title>
     <url>/2024/04/03/CSAPP_Ch9%20%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<h1 id="Ch9-虚拟内存"><a href="#Ch9-虚拟内存" class="headerlink" title="Ch9 虚拟内存"></a>Ch9 虚拟内存</h1><span id="more"></span>
@@ -1036,7 +1101,7 @@
 <li><p><strong>TLB&#x2F;Translation Lookaside Buffer</strong></p>
 <ul>
 <li>高速缓存，用于存储虚拟地址到物理地址的转换信息。它位于CPU和内存之间，用于加速虚拟地址到物理地址的转换过程。</li>
-<li>虚拟页号(VPN) &#x3D; TLBT(TLB Tag) + TLBI(TLB Index)</li>
+<li><strong>虚拟页号(VPN) &#x3D; TLBT(TLB Tag) + TLBI(TLB Index)</strong></li>
 </ul>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040102671.png" alt="image-20240404010233622" style="zoom: 67%;" />
 </li>
@@ -1046,76 +1111,66 @@
 <li><p><strong>TLB Miss</strong></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404040106189.png" alt="image-20240404010620118"></p>
 </li>
+<li><p>多级页表</p>
+<ul>
+<li><p>多级页表（Multi-level Page Tables）是一种用于管理大型虚拟内存空间的技术，它将整个虚拟地址空间分割成多个级别的页表，从而降低了页表的大小和访问时间。</p>
+</li>
+<li><p>下图是一个<strong>2级页表</strong>的示例。其中2级页表才指向真正的虚拟页的地址。 </p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041446551.png" alt="image-20240404144628382"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041508429.png" alt="image-20240404150817364"></p>
+</li>
 </ul>
+</li>
+</ul>
+<h2 id="3、Inter-Core-i7"><a href="#3、Inter-Core-i7" class="headerlink" title="3、Inter Core i7"></a>3、Inter Core i7</h2><h3 id="（1）Cache-Hierarchy"><a href="#（1）Cache-Hierarchy" class="headerlink" title="（1）Cache Hierarchy"></a>（1）Cache Hierarchy</h3><ul>
+<li>共4个Core(核心)，每个Core有自己的L1 d-cache(数据cache)、L1 i-cache(指令cache)和L2 cache</li>
+<li>4个Core共享L3 cache</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041509298.png" alt="image-20240404150908225"></p>
+<ul>
+<li><p>单个Core中的结构（包含TLB）</p>
+<ul>
+<li><strong>L2 unified TLB直接连到了DDR3 memory controller上，访问内存</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041511470.png" alt="image-20240404151102359"></p>
+</li>
+</ul>
+<h3 id="（2）i7中如何进行地址翻译"><a href="#（2）i7中如何进行地址翻译" class="headerlink" title="（2）i7中如何进行地址翻译"></a>（2）i7中如何进行地址翻译</h3><ul>
+<li><p>CPU发出一个虚拟地址去访存（-48位）</p>
+<ul>
+<li><p><strong>VPN</strong>(&#x3D;TLBT(-32位)+TLBI(-4位))：-36位； <strong>VPO</strong>：-12位(&#x3D;2^12&#x3D;4096B&#x3D;4KB)</p>
+</li>
+<li><p>根据TLBI查询相应的Set</p>
+</li>
+<li><p>组成52位的物理地址</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041536104.png" alt="image-20240404153626039"></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041535284.png" alt="image-20240404153537221"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041537071.png" alt="image-20240404153719985"></p>
+</li>
+</ul>
+<h2 id="4、Page-Memory-Area（段-Segment）"><a href="#4、Page-Memory-Area（段-Segment）" class="headerlink" title="4、Page Memory Area（段&#x2F;Segment）"></a>4、Page Memory Area（段&#x2F;Segment）</h2><blockquote>
+<ol>
+<li><strong>进程私有部分（Process Private Memory）：</strong> 每个进程拥有自己独立的虚拟内存空间，包括代码、数据、堆、栈等部分。这些内存区域是进程私有的，不同进程之间互不干扰。当进程被创建时，操作系统会为其分配一定的虚拟地址空间，进程可以在这个地址空间中进行内存操作。</li>
+<li><strong>内核部分（Kernel Space）：</strong> 所有进程共享一份内核虚拟内存空间，其中包含了操作系统的内核代码和数据。这部分内存空间被所有进程共享，用于执行操作系统提供的系统调用、管理硬件资源等操作。进程无法直接访问内核空间，需要通过系统调用等方式请求操作系统执行相应的操作。</li>
+</ol>
+<p>总之，每个进程都有自己独立的虚拟内存空间，但所有进程共享一份内核虚拟内存空间。这种设计既保证了进程间的隔离和安全性，又能够高效地共享操作系统提供的资源和功能。</p>
+</blockquote>
+<ul>
+<li>pdg——page global directory</li>
+<li>mmap——结构体<ul>
+<li>vm_start-vm_end——该段的起始地址到结束地址，如：共享库&#x2F;Data</li>
+<li>vm_prot——protect 段的权限信息</li>
+<li>vm_flags——段的某些属性</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041539849.png" alt="image-20240404153947715"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
         <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>OpenPose原理及编译</title>
-    <url>/2023/12/25/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/</url>
-    <content><![CDATA[<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
-<p>识别人体骨干躯干的关键点，并进行定位与拼接。</p>
-<span id="more"></span>
-
-<p>2、姿态估计中的难点是什么？</p>
-<p><strong>（1）遮挡；（2）匹配。</strong></p>
-<p>3、COCO数据集的关键点有几个，分别是？</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524168.png" alt="COCO数据集关键点" style="zoom: 50%;" />
-
-<p>数据集中是<code>17</code>个点，实际上训练时候还要加上<code>1</code>个脖子的点，共<code>18</code>个点。</p>
-<p>4、姿态估计方法分为几个大类？</p>
-<p>（1）<code>Top-down</code>（自顶向下）：先检测所有的人，再对每个框的人进行姿态估计输出结果</p>
-<p>优点：准确率高，点的回归率高；</p>
-<p>缺点：算法性能依赖检测效果，复杂度较高，实时性比较差。</p>
-<p>主要用于一些离线的项目，对实时性没要求。</p>
-<p>（2）<code>bottom-up</code>（自底向上）：先检测所有关键点，再进行匹配连接</p>
-<p>优点：计算量较小，可以达到实时性的效果；</p>
-<p>缺点：精度较差，匹配策略比较复杂。</p>
-<h2 id="2-论文解读"><a href="#2-论文解读" class="headerlink" title="2 论文解读"></a>2 论文解读</h2><p>论文地址：<a href="https://arxiv.org/pdf/1611.08050.pdf">https://arxiv.org/pdf/1611.08050.pdf</a></p>
-<h3 id="1、网络框架"><a href="#1、网络框架" class="headerlink" title="1、网络框架"></a>1、网络框架</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524273.png" alt="网络整体流程图">	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251532476.jpg" alt="网络框架1"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251534898.png" alt="网络框架2"></p>
-<p>其中的重点：</p>
-<p>（1）关键点的<code>heatmap</code>标注生成，采用高斯热度图的方式；</p>
-<p>（2）<code>PAF</code>：部分亲和域。这也是论文中的重点和难点；</p>
-<p>（3）匹配策略：匈牙利匹配。</p>
-<h3 id="2、数据制作"><a href="#2、数据制作" class="headerlink" title="2、数据制作"></a>2、数据制作</h3><p>采用的数据集为<code>COCO</code>数据集，其中人体骨骼点的标注信息为<code>[x, y, label]</code>。</p>
-<p><code>label</code>取值为<code>0</code>、<code>1</code>、<code>2</code>，分别表示不存在、遮挡、正常，其中不存在的关键点是需要去除的。</p>
-<p>（1）关键点高斯热力图实现：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putGaussianMaps</span>(<span class="params">center, accumulate_confid_map, sigma, grid_y, grid_x, stride</span>):</span><br><span class="line"></span><br><span class="line">    start = stride / <span class="number">2.0</span> - <span class="number">0.5</span></span><br><span class="line">    y_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_y))]</span><br><span class="line">    x_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_x))]</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)      <span class="comment"># 构建棋盘</span></span><br><span class="line">    xx = xx * stride + start                    <span class="comment"># 每个点在原始图像上的位置</span></span><br><span class="line">    yy = yy * stride + start</span><br><span class="line">    d2 = (xx - center[<span class="number">0</span>]) ** <span class="number">2</span> + (yy - center[<span class="number">1</span>]) ** <span class="number">2</span>  <span class="comment"># 计算每个点和GT点的距离</span></span><br><span class="line">    exponent = d2 / <span class="number">2.0</span> / sigma / sigma                 <span class="comment"># 这里在做一个高斯计算</span></span><br><span class="line">    mask = exponent &lt;= <span class="number">4.6052</span>                           <span class="comment"># 将在这个阈值范围内的点用True记录</span></span><br><span class="line">    cofid_map = np.exp(-exponent)                       <span class="comment"># 这里做一个标准化</span></span><br><span class="line">    cofid_map = np.multiply(mask, cofid_map)            <span class="comment"># 取出对应关系为True的点</span></span><br><span class="line">    accumulate_confid_map += cofid_map                  <span class="comment"># 将每个点计算的结果都累加到上一次的特征中</span></span><br><span class="line">    accumulate_confid_map[accumulate_confid_map &gt; <span class="number">1.0</span>] = <span class="number">1.0</span>      <span class="comment"># 对结果大于1的值，只取1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> accumulate_confid_map    <span class="comment"># 返回热力图（heatmap）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>（2）PAF数据计算的实现：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putVecMaps</span>(<span class="params">centerA, centerB, accumulate_vec_map, count, grid_y, grid_x, stride</span>):</span><br><span class="line">    centerA = centerA.astype(<span class="built_in">float</span>)</span><br><span class="line">    centerB = centerB.astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line">    thre = <span class="number">1</span>  <span class="comment"># 表示宽度，也就是一个设定好的参数</span></span><br><span class="line">    centerB = centerB / stride  <span class="comment"># 缩放比例特定到特征图中</span></span><br><span class="line">    centerA = centerA / stride</span><br><span class="line"></span><br><span class="line">    limb_vec = centerB - centerA  <span class="comment"># 求出两个点的向量</span></span><br><span class="line">    norm = np.linalg.norm(limb_vec)  <span class="comment"># 是需要求单位向量，所以先计算范数，也就是向量模长</span></span><br><span class="line">    <span class="keyword">if</span> (norm == <span class="number">0.0</span>):  <span class="comment"># 这里表示两个点基本重合了</span></span><br><span class="line">        <span class="comment"># print &#x27;limb is too short, ignore it...&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line">    limb_vec_unit = limb_vec / norm  <span class="comment"># 向量除以模长，得到单位向量</span></span><br><span class="line">    <span class="comment"># print &#x27;limb unit vector: &#123;&#125;&#x27;.format(limb_vec_unit)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To make sure not beyond the border of this two points</span></span><br><span class="line">    <span class="comment"># 得到所有可能存在方向的区域(这里就用到了之前的超参数阈值)</span></span><br><span class="line">    min_x = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_x = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) + thre)), grid_x)</span><br><span class="line">    min_y = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_y = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) + thre)), grid_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到一个可能存在向量的矩形框</span></span><br><span class="line">    range_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_x), <span class="built_in">int</span>(max_x), <span class="number">1</span>))</span><br><span class="line">    range_y = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_y), <span class="built_in">int</span>(max_y), <span class="number">1</span>))</span><br><span class="line">    xx, yy = np.meshgrid(range_x, range_y)  <span class="comment"># 制作一个网格</span></span><br><span class="line">    ba_x = xx - centerA[<span class="number">0</span>]  <span class="comment"># the vector from (x,y) to centerA 根据位置判断是否在该区域上（分别得到X和Y方向的）</span></span><br><span class="line">    ba_y = yy - centerA[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 向量叉乘根据阈值选择赋值区域，任何向量与单位向量的叉乘即为四边形的面积</span></span><br><span class="line">    <span class="comment"># 这里是重点步骤，也就是论文中的公式，表示计算出两个向量组成四边形的面积</span></span><br><span class="line">    limb_width = np.<span class="built_in">abs</span>(ba_x * limb_vec_unit[<span class="number">1</span>] - ba_y * limb_vec_unit[<span class="number">0</span>])</span><br><span class="line">    mask = limb_width &lt; thre  <span class="comment"># mask is 2D （小于阈值的表示在该区域上）</span></span><br><span class="line"></span><br><span class="line">    vec_map = np.copy(accumulate_vec_map) * <span class="number">0.0</span>  <span class="comment"># 构建一个全为0的矩阵</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这行代码主要作用是将mask扩展一个维度并且赋值给vec_map数组</span></span><br><span class="line">    vec_map[yy, xx] = np.repeat(mask[:, :, np.newaxis], <span class="number">2</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 在该区域上的都用对应的方向向量表示（根据mask结果表示是否在，通过乘法的方式）</span></span><br><span class="line">    vec_map[yy, xx] *= limb_vec_unit[np.newaxis, np.newaxis, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #在特征图中（46*46）中 哪些区域是该躯干所在区域，判断x或者y向量都不为0</span></span><br><span class="line">    mask = np.logical_or.reduce(</span><br><span class="line">        (np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">0</span>]) &gt; <span class="number">0</span>, np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每次返回的accumulate_vec_map都是平均值，现在还原成实际值</span></span><br><span class="line">    accumulate_vec_map = np.multiply(</span><br><span class="line">        accumulate_vec_map, count[:, :, np.newaxis])</span><br><span class="line">    accumulate_vec_map += vec_map  <span class="comment"># 加上当前关键点位置形成的向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] += <span class="number">1</span>  <span class="comment"># 该区域计算次数都+1</span></span><br><span class="line"></span><br><span class="line">    mask = count == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">1</span>  <span class="comment"># 没有被计算过的地方就等于自身（因为一会要除法）</span></span><br><span class="line"></span><br><span class="line">    accumulate_vec_map = np.divide(accumulate_vec_map, count[:, :, np.newaxis])  <span class="comment"># 算平均向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">0</span>  <span class="comment"># 还原回去</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这两个函数是最重要的两个部分，也就是对训练数据的处理，生成出需要的训练数据。</p>
-<h3 id="3、预测推理"><a href="#3、预测推理" class="headerlink" title="3、预测推理"></a>3、预测推理</h3><p>预测模型这里，在官方源码中是将<code>paf</code>的处理封装在一个<code>cpp</code>库中，<strong>通过编译得到静态库，代码中可以调用</strong>。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">swig -python -c++ pafprocess.i</span><br><span class="line">python3 setup.py build_ext --inplace</span><br></pre></td></tr></table></figure>
-
-<p>这里PAF的处理主要是采用积分计算的方式，也就是对于连线的点的方向选择，采用积分的方式计算最佳连线策略。</p>
-<h2 id="3-OpenPose-Windows-cpu-only-编译"><a href="#3-OpenPose-Windows-cpu-only-编译" class="headerlink" title="3 OpenPose_Windows_cpu_only 编译"></a>3 OpenPose_Windows_cpu_only 编译</h2><p>主要步骤参考：</p>
-<p><a href="https://blog.csdn.net/qq_51209492/article/details/124185106?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AE%89%E8%A3%85openpose%E5%B9%B6%E4%BD%BF%E7%94%A8python%E8%B0%83%E7%94%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124185106.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">CSDN——win10环境下下载安装openpose(only cpu)并在pycharm中运行代码（超详细）</a></p>
-<p>基本按照这上面来走就可以正确编译，但其中要注意以下几点：</p>
-<p><strong>1、<code>bat</code>批处理命令运行时给的网站我根本无法访问，一直<code>retry</code></strong></p>
-<p>最后选择用迅雷下载，然后放进<code>\openpose\3rdparty\windows</code>文件夹下。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272200864.png" alt="image-20231227220003816"></p>
-<p>同时这里面的<code>caffe_cpu</code>不是用这4个<code>bat</code>文件下载的，但是由于网址同样进不去，也选择先用迅雷下载好后放进去。</p>
-<p>我这里的4个<code>zip</code>文件大小显示为<code>0kb</code>似乎是<code>cmake</code>编译后自己更改的，不用去管。</p>
-<p><strong>2、用迅雷提前下载好<code>\openpose\models</code>后，<code>cmake</code>编译依然会重新下载模型。</strong></p>
-<p>这里我参考了<a href="https://zhuanlan.zhihu.com/p/446981890">OpenPose-CPU版本安装</a>的方法：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272207425.png" alt="image-20231227220706339"></p>
-<p>修改<code>CmakeLists.txt</code>文件后就不会再重新下载模型了。</p>
-<p><strong>3、用<code>CMAKE</code>编译<code>openpose</code>项目时，一定要在第一次<code>configure</code>之前，点击<code>Add Entry</code>选择<code>Python</code>版本。</strong></p>
-<p>如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272202637.png" alt="在这里插入图片描述"></p>
-<p>实际上这一步就是要确保在<code>cmake</code>编译时访问的<code>python</code>解释器和最后在<code>pycharm</code>中运行时选择的python解释器一致，否则可能会在<code>pycharm</code>中报错<code>No module named pyopenpose</code>。</p>
-<p>我第一次在这里就是因为没有关注这个细节，导致<code>cmake</code>选择的是<code>python 3.6.5</code>的编译器，而<code>pycharm</code>选择的是<code>3.7.6</code>的编译器，出现错误。</p>
-<p><strong>4、最好采用本地<code>python</code>解释器，不要用<code>anaconda</code>虚拟环境。</strong></p>
-<p>我也不知道为什么虚拟环境会报错，可能还是路径的问题吧。</p>
-]]></content>
-      <categories>
-        <category>深度学习算法</category>
       </categories>
   </entry>
   <entry>
@@ -1586,156 +1641,6 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Project 1 (Spring 2023)</title>
-    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
-    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
-<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
-<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
-<span id="more"></span>
-
-<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
-<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
-<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
-<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
-<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
-<p>错误代码处为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
-
-<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
-<p>修正后为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
-<p>错误代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
-<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
-
-<p>此时上述代码可修改为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
-<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
-<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
-<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
-<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>NewPage</code>：<ul>
-<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
-<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>创建新<code>page</code>；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
-</li>
-<li><code>FetchPage</code>：<ul>
-<li>找<code>page_id</code>对应的页：<ul>
-<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
-<li>若找到，<code>pin_count_</code>自增；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
-</ul>
-</li>
-<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
-<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
-<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>UnpinPage</code>：<ul>
-<li>若<code>page_id</code>不存在，直接返回；</li>
-<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并设置<code>frame</code>可驱逐；</li>
-<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
-<p>正确的顺序应该是：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
-<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
-<p>引起错误的代码行为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
-
-<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
-<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
-
-<h1 id="Task-3-Read-Write-Page-Guards"><a href="#Task-3-Read-Write-Page-Guards" class="headerlink" title="Task #3 - Read&#x2F;Write Page Guards"></a>Task #3 - Read&#x2F;Write Page Guards</h1><blockquote>
-<p>您将实现BasicPageGuard，它存储指向BufferPoolManager和Page对象的指针。页面保护确保在相应的page对象超出作用域时立即在其上调用UnpinPage。注意，它仍然应该为程序员提供一个方法来手动解除页面的锁定。</p>
-<p>由于BasicPageGuard隐藏了底层的Page指针，它还可以提供只读&#x2F;写数据api，提供编译时检查，以确保针对每种用例正确设置is_dirty标志。</p>
-<p>在未来的项目中，多个线程将从同一个页面读取和写入，因此需要读写锁存器来确保数据的正确性。请注意，在Page类中，有用于此目的的相关锁存方法。与页面的解锁类似，程序员在使用页面后可能会忘记解锁页面。为了缓解这个问题，你将实现ReadPageGuard和WritePageGuard，它们会在页面超出范围时自动解锁。</p>
-<p>你需要为所有的BasicPageGuard, ReadPageGuard和WritePageGuard实现以下函数。</p>
-<ul>
-<li><code>PageGuard(PageGuard &amp;&amp;that)</code> : Move constructor.</li>
-<li><code>operator=(PageGuard &amp;&amp;that)</code> : Move operator.</li>
-<li><code>Drop()</code> : Unpin and&#x2F;or unlatch.</li>
-<li><code>~PageGuard()</code> : Destructor.</li>
-</ul>
-<p>使用新的页面保护，在BufferPoolManager中实现以下wrappers。</p>
-<ul>
-<li><code>FetchPageBasic(page_id_t page_id)</code></li>
-<li><code>FetchPageRead(page_id_t page_id)</code></li>
-<li><code>FetchPageWrite(page_id_t page_id)</code></li>
-<li><code>NewPageGuarded(page_id_t *page_id)</code></li>
-</ul>
-</blockquote>
-<p>这个<code>task</code>的重点就是实现移动构造、移动幅值、<code>Drop</code>和析构这四个函数。</p>
-<h1 id="GradeScope在线测试"><a href="#GradeScope在线测试" class="headerlink" title="GradeScope在线测试"></a>GradeScope在线测试</h1><h2 id="1、LRUKReplacerTest-Evict"><a href="#1、LRUKReplacerTest-Evict" class="headerlink" title="1、LRUKReplacerTest.Evict"></a>1、LRUKReplacerTest.Evict</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19: /autograder/source/bustub/test/buffer/grading_lru_k_replacer_test.cpp:276: Failure</span><br><span class="line">19: Expected equality of these values:</span><br><span class="line">19:   i</span><br><span class="line">19:     Which is: 100</span><br><span class="line">19:   result</span><br><span class="line">19:     Which is: 0</span><br><span class="line">19: Check your return value behavior for LRUKReplacer::Evict</span><br></pre></td></tr></table></figure>
-
-<p>这个问题我真的研究了很久，本地测试和前面的一大部分在线测试都可以过，但是就是卡在这里。后来查了很久，知乎上有一个博主说是发现他的<code>LRUKReplacer::Remove</code>。于是我去检查了我的<code>Remove</code>函数，发现我也没有写完……我只在<code>node_store_</code>中进行了删除，而没有在<code>node_less_k_</code>或者<code>node_more_k_</code>中删除，补上后这个测试就通过了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (it-&gt;second-&gt;is_evictable_) &#123;</span><br><span class="line">      <span class="comment">// 该帧为可驱逐状态，继续操作</span></span><br><span class="line">      it-&gt;second-&gt;history_.<span class="built_in">clear</span>();</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      <span class="keyword">if</span> (it-&gt;second-&gt;pos_ != node_less_k_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        node_less_k_.<span class="built_in">erase</span>(it-&gt;second-&gt;pos_);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        node_more_k_.<span class="built_in">erase</span>(it-&gt;second);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      node_store_.<span class="built_in">erase</span>(it);</span><br><span class="line">      curr_size_--;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、BufferPoolManagerTest-UnpinPage"><a href="#2、BufferPoolManagerTest-UnpinPage" class="headerlink" title="2、BufferPoolManagerTest.UnpinPage"></a>2、BufferPoolManagerTest.UnpinPage</h2><h3 id="DeletePage"><a href="#DeletePage" class="headerlink" title="DeletePage"></a>DeletePage</h3><p>[*]Bug:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">------------------------------------------</span><br><span class="line"><span class="number">7</span>: UnpinPage: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: --- Before UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">2</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">0</span>, frame_id: <span class="number">0</span>, pin_count: <span class="number">1</span>, page_data: page0</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:</span><br><span class="line"><span class="number">7</span>: </span><br><span class="line"><span class="number">7</span>: --- After UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">1</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:  <span class="comment">// free_list的更新出错</span></span><br></pre></td></tr></table></figure>
-
-<p>要在DeletePage中实现将不再使用的frame从Replacer中删除，并重新放入free_list中</p>
-<h3 id="NewPage"><a href="#NewPage" class="headerlink" title="NewPage"></a>NewPage</h3><ul>
-<li>通过evict获取frame时，要先删除其上的old page</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page_table_.<span class="built_in">erase</span>(pages_[frame_id].page_id_);  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="FetchPage"><a href="#FetchPage" class="headerlink" title="FetchPage"></a>FetchPage</h3><ul>
-<li><p>同NewPage，通过evict获取frame时，要先删除其上的old page；</p>
-</li>
-<li><p>若在内存中没找到对应的page，而需要从disk中获取时，注意除了要在page_table中绑定page_id和frame_id，还要在pages_对象中更新page_id和frame_id的绑定关系</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].page_id_ = page_id;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在fetch一个page后，更新其dirty状态为false，因为此时的page刚从disk写完数据</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].is_dirty_ = <span class="literal">false</span>;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="3、BufferPoolManagerTest-ConcurrencyTest"><a href="#3、BufferPoolManagerTest-ConcurrencyTest" class="headerlink" title="3、BufferPoolManagerTest.ConcurrencyTest"></a>3、BufferPoolManagerTest.ConcurrencyTest</h2><p>问题出在每个函数的加锁写在了日志打印后面，因此出现并发错误。</p>
-<h2 id="4、PageGuardTest-DropTest-PageGuardTest-MoveTest"><a href="#4、PageGuardTest-DropTest-PageGuardTest-MoveTest" class="headerlink" title="4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest"></a>4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest</h2><blockquote>
-<p>PageGuardTest.DropTest (0&#x2F;8)<br>PageGuardTest.MoveTest (0&#x2F;8)<br>PageGuardTest.BPMTest (0&#x2F;9)</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403241940804.png" alt="image-20240324194001569"></p>
-<p>经过研究，我重写了PageGuard.cpp中几个函数的逻辑：</p>
-<h3 id="BasicPageGuard"><a href="#BasicPageGuard" class="headerlink" title="BasicPageGuard"></a>BasicPageGuard</h3><h4 id="（1）Drop"><a href="#（1）Drop" class="headerlink" title="（1）Drop()"></a>（1）Drop()</h4><p>忘记了对bpm_重置为nullptr;</p>
-<h4 id="（2）operator-BasicPageGuard-that"><a href="#（2）operator-BasicPageGuard-that" class="headerlink" title="（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)</h4><p>注意要先调用<code>Drop()</code>来drop掉当前的old guarded page，然后再进行资源转移。</p>
-<h3 id="ReadPageGuard"><a href="#ReadPageGuard" class="headerlink" title="ReadPageGuard"></a>ReadPageGuard</h3><h4 id="（1）ReadPageGuard-ReadPageGuard-that"><a href="#（1）ReadPageGuard-ReadPageGuard-that" class="headerlink" title="（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)"></a>（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)</h4><p>虽然.cpp文件中写的是<code>=default</code>，但.h文件中又要求实现，所以还是实现了一下。</p>
-<h4 id="（2）operator-ReadPageGuard-that"><a href="#（2）operator-ReadPageGuard-that" class="headerlink" title="（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)</h4><p>这里我最开始只调用了<code>std::move(that.guard_)</code>，实际上应该1)先在page_不为空时进行解读锁；2)然后进行资源转移。</p>
-<h4 id="（3）Drop"><a href="#（3）Drop" class="headerlink" title="（3）Drop()"></a>（3）Drop()</h4><p>这里和重载移动赋值运算符一样，最开始只调用了<code>Drop()</code>，而实际上也应该先解读锁。</p>
-<h3 id="WritePageGuard"><a href="#WritePageGuard" class="headerlink" title="WritePageGuard"></a>WritePageGuard</h3><p>和ReadPageGuard同理。</p>
-<p>最后，历时许久，第一个Project终于通过了！</p>
-<p><img src="C:/Users/86135/Desktop/202403242032692.png" alt="image-20240324203210481"></p>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>cmu15-445 Project 0 (Spring 2023)</title>
     <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
     <content><![CDATA[<h1 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h1><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
@@ -2022,6 +1927,156 @@
 <h3 id="src-storage-index-b-plus-tree-cpp"><a href="#src-storage-index-b-plus-tree-cpp" class="headerlink" title="src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp"></a>src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze1: emplace_back()</span><br></pre></td></tr></table></figure>
 
 <h1 id="Checkpoint-2-85-points"><a href="#Checkpoint-2-85-points" class="headerlink" title="Checkpoint #2 (85 points)"></a><strong>Checkpoint #2 (85 points)</strong></h1><h2 id="Task-2b-B-Tree-Data-Structure-Deletion"><a href="#Task-2b-B-Tree-Data-Structure-Deletion" class="headerlink" title="Task #2b - B+Tree Data Structure (Deletion)"></a>Task #2b - B+Tree Data Structure (Deletion)</h2><h2 id="Task-3-Index-Iterator"><a href="#Task-3-Index-Iterator" class="headerlink" title="Task #3 - Index Iterator"></a>Task #3 - Index Iterator</h2><h2 id="Task-4-Concurrency-Control"><a href="#Task-4-Concurrency-Control" class="headerlink" title="Task #4 - Concurrency Control"></a>Task #4 - Concurrency Control</h2>]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cmu15-445 Project 1 (Spring 2023)</title>
+    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
+    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
+<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
+<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
+<span id="more"></span>
+
+<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
+<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
+<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
+<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
+<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
+<p>错误代码处为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
+
+<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
+<p>修正后为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
+<p>错误代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
+<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
+
+<p>此时上述代码可修改为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
+<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
+<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
+<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
+<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>NewPage</code>：<ul>
+<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
+<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>创建新<code>page</code>；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
+</ul>
+</li>
+<li><code>FetchPage</code>：<ul>
+<li>找<code>page_id</code>对应的页：<ul>
+<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
+<li>若找到，<code>pin_count_</code>自增；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+</ul>
+</li>
+<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
+<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>UnpinPage</code>：<ul>
+<li>若<code>page_id</code>不存在，直接返回；</li>
+<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并设置<code>frame</code>可驱逐；</li>
+<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
+<p>正确的顺序应该是：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
+<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
+<p>引起错误的代码行为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
+
+<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
+<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Task-3-Read-Write-Page-Guards"><a href="#Task-3-Read-Write-Page-Guards" class="headerlink" title="Task #3 - Read&#x2F;Write Page Guards"></a>Task #3 - Read&#x2F;Write Page Guards</h1><blockquote>
+<p>您将实现BasicPageGuard，它存储指向BufferPoolManager和Page对象的指针。页面保护确保在相应的page对象超出作用域时立即在其上调用UnpinPage。注意，它仍然应该为程序员提供一个方法来手动解除页面的锁定。</p>
+<p>由于BasicPageGuard隐藏了底层的Page指针，它还可以提供只读&#x2F;写数据api，提供编译时检查，以确保针对每种用例正确设置is_dirty标志。</p>
+<p>在未来的项目中，多个线程将从同一个页面读取和写入，因此需要读写锁存器来确保数据的正确性。请注意，在Page类中，有用于此目的的相关锁存方法。与页面的解锁类似，程序员在使用页面后可能会忘记解锁页面。为了缓解这个问题，你将实现ReadPageGuard和WritePageGuard，它们会在页面超出范围时自动解锁。</p>
+<p>你需要为所有的BasicPageGuard, ReadPageGuard和WritePageGuard实现以下函数。</p>
+<ul>
+<li><code>PageGuard(PageGuard &amp;&amp;that)</code> : Move constructor.</li>
+<li><code>operator=(PageGuard &amp;&amp;that)</code> : Move operator.</li>
+<li><code>Drop()</code> : Unpin and&#x2F;or unlatch.</li>
+<li><code>~PageGuard()</code> : Destructor.</li>
+</ul>
+<p>使用新的页面保护，在BufferPoolManager中实现以下wrappers。</p>
+<ul>
+<li><code>FetchPageBasic(page_id_t page_id)</code></li>
+<li><code>FetchPageRead(page_id_t page_id)</code></li>
+<li><code>FetchPageWrite(page_id_t page_id)</code></li>
+<li><code>NewPageGuarded(page_id_t *page_id)</code></li>
+</ul>
+</blockquote>
+<p>这个<code>task</code>的重点就是实现移动构造、移动幅值、<code>Drop</code>和析构这四个函数。</p>
+<h1 id="GradeScope在线测试"><a href="#GradeScope在线测试" class="headerlink" title="GradeScope在线测试"></a>GradeScope在线测试</h1><h2 id="1、LRUKReplacerTest-Evict"><a href="#1、LRUKReplacerTest-Evict" class="headerlink" title="1、LRUKReplacerTest.Evict"></a>1、LRUKReplacerTest.Evict</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19: /autograder/source/bustub/test/buffer/grading_lru_k_replacer_test.cpp:276: Failure</span><br><span class="line">19: Expected equality of these values:</span><br><span class="line">19:   i</span><br><span class="line">19:     Which is: 100</span><br><span class="line">19:   result</span><br><span class="line">19:     Which is: 0</span><br><span class="line">19: Check your return value behavior for LRUKReplacer::Evict</span><br></pre></td></tr></table></figure>
+
+<p>这个问题我真的研究了很久，本地测试和前面的一大部分在线测试都可以过，但是就是卡在这里。后来查了很久，知乎上有一个博主说是发现他的<code>LRUKReplacer::Remove</code>。于是我去检查了我的<code>Remove</code>函数，发现我也没有写完……我只在<code>node_store_</code>中进行了删除，而没有在<code>node_less_k_</code>或者<code>node_more_k_</code>中删除，补上后这个测试就通过了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (it-&gt;second-&gt;is_evictable_) &#123;</span><br><span class="line">      <span class="comment">// 该帧为可驱逐状态，继续操作</span></span><br><span class="line">      it-&gt;second-&gt;history_.<span class="built_in">clear</span>();</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      <span class="keyword">if</span> (it-&gt;second-&gt;pos_ != node_less_k_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        node_less_k_.<span class="built_in">erase</span>(it-&gt;second-&gt;pos_);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        node_more_k_.<span class="built_in">erase</span>(it-&gt;second);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      node_store_.<span class="built_in">erase</span>(it);</span><br><span class="line">      curr_size_--;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、BufferPoolManagerTest-UnpinPage"><a href="#2、BufferPoolManagerTest-UnpinPage" class="headerlink" title="2、BufferPoolManagerTest.UnpinPage"></a>2、BufferPoolManagerTest.UnpinPage</h2><h3 id="DeletePage"><a href="#DeletePage" class="headerlink" title="DeletePage"></a>DeletePage</h3><p>[*]Bug:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">------------------------------------------</span><br><span class="line"><span class="number">7</span>: UnpinPage: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: --- Before UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">2</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">0</span>, frame_id: <span class="number">0</span>, pin_count: <span class="number">1</span>, page_data: page0</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:</span><br><span class="line"><span class="number">7</span>: </span><br><span class="line"><span class="number">7</span>: --- After UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">1</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:  <span class="comment">// free_list的更新出错</span></span><br></pre></td></tr></table></figure>
+
+<p>要在DeletePage中实现将不再使用的frame从Replacer中删除，并重新放入free_list中</p>
+<h3 id="NewPage"><a href="#NewPage" class="headerlink" title="NewPage"></a>NewPage</h3><ul>
+<li>通过evict获取frame时，要先删除其上的old page</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page_table_.<span class="built_in">erase</span>(pages_[frame_id].page_id_);  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="FetchPage"><a href="#FetchPage" class="headerlink" title="FetchPage"></a>FetchPage</h3><ul>
+<li><p>同NewPage，通过evict获取frame时，要先删除其上的old page；</p>
+</li>
+<li><p>若在内存中没找到对应的page，而需要从disk中获取时，注意除了要在page_table中绑定page_id和frame_id，还要在pages_对象中更新page_id和frame_id的绑定关系</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].page_id_ = page_id;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在fetch一个page后，更新其dirty状态为false，因为此时的page刚从disk写完数据</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].is_dirty_ = <span class="literal">false</span>;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3、BufferPoolManagerTest-ConcurrencyTest"><a href="#3、BufferPoolManagerTest-ConcurrencyTest" class="headerlink" title="3、BufferPoolManagerTest.ConcurrencyTest"></a>3、BufferPoolManagerTest.ConcurrencyTest</h2><p>问题出在每个函数的加锁写在了日志打印后面，因此出现并发错误。</p>
+<h2 id="4、PageGuardTest-DropTest-PageGuardTest-MoveTest"><a href="#4、PageGuardTest-DropTest-PageGuardTest-MoveTest" class="headerlink" title="4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest"></a>4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest</h2><blockquote>
+<p>PageGuardTest.DropTest (0&#x2F;8)<br>PageGuardTest.MoveTest (0&#x2F;8)<br>PageGuardTest.BPMTest (0&#x2F;9)</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403241940804.png" alt="image-20240324194001569"></p>
+<p>经过研究，我重写了PageGuard.cpp中几个函数的逻辑：</p>
+<h3 id="BasicPageGuard"><a href="#BasicPageGuard" class="headerlink" title="BasicPageGuard"></a>BasicPageGuard</h3><h4 id="（1）Drop"><a href="#（1）Drop" class="headerlink" title="（1）Drop()"></a>（1）Drop()</h4><p>忘记了对bpm_重置为nullptr;</p>
+<h4 id="（2）operator-BasicPageGuard-that"><a href="#（2）operator-BasicPageGuard-that" class="headerlink" title="（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)</h4><p>注意要先调用<code>Drop()</code>来drop掉当前的old guarded page，然后再进行资源转移。</p>
+<h3 id="ReadPageGuard"><a href="#ReadPageGuard" class="headerlink" title="ReadPageGuard"></a>ReadPageGuard</h3><h4 id="（1）ReadPageGuard-ReadPageGuard-that"><a href="#（1）ReadPageGuard-ReadPageGuard-that" class="headerlink" title="（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)"></a>（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)</h4><p>虽然.cpp文件中写的是<code>=default</code>，但.h文件中又要求实现，所以还是实现了一下。</p>
+<h4 id="（2）operator-ReadPageGuard-that"><a href="#（2）operator-ReadPageGuard-that" class="headerlink" title="（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)</h4><p>这里我最开始只调用了<code>std::move(that.guard_)</code>，实际上应该1)先在page_不为空时进行解读锁；2)然后进行资源转移。</p>
+<h4 id="（3）Drop"><a href="#（3）Drop" class="headerlink" title="（3）Drop()"></a>（3）Drop()</h4><p>这里和重载移动赋值运算符一样，最开始只调用了<code>Drop()</code>，而实际上也应该先解读锁。</p>
+<h3 id="WritePageGuard"><a href="#WritePageGuard" class="headerlink" title="WritePageGuard"></a>WritePageGuard</h3><p>和ReadPageGuard同理。</p>
+<p>最后，历时许久，第一个Project终于通过了！</p>
+<p><img src="C:/Users/86135/Desktop/202403242032692.png" alt="image-20240324203210481"></p>
+]]></content>
       <categories>
         <category>Project</category>
         <category>cmu15-445</category>
