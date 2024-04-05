@@ -29,10 +29,21 @@
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
 <meta property="og:description" content="Ch10 系统级I&#x2F;O">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052220580.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052222286.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052223245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052227053.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052233018.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235910.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235669.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052239600.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png">
 <meta property="article:published_time" content="2024-04-03T03:20:45.363Z">
-<meta property="article:modified_time" content="2024-04-03T14:22:41.009Z">
+<meta property="article:modified_time" content="2024-04-05T14:42:08.483Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png">
 
 <link rel="canonical" href="http://example.com/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/">
 
@@ -216,10 +227,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-03 11:20:45 / 修改时间：22:22:41" itemprop="dateCreated datePublished" datetime="2024-04-03T11:20:45+08:00">2024-04-03</time>
+              <time title="创建时间：2024-04-03 11:20:45" itemprop="dateCreated datePublished" datetime="2024-04-03T11:20:45+08:00">2024-04-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-05 22:42:08" itemprop="dateModified" datetime="2024-04-05T22:42:08+08:00">2024-04-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,14 +257,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7</span>
+              <span>680</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -260,6 +277,91 @@
 
       
         <h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
+
+<p><strong>I-Input&#x2F;O-Output：外设和内存之间进行数据交互的过程</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png" alt="image-20240405220142526"></p>
+<h2 id="1、系统级I-O"><a href="#1、系统级I-O" class="headerlink" title="1、系统级I&#x2F;O"></a>1、系统级I&#x2F;O</h2><h3 id="（1）Unix-I-O"><a href="#（1）Unix-I-O" class="headerlink" title="（1）Unix I&#x2F;O"></a>（1）Unix I&#x2F;O</h3><ul>
+<li>Opening files——返回文件描述符（file discripitor，fd）<ul>
+<li>standard unput</li>
+<li>standard output</li>
+<li>standard err</li>
+</ul>
+</li>
+<li>Changing the current file（改变当前文件的位置）</li>
+<li>Reading and Writing files</li>
+<li>Closing files</li>
+</ul>
+<h3 id="（2）Files"><a href="#（2）Files" class="headerlink" title="（2）Files"></a>（2）Files</h3><ul>
+<li><p><strong>Regular file</strong>（普通文件）</p>
+</li>
+<li><p><strong>Directory</strong>（目录文件）</p>
+<ul>
+<li>相当于文件夹，是一个<strong>存储链接信息</strong>的数组，即<strong>文件和文件名的映射</strong></li>
+</ul>
+</li>
+<li><p><strong>Socket</strong>（套接字）</p>
+</li>
+<li><p><strong>named pipe</strong>（命名管道），<strong>symbolic link</strong>（符号链接），<strong>character and block device</strong>（字符和块设备）</p>
+<ul>
+<li>如键盘、鼠标等为字符设备；硬盘为块设备</li>
+</ul>
+</li>
+<li><p><strong>usr</strong>——Unix Software Resources的缩写</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052220580.png" alt="image-20240405222033196"></p>
+<h3 id="（3）Opening-and-Closing-Files"><a href="#（3）Opening-and-Closing-Files" class="headerlink" title="（3）Opening and Closing Files"></a>（3）Opening and Closing Files</h3><ul>
+<li><p>打开文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052222286.png" alt="image-20240405222257203"></p>
+</li>
+<li><p>关闭文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052223245.png" alt="image-20240405222318176"></p>
+</li>
+</ul>
+<h3 id="（4）File-Permission"><a href="#（4）File-Permission" class="headerlink" title="（4）File Permission"></a>（4）File Permission</h3><ul>
+<li><p>User（文件拥有者）</p>
+</li>
+<li><p>Group（群组）</p>
+</li>
+<li><p>Others（其他人）</p>
+</li>
+<li><p>观察下图，可以看出：</p>
+<ul>
+<li>普通文件由<code>-</code>开头；目录文件由<code>d</code>开头</li>
+<li><code>rwx</code>：<ul>
+<li><code>r</code>：read</li>
+<li><code>w</code>：write</li>
+<li><code>x</code>：execute</li>
+</ul>
+</li>
+<li>一共有三组，如hello.c：<code>-rw-rw-r--</code>，可以看作是：<code>-|rw-|rw-|r--</code>，分别对应User、Group和Others的权限</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052227053.png" alt="image-20240405222704994"></p>
+<h3 id="（5）Reading-and-Writing-Files"><a href="#（5）Reading-and-Writing-Files" class="headerlink" title="（5）Reading and Writing Files"></a>（5）Reading and Writing Files</h3><ul>
+<li><code>EOF</code>：End of File</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052233018.png" alt="image-20240405223313949"></p>
+<h3 id="（6）Reading-File-Metadata"><a href="#（6）Reading-File-Metadata" class="headerlink" title="（6）Reading File Metadata"></a>（6）Reading File Metadata</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235910.png" alt="image-20240405223528846"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235669.png" alt="image-20240405223540586"></p>
+<h2 id="2、Robust-I-O"><a href="#2、Robust-I-O" class="headerlink" title="2、Robust I&#x2F;O"></a>2、Robust I&#x2F;O</h2><p><strong>Robust I&#x2F;O主要用于网络中。</strong></p>
+<blockquote>
+<p>Robust I&#x2F;O（健壮的I&#x2F;O）是一种设计模式，旨在提高程序对输入输出（I&#x2F;O）操作的稳健性和可靠性。具体来说，Robust I&#x2F;O 的作用包括以下几个方面：</p>
+<ol>
+<li><strong>错误处理：</strong> Robust I&#x2F;O 强调对I&#x2F;O操作的错误处理。它会在发生错误时进行适当的处理，例如捕获异常、返回错误码或者记录日志，从而确保程序在出现异常情况时能够做出合适的应对，而不会导致程序崩溃或者数据丢失。</li>
+<li><strong>超时处理：</strong> Robust I&#x2F;O 考虑到可能发生的网络超时、设备故障等情况，会设置适当的超时时间，并在超时发生时进行处理，例如重新尝试连接或者报告错误，以保证程序能够及时响应并继续执行。</li>
+<li><strong>资源释放：</strong> Robust I&#x2F;O 确保在完成I&#x2F;O操作后及时释放资源，避免资源泄露和内存溢出等问题，提高程序的稳定性和性能。</li>
+<li><strong>容错机制：</strong> Robust I&#x2F;O 通过实现容错机制，可以在遇到部分错误或异常情况时，仍然保持程序的正常运行，尽量避免中断整个操作流程。</li>
+<li><strong>重试机制：</strong> Robust I&#x2F;O 可能会实现重试机制，以确保在出现一次性错误时，能够尝试多次重复操作，从而提高操作的成功率。</li>
+</ol>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052239600.png" alt="image-20240405223951531"></p>
+<ul>
+<li><p>rio_t结构体</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png" alt="image-20240405224031108"></p>
+</li>
+</ul>
 
     </div>
 
@@ -340,7 +442,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch10-%E7%B3%BB%E7%BB%9F%E7%BA%A7I-O"><span class="nav-number">1.</span> <span class="nav-text">Ch10 系统级I&#x2F;O</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch10-%E7%B3%BB%E7%BB%9F%E7%BA%A7I-O"><span class="nav-number">1.</span> <span class="nav-text">Ch10 系统级I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E7%BA%A7I-O"><span class="nav-number">1.1.</span> <span class="nav-text">1、系统级I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Unix-I-O"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）Unix I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Files"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Opening-and-Closing-Files"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）Opening and Closing Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89File-Permission"><span class="nav-number">1.1.4.</span> <span class="nav-text">（4）File Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%885%EF%BC%89Reading-and-Writing-Files"><span class="nav-number">1.1.5.</span> <span class="nav-text">（5）Reading and Writing Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%886%EF%BC%89Reading-File-Metadata"><span class="nav-number">1.1.6.</span> <span class="nav-text">（6）Reading File Metadata</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Robust-I-O"><span class="nav-number">1.2.</span> <span class="nav-text">2、Robust I&#x2F;O</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -399,12 +501,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">42k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:26</span>
+    <span title="站点阅读时长">2:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

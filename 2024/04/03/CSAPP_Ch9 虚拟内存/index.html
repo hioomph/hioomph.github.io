@@ -50,8 +50,19 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041535284.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041537071.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041539849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042220837.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042221907.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042226192.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042234474.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042235045.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042237697.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042303799.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050001970.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050020437.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050026188.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050028163.png">
 <meta property="article:published_time" content="2024-04-03T03:20:41.434Z">
-<meta property="article:modified_time" content="2024-04-04T08:02:33.761Z">
+<meta property="article:modified_time" content="2024-04-04T16:29:17.302Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032355663.png">
@@ -246,7 +257,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-04 16:02:33" itemprop="dateModified" datetime="2024-04-04T16:02:33+08:00">2024-04-04</time>
+                <time title="修改时间：2024-04-05 00:29:17" itemprop="dateModified" datetime="2024-04-05T00:29:17+08:00">2024-04-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,14 +279,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>11 分钟</span>
             </span>
 
         </div>
@@ -435,7 +446,7 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041537071.png" alt="image-20240404153719985"></p>
 </li>
 </ul>
-<h2 id="4、Page-Memory-Area（段-Segment）"><a href="#4、Page-Memory-Area（段-Segment）" class="headerlink" title="4、Page Memory Area（段&#x2F;Segment）"></a>4、Page Memory Area（段&#x2F;Segment）</h2><blockquote>
+<h3 id="（3）Page-Memory-Area（段-Segment）"><a href="#（3）Page-Memory-Area（段-Segment）" class="headerlink" title="（3）Page Memory Area（段&#x2F;Segment）"></a>（3）Page Memory Area（段&#x2F;Segment）</h3><blockquote>
 <ol>
 <li><strong>进程私有部分（Process Private Memory）：</strong> 每个进程拥有自己独立的虚拟内存空间，包括代码、数据、堆、栈等部分。这些内存区域是进程私有的，不同进程之间互不干扰。当进程被创建时，操作系统会为其分配一定的虚拟地址空间，进程可以在这个地址空间中进行内存操作。</li>
 <li><strong>内核部分（Kernel Space）：</strong> 所有进程共享一份内核虚拟内存空间，其中包含了操作系统的内核代码和数据。这部分内存空间被所有进程共享，用于执行操作系统提供的系统调用、管理硬件资源等操作。进程无法直接访问内核空间，需要通过系统调用等方式请求操作系统执行相应的操作。</li>
@@ -458,6 +469,98 @@
 </li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404041539849.png" alt="image-20240404153947715"></p>
+<h2 id="4、内存映射"><a href="#4、内存映射" class="headerlink" title="4、内存映射"></a>4、内存映射</h2><p>通俗来讲，内存映射（Memory Mapping）是指要把段（Virtual Memory Area）上的内容（比如共享库、数据、代码等）与磁盘中的页关联起来。也即是将磁盘上的页加载到内存中的过程。</p>
+<blockquote>
+<p>内存映射是一种操作系统的内存管理技术，它允许将文件或其他设备映射到进程的虚拟地址空间，使得进程可以通过内存访问的方式来操作文件或设备。</p>
+<p>在内存映射中，操作系统会在进程的虚拟地址空间中创建一个映射区域（Memory-mapped region），将文件的内容或设备的数据映射到这个区域中。进程可以像访问内存一样对这个映射区域进行读写操作，而不需要显式地进行文件的读写或设备的输入输出。</p>
+</blockquote>
+<p>对于如下图所示的ELF（Executable and Linkable Format）文件，将磁盘中的数据按照4KB的大小抽象成一页一页的虚拟页，映射到相应的虚拟地址空间中。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042220837.png" alt="image-20240404222055630"></p>
+<p>这个过程也就是下图所示的<code>Loaded from the executable file</code>，<strong>这个过程只是做了一个映射，而并没有把实际的代码&#x2F;数据等写入真实物理内存。真正执行这一步是依靠缺页处理程序来实现的。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042221907.png" alt="image-20240404222120839"></p>
+<p><strong>这里有个问题，那就是针对下图，对于代码段、数据段以及共享库段等，ELF文件（磁盘上）是有对应的数据对其进行映射的，但对于其他的部分，诸如用户栈、堆等，是没有可以与之映射的。</strong></p>
+<ul>
+<li>解决方法是将栈和堆映射到一个<strong>匿名文件（由内核创建）</strong>，也叫<strong>请求二进制（demand-zero）</strong>，其存储的全是二进制的0。当需要使用堆中的数据时（如malloc()），内核就去物理页中找一个页，用二进制0做覆盖并更新页表。</li>
+</ul>
+<p>也就是说：<strong>操作系统用匿名文件来映射栈和堆区域。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042226192.png" alt="image-20240404222601119"></p>
+<ul>
+<li><p>对于进程间的<strong>共享对象</strong>（如libc.so），不需要再复制一份到内存中，<strong>只需多个进程映射到一个相同的物理地址空间即可</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042234474.png" alt="image-20240404223431408"></p>
+</li>
+<li><p>对于<strong>私有对象</strong>，采用<code>copy-on-write</code>的策略</p>
+<ul>
+<li>在读数据时，和共享对象的映射策略一致；</li>
+<li>一旦某个进程触发了一个写操作，则在写时需要<strong>先将其复制到内存上再进行修改</strong>，如下图2</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042235045.png" alt="image-20240404223543989"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042237697.png" alt="image-20240404223756633"> </p>
+</li>
+<li><p>用户级的内存映射函数：<code>mmap()</code></p>
+<ul>
+<li><code>*start</code>：一般为null，是由内核选择的虚拟地址空间的起始位置</li>
+<li><code>length</code>：要映射的长度</li>
+<li><code>prot</code>：权限问题</li>
+<li><code>fd(file discriptor)</code></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404042303799.png" alt="image-20240404230341734" style="zoom: 50%;" /></li>
+</ul>
+<h2 id="5、动态内存分配"><a href="#5、动态内存分配" class="headerlink" title="5、动态内存分配"></a>5、动态内存分配</h2><p>示例：<code>array = (int *)malloc(n * sizeof(int));</code>其中malloc()申请到的地址空间位于堆中。</p>
+<p><code>brk</code>指针指向堆的最底端，<strong>堆的生长空间是从低地址到高地址</strong>，与之相区别的，<strong>栈的生长空间是从高地址到低地址</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050001970.png" alt="image-20240405000133888" style="zoom:50%;" />
+
+<ul>
+<li><p><strong><code>malloc()</code>的地址返回需要对齐，32位要求为8的倍数，64位要求为16的倍数</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">sbrk</span><span class="params">(<span class="type">intptr_t</span> incr)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Allocator动态分配时的要求</p>
+<ul>
+<li>处理任意请求序列</li>
+<li>立即响应请求</li>
+<li>只使用堆</li>
+<li>对齐块</li>
+<li>不修改已分配的块</li>
+</ul>
+</li>
+<li><p>Allocator动态分配时的目标</p>
+<ul>
+<li>最大化吞吐率</li>
+<li>最大化内存利用率<ul>
+<li>存在<strong>内部碎片（internal fragmentation）</strong>和<strong>外部碎片（external fragmentation）</strong><ul>
+<li><strong>内部碎片：</strong> 当一个分配的内存块的实际大小大于请求的大小时，产生了内部碎片，分配的内存块中存在的一部分空闲的空间</li>
+<li><strong>外部碎片：</strong> 外部碎片是指由于连续的空闲内存块分散在内存中，导致无法满足一个新的内存分配请求。即使系统总的空闲内存足够大，但由于空闲内存块分布不连续，导致无法找到一个足够大的连续空间来满足新的内存分配请求。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用malloc()申请到的一块内存的数据结构：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050020437.png" alt="image-20240405002017373"></p>
+<ul>
+<li><p>Header：头部信息，用户成员无法访问该信息</p>
+<ul>
+<li><p>29个bit表示整个Header的大小</p>
+</li>
+<li><p>0-2位仅0位上有有效信息，表明该块是否被分配</p>
+</li>
+<li><p>这里用29位表示大小，而留下了最后3位，是由于内存对齐的要求下，要求大小为8的倍数，因此对于任意8的倍数的二进制表示，其最低三位都为0</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050026188.png" alt="image-20240405002607101"  /></li>
+</ul>
+</li>
+<li><p>Payload：有效载荷，即实际存放的数据，其大小为请求的内存空间大小</p>
+</li>
+<li><p>Padding：用于内存对齐，用户成员无法访问该信息</p>
+</li>
+</ul>
+</li>
+<li><p>隐式空闲链表（Implicit Free List）</p>
+<ul>
+<li>隐式空闲链表是动态内存分配中一种常见的内存管理数据结构，用于管理堆中的空闲内存块。在隐式空闲链表中，空闲的内存块不是显式地维护在一个链表中，而是通过在堆中连续的空闲内存块之间插入一个特殊的标记来隐式地表示空闲空间的位置和大小</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404050028163.png" alt="image-20240405002833100"></p>
+</li>
+</ul>
 
     </div>
 
@@ -538,7 +641,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch9-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">Ch9 虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">1、虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%A4%E7%A7%8D%E5%AF%BB%E5%9D%80%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）两种寻址方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E9%A1%B5%E8%A1%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）页表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91"><span class="nav-number">1.2.</span> <span class="nav-text">2、地址翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Inter-Core-i7"><span class="nav-number">1.3.</span> <span class="nav-text">3、Inter Core i7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Cache-Hierarchy"><span class="nav-number">1.3.1.</span> <span class="nav-text">（1）Cache Hierarchy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89i7%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91"><span class="nav-number">1.3.2.</span> <span class="nav-text">（2）i7中如何进行地址翻译</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Page-Memory-Area%EF%BC%88%E6%AE%B5-Segment%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">4、Page Memory Area（段&#x2F;Segment）</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch9-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">Ch9 虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">1、虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%A4%E7%A7%8D%E5%AF%BB%E5%9D%80%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">（1）两种寻址方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">（2）虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E9%A1%B5%E8%A1%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">（3）页表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91"><span class="nav-number">1.2.</span> <span class="nav-text">2、地址翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81Inter-Core-i7"><span class="nav-number">1.3.</span> <span class="nav-text">3、Inter Core i7</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Cache-Hierarchy"><span class="nav-number">1.3.1.</span> <span class="nav-text">（1）Cache Hierarchy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89i7%E4%B8%AD%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91"><span class="nav-number">1.3.2.</span> <span class="nav-text">（2）i7中如何进行地址翻译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Page-Memory-Area%EF%BC%88%E6%AE%B5-Segment%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">（3）Page Memory Area（段&#x2F;Segment）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84"><span class="nav-number">1.4.</span> <span class="nav-text">4、内存映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">1.5.</span> <span class="nav-text">5、动态内存分配</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -597,12 +700,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">42k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:26</span>
+    <span title="站点阅读时长">2:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
