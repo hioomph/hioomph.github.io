@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Ch6 存储器层次结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ch6 存储器层次结构">
+<meta property="og:url" content="http://example.com/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="Ch6 存储器层次结构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png">
+<meta property="article:published_time" content="2024-04-03T03:16:44.970Z">
+<meta property="article:modified_time" content="2024-04-03T14:22:27.050Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png">
+
+<link rel="canonical" href="http://example.com/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ch6 存储器层次结构 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ch6 存储器层次结构
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-03 11:16:44 / 修改时间：22:22:27" itemprop="dateCreated datePublished" datetime="2024-04-03T11:16:44+08:00">2024-04-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><span id="more"></span>
+
+<h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
+<ul>
+<li><p>静态RAM（SRAM）</p>
+<ul>
+<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
+</ul>
+</li>
+<li><p>动态RAM（DRAM）</p>
+<ul>
+<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
+</li>
+<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
+</li>
+<li><p>举例：</p>
+<ul>
+<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
+<li>8：每个超单元存储8比特数据</li>
+<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
+</li>
+<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
+
+<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
+
+<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
+
+<p>磁盘访问数据花费时间：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
+
+<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
+<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
+<ul>
+<li><p>闪存芯片（falsh chip）</p>
+<ul>
+<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
+</li>
+<li><p>包含读、写和擦除三个操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
+<li>时间局部性<ul>
+<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
+</ul>
+</li>
+<li>空间局部性<ul>
+<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
+<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
+<ul>
+<li><p>缓存命中（cache Hit）</p>
+<ul>
+<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
+<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
+<li>步骤分三步：<ul>
+<li>set selection（组选择）</li>
+<li>line matching（行匹配）</li>
+<li>word extraction（字抽取）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内部结构</p>
+<ul>
+<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
+</li>
+<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
+</li>
+<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
+<ul>
+<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
+<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
+<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
+<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
+</ul>
+</li>
+<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
+</li>
+<li><p>Issues With Writes</p>
+<ul>
+<li>写命中（Write Hit）<ul>
+<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
+<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
+</ul>
+</li>
+<li>写不命中（Write Miss）<ul>
+<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
+<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
+<li><p>直接映射：每个Set只包含1行cache line</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
+</li>
+<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
+<ul>
+<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
+</li>
+<li><p><strong>s2、行匹配</strong>：</p>
+<ul>
+<li>1、valid是否为1？</li>
+<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
+</ul>
+</li>
+<li><p><strong>s3、字抽取</strong></p>
+<ul>
+<li>若一致，根据Block offset找到确切的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
+
+<ul>
+<li><p>举例说明：假设有一个cache如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
+
+<ul>
+<li>当地址是4位时，整个地址空间用编号0-15表示</li>
+<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
+<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
+</li>
+<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
+</li>
+</ul>
+<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
+<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
+</li>
+<li><p>全相联cache只有一个set</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/03/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/" rel="prev" title="Ch5 优化程序性能">
+      <i class="fa fa-chevron-left"></i> Ch5 优化程序性能
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/03/CSAPP_Ch7%20%E9%93%BE%E6%8E%A5/" rel="next" title="Ch7 链接">
+      Ch7 链接 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch6-%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-text">Ch6 存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF"><span class="nav-text">1、存储技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%88RAM%EF%BC%89"><span class="nav-text">（1）随机访问存储器（RAM）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%9C%BA%E6%A2%B0%E7%A3%81%E7%9B%98"><span class="nav-text">（2）机械磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%9B%BA%E6%80%81%E7%A1%AC%E7%9B%98"><span class="nav-text">（3）固态硬盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B1%80%E9%83%A8%E6%80%A7"><span class="nav-text">（4）程序的局部性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-text">2、存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89cache"><span class="nav-text">（1）cache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-text">（2）直接映射高速缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%BB%84%E7%9B%B8%E8%81%94-%E5%85%A8%E7%9B%B8%E8%81%94%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98"><span class="nav-text">（3）组相联&#x2F;全相联高速缓存</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:33</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
