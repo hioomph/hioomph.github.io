@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Ch1 计算机系统漫游</title>
-    <url>/2024/04/03/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
-    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Ch10 系统级I/O</title>
     <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
     <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
@@ -102,6 +89,19 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png" alt="image-20240405224031108"></p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch1 计算机系统漫游</title>
+    <url>/2024/04/03/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
+    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -1292,106 +1292,6 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
-    <url>/2024/02/28/cmu15-445%20Homework1_SQL/</url>
-    <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> s.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(<span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> o.ShippedDate <span class="operator">&gt;</span> o.RequiredDate <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="operator">*</span> <span class="number">100.0</span> <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>), <span class="number">2</span>) <span class="keyword">AS</span> Percentage</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Shipper <span class="keyword">as</span> s</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] <span class="keyword">as</span> o <span class="keyword">ON</span> s.Id <span class="operator">=</span> o.ShipVia</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> s.CompanyName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Percentage <span class="keyword">DESC</span>; </span><br><span class="line"></span><br><span class="line">United Package<span class="operator">|</span><span class="number">23.44</span></span><br><span class="line">Speedy Express<span class="operator">|</span><span class="number">23.46</span></span><br><span class="line">Federal Shipping<span class="operator">|</span><span class="number">23.61</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> a.CategoryName,</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">COUNT</span>(a.Id) <span class="keyword">AS</span> TotalCategoryCount,</span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(((<span class="keyword">SELECT</span> <span class="built_in">SUM</span>(UnitPrice) <span class="keyword">FROM</span> Category b, Product c <span class="keyword">WHERE</span> b.Id <span class="operator">=</span> c.CategoryId <span class="keyword">AND</span> b.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) <span class="operator">/</span> ((<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> Category d, Product e <span class="keyword">WHERE</span> d.Id <span class="operator">=</span> e.CategoryId <span class="keyword">AND</span> d.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) , <span class="number">2</span>),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MIN</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MAX</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">SUM</span>(f.UnitsOnOrder)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Category a, Product f</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> f.CategoryId</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.CategoryName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> a.Id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">Beverages<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">37.98</span><span class="operator">|</span><span class="number">4.5</span><span class="operator">|</span><span class="number">263.5</span><span class="operator">|</span><span class="number">60</span></span><br><span class="line">Condiments<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">23.06</span><span class="operator">|</span><span class="number">10</span><span class="operator">|</span><span class="number">43.9</span><span class="operator">|</span><span class="number">170</span></span><br><span class="line">Confections<span class="operator">|</span><span class="number">13</span><span class="operator">|</span><span class="number">25.16</span><span class="operator">|</span><span class="number">9.2</span><span class="operator">|</span><span class="number">81</span><span class="operator">|</span><span class="number">180</span></span><br><span class="line">Seafood<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">20.68</span><span class="operator">|</span><span class="number">6</span><span class="operator">|</span><span class="number">62.5</span><span class="operator">|</span><span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> b.CategoryName <span class="operator">=</span> a.CategoryName 这个条件确保了在计算每个类别的商品价格总和时，只考虑了与当前类别相关的商品</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 这是为了满足 <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span> 中的条件</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">*</span><span class="number">1.0</span> 的目的是将整数值转换为浮点数。这是为了确保在计算平均商品价格时，得到的结果是一个浮点数，而不是整数</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q6"><a href="#Q6" class="headerlink" title="Q6*"></a>Q6*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">SELECT</span> p.ProductName, </span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  c1.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> c1.ContactName </span><br><span class="line">  <span class="keyword">FROM</span> Customer c1 </span><br><span class="line">  <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o1 <span class="keyword">ON</span> o1.CustomerId <span class="operator">=</span> c1.Id</span><br><span class="line">  <span class="keyword">JOIN</span> OrderDetail od1 <span class="keyword">ON</span> o1.Id <span class="operator">=</span> od1.OrderID</span><br><span class="line">  <span class="keyword">WHERE</span> od1.ProductId <span class="operator">=</span> p.Id</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> o1.OrderDate <span class="keyword">ASC</span> LIMIT <span class="number">1</span>) <span class="keyword">AS</span> CustomerInfo</span><br><span class="line"><span class="keyword">FROM</span> Product p</span><br><span class="line"><span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> p.Id <span class="operator">=</span> od.ProductId</span><br><span class="line"><span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line"><span class="keyword">JOIN</span> CUSTOMER c <span class="keyword">ON</span> o.CustomerID <span class="operator">=</span> c.Id</span><br><span class="line"><span class="keyword">WHERE</span> p.Discontinued <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.ProductName;</span><br><span class="line"></span><br><span class="line">Alice Mutton<span class="operator">|</span>Consolidated Holdings<span class="operator">|</span>Elizabeth Brown</span><br><span class="line">Chef Anton<span class="string">&#x27;s Gumbo Mix|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Guaraná Fantástica|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Mishi Kobe Niku|Old World Delicatessen|Rene Phillips</span></span><br><span class="line"><span class="string">Perth Pasties|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Rössle Sauerkraut|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Singaporean Hokkien Fried Mee|Vins et alcools Chevalier|Paul Henriot</span></span><br><span class="line"><span class="string">Thüringer Rostbratwurst|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// c1		==&gt; FROM Customer c1 </span></span><br><span class="line"><span class="string">// c1-&gt;o1	==&gt; JOIN [Order] o1 ON o1.CustomerId = c1.Id</span></span><br><span class="line"><span class="string">// o1-&gt;od1	==&gt; JOIN OrderDetail od1 ON o1.Id = od1.OrderID</span></span><br><span class="line"><span class="string">// od1-&gt;p	==&gt; (将子查询和外部主查询联系起来)WHERE od1.ProductId = p.Id</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Q7"><a href="#Q7" class="headerlink" title="Q7*"></a>Q7*</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id, Orderdate, pre_OrderDate, ROUND(julianday(OrderDate)<span class="operator">-</span>julianday(pre_orderdate) , <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> Id, OrderDate, <span class="built_in">LAG</span>(Orderdate, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> CustomerId <span class="keyword">ORDER</span> <span class="keyword">BY</span> OrderDate <span class="keyword">ASC</span>) pre_OrderDate</span><br><span class="line">      <span class="keyword">FROM</span> [<span class="keyword">Order</span>]</span><br><span class="line">      <span class="keyword">WHERE</span> CustomerId <span class="operator">=</span> <span class="string">&#x27;BLONP&#x27;</span></span><br><span class="line">      LIMIT <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">16766</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0</span><span class="operator">|</span><span class="number">2456131.47</span></span><br><span class="line"><span class="number">10265</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2.03</span></span><br><span class="line"><span class="number">12594</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">22.52</span></span><br><span class="line"><span class="number">20249</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.18</span></span><br><span class="line"><span class="number">20882</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2.1</span></span><br><span class="line"><span class="number">18443</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">9.43</span></span><br><span class="line"><span class="number">10297</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">6.77</span></span><br><span class="line"><span class="number">11694</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">13.02</span></span><br><span class="line"><span class="number">25613</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">1.92</span></span><br><span class="line"><span class="number">17361</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-19</span> <span class="number">12</span>:<span class="number">13</span>:<span class="number">21</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.57</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">SELECT</span> julianday(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">Result</span>: <span class="number">2458220.59892027</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 返回从格林尼治时间的公元前 <span class="number">4714</span> 年 <span class="number">11</span> 月 <span class="number">24</span> 日正午算起的天数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">LAG</span>(expr, <span class="keyword">offset</span>, <span class="keyword">default</span>) <span class="keyword">OVER</span> (partition_by_clause order_by_clause)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 计算当前行向前数若干行的值，该函数专门用作窗口函数(<span class="keyword">window</span> functions)，<span class="keyword">partition</span> <span class="keyword">by</span>功能类似<span class="keyword">group</span> <span class="keyword">by</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Q8"><a href="#Q8" class="headerlink" title="Q8*"></a>Q8*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">WITH</span> expenditures <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span> </span><br><span class="line">   ...<span class="operator">&gt;</span>                        IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        o.CustomerId,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        ROUND((<span class="built_in">SUM</span>(od.Quantity <span class="operator">*</span> od.UnitPrice)) , <span class="number">2</span>) <span class="keyword">AS</span> totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> [<span class="keyword">Order</span>] o</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.CustomerId),</span><br><span class="line">   ...<span class="operator">&gt;</span>      quartiles <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="operator">*</span>,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> expenditures)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CompanyName, CustomerId, totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> quartiles</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ExpenditureQuartile <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">MISSING_NAME<span class="operator">|</span>DUMO<span class="operator">|</span><span class="number">1615.9</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>OCEA<span class="operator">|</span><span class="number">3460.2</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>ANTO<span class="operator">|</span><span class="number">7515.35</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>QUEE<span class="operator">|</span><span class="number">30226.1</span></span><br><span class="line">Trail<span class="string">&#x27;s Head Gourmet Provisioners|TRAIH|3874502.02</span></span><br><span class="line"><span class="string">Blondesddsl père et fils|BLONP|3879728.69</span></span><br><span class="line"><span class="string">Around the Horn|AROUT|4395636.28</span></span><br><span class="line"><span class="string">Hungry Owl All-Night Grocers|HUNGO|4431457.1</span></span><br><span class="line"><span class="string">Bon app|BONAP|4485708.49</span></span><br><span class="line"><span class="string">Bólido Comidas preparadas|BOLID|4520121.88</span></span><br><span class="line"><span class="string">Galería del gastrónomo|GALED|4533089.9</span></span><br><span class="line"><span class="string">FISSA Fabrica Inter. Salchichas S.A.|FISSA|4554591.02</span></span><br><span class="line"><span class="string">Maison Dewey|MAISD|4555931.37</span></span><br><span class="line"><span class="string">Cactus Comidas para llevar|CACTU|4559046.87</span></span><br><span class="line"><span class="string">Spécialités du monde|SPECD|4571764.89</span></span><br><span class="line"><span class="string">Magazzini Alimentari Riuniti|MAGAA|4572382.35</span></span><br><span class="line"><span class="string">Toms Spezialitäten|TOMSP|4628403.36</span></span><br><span class="line"><span class="string">Split Rail Beer &amp; Ale|SPLIR|4641383.53</span></span><br><span class="line"><span class="string">Santé Gourmet|SANTG|4647668.15</span></span><br><span class="line"><span class="string">Morgenstern Gesundkost|MORGK|4676234.2</span></span><br><span class="line"><span class="string">White Clover Markets|WHITC|4681531.74</span></span><br><span class="line"><span class="string">La corne d&#x27;</span>abondance<span class="operator">|</span>LACOR<span class="operator">|</span><span class="number">4724494.22</span></span><br><span class="line">Victuailles en stock<span class="operator">|</span>VICTE<span class="operator">|</span><span class="number">4726476.33</span></span><br><span class="line">Lonesome Pine Restaurant<span class="operator">|</span>LONEP<span class="operator">|</span><span class="number">4735780.66</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 处理<span class="keyword">NULL</span>值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 这种连接类型包含左表的所有行，以及右表中满足连接条件的行。如果右表中没有匹配的行，那么结果集中将包含 <span class="keyword">NULL</span> 值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 它将结果集划分为指定数量的桶（buckets），并为每个桶分配一个标识号（bucket number）</span><br></pre></td></tr></table></figure>
-<p>现在，假设有以下支出数据：</p>
-<table>
-<thead>
-<tr>
-<th>CompanyName</th>
-<th>CustomerId</th>
-<th>totalcost</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Company1</td>
-<td>1</td>
-<td>100</td>
-</tr>
-<tr>
-<td>Company2</td>
-<td>2</td>
-<td>150</td>
-</tr>
-<tr>
-<td>Company3</td>
-<td>3</td>
-<td>200</td>
-</tr>
-<tr>
-<td>Company4</td>
-<td>4</td>
-<td>250</td>
-</tr>
-<tr>
-<td>Company5</td>
-<td>5</td>
-<td>300</td>
-</tr>
-</tbody></table>
-<p><code>NTILE(4) OVER (ORDER BY totalcost ASC) AS ExpenditureQuartile</code>将分配 ExpenditureQuartile 值，结果如下：</p>
-<table>
-<thead>
-<tr>
-<th>CompanyName</th>
-<th>CustomerId</th>
-<th>totalcost</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Company1</td>
-<td>1</td>
-<td>100</td>
-</tr>
-<tr>
-<td>Company2</td>
-<td>2</td>
-<td>150</td>
-</tr>
-<tr>
-<td>Company3</td>
-<td>3</td>
-<td>200</td>
-</tr>
-<tr>
-<td>Company4</td>
-<td>4</td>
-<td>250</td>
-</tr>
-<tr>
-<td>Company5</td>
-<td>5</td>
-<td>300</td>
-</tr>
-</tbody></table>
-<h1 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> r.RegionDescription, e.FirstName, e.LastName, <span class="built_in">MAX</span>(e.BirthDate)</span><br><span class="line"><span class="keyword">FROM</span> Region r</span><br><span class="line"><span class="keyword">JOIN</span> Territory t <span class="keyword">ON</span> t.RegionId <span class="operator">=</span> r.Id</span><br><span class="line"><span class="keyword">JOIN</span> EmployeeTerritory et <span class="keyword">ON</span> et.TerritoryId <span class="operator">=</span> t.Id</span><br><span class="line"><span class="keyword">JOIN</span> Employee e <span class="keyword">On</span> e.Id <span class="operator">=</span> et.EmployeeId</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.RegionId;</span><br><span class="line"></span><br><span class="line">Eastern<span class="operator">|</span>Steven<span class="operator">|</span>Buchanan<span class="operator">|</span><span class="number">1987</span><span class="number">-03</span><span class="number">-04</span></span><br><span class="line">Western<span class="operator">|</span>Michael<span class="operator">|</span>Suyama<span class="operator">|</span><span class="number">1995</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line">Northern<span class="operator">|</span>Anne<span class="operator">|</span>Dodsworth<span class="operator">|</span><span class="number">1998</span><span class="number">-01</span><span class="number">-27</span></span><br><span class="line">Southern<span class="operator">|</span>Janet<span class="operator">|</span>Leverling<span class="operator">|</span><span class="number">1995</span><span class="number">-08</span><span class="number">-30</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">MAX</span>(e.BirthDate)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WITH</span> temptable <span class="keyword">AS</span>(</span><br><span class="line">                  <span class="keyword">SELECT</span> </span><br><span class="line">                    d.ProductName myproductname,</span><br><span class="line">                    strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span></span><br><span class="line">                  <span class="keyword">FROM</span> Customer a, [<span class="keyword">Order</span>] b, OrderDetail c, Product d</span><br><span class="line">                  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId </span><br><span class="line">                    <span class="keyword">AND</span> b.Id <span class="operator">=</span> c.OrderId </span><br><span class="line">                    <span class="keyword">AND</span> c.ProductId <span class="operator">=</span> d.Id </span><br><span class="line">                    <span class="keyword">AND</span> a.CompanyName <span class="operator">=</span> <span class="string">&#x27;Queen Cozinha&#x27;</span> </span><br><span class="line">                    <span class="keyword">AND</span> <span class="type">date</span> <span class="operator">=</span> <span class="string">&#x27;2014-12-25&#x27;</span></span><br><span class="line">                  <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.Id <span class="keyword">ASC</span>)</span><br><span class="line"><span class="keyword">SELECT</span> group_concat(myproductname)</span><br><span class="line"><span class="keyword">FROM</span> temptable;</span><br><span class="line"></span><br><span class="line">Mishi Kobe Niku,NuNuCa Nuß<span class="operator">-</span>Nougat<span class="operator">-</span>Creme,Schoggi Schokolade,Mascarpone Fabioli,Sasquatch Ale,Boston Crab Meat,Manjimup Dried Apples,Longlife Tofu,Lakkalikööri</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span>  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 将日期和时间格式化为字符串，将原始日期格式转换为 &quot;年-月-日&quot; 的字符串格式</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>OpenPose原理及编译</title>
     <url>/2023/12/25/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/</url>
     <content><![CDATA[<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
@@ -1454,114 +1354,6 @@
 ]]></content>
       <categories>
         <category>深度学习算法</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cmu15-445 Project 0 (Spring 2023)</title>
-    <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
-    <content><![CDATA[<h1 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h1><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
-<p><code>COW</code>即代表，对<code>Trie</code>的添加&#x2F;删除操作不会在原<code>Trie</code>上进行，而是对原<code>Trie</code>进行拷贝后再进行修改。</p>
-<span id="more"></span>
-
-<p><code>trie.h</code>中共有三个类：</p>
-<ul>
-<li>​	<code>TrieNode</code>：表示Trie树不包含value的普通节点。<ul>
-<li>组成：<ul>
-<li><code>bool is_value_node_&#123;false&#125;;</code></li>
-<li><code>std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children_;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>TrieNodeWithValue</code>：<code>Trie</code>树包含<code>value</code>的节点，由<code>TrieNode</code>派生而来。<ul>
-<li>新增组成：<ul>
-<li><code>std::shared_ptr&lt;T&gt; value_;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Trie</code>：<code>Trie</code> 树的本体，<ul>
-<li>组成：<ul>
-<li><code>std::shared_ptr&lt;const TrieNode&gt; root_&#123;nullptr&#125;;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>注意：</p>
-<p>1、一个 <code>shared_ptr&lt;const TrieNode&gt;</code> 智能指针（<code>root</code>）指向一个 <code>TrieNode</code> 节点，而 <code>TrieNode</code> 节点中的 <code>map</code> 则含有多个可以指向下一个 <code>TrieNode</code> 节点的智能指针。也就是说，当 <code>TrieNode</code> 调用 <code>Clone()</code> 时，会复制一份<strong>当前节点</strong>并返回。由于返回的是 <code>unique_ptr</code>，因此我们只能用 <code>shared_ptr</code> 的构造函数来接收，然后再对 <code>shared_ptr</code> 进行赋值，类似于：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;TrieNode&gt; new_root = std::<span class="built_in">shared_ptr</span>&lt;TrieNode&gt;(<span class="keyword">this</span>-&gt;root_-&gt;<span class="built_in">Clone</span>());</span><br></pre></td></tr></table></figure>
-
-<h2 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h2><p>（1）考虑<code>key</code>为空的边界情况，此时看<code>root</code>是否是一个<code>TrieNodeWithVal</code>节点；</p>
-<p>（2）考虑<code>root</code>为空的边界情况，此时直接返回一个<code>nullptr</code>；</p>
-<p>（3）若非上述两种边界情况，则通过遍历进行<code>Get</code>操作：</p>
-<ul>
-<li>定义一个<code>cur</code>指向当前根节点，注意<code>root</code>的类型是<code>std::shared_ptr&lt;const bustub::TrieNode&gt;</code></li>
-<li>对<code>key</code>的所有字符进行遍历，<code>cur</code>不断更新迭代指向<code>cur-&gt;children-&gt;second</code>，直到找到<code>key</code>的键尾为止；</li>
-<li>判断此时的<code>cur</code>是否是一个<code>TrieNodeWithVal</code>节点</li>
-</ul>
-<p>注意：返回的<code>value</code>——<code>std::shared_ptr&lt;T&gt; value_</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> *twnv = <span class="keyword">dynamic_cast</span>&lt;<span class="type">const</span> bustub::TrieNodeWithValue&lt;T&gt; *&gt;(root_.<span class="built_in">get</span>());</span><br><span class="line"><span class="comment">// const确保twnv是一个指向常量对象的指针，最好保留以明确这种限制</span></span><br><span class="line"><span class="comment">// dynamic_cast的目的是为了检查在运行时root_所指向的对象是否实际上是TrieNodeWithValue&lt;T&gt;或其派生类型</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h2><p><code>Put</code>操作最需要注意的点在于：在插入时，已有的节点执行<code>Clone()</code>操作，新建的节点执行<code>make_shared</code>操作，如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
-<p>逻辑如下：</p>
-<p>（1）考虑<code>key</code>为空的边界情况，此时在<code>root</code>处插入</p>
-<ul>
-<li>创建新的<code>shared_ptr</code>指针指向<code>value</code>和为空的<code>new_root</code></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>判断原<code>root</code>是否有子节点，处理后返回新的<code>Trie</code>的根结点<code>new_root</code></p>
-<ul>
-<li><p>若无，则直接对<code>new_root</code>进行修改；</p>
-</li>
-<li><p>若有，则构造一个新节点指向<code>root</code>的<code>children</code>，如图</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
-</li>
-</ul>
-</li>
-</ul>
-<p>（2）若<code>key</code>非空</p>
-<ul>
-<li><p>首先拷贝根节点<code>root</code></p>
-<ul>
-<li>若<code>root</code>空，直接新建空的<code>Trie</code></li>
-<li>若<code>root</code>非空，调用<code>Clone()</code>操作，拷贝<code>root</code>的已有<code>children</code>给<code>new_root</code></li>
-</ul>
-</li>
-<li><p><code>Put1()</code>函数递归插入</p>
-<ul>
-<li><p>遍历<code>new_root</code>的<code>children</code>，找到是否有哪一个<code>children</code>的<code>key</code>等于传入<code>key</code>的<code>key[0]</code></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>判断完<code>key[0]</code>后，对<code>key</code>剩余的值进行判断<ul>
-<li>若到达<code>key</code>的键尾，新建一个节点并覆盖掉<code>pair</code>的<code>second</code></li>
-<li>若未到达键尾，拷贝已有节点、递归调用<code>Put1</code>写入<code>key</code>、将写入完成后的节点重新拷贝给<code>pair.second</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>若未找到匹配的<code>key[0]</code>，则直接新建节点插入。注意判断<code>key</code>的长度以决定是否需要递归操作。</p>
-</li>
-</ul>
-</li>
-<li><p>返回新的<code>Trie</code></p>
-</li>
-</ul>
-<p>注意：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;bustub::TrieNode&gt; ptr = pair.second-&gt;<span class="built_in">Clone</span>();</span><br><span class="line"><span class="comment">// Clone()返回的对象是std::unique_ptr&lt;TrieNode&gt;类型，为了确保ptr能够在程序的其他地方被共享所有权，因此</span></span><br><span class="line"><span class="comment">// 用std::shared_ptr&lt;bustub::TrieNode&gt;接收</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h2><p><code>Remove</code>的思想和<code>Put</code>一致，不再赘述。</p>
-<h1 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h1><p>注意加锁的时机即可。</p>
-<p><code>read</code>操作只需要在获取根节点时加锁。</p>
-<p><code>write</code>操作则需要全程添加写锁，从而保证只有一名<code>writer</code>。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
       </categories>
   </entry>
   <entry>
@@ -1932,6 +1724,106 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
+    <url>/2024/02/28/cmu15-445%20Homework1_SQL/</url>
+    <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> s.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(<span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> o.ShippedDate <span class="operator">&gt;</span> o.RequiredDate <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="operator">*</span> <span class="number">100.0</span> <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>), <span class="number">2</span>) <span class="keyword">AS</span> Percentage</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Shipper <span class="keyword">as</span> s</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] <span class="keyword">as</span> o <span class="keyword">ON</span> s.Id <span class="operator">=</span> o.ShipVia</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> s.CompanyName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Percentage <span class="keyword">DESC</span>; </span><br><span class="line"></span><br><span class="line">United Package<span class="operator">|</span><span class="number">23.44</span></span><br><span class="line">Speedy Express<span class="operator">|</span><span class="number">23.46</span></span><br><span class="line">Federal Shipping<span class="operator">|</span><span class="number">23.61</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> a.CategoryName,</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">COUNT</span>(a.Id) <span class="keyword">AS</span> TotalCategoryCount,</span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(((<span class="keyword">SELECT</span> <span class="built_in">SUM</span>(UnitPrice) <span class="keyword">FROM</span> Category b, Product c <span class="keyword">WHERE</span> b.Id <span class="operator">=</span> c.CategoryId <span class="keyword">AND</span> b.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) <span class="operator">/</span> ((<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> Category d, Product e <span class="keyword">WHERE</span> d.Id <span class="operator">=</span> e.CategoryId <span class="keyword">AND</span> d.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) , <span class="number">2</span>),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MIN</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MAX</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">SUM</span>(f.UnitsOnOrder)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Category a, Product f</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> f.CategoryId</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.CategoryName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> a.Id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">Beverages<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">37.98</span><span class="operator">|</span><span class="number">4.5</span><span class="operator">|</span><span class="number">263.5</span><span class="operator">|</span><span class="number">60</span></span><br><span class="line">Condiments<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">23.06</span><span class="operator">|</span><span class="number">10</span><span class="operator">|</span><span class="number">43.9</span><span class="operator">|</span><span class="number">170</span></span><br><span class="line">Confections<span class="operator">|</span><span class="number">13</span><span class="operator">|</span><span class="number">25.16</span><span class="operator">|</span><span class="number">9.2</span><span class="operator">|</span><span class="number">81</span><span class="operator">|</span><span class="number">180</span></span><br><span class="line">Seafood<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">20.68</span><span class="operator">|</span><span class="number">6</span><span class="operator">|</span><span class="number">62.5</span><span class="operator">|</span><span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> b.CategoryName <span class="operator">=</span> a.CategoryName 这个条件确保了在计算每个类别的商品价格总和时，只考虑了与当前类别相关的商品</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 这是为了满足 <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span> 中的条件</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">*</span><span class="number">1.0</span> 的目的是将整数值转换为浮点数。这是为了确保在计算平均商品价格时，得到的结果是一个浮点数，而不是整数</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q6"><a href="#Q6" class="headerlink" title="Q6*"></a>Q6*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">SELECT</span> p.ProductName, </span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  c1.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> c1.ContactName </span><br><span class="line">  <span class="keyword">FROM</span> Customer c1 </span><br><span class="line">  <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o1 <span class="keyword">ON</span> o1.CustomerId <span class="operator">=</span> c1.Id</span><br><span class="line">  <span class="keyword">JOIN</span> OrderDetail od1 <span class="keyword">ON</span> o1.Id <span class="operator">=</span> od1.OrderID</span><br><span class="line">  <span class="keyword">WHERE</span> od1.ProductId <span class="operator">=</span> p.Id</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> o1.OrderDate <span class="keyword">ASC</span> LIMIT <span class="number">1</span>) <span class="keyword">AS</span> CustomerInfo</span><br><span class="line"><span class="keyword">FROM</span> Product p</span><br><span class="line"><span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> p.Id <span class="operator">=</span> od.ProductId</span><br><span class="line"><span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line"><span class="keyword">JOIN</span> CUSTOMER c <span class="keyword">ON</span> o.CustomerID <span class="operator">=</span> c.Id</span><br><span class="line"><span class="keyword">WHERE</span> p.Discontinued <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.ProductName;</span><br><span class="line"></span><br><span class="line">Alice Mutton<span class="operator">|</span>Consolidated Holdings<span class="operator">|</span>Elizabeth Brown</span><br><span class="line">Chef Anton<span class="string">&#x27;s Gumbo Mix|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Guaraná Fantástica|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Mishi Kobe Niku|Old World Delicatessen|Rene Phillips</span></span><br><span class="line"><span class="string">Perth Pasties|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Rössle Sauerkraut|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Singaporean Hokkien Fried Mee|Vins et alcools Chevalier|Paul Henriot</span></span><br><span class="line"><span class="string">Thüringer Rostbratwurst|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// c1		==&gt; FROM Customer c1 </span></span><br><span class="line"><span class="string">// c1-&gt;o1	==&gt; JOIN [Order] o1 ON o1.CustomerId = c1.Id</span></span><br><span class="line"><span class="string">// o1-&gt;od1	==&gt; JOIN OrderDetail od1 ON o1.Id = od1.OrderID</span></span><br><span class="line"><span class="string">// od1-&gt;p	==&gt; (将子查询和外部主查询联系起来)WHERE od1.ProductId = p.Id</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Q7"><a href="#Q7" class="headerlink" title="Q7*"></a>Q7*</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id, Orderdate, pre_OrderDate, ROUND(julianday(OrderDate)<span class="operator">-</span>julianday(pre_orderdate) , <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> Id, OrderDate, <span class="built_in">LAG</span>(Orderdate, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> CustomerId <span class="keyword">ORDER</span> <span class="keyword">BY</span> OrderDate <span class="keyword">ASC</span>) pre_OrderDate</span><br><span class="line">      <span class="keyword">FROM</span> [<span class="keyword">Order</span>]</span><br><span class="line">      <span class="keyword">WHERE</span> CustomerId <span class="operator">=</span> <span class="string">&#x27;BLONP&#x27;</span></span><br><span class="line">      LIMIT <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">16766</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0</span><span class="operator">|</span><span class="number">2456131.47</span></span><br><span class="line"><span class="number">10265</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2.03</span></span><br><span class="line"><span class="number">12594</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">22.52</span></span><br><span class="line"><span class="number">20249</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.18</span></span><br><span class="line"><span class="number">20882</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2.1</span></span><br><span class="line"><span class="number">18443</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">9.43</span></span><br><span class="line"><span class="number">10297</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">6.77</span></span><br><span class="line"><span class="number">11694</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">13.02</span></span><br><span class="line"><span class="number">25613</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">1.92</span></span><br><span class="line"><span class="number">17361</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-19</span> <span class="number">12</span>:<span class="number">13</span>:<span class="number">21</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.57</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">SELECT</span> julianday(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">Result</span>: <span class="number">2458220.59892027</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 返回从格林尼治时间的公元前 <span class="number">4714</span> 年 <span class="number">11</span> 月 <span class="number">24</span> 日正午算起的天数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">LAG</span>(expr, <span class="keyword">offset</span>, <span class="keyword">default</span>) <span class="keyword">OVER</span> (partition_by_clause order_by_clause)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 计算当前行向前数若干行的值，该函数专门用作窗口函数(<span class="keyword">window</span> functions)，<span class="keyword">partition</span> <span class="keyword">by</span>功能类似<span class="keyword">group</span> <span class="keyword">by</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q8"><a href="#Q8" class="headerlink" title="Q8*"></a>Q8*</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">WITH</span> expenditures <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span> </span><br><span class="line">   ...<span class="operator">&gt;</span>                        IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        o.CustomerId,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        ROUND((<span class="built_in">SUM</span>(od.Quantity <span class="operator">*</span> od.UnitPrice)) , <span class="number">2</span>) <span class="keyword">AS</span> totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> [<span class="keyword">Order</span>] o</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.CustomerId),</span><br><span class="line">   ...<span class="operator">&gt;</span>      quartiles <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="operator">*</span>,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> expenditures)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CompanyName, CustomerId, totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> quartiles</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ExpenditureQuartile <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">MISSING_NAME<span class="operator">|</span>DUMO<span class="operator">|</span><span class="number">1615.9</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>OCEA<span class="operator">|</span><span class="number">3460.2</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>ANTO<span class="operator">|</span><span class="number">7515.35</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>QUEE<span class="operator">|</span><span class="number">30226.1</span></span><br><span class="line">Trail<span class="string">&#x27;s Head Gourmet Provisioners|TRAIH|3874502.02</span></span><br><span class="line"><span class="string">Blondesddsl père et fils|BLONP|3879728.69</span></span><br><span class="line"><span class="string">Around the Horn|AROUT|4395636.28</span></span><br><span class="line"><span class="string">Hungry Owl All-Night Grocers|HUNGO|4431457.1</span></span><br><span class="line"><span class="string">Bon app|BONAP|4485708.49</span></span><br><span class="line"><span class="string">Bólido Comidas preparadas|BOLID|4520121.88</span></span><br><span class="line"><span class="string">Galería del gastrónomo|GALED|4533089.9</span></span><br><span class="line"><span class="string">FISSA Fabrica Inter. Salchichas S.A.|FISSA|4554591.02</span></span><br><span class="line"><span class="string">Maison Dewey|MAISD|4555931.37</span></span><br><span class="line"><span class="string">Cactus Comidas para llevar|CACTU|4559046.87</span></span><br><span class="line"><span class="string">Spécialités du monde|SPECD|4571764.89</span></span><br><span class="line"><span class="string">Magazzini Alimentari Riuniti|MAGAA|4572382.35</span></span><br><span class="line"><span class="string">Toms Spezialitäten|TOMSP|4628403.36</span></span><br><span class="line"><span class="string">Split Rail Beer &amp; Ale|SPLIR|4641383.53</span></span><br><span class="line"><span class="string">Santé Gourmet|SANTG|4647668.15</span></span><br><span class="line"><span class="string">Morgenstern Gesundkost|MORGK|4676234.2</span></span><br><span class="line"><span class="string">White Clover Markets|WHITC|4681531.74</span></span><br><span class="line"><span class="string">La corne d&#x27;</span>abondance<span class="operator">|</span>LACOR<span class="operator">|</span><span class="number">4724494.22</span></span><br><span class="line">Victuailles en stock<span class="operator">|</span>VICTE<span class="operator">|</span><span class="number">4726476.33</span></span><br><span class="line">Lonesome Pine Restaurant<span class="operator">|</span>LONEP<span class="operator">|</span><span class="number">4735780.66</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 处理<span class="keyword">NULL</span>值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 这种连接类型包含左表的所有行，以及右表中满足连接条件的行。如果右表中没有匹配的行，那么结果集中将包含 <span class="keyword">NULL</span> 值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 它将结果集划分为指定数量的桶（buckets），并为每个桶分配一个标识号（bucket number）</span><br></pre></td></tr></table></figure>
+<p>现在，假设有以下支出数据：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<p><code>NTILE(4) OVER (ORDER BY totalcost ASC) AS ExpenditureQuartile</code>将分配 ExpenditureQuartile 值，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<h1 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> r.RegionDescription, e.FirstName, e.LastName, <span class="built_in">MAX</span>(e.BirthDate)</span><br><span class="line"><span class="keyword">FROM</span> Region r</span><br><span class="line"><span class="keyword">JOIN</span> Territory t <span class="keyword">ON</span> t.RegionId <span class="operator">=</span> r.Id</span><br><span class="line"><span class="keyword">JOIN</span> EmployeeTerritory et <span class="keyword">ON</span> et.TerritoryId <span class="operator">=</span> t.Id</span><br><span class="line"><span class="keyword">JOIN</span> Employee e <span class="keyword">On</span> e.Id <span class="operator">=</span> et.EmployeeId</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.RegionId;</span><br><span class="line"></span><br><span class="line">Eastern<span class="operator">|</span>Steven<span class="operator">|</span>Buchanan<span class="operator">|</span><span class="number">1987</span><span class="number">-03</span><span class="number">-04</span></span><br><span class="line">Western<span class="operator">|</span>Michael<span class="operator">|</span>Suyama<span class="operator">|</span><span class="number">1995</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line">Northern<span class="operator">|</span>Anne<span class="operator">|</span>Dodsworth<span class="operator">|</span><span class="number">1998</span><span class="number">-01</span><span class="number">-27</span></span><br><span class="line">Southern<span class="operator">|</span>Janet<span class="operator">|</span>Leverling<span class="operator">|</span><span class="number">1995</span><span class="number">-08</span><span class="number">-30</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">MAX</span>(e.BirthDate)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">WITH</span> temptable <span class="keyword">AS</span>(</span><br><span class="line">                  <span class="keyword">SELECT</span> </span><br><span class="line">                    d.ProductName myproductname,</span><br><span class="line">                    strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span></span><br><span class="line">                  <span class="keyword">FROM</span> Customer a, [<span class="keyword">Order</span>] b, OrderDetail c, Product d</span><br><span class="line">                  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId </span><br><span class="line">                    <span class="keyword">AND</span> b.Id <span class="operator">=</span> c.OrderId </span><br><span class="line">                    <span class="keyword">AND</span> c.ProductId <span class="operator">=</span> d.Id </span><br><span class="line">                    <span class="keyword">AND</span> a.CompanyName <span class="operator">=</span> <span class="string">&#x27;Queen Cozinha&#x27;</span> </span><br><span class="line">                    <span class="keyword">AND</span> <span class="type">date</span> <span class="operator">=</span> <span class="string">&#x27;2014-12-25&#x27;</span></span><br><span class="line">                  <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.Id <span class="keyword">ASC</span>)</span><br><span class="line"><span class="keyword">SELECT</span> group_concat(myproductname)</span><br><span class="line"><span class="keyword">FROM</span> temptable;</span><br><span class="line"></span><br><span class="line">Mishi Kobe Niku,NuNuCa Nuß<span class="operator">-</span>Nougat<span class="operator">-</span>Creme,Schoggi Schokolade,Mascarpone Fabioli,Sasquatch Ale,Boston Crab Meat,Manjimup Dried Apples,Longlife Tofu,Lakkalikööri</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span>  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 将日期和时间格式化为字符串，将原始日期格式转换为 &quot;年-月-日&quot; 的字符串格式</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>cmu15-445 Project 1 (Spring 2023)</title>
     <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
     <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
@@ -2081,6 +1973,232 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Project 0 (Spring 2023)</title>
+    <url>/2024/02/28/cmu15-445%20Project%200%20(Spring%202023)%20%20/</url>
+    <content><![CDATA[<h1 id="Task-1-Copy-On-Write-Trie"><a href="#Task-1-Copy-On-Write-Trie" class="headerlink" title="Task #1 - Copy-On-Write Trie"></a>Task #1 - Copy-On-Write Trie</h1><p>在<code>trie.cpp</code>中实现<code>COW Trie</code>。</p>
+<p><code>COW</code>即代表，对<code>Trie</code>的添加&#x2F;删除操作不会在原<code>Trie</code>上进行，而是对原<code>Trie</code>进行拷贝后再进行修改。</p>
+<span id="more"></span>
+
+<p><code>trie.h</code>中共有三个类：</p>
+<ul>
+<li>​	<code>TrieNode</code>：表示Trie树不包含value的普通节点。<ul>
+<li>组成：<ul>
+<li><code>bool is_value_node_&#123;false&#125;;</code></li>
+<li><code>std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children_;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>TrieNodeWithValue</code>：<code>Trie</code>树包含<code>value</code>的节点，由<code>TrieNode</code>派生而来。<ul>
+<li>新增组成：<ul>
+<li><code>std::shared_ptr&lt;T&gt; value_;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Trie</code>：<code>Trie</code> 树的本体，<ul>
+<li>组成：<ul>
+<li><code>std::shared_ptr&lt;const TrieNode&gt; root_&#123;nullptr&#125;;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>注意：</p>
+<p>1、一个 <code>shared_ptr&lt;const TrieNode&gt;</code> 智能指针（<code>root</code>）指向一个 <code>TrieNode</code> 节点，而 <code>TrieNode</code> 节点中的 <code>map</code> 则含有多个可以指向下一个 <code>TrieNode</code> 节点的智能指针。也就是说，当 <code>TrieNode</code> 调用 <code>Clone()</code> 时，会复制一份<strong>当前节点</strong>并返回。由于返回的是 <code>unique_ptr</code>，因此我们只能用 <code>shared_ptr</code> 的构造函数来接收，然后再对 <code>shared_ptr</code> 进行赋值，类似于：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;TrieNode&gt; new_root = std::<span class="built_in">shared_ptr</span>&lt;TrieNode&gt;(<span class="keyword">this</span>-&gt;root_-&gt;<span class="built_in">Clone</span>());</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、Get-key"><a href="#1、Get-key" class="headerlink" title="1、Get(key)"></a>1、<code>Get(key)</code></h2><p>（1）考虑<code>key</code>为空的边界情况，此时看<code>root</code>是否是一个<code>TrieNodeWithVal</code>节点；</p>
+<p>（2）考虑<code>root</code>为空的边界情况，此时直接返回一个<code>nullptr</code>；</p>
+<p>（3）若非上述两种边界情况，则通过遍历进行<code>Get</code>操作：</p>
+<ul>
+<li>定义一个<code>cur</code>指向当前根节点，注意<code>root</code>的类型是<code>std::shared_ptr&lt;const bustub::TrieNode&gt;</code></li>
+<li>对<code>key</code>的所有字符进行遍历，<code>cur</code>不断更新迭代指向<code>cur-&gt;children-&gt;second</code>，直到找到<code>key</code>的键尾为止；</li>
+<li>判断此时的<code>cur</code>是否是一个<code>TrieNodeWithVal</code>节点</li>
+</ul>
+<p>注意：返回的<code>value</code>——<code>std::shared_ptr&lt;T&gt; value_</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> *twnv = <span class="keyword">dynamic_cast</span>&lt;<span class="type">const</span> bustub::TrieNodeWithValue&lt;T&gt; *&gt;(root_.<span class="built_in">get</span>());</span><br><span class="line"><span class="comment">// const确保twnv是一个指向常量对象的指针，最好保留以明确这种限制</span></span><br><span class="line"><span class="comment">// dynamic_cast的目的是为了检查在运行时root_所指向的对象是否实际上是TrieNodeWithValue&lt;T&gt;或其派生类型</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、Put-key-value"><a href="#2、Put-key-value" class="headerlink" title="2、Put(key, value)"></a>2、<code>Put(key, value)</code></h2><p><code>Put</code>操作最需要注意的点在于：在插入时，已有的节点执行<code>Clone()</code>操作，新建的节点执行<code>make_shared</code>操作，如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/b8962d07c7484d00bdb71214b75ea157.png#pic_center" alt="在这里插入图片描述"></p>
+<p>逻辑如下：</p>
+<p>（1）考虑<code>key</code>为空的边界情况，此时在<code>root</code>处插入</p>
+<ul>
+<li>创建新的<code>shared_ptr</code>指针指向<code>value</code>和为空的<code>new_root</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;T&gt; val_p = std::<span class="built_in">make_shared</span>&lt;T&gt;(std::<span class="built_in">move</span>(value));</span><br><span class="line">std::shared_ptr&lt;bustub::TrieNodeWithValue&lt;T&gt;&gt; new_root = <span class="literal">nullptr</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>判断原<code>root</code>是否有子节点，处理后返回新的<code>Trie</code>的根结点<code>new_root</code></p>
+<ul>
+<li><p>若无，则直接对<code>new_root</code>进行修改；</p>
+</li>
+<li><p>若有，则构造一个新节点指向<code>root</code>的<code>children</code>，如图</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403011541108.png" alt="image-20240301154103793"></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>（2）若<code>key</code>非空</p>
+<ul>
+<li><p>首先拷贝根节点<code>root</code></p>
+<ul>
+<li>若<code>root</code>空，直接新建空的<code>Trie</code></li>
+<li>若<code>root</code>非空，调用<code>Clone()</code>操作，拷贝<code>root</code>的已有<code>children</code>给<code>new_root</code></li>
+</ul>
+</li>
+<li><p><code>Put1()</code>函数递归插入</p>
+<ul>
+<li><p>遍历<code>new_root</code>的<code>children</code>，找到是否有哪一个<code>children</code>的<code>key</code>等于传入<code>key</code>的<code>key[0]</code></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;pair : new_root-&gt;children_) &#123;&#125;</span><br><span class="line"><span class="comment">// pari类型：std::map&lt;char, std::shared_ptr&lt;const TrieNode&gt;&gt; children</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>判断完<code>key[0]</code>后，对<code>key</code>剩余的值进行判断<ul>
+<li>若到达<code>key</code>的键尾，新建一个节点并覆盖掉<code>pair</code>的<code>second</code></li>
+<li>若未到达键尾，拷贝已有节点、递归调用<code>Put1</code>写入<code>key</code>、将写入完成后的节点重新拷贝给<code>pair.second</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>若未找到匹配的<code>key[0]</code>，则直接新建节点插入。注意判断<code>key</code>的长度以决定是否需要递归操作。</p>
+</li>
+</ul>
+</li>
+<li><p>返回新的<code>Trie</code></p>
+</li>
+</ul>
+<p>注意：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::shared_ptr&lt;bustub::TrieNode&gt; ptr = pair.second-&gt;<span class="built_in">Clone</span>();</span><br><span class="line"><span class="comment">// Clone()返回的对象是std::unique_ptr&lt;TrieNode&gt;类型，为了确保ptr能够在程序的其他地方被共享所有权，因此</span></span><br><span class="line"><span class="comment">// 用std::shared_ptr&lt;bustub::TrieNode&gt;接收</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、Remove-key"><a href="#3、Remove-key" class="headerlink" title="3、Remove(key)"></a>3、<code>Remove(key)</code></h2><p><code>Remove</code>的思想和<code>Put</code>一致，不再赘述。</p>
+<h1 id="Task-2-Concurrent-Key-Value-Store"><a href="#Task-2-Concurrent-Key-Value-Store" class="headerlink" title="Task #2 - Concurrent Key-Value Store"></a>Task #2 - Concurrent Key-Value Store</h1><p>注意加锁的时机即可。</p>
+<p><code>read</code>操作只需要在获取根节点时加锁。</p>
+<p><code>write</code>操作则需要全程添加写锁，从而保证只有一名<code>writer</code>。此外，在获取根节点和更新修改后的根结点时，需要添加读锁。</p>
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cmu15-445 Project 2 (Spring 2023)</title>
+    <url>/2024/03/27/cmu15-445%20Project%202%20(Spring%202023)/</url>
+    <content><![CDATA[<p>Overview：</p>
+<blockquote>
+<p>In this programming project you will implement a <a href="https://en.wikipedia.org/wiki/B%2B_tree">B+Tree</a> index in your database system. <strong>A B+Tree is a balanced search tree in which the internal pages direct the search and leaf pages contain the actual data entries.</strong> The index provides fast data retrieval without needing to search every row in a database table, enabling rapid random lookups and efficient scans of ordered records. Your implementation will support thread-safe search, insertion, deletion (including splitting and merging nodes), and an iterator to support in-order leaf scans.</p>
+<p>在这个编程项目中，您将在数据库系统中实现B+树索引。B+树是一种平衡搜索树，其中internal pages指导搜索，leaf pages包含实际的数据项。索引提供了快速的数据检索，而不需要搜索数据库表中的每一行，支持快速随机查找和高效的有序记录扫描。你的实现将支持<strong>线程安全</strong>的搜索、插入、删除(包括节点拆分和合并)，以及一个支持按序叶扫描的迭代器。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>Project2的实现依赖于Project1的buffer pool和page guards。</p>
+<h1 id="Checkpoint-1-15-points"><a href="#Checkpoint-1-15-points" class="headerlink" title="Checkpoint #1 (15 points)"></a><strong>Checkpoint #1 (15 points)</strong></h1><h2 id="Task-1-B-Tree-Pages"><a href="#Task-1-B-Tree-Pages" class="headerlink" title="Task #1 - B+Tree Pages"></a>Task #1 - B+Tree Pages</h2><p>实现三个Page Classes去存储B+Tree的数据：</p>
+<ul>
+<li><p>B+Tree Page</p>
+<ul>
+<li>Base class，以供下面两个类继承。</li>
+</ul>
+</li>
+<li><p>B+Tree Internal Page</p>
+<ul>
+<li><strong>存储m个ordered keys和m+1个child pointers</strong>（即page_ids，指向其他的B+Tree Pages），表现为<code>key/page_id</code>pairs；</li>
+</ul>
+<blockquote>
+<p>Because the number of pointers does not equal the number of keys, the first key is set to be invalid, and lookups should always start with the second key.</p>
+</blockquote>
+<ul>
+<li>在任意时刻，internal page必须至少为<code>half full</code>。<ul>
+<li>删除时，两个<code>half full pages</code>可以合并，或<code>keys and pointers</code>重新分布来避免合并；</li>
+<li>插入时，一个<code>full pages</code>可以拆分成两个，或<code>keys and pointers</code>重新分布来避免拆分。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>B+Tree Leaf Page</p>
+<ul>
+<li><strong>存储m个ordered keys和m个相对应的value。</strong>value需要被设置为<strong>64-bit record-id</strong>。</li>
+<li>其余设置和internal pages一致。</li>
+</ul>
+<blockquote>
+<p>即使叶子页和内部页包含相同类型的键，它们的值类型也可能不同。因此，max_size 也可能不同。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：</p>
+<p>1、每个 B+Tree 的叶子页&#x2F;内部页都与缓冲池获取的内存页的内容（即 data_ 部分）相对应；</p>
+<p>2、每次read&#x2F;write一个leaf&#x2F;internal page时：</p>
+<p>（1）从buffer pool中fetch该页；（page id）</p>
+<p>（2）reinterpret cast to leaf&#x2F;internal page；</p>
+<p>（3）读&#x2F;写完后Unpin该page。</p>
+<ul>
+<li><p>flexible array</p>
+<ul>
+<li><p>flexible array 必须是类中的最后一个成员，并且仅能有一个。在为对象分配内存时，flexible array 会自动填充，占用未被其他变量使用的内存。这样就可以确定自己的长度了。</p>
+</li>
+<li><p>举例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例如有一个类 C：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="type">int</span> a; <span class="comment">// 4 byte</span></span><br><span class="line">    <span class="type">int</span> array[<span class="number">1</span>]; <span class="comment">// unknown size</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在初始化一个 C 的对象，并为其分配了 24 byte 的内存。a 占了 4 byte 内存</span></span><br><span class="line"><span class="comment">// 那么 array 会尝试填充剩下的内存，大小变为 5。</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="B-PLUS-TREE-INTERNAL-PAGE"><a href="#B-PLUS-TREE-INTERNAL-PAGE" class="headerlink" title="B_PLUS_TREE_INTERNAL_PAGE"></a><strong>B_PLUS_TREE_INTERNAL_PAGE</strong></h3><ul>
+<li><p>对于 Internal Page 其储存的节点数最大正好是 internal_max_size，可能被存满</p>
+<ul>
+<li>由于先插入会导致空间溢出，因此考虑单独开辟一块内存空间，在完成插入与分裂后释放。</li>
+</ul>
+</li>
+<li><p>要求第一个key为空的原因：在 internal page 中，n 个 key 可以将数轴划分为 n+1 个区域，也就对应着 n+1 个 value。</p>
+</li>
+<li><p>internal page 中的 key 并不代表实际上的索引值，仅仅是作为一个向导，引导需要插入&#x2F;删除&#x2F;查询的 key 找到这个 key 真正所在的 leaf page。</p>
+</li>
+<li><p>Header大小为24Byte：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">IndexPageType page_type_;   <span class="comment">// leaf or internal. 4 Byte</span></span><br><span class="line"><span class="type">lsn_t</span> lsn_  <span class="comment">// temporarily unused. 4 Byte</span></span><br><span class="line"><span class="type">int</span> size_;  <span class="comment">// tree page data size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">int</span> max_size_;  <span class="comment">// tree page data max size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> parent_page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="comment">// 24 Byte in total</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>internal page的KV对</strong>中：</p>
+<ul>
+<li>K-比较大小的索引；</li>
+<li>V-page_id，指向下一层的节点。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403291930057.png" alt="image-20240329193009583"></p>
+<h3 id="B-PLUS-TREE-LEAF-PAGE"><a href="#B-PLUS-TREE-LEAF-PAGE" class="headerlink" title="B_PLUS_TREE_LEAF_PAGE"></a><strong>B_PLUS_TREE_LEAF_PAGE</strong></h3><ul>
+<li>对于 Leaf Page 其储存的节点数最大永远是 leaf_max_size - 1，永远存不满、<ul>
+<li>对于Leaf Page，直接先插入再分裂；</li>
+</ul>
+</li>
+<li>Header大小为28Byte，多了一个成员变量 <code>next_page_id</code>。</li>
+<li><strong>leaf page的KV对</strong>中：<ul>
+<li>K-实际的索引；</li>
+<li>V-Record ID，用于识别表中的某一条数据。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Task-2a-B-Tree-Data-Structure-Insertion-Point-Search"><a href="#Task-2a-B-Tree-Data-Structure-Insertion-Point-Search" class="headerlink" title="Task #2a - B+Tree Data Structure (Insertion, Point Search)"></a>Task #2a - B+Tree Data Structure (Insertion, Point Search)</h2><ul>
+<li>目标：实现1）<code>insertion：Insert()</code>；2）<code>Search：Getvalue()</code></li>
+</ul>
+<blockquote>
+<p>index仅支持unique keys。</p>
+<p>如果插入会改变树的不变形，需要进行结点的拆分或keys的重组。</p>
+<p>若改变了root的page ID，必须更新<code>root_page_id</code>。为此，可以访问构造函数中给出的 <code>header_page_id_</code> 页面。然后，通过使用 <code>reinterpret cast</code>，可以将该页面解释为 <code>BPlusTreeHeaderPage</code>，并从这里更新root的page ID。此外，必须实现 <code>GetRootPageId</code>（目前默认返回 0）。</p>
+<p>推荐使用<code>FetchPageBasic</code>来访问页。</p>
+</blockquote>
+<ul>
+<li><p>对于取得的页进行操作：1）根据page_id取得guard；2）将其数据部分<code>data_</code>强制转换成对应的类型（reinterpret_cast&#x2F;As&#x2F;AsMut）。</p>
+  <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将内部存储的指针按照指定的类型进行类型转换</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">As</span><span class="params">()</span> -&gt; <span class="type">const</span> T * </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> guard_.<span class="built_in">As</span>&lt;T&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><em><strong>（under analyze）补充</strong></em></p>
+<h3 id="src-storage-page-b-plus-tree-internal-page-cpp"><a href="#src-storage-page-b-plus-tree-internal-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br><span class="line">// ==under analyze 2: lambda 表达式 &amp; [comparator]</span><br><span class="line">// ==under analyze 2: std::lower_bound &amp; std::prev</span><br></pre></td></tr></table></figure>
+
+<h3 id="src-storage-page-b-plus-tree-leaf-page-cpp"><a href="#src-storage-page-b-plus-tree-leaf-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br></pre></td></tr></table></figure>
+
+<h3 id="src-storage-index-b-plus-tree-cpp"><a href="#src-storage-index-b-plus-tree-cpp" class="headerlink" title="src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp"></a>src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze1: emplace_back()</span><br></pre></td></tr></table></figure>
+
+<h1 id="Checkpoint-2-85-points"><a href="#Checkpoint-2-85-points" class="headerlink" title="Checkpoint #2 (85 points)"></a><strong>Checkpoint #2 (85 points)</strong></h1><h2 id="Task-2b-B-Tree-Data-Structure-Deletion"><a href="#Task-2b-B-Tree-Data-Structure-Deletion" class="headerlink" title="Task #2b - B+Tree Data Structure (Deletion)"></a>Task #2b - B+Tree Data Structure (Deletion)</h2><h2 id="Task-3-Index-Iterator"><a href="#Task-3-Index-Iterator" class="headerlink" title="Task #3 - Index Iterator"></a>Task #3 - Index Iterator</h2><h2 id="Task-4-Concurrency-Control"><a href="#Task-4-Concurrency-Control" class="headerlink" title="Task #4 - Concurrency Control"></a>Task #4 - Concurrency Control</h2>]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
@@ -2144,6 +2262,153 @@
 ]]></content>
       <categories>
         <category>无从属类别</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数据库2_Redis数据库.md</title>
+    <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="1、Redis简介"><a href="#1、Redis简介" class="headerlink" title="1、Redis简介"></a>1、Redis简介</h1><p>Redis是一个基于内存的数据存储系统，它<strong>将数据完全存储在内存中</strong>，通过使用<strong>持久化机制</strong>来将数据定期写入磁盘以保证数据的持久性。</p>
+<h2 id="（1）内存淘汰机制-过期策略"><a href="#（1）内存淘汰机制-过期策略" class="headerlink" title="（1）内存淘汰机制&#x2F;过期策略"></a>（1）内存淘汰机制&#x2F;过期策略</h2><p><strong>MySQL里有2000w数据，Redis中只存20w的数据，如何保证Redis中的数据都是热点数据？</strong></p>
+<p>redis 提供 6种数据淘汰策略：</p>
+<ul>
+<li>volatile-lru： 从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</li>
+<li>volatile-ttl： 从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</li>
+<li>volatile-random： 从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</li>
+<li>allkeys-lru： 当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（这个是最常用的）.</li>
+<li>allkeys-random： 从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li>no-eviction： 禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。</li>
+</ul>
+<h2 id="（2）持久化机制"><a href="#（2）持久化机制" class="headerlink" title="（2）持久化机制"></a>（2）持久化机制</h2><p><strong>怎么保证 redis 挂掉之后再重启数据可以进行恢复？</strong></p>
+<p><strong>持久化数据</strong>：也就是将内存中的数据写入磁盘。</p>
+<ul>
+<li><p>目的：</p>
+<ul>
+<li>为了之后重用数据（比如重启机器、机器故障之后恢复数据），</li>
+<li>为了防止系统故障而将数据备份到一个远程位置。</li>
+</ul>
+</li>
+<li><p><strong>快照（snapshotting，RDB）</strong></p>
+<ul>
+<li>在指定的时间间隔内将内存中的数据集快照写入磁盘，RDB是内存快照（内存数据的二进制序列化形式）的方式持久化，每次都是从Redis中生成一个快照进行数据的全量备份。</li>
+<li>Redis持久化<strong>默认开启为RDB持久化</strong>。<ul>
+<li>指定的时间间隔：体现在主进程fork子进程的阶段。</li>
+<li>触发规则：<ul>
+<li><strong>手动触发</strong><ul>
+<li><strong>save</strong>：阻塞当前Redis进程，直到RDB持久化完成（尽量不使用）</li>
+<li><strong>bgsave</strong>：Redis主进程fork子进程，由子进程完成持久化</li>
+</ul>
+</li>
+<li><strong>自动触发</strong>：<ul>
+<li><strong>配置触发</strong>：redis.conf——&#x2F;snapshot即可定位到触发的配置位置<ul>
+<li>save 3600 1 300 100 600 60 10000<ul>
+<li>save 3600 1：3600秒内有1个key被修改，触发RDB</li>
+<li>save 300 100：300秒内有100个key被修改，触发RDB</li>
+<li>save 60 10000：60秒内有10000个key被修改，触发RDB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>shutdown触发</strong></li>
+<li><strong>flushall触发</strong>：清空Redis数据的同时清空dump.rdb文件，等同于删库跑路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>性能高：RDB持久化通过生成一个快照文件来保存数据，因此在恢复数据时速度非常快；</li>
+<li>文件紧凑：RDB文件是二进制格式的数据库文件，相较于AOF文件来说，文件体积小。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能丢失数据：由于RDB是定期生成的快照文件，如果Redis意外宕机，最近一次的修改可能会丢失。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>只追加文件（append-only file，AOF）</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061114362.png" alt="image-20240406111403297"></p>
+<ul>
+<li>开启AOF持久化后每执行一条会更改Redis中的数据的命令，Redis就会将该命令写入硬盘中的AOF文件。</li>
+<li><strong>同步策略</strong>：<ul>
+<li><code>appendfsync always</code>：每次有数据修改发生时都会写入AOF文件，但会严重降低Redis的速度；</li>
+<li><code>appendfsync everysec</code>：每秒刷新一次缓冲区中的数据到AOF文件，显式地将多个写命令同步到硬盘；</li>
+<li><code>appendfsync no</code>：Redis进程不会主动地去刷新缓冲区的数据到AOF文件，让操作系统决定何时进行同步。</li>
+</ul>
+</li>
+<li><strong>重写策略</strong><ul>
+<li><code>auto-aof-rewrite-percentage 100</code>：当AOF文件体积达到上次重写之后的体积的100%时，触发AOF重写；</li>
+<li><code>auto-aof-rewrite-min-size 64mb</code>：当AOF文件体积超过该阈值时，触发AOF重写。</li>
+</ul>
+</li>
+<li><strong>优点</strong><ul>
+<li>数据更加可靠：AOF持久化记录了每个写命令的操作，因此在出现故障时，可以通过重新执行AOF文件来保证数据的完整性；</li>
+<li>可以保留写命令历史：AOF文件是一个追加日志文件，可以用于回放过去的写操作。</li>
+</ul>
+</li>
+<li><strong>缺点</strong><ul>
+<li>文件较大：由于记录了每个写命令，AOF文件体积通常比RDB文件要大；</li>
+<li>恢复速度较慢：当AOF文件较大时，Redis重启时需要重新执行整个AOF文件，恢复速度相对较慢。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="（3）缓存击穿、缓存雪崩和缓存穿透"><a href="#（3）缓存击穿、缓存雪崩和缓存穿透" class="headerlink" title="（3）缓存击穿、缓存雪崩和缓存穿透"></a>（3）缓存击穿、缓存雪崩和缓存穿透</h2><h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>在高并发的访问下，一个热点数据失效时，大量请求会直接绕过缓存，直接查询数据库，导致数据库压力剧增。</p>
+<p>解决方案：</p>
+<ul>
+<li><strong>设置热点数据永不过期</strong>：对于一些热点数据，可以设置不过期，或者设置较长的过期时间，以保证这部分数据在缓存中一直可用，减少因数据过期引起的击穿问题；</li>
+<li><strong>设置互斥锁</strong>：在缓存失效时，只允许一个请求访问数据库，其他请求需要等待该请求执行完毕后再从缓存中获取数据，可以减少并发请求对数据库的冲击；</li>
+<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果不存在，可以直接返回避免对数据库的查询，缓解击穿压力。</li>
+</ul>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>在高并发的访问下，大规模缓存失效同时失效或者缓存宕机，大量请求同时涌入数据库，导致数据库负载过大甚至崩溃的情况。 </p>
+<p>解决方案：</p>
+<ul>
+<li><strong>随机分布过期时间</strong>：在设置缓存数据的过期时间时，可以随机分布过期时间，避免缓存数据同时大规模失效；</li>
+<li><strong>使用多级缓存</strong>：引入多级缓存架构，将请求分散到不同的缓存层，即使一个缓存层发生雪崩，也能够有其他缓存层提供服务。</li>
+</ul>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>缓存穿透是指恶意请求或者大量查询不存在于缓存中的数据，导致请求直接绕过缓存层，直接访问后端存储系统（如数据库），从而给后端系统造成巨大压力的现象。</p>
+<p>解决方法主要包括：</p>
+<ul>
+<li><strong>空值缓存</strong>：对于查询数据库返回空结果的情况，也将其缓存起来，但设置一个较短的过期时间，防止缓存穿透的请求直接击穿数据库；</li>
+<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果数据不存在，则直接拒绝访问，从而避免了对后端系统的查询请求，减轻了后端压力；</li>
+<li><strong>数据预热</strong>：在系统启动或者定时任务中，预先将热点数据加载到缓存中，避免缓存穿透带来的大量请求直接击穿数据库；</li>
+<li><strong>合法性校验</strong>：在接收到请求后，首先进行参数的合法性校验，对非法请求直接拒绝，从而减少无效请求对后端系统的压力。</li>
+</ul>
+<h2 id="（4）Redis的哨兵机制是怎样的？"><a href="#（4）Redis的哨兵机制是怎样的？" class="headerlink" title="（4）Redis的哨兵机制是怎样的？"></a>（4）Redis的哨兵机制是怎样的？</h2><p>设置多个哨兵监视Master节点。只有当多个哨兵都认为Master节点宕掉时，才进行主从切换；同时，针对由哪一个哨兵来进行主从切换的问题，进行哨兵选举，通过选举选出一个主导的哨兵进行主从切换。</p>
+<h2 id="（5）Redis数据类型"><a href="#（5）Redis数据类型" class="headerlink" title="（5）Redis数据类型"></a>（5）Redis数据类型</h2><ul>
+<li>String：String是最常用的数据类型，在Redis中以二进制安全的方式存储字符串值。它可以包含任何类型的数据，比如文本、整数或二进制数据。</li>
+</ul>
+<ol start="2">
+<li>Hash：Hash是一个键值对的集合，其中每个键都与一个值相关联。在Redis中，Hash可以用于存储和操作对象，每个键值对相当于对象的字段和值。</li>
+<li>List：List是一个按照插入顺序排序的字符串元素集合。集合中的元素可以重复，可以从列表的两端进行插入和删除操作，可用于实现队列、栈等数据结构。</li>
+<li>Set：Set是一个无序、唯一的字符串集合，不允许重复的成员。可以对集合执行添加、删除和判断成员是否存在等操作，也支持集合间的交集、并集和差集运算。</li>
+<li>Sorted Set：Sorted Set是一个有序的字符串集合，每个成员都关联着一个分数。集合中的成员根据分数的大小进行排序，可以进行范围查询和按分数排名操作。</li>
+</ol>
+<h2 id="（6）Redis是单线程的，为什么还会这么快呢？"><a href="#（6）Redis是单线程的，为什么还会这么快呢？" class="headerlink" title="（6）Redis是单线程的，为什么还会这么快呢？"></a>（6）Redis是单线程的，为什么还会这么快呢？</h2><ul>
+<li>首先Redis是基于内存的nosql数据库，基于内存的读写效率本身就非常高；</li>
+<li>Redis内部对应核心命令的执行采用了单线程模型，并且给予内存模型，单条命令的执行速度远小于线程上下文的开销，所以使用单线程能够大大提升我们Redis的吞吐量；</li>
+<li>内部提供了高效查询和操作的数据结构；</li>
+<li>采用IO多路复用模型，能够同时处理大量连接，并且使用reator模型，能够并发的处理连接以及对连接进行响应，但是内部命令执行还是单线程的；</li>
+<li>对Redis常用操作进行旅游化，提供了管道技术和批量操作技术，能够减少单次Redis操作的网络开销</li>
+</ul>
+<h2 id="（7）使用缓存的好处？"><a href="#（7）使用缓存的好处？" class="headerlink" title="（7）使用缓存的好处？"></a>（7）使用缓存的好处？</h2><ul>
+<li>高性能</li>
+<li>高并发</li>
+</ul>
+<h2 id="（8）对Redis的理解"><a href="#（8）对Redis的理解" class="headerlink" title="（8）对Redis的理解"></a>（8）对Redis的理解</h2><p>首先，Redis本质上是一个nosql数据库，内部提供了非常多的数据结构，帮助我们满足各种场景的需求实现。</p>
+<p>并且内部使用了IO多路复用的模型，使得Redis能够处理大量的连接，并且内部对于核心命令的执行部分使用了单线程，使得我们的不需要考虑线程安全的问题。</p>
+<p>Redis完全是基于内存操作，速度很快，他的并发读写性能非常高，并且Redis6之后，对于协议解析和响应使用率了多线程模型，进一步降低核心单线程处理任务的复杂度，使得我们Redis的性能又提升了一个量级。</p>
+<p>Redis本身提供了非常多的高可用机制，帮助我们实现Redis的高可用集群，目前企业中已经大量使用Redis作为我们缓存 等场景</p>
+<h2 id="（7）一个Redis实例最多能存放多少Keys？"><a href="#（7）一个Redis实例最多能存放多少Keys？" class="headerlink" title="（7）一个Redis实例最多能存放多少Keys？"></a>（7）一个Redis实例最多能存放多少Keys？</h2><p>Redis 的每个实例最多可以存放约 2^32 - 1 个keys，即大约 42 亿个keys。</p>
+<p>这是由 Redis 内部使用的哈希表实现决定的，它使用 32 位有符号整数作为索引。Redis 使用的哈希函数和负载因子等因素也会影响实际可存放键的数量。</p>
+<h2 id="（8）说说你对缓存双写不一致的理解？"><a href="#（8）说说你对缓存双写不一致的理解？" class="headerlink" title="（8）说说你对缓存双写不一致的理解？"></a>（8）说说你对缓存双写不一致的理解？</h2><p>缓存不一致主要是指我们的业务系统里面引入了缓存提生我们查询性能，但是当我们数据库数据发生变更的时候，我们如何去保证缓存和数据库中数据的一致性问题，主要有两大种方案首先是异步通知，可以利用canal监听我们mysql的数据变化，然后发送变更缓存消息到mq，让业务系统去对缓存进行更新，由于我们一般监听binlog都是在从mysql上进行，而主从同步有一定的延时，监听完消息发送到mq又存在一定的延时，所以他的实时性不是很好，比较适合用在一致性要求不是很高的缓存场景，并且异步通知最大的优点就是解耦，对于更新缓存的逻辑不需要耦合在代码中</p>
+<p>第二种方案也是得物使用规范的中最推荐的同步双写，之所以使用这种方案，就是非常多的业务中都涉及到钱相关，如果缓存长时间不一致容易造成大量的资损，比如：我们商品中心大量商品数据进行了缓存，此时我们管理员修改了价格，这个缓存怎么同步，其实就是缓存一致性的问题，对于这种一致性比较高的业务，我们推荐最佳方案是采用延时双删，先删缓存，然后写数据库，然后过500ms再删一次缓存，这种方案能够尽可能避免出现缓存不一致的问题，但是也是无法完全避免，因为可能出现一些极端情况，比如出现了慢SQL，查了半天还是旧数据，结果我们双删也删完了，他又走了旧数据的逻辑，但是这种都可以通过监控来进行优化，尽最大可能不出现问题，如果想要保证强一致性，其实方案就是使用读写锁来保证了，但是一般C端业务，优先考虑用户体验性，如果不是直接操作钱一般不使用这种方案</p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>数据库</category>
       </categories>
   </entry>
   <entry>
@@ -2650,124 +2915,6 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Project 2 (Spring 2023)</title>
-    <url>/2024/03/27/cmu15-445%20Project%202%20(Spring%202023)/</url>
-    <content><![CDATA[<p>Overview：</p>
-<blockquote>
-<p>In this programming project you will implement a <a href="https://en.wikipedia.org/wiki/B%2B_tree">B+Tree</a> index in your database system. <strong>A B+Tree is a balanced search tree in which the internal pages direct the search and leaf pages contain the actual data entries.</strong> The index provides fast data retrieval without needing to search every row in a database table, enabling rapid random lookups and efficient scans of ordered records. Your implementation will support thread-safe search, insertion, deletion (including splitting and merging nodes), and an iterator to support in-order leaf scans.</p>
-<p>在这个编程项目中，您将在数据库系统中实现B+树索引。B+树是一种平衡搜索树，其中internal pages指导搜索，leaf pages包含实际的数据项。索引提供了快速的数据检索，而不需要搜索数据库表中的每一行，支持快速随机查找和高效的有序记录扫描。你的实现将支持<strong>线程安全</strong>的搜索、插入、删除(包括节点拆分和合并)，以及一个支持按序叶扫描的迭代器。</p>
-</blockquote>
-<span id="more"></span>
-
-<p>Project2的实现依赖于Project1的buffer pool和page guards。</p>
-<h1 id="Checkpoint-1-15-points"><a href="#Checkpoint-1-15-points" class="headerlink" title="Checkpoint #1 (15 points)"></a><strong>Checkpoint #1 (15 points)</strong></h1><h2 id="Task-1-B-Tree-Pages"><a href="#Task-1-B-Tree-Pages" class="headerlink" title="Task #1 - B+Tree Pages"></a>Task #1 - B+Tree Pages</h2><p>实现三个Page Classes去存储B+Tree的数据：</p>
-<ul>
-<li><p>B+Tree Page</p>
-<ul>
-<li>Base class，以供下面两个类继承。</li>
-</ul>
-</li>
-<li><p>B+Tree Internal Page</p>
-<ul>
-<li><strong>存储m个ordered keys和m+1个child pointers</strong>（即page_ids，指向其他的B+Tree Pages），表现为<code>key/page_id</code>pairs；</li>
-</ul>
-<blockquote>
-<p>Because the number of pointers does not equal the number of keys, the first key is set to be invalid, and lookups should always start with the second key.</p>
-</blockquote>
-<ul>
-<li>在任意时刻，internal page必须至少为<code>half full</code>。<ul>
-<li>删除时，两个<code>half full pages</code>可以合并，或<code>keys and pointers</code>重新分布来避免合并；</li>
-<li>插入时，一个<code>full pages</code>可以拆分成两个，或<code>keys and pointers</code>重新分布来避免拆分。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>B+Tree Leaf Page</p>
-<ul>
-<li><strong>存储m个ordered keys和m个相对应的value。</strong>value需要被设置为<strong>64-bit record-id</strong>。</li>
-<li>其余设置和internal pages一致。</li>
-</ul>
-<blockquote>
-<p>即使叶子页和内部页包含相同类型的键，它们的值类型也可能不同。因此，max_size 也可能不同。</p>
-</blockquote>
-</li>
-</ul>
-<p>注意：</p>
-<p>1、每个 B+Tree 的叶子页&#x2F;内部页都与缓冲池获取的内存页的内容（即 data_ 部分）相对应；</p>
-<p>2、每次read&#x2F;write一个leaf&#x2F;internal page时：</p>
-<p>（1）从buffer pool中fetch该页；（page id）</p>
-<p>（2）reinterpret cast to leaf&#x2F;internal page；</p>
-<p>（3）读&#x2F;写完后Unpin该page。</p>
-<ul>
-<li><p>flexible array</p>
-<ul>
-<li><p>flexible array 必须是类中的最后一个成员，并且仅能有一个。在为对象分配内存时，flexible array 会自动填充，占用未被其他变量使用的内存。这样就可以确定自己的长度了。</p>
-</li>
-<li><p>举例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 例如有一个类 C：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> &#123;</span><br><span class="line">    <span class="type">int</span> a; <span class="comment">// 4 byte</span></span><br><span class="line">    <span class="type">int</span> array[<span class="number">1</span>]; <span class="comment">// unknown size</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 现在初始化一个 C 的对象，并为其分配了 24 byte 的内存。a 占了 4 byte 内存</span></span><br><span class="line"><span class="comment">// 那么 array 会尝试填充剩下的内存，大小变为 5。</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="B-PLUS-TREE-INTERNAL-PAGE"><a href="#B-PLUS-TREE-INTERNAL-PAGE" class="headerlink" title="B_PLUS_TREE_INTERNAL_PAGE"></a><strong>B_PLUS_TREE_INTERNAL_PAGE</strong></h3><ul>
-<li><p>对于 Internal Page 其储存的节点数最大正好是 internal_max_size，可能被存满</p>
-<ul>
-<li>由于先插入会导致空间溢出，因此考虑单独开辟一块内存空间，在完成插入与分裂后释放。</li>
-</ul>
-</li>
-<li><p>要求第一个key为空的原因：在 internal page 中，n 个 key 可以将数轴划分为 n+1 个区域，也就对应着 n+1 个 value。</p>
-</li>
-<li><p>internal page 中的 key 并不代表实际上的索引值，仅仅是作为一个向导，引导需要插入&#x2F;删除&#x2F;查询的 key 找到这个 key 真正所在的 leaf page。</p>
-</li>
-<li><p>Header大小为24Byte：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">IndexPageType page_type_;   <span class="comment">// leaf or internal. 4 Byte</span></span><br><span class="line"><span class="type">lsn_t</span> lsn_  <span class="comment">// temporarily unused. 4 Byte</span></span><br><span class="line"><span class="type">int</span> size_;  <span class="comment">// tree page data size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">int</span> max_size_;  <span class="comment">// tree page data max size(not in byte, in count). 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> parent_page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="type">page_id_t</span> page_id_; <span class="comment">// 4 Byte</span></span><br><span class="line"><span class="comment">// 24 Byte in total</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>internal page的KV对</strong>中：</p>
-<ul>
-<li>K-比较大小的索引；</li>
-<li>V-page_id，指向下一层的节点。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403291930057.png" alt="image-20240329193009583"></p>
-<h3 id="B-PLUS-TREE-LEAF-PAGE"><a href="#B-PLUS-TREE-LEAF-PAGE" class="headerlink" title="B_PLUS_TREE_LEAF_PAGE"></a><strong>B_PLUS_TREE_LEAF_PAGE</strong></h3><ul>
-<li>对于 Leaf Page 其储存的节点数最大永远是 leaf_max_size - 1，永远存不满、<ul>
-<li>对于Leaf Page，直接先插入再分裂；</li>
-</ul>
-</li>
-<li>Header大小为28Byte，多了一个成员变量 <code>next_page_id</code>。</li>
-<li><strong>leaf page的KV对</strong>中：<ul>
-<li>K-实际的索引；</li>
-<li>V-Record ID，用于识别表中的某一条数据。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Task-2a-B-Tree-Data-Structure-Insertion-Point-Search"><a href="#Task-2a-B-Tree-Data-Structure-Insertion-Point-Search" class="headerlink" title="Task #2a - B+Tree Data Structure (Insertion, Point Search)"></a>Task #2a - B+Tree Data Structure (Insertion, Point Search)</h2><ul>
-<li>目标：实现1）<code>insertion：Insert()</code>；2）<code>Search：Getvalue()</code></li>
-</ul>
-<blockquote>
-<p>index仅支持unique keys。</p>
-<p>如果插入会改变树的不变形，需要进行结点的拆分或keys的重组。</p>
-<p>若改变了root的page ID，必须更新<code>root_page_id</code>。为此，可以访问构造函数中给出的 <code>header_page_id_</code> 页面。然后，通过使用 <code>reinterpret cast</code>，可以将该页面解释为 <code>BPlusTreeHeaderPage</code>，并从这里更新root的page ID。此外，必须实现 <code>GetRootPageId</code>（目前默认返回 0）。</p>
-<p>推荐使用<code>FetchPageBasic</code>来访问页。</p>
-</blockquote>
-<ul>
-<li><p>对于取得的页进行操作：1）根据page_id取得guard；2）将其数据部分<code>data_</code>强制转换成对应的类型（reinterpret_cast&#x2F;As&#x2F;AsMut）。</p>
-  <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 将内部存储的指针按照指定的类型进行类型转换</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">As</span><span class="params">()</span> -&gt; <span class="type">const</span> T * </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> guard_.<span class="built_in">As</span>&lt;T&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><em><strong>（under analyze）补充</strong></em></p>
-<h3 id="src-storage-page-b-plus-tree-internal-page-cpp"><a href="#src-storage-page-b-plus-tree-internal-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_internal_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br><span class="line">// ==under analyze 2: lambda 表达式 &amp; [comparator]</span><br><span class="line">// ==under analyze 2: std::lower_bound &amp; std::prev</span><br></pre></td></tr></table></figure>
-
-<h3 id="src-storage-page-b-plus-tree-leaf-page-cpp"><a href="#src-storage-page-b-plus-tree-leaf-page-cpp" class="headerlink" title="src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp"></a>src&#x2F;storage&#x2F;page&#x2F;b_plus_tree_leaf_page.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze 1: FindValue的逻辑</span><br></pre></td></tr></table></figure>
-
-<h3 id="src-storage-index-b-plus-tree-cpp"><a href="#src-storage-index-b-plus-tree-cpp" class="headerlink" title="src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp"></a>src&#x2F;storage&#x2F;index&#x2F;b_plus_tree.cpp</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// ==under analyze1: emplace_back()</span><br></pre></td></tr></table></figure>
-
-<h1 id="Checkpoint-2-85-points"><a href="#Checkpoint-2-85-points" class="headerlink" title="Checkpoint #2 (85 points)"></a><strong>Checkpoint #2 (85 points)</strong></h1><h2 id="Task-2b-B-Tree-Data-Structure-Deletion"><a href="#Task-2b-B-Tree-Data-Structure-Deletion" class="headerlink" title="Task #2b - B+Tree Data Structure (Deletion)"></a>Task #2b - B+Tree Data Structure (Deletion)</h2><h2 id="Task-3-Index-Iterator"><a href="#Task-3-Index-Iterator" class="headerlink" title="Task #3 - Index Iterator"></a>Task #3 - Index Iterator</h2><h2 id="Task-4-Concurrency-Control"><a href="#Task-4-Concurrency-Control" class="headerlink" title="Task #4 - Concurrency Control"></a>Task #4 - Concurrency Control</h2>]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>数据库1_MySQL数据库.md</title>
     <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h1 id="1、MySQL简介"><a href="#1、MySQL简介" class="headerlink" title="1、MySQL简介"></a>1、MySQL简介</h1><p>MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
@@ -3014,150 +3161,131 @@
       </categories>
   </entry>
   <entry>
-    <title>数据库2_Redis数据库.md</title>
-    <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="1、Redis简介"><a href="#1、Redis简介" class="headerlink" title="1、Redis简介"></a>1、Redis简介</h1><p>Redis是一个基于内存的数据存储系统，它<strong>将数据完全存储在内存中</strong>，通过使用<strong>持久化机制</strong>来将数据定期写入磁盘以保证数据的持久性。</p>
-<h2 id="（1）内存淘汰机制-过期策略"><a href="#（1）内存淘汰机制-过期策略" class="headerlink" title="（1）内存淘汰机制&#x2F;过期策略"></a>（1）内存淘汰机制&#x2F;过期策略</h2><p><strong>MySQL里有2000w数据，Redis中只存20w的数据，如何保证Redis中的数据都是热点数据？</strong></p>
-<p>redis 提供 6种数据淘汰策略：</p>
-<ul>
-<li>volatile-lru： 从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</li>
-<li>volatile-ttl： 从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</li>
-<li>volatile-random： 从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</li>
-<li>allkeys-lru： 当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（这个是最常用的）.</li>
-<li>allkeys-random： 从数据集（server.db[i].dict）中任意选择数据淘汰</li>
-<li>no-eviction： 禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。</li>
-</ul>
-<h2 id="（2）持久化机制"><a href="#（2）持久化机制" class="headerlink" title="（2）持久化机制"></a>（2）持久化机制</h2><p><strong>怎么保证 redis 挂掉之后再重启数据可以进行恢复？</strong></p>
-<p><strong>持久化数据</strong>：也就是将内存中的数据写入磁盘。</p>
-<ul>
-<li><p>目的：</p>
-<ul>
-<li>为了之后重用数据（比如重启机器、机器故障之后恢复数据），</li>
-<li>为了防止系统故障而将数据备份到一个远程位置。</li>
-</ul>
-</li>
-<li><p><strong>快照（snapshotting，RDB）</strong></p>
-<ul>
-<li>在指定的时间间隔内将内存中的数据集快照写入磁盘，RDB是内存快照（内存数据的二进制序列化形式）的方式持久化，每次都是从Redis中生成一个快照进行数据的全量备份。</li>
-<li>Redis持久化<strong>默认开启为RDB持久化</strong>。<ul>
-<li>指定的时间间隔：体现在主进程fork子进程的阶段。</li>
-<li>触发规则：<ul>
-<li><strong>手动触发</strong><ul>
-<li><strong>save</strong>：阻塞当前Redis进程，直到RDB持久化完成（尽量不使用）</li>
-<li><strong>bgsave</strong>：Redis主进程fork子进程，由子进程完成持久化</li>
+    <title>毕设项目提问</title>
+    <url>/2024/04/08/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/</url>
+    <content><![CDATA[<h2 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h2><p>名称：<strong>多用户智能家居控制系统设计</strong>。</p>
+<p>1、 基于Linux多线程编程，结合MQTT协议的订阅-发布模式，完成多用户智能控制；</p>
+<p>2、 在用户端设计双模式。共享模式：多个用户同时控制，且共享当前设备的状态；私人模式：被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>3、 采用MQTT协议进行数据传送。通过实验对比HTTP协议和MQTT协议在智能家居领域的应用，结果表明MQTT在降低功耗和推送功能开发上优势明显，其即便是在资源有限的环境中也能易于使用。</p>
+<p><strong>根据MQTT的基本原理，将智能家居控制系统分为三部分，即发布者、消息代理者以及订阅者：</strong></p>
+<p>1、 发布者由多个安卓客户端构成，每个安卓客户端发出独立的控制指令；</p>
+<p>2、 消息代理者是部署了通信协议的云服务器，其主要负责将客户端的控制指令转发给开发板，以实现的对应的功能操作；</p>
+<p>3、 订阅者是iTop4412开发板，包括其LED、警报及温度传感器等功能。</p>
+<p><strong>本项目的重点与核心在实现客户端的多用户控制。</strong></p>
+<p>1、 针对发布者，利用Qt开发平台设计手机App作为客户端，它有两个特点，分别是多用户和双模式。多用户指不同的客户端均可进行控制操作；双模式指针对客户端本身，有共享模式和私人模式两种，在共享模式下可实现多个用户同时控制，且共享当前设备的状态；在私人模式下被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>2、 针对消息代理者，选择在阿里云上部署mosquitto。选用MQTT协议的原因已在前述加以说明，而由于mosquitto是一种流行的mqtt服务器，且易于安装和配置，因此选用mosquitto进行部署；</p>
+<p>3、 针对订阅者，主要以iTop4412开发板作为功能实现端。同时基于Linux多线程来配合实现多用户控制。</p>
+<p><strong>本项目的数据转发过程如下。</strong></p>
+<p>每个安卓客户端是基于其特定的主题实现对开发板的控制。客户端发出的控制指令将以json数据的格式被封装，经mosquitto云服务器转发后送至开发板侧，开发板读取json包，解析出对应的命令行指令，对相应的硬件进行控制。</p>
+<h2 id="二、相关问题"><a href="#二、相关问题" class="headerlink" title="二、相关问题"></a>二、相关问题</h2><ol>
+<li><strong>为什么选择Linux作为多用户智能家居控制系统的操作系统？</strong><ul>
+<li>Linux是一个开源的操作系统，具有良好的稳定性和安全性，适合于嵌入式系统和服务器端应用，并且支持多线程编程，能够满足项目的需求。</li>
 </ul>
 </li>
-<li><strong>自动触发</strong>：<ul>
-<li><strong>配置触发</strong>：redis.conf——&#x2F;snapshot即可定位到触发的配置位置<ul>
-<li>save 3600 1 300 100 600 60 10000<ul>
-<li>save 3600 1：3600秒内有1个key被修改，触发RDB</li>
-<li>save 300 100：300秒内有100个key被修改，触发RDB</li>
-<li>save 60 10000：60秒内有10000个key被修改，触发RDB</li>
+<li><strong>在Linux中，如何使用多线程编程实现并发处理？项目中是如何实现的？</strong><ul>
+<li><strong>pthread库：</strong> pthread库是POSIX标准定义的线程库，在Linux系统中得到广泛支持。通过pthread库，可以创建、管理和同步线程，实现并发处理。具体包括以下几个步骤：<ul>
+<li>包含头文件 <code>pthread.h</code>。</li>
+<li>使用 <code>pthread_create</code> 函数创建线程。</li>
+<li>在线程函数中实现具体的处理逻辑。</li>
+<li>使用 <code>pthread_join</code> 函数等待线程结束并回收资源。</li>
+<li>使用互斥锁（pthread_mutex）、条件变量（pthread_cond）等进行线程同步和通信。</li>
 </ul>
 </li>
+<li><strong>C++11标准线程库：</strong> C++11引入了标准线程库，通过 <code>std::thread</code> 类可以方便地创建和管理线程，与pthread库相比，使用更加方便。使用标准线程库的步骤如下：<ul>
+<li>包含头文件 <code>&lt;thread&gt;</code>。</li>
+<li>使用 <code>std::thread</code> 类创建线程。</li>
+<li>在线程函数中实现具体的处理逻辑。</li>
+<li>调用 <code>join()</code> 或 <code>detach()</code> 函数等待线程结束或将其分离。</li>
 </ul>
 </li>
-<li><strong>shutdown触发</strong></li>
-<li><strong>flushall触发</strong>：清空Redis数据的同时清空dump.rdb文件，等同于删库跑路</li>
+<li>在项目中，主要通过编写多线程的C程序来实现。其主要功能是创建两个线程，一个用于订阅MQTT消息，即sub_thread，另一个用于发布MQTT消息，即pub_thread。同时在主线程等待这两个线程的结束。<ul>
+<li><code>sub_thread</code>函数首先通过<code>pthread_mutex_lock</code>获取互斥锁，接着创建一个mosquitto客户端并连接到指定的MQTT服务器，配置连接回调函数和消息接收回调函数，最后调用<code>mosquitto_loop_forever</code>函数来循环接收消息。当业务结束时，释放互斥锁并退出线程。<ul>
+<li>回调函数是在特定事件发生时自动调用的函数，用于处理相应的事件或数据。在sub_thread中调用了mosquitto库提供的mosquitto_connect_callback_set和 mosquitto_message_callback_set。</li>
 </ul>
 </li>
+<li><code>pub_thread</code>函数操作和sub_thread类似，但不需要对其进行加锁操作。在成功建立连接后，进入一个死循环，在循环中创建一个JSON格式的消息并发布到指定的主题。</li>
+<li>在<code>main</code>函数中使用了<code>pthread_create</code>函数来创建线程，并使用<code>pthread_join</code>函数来等待线程结束。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>优点<ul>
-<li>性能高：RDB持久化通过生成一个快照文件来保存数据，因此在恢复数据时速度非常快；</li>
-<li>文件紧凑：RDB文件是二进制格式的数据库文件，相较于AOF文件来说，文件体积小。</li>
+<li><strong>MQTT协议与HTTP协议相比，有何优势？为什么选择MQTT协议进行数据传送？</strong><ul>
+<li>MQTT协议相比HTTP协议在降低功耗和推送功能开发上具有明显优势，适合于资源有限的环境和实时数据传输的场景。因此选择MQTT协议进行数据传送。</li>
 </ul>
 </li>
-<li>缺点<ul>
-<li>可能丢失数据：由于RDB是定期生成的快照文件，如果Redis意外宕机，最近一次的修改可能会丢失。</li>
+<li><strong>如何使用Qt开发平台设计手机App？</strong><ul>
+<li>使用Qt Creator工具进行开发，利用Qt提供的QML语言和Qt Quick控件进行界面设计和开发，同时通过C++语言编写业务逻辑代码。</li>
+</ul>
+</li>
+<li><strong>介绍一下阿里云上部署mosquitto的过程。</strong><ul>
+<li>在阿里云上安装mosquitto，配置mosquitto的配置文件，设置端口号和用户名密码等参数，启动mosquitto服务，配置防火墙规则允许外部访问。</li>
+<li>MQTT服务器的端口号通常是1883。</li>
+</ul>
+</li>
+<li><strong>如何在iTop4412开发板上实现对控制指令的接收和执行？</strong><ul>
+<li>通过Linux多线程编程，在iTop4412开发板上创建一个线程来监听MQTT服务器发送的控制指令，接收到指令后解析并执行对应的命令。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何使用JSON格式封装控制指令？</strong><ul>
+<li>使用 <code>cJSON_CreateObject()</code> 函数创建一个空的JSON对象。</li>
+<li>使用 <code>cJSON_AddNumberToObject()</code> 函数向JSON对象中添加一个键值对，键为 “temp”，值为一个随机生成的温度值 <code>a</code>。</li>
+<li>使用 <code>cJSON_Print()</code> 函数将JSON对象打印成JSON格式的字符串，并将其赋值给 <code>json_buf</code>。</li>
+<li>使用 <code>mosquitto_publish()</code> 函数将JSON字符串发布到MQTT服务器上的主题为 “temp” 的通道中。</li>
+</ul>
+</li>
+<li><strong>如何通过mosquitto服务器将客户端的控制指令转发给iTop4412开发板？</strong><ul>
+<li>在mosquitto服务器上配置相应的主题和订阅关系，客户端发布控制指令到对应的主题，mosquitto服务器将控制指令转发给iTop4412开发板的订阅者。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何处理并发访问问题？</strong><ul>
+<li>订阅者线程（<code>sub_thread</code>）需要访问共享资源，涉及到订阅者之间的状态共享或者资源竞争，因此需要使用互斥锁来保护共享资源的访问，确保线程安全。</li>
+<li>而发布者线程（<code>pub_thread</code>）只是简单地发布消息，没有涉及到共享资源的修改或竞争条件，因此不需要使用互斥锁。只是在程序结束时释放资源。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何实现共享模式和私人模式的切换？</strong><ul>
+<li>通过界面设计和用户交互实现切换按钮或选项卡，根据用户选择的模式来设置相应的控制权限和功能。</li>
+</ul>
+</li>
+<li><strong>在iTop4412开发板上，如何解析JSON格式的控制指令并执行相应的功能操作？</strong><ul>
+<li>使用第三方JSON库cJSON在Linux环境下解析JSON格式的控制指令，提取出对应的命令参数，然后调用相应的系统调用或执行命令行来控制硬件设备。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何实现用户认证和权限管理？</strong><ul>
+<li>在安卓客户端上实现用户登录和注册功能。将用户信息存储在MySQL数据库上，在登陆查询当前用户是否属于该数据库，以及用户名与密码是否匹配；若不存在，可进行注册操作。</li>
+<li>由于本设计要访问特定公网的阿里云服务器上的数据库，因此在Qt开发平台上需要首先提供所需要的驱动插件之后，再利用QSqlDatabase来处理与数据库的连接，利用QSqlQuery类来执行底层数据库支持的任何SQL语句。</li>
+</ul>
+</li>
+<li><strong>如何保证系统的稳定性和可靠性？</strong><ul>
+<li>采用日志记录功能来记录系统运行状态和处理异常情况，同时进行定期的系统监控和维护。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何实现界面的实时更新和数据同步？</strong><ul>
+<li>使用信号与槽机制： 在Qt中，通过信号与槽机制实现对象之间的通信。当数据发生变化时，可以通过信号发送变化的消息，然后在界面组件中连接相应的槽函数来更新界面。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何实现系统的扩展性和灵活性？</strong><ul>
+<li>采用模块化设计，将系统功能拆分为独立的模块，支持动态加载和卸载，从而实现系统的扩展性和灵活性。</li>
+</ul>
+</li>
+<li><strong>在iTop4412开发板上，如何实现硬件设备的驱动和控制？</strong><ul>
+<li>通过 MQTT 实现硬件设备的驱动和控制：<ul>
+<li>当用户在 UI 上进行操作时，比如点击 LED 开关按钮，UI 触发对应的槽函数，如 <code>on_ledBt_ON_1_clicked()</code>。</li>
+<li>在槽函数中构造一个JSON 数据包，其中包含了需要控制的硬件设备信息，比如 LED 的状态。然后将这个 JSON 数据包发布到 MQTT 主题上，通过 MQTT 协议发送给 MQTT 服务器。</li>
+<li>在硬件设备端，通过订阅相应的 MQTT 主题，监听来自 MQTT 服务器的消息。</li>
+<li>当硬件设备端接收到相应的消息后，解析 JSON 数据包，获取到控制指令，并执行相应的操作，例如打开或关闭 LED。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><strong>只追加文件（append-only file，AOF）</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061114362.png" alt="image-20240406111403297"></p>
-<ul>
-<li>开启AOF持久化后每执行一条会更改Redis中的数据的命令，Redis就会将该命令写入硬盘中的AOF文件。</li>
-<li><strong>同步策略</strong>：<ul>
-<li><code>appendfsync always</code>：每次有数据修改发生时都会写入AOF文件，但会严重降低Redis的速度；</li>
-<li><code>appendfsync everysec</code>：每秒刷新一次缓冲区中的数据到AOF文件，显式地将多个写命令同步到硬盘；</li>
-<li><code>appendfsync no</code>：Redis进程不会主动地去刷新缓冲区的数据到AOF文件，让操作系统决定何时进行同步。</li>
+<li><strong>该项目还有哪些可以改进的地方？</strong><ul>
+<li>可以在mosquitto服务器上配置TLS&#x2F;SSL加密通信，客户端和服务器之间通过证书验证进行安全连接，防止数据被窃取或篡改。确保安卓客户端与mosquitto服务器之间的通信安全性。</li>
+<li>此外，对于多线程部分我觉得还可以再考虑细化锁的粒度，以及进行RAII技术管理互斥锁，避免在某些异常情况下未释放锁导致资源泄露问题。</li>
 </ul>
 </li>
-<li><strong>重写策略</strong><ul>
-<li><code>auto-aof-rewrite-percentage 100</code>：当AOF文件体积达到上次重写之后的体积的100%时，触发AOF重写；</li>
-<li><code>auto-aof-rewrite-min-size 64mb</code>：当AOF文件体积超过该阈值时，触发AOF重写。</li>
-</ul>
-</li>
-<li><strong>优点</strong><ul>
-<li>数据更加可靠：AOF持久化记录了每个写命令的操作，因此在出现故障时，可以通过重新执行AOF文件来保证数据的完整性；</li>
-<li>可以保留写命令历史：AOF文件是一个追加日志文件，可以用于回放过去的写操作。</li>
-</ul>
-</li>
-<li><strong>缺点</strong><ul>
-<li>文件较大：由于记录了每个写命令，AOF文件体积通常比RDB文件要大；</li>
-<li>恢复速度较慢：当AOF文件较大时，Redis重启时需要重新执行整个AOF文件，恢复速度相对较慢。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="（3）缓存击穿、缓存雪崩和缓存穿透"><a href="#（3）缓存击穿、缓存雪崩和缓存穿透" class="headerlink" title="（3）缓存击穿、缓存雪崩和缓存穿透"></a>（3）缓存击穿、缓存雪崩和缓存穿透</h2><h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>在高并发的访问下，一个热点数据失效时，大量请求会直接绕过缓存，直接查询数据库，导致数据库压力剧增。</p>
-<p>解决方案：</p>
-<ul>
-<li><strong>设置热点数据永不过期</strong>：对于一些热点数据，可以设置不过期，或者设置较长的过期时间，以保证这部分数据在缓存中一直可用，减少因数据过期引起的击穿问题；</li>
-<li><strong>设置互斥锁</strong>：在缓存失效时，只允许一个请求访问数据库，其他请求需要等待该请求执行完毕后再从缓存中获取数据，可以减少并发请求对数据库的冲击；</li>
-<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果不存在，可以直接返回避免对数据库的查询，缓解击穿压力。</li>
-</ul>
-<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>在高并发的访问下，大规模缓存失效同时失效或者缓存宕机，大量请求同时涌入数据库，导致数据库负载过大甚至崩溃的情况。 </p>
-<p>解决方案：</p>
-<ul>
-<li><strong>随机分布过期时间</strong>：在设置缓存数据的过期时间时，可以随机分布过期时间，避免缓存数据同时大规模失效；</li>
-<li><strong>使用多级缓存</strong>：引入多级缓存架构，将请求分散到不同的缓存层，即使一个缓存层发生雪崩，也能够有其他缓存层提供服务。</li>
-</ul>
-<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>缓存穿透是指恶意请求或者大量查询不存在于缓存中的数据，导致请求直接绕过缓存层，直接访问后端存储系统（如数据库），从而给后端系统造成巨大压力的现象。</p>
-<p>解决方法主要包括：</p>
-<ul>
-<li><strong>空值缓存</strong>：对于查询数据库返回空结果的情况，也将其缓存起来，但设置一个较短的过期时间，防止缓存穿透的请求直接击穿数据库；</li>
-<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果数据不存在，则直接拒绝访问，从而避免了对后端系统的查询请求，减轻了后端压力；</li>
-<li><strong>数据预热</strong>：在系统启动或者定时任务中，预先将热点数据加载到缓存中，避免缓存穿透带来的大量请求直接击穿数据库；</li>
-<li><strong>合法性校验</strong>：在接收到请求后，首先进行参数的合法性校验，对非法请求直接拒绝，从而减少无效请求对后端系统的压力。</li>
-</ul>
-<h2 id="（4）Redis的哨兵机制是怎样的？"><a href="#（4）Redis的哨兵机制是怎样的？" class="headerlink" title="（4）Redis的哨兵机制是怎样的？"></a>（4）Redis的哨兵机制是怎样的？</h2><p>设置多个哨兵监视Master节点。只有当多个哨兵都认为Master节点宕掉时，才进行主从切换；同时，针对由哪一个哨兵来进行主从切换的问题，进行哨兵选举，通过选举选出一个主导的哨兵进行主从切换。</p>
-<h2 id="（5）Redis数据类型"><a href="#（5）Redis数据类型" class="headerlink" title="（5）Redis数据类型"></a>（5）Redis数据类型</h2><ul>
-<li>String：String是最常用的数据类型，在Redis中以二进制安全的方式存储字符串值。它可以包含任何类型的数据，比如文本、整数或二进制数据。</li>
-</ul>
-<ol start="2">
-<li>Hash：Hash是一个键值对的集合，其中每个键都与一个值相关联。在Redis中，Hash可以用于存储和操作对象，每个键值对相当于对象的字段和值。</li>
-<li>List：List是一个按照插入顺序排序的字符串元素集合。集合中的元素可以重复，可以从列表的两端进行插入和删除操作，可用于实现队列、栈等数据结构。</li>
-<li>Set：Set是一个无序、唯一的字符串集合，不允许重复的成员。可以对集合执行添加、删除和判断成员是否存在等操作，也支持集合间的交集、并集和差集运算。</li>
-<li>Sorted Set：Sorted Set是一个有序的字符串集合，每个成员都关联着一个分数。集合中的成员根据分数的大小进行排序，可以进行范围查询和按分数排名操作。</li>
 </ol>
-<h2 id="（6）Redis是单线程的，为什么还会这么快呢？"><a href="#（6）Redis是单线程的，为什么还会这么快呢？" class="headerlink" title="（6）Redis是单线程的，为什么还会这么快呢？"></a>（6）Redis是单线程的，为什么还会这么快呢？</h2><ul>
-<li>首先Redis是基于内存的nosql数据库，基于内存的读写效率本身就非常高；</li>
-<li>Redis内部对应核心命令的执行采用了单线程模型，并且给予内存模型，单条命令的执行速度远小于线程上下文的开销，所以使用单线程能够大大提升我们Redis的吞吐量；</li>
-<li>内部提供了高效查询和操作的数据结构；</li>
-<li>采用IO多路复用模型，能够同时处理大量连接，并且使用reator模型，能够并发的处理连接以及对连接进行响应，但是内部命令执行还是单线程的；</li>
-<li>对Redis常用操作进行旅游化，提供了管道技术和批量操作技术，能够减少单次Redis操作的网络开销</li>
-</ul>
-<h2 id="（7）使用缓存的好处？"><a href="#（7）使用缓存的好处？" class="headerlink" title="（7）使用缓存的好处？"></a>（7）使用缓存的好处？</h2><ul>
-<li>高性能</li>
-<li>高并发</li>
-</ul>
-<h2 id="（8）对Redis的理解"><a href="#（8）对Redis的理解" class="headerlink" title="（8）对Redis的理解"></a>（8）对Redis的理解</h2><p>首先，Redis本质上是一个nosql数据库，内部提供了非常多的数据结构，帮助我们满足各种场景的需求实现。</p>
-<p>并且内部使用了IO多路复用的模型，使得Redis能够处理大量的连接，并且内部对于核心命令的执行部分使用了单线程，使得我们的不需要考虑线程安全的问题。</p>
-<p>Redis完全是基于内存操作，速度很快，他的并发读写性能非常高，并且Redis6之后，对于协议解析和响应使用率了多线程模型，进一步降低核心单线程处理任务的复杂度，使得我们Redis的性能又提升了一个量级。</p>
-<p>Redis本身提供了非常多的高可用机制，帮助我们实现Redis的高可用集群，目前企业中已经大量使用Redis作为我们缓存 等场景</p>
-<h2 id="（7）一个Redis实例最多能存放多少Keys？"><a href="#（7）一个Redis实例最多能存放多少Keys？" class="headerlink" title="（7）一个Redis实例最多能存放多少Keys？"></a>（7）一个Redis实例最多能存放多少Keys？</h2><p>Redis 的每个实例最多可以存放约 2^32 - 1 个keys，即大约 42 亿个keys。</p>
-<p>这是由 Redis 内部使用的哈希表实现决定的，它使用 32 位有符号整数作为索引。Redis 使用的哈希函数和负载因子等因素也会影响实际可存放键的数量。</p>
-<h2 id="（8）说说你对缓存双写不一致的理解？"><a href="#（8）说说你对缓存双写不一致的理解？" class="headerlink" title="（8）说说你对缓存双写不一致的理解？"></a>（8）说说你对缓存双写不一致的理解？</h2><p>缓存不一致主要是指我们的业务系统里面引入了缓存提生我们查询性能，但是当我们数据库数据发生变更的时候，我们如何去保证缓存和数据库中数据的一致性问题，主要有两大种方案首先是异步通知，可以利用canal监听我们mysql的数据变化，然后发送变更缓存消息到mq，让业务系统去对缓存进行更新，由于我们一般监听binlog都是在从mysql上进行，而主从同步有一定的延时，监听完消息发送到mq又存在一定的延时，所以他的实时性不是很好，比较适合用在一致性要求不是很高的缓存场景，并且异步通知最大的优点就是解耦，对于更新缓存的逻辑不需要耦合在代码中</p>
-<p>第二种方案也是得物使用规范的中最推荐的同步双写，之所以使用这种方案，就是非常多的业务中都涉及到钱相关，如果缓存长时间不一致容易造成大量的资损，比如：我们商品中心大量商品数据进行了缓存，此时我们管理员修改了价格，这个缓存怎么同步，其实就是缓存一致性的问题，对于这种一致性比较高的业务，我们推荐最佳方案是采用延时双删，先删缓存，然后写数据库，然后过500ms再删一次缓存，这种方案能够尽可能避免出现缓存不一致的问题，但是也是无法完全避免，因为可能出现一些极端情况，比如出现了慢SQL，查了半天还是旧数据，结果我们双删也删完了，他又走了旧数据的逻辑，但是这种都可以通过监控来进行优化，尽最大可能不出现问题，如果想要保证强一致性，其实方案就是使用读写锁来保证了，但是一般C端业务，优先考虑用户体验性，如果不是直接操作钱一般不使用这种方案</p>
 ]]></content>
       <categories>
-        <category>计算机基础</category>
-        <category>数据库</category>
+        <category>面试</category>
       </categories>
   </entry>
   <entry>
@@ -3280,6 +3408,249 @@
 ]]></content>
       <categories>
         <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>面试八股</title>
+    <url>/2024/04/07/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/</url>
+    <content><![CDATA[<h3 id="1-如何看待C-和C的关系？"><a href="#1-如何看待C-和C的关系？" class="headerlink" title="1.如何看待C++和C的关系？"></a>1.如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
+<h3 id="2-讲一下什么是智能指针？"><a href="#2-讲一下什么是智能指针？" class="headerlink" title="2.讲一下什么是智能指针？"></a>2.讲一下什么是智能指针？</h3><p>智能指针是对裸指针的封装，其实质上是一个类，在离开类的作用范围后会自动调用析构函数释放资源，因此避免了程序员手动操作时忘记释放资源导致的内存泄漏问题。<br>智能指针包含4类：<br>（1）auto_ptr：在C++11中已经被废弃使用。它提供独占所有权，但没有复制语义，存在潜在的危险，例如当它被复制后原始指针可能被意外释放。<br>（2）unique_ptr：实现了对资源的独占访问，同一时刻只能有一个指针对资源进行访问。<br>（3）shared_ptr：当有多个对象需要共享资源时，则使用shared_ptr。其内部维护了一个引用计数器，当引用计数减少为0时调用delete释放资源。<br>当存在下列情况时会使得引用计数增加：1）新建一个shared_ptr指向对象；2）拷贝构造函数复制一个shared_ptr；3）复制操作将一个shared_ptr复制给另一个shared_ptr。<br>当存在下列操作时会使得引用计数减少：1）当一个shared_ptr被销毁时，如离开作用域，或调用了析构函数；2）当一个shared_ptr不再指向某个资源，如调用reset方法。<br>（4）weak_ptr：指向一个shared_ptr对象，并不会增加其引用计数，而只是提供一种访问方式。可以解决shared_ptr中存在的循环引用问题。</p>
+<h3 id="3-循环引用是如何发生的？如何解决？"><a href="#3-循环引用是如何发生的？如何解决？" class="headerlink" title="3.循环引用是如何发生的？如何解决？"></a>3.循环引用是如何发生的？如何解决？</h3><p>当多个shared_ptr对象互相引用，或是在某些比较复杂的数据结构中存在多条引用路径时，可能存在循环引用问题，导致资源无法被释放。此时就可以使用weak_ptr来打破循环，因为waek_ptr不会增加引用计数。</p>
+<h3 id="4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？"><a href="#4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？" class="headerlink" title="4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？"></a>4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？</h3><p>shared_ptr并不是线程安全的，当多个线程同时访问或修改同一个shared_ptr对象时，可能会导致数据竞争或未定义的行为。但shared_ptr内部的计数器操作是线程安全的。<br>因此，在多线程使用时，需要避免多个线程同时访问一个shared_ptr对象或对其修改。</p>
+<h3 id="5-介绍一下static和const？"><a href="#5-介绍一下static和const？" class="headerlink" title="5.介绍一下static和const？"></a>5.介绍一下static和const？</h3><p>const允许我们指定一个语义约束，告诉编译器某个变量不应该被修改。const可以用于修饰普通变量、函数、类等。比如在重载解引用操作符时，就可以用const来修饰，因为在解引用操作前后指针所指向的值是不应该被改变的。<br>static则修改存储方式和可见范围。主要包含4类：<br>（1）静态成员变量：静态成员变量不属于类的任何一个对象，而只属于类本身，所有对象共享一个静态成员变量。<br>（2）静态成员函数：静态成员函数同理。<br>（3）静态局部变量：定义在函数内部，和普通局部变量不同，在函数整个运行期间只会初始化一次，即使函数被多次调用也是如此。<br>（4）静态全局变量：静态全局变量在某个源文件中被定义后则只能在该源文件中被使用，而不能在其他文件中使用，有助于封装和避免命名冲突。</p>
+<h3 id="6-如何让对象只能存在于栈-堆中？"><a href="#6-如何让对象只能存在于栈-堆中？" class="headerlink" title="6.如何让对象只能存在于栈&#x2F;堆中？"></a>6.如何让对象只能存在于栈&#x2F;堆中？</h3><p>如果将operator new设置为私有的，此时尝试在堆上分配内存失败，对象就会存在于栈中。<br>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会存在于堆中。</p>
+<h3 id="7-new和malloc的区别？"><a href="#7-new和malloc的区别？" class="headerlink" title="7.new和malloc的区别？"></a>7.new和malloc的区别？</h3><p>主要包含以下区别：<br>（1）new是c++特有的操作符，只能在C++中使用；malloc是C中的函数，但可以同时在c&#x2F;c++中使用。<br>（2）malloc在使用时需要指定分配内存的大小，如malloc(sizeof(int))，但new的使用则比较简洁，如new int。<br>（3）malloc分配的内存是未定义的，而new在分配内存时还会调用构造函数进行初始化。<br>（4）malloc返回的是void *类型的指针，需要进行强制类型转换以得到需要的指针类型，而new会自动转换为响应的指针类型。<br>（5）malloc调用free进行释放， ew调用delete进行释放。</p>
+<h3 id="8-什么是左值，什么是右值？"><a href="#8-什么是左值，什么是右值？" class="headerlink" title="8.什么是左值，什么是右值？"></a>8.什么是左值，什么是右值？</h3><p>左值是指一段指向内存的，具有名称的值，通常有较长的声明周期；右值是指向不稳定内存的匿名值，声明周期较短。可以通过取址符号来进行判断，能取到地址的是左值，取不到的是右值。</p>
+<h3 id="9-前置c-返回的是左值还是右值？后置c-呢？字符串字面量呢？"><a href="#9-前置c-返回的是左值还是右值？后置c-呢？字符串字面量呢？" class="headerlink" title="9.前置c++返回的是左值还是右值？后置c++呢？字符串字面量呢？"></a>9.前置c++返回的是左值还是右值？后置c++呢？字符串字面量呢？</h3><p>前置C++的实现是直接对传入的变量进行自增，然后返回这个对象，即一个具有名称的稳定的值，因此返回的是左值。后置C++是创建一个临时对象，然后对对象自增，再返回这个临时对象自增，因此返回的是右值。<br>字符串字面量也是左值。他会将字符串变量存放在程序的数据段中，程序加载时为其分配一段内存。</p>
+<h3 id="10-什么是左值引用和右值引用？"><a href="#10-什么是左值引用和右值引用？" class="headerlink" title="10.什么是左值引用和右值引用？"></a>10.什么是左值引用和右值引用？</h3><p>左值引用是指向左值的引用，用单个&amp;表示。常量左值引用可以绑定左值，也可以绑定右值。非变量左值引用只能绑定左值。<br>右值引用是指向右值的引用，用两个&amp;&amp;表示。右值引用主要用于移动语义。通过移动语义，可以避免不必要的拷贝操作，从而提升性能。</p>
+<h3 id="11-右值引用是如何提高性能的？"><a href="#11-右值引用是如何提高性能的？" class="headerlink" title="11.右值引用是如何提高性能的？"></a>11.右值引用是如何提高性能的？</h3><p>右值引用主要是通过避免不必要的拷贝操作来提升性能的。<br>举两个例子：<br>（1）当使用右值引用接收函数返回的局部变量时，可以延长该局部变量的声明周期，使得右值引用直接利用该局部变量的内存，而不是创建一个临时对象，从而避免了不必要的开销。<br>（2）当使用一个临时对象来创建一个新对象时，可以使用移动构造函数，直接将资源从一个对象复制到另一个对象上，避免了不必要的复制操作。</p>
+<h3 id="12-移动构造函数可能会有什么问题？"><a href="#12-移动构造函数可能会有什么问题？" class="headerlink" title="12.移动构造函数可能会有什么问题？"></a>12.移动构造函数可能会有什么问题？</h3><p>在使用移动构造函数时，如果当一个对象的资源移动到另一个对象上时发生了异常，此时就会造成有一部分资源转移了，而另一部分没有，从而使得源对象和目标对象上的资源都不完整。因此在使用移动构造函数时应该避免发生异常。如果无法确保移动构造函数不会发生异常，应该用noexcept进行修饰。这样函数如果发生异常时不会继续执行，而是抛出std::terminate并停止。</p>
+<h3 id="13-一个由C-C-编译的程序的内存分布（内存模型）？"><a href="#13-一个由C-C-编译的程序的内存分布（内存模型）？" class="headerlink" title="13.一个由C&#x2F;C++编译的程序的内存分布（内存模型）？"></a>13.一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<br>.text段，.rodata段，.data段，.bss段，堆，内存映射区，栈，内核空间。<br>其中，各项主要内容如下：<br>（1）.text段主要存在程序编译后的机器指令<br>（2）.rodata段主要存放程序中的各种只读变量<br>（3）.data段主要存放已经被初始化了的全局静态变量和局部静态变量<br>（4）.bss段主要存放未被初始化的全局静态变量和局部静态变量<br>（5）堆：由程序员进行动态分配，如调用malloc或new<br>（6）栈：由编译器自动分配释放，存放一些局部变量等<br>（7）内核空间：存放操作系统的一些内核数据和代码</p>
+<h3 id="14-不同段上的对象的生命周期是怎样的？"><a href="#14-不同段上的对象的生命周期是怎样的？" class="headerlink" title="14.不同段上的对象的生命周期是怎样的？"></a>14.不同段上的对象的生命周期是怎样的？</h3><p>（1）.data&#x2F;.bss段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁<br>（2）堆上的对象由程序员进行动态分配<br>（3）栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
+<h3 id="15-堆和栈的区别是什么？"><a href="#15-堆和栈的区别是什么？" class="headerlink" title="15.堆和栈的区别是什么？"></a>15.堆和栈的区别是什么？</h3><p>（1）内存分配方式<br>（2）生命周期不同<br>（3）内存大小不同</p>
+<h3 id="16-内存模型是什么？是指可执行文件中包含这些东西吗？"><a href="#16-内存模型是什么？是指可执行文件中包含这些东西吗？" class="headerlink" title="16.内存模型是什么？是指可执行文件中包含这些东西吗？"></a>16.内存模型是什么？是指可执行文件中包含这些东西吗？</h3><p>内存模型是指虚拟内存。<br>可执行文件中只包含.text .rodata和.data，不包含.bss、栈和堆。.bss段存放的是未初始化的全局静态变量和局部静态变量，在程序加载到内存中时，这些变量会被初始化为0或空指针，在生成可执行文件时不会占用内存空间。而栈和堆是动态加载的，只有在程序运行时才会分配。</p>
+<h3 id="17-c-是如何实现动态多态的？"><a href="#17-c-是如何实现动态多态的？" class="headerlink" title="17.c++是如何实现动态多态的？"></a>17.c++是如何实现动态多态的？</h3><p>c++是通过虚函数实现动态多态的。其核心是通过不同对象的特性来确定调用哪一个类的函数。具体来说，每一个包含虚函数的类都分配了一个虚函数指针，这个虚函数指针指向一个虚函数表。当需要调用对应的函数时，首先根据虚函数指针找到对应的虚函数表，然后根据这个函数在表中的下标位置找到对应的函数。</p>
+<h3 id="18-一个类中有几个虚函数表？一个类的对象有几个虚函数指针？"><a href="#18-一个类中有几个虚函数表？一个类的对象有几个虚函数指针？" class="headerlink" title="18.一个类中有几个虚函数表？一个类的对象有几个虚函数指针？"></a>18.一个类中有几个虚函数表？一个类的对象有几个虚函数指针？</h3><p>一个类继承了多少个父类，就有多少张虚函数表。一个类的对象包含多少张虚函数表，就有多少虚函数指针。</p>
+<h3 id="19-一个类的虚函数指针在类中的内存分布是怎样的？"><a href="#19-一个类的虚函数指针在类中的内存分布是怎样的？" class="headerlink" title="19.一个类的虚函数指针在类中的内存分布是怎样的？"></a>19.一个类的虚函数指针在类中的内存分布是怎样的？</h3><p>根据该类继承父类的顺序，从对象的首地址开始依次排列。</p>
+<h3 id="20-什么是ICMP？"><a href="#20-什么是ICMP？" class="headerlink" title="20.什么是ICMP？"></a>20.什么是ICMP？</h3><p>ICMP是TCP&#x2F;IP协议族中网络层的协议，通过传输网络层控制消息的协议来实现网络诊断，以及发送错误报告的目的。<br>如ping&#x2F;traceout就是通过icmp来诊断网络质量以及追踪数据包在网络中的传输路径来达到网络诊断的目的。</p>
+<h3 id="21-什么是TCP粘包？"><a href="#21-什么是TCP粘包？" class="headerlink" title="21.什么是TCP粘包？"></a>21.什么是TCP粘包？</h3><p>TCP粘包是指在使用TCP协议传输数据时，发送方发送的多个数据包被接收方一次性接收。这是由于TCP发送的数据是以字节流为单位的，无法确定消数据边界。</p>
+<h3 id="22-如何解决TCP粘包？"><a href="#22-如何解决TCP粘包？" class="headerlink" title="22.如何解决TCP粘包？"></a>22.如何解决TCP粘包？</h3><p>（1）添加数据边界，在数据中添加一个一个特定边界标识<br>（2）发送定长数据，不满足定长的数据用特定字符填充<br>（3）添加消息头<br>（4）使用应用层协议，如HTTP&#x2F;FTP协议都已经针对粘包问题进行了处理</p>
+<h3 id="23-UDP会发生粘包吗？"><a href="#23-UDP会发生粘包吗？" class="headerlink" title="23.UDP会发生粘包吗？"></a>23.UDP会发生粘包吗？</h3><p>不会，因为UDP数据报格式的协议，发送时的数据报是独立的，因此有明确的边界。</p>
+<h3 id="24-UDP为什么会发生乱序问题？"><a href="#24-UDP为什么会发生乱序问题？" class="headerlink" title="24.UDP为什么会发生乱序问题？"></a>24.UDP为什么会发生乱序问题？</h3><p>UDP不像TCP，存在滑动窗、序列号、确认序列和超时重传机制。因此由于存在网络抖动问题，接收方接收到的UDP数据报可能是乱序的，需要自行处理。</p>
+<h3 id="25-多态的实现原理是什么？"><a href="#25-多态的实现原理是什么？" class="headerlink" title="25.多态的实现原理是什么？"></a>25.多态的实现原理是什么？</h3><p>c++的多态包括静态多态和动态多态。<br>静态多态是指编译器的多态，主要由函数重载和函数模板实现。函数重载是指在同一作用域内，一组函数具有相同的函数名和不同的参数列表，编译器根据函数调用时传递的参数数量和类型选择调用哪个函数执行。函数模板允许编写通用的代码，编译器根据模板实例化的内容生成代码。<br>动态多态则是在运行时实现，主要由虚函数和继承实现。其核心思想是类的对象会根据其属性来确定究竟调用哪一个类的函数。具体来说，每一个包含虚函数的类中都分配了一个虚函数指针，每一个虚函数指针都指向一个虚函数表。当需要调用函数时，根据虚函数指针找到对应的虚函数表，然后根据函数的下标位置在虚函数表找到对应的函数实现。</p>
+<h3 id="26-C-的菱形继承指什么？"><a href="#26-C-的菱形继承指什么？" class="headerlink" title="26.C++的菱形继承指什么？"></a>26.C++的菱形继承指什么？</h3><p>菱形继承指两个及以上的派生类继承自同一个基类，而另外又有一个类继承了这些派生类，导致最终生成的派生类中包含多个基类的子对象副本。</p>
+<h3 id="27-析构函数为什么设置成虚函数？"><a href="#27-析构函数为什么设置成虚函数？" class="headerlink" title="27.析构函数为什么设置成虚函数？"></a>27.析构函数为什么设置成虚函数？</h3><p>如果这个类是一个多态性质的类，其析构函数应该设置为虚函数，否则就不应该被设置为虚函数。<br>由于基类的多态性，基类指针可以指向派生类的对象，如果删除该基类的指针，就会调用该指针指向的派生类析构函数，而派生类的析构函数又自动调用基类的析构函数，这样整个派生类的对象完全被释放。假如析构函数非虚函数，如果析构函数不被声明成虚函数，则编译器实施静态绑定，在删除基类指针时，只会调用基类的析构函数而不调用派生类析构函数，造成内存的局部释放，内存泄漏。因此此时析构函数应该设置为虚函数。<br>但如果这个类不包含多态性，就不应该设置为虚函数，否则会引入虚函数指针和虚函数表，造成内存浪费。</p>
+<h3 id="28-C-对象的大小由哪些因素决定？"><a href="#28-C-对象的大小由哪些因素决定？" class="headerlink" title="28.C++对象的大小由哪些因素决定？"></a>28.C++对象的大小由哪些因素决定？</h3><p>（1）变量的类型和大小；</p>
+<p>（2）内存对齐和填充；</p>
+<p>（3）虚函数所带来的开销；</p>
+<p>（4）空类优化。</p>
+<h3 id="29-TCP挥手过程中，为什么存在一个time-wait状态？"><a href="#29-TCP挥手过程中，为什么存在一个time-wait状态？" class="headerlink" title="29.TCP挥手过程中，为什么存在一个time_wait状态？"></a>29.TCP挥手过程中，为什么存在一个time_wait状态？</h3><p>（1）防止错误接收报文。如果立刻断掉连接，那么当客户端复位ip地址和端口号重新建立连接时，可能会收到上一个连接发送过来的历史报文，而当前建立的新连接无法判断这个报文是否为历史报文，因此会出现错误。</p>
+<p>（2）确保双方正常关闭。当客户端发送ACK报文给服务器端时，若该报文丢失，需要等待服务器端重新发送一个FIN报文给客户端，这个等待的时间最大为2MSL，因此需要一个time_wait状态来让客户端等到是否再次接受到一个FIN报文。</p>
+<h3 id="30-什么情况下会出现大量time-wait状态？如何优化？"><a href="#30-什么情况下会出现大量time-wait状态？如何优化？" class="headerlink" title="30.什么情况下会出现大量time_wait状态？如何优化？"></a>30.什么情况下会出现大量time_wait状态？如何优化？</h3><p>在以下两种场景会出现大量time_wait状态：</p>
+<p>（1）高并发场景下。此时存在大量的客户端和服务器端建立连接，因此在断开连接时就会出现大量的time_wait状态。</p>
+<p>（2）短连接场景下。短连接场景下的TCP连接生命周期较短，很快就会断开连接，就导致出现大量的time_wait状态。</p>
+<p>可以通过下列方式进行优化：</p>
+<p>（1）缩短MSL的时间。</p>
+<p>（2）建立连接池。在客户端和服务器端中间建立连接池，这样就可以复用已经建立的的TCP连接。</p>
+<p>（3）在服务器端开启SO_REUSEADDR套接字，这样可以使得服务器端在time_wait状态时就可以重新绑定并监听端口号。</p>
+<p>（4）在客户端开启SO_LINGER套接字，并将延迟设置为0。这样当断开连接时，客户端会直接发送一个RST信号，不再进行四次挥手，从而避免进入time_wait状态。</p>
+<h3 id="31-从C-文件到可执行文件经过了哪几个阶段？"><a href="#31-从C-文件到可执行文件经过了哪几个阶段？" class="headerlink" title="31.从C++文件到可执行文件经过了哪几个阶段？"></a>31.从C++文件到可执行文件经过了哪几个阶段？</h3><p>预编译、编译、汇编、链接，最后生成可执行文件。</p>
+<h3 id="32-为什么需要有链接的过程？"><a href="#32-为什么需要有链接的过程？" class="headerlink" title="32.为什么需要有链接的过程？"></a>32.为什么需要有链接的过程？</h3><p>因为软件开发的规模很大，不可能将它们都放在同一个模块中。因此按照层次化以及模块化的视线方法，将代码分成多个部分，每个部分分别开发。因此就需要在最后将它们组装起来，这就是链接的过程。通过链接，实现符号解析、地址分配和库依赖管理等工作。</p>
+<h3 id="33-链接这个过程做了什么？"><a href="#33-链接这个过程做了什么？" class="headerlink" title="33.链接这个过程做了什么？"></a>33.链接这个过程做了什么？</h3><p>（1）符号解析。在目标文件和库中存在许多符号（如函数名或变量名等），需要在其他的目标文件或库中找到相应的定义，并将它们连接起来，使得程序在运行时可以找到正确的内存地址。</p>
+<p>（2）地址分配。给目标文件和库分配内存地址，并确定其在程序中的内存布局。同时需要完成重定位的工作，用实际的内存地址去替换其中的地址引用。</p>
+<p>（3）库依赖管理。链接器处理程序和库之间的依赖关系，确保所有库都被正确地包含在目标文件中。同时要处理库与库之间的依赖关系。</p>
+<h3 id="34-什么是hash冲突，常见的解决hash冲突的办法是什么？"><a href="#34-什么是hash冲突，常见的解决hash冲突的办法是什么？" class="headerlink" title="34.什么是hash冲突，常见的解决hash冲突的办法是什么？"></a>34.什么是hash冲突，常见的解决hash冲突的办法是什么？</h3><p>hash冲突是指两个及以上的输入值在经过哈希映射后得到相同的哈希值。由于hash映射是从无限空间到有限空间的映射，因此hash冲突是不可避免的。</p>
+<p>解决hash冲突的办法有：</p>
+<p>（1）开放寻址哈希。如果发生hash冲突，则继续往下寻找一个空闲位置。</p>
+<p>（2）链地址哈希。在每一个哈希槽中存储一个链表，当发生hash冲突时，就将其放入该链表中。当然，如果链表变得太长，导致查询效率减小，就需要重新分配哈希表，扩大容量，动态调整哈希表的大小来改善。</p>
+<p>（3）再哈希。在发生hash冲突时再进一步进行hash映射，以得到不冲突的哈希值。</p>
+<h3 id="35-说一下你对于内存对齐的理解？"><a href="#35-说一下你对于内存对齐的理解？" class="headerlink" title="35.说一下你对于内存对齐的理解？"></a>35.说一下你对于内存对齐的理解？</h3><p>内存对齐是指对于特定类型的数据规定了其应该位于内存的哪个位置上。比如，对于int类型的数据，在32系统上要求其内存对齐为4个字节，也就是说其起始地址应该为4的倍数。</p>
+<p>内存对齐的目的是为了提高内存访问的效率。因为在许多硬件平台上，访问对齐的内存要比访问不对齐的内存更快。</p>
+<h3 id="36-内存对齐可能会带来哪些问题？"><a href="#36-内存对齐可能会带来哪些问题？" class="headerlink" title="36.内存对齐可能会带来哪些问题？"></a>36.内存对齐可能会带来哪些问题？</h3><p>（1）可能会造成内存浪费问题。虽然内存对齐后其内存访问速度会大幅提升，但随之而来的可能会造成一些内存浪费现象。</p>
+<p>（2）可能存在平台不兼容的问题。不同类型的数据在不同的平台上可能有不能的内存对齐规则。</p>
+<h3 id="37-线程中的锁包含哪些？"><a href="#37-线程中的锁包含哪些？" class="headerlink" title="37.线程中的锁包含哪些？"></a>37.线程中的锁包含哪些？</h3><p>（1）互斥锁：用于对共享资源的互斥访问。当有线程对该资源加了互斥锁后，其他线程尝试加锁时会被阻塞，直至锁被释放。</p>
+<p>（2）递归锁：是一种特殊的互斥锁，当有同一个线程尝试对同一个线程不断加锁时，不会被阻塞。</p>
+<p>（3）读写锁：允许多个线程同时进行读操作，但仅允许一个线程进行写操作，使用的读多于写的场景。</p>
+<p>（4）自旋锁：当有线程对资源加了自旋锁后，其他线程尝试加锁时将忙等待，而非被阻塞。</p>
+<h3 id="38-缺页中断什么时候发生？"><a href="#38-缺页中断什么时候发生？" class="headerlink" title="38.缺页中断什么时候发生？"></a>38.缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
+<p>（2）当程序尝试进行一个违反内存规则的操作时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</p>
+<h3 id="39-常见的缺页中断算法有哪些？"><a href="#39-常见的缺页中断算法有哪些？" class="headerlink" title="39.常见的缺页中断算法有哪些？"></a>39.常见的缺页中断算法有哪些？</h3><p>（1）LRU，最近最少使用。</p>
+<p>（2）LFU，使用频率最低。</p>
+<p>（3）FIFO，先进先出。</p>
+<h3 id="40-代码的共同开发工具有哪些？"><a href="#40-代码的共同开发工具有哪些？" class="headerlink" title="40.代码的共同开发工具有哪些？"></a>40.代码的共同开发工具有哪些？</h3><p>主要用的就是git。包含以下命令：</p>
+<p>（1）pull，从远程仓库获取更新，并将其合并到本地仓库中。</p>
+<p>（2）push，将本地仓库的更新合并到远程仓库中。</p>
+<p>（3）clone，在本地创建远程仓库的副本。</p>
+<p>（4）merge，在一个分支上合并另一个分支的相关操作。</p>
+<p>（5）rebase，将一个分支的修改移动到另一个分支上。</p>
+<h3 id="41-假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？"><a href="#41-假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？" class="headerlink" title="41.假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？"></a>41.假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？</h3><p>在使用动态库时，链接器会将动态库的相关信息，包括动态库的名字、符号表以及可重定位信息存储到相应的可执行文件中。在可执行文件运行时，链接器会根据这些信息找到动态库是否存在、在哪里、符号引用的内存地址是哪里，也就是说找到A.dll引用的B.dll的相关方法，并通过重定位找到其物理内存地址。</p>
+<h3 id="42-vector的扩容原理是怎样的？"><a href="#42-vector的扩容原理是怎样的？" class="headerlink" title="42.vector的扩容原理是怎样的？"></a>42.vector的扩容原理是怎样的？</h3><p>vector可以进行自动扩容，以容纳更多的元素。主要包含以下几步：</p>
+<p>（1）确定新容量。根据平台的不同，有不同的扩容倍数。其中linux和gcc下为2倍，windows下为1.5倍。</p>
+<p>（2）开辟内存空间。确定了新容量后，在堆上开辟一块新的连续内存空间。</p>
+<p>（3）复制元素。通过拷贝构造或移动构造将现有元素从旧内存空间复制到新内存空间。</p>
+<p>（4）释放旧内存。</p>
+<p>（5）更新内部指针。在元素复制完成后，vector更新其内部数据结构，如指向元素数组的指针、大小和容量。</p>
+<h3 id="43-map和set保存的元素有什么区别？"><a href="#43-map和set保存的元素有什么区别？" class="headerlink" title="43.map和set保存的元素有什么区别？"></a>43.map和set保存的元素有什么区别？</h3><p>（1）map保存的是键值对元素，其中key是不能重复的，一旦重复将对value进行覆盖。只能通过key来访问value。</p>
+<p>（2）set保存的元素是无序的，且元素也是不能重复的。只能通过迭代器遍历访问set。</p>
+<h3 id="44-map的插入方式和访问方式有哪些？"><a href="#44-map的插入方式和访问方式有哪些？" class="headerlink" title="44.map的插入方式和访问方式有哪些？"></a>44.map的插入方式和访问方式有哪些？</h3><p>插入方式：</p>
+<p>（1）operator []</p>
+<p>（2）emplace()</p>
+<p>（3）insert()</p>
+<p>访问方式</p>
+<p>（1）operator []</p>
+<p>（2）使用at</p>
+<p>（3）find()</p>
+<p>（4）使用迭代器</p>
+<h3 id="45-explicit关键字用在什么情况下？"><a href="#45-explicit关键字用在什么情况下？" class="headerlink" title="45.explicit关键字用在什么情况下？"></a>45.explicit关键字用在什么情况下？</h3><p>explicit关键用于声明一个单参数的构造函数，阻止该构造函数隐式转换为该类的类型。</p>
+<h3 id="46-inline关键字遇到过吗？作用是什么？和-define有什么区别？"><a href="#46-inline关键字遇到过吗？作用是什么？和-define有什么区别？" class="headerlink" title="46.inline关键字遇到过吗？作用是什么？和#define有什么区别？"></a>46.inline关键字遇到过吗？作用是什么？和#define有什么区别？</h3><p>inline关键字作为函数定义的关键字，说明该函数是内联函数。内联函数会将代码块嵌入到每个调用该函数的地方，减少函数调用的开销，但增加了代码量。同时要注意inline只是对编译器的一个建议，真正能否内联还是要看编译器自己的判断。</p>
+<p>和#define的区别在于：</p>
+<p>（1）#define是关键字，inline是函数。</p>
+<p>（2）宏定义在预处理阶段进行文本替换，inline函数在编译时进行替换。</p>
+<p>（3）inline有类型检查，相对于#define较安全。</p>
+<h3 id="47-引用计数的线程安全性怎么实现的？"><a href="#47-引用计数的线程安全性怎么实现的？" class="headerlink" title="47.引用计数的线程安全性怎么实现的？"></a>47.引用计数的线程安全性怎么实现的？</h3><p>引用计数的线程安全性通常通过原子操作实现，确保对引用计数的增减操作是原子的，这样可以避免多线程环境下的竞态条件。</p>
+<h3 id="48-如果有⼀个场景需要用到线程安全的shared-ptr，一般你会怎么做？"><a href="#48-如果有⼀个场景需要用到线程安全的shared-ptr，一般你会怎么做？" class="headerlink" title="48.如果有⼀个场景需要用到线程安全的shared_ptr，一般你会怎么做？"></a>48.如果有⼀个场景需要用到线程安全的shared_ptr，一般你会怎么做？</h3><p>如果需要在多线程环境下使用线程安全的 shared_ptr，通常会使用 std::atomic 或者 std::mutex 来保护对 shared_ptr 的访问。</p>
+<h3 id="49-说到线程安全性，在语言层面，你⼀般使用什么⼿段？"><a href="#49-说到线程安全性，在语言层面，你⼀般使用什么⼿段？" class="headerlink" title="49.说到线程安全性，在语言层面，你⼀般使用什么⼿段？"></a>49.说到线程安全性，在语言层面，你⼀般使用什么⼿段？</h3><p>在语言层面，我一般会使用原子操作和互斥锁来确保多线程环境下的线程安全性。</p>
+<h3 id="50-make-shared和shared-ptr构造函数创建shared-ptr的区别？"><a href="#50-make-shared和shared-ptr构造函数创建shared-ptr的区别？" class="headerlink" title="50.make_shared和shared_ptr构造函数创建shared_ptr的区别？"></a>50.make_shared和shared_ptr构造函数创建shared_ptr的区别？</h3><p>make_shared 创建的对象和 shared_ptr 一起存储在同一块内存中，而使用构造函数创建的 shared_ptr 需要额外的内存用于存储引用计数。</p>
+<h3 id="51-如果构造函数传入同一裸指针构造两个shared-ptr对象，会发生什么现象？"><a href="#51-如果构造函数传入同一裸指针构造两个shared-ptr对象，会发生什么现象？" class="headerlink" title="51.如果构造函数传入同一裸指针构造两个shared_ptr对象，会发生什么现象？"></a>51.如果构造函数传入同一裸指针构造两个shared_ptr对象，会发生什么现象？</h3><p>如果构造函数传入同一个裸指针构造两个 shared_ptr 对象，会导致两个 shared_ptr 对象都管理同一个对象，引用计数会变为 2。</p>
+<h3 id="52-还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？"><a href="#52-还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？" class="headerlink" title="52.还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？"></a>52.还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？</h3><p>这种现象是因为 shared_ptr 的设计决定了它的共享性质，即多个 shared_ptr 可以管理同一个对象。</p>
+<h3 id="53-很多人说到weak-ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？"><a href="#53-很多人说到weak-ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？" class="headerlink" title="53.很多人说到weak_ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？"></a>53.很多人说到weak_ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？</h3><p><code>std::weak_ptr</code> 的主要作用是提供一种非拥有性的智能指针，用于解决共享指针的循环引用问题，避免内存泄漏和资源泄露。它不会增加对象的引用计数，也不会影响对象的生命周期，因此适用于表示临时性的对象引用或者避免循环引用的情况。</p>
+<p>除了解决循环引用之外，<code>std::weak_ptr</code> 还具有其他用途，例如：</p>
+<ol>
+<li><strong>观察者模式（Observer Pattern）：</strong> <code>std::weak_ptr</code> 可用于实现观察者模式，其中观察者持有被观察者对象的弱引用，以避免循环引用和对象生命周期管理的问题。</li>
+<li><strong>缓存：</strong> 在缓存系统中，可以使用 <code>std::weak_ptr</code> 来保存对象的缓存项，以避免对对象的强引用导致缓存项无法被释放。</li>
+<li><strong>延迟初始化：</strong> <code>std::weak_ptr</code> 可用于实现延迟初始化（Lazy Initialization），只有在需要时才创建对象，以提高性能和资源利用率。</li>
+</ol>
+<h3 id="54-如何实现一个线程池？"><a href="#54-如何实现一个线程池？" class="headerlink" title="54.如何实现一个线程池？"></a>54.如何实现一个线程池？</h3><p>线程池是一组预先创建好的线程，用于执行多个任务。它可以提高任务调度的效率和性能。</p>
+<p>实现一个线程池可以使用 C++11 提供的 std::thread和 std::mutex 等多线程库，结合队列等数据结构来管理任务的提交和执行。</p>
+<h3 id="55-详细说明三握四挥"><a href="#55-详细说明三握四挥" class="headerlink" title="55.详细说明三握四挥"></a>55.详细说明三握四挥</h3><p>三次握手和四次挥手是 TCP 协议中用于建立和断开连接的过程，它们是网络通信中非常重要的部分。</p>
+<p>（1）三次握手（Three-way Handshake）</p>
+<p>三次握手是建立 TCP 连接的过程，涉及到客户端和服务端之间的通信。下面是三次握手的详细步骤：</p>
+<ol>
+<li><p>第一步（SYN）</p>
+<ul>
+<li>客户端向服务端发送一个带有 SYN（同步）标志的数据包，表示请求建立连接。</li>
+</ul>
+<ul>
+<li>客户端选择一个起始序列号（Sequence Number）用于后续数据传输的序号标识。</li>
+</ul>
+</li>
+<li><p>第二步（SYN + ACK）</p>
+<ul>
+<li>服务端接收到客户端发送的 SYN 数据包后，向客户端发送一个带有 SYN 和 ACK（确认）标志的数据包，表示收到了客户端的请求，并同意建立连接。</li>
+<li>服务端也会选择一个起始序列号用于后续数据传输，并在确认号中包含客户端发送的序列号加一作为确认。</li>
+</ul>
+</li>
+<li><p>第三步（ACK）</p>
+<ul>
+<li>客户端收到服务端发送的 SYN+ACK 数据包后，向服务端发送一个带有 ACK 标志的数据包，表示收到了服务端的确认，并同意建立连接。</li>
+<li>客户端在确认号中包含服务端发送的序列号加一作为确认。</li>
+</ul>
+</li>
+</ol>
+<p>完成了这三次握手之后，TCP 连接就建立起来了，客户端和服务端之间可以开始进行数据传输。</p>
+<p>（2）四次挥手（Four-way Handshake）</p>
+<p>四次挥手是断开 TCP 连接的过程，也是客户端和服务端之间的通信。下面是四次挥手的详细步骤：</p>
+<ol>
+<li>第一步（FIN）<ul>
+<li>客户端或服务端中的一方决定断开连接后，向对方发送一个带有 FIN（结束）标志的数据包，表示不再发送数据，但仍可以接收数据。</li>
+</ul>
+</li>
+<li>第二步（ACK）<ul>
+<li>接收到 FIN 数据包的一方（通常是另一端）收到后，向发送 FIN 数据包的一方发送一个带有 ACK 标志的数据包，表示确认收到了断开连接的请求。</li>
+</ul>
+</li>
+<li>第三步（FIN）<ul>
+<li>接收到 ACK 数据包的一方也决定断开连接后，向对方发送一个带有 FIN 标志的数据包，表示同意断开连接。</li>
+</ul>
+</li>
+<li>第四步（ACK）<ul>
+<li>最后，接收到 FIN 数据包的一方发送一个带有 ACK 标志的数据包，表示确认收到了断开连接的请求。</li>
+</ul>
+</li>
+</ol>
+<p>完成了这四次挥手之后，TCP 连接就彻底断开了，客户端和服务端之间的连接关闭，不再进行数据传输。</p>
+<p>总的来说，三次握手和四次挥手保证了数据传输的可靠性和顺序性，确保了客户端和服务端之间的正常通信。</p>
+<h3 id="56-进程和线程以及并发和并行的概念是什么？"><a href="#56-进程和线程以及并发和并行的概念是什么？" class="headerlink" title="56.进程和线程以及并发和并行的概念是什么？"></a>56.进程和线程以及并发和并行的概念是什么？</h3><p>（1）线程是操作系统中的最小执行单元，进程是程序的一次执行过程，是系统资源分配的最小单位。并发是指多个任务交替执行，而并行是指多个任务同时执行。</p>
+<p>（2）并发是在单个处理器上实现多个线程同时执行的假象，而并行是在多个处理器上实现多个线程同时执行。</p>
+<h3 id="57-tcp遇到网络拥塞或者大流量的情况如何去做？"><a href="#57-tcp遇到网络拥塞或者大流量的情况如何去做？" class="headerlink" title="57.tcp遇到网络拥塞或者大流量的情况如何去做？"></a>57.tcp遇到网络拥塞或者大流量的情况如何去做？</h3><p>关于TCP遇到数据包损坏、乱序、网络拥塞或大流量的情况，通常会采取以下处理方式：</p>
+<ol>
+<li><strong>数据包损坏和乱序：</strong> TCP协议通过使用校验和（Checksum）来检测数据包的损坏，并通过序列号来处理乱序的数据包。如果数据包损坏，则丢弃该数据包并请求重传；如果数据包乱序，则按照序列号重新排序。</li>
+<li><strong>网络拥塞或大流量：</strong> 当网络拥塞或流量过大时，TCP协议会根据拥塞控制算法（如拥塞窗口控制、慢启动、拥塞避免、快速重传、快速恢复等）来调整数据包的发送速率，以避免造成丢包和拥塞。通过动态调整拥塞窗口大小和重新传输超时时间等参数来控制数据包的发送速率，从而维持网络的稳定性和性能。</li>
+</ol>
+<p>总的来说，TCP通过可靠性、流量控制和拥塞控制等机制来保证数据传输的可靠性和网络的稳定性，从而在不同网络环境下有效地处理各种异常情况。</p>
+<h3 id="58-https是如何进行加密的？"><a href="#58-https是如何进行加密的？" class="headerlink" title="58.https是如何进行加密的？"></a>58.https是如何进行加密的？</h3><p>HTTPS（HyperText Transfer Protocol Secure）是一种基于HTTP协议和SSL&#x2F;TLS协议的安全传输协议，它通过使用加密技术来保护通信数据的安全性和完整性。下面是HTTPS进行加密的基本流程：</p>
+<ol>
+<li><strong>建立SSL&#x2F;TLS连接：</strong> 客户端与服务器之间首先建立SSL&#x2F;TLS连接，这个过程通常称为SSL&#x2F;TLS握手。在握手过程中，客户端和服务器协商使用的加密算法、密钥长度和其他参数，同时进行身份验证。</li>
+<li><strong>进行证书交换：</strong> 在握手过程中，服务器会向客户端发送数字证书，用于证明服务器的身份。数字证书包含了服务器的公钥以及与证书相关的信息，如证书颁发者、有效期等。</li>
+<li><strong>验证证书：</strong> 客户端收到服务器的证书后，会对证书进行验证。这个过程通常包括检查证书的有效性、签发者的可信度、证书是否过期等。如果证书验证通过，则客户端继续握手过程；否则，可能会发出警告或中止连接。</li>
+<li><strong>生成会话密钥：</strong> 一旦证书验证通过，客户端会生成一个用于对通信数据进行加密和解密的会话密钥（Session Key）。通常情况下，客户端使用服务器的公钥来加密这个会话密钥，并发送给服务器。</li>
+<li><strong>加密通信：</strong> 一旦服务器收到客户端发送的加密的会话密钥，服务器使用自己的私钥解密会话密钥。此后，客户端和服务器之间的通信就使用这个会话密钥来进行对称加密和解密了。这意味着通信数据在传输过程中是加密的，保护了数据的机密性和完整性。</li>
+</ol>
+<h3 id="59-遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"><a href="#59-遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？" class="headerlink" title="59.遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"></a>59.遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？</h3><p>在处理多线程同步问题时，常用的机制包括互斥锁（Mutex）、条件变量（Condition Variable）、信号量（Semaphore）等。下面简要介绍一下信号量的实现和处理方式，并举例说明如何使用。</p>
+<p>（1）信号量（Semaphore）</p>
+<p>信号量是一种用于多线程同步的机制，它可以用来控制对临界资源的访问。信号量维护了一个计数器，表示可用资源的数量，线程在访问临界资源之前必须先获取信号量，如果信号量计数器大于零，则线程可以获取资源并将计数器减一；如果计数器等于零，则线程将被阻塞，直到有其他线程释放资源并增加计数器。当线程使用完资源后，需要释放信号量，使计数器加一，以便其他线程可以继续访问资源。</p>
+<p>（2）等待线程A执行完任务后再执行线程B的处理方式</p>
+<p>在示例中，使用了条件变量 <code>std::condition_variable</code> 来等待线程A执行完任务后再执行线程B。线程A在等待条件时会调用 <code>cv.wait(lock, predicate)</code> 函数，其中 <code>predicate</code> 是一个lambda表达式，表示等待的条件。线程B在执行完任务后调用 <code>cv.notify_one()</code> 函数来发送信号给等待中的线程A，从而唤醒线程A并开始执行任务。</p>
+<h3 id="60-多线程切换，cpu和内存会做一些什么处理"><a href="#60-多线程切换，cpu和内存会做一些什么处理" class="headerlink" title="60.多线程切换，cpu和内存会做一些什么处理"></a>60.多线程切换，cpu和内存会做一些什么处理</h3><p>在多线程环境下，当操作系统进行线程切换时，CPU 和内存会做一些处理：</p>
+<ol>
+<li><strong>保存当前线程的上下文：</strong> 当一个线程被抢占时，CPU 会保存当前线程的上下文信息，包括程序计数器（PC）、寄存器状态、栈指针（SP）等。这样做是为了在之后恢复线程时能够继续执行。</li>
+<li><strong>加载下一个线程的上下文：</strong> CPU 根据调度算法选择下一个需要执行的线程，然后加载其上下文信息到寄存器和其他硬件状态中。</li>
+<li><strong>切换内存空间：</strong> 在多线程环境下，不同线程可能会访问不同的内存区域。因此，在线程切换时，操作系统需要更新页表（Page Table）等内存映射表，以确保下一个线程能够访问到正确的内存空间。</li>
+<li><strong>处理器流水线的清空和填充：</strong> 在 CPU 进行线程切换时，可能存在流水线（Pipeline）中的指令未执行完毕。在切换时，CPU 可能需要将流水线清空，以避免对新线程执行的指令产生影响。</li>
+<li><strong>更新调度器信息：</strong> 操作系统需要更新线程的调度信息，包括线程的状态（就绪、运行、阻塞等），以及相关的时间片（Time Slice）等调度参数。</li>
+</ol>
+<h3 id="61-流量控制和拥塞控制"><a href="#61-流量控制和拥塞控制" class="headerlink" title="61.流量控制和拥塞控制"></a>61.流量控制和拥塞控制</h3><p>流量控制和拥塞控制都是网络通信中用于控制数据传输的机制，但它们针对的对象和目的略有不同。</p>
+<p>（1）流量控制（Flow Control）</p>
+<p>流量控制是指在数据传输过程中，接收方通过一定的方式告诉发送方自己的接收能力，以控制发送方的发送速率，防止发送方发送过多的数据导致接收方无法及时处理。流量控制通常发生在端到端之间，其主要目的是保护接收方不被发送方的数据压倒。</p>
+<p>常见的流量控制机制包括滑动窗口协议（如TCP的滑动窗口机制）和通告窗口大小（advertised window size）等。接收方通过不断调整通告窗口大小来告诉发送方自己的接收能力，从而控制发送方的发送速率。</p>
+<p>（2）拥塞控制（Congestion Control）</p>
+<p>拥塞控制是指在网络中避免过多的数据包拥塞在网络节点或链路上，从而影响网络性能和吞吐量的机制。拥塞控制通常发生在网络中，其主要目的是保护网络免受过载和崩溃。</p>
+<p>拥塞控制通过监控网络的拥塞程度，并采取一系列措施来降低数据包的发送速率，从而避免网络拥塞。常见的拥塞控制算法包括拥塞窗口控制、慢启动、拥塞避免、快速重传、快速恢复等。这些算法通过动态调整数据包的发送速率，以适应网络的负载情况，从而确保网络的稳定性和性能。</p>
+<p>综上所述，流量控制和拥塞控制是网络通信中两个重要的控制机制，它们分别针对数据的发送方和网络本身，通过控制数据的发送速率来保护接收方和网络免受过载和拥塞的影响，从而保证通信的稳定性和效率。</p>
+<h3 id="62-Tcp可靠传输的⼏种机制"><a href="#62-Tcp可靠传输的⼏种机制" class="headerlink" title="62.Tcp可靠传输的⼏种机制"></a>62.Tcp可靠传输的⼏种机制</h3><p>TCP（Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层协议。它采用了多种机制来保证数据的可靠传输，以下是几种常见的机制：</p>
+<ol>
+<li><strong>序列号和确认应答：</strong> TCP 使用序列号和确认应答机制来确保数据的可靠传输。发送方将每个数据包都标记上序列号，并等待接收方发送确认应答。接收方收到数据后，会发送确认应答，告诉发送方已成功接收到数据，如果发送方在一定时间内没有收到确认应答，则会重新发送数据。</li>
+<li><strong>超时重传：</strong> TCP 采用超时重传机制来处理丢失的数据包。如果发送方在一定时间内没有收到确认应答，则会认为数据包丢失，会重新发送该数据包。</li>
+<li><strong>滑动窗口：</strong> TCP 使用滑动窗口机制来进行流量控制和拥塞控制。滑动窗口指定了发送方可以发送的数据量，接收方通过发送窗口大小来告知发送方自己的接收能力。发送方根据接收窗口的大小来控制发送速率，以避免发送过多的数据导致接收方无法及时处理。</li>
+<li><strong>累积确认：</strong> TCP 使用累积确认机制来确认已成功接收的数据。接收方发送的确认应答中包含了已成功接收的数据的最大序列号，发送方根据该确认号来确认哪些数据已经被成功接收。</li>
+<li><strong>拥塞控制算法：</strong> TCP 使用拥塞控制算法来避免网络拥塞和过载。常见的拥塞控制算法包括慢启动、拥塞避免、快速重传和快速恢复等，通过动态调整发送窗口大小和数据包的发送速率来适应网络的负载情况，从而确保网络的稳定性和性能。</li>
+</ol>
+<h3 id="63-移动构造函数的使用场景是什么？"><a href="#63-移动构造函数的使用场景是什么？" class="headerlink" title="63.移动构造函数的使用场景是什么？"></a>63.移动构造函数的使用场景是什么？</h3><p>移动构造函数是 C++11 新增的特性，用于实现右值引用语义，可以将临时对象的资源有效地转移给目标对象，避免不必要的资源复制，提高程序的性能和效率。</p>
+<p>（1）容器元素的插入和移动</p>
+<p>（2）返回临时对象</p>
+<h3 id="64-c-在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？"><a href="#64-c-在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？" class="headerlink" title="64.c++在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？"></a>64.c++在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？</h3><p>在 C++ 中，返回局部对象时会发生返回值优化（Return Value Optimization，RVO）和命名返回值优化（Named Return Value Optimization，NRVO）。这些优化技术可以避免多次调用构造函数，提高程序的性能和效率。</p>
+<p>具体来说，当函数返回一个局部对象时，编译器可以将该对象直接构造在函数调用方的目标对象的位置上，而不是在函数内部创建一个局部对象然后再拷贝到目标对象中。这样就避免了额外的构造和拷贝操作。</p>
+<h3 id="65-tcp和udp的区别"><a href="#65-tcp和udp的区别" class="headerlink" title="65.tcp和udp的区别"></a>65.tcp和udp的区别</h3><p>TCP（Transmission Control Protocol）和UDP（User Datagram Protocol）是两种常见的传输层协议，它们在网络通信中有以下几点区别：</p>
+<ol>
+<li><strong>连接性：</strong><ul>
+<li>TCP 是面向连接的协议，通信双方在传输数据之前需要建立连接，数据传输完毕后需要断开连接。</li>
+<li>UDP 是无连接的协议，通信双方之间不需要建立持久的连接，每个数据包都是独立的，相互之间没有关联。</li>
+</ul>
+</li>
+<li><strong>可靠性：</strong><ul>
+<li>TCP 提供可靠的数据传输，保证数据的完整性和顺序性，通过确认应答机制和重传机制来确保数据的可靠传输。</li>
+<li>UDP 不提供可靠的数据传输，数据包可能会丢失、重复或者乱序，不保证数据的可靠性和顺序性。</li>
+</ul>
+</li>
+<li><strong>传输效率：</strong><ul>
+<li>TCP 的数据传输效率相对较低，因为它需要维护连接状态、实现可靠传输等机制，这些额外的开销会影响数据传输的效率。</li>
+<li>UDP 的数据传输效率相对较高，因为它是无连接的，并且不需要维护连接状态和实现可靠传输，适用于实时性要求较高的应用场景。</li>
+</ul>
+</li>
+<li><strong>应用场景：</strong><ul>
+<li>TCP 适用于要求数据传输安全可靠、顺序一致的应用，如网页浏览、文件传输、电子邮件等。</li>
+<li>UDP 适用于实时性要求较高、对数据可靠性要求不高的应用，如音视频传输、在线游戏、DNS 查询等。</li>
+</ul>
+</li>
+<li><strong>头部开销：</strong><ul>
+<li>TCP 头部开销较大，包含了序列号、确认号、窗口大小等字段，用于实现可靠传输和流量控制。</li>
+<li>UDP 头部开销较小，只包含了源端口、目标端口、长度和校验和字段，不包含额外的控制信息。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>面试</category>
       </categories>
   </entry>
 </search>

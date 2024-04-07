@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.如何看待C++和C的关系？C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。（1）面向对象：C++包含封装、继承、多态的特性；（2）C++支持泛型编程；（3）C++包含了STL部分。 2.讲一下什么是智能指针？智能指针是对裸指针的封装，其实质上是一个类，在离开类的作用范围后会自动调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试八股">
+<meta property="og:url" content="http://example.com/2024/04/07/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="1.如何看待C++和C的关系？C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。（1）面向对象：C++包含封装、继承、多态的特性；（2）C++支持泛型编程；（3）C++包含了STL部分。 2.讲一下什么是智能指针？智能指针是对裸指针的封装，其实质上是一个类，在离开类的作用范围后会自动调">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-07T07:02:11.712Z">
+<meta property="article:modified_time" content="2024-04-07T16:57:47.162Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/04/07/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面试八股 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/07/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试八股
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-07 15:02:11" itemprop="dateCreated datePublished" datetime="2024-04-07T15:02:11+08:00">2024-04-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-08 00:57:47" itemprop="dateModified" datetime="2024-04-08T00:57:47+08:00">2024-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>41 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-如何看待C-和C的关系？"><a href="#1-如何看待C-和C的关系？" class="headerlink" title="1.如何看待C++和C的关系？"></a>1.如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
+<h3 id="2-讲一下什么是智能指针？"><a href="#2-讲一下什么是智能指针？" class="headerlink" title="2.讲一下什么是智能指针？"></a>2.讲一下什么是智能指针？</h3><p>智能指针是对裸指针的封装，其实质上是一个类，在离开类的作用范围后会自动调用析构函数释放资源，因此避免了程序员手动操作时忘记释放资源导致的内存泄漏问题。<br>智能指针包含4类：<br>（1）auto_ptr：在C++11中已经被废弃使用。它提供独占所有权，但没有复制语义，存在潜在的危险，例如当它被复制后原始指针可能被意外释放。<br>（2）unique_ptr：实现了对资源的独占访问，同一时刻只能有一个指针对资源进行访问。<br>（3）shared_ptr：当有多个对象需要共享资源时，则使用shared_ptr。其内部维护了一个引用计数器，当引用计数减少为0时调用delete释放资源。<br>当存在下列情况时会使得引用计数增加：1）新建一个shared_ptr指向对象；2）拷贝构造函数复制一个shared_ptr；3）复制操作将一个shared_ptr复制给另一个shared_ptr。<br>当存在下列操作时会使得引用计数减少：1）当一个shared_ptr被销毁时，如离开作用域，或调用了析构函数；2）当一个shared_ptr不再指向某个资源，如调用reset方法。<br>（4）weak_ptr：指向一个shared_ptr对象，并不会增加其引用计数，而只是提供一种访问方式。可以解决shared_ptr中存在的循环引用问题。</p>
+<h3 id="3-循环引用是如何发生的？如何解决？"><a href="#3-循环引用是如何发生的？如何解决？" class="headerlink" title="3.循环引用是如何发生的？如何解决？"></a>3.循环引用是如何发生的？如何解决？</h3><p>当多个shared_ptr对象互相引用，或是在某些比较复杂的数据结构中存在多条引用路径时，可能存在循环引用问题，导致资源无法被释放。此时就可以使用weak_ptr来打破循环，因为waek_ptr不会增加引用计数。</p>
+<h3 id="4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？"><a href="#4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？" class="headerlink" title="4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？"></a>4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？</h3><p>shared_ptr并不是线程安全的，当多个线程同时访问或修改同一个shared_ptr对象时，可能会导致数据竞争或未定义的行为。但shared_ptr内部的计数器操作是线程安全的。<br>因此，在多线程使用时，需要避免多个线程同时访问一个shared_ptr对象或对其修改。</p>
+<h3 id="5-介绍一下static和const？"><a href="#5-介绍一下static和const？" class="headerlink" title="5.介绍一下static和const？"></a>5.介绍一下static和const？</h3><p>const允许我们指定一个语义约束，告诉编译器某个变量不应该被修改。const可以用于修饰普通变量、函数、类等。比如在重载解引用操作符时，就可以用const来修饰，因为在解引用操作前后指针所指向的值是不应该被改变的。<br>static则修改存储方式和可见范围。主要包含4类：<br>（1）静态成员变量：静态成员变量不属于类的任何一个对象，而只属于类本身，所有对象共享一个静态成员变量。<br>（2）静态成员函数：静态成员函数同理。<br>（3）静态局部变量：定义在函数内部，和普通局部变量不同，在函数整个运行期间只会初始化一次，即使函数被多次调用也是如此。<br>（4）静态全局变量：静态全局变量在某个源文件中被定义后则只能在该源文件中被使用，而不能在其他文件中使用，有助于封装和避免命名冲突。</p>
+<h3 id="6-如何让对象只能存在于栈-堆中？"><a href="#6-如何让对象只能存在于栈-堆中？" class="headerlink" title="6.如何让对象只能存在于栈&#x2F;堆中？"></a>6.如何让对象只能存在于栈&#x2F;堆中？</h3><p>如果将operator new设置为私有的，此时尝试在堆上分配内存失败，对象就会存在于栈中。<br>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会存在于堆中。</p>
+<h3 id="7-new和malloc的区别？"><a href="#7-new和malloc的区别？" class="headerlink" title="7.new和malloc的区别？"></a>7.new和malloc的区别？</h3><p>主要包含以下区别：<br>（1）new是c++特有的操作符，只能在C++中使用；malloc是C中的函数，但可以同时在c&#x2F;c++中使用。<br>（2）malloc在使用时需要指定分配内存的大小，如malloc(sizeof(int))，但new的使用则比较简洁，如new int。<br>（3）malloc分配的内存是未定义的，而new在分配内存时还会调用构造函数进行初始化。<br>（4）malloc返回的是void *类型的指针，需要进行强制类型转换以得到需要的指针类型，而new会自动转换为响应的指针类型。<br>（5）malloc调用free进行释放， ew调用delete进行释放。</p>
+<h3 id="8-什么是左值，什么是右值？"><a href="#8-什么是左值，什么是右值？" class="headerlink" title="8.什么是左值，什么是右值？"></a>8.什么是左值，什么是右值？</h3><p>左值是指一段指向内存的，具有名称的值，通常有较长的声明周期；右值是指向不稳定内存的匿名值，声明周期较短。可以通过取址符号来进行判断，能取到地址的是左值，取不到的是右值。</p>
+<h3 id="9-前置c-返回的是左值还是右值？后置c-呢？字符串字面量呢？"><a href="#9-前置c-返回的是左值还是右值？后置c-呢？字符串字面量呢？" class="headerlink" title="9.前置c++返回的是左值还是右值？后置c++呢？字符串字面量呢？"></a>9.前置c++返回的是左值还是右值？后置c++呢？字符串字面量呢？</h3><p>前置C++的实现是直接对传入的变量进行自增，然后返回这个对象，即一个具有名称的稳定的值，因此返回的是左值。后置C++是创建一个临时对象，然后对对象自增，再返回这个临时对象自增，因此返回的是右值。<br>字符串字面量也是左值。他会将字符串变量存放在程序的数据段中，程序加载时为其分配一段内存。</p>
+<h3 id="10-什么是左值引用和右值引用？"><a href="#10-什么是左值引用和右值引用？" class="headerlink" title="10.什么是左值引用和右值引用？"></a>10.什么是左值引用和右值引用？</h3><p>左值引用是指向左值的引用，用单个&amp;表示。常量左值引用可以绑定左值，也可以绑定右值。非变量左值引用只能绑定左值。<br>右值引用是指向右值的引用，用两个&amp;&amp;表示。右值引用主要用于移动语义。通过移动语义，可以避免不必要的拷贝操作，从而提升性能。</p>
+<h3 id="11-右值引用是如何提高性能的？"><a href="#11-右值引用是如何提高性能的？" class="headerlink" title="11.右值引用是如何提高性能的？"></a>11.右值引用是如何提高性能的？</h3><p>右值引用主要是通过避免不必要的拷贝操作来提升性能的。<br>举两个例子：<br>（1）当使用右值引用接收函数返回的局部变量时，可以延长该局部变量的声明周期，使得右值引用直接利用该局部变量的内存，而不是创建一个临时对象，从而避免了不必要的开销。<br>（2）当使用一个临时对象来创建一个新对象时，可以使用移动构造函数，直接将资源从一个对象复制到另一个对象上，避免了不必要的复制操作。</p>
+<h3 id="12-移动构造函数可能会有什么问题？"><a href="#12-移动构造函数可能会有什么问题？" class="headerlink" title="12.移动构造函数可能会有什么问题？"></a>12.移动构造函数可能会有什么问题？</h3><p>在使用移动构造函数时，如果当一个对象的资源移动到另一个对象上时发生了异常，此时就会造成有一部分资源转移了，而另一部分没有，从而使得源对象和目标对象上的资源都不完整。因此在使用移动构造函数时应该避免发生异常。如果无法确保移动构造函数不会发生异常，应该用noexcept进行修饰。这样函数如果发生异常时不会继续执行，而是抛出std::terminate并停止。</p>
+<h3 id="13-一个由C-C-编译的程序的内存分布（内存模型）？"><a href="#13-一个由C-C-编译的程序的内存分布（内存模型）？" class="headerlink" title="13.一个由C&#x2F;C++编译的程序的内存分布（内存模型）？"></a>13.一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<br>.text段，.rodata段，.data段，.bss段，堆，内存映射区，栈，内核空间。<br>其中，各项主要内容如下：<br>（1）.text段主要存在程序编译后的机器指令<br>（2）.rodata段主要存放程序中的各种只读变量<br>（3）.data段主要存放已经被初始化了的全局静态变量和局部静态变量<br>（4）.bss段主要存放未被初始化的全局静态变量和局部静态变量<br>（5）堆：由程序员进行动态分配，如调用malloc或new<br>（6）栈：由编译器自动分配释放，存放一些局部变量等<br>（7）内核空间：存放操作系统的一些内核数据和代码</p>
+<h3 id="14-不同段上的对象的生命周期是怎样的？"><a href="#14-不同段上的对象的生命周期是怎样的？" class="headerlink" title="14.不同段上的对象的生命周期是怎样的？"></a>14.不同段上的对象的生命周期是怎样的？</h3><p>（1）.data&#x2F;.bss段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁<br>（2）堆上的对象由程序员进行动态分配<br>（3）栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
+<h3 id="15-堆和栈的区别是什么？"><a href="#15-堆和栈的区别是什么？" class="headerlink" title="15.堆和栈的区别是什么？"></a>15.堆和栈的区别是什么？</h3><p>（1）内存分配方式<br>（2）生命周期不同<br>（3）内存大小不同</p>
+<h3 id="16-内存模型是什么？是指可执行文件中包含这些东西吗？"><a href="#16-内存模型是什么？是指可执行文件中包含这些东西吗？" class="headerlink" title="16.内存模型是什么？是指可执行文件中包含这些东西吗？"></a>16.内存模型是什么？是指可执行文件中包含这些东西吗？</h3><p>内存模型是指虚拟内存。<br>可执行文件中只包含.text .rodata和.data，不包含.bss、栈和堆。.bss段存放的是未初始化的全局静态变量和局部静态变量，在程序加载到内存中时，这些变量会被初始化为0或空指针，在生成可执行文件时不会占用内存空间。而栈和堆是动态加载的，只有在程序运行时才会分配。</p>
+<h3 id="17-c-是如何实现动态多态的？"><a href="#17-c-是如何实现动态多态的？" class="headerlink" title="17.c++是如何实现动态多态的？"></a>17.c++是如何实现动态多态的？</h3><p>c++是通过虚函数实现动态多态的。其核心是通过不同对象的特性来确定调用哪一个类的函数。具体来说，每一个包含虚函数的类都分配了一个虚函数指针，这个虚函数指针指向一个虚函数表。当需要调用对应的函数时，首先根据虚函数指针找到对应的虚函数表，然后根据这个函数在表中的下标位置找到对应的函数。</p>
+<h3 id="18-一个类中有几个虚函数表？一个类的对象有几个虚函数指针？"><a href="#18-一个类中有几个虚函数表？一个类的对象有几个虚函数指针？" class="headerlink" title="18.一个类中有几个虚函数表？一个类的对象有几个虚函数指针？"></a>18.一个类中有几个虚函数表？一个类的对象有几个虚函数指针？</h3><p>一个类继承了多少个父类，就有多少张虚函数表。一个类的对象包含多少张虚函数表，就有多少虚函数指针。</p>
+<h3 id="19-一个类的虚函数指针在类中的内存分布是怎样的？"><a href="#19-一个类的虚函数指针在类中的内存分布是怎样的？" class="headerlink" title="19.一个类的虚函数指针在类中的内存分布是怎样的？"></a>19.一个类的虚函数指针在类中的内存分布是怎样的？</h3><p>根据该类继承父类的顺序，从对象的首地址开始依次排列。</p>
+<h3 id="20-什么是ICMP？"><a href="#20-什么是ICMP？" class="headerlink" title="20.什么是ICMP？"></a>20.什么是ICMP？</h3><p>ICMP是TCP&#x2F;IP协议族中网络层的协议，通过传输网络层控制消息的协议来实现网络诊断，以及发送错误报告的目的。<br>如ping&#x2F;traceout就是通过icmp来诊断网络质量以及追踪数据包在网络中的传输路径来达到网络诊断的目的。</p>
+<h3 id="21-什么是TCP粘包？"><a href="#21-什么是TCP粘包？" class="headerlink" title="21.什么是TCP粘包？"></a>21.什么是TCP粘包？</h3><p>TCP粘包是指在使用TCP协议传输数据时，发送方发送的多个数据包被接收方一次性接收。这是由于TCP发送的数据是以字节流为单位的，无法确定消数据边界。</p>
+<h3 id="22-如何解决TCP粘包？"><a href="#22-如何解决TCP粘包？" class="headerlink" title="22.如何解决TCP粘包？"></a>22.如何解决TCP粘包？</h3><p>（1）添加数据边界，在数据中添加一个一个特定边界标识<br>（2）发送定长数据，不满足定长的数据用特定字符填充<br>（3）添加消息头<br>（4）使用应用层协议，如HTTP&#x2F;FTP协议都已经针对粘包问题进行了处理</p>
+<h3 id="23-UDP会发生粘包吗？"><a href="#23-UDP会发生粘包吗？" class="headerlink" title="23.UDP会发生粘包吗？"></a>23.UDP会发生粘包吗？</h3><p>不会，因为UDP数据报格式的协议，发送时的数据报是独立的，因此有明确的边界。</p>
+<h3 id="24-UDP为什么会发生乱序问题？"><a href="#24-UDP为什么会发生乱序问题？" class="headerlink" title="24.UDP为什么会发生乱序问题？"></a>24.UDP为什么会发生乱序问题？</h3><p>UDP不像TCP，存在滑动窗、序列号、确认序列和超时重传机制。因此由于存在网络抖动问题，接收方接收到的UDP数据报可能是乱序的，需要自行处理。</p>
+<h3 id="25-多态的实现原理是什么？"><a href="#25-多态的实现原理是什么？" class="headerlink" title="25.多态的实现原理是什么？"></a>25.多态的实现原理是什么？</h3><p>c++的多态包括静态多态和动态多态。<br>静态多态是指编译器的多态，主要由函数重载和函数模板实现。函数重载是指在同一作用域内，一组函数具有相同的函数名和不同的参数列表，编译器根据函数调用时传递的参数数量和类型选择调用哪个函数执行。函数模板允许编写通用的代码，编译器根据模板实例化的内容生成代码。<br>动态多态则是在运行时实现，主要由虚函数和继承实现。其核心思想是类的对象会根据其属性来确定究竟调用哪一个类的函数。具体来说，每一个包含虚函数的类中都分配了一个虚函数指针，每一个虚函数指针都指向一个虚函数表。当需要调用函数时，根据虚函数指针找到对应的虚函数表，然后根据函数的下标位置在虚函数表找到对应的函数实现。</p>
+<h3 id="26-C-的菱形继承指什么？"><a href="#26-C-的菱形继承指什么？" class="headerlink" title="26.C++的菱形继承指什么？"></a>26.C++的菱形继承指什么？</h3><p>菱形继承指两个及以上的派生类继承自同一个基类，而另外又有一个类继承了这些派生类，导致最终生成的派生类中包含多个基类的子对象副本。</p>
+<h3 id="27-析构函数为什么设置成虚函数？"><a href="#27-析构函数为什么设置成虚函数？" class="headerlink" title="27.析构函数为什么设置成虚函数？"></a>27.析构函数为什么设置成虚函数？</h3><p>如果这个类是一个多态性质的类，其析构函数应该设置为虚函数，否则就不应该被设置为虚函数。<br>由于基类的多态性，基类指针可以指向派生类的对象，如果删除该基类的指针，就会调用该指针指向的派生类析构函数，而派生类的析构函数又自动调用基类的析构函数，这样整个派生类的对象完全被释放。假如析构函数非虚函数，如果析构函数不被声明成虚函数，则编译器实施静态绑定，在删除基类指针时，只会调用基类的析构函数而不调用派生类析构函数，造成内存的局部释放，内存泄漏。因此此时析构函数应该设置为虚函数。<br>但如果这个类不包含多态性，就不应该设置为虚函数，否则会引入虚函数指针和虚函数表，造成内存浪费。</p>
+<h3 id="28-C-对象的大小由哪些因素决定？"><a href="#28-C-对象的大小由哪些因素决定？" class="headerlink" title="28.C++对象的大小由哪些因素决定？"></a>28.C++对象的大小由哪些因素决定？</h3><p>（1）变量的类型和大小；</p>
+<p>（2）内存对齐和填充；</p>
+<p>（3）虚函数所带来的开销；</p>
+<p>（4）空类优化。</p>
+<h3 id="29-TCP挥手过程中，为什么存在一个time-wait状态？"><a href="#29-TCP挥手过程中，为什么存在一个time-wait状态？" class="headerlink" title="29.TCP挥手过程中，为什么存在一个time_wait状态？"></a>29.TCP挥手过程中，为什么存在一个time_wait状态？</h3><p>（1）防止错误接收报文。如果立刻断掉连接，那么当客户端复位ip地址和端口号重新建立连接时，可能会收到上一个连接发送过来的历史报文，而当前建立的新连接无法判断这个报文是否为历史报文，因此会出现错误。</p>
+<p>（2）确保双方正常关闭。当客户端发送ACK报文给服务器端时，若该报文丢失，需要等待服务器端重新发送一个FIN报文给客户端，这个等待的时间最大为2MSL，因此需要一个time_wait状态来让客户端等到是否再次接受到一个FIN报文。</p>
+<h3 id="30-什么情况下会出现大量time-wait状态？如何优化？"><a href="#30-什么情况下会出现大量time-wait状态？如何优化？" class="headerlink" title="30.什么情况下会出现大量time_wait状态？如何优化？"></a>30.什么情况下会出现大量time_wait状态？如何优化？</h3><p>在以下两种场景会出现大量time_wait状态：</p>
+<p>（1）高并发场景下。此时存在大量的客户端和服务器端建立连接，因此在断开连接时就会出现大量的time_wait状态。</p>
+<p>（2）短连接场景下。短连接场景下的TCP连接生命周期较短，很快就会断开连接，就导致出现大量的time_wait状态。</p>
+<p>可以通过下列方式进行优化：</p>
+<p>（1）缩短MSL的时间。</p>
+<p>（2）建立连接池。在客户端和服务器端中间建立连接池，这样就可以复用已经建立的的TCP连接。</p>
+<p>（3）在服务器端开启SO_REUSEADDR套接字，这样可以使得服务器端在time_wait状态时就可以重新绑定并监听端口号。</p>
+<p>（4）在客户端开启SO_LINGER套接字，并将延迟设置为0。这样当断开连接时，客户端会直接发送一个RST信号，不再进行四次挥手，从而避免进入time_wait状态。</p>
+<h3 id="31-从C-文件到可执行文件经过了哪几个阶段？"><a href="#31-从C-文件到可执行文件经过了哪几个阶段？" class="headerlink" title="31.从C++文件到可执行文件经过了哪几个阶段？"></a>31.从C++文件到可执行文件经过了哪几个阶段？</h3><p>预编译、编译、汇编、链接，最后生成可执行文件。</p>
+<h3 id="32-为什么需要有链接的过程？"><a href="#32-为什么需要有链接的过程？" class="headerlink" title="32.为什么需要有链接的过程？"></a>32.为什么需要有链接的过程？</h3><p>因为软件开发的规模很大，不可能将它们都放在同一个模块中。因此按照层次化以及模块化的视线方法，将代码分成多个部分，每个部分分别开发。因此就需要在最后将它们组装起来，这就是链接的过程。通过链接，实现符号解析、地址分配和库依赖管理等工作。</p>
+<h3 id="33-链接这个过程做了什么？"><a href="#33-链接这个过程做了什么？" class="headerlink" title="33.链接这个过程做了什么？"></a>33.链接这个过程做了什么？</h3><p>（1）符号解析。在目标文件和库中存在许多符号（如函数名或变量名等），需要在其他的目标文件或库中找到相应的定义，并将它们连接起来，使得程序在运行时可以找到正确的内存地址。</p>
+<p>（2）地址分配。给目标文件和库分配内存地址，并确定其在程序中的内存布局。同时需要完成重定位的工作，用实际的内存地址去替换其中的地址引用。</p>
+<p>（3）库依赖管理。链接器处理程序和库之间的依赖关系，确保所有库都被正确地包含在目标文件中。同时要处理库与库之间的依赖关系。</p>
+<h3 id="34-什么是hash冲突，常见的解决hash冲突的办法是什么？"><a href="#34-什么是hash冲突，常见的解决hash冲突的办法是什么？" class="headerlink" title="34.什么是hash冲突，常见的解决hash冲突的办法是什么？"></a>34.什么是hash冲突，常见的解决hash冲突的办法是什么？</h3><p>hash冲突是指两个及以上的输入值在经过哈希映射后得到相同的哈希值。由于hash映射是从无限空间到有限空间的映射，因此hash冲突是不可避免的。</p>
+<p>解决hash冲突的办法有：</p>
+<p>（1）开放寻址哈希。如果发生hash冲突，则继续往下寻找一个空闲位置。</p>
+<p>（2）链地址哈希。在每一个哈希槽中存储一个链表，当发生hash冲突时，就将其放入该链表中。当然，如果链表变得太长，导致查询效率减小，就需要重新分配哈希表，扩大容量，动态调整哈希表的大小来改善。</p>
+<p>（3）再哈希。在发生hash冲突时再进一步进行hash映射，以得到不冲突的哈希值。</p>
+<h3 id="35-说一下你对于内存对齐的理解？"><a href="#35-说一下你对于内存对齐的理解？" class="headerlink" title="35.说一下你对于内存对齐的理解？"></a>35.说一下你对于内存对齐的理解？</h3><p>内存对齐是指对于特定类型的数据规定了其应该位于内存的哪个位置上。比如，对于int类型的数据，在32系统上要求其内存对齐为4个字节，也就是说其起始地址应该为4的倍数。</p>
+<p>内存对齐的目的是为了提高内存访问的效率。因为在许多硬件平台上，访问对齐的内存要比访问不对齐的内存更快。</p>
+<h3 id="36-内存对齐可能会带来哪些问题？"><a href="#36-内存对齐可能会带来哪些问题？" class="headerlink" title="36.内存对齐可能会带来哪些问题？"></a>36.内存对齐可能会带来哪些问题？</h3><p>（1）可能会造成内存浪费问题。虽然内存对齐后其内存访问速度会大幅提升，但随之而来的可能会造成一些内存浪费现象。</p>
+<p>（2）可能存在平台不兼容的问题。不同类型的数据在不同的平台上可能有不能的内存对齐规则。</p>
+<h3 id="37-线程中的锁包含哪些？"><a href="#37-线程中的锁包含哪些？" class="headerlink" title="37.线程中的锁包含哪些？"></a>37.线程中的锁包含哪些？</h3><p>（1）互斥锁：用于对共享资源的互斥访问。当有线程对该资源加了互斥锁后，其他线程尝试加锁时会被阻塞，直至锁被释放。</p>
+<p>（2）递归锁：是一种特殊的互斥锁，当有同一个线程尝试对同一个线程不断加锁时，不会被阻塞。</p>
+<p>（3）读写锁：允许多个线程同时进行读操作，但仅允许一个线程进行写操作，使用的读多于写的场景。</p>
+<p>（4）自旋锁：当有线程对资源加了自旋锁后，其他线程尝试加锁时将忙等待，而非被阻塞。</p>
+<h3 id="38-缺页中断什么时候发生？"><a href="#38-缺页中断什么时候发生？" class="headerlink" title="38.缺页中断什么时候发生？"></a>38.缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
+<p>（2）当程序尝试进行一个违反内存规则的操作时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</p>
+<h3 id="39-常见的缺页中断算法有哪些？"><a href="#39-常见的缺页中断算法有哪些？" class="headerlink" title="39.常见的缺页中断算法有哪些？"></a>39.常见的缺页中断算法有哪些？</h3><p>（1）LRU，最近最少使用。</p>
+<p>（2）LFU，使用频率最低。</p>
+<p>（3）FIFO，先进先出。</p>
+<h3 id="40-代码的共同开发工具有哪些？"><a href="#40-代码的共同开发工具有哪些？" class="headerlink" title="40.代码的共同开发工具有哪些？"></a>40.代码的共同开发工具有哪些？</h3><p>主要用的就是git。包含以下命令：</p>
+<p>（1）pull，从远程仓库获取更新，并将其合并到本地仓库中。</p>
+<p>（2）push，将本地仓库的更新合并到远程仓库中。</p>
+<p>（3）clone，在本地创建远程仓库的副本。</p>
+<p>（4）merge，在一个分支上合并另一个分支的相关操作。</p>
+<p>（5）rebase，将一个分支的修改移动到另一个分支上。</p>
+<h3 id="41-假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？"><a href="#41-假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？" class="headerlink" title="41.假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？"></a>41.假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？</h3><p>在使用动态库时，链接器会将动态库的相关信息，包括动态库的名字、符号表以及可重定位信息存储到相应的可执行文件中。在可执行文件运行时，链接器会根据这些信息找到动态库是否存在、在哪里、符号引用的内存地址是哪里，也就是说找到A.dll引用的B.dll的相关方法，并通过重定位找到其物理内存地址。</p>
+<h3 id="42-vector的扩容原理是怎样的？"><a href="#42-vector的扩容原理是怎样的？" class="headerlink" title="42.vector的扩容原理是怎样的？"></a>42.vector的扩容原理是怎样的？</h3><p>vector可以进行自动扩容，以容纳更多的元素。主要包含以下几步：</p>
+<p>（1）确定新容量。根据平台的不同，有不同的扩容倍数。其中linux和gcc下为2倍，windows下为1.5倍。</p>
+<p>（2）开辟内存空间。确定了新容量后，在堆上开辟一块新的连续内存空间。</p>
+<p>（3）复制元素。通过拷贝构造或移动构造将现有元素从旧内存空间复制到新内存空间。</p>
+<p>（4）释放旧内存。</p>
+<p>（5）更新内部指针。在元素复制完成后，vector更新其内部数据结构，如指向元素数组的指针、大小和容量。</p>
+<h3 id="43-map和set保存的元素有什么区别？"><a href="#43-map和set保存的元素有什么区别？" class="headerlink" title="43.map和set保存的元素有什么区别？"></a>43.map和set保存的元素有什么区别？</h3><p>（1）map保存的是键值对元素，其中key是不能重复的，一旦重复将对value进行覆盖。只能通过key来访问value。</p>
+<p>（2）set保存的元素是无序的，且元素也是不能重复的。只能通过迭代器遍历访问set。</p>
+<h3 id="44-map的插入方式和访问方式有哪些？"><a href="#44-map的插入方式和访问方式有哪些？" class="headerlink" title="44.map的插入方式和访问方式有哪些？"></a>44.map的插入方式和访问方式有哪些？</h3><p>插入方式：</p>
+<p>（1）operator []</p>
+<p>（2）emplace()</p>
+<p>（3）insert()</p>
+<p>访问方式</p>
+<p>（1）operator []</p>
+<p>（2）使用at</p>
+<p>（3）find()</p>
+<p>（4）使用迭代器</p>
+<h3 id="45-explicit关键字用在什么情况下？"><a href="#45-explicit关键字用在什么情况下？" class="headerlink" title="45.explicit关键字用在什么情况下？"></a>45.explicit关键字用在什么情况下？</h3><p>explicit关键用于声明一个单参数的构造函数，阻止该构造函数隐式转换为该类的类型。</p>
+<h3 id="46-inline关键字遇到过吗？作用是什么？和-define有什么区别？"><a href="#46-inline关键字遇到过吗？作用是什么？和-define有什么区别？" class="headerlink" title="46.inline关键字遇到过吗？作用是什么？和#define有什么区别？"></a>46.inline关键字遇到过吗？作用是什么？和#define有什么区别？</h3><p>inline关键字作为函数定义的关键字，说明该函数是内联函数。内联函数会将代码块嵌入到每个调用该函数的地方，减少函数调用的开销，但增加了代码量。同时要注意inline只是对编译器的一个建议，真正能否内联还是要看编译器自己的判断。</p>
+<p>和#define的区别在于：</p>
+<p>（1）#define是关键字，inline是函数。</p>
+<p>（2）宏定义在预处理阶段进行文本替换，inline函数在编译时进行替换。</p>
+<p>（3）inline有类型检查，相对于#define较安全。</p>
+<h3 id="47-引用计数的线程安全性怎么实现的？"><a href="#47-引用计数的线程安全性怎么实现的？" class="headerlink" title="47.引用计数的线程安全性怎么实现的？"></a>47.引用计数的线程安全性怎么实现的？</h3><p>引用计数的线程安全性通常通过原子操作实现，确保对引用计数的增减操作是原子的，这样可以避免多线程环境下的竞态条件。</p>
+<h3 id="48-如果有⼀个场景需要用到线程安全的shared-ptr，一般你会怎么做？"><a href="#48-如果有⼀个场景需要用到线程安全的shared-ptr，一般你会怎么做？" class="headerlink" title="48.如果有⼀个场景需要用到线程安全的shared_ptr，一般你会怎么做？"></a>48.如果有⼀个场景需要用到线程安全的shared_ptr，一般你会怎么做？</h3><p>如果需要在多线程环境下使用线程安全的 shared_ptr，通常会使用 std::atomic 或者 std::mutex 来保护对 shared_ptr 的访问。</p>
+<h3 id="49-说到线程安全性，在语言层面，你⼀般使用什么⼿段？"><a href="#49-说到线程安全性，在语言层面，你⼀般使用什么⼿段？" class="headerlink" title="49.说到线程安全性，在语言层面，你⼀般使用什么⼿段？"></a>49.说到线程安全性，在语言层面，你⼀般使用什么⼿段？</h3><p>在语言层面，我一般会使用原子操作和互斥锁来确保多线程环境下的线程安全性。</p>
+<h3 id="50-make-shared和shared-ptr构造函数创建shared-ptr的区别？"><a href="#50-make-shared和shared-ptr构造函数创建shared-ptr的区别？" class="headerlink" title="50.make_shared和shared_ptr构造函数创建shared_ptr的区别？"></a>50.make_shared和shared_ptr构造函数创建shared_ptr的区别？</h3><p>make_shared 创建的对象和 shared_ptr 一起存储在同一块内存中，而使用构造函数创建的 shared_ptr 需要额外的内存用于存储引用计数。</p>
+<h3 id="51-如果构造函数传入同一裸指针构造两个shared-ptr对象，会发生什么现象？"><a href="#51-如果构造函数传入同一裸指针构造两个shared-ptr对象，会发生什么现象？" class="headerlink" title="51.如果构造函数传入同一裸指针构造两个shared_ptr对象，会发生什么现象？"></a>51.如果构造函数传入同一裸指针构造两个shared_ptr对象，会发生什么现象？</h3><p>如果构造函数传入同一个裸指针构造两个 shared_ptr 对象，会导致两个 shared_ptr 对象都管理同一个对象，引用计数会变为 2。</p>
+<h3 id="52-还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？"><a href="#52-还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？" class="headerlink" title="52.还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？"></a>52.还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？</h3><p>这种现象是因为 shared_ptr 的设计决定了它的共享性质，即多个 shared_ptr 可以管理同一个对象。</p>
+<h3 id="53-很多人说到weak-ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？"><a href="#53-很多人说到weak-ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？" class="headerlink" title="53.很多人说到weak_ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？"></a>53.很多人说到weak_ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？</h3><p><code>std::weak_ptr</code> 的主要作用是提供一种非拥有性的智能指针，用于解决共享指针的循环引用问题，避免内存泄漏和资源泄露。它不会增加对象的引用计数，也不会影响对象的生命周期，因此适用于表示临时性的对象引用或者避免循环引用的情况。</p>
+<p>除了解决循环引用之外，<code>std::weak_ptr</code> 还具有其他用途，例如：</p>
+<ol>
+<li><strong>观察者模式（Observer Pattern）：</strong> <code>std::weak_ptr</code> 可用于实现观察者模式，其中观察者持有被观察者对象的弱引用，以避免循环引用和对象生命周期管理的问题。</li>
+<li><strong>缓存：</strong> 在缓存系统中，可以使用 <code>std::weak_ptr</code> 来保存对象的缓存项，以避免对对象的强引用导致缓存项无法被释放。</li>
+<li><strong>延迟初始化：</strong> <code>std::weak_ptr</code> 可用于实现延迟初始化（Lazy Initialization），只有在需要时才创建对象，以提高性能和资源利用率。</li>
+</ol>
+<h3 id="54-如何实现一个线程池？"><a href="#54-如何实现一个线程池？" class="headerlink" title="54.如何实现一个线程池？"></a>54.如何实现一个线程池？</h3><p>线程池是一组预先创建好的线程，用于执行多个任务。它可以提高任务调度的效率和性能。</p>
+<p>实现一个线程池可以使用 C++11 提供的 std::thread和 std::mutex 等多线程库，结合队列等数据结构来管理任务的提交和执行。</p>
+<h3 id="55-详细说明三握四挥"><a href="#55-详细说明三握四挥" class="headerlink" title="55.详细说明三握四挥"></a>55.详细说明三握四挥</h3><p>三次握手和四次挥手是 TCP 协议中用于建立和断开连接的过程，它们是网络通信中非常重要的部分。</p>
+<p>（1）三次握手（Three-way Handshake）</p>
+<p>三次握手是建立 TCP 连接的过程，涉及到客户端和服务端之间的通信。下面是三次握手的详细步骤：</p>
+<ol>
+<li><p>第一步（SYN）</p>
+<ul>
+<li>客户端向服务端发送一个带有 SYN（同步）标志的数据包，表示请求建立连接。</li>
+</ul>
+<ul>
+<li>客户端选择一个起始序列号（Sequence Number）用于后续数据传输的序号标识。</li>
+</ul>
+</li>
+<li><p>第二步（SYN + ACK）</p>
+<ul>
+<li>服务端接收到客户端发送的 SYN 数据包后，向客户端发送一个带有 SYN 和 ACK（确认）标志的数据包，表示收到了客户端的请求，并同意建立连接。</li>
+<li>服务端也会选择一个起始序列号用于后续数据传输，并在确认号中包含客户端发送的序列号加一作为确认。</li>
+</ul>
+</li>
+<li><p>第三步（ACK）</p>
+<ul>
+<li>客户端收到服务端发送的 SYN+ACK 数据包后，向服务端发送一个带有 ACK 标志的数据包，表示收到了服务端的确认，并同意建立连接。</li>
+<li>客户端在确认号中包含服务端发送的序列号加一作为确认。</li>
+</ul>
+</li>
+</ol>
+<p>完成了这三次握手之后，TCP 连接就建立起来了，客户端和服务端之间可以开始进行数据传输。</p>
+<p>（2）四次挥手（Four-way Handshake）</p>
+<p>四次挥手是断开 TCP 连接的过程，也是客户端和服务端之间的通信。下面是四次挥手的详细步骤：</p>
+<ol>
+<li>第一步（FIN）<ul>
+<li>客户端或服务端中的一方决定断开连接后，向对方发送一个带有 FIN（结束）标志的数据包，表示不再发送数据，但仍可以接收数据。</li>
+</ul>
+</li>
+<li>第二步（ACK）<ul>
+<li>接收到 FIN 数据包的一方（通常是另一端）收到后，向发送 FIN 数据包的一方发送一个带有 ACK 标志的数据包，表示确认收到了断开连接的请求。</li>
+</ul>
+</li>
+<li>第三步（FIN）<ul>
+<li>接收到 ACK 数据包的一方也决定断开连接后，向对方发送一个带有 FIN 标志的数据包，表示同意断开连接。</li>
+</ul>
+</li>
+<li>第四步（ACK）<ul>
+<li>最后，接收到 FIN 数据包的一方发送一个带有 ACK 标志的数据包，表示确认收到了断开连接的请求。</li>
+</ul>
+</li>
+</ol>
+<p>完成了这四次挥手之后，TCP 连接就彻底断开了，客户端和服务端之间的连接关闭，不再进行数据传输。</p>
+<p>总的来说，三次握手和四次挥手保证了数据传输的可靠性和顺序性，确保了客户端和服务端之间的正常通信。</p>
+<h3 id="56-进程和线程以及并发和并行的概念是什么？"><a href="#56-进程和线程以及并发和并行的概念是什么？" class="headerlink" title="56.进程和线程以及并发和并行的概念是什么？"></a>56.进程和线程以及并发和并行的概念是什么？</h3><p>（1）线程是操作系统中的最小执行单元，进程是程序的一次执行过程，是系统资源分配的最小单位。并发是指多个任务交替执行，而并行是指多个任务同时执行。</p>
+<p>（2）并发是在单个处理器上实现多个线程同时执行的假象，而并行是在多个处理器上实现多个线程同时执行。</p>
+<h3 id="57-tcp遇到网络拥塞或者大流量的情况如何去做？"><a href="#57-tcp遇到网络拥塞或者大流量的情况如何去做？" class="headerlink" title="57.tcp遇到网络拥塞或者大流量的情况如何去做？"></a>57.tcp遇到网络拥塞或者大流量的情况如何去做？</h3><p>关于TCP遇到数据包损坏、乱序、网络拥塞或大流量的情况，通常会采取以下处理方式：</p>
+<ol>
+<li><strong>数据包损坏和乱序：</strong> TCP协议通过使用校验和（Checksum）来检测数据包的损坏，并通过序列号来处理乱序的数据包。如果数据包损坏，则丢弃该数据包并请求重传；如果数据包乱序，则按照序列号重新排序。</li>
+<li><strong>网络拥塞或大流量：</strong> 当网络拥塞或流量过大时，TCP协议会根据拥塞控制算法（如拥塞窗口控制、慢启动、拥塞避免、快速重传、快速恢复等）来调整数据包的发送速率，以避免造成丢包和拥塞。通过动态调整拥塞窗口大小和重新传输超时时间等参数来控制数据包的发送速率，从而维持网络的稳定性和性能。</li>
+</ol>
+<p>总的来说，TCP通过可靠性、流量控制和拥塞控制等机制来保证数据传输的可靠性和网络的稳定性，从而在不同网络环境下有效地处理各种异常情况。</p>
+<h3 id="58-https是如何进行加密的？"><a href="#58-https是如何进行加密的？" class="headerlink" title="58.https是如何进行加密的？"></a>58.https是如何进行加密的？</h3><p>HTTPS（HyperText Transfer Protocol Secure）是一种基于HTTP协议和SSL&#x2F;TLS协议的安全传输协议，它通过使用加密技术来保护通信数据的安全性和完整性。下面是HTTPS进行加密的基本流程：</p>
+<ol>
+<li><strong>建立SSL&#x2F;TLS连接：</strong> 客户端与服务器之间首先建立SSL&#x2F;TLS连接，这个过程通常称为SSL&#x2F;TLS握手。在握手过程中，客户端和服务器协商使用的加密算法、密钥长度和其他参数，同时进行身份验证。</li>
+<li><strong>进行证书交换：</strong> 在握手过程中，服务器会向客户端发送数字证书，用于证明服务器的身份。数字证书包含了服务器的公钥以及与证书相关的信息，如证书颁发者、有效期等。</li>
+<li><strong>验证证书：</strong> 客户端收到服务器的证书后，会对证书进行验证。这个过程通常包括检查证书的有效性、签发者的可信度、证书是否过期等。如果证书验证通过，则客户端继续握手过程；否则，可能会发出警告或中止连接。</li>
+<li><strong>生成会话密钥：</strong> 一旦证书验证通过，客户端会生成一个用于对通信数据进行加密和解密的会话密钥（Session Key）。通常情况下，客户端使用服务器的公钥来加密这个会话密钥，并发送给服务器。</li>
+<li><strong>加密通信：</strong> 一旦服务器收到客户端发送的加密的会话密钥，服务器使用自己的私钥解密会话密钥。此后，客户端和服务器之间的通信就使用这个会话密钥来进行对称加密和解密了。这意味着通信数据在传输过程中是加密的，保护了数据的机密性和完整性。</li>
+</ol>
+<h3 id="59-遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"><a href="#59-遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？" class="headerlink" title="59.遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"></a>59.遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？</h3><p>在处理多线程同步问题时，常用的机制包括互斥锁（Mutex）、条件变量（Condition Variable）、信号量（Semaphore）等。下面简要介绍一下信号量的实现和处理方式，并举例说明如何使用。</p>
+<p>（1）信号量（Semaphore）</p>
+<p>信号量是一种用于多线程同步的机制，它可以用来控制对临界资源的访问。信号量维护了一个计数器，表示可用资源的数量，线程在访问临界资源之前必须先获取信号量，如果信号量计数器大于零，则线程可以获取资源并将计数器减一；如果计数器等于零，则线程将被阻塞，直到有其他线程释放资源并增加计数器。当线程使用完资源后，需要释放信号量，使计数器加一，以便其他线程可以继续访问资源。</p>
+<p>（2）等待线程A执行完任务后再执行线程B的处理方式</p>
+<p>在示例中，使用了条件变量 <code>std::condition_variable</code> 来等待线程A执行完任务后再执行线程B。线程A在等待条件时会调用 <code>cv.wait(lock, predicate)</code> 函数，其中 <code>predicate</code> 是一个lambda表达式，表示等待的条件。线程B在执行完任务后调用 <code>cv.notify_one()</code> 函数来发送信号给等待中的线程A，从而唤醒线程A并开始执行任务。</p>
+<h3 id="60-多线程切换，cpu和内存会做一些什么处理"><a href="#60-多线程切换，cpu和内存会做一些什么处理" class="headerlink" title="60.多线程切换，cpu和内存会做一些什么处理"></a>60.多线程切换，cpu和内存会做一些什么处理</h3><p>在多线程环境下，当操作系统进行线程切换时，CPU 和内存会做一些处理：</p>
+<ol>
+<li><strong>保存当前线程的上下文：</strong> 当一个线程被抢占时，CPU 会保存当前线程的上下文信息，包括程序计数器（PC）、寄存器状态、栈指针（SP）等。这样做是为了在之后恢复线程时能够继续执行。</li>
+<li><strong>加载下一个线程的上下文：</strong> CPU 根据调度算法选择下一个需要执行的线程，然后加载其上下文信息到寄存器和其他硬件状态中。</li>
+<li><strong>切换内存空间：</strong> 在多线程环境下，不同线程可能会访问不同的内存区域。因此，在线程切换时，操作系统需要更新页表（Page Table）等内存映射表，以确保下一个线程能够访问到正确的内存空间。</li>
+<li><strong>处理器流水线的清空和填充：</strong> 在 CPU 进行线程切换时，可能存在流水线（Pipeline）中的指令未执行完毕。在切换时，CPU 可能需要将流水线清空，以避免对新线程执行的指令产生影响。</li>
+<li><strong>更新调度器信息：</strong> 操作系统需要更新线程的调度信息，包括线程的状态（就绪、运行、阻塞等），以及相关的时间片（Time Slice）等调度参数。</li>
+</ol>
+<h3 id="61-流量控制和拥塞控制"><a href="#61-流量控制和拥塞控制" class="headerlink" title="61.流量控制和拥塞控制"></a>61.流量控制和拥塞控制</h3><p>流量控制和拥塞控制都是网络通信中用于控制数据传输的机制，但它们针对的对象和目的略有不同。</p>
+<p>（1）流量控制（Flow Control）</p>
+<p>流量控制是指在数据传输过程中，接收方通过一定的方式告诉发送方自己的接收能力，以控制发送方的发送速率，防止发送方发送过多的数据导致接收方无法及时处理。流量控制通常发生在端到端之间，其主要目的是保护接收方不被发送方的数据压倒。</p>
+<p>常见的流量控制机制包括滑动窗口协议（如TCP的滑动窗口机制）和通告窗口大小（advertised window size）等。接收方通过不断调整通告窗口大小来告诉发送方自己的接收能力，从而控制发送方的发送速率。</p>
+<p>（2）拥塞控制（Congestion Control）</p>
+<p>拥塞控制是指在网络中避免过多的数据包拥塞在网络节点或链路上，从而影响网络性能和吞吐量的机制。拥塞控制通常发生在网络中，其主要目的是保护网络免受过载和崩溃。</p>
+<p>拥塞控制通过监控网络的拥塞程度，并采取一系列措施来降低数据包的发送速率，从而避免网络拥塞。常见的拥塞控制算法包括拥塞窗口控制、慢启动、拥塞避免、快速重传、快速恢复等。这些算法通过动态调整数据包的发送速率，以适应网络的负载情况，从而确保网络的稳定性和性能。</p>
+<p>综上所述，流量控制和拥塞控制是网络通信中两个重要的控制机制，它们分别针对数据的发送方和网络本身，通过控制数据的发送速率来保护接收方和网络免受过载和拥塞的影响，从而保证通信的稳定性和效率。</p>
+<h3 id="62-Tcp可靠传输的⼏种机制"><a href="#62-Tcp可靠传输的⼏种机制" class="headerlink" title="62.Tcp可靠传输的⼏种机制"></a>62.Tcp可靠传输的⼏种机制</h3><p>TCP（Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层协议。它采用了多种机制来保证数据的可靠传输，以下是几种常见的机制：</p>
+<ol>
+<li><strong>序列号和确认应答：</strong> TCP 使用序列号和确认应答机制来确保数据的可靠传输。发送方将每个数据包都标记上序列号，并等待接收方发送确认应答。接收方收到数据后，会发送确认应答，告诉发送方已成功接收到数据，如果发送方在一定时间内没有收到确认应答，则会重新发送数据。</li>
+<li><strong>超时重传：</strong> TCP 采用超时重传机制来处理丢失的数据包。如果发送方在一定时间内没有收到确认应答，则会认为数据包丢失，会重新发送该数据包。</li>
+<li><strong>滑动窗口：</strong> TCP 使用滑动窗口机制来进行流量控制和拥塞控制。滑动窗口指定了发送方可以发送的数据量，接收方通过发送窗口大小来告知发送方自己的接收能力。发送方根据接收窗口的大小来控制发送速率，以避免发送过多的数据导致接收方无法及时处理。</li>
+<li><strong>累积确认：</strong> TCP 使用累积确认机制来确认已成功接收的数据。接收方发送的确认应答中包含了已成功接收的数据的最大序列号，发送方根据该确认号来确认哪些数据已经被成功接收。</li>
+<li><strong>拥塞控制算法：</strong> TCP 使用拥塞控制算法来避免网络拥塞和过载。常见的拥塞控制算法包括慢启动、拥塞避免、快速重传和快速恢复等，通过动态调整发送窗口大小和数据包的发送速率来适应网络的负载情况，从而确保网络的稳定性和性能。</li>
+</ol>
+<h3 id="63-移动构造函数的使用场景是什么？"><a href="#63-移动构造函数的使用场景是什么？" class="headerlink" title="63.移动构造函数的使用场景是什么？"></a>63.移动构造函数的使用场景是什么？</h3><p>移动构造函数是 C++11 新增的特性，用于实现右值引用语义，可以将临时对象的资源有效地转移给目标对象，避免不必要的资源复制，提高程序的性能和效率。</p>
+<p>（1）容器元素的插入和移动</p>
+<p>（2）返回临时对象</p>
+<h3 id="64-c-在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？"><a href="#64-c-在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？" class="headerlink" title="64.c++在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？"></a>64.c++在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？</h3><p>在 C++ 中，返回局部对象时会发生返回值优化（Return Value Optimization，RVO）和命名返回值优化（Named Return Value Optimization，NRVO）。这些优化技术可以避免多次调用构造函数，提高程序的性能和效率。</p>
+<p>具体来说，当函数返回一个局部对象时，编译器可以将该对象直接构造在函数调用方的目标对象的位置上，而不是在函数内部创建一个局部对象然后再拷贝到目标对象中。这样就避免了额外的构造和拷贝操作。</p>
+<h3 id="65-tcp和udp的区别"><a href="#65-tcp和udp的区别" class="headerlink" title="65.tcp和udp的区别"></a>65.tcp和udp的区别</h3><p>TCP（Transmission Control Protocol）和UDP（User Datagram Protocol）是两种常见的传输层协议，它们在网络通信中有以下几点区别：</p>
+<ol>
+<li><strong>连接性：</strong><ul>
+<li>TCP 是面向连接的协议，通信双方在传输数据之前需要建立连接，数据传输完毕后需要断开连接。</li>
+<li>UDP 是无连接的协议，通信双方之间不需要建立持久的连接，每个数据包都是独立的，相互之间没有关联。</li>
+</ul>
+</li>
+<li><strong>可靠性：</strong><ul>
+<li>TCP 提供可靠的数据传输，保证数据的完整性和顺序性，通过确认应答机制和重传机制来确保数据的可靠传输。</li>
+<li>UDP 不提供可靠的数据传输，数据包可能会丢失、重复或者乱序，不保证数据的可靠性和顺序性。</li>
+</ul>
+</li>
+<li><strong>传输效率：</strong><ul>
+<li>TCP 的数据传输效率相对较低，因为它需要维护连接状态、实现可靠传输等机制，这些额外的开销会影响数据传输的效率。</li>
+<li>UDP 的数据传输效率相对较高，因为它是无连接的，并且不需要维护连接状态和实现可靠传输，适用于实时性要求较高的应用场景。</li>
+</ul>
+</li>
+<li><strong>应用场景：</strong><ul>
+<li>TCP 适用于要求数据传输安全可靠、顺序一致的应用，如网页浏览、文件传输、电子邮件等。</li>
+<li>UDP 适用于实时性要求较高、对数据可靠性要求不高的应用，如音视频传输、在线游戏、DNS 查询等。</li>
+</ul>
+</li>
+<li><strong>头部开销：</strong><ul>
+<li>TCP 头部开销较大，包含了序列号、确认号、窗口大小等字段，用于实现可靠传输和流量控制。</li>
+<li>UDP 头部开销较小，只包含了源端口、目标端口、长度和校验和字段，不包含额外的控制信息。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="数据库2_Redis数据库.md">
+      <i class="fa fa-chevron-left"></i> 数据库2_Redis数据库.md
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/08/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/" rel="next" title="毕设项目提问">
+      毕设项目提问 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A6%82%E4%BD%95%E7%9C%8B%E5%BE%85C-%E5%92%8CC%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-text">1.如何看待C++和C的关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%AE%B2%E4%B8%80%E4%B8%8B%E4%BB%80%E4%B9%88%E6%98%AF%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%EF%BC%9F"><span class="nav-text">2.讲一下什么是智能指针？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%8F%91%E7%94%9F%E7%9A%84%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="nav-text">3.循环引用是如何发生的？如何解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-shared-ptr%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%90%97%EF%BC%9F%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%BD%BF%E7%94%A8%E6%97%B6%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bstatic%E5%92%8Cconst%EF%BC%9F"><span class="nav-text">5.介绍一下static和const？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%A6%82%E4%BD%95%E8%AE%A9%E5%AF%B9%E8%B1%A1%E5%8F%AA%E8%83%BD%E5%AD%98%E5%9C%A8%E4%BA%8E%E6%A0%88-%E5%A0%86%E4%B8%AD%EF%BC%9F"><span class="nav-text">6.如何让对象只能存在于栈&#x2F;堆中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-new%E5%92%8Cmalloc%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">7.new和malloc的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B7%A6%E5%80%BC%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%B3%E5%80%BC%EF%BC%9F"><span class="nav-text">8.什么是左值，什么是右值？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E5%89%8D%E7%BD%AEc-%E8%BF%94%E5%9B%9E%E7%9A%84%E6%98%AF%E5%B7%A6%E5%80%BC%E8%BF%98%E6%98%AF%E5%8F%B3%E5%80%BC%EF%BC%9F%E5%90%8E%E7%BD%AEc-%E5%91%A2%EF%BC%9F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AD%97%E9%9D%A2%E9%87%8F%E5%91%A2%EF%BC%9F"><span class="nav-text">9.前置c++返回的是左值还是右值？后置c++呢？字符串字面量呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-%E4%BB%80%E4%B9%88%E6%98%AF%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%EF%BC%9F"><span class="nav-text">10.什么是左值引用和右值引用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%EF%BC%9F"><span class="nav-text">11.右值引用是如何提高性能的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%8F%AF%E8%83%BD%E4%BC%9A%E6%9C%89%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">12.移动构造函数可能会有什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-%E4%B8%80%E4%B8%AA%E7%94%B1C-C-%E7%BC%96%E8%AF%91%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83%EF%BC%88%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%89%EF%BC%9F"><span class="nav-text">13.一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%8A%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">14.不同段上的对象的生命周期是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">15.堆和栈的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%8C%87%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8C%85%E5%90%AB%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%90%97%EF%BC%9F"><span class="nav-text">16.内存模型是什么？是指可执行文件中包含这些东西吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17-c-%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E5%A4%9A%E6%80%81%E7%9A%84%EF%BC%9F"><span class="nav-text">17.c++是如何实现动态多态的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18-%E4%B8%80%E4%B8%AA%E7%B1%BB%E4%B8%AD%E6%9C%89%E5%87%A0%E4%B8%AA%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%EF%BC%9F%E4%B8%80%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%87%A0%E4%B8%AA%E8%99%9A%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%EF%BC%9F"><span class="nav-text">18.一个类中有几个虚函数表？一个类的对象有几个虚函数指针？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-%E4%B8%80%E4%B8%AA%E7%B1%BB%E7%9A%84%E8%99%9A%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88%E5%9C%A8%E7%B1%BB%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">19.一个类的虚函数指针在类中的内存分布是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20-%E4%BB%80%E4%B9%88%E6%98%AFICMP%EF%BC%9F"><span class="nav-text">20.什么是ICMP？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#21-%E4%BB%80%E4%B9%88%E6%98%AFTCP%E7%B2%98%E5%8C%85%EF%BC%9F"><span class="nav-text">21.什么是TCP粘包？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3TCP%E7%B2%98%E5%8C%85%EF%BC%9F"><span class="nav-text">22.如何解决TCP粘包？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-UDP%E4%BC%9A%E5%8F%91%E7%94%9F%E7%B2%98%E5%8C%85%E5%90%97%EF%BC%9F"><span class="nav-text">23.UDP会发生粘包吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-UDP%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%91%E7%94%9F%E4%B9%B1%E5%BA%8F%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">24.UDP为什么会发生乱序问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-%E5%A4%9A%E6%80%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">25.多态的实现原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-C-%E7%9A%84%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF%E6%8C%87%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">26.C++的菱形继承指什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E7%BD%AE%E6%88%90%E8%99%9A%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-text">27.析构函数为什么设置成虚函数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-C-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%A7%E5%B0%8F%E7%94%B1%E5%93%AA%E4%BA%9B%E5%9B%A0%E7%B4%A0%E5%86%B3%E5%AE%9A%EF%BC%9F"><span class="nav-text">28.C++对象的大小由哪些因素决定？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-TCP%E6%8C%A5%E6%89%8B%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%98%E5%9C%A8%E4%B8%80%E4%B8%AAtime-wait%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-text">29.TCP挥手过程中，为什么存在一个time_wait状态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E5%87%BA%E7%8E%B0%E5%A4%A7%E9%87%8Ftime-wait%E7%8A%B6%E6%80%81%EF%BC%9F%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-text">30.什么情况下会出现大量time_wait状态？如何优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#31-%E4%BB%8EC-%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%BB%8F%E8%BF%87%E4%BA%86%E5%93%AA%E5%87%A0%E4%B8%AA%E9%98%B6%E6%AE%B5%EF%BC%9F"><span class="nav-text">31.从C++文件到可执行文件经过了哪几个阶段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#32-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="nav-text">32.为什么需要有链接的过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#33-%E9%93%BE%E6%8E%A5%E8%BF%99%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">33.链接这个过程做了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#34-%E4%BB%80%E4%B9%88%E6%98%AFhash%E5%86%B2%E7%AA%81%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3hash%E5%86%B2%E7%AA%81%E7%9A%84%E5%8A%9E%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">34.什么是hash冲突，常见的解决hash冲突的办法是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#35-%E8%AF%B4%E4%B8%80%E4%B8%8B%E4%BD%A0%E5%AF%B9%E4%BA%8E%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="nav-text">35.说一下你对于内存对齐的理解？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#36-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%B8%A6%E6%9D%A5%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">36.内存对齐可能会带来哪些问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#37-%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%94%81%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">37.线程中的锁包含哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#38-%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%91%E7%94%9F%EF%BC%9F"><span class="nav-text">38.缺页中断什么时候发生？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#39-%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">39.常见的缺页中断算法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#40-%E4%BB%A3%E7%A0%81%E7%9A%84%E5%85%B1%E5%90%8C%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">40.代码的共同开发工具有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#41-%E5%81%87%E8%AE%BE%E6%9C%89%E4%B8%80%E4%B8%AAA-dll%E5%92%8CB-dll%EF%BC%8CA-dll%E8%B0%83%E7%94%A8%E4%BA%86B-dll%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8CA-dll%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0B-dll%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%E7%9A%84%EF%BC%9F"><span class="nav-text">41.假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42-vector%E7%9A%84%E6%89%A9%E5%AE%B9%E5%8E%9F%E7%90%86%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">42.vector的扩容原理是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43-map%E5%92%8Cset%E4%BF%9D%E5%AD%98%E7%9A%84%E5%85%83%E7%B4%A0%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">43.map和set保存的元素有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#44-map%E7%9A%84%E6%8F%92%E5%85%A5%E6%96%B9%E5%BC%8F%E5%92%8C%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">44.map的插入方式和访问方式有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45-explicit%E5%85%B3%E9%94%AE%E5%AD%97%E7%94%A8%E5%9C%A8%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%9F"><span class="nav-text">45.explicit关键字用在什么情况下？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#46-inline%E5%85%B3%E9%94%AE%E5%AD%97%E9%81%87%E5%88%B0%E8%BF%87%E5%90%97%EF%BC%9F%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%92%8C-define%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">46.inline关键字遇到过吗？作用是什么？和#define有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#47-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-text">47.引用计数的线程安全性怎么实现的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#48-%E5%A6%82%E6%9E%9C%E6%9C%89%E2%BC%80%E4%B8%AA%E5%9C%BA%E6%99%AF%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84shared-ptr%EF%BC%8C%E4%B8%80%E8%88%AC%E4%BD%A0%E4%BC%9A%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-text">48.如果有⼀个场景需要用到线程安全的shared_ptr，一般你会怎么做？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#49-%E8%AF%B4%E5%88%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7%EF%BC%8C%E5%9C%A8%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%EF%BC%8C%E4%BD%A0%E2%BC%80%E8%88%AC%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88%E2%BC%BF%E6%AE%B5%EF%BC%9F"><span class="nav-text">49.说到线程安全性，在语言层面，你⼀般使用什么⼿段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#50-make-shared%E5%92%8Cshared-ptr%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BAshared-ptr%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">50.make_shared和shared_ptr构造函数创建shared_ptr的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#51-%E5%A6%82%E6%9E%9C%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%BC%A0%E5%85%A5%E5%90%8C%E4%B8%80%E8%A3%B8%E6%8C%87%E9%92%88%E6%9E%84%E9%80%A0%E4%B8%A4%E4%B8%AAshared-ptr%E5%AF%B9%E8%B1%A1%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%E7%8E%B0%E8%B1%A1%EF%BC%9F"><span class="nav-text">51.如果构造函数传入同一裸指针构造两个shared_ptr对象，会发生什么现象？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52-%E8%BF%98%E6%98%AF%E4%B8%8A%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E4%BD%A0%E8%A7%89%E5%BE%97%E5%AF%B9%E4%BA%8E%E6%89%80%E8%B0%93%E7%9A%84%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0%E8%BF%99%E6%A0%B7%E7%9A%84%E7%8E%B0%E8%B1%A1%EF%BC%9F"><span class="nav-text">52.还是上面的问题，你觉得对于所谓的智能指针，为什么会出现这样的现象？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-%E5%BE%88%E5%A4%9A%E4%BA%BA%E8%AF%B4%E5%88%B0weak-ptr%E5%B0%B1%E4%BC%9A%E8%AF%B4%E6%98%AF%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8%EF%BC%8C%E4%BD%A0%E8%A7%89%E5%BE%97%E8%BF%99%E6%98%AF%E5%85%B3%E9%94%AE%E7%9A%84%E5%9B%A0%E7%B4%A0%E5%90%97%EF%BC%9F"><span class="nav-text">53.很多人说到weak_ptr就会说是为了解决循环引用，你觉得这是关键的因素吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#54-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F"><span class="nav-text">54.如何实现一个线程池？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55-%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5"><span class="nav-text">55.详细说明三握四挥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56-%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%BB%A5%E5%8F%8A%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E6%A6%82%E5%BF%B5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">56.进程和线程以及并发和并行的概念是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#57-tcp%E9%81%87%E5%88%B0%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E%E6%88%96%E8%80%85%E5%A4%A7%E6%B5%81%E9%87%8F%E7%9A%84%E6%83%85%E5%86%B5%E5%A6%82%E4%BD%95%E5%8E%BB%E5%81%9A%EF%BC%9F"><span class="nav-text">57.tcp遇到网络拥塞或者大流量的情况如何去做？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#58-https%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8A%A0%E5%AF%86%E7%9A%84%EF%BC%9F"><span class="nav-text">58.https是如何进行加密的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#59-%E9%81%87%E5%88%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BE%E4%BE%8B%E6%9D%A5%E8%AF%B4%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%96%E4%BB%AC%E4%B8%80%E8%88%AC%E4%BC%9A%E8%B0%83%E7%94%A8%E5%88%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%83%B3%E7%AD%89%E5%BE%85%E7%BA%BF%E7%A8%8Ba%E6%89%A7%E8%A1%8C%E5%AE%8C%E4%BB%BB%E5%8A%A1%E5%90%8E%E5%86%8D%E5%8E%BB%E6%89%A7%E8%A1%8Cb%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E8%A6%81%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-text">59.遇到多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#60-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%8Ccpu%E5%92%8C%E5%86%85%E5%AD%98%E4%BC%9A%E5%81%9A%E4%B8%80%E4%BA%9B%E4%BB%80%E4%B9%88%E5%A4%84%E7%90%86"><span class="nav-text">60.多线程切换，cpu和内存会做一些什么处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E5%92%8C%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="nav-text">61.流量控制和拥塞控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#62-Tcp%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E2%BC%8F%E7%A7%8D%E6%9C%BA%E5%88%B6"><span class="nav-text">62.Tcp可靠传输的⼏种机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-%E7%A7%BB%E5%8A%A8%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">63.移动构造函数的使用场景是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-c-%E5%9C%A8%E8%BF%94%E5%9B%9E%E2%BC%80%E4%B8%AA%E5%B1%80%E9%83%A8%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%A4%9A%E6%AC%A1%E8%B0%83%E2%BD%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%9A%84%EF%BC%8C%E8%BF%94%E5%9B%9E%E5%B1%80%E9%83%A8%E5%AF%B9%E8%B1%A1%E2%BC%80%E5%AE%9A%E4%BC%9A%E5%A4%9A%E6%AC%A1%E6%9E%84%E9%80%A0%E5%90%97%EF%BC%9F"><span class="nav-text">64.c++在返回⼀个局部对象的时候是如何避免多次调⽤构造函数的，返回局部对象⼀定会多次构造吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#65-tcp%E5%92%8Cudp%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">65.tcp和udp的区别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">64k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:54</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
