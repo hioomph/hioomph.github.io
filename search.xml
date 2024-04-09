@@ -14,6 +14,22 @@
       </categories>
   </entry>
   <entry>
+    <title>Ch2 信息的表示和处理</title>
+    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ch10 系统级I/O</title>
     <url>/2024/04/03/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
     <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
@@ -109,22 +125,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch2 信息的表示和处理</title>
-    <url>/2024/04/03/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Ch3 程序的机器级表示</title>
     <url>/2024/04/03/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
     <content><![CDATA[<h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1><span id="more"></span>
@@ -136,83 +136,6 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126892.png" alt="CSAPP Ch1-Ch3_11"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126616.png" alt="CSAPP Ch1-Ch3_12"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126789.png" alt="CSAPP Ch1-Ch3_13"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch5 优化程序性能</title>
-    <url>/2024/04/03/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><span id="more"></span>
-
-<h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><ul>
-<li><strong>如果编译器无法确定两个指针是否指向同一个位置，那么编译器会假设所有情况都有可能发生，反而限制了优化策略。</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380" style="zoom:33%;" />
-
-<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，如下图所示，此时add1 res&#x3D;4x，add2 res&#x3D;3x，因此不能将add2用于优化add1。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648" style="zoom:33%;" />
-
-<ul>
-<li><strong>函数调用影响优化策略</strong></li>
-</ul>
-<p>如下图所示，大多数编译器不会把func1优化为func2（注意func2返回0是因为counter为后++，先返回再++）。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021006812.png" alt="image-20240402100639099" style="zoom:33%;" />
-
-<h3 id="（2）优化方式"><a href="#（2）优化方式" class="headerlink" title="（2）优化方式"></a>（2）优化方式</h3><ul>
-<li><p>1）代码移动</p>
-<ul>
-<li>循环不变式外提，比如在执行for循环前先计算出数组长度；</li>
-</ul>
-</li>
-<li><p>2）优化函数调用</p>
-<ul>
-<li><p>举例：在循环中将函数get_vec_element变为直接数组访问，这样反而降低了效率，这是因为每次操作数组时需要两次读内存和一次写内存：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022591.png" alt="image-20240402102218521"></p>
-</li>
-<li><p>基于此再进行优化，设置临时变量，直到循环结束再写入，此时只需要一次读内存，性能得到了很大的提升：</p>
-<ul>
-<li><strong>这里的acc是临时变量， 通常情况下，临时变量会被保存在栈帧（栈帧是用来存储函数调用期间的局部变量和其他临时数据的一块内存区域）中， 由于 acc 在循环中频繁使用，并且在每次迭代中都需要更新，将其保存在寄存器中可以提高访问速度，避免了频繁的内存访问操作。寄存器的访问速度比内存更快，因此可以加快循环的执行速度；</strong></li>
-<li><strong>由于循环中的代码会被频繁执行，对循环内的变量进行优化以提高性能尤为重要。将累加器保存在寄存器中可以减少内存访问次数，从而提高代码的执行效率。</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022289.png" alt="image-20240402102255146" style="zoom:33%;" /></li>
-</ul>
-</li>
-</ul>
-<h2 id="2、现代处理器"><a href="#2、现代处理器" class="headerlink" title="2、现代处理器"></a>2、现代处理器</h2><p>在1的基础上，考虑利用处理器的微体系结构进行优化。现代处理器可以实现多指令并行。</p>
-<h3 id="（1）功能单元"><a href="#（1）功能单元" class="headerlink" title="（1）功能单元"></a>（1）功能单元</h3><ul>
-<li>指令控制单元（Instruction Control Unit，ICU）<ul>
-<li>从内存中读取指令序列并译码，之后进行一系列操作</li>
-<li>退役单元，控制着寄存器文件<ul>
-<li>若指令执行完毕，相应更新寄存器文件；</li>
-<li>若不该执行该条指令，则丢弃所有运算结果。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>执行单元（Execution Unit，EU）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021039315.png" alt="image-20240402103925031"></p>
-<h3 id="（2）功能单元的性能衡量指标"><a href="#（2）功能单元的性能衡量指标" class="headerlink" title="（2）功能单元的性能衡量指标"></a>（2）功能单元的性能衡量指标</h3><ul>
-<li>延迟（Latency）：完成运算需要的总时间</li>
-<li>发射（Isuue）：两次运算间间隔的最小周期数</li>
-<li>容量（Capacity）：执行该运算的功能单元的数量</li>
-</ul>
-<p>CPE&#x2F;Clocks Per Instruction，每条指令所需的时钟周期数，衡量计算机指令执行效率的一个指标。</p>
-<p>延迟界限和吞吐量界限的CPE值</p>
-<ul>
-<li>延迟界限：在给定的工作负载下，系统性能受到的主要限制是每个任务或指令的执行时间（延迟）的上限<ul>
-<li>对于任何必须严格按照顺序执行的合并运算，延迟界限给出了所需要的最小的CPE值</li>
-</ul>
-</li>
-</ul>
-<p>吞吐量界限：在给定的工作负载下，系统性能受到的主要限制是系统的总体吞吐量（Throughput）的上限</p>
-<ul>
-<li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
-<li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
-</ul>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -431,6 +354,83 @@
 </ul>
 <p>其他阶段和顺序设计相差不大，不再赘述。</p>
 <h2 id="6、流水线的控制逻辑"><a href="#6、流水线的控制逻辑" class="headerlink" title="6、流水线的控制逻辑"></a>6、流水线的控制逻辑</h2><h3 id="（1）加载-使用冒险"><a href="#（1）加载-使用冒险" class="headerlink" title="（1）加载&#x2F;使用冒险"></a>（1）加载&#x2F;使用冒险</h3><h3 id="（2）分支预测发生错误"><a href="#（2）分支预测发生错误" class="headerlink" title="（2）分支预测发生错误"></a>（2）分支预测发生错误</h3><h3 id="（3）返回阶段的处理"><a href="#（3）返回阶段的处理" class="headerlink" title="（3）返回阶段的处理"></a>（3）返回阶段的处理</h3>]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch5 优化程序性能</title>
+    <url>/2024/04/03/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><span id="more"></span>
+
+<h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><ul>
+<li><strong>如果编译器无法确定两个指针是否指向同一个位置，那么编译器会假设所有情况都有可能发生，反而限制了优化策略。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380" style="zoom:33%;" />
+
+<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，如下图所示，此时add1 res&#x3D;4x，add2 res&#x3D;3x，因此不能将add2用于优化add1。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648" style="zoom:33%;" />
+
+<ul>
+<li><strong>函数调用影响优化策略</strong></li>
+</ul>
+<p>如下图所示，大多数编译器不会把func1优化为func2（注意func2返回0是因为counter为后++，先返回再++）。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021006812.png" alt="image-20240402100639099" style="zoom:33%;" />
+
+<h3 id="（2）优化方式"><a href="#（2）优化方式" class="headerlink" title="（2）优化方式"></a>（2）优化方式</h3><ul>
+<li><p>1）代码移动</p>
+<ul>
+<li>循环不变式外提，比如在执行for循环前先计算出数组长度；</li>
+</ul>
+</li>
+<li><p>2）优化函数调用</p>
+<ul>
+<li><p>举例：在循环中将函数get_vec_element变为直接数组访问，这样反而降低了效率，这是因为每次操作数组时需要两次读内存和一次写内存：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022591.png" alt="image-20240402102218521"></p>
+</li>
+<li><p>基于此再进行优化，设置临时变量，直到循环结束再写入，此时只需要一次读内存，性能得到了很大的提升：</p>
+<ul>
+<li><strong>这里的acc是临时变量， 通常情况下，临时变量会被保存在栈帧（栈帧是用来存储函数调用期间的局部变量和其他临时数据的一块内存区域）中， 由于 acc 在循环中频繁使用，并且在每次迭代中都需要更新，将其保存在寄存器中可以提高访问速度，避免了频繁的内存访问操作。寄存器的访问速度比内存更快，因此可以加快循环的执行速度；</strong></li>
+<li><strong>由于循环中的代码会被频繁执行，对循环内的变量进行优化以提高性能尤为重要。将累加器保存在寄存器中可以减少内存访问次数，从而提高代码的执行效率。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022289.png" alt="image-20240402102255146" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="2、现代处理器"><a href="#2、现代处理器" class="headerlink" title="2、现代处理器"></a>2、现代处理器</h2><p>在1的基础上，考虑利用处理器的微体系结构进行优化。现代处理器可以实现多指令并行。</p>
+<h3 id="（1）功能单元"><a href="#（1）功能单元" class="headerlink" title="（1）功能单元"></a>（1）功能单元</h3><ul>
+<li>指令控制单元（Instruction Control Unit，ICU）<ul>
+<li>从内存中读取指令序列并译码，之后进行一系列操作</li>
+<li>退役单元，控制着寄存器文件<ul>
+<li>若指令执行完毕，相应更新寄存器文件；</li>
+<li>若不该执行该条指令，则丢弃所有运算结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行单元（Execution Unit，EU）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021039315.png" alt="image-20240402103925031"></p>
+<h3 id="（2）功能单元的性能衡量指标"><a href="#（2）功能单元的性能衡量指标" class="headerlink" title="（2）功能单元的性能衡量指标"></a>（2）功能单元的性能衡量指标</h3><ul>
+<li>延迟（Latency）：完成运算需要的总时间</li>
+<li>发射（Isuue）：两次运算间间隔的最小周期数</li>
+<li>容量（Capacity）：执行该运算的功能单元的数量</li>
+</ul>
+<p>CPE&#x2F;Clocks Per Instruction，每条指令所需的时钟周期数，衡量计算机指令执行效率的一个指标。</p>
+<p>延迟界限和吞吐量界限的CPE值</p>
+<ul>
+<li>延迟界限：在给定的工作负载下，系统性能受到的主要限制是每个任务或指令的执行时间（延迟）的上限<ul>
+<li>对于任何必须严格按照顺序执行的合并运算，延迟界限给出了所需要的最小的CPE值</li>
+</ul>
+</li>
+</ul>
+<p>吞吐量界限：在给定的工作负载下，系统性能受到的主要限制是系统的总体吞吐量（Throughput）的上限</p>
+<ul>
+<li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
+<li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
+</ul>
+]]></content>
       <categories>
         <category>计算机基础</category>
         <category>CSAPP</category>
@@ -870,6 +870,156 @@
       </categories>
   </entry>
   <entry>
+    <title>Ch8 异常控制流</title>
+    <url>/2024/04/03/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
+
+<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
+<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
+
+<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
+<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
+<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
+<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
+<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
+<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
+</ul>
+</li>
+</ul>
+<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
+<ul>
+<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
+<li>将控制交还给之前正在执行的指令</li>
+<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
+<li>终止程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
+<ul>
+<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
+</li>
+<li><p>陷阱（同步）</p>
+<ul>
+<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
+</li>
+<li><p>故障（同步）</p>
+<ul>
+<li>由错误情况引起，故障处理程序会尝试修复</li>
+<li>经典示例：缺页异常</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
+</li>
+<li><p>终止（同步）</p>
+<ul>
+<li>由不可恢复的致命错误导致</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
+</li>
+</ul>
+<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
+<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
+<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
+<ul>
+<li>区分并发和并行：<ul>
+<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
+<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
+<ul>
+<li><p>控制寄存器：描述进程当前的权限</p>
+</li>
+<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
+</li>
+<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
+</li>
+<li><p>上下文（Context）</p>
+<ul>
+<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
+</li>
+<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
+<ul>
+<li>保存当前进程的上下文；</li>
+<li>恢复某个先前被抢占进程的上下文；</li>
+<li>将控制传递给这个新恢复的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
+<li><p>进程的状态：运行、暂停、终止</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
+</ul>
+<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
+<ul>
+<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
+</li>
+<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
+<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
+<li><p>execve函数</p>
+<ul>
+<li><code>*argv[]</code>：参数列表</li>
+<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
+
+<ul>
+<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
+</ul>
+</li>
+<li><p>waitpid函数</p>
+<ul>
+<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
+<blockquote>
+<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
+<ol>
+<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
+<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
+<ul>
+<li>（1）pid &gt; 0<ul>
+<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
+</ul>
+</li>
+<li>（2）pid &#x3D; -1<ul>
+<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
+</ul>
+</li>
+<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
+</li>
+</ul>
+<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
+<ul>
+<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ch9 虚拟内存</title>
     <url>/2024/04/03/CSAPP_Ch9%20%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</url>
     <content><![CDATA[<h1 id="Ch9-虚拟内存"><a href="#Ch9-虚拟内存" class="headerlink" title="Ch9 虚拟内存"></a>Ch9 虚拟内存</h1><span id="more"></span>
@@ -1142,153 +1292,16 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch8 异常控制流</title>
-    <url>/2024/04/03/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
-    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
+    <title>MoCoDAD</title>
+    <url>/2024/04/08/MoCoDAD/</url>
+    <content><![CDATA[<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">├── config  <span class="comment">// 保存了三个数据集相关的配置文件</span></span><br><span class="line">│   ├── Avenue</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   ├── STC</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   └── UBnormal</span><br><span class="line">│      ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad_test.yaml</span><br><span class="line">│       └── mocodad_train.yaml</span><br><span class="line">├── environment.yaml  <span class="comment">// 该模型需要的库依赖</span></span><br><span class="line">├── eval_MoCoDAD.py</span><br><span class="line">├── predict_MoCoDAD.py</span><br><span class="line">├── train_MoCoDAD.py</span><br><span class="line">├── models</span><br><span class="line">│   ├── common</span><br><span class="line">│   │   └── components.py</span><br><span class="line">│   ├── gcae</span><br><span class="line">│   │   └── stsgcn.py</span><br><span class="line">│   ├── mocodad_latent.py</span><br><span class="line">│   ├── mocodad.py</span><br><span class="line">│   └── stsae</span><br><span class="line">│       ├── stsae.py</span><br><span class="line">│       └── stsae_unet.py</span><br><span class="line">└── utils</span><br><span class="line">    ├── argparser.py</span><br><span class="line">    ├── data.py</span><br><span class="line">    ├── dataset.py</span><br><span class="line">    ├── dataset_utils.py</span><br><span class="line">    ├── diffusion_utils.py</span><br><span class="line">    ├── ema.py</span><br><span class="line">    ├── eval_utils.py</span><br><span class="line">    ├── get_robust_data.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── model_utils.py</span><br><span class="line">    ├── preprocessing.py</span><br><span class="line">    └── tools.py</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
-<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>MoCoDAD &amp; MoCoDADlatent</p>
+<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> utils.dataset <span class="keyword">import</span> get_dataset_and_loader</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
-<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
-<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
-<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
-<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
-<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
-</ul>
-</li>
-</ul>
-<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
-<ul>
-<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
-<li>将控制交还给之前正在执行的指令</li>
-<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
-<li>终止程序</li>
-</ul>
-</li>
-</ul>
-<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
-<ul>
-<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
-</li>
-<li><p>陷阱（同步）</p>
-<ul>
-<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
-</li>
-<li><p>故障（同步）</p>
-<ul>
-<li>由错误情况引起，故障处理程序会尝试修复</li>
-<li>经典示例：缺页异常</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
-</li>
-<li><p>终止（同步）</p>
-<ul>
-<li>由不可恢复的致命错误导致</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
-</li>
-</ul>
-<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
-<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
-<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
-<ul>
-<li>区分并发和并行：<ul>
-<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
-<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
-<ul>
-<li><p>控制寄存器：描述进程当前的权限</p>
-</li>
-<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
-</li>
-<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
-</li>
-<li><p>上下文（Context）</p>
-<ul>
-<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
-</li>
-<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
-<ul>
-<li>保存当前进程的上下文；</li>
-<li>恢复某个先前被抢占进程的上下文；</li>
-<li>将控制传递给这个新恢复的进程。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
-<li><p>进程的状态：运行、暂停、终止</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
-</ul>
-<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
-<ul>
-<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
-</li>
-<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
-<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
-<li><p>execve函数</p>
-<ul>
-<li><code>*argv[]</code>：参数列表</li>
-<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
-
-<ul>
-<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
-</ul>
-</li>
-<li><p>waitpid函数</p>
-<ul>
-<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
-<blockquote>
-<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
-<ol>
-<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
-<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
-</ol>
-</blockquote>
-</li>
-<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
-<ul>
-<li>（1）pid &gt; 0<ul>
-<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
-</ul>
-</li>
-<li>（2）pid &#x3D; -1<ul>
-<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
-</ul>
-</li>
-<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
-</li>
-</ul>
-<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
-<ul>
-<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
-</ul>
-]]></content>
+<h2 id="EMA"><a href="#EMA" class="headerlink" title="EMA"></a>EMA</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> utils.ema <span class="keyword">import</span> EMACallback</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
+        <category>科研</category>
       </categories>
   </entry>
   <entry>
@@ -1354,16 +1367,6 @@
 ]]></content>
       <categories>
         <category>深度学习算法</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>MoCoDAD</title>
-    <url>/2024/04/08/MoCoDAD/</url>
-    <content><![CDATA[<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── assets</span><br><span class="line">│   ├── mocodad.jpg</span><br><span class="line">├── config</span><br><span class="line">│   ├── Avenue</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   ├── STC</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   └── UBnormal</span><br><span class="line">│      ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad_test.yaml</span><br><span class="line">│       └── mocodad_train.yaml</span><br><span class="line">├── environment.yaml</span><br><span class="line">├── eval_MoCoDAD.py</span><br><span class="line">├── models</span><br><span class="line">│   ├── common</span><br><span class="line">│   │   └── components.py</span><br><span class="line">│   ├── gcae</span><br><span class="line">│   │   └── stsgcn.py</span><br><span class="line">│   ├── mocodad_latent.py</span><br><span class="line">│   ├── mocodad.py</span><br><span class="line">│   └── stsae</span><br><span class="line">│       ├── stsae.py</span><br><span class="line">│       └── stsae_unet.py</span><br><span class="line">├── predict_MoCoDAD.py</span><br><span class="line">├── README.md</span><br><span class="line">├── train_MoCoDAD.py</span><br><span class="line">└── utils</span><br><span class="line">    ├── argparser.py</span><br><span class="line">    ├── data.py</span><br><span class="line">    ├── dataset.py</span><br><span class="line">    ├── dataset_utils.py</span><br><span class="line">    ├── diffusion_utils.py</span><br><span class="line">    ├── ema.py</span><br><span class="line">    ├── eval_utils.py</span><br><span class="line">    ├── get_robust_data.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── model_utils.py</span><br><span class="line">    ├── preprocessing.py</span><br><span class="line">    └── tools.py</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>科研</category>
       </categories>
   </entry>
   <entry>
@@ -1942,155 +1945,6 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Project 1 (Spring 2023)</title>
-    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
-    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
-<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
-<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
-<span id="more"></span>
-
-<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
-<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
-<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
-<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
-<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
-<p>错误代码处为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
-
-<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
-<p>修正后为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
-<p>错误代码：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
-<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
-
-<p>此时上述代码可修改为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
-
-<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
-<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
-<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
-<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
-<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
-</blockquote>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>NewPage</code>：<ul>
-<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
-<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>创建新<code>page</code>；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
-</li>
-<li><code>FetchPage</code>：<ul>
-<li>找<code>page_id</code>对应的页：<ul>
-<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
-<li>若找到，<code>pin_count_</code>自增；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
-</ul>
-</li>
-<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
-<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
-<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
-<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
-<li>写回内存（<code>page_table_</code>）。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>UnpinPage</code>：<ul>
-<li>若<code>page_id</code>不存在，直接返回；</li>
-<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并设置<code>frame</code>可驱逐；</li>
-<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
-<p>正确的顺序应该是：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
-<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
-<p>引起错误的代码行为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
-
-<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
-<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
-
-<h1 id="Task-3-Read-Write-Page-Guards"><a href="#Task-3-Read-Write-Page-Guards" class="headerlink" title="Task #3 - Read&#x2F;Write Page Guards"></a>Task #3 - Read&#x2F;Write Page Guards</h1><blockquote>
-<p>您将实现BasicPageGuard，它存储指向BufferPoolManager和Page对象的指针。页面保护确保在相应的page对象超出作用域时立即在其上调用UnpinPage。注意，它仍然应该为程序员提供一个方法来手动解除页面的锁定。</p>
-<p>由于BasicPageGuard隐藏了底层的Page指针，它还可以提供只读&#x2F;写数据api，提供编译时检查，以确保针对每种用例正确设置is_dirty标志。</p>
-<p>在未来的项目中，多个线程将从同一个页面读取和写入，因此需要读写锁存器来确保数据的正确性。请注意，在Page类中，有用于此目的的相关锁存方法。与页面的解锁类似，程序员在使用页面后可能会忘记解锁页面。为了缓解这个问题，你将实现ReadPageGuard和WritePageGuard，它们会在页面超出范围时自动解锁。</p>
-<p>你需要为所有的BasicPageGuard, ReadPageGuard和WritePageGuard实现以下函数。</p>
-<ul>
-<li><code>PageGuard(PageGuard &amp;&amp;that)</code> : Move constructor.</li>
-<li><code>operator=(PageGuard &amp;&amp;that)</code> : Move operator.</li>
-<li><code>Drop()</code> : Unpin and&#x2F;or unlatch.</li>
-<li><code>~PageGuard()</code> : Destructor.</li>
-</ul>
-<p>使用新的页面保护，在BufferPoolManager中实现以下wrappers。</p>
-<ul>
-<li><code>FetchPageBasic(page_id_t page_id)</code></li>
-<li><code>FetchPageRead(page_id_t page_id)</code></li>
-<li><code>FetchPageWrite(page_id_t page_id)</code></li>
-<li><code>NewPageGuarded(page_id_t *page_id)</code></li>
-</ul>
-</blockquote>
-<p>这个<code>task</code>的重点就是实现移动构造、移动幅值、<code>Drop</code>和析构这四个函数。</p>
-<h1 id="GradeScope在线测试"><a href="#GradeScope在线测试" class="headerlink" title="GradeScope在线测试"></a>GradeScope在线测试</h1><h2 id="1、LRUKReplacerTest-Evict"><a href="#1、LRUKReplacerTest-Evict" class="headerlink" title="1、LRUKReplacerTest.Evict"></a>1、LRUKReplacerTest.Evict</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19: /autograder/source/bustub/test/buffer/grading_lru_k_replacer_test.cpp:276: Failure</span><br><span class="line">19: Expected equality of these values:</span><br><span class="line">19:   i</span><br><span class="line">19:     Which is: 100</span><br><span class="line">19:   result</span><br><span class="line">19:     Which is: 0</span><br><span class="line">19: Check your return value behavior for LRUKReplacer::Evict</span><br></pre></td></tr></table></figure>
-
-<p>这个问题我真的研究了很久，本地测试和前面的一大部分在线测试都可以过，但是就是卡在这里。后来查了很久，知乎上有一个博主说是发现他的<code>LRUKReplacer::Remove</code>。于是我去检查了我的<code>Remove</code>函数，发现我也没有写完……我只在<code>node_store_</code>中进行了删除，而没有在<code>node_less_k_</code>或者<code>node_more_k_</code>中删除，补上后这个测试就通过了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (it-&gt;second-&gt;is_evictable_) &#123;</span><br><span class="line">      <span class="comment">// 该帧为可驱逐状态，继续操作</span></span><br><span class="line">      it-&gt;second-&gt;history_.<span class="built_in">clear</span>();</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      <span class="keyword">if</span> (it-&gt;second-&gt;pos_ != node_less_k_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        node_less_k_.<span class="built_in">erase</span>(it-&gt;second-&gt;pos_);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        node_more_k_.<span class="built_in">erase</span>(it-&gt;second);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      node_store_.<span class="built_in">erase</span>(it);</span><br><span class="line">      curr_size_--;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2、BufferPoolManagerTest-UnpinPage"><a href="#2、BufferPoolManagerTest-UnpinPage" class="headerlink" title="2、BufferPoolManagerTest.UnpinPage"></a>2、BufferPoolManagerTest.UnpinPage</h2><h3 id="DeletePage"><a href="#DeletePage" class="headerlink" title="DeletePage"></a>DeletePage</h3><p>[*]Bug:</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">------------------------------------------</span><br><span class="line"><span class="number">7</span>: UnpinPage: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: --- Before UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">2</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">0</span>, frame_id: <span class="number">0</span>, pin_count: <span class="number">1</span>, page_data: page0</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:</span><br><span class="line"><span class="number">7</span>: </span><br><span class="line"><span class="number">7</span>: --- After UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">1</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:  <span class="comment">// free_list的更新出错</span></span><br></pre></td></tr></table></figure>
-
-<p>要在DeletePage中实现将不再使用的frame从Replacer中删除，并重新放入free_list中</p>
-<h3 id="NewPage"><a href="#NewPage" class="headerlink" title="NewPage"></a>NewPage</h3><ul>
-<li>通过evict获取frame时，要先删除其上的old page</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page_table_.<span class="built_in">erase</span>(pages_[frame_id].page_id_);  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="FetchPage"><a href="#FetchPage" class="headerlink" title="FetchPage"></a>FetchPage</h3><ul>
-<li><p>同NewPage，通过evict获取frame时，要先删除其上的old page；</p>
-</li>
-<li><p>若在内存中没找到对应的page，而需要从disk中获取时，注意除了要在page_table中绑定page_id和frame_id，还要在pages_对象中更新page_id和frame_id的绑定关系</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].page_id_ = page_id;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在fetch一个page后，更新其dirty状态为false，因为此时的page刚从disk写完数据</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].is_dirty_ = <span class="literal">false</span>;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="3、BufferPoolManagerTest-ConcurrencyTest"><a href="#3、BufferPoolManagerTest-ConcurrencyTest" class="headerlink" title="3、BufferPoolManagerTest.ConcurrencyTest"></a>3、BufferPoolManagerTest.ConcurrencyTest</h2><p>问题出在每个函数的加锁写在了日志打印后面，因此出现并发错误。</p>
-<h2 id="4、PageGuardTest-DropTest-PageGuardTest-MoveTest"><a href="#4、PageGuardTest-DropTest-PageGuardTest-MoveTest" class="headerlink" title="4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest"></a>4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest</h2><blockquote>
-<p>PageGuardTest.DropTest (0&#x2F;8)<br>PageGuardTest.MoveTest (0&#x2F;8)<br>PageGuardTest.BPMTest (0&#x2F;9)</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403241940804.png" alt="image-20240324194001569"></p>
-<p>经过研究，我重写了PageGuard.cpp中几个函数的逻辑：</p>
-<h3 id="BasicPageGuard"><a href="#BasicPageGuard" class="headerlink" title="BasicPageGuard"></a>BasicPageGuard</h3><h4 id="（1）Drop"><a href="#（1）Drop" class="headerlink" title="（1）Drop()"></a>（1）Drop()</h4><p>忘记了对bpm_重置为nullptr;</p>
-<h4 id="（2）operator-BasicPageGuard-that"><a href="#（2）operator-BasicPageGuard-that" class="headerlink" title="（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)</h4><p>注意要先调用<code>Drop()</code>来drop掉当前的old guarded page，然后再进行资源转移。</p>
-<h3 id="ReadPageGuard"><a href="#ReadPageGuard" class="headerlink" title="ReadPageGuard"></a>ReadPageGuard</h3><h4 id="（1）ReadPageGuard-ReadPageGuard-that"><a href="#（1）ReadPageGuard-ReadPageGuard-that" class="headerlink" title="（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)"></a>（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)</h4><p>虽然.cpp文件中写的是<code>=default</code>，但.h文件中又要求实现，所以还是实现了一下。</p>
-<h4 id="（2）operator-ReadPageGuard-that"><a href="#（2）operator-ReadPageGuard-that" class="headerlink" title="（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)</h4><p>这里我最开始只调用了<code>std::move(that.guard_)</code>，实际上应该1)先在page_不为空时进行解读锁；2)然后进行资源转移。</p>
-<h4 id="（3）Drop"><a href="#（3）Drop" class="headerlink" title="（3）Drop()"></a>（3）Drop()</h4><p>这里和重载移动赋值运算符一样，最开始只调用了<code>Drop()</code>，而实际上也应该先解读锁。</p>
-<h3 id="WritePageGuard"><a href="#WritePageGuard" class="headerlink" title="WritePageGuard"></a>WritePageGuard</h3><p>和ReadPageGuard同理。</p>
-<p>最后，历时许久，第一个Project终于通过了！</p>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>vscode相关</title>
     <url>/2023/08/01/vscode%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
@@ -2275,371 +2129,152 @@
       </categories>
   </entry>
   <entry>
-    <title>毕设项目提问</title>
-    <url>/2024/04/08/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/</url>
-    <content><![CDATA[<p>面试官早上好！我是颜鼎鼎，本科就读于成都理工大学通信工程专业，硕士就读于重庆理工大学电子信息专业。在校期间学习成绩良好，名列班级前10%。项目经历是本科毕设的多用户智能控制系统设计，基于Qt平台开发Android客户端，同时基于MySQL数据库及多线程编程技术完成多用户操作，并利用MQTT通信协议实现了Android客户端与嵌入式控制终端之间的信息交互。在校期间我曾多次获得各类竞赛奖项及奖学金。我希望能够拥有一段实习经历来丰富自己的简历，感谢给我这次面试的机会，期待和您的进一步交流！</p>
-<h2 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h2><p>名称：<strong>多用户智能家居控制系统设计</strong>。</p>
-<p>1、 基于Linux多线程编程，结合MQTT协议的订阅-发布模式，完成多用户智能控制；</p>
-<p>2、 在用户端设计双模式。共享模式：多个用户同时控制，且共享当前设备的状态；私人模式：被控制端的某一功能同一时间只能由一个用户控制；</p>
-<p>3、 采用MQTT协议进行数据传送。通过实验对比HTTP协议和MQTT协议在智能家居领域的应用，结果表明MQTT在降低功耗和推送功能开发上优势明显，其即便是在资源有限的环境中也能易于使用。</p>
-<p><strong>根据MQTT的基本原理，将智能家居控制系统分为三部分，即发布者、消息代理者以及订阅者：</strong></p>
-<p>1、 发布者由多个安卓客户端构成，每个安卓客户端发出独立的控制指令；</p>
-<p>2、 消息代理者是部署了通信协议的云服务器，其主要负责将客户端的控制指令转发给开发板，以实现的对应的功能操作；</p>
-<p>3、 订阅者是iTop4412开发板，包括其LED、警报及温度传感器等功能。</p>
-<p><strong>本项目的重点与核心在实现客户端的多用户控制。</strong></p>
-<p>1、 针对发布者，利用Qt开发平台设计手机App作为客户端，它有两个特点，分别是多用户和双模式。多用户指不同的客户端均可进行控制操作；双模式指针对客户端本身，有共享模式和私人模式两种，在共享模式下可实现多个用户同时控制，且共享当前设备的状态；在私人模式下被控制端的某一功能同一时间只能由一个用户控制；</p>
-<p>2、 针对消息代理者，选择在阿里云上部署mosquitto。选用MQTT协议的原因已在前述加以说明，而由于mosquitto是一种流行的mqtt服务器，且易于安装和配置，因此选用mosquitto进行部署；</p>
-<p>3、 针对订阅者，主要以iTop4412开发板作为功能实现端。同时基于Linux多线程来配合实现多用户控制。</p>
-<p><strong>本项目的数据转发过程如下。</strong></p>
-<p>每个安卓客户端是基于其特定的主题实现对开发板的控制。客户端发出的控制指令将以json数据的格式被封装，经mosquitto云服务器转发后送至开发板侧，开发板读取json包，解析出对应的命令行指令，对相应的硬件进行控制。</p>
-<h2 id="二、相关问题"><a href="#二、相关问题" class="headerlink" title="二、相关问题"></a>二、相关问题</h2><ol>
-<li><strong>为什么选择Linux作为多用户智能家居控制系统的操作系统？</strong><ul>
-<li>Linux是一个开源的操作系统，具有良好的稳定性和安全性，适合于嵌入式系统和服务器端应用，并且支持多线程编程，能够满足项目的需求。</li>
+    <title>cmu15-445 Project 1 (Spring 2023)</title>
+    <url>/2024/03/02/cmu15-445%20Project%201%20(Spring%202023)/</url>
+    <content><![CDATA[<h1 id="Task-1-LRU-K-Replacement-Policy"><a href="#Task-1-LRU-K-Replacement-Policy" class="headerlink" title="Task #1 - LRU-K Replacement Policy"></a>Task #1 - LRU-K Replacement Policy</h1><p>跟踪缓冲池中页面的使用情况，用于记录、更新以及删除页<code>(frame)</code>。</p>
+<p><code>src/include/buffer/lru_k_replacer.h</code>  &#x3D;&#x3D;&gt; 实现<code>LRUKReplacer</code>的新类，且独立</p>
+<p><code>src/buffer/lru_k_replacer.cpp</code> &#x3D;&#x3D;&gt; 对应实现，实现<code>LRU-K</code>替换策略。</p>
+<span id="more"></span>
+
+<p><code>LRU-K</code>将替换帧中<code>backward k-distance</code>最大的帧剔除。<code>backward k-distance</code>计算的是当前时间戳与前<code>k</code>次访问的时间戳之差。</p>
+<p>历史链表：记录出现的历史时间戳，新的时间戳追加到链表尾部；</p>
+<p><code>k-distance</code>：若出现此时小于<code>k</code>，则为无穷大；若大于等于<code>k</code>，则对应为历史链表头部；</p>
+<p>驱逐方法：1）优先驱逐<code>k-distance</code>为无穷大的页，且按照<code>FIFO</code>的策略进行驱逐；2）若无无穷大的页，则驱逐<code>k-distance</code>最小的页（说明其倒数第<code>k</code>次出现最遥远，时间局部性更弱）。</p>
+<h2 id="Task1踩坑处"><a href="#Task1踩坑处" class="headerlink" title="Task1踩坑处"></a>Task1踩坑处</h2><h3 id="（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0"><a href="#（1）-15634-ERROR-AddressSanitizer-attempting-free-on-address-which-was-not-malloc-ed-0x7ffd62284260-in-thread-T0" class="headerlink" title="（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0"></a>（1）&#x3D;&#x3D;15634&#x3D;&#x3D;ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffd62284260 in thread T0</h3><p>表明在试图释放一个未经 malloc 分配的地址。</p>
+<p>错误代码处为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">node.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">node.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node)); </span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;node);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">node_more_k_.<span class="built_in">erase</span>(node_more_k_.<span class="built_in">find</span>(&amp;node));  <span class="comment">// here</span></span><br></pre></td></tr></table></figure>
+
+<p>在 C++ 的 <code>std::set</code> 中，<code>erase</code> 函数会删除指定的元素，但不会直接释放其内存。相反，它会调用元素类型的析构函数，然后将元素从 <code>std::set</code> 中移除。然而这里尝试擦除的是一个指向局部对象 <code>node</code> 的指针，而不是指向 <code>std::set</code> 中元素的指针。一旦 <code>node</code> 超出作用域，其地址将变为无效地址。因此，这样的写法可能导致悬垂指针问题，当再次访问 <code>node_more_k_</code> 时，可能会引发未定义行为或崩溃。</p>
+<p>修正后为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// history 已满，更新 history</span></span><br><span class="line">LRUKNode&amp; tmp = node;</span><br><span class="line">node_more_k_.<span class="built_in">erase</span>(&amp;node);</span><br><span class="line"><span class="comment">// 更新 more</span></span><br><span class="line">tmp.history_.<span class="built_in">pop_front</span>();</span><br><span class="line">tmp.history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">node_more_k_.<span class="built_in">insert</span>(&amp;tmp);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks"><a href="#（2）-17474-ERROR-LeakSanitizer-detected-memory-leaks" class="headerlink" title="（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks"></a>（2）&#x3D;&#x3D;17474&#x3D;&#x3D;ERROR: LeakSanitizer: detected memory leaks</h3><p>表明存在内存泄漏问题。</p>
+<p>错误代码：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果在node_store_中没有找到对应的元素，创建一个新的LRUKNode</span></span><br><span class="line"><span class="keyword">auto</span> *new_node = <span class="keyword">new</span> <span class="built_in">LRUKNode</span>();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = *new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id].pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，由于<code>node_store_</code> 的声明是 <code>std::unordered_map&lt;frame_id_t, LRUKNode&gt;</code>，这表示它存储的是 <code>LRUKNode</code> 对象的副本而不是指针。因此在使用<code>new</code>运算符分配内存后，将对象的副本赋值给了<code>node_store_[frame_id]</code>，而不是直接将指针存储在<code>node_store_</code>中。</p>
+<p>改正的方式是直接存储指向动态分配的对象的指针，而不是对象的副本。同时，应该考虑采用智能指针。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::unordered_map&lt;<span class="type">frame_id_t</span>, std::shared_ptr&lt;LRUKNode&gt;&gt; node_store_;</span><br><span class="line">std::list&lt;std::shared_ptr&lt;LRUKNode&gt;&gt; node_less_k_;  <span class="comment">// 访问 k 次以下的页面，FIFO 队列</span></span><br><span class="line">std::set&lt;std::shared_ptr&lt;LRUKNode&gt;, MyCompare&gt; node_more_k_;  <span class="comment">// 访问 k 次以上的页面，LRU 队列</span></span><br></pre></td></tr></table></figure>
+
+<p>此时上述代码可修改为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">auto</span> new_node = std::<span class="built_in">make_shared</span>&lt;LRUKNode&gt;();</span><br><span class="line">new_node-&gt;fid_ = frame_id;</span><br><span class="line">new_node-&gt;history_.<span class="built_in">push_back</span>(current_timestamp_);</span><br><span class="line">new_node-&gt;k_ = <span class="keyword">this</span>-&gt;k_;</span><br><span class="line"></span><br><span class="line">node_store_[frame_id] = new_node;</span><br><span class="line">node_less_k_.<span class="built_in">insert</span>(node_less_k_.<span class="built_in">end</span>(), new_node);</span><br><span class="line">node_store_[frame_id]-&gt;pos_ = std::<span class="built_in">prev</span>(node_less_k_.<span class="built_in">end</span>());</span><br></pre></td></tr></table></figure>
+
+<h1 id="Task-2-Buffer-Pool-Manager"><a href="#Task-2-Buffer-Pool-Manager" class="headerlink" title="Task #2 - Buffer Pool Manager"></a>Task #2 - Buffer Pool Manager</h1><blockquote>
+<p><code>BufferPoolManager</code>负责从<code>DiskManager</code>抓取数据库页面并将其存储到内存中。<code>BufferPoolManager</code>还可以在收到明确指示或需要删除页面以便为新页面腾出空间时，将脏页面写入磁盘。</p>
+<p>实际读取和写入磁盘数据的代码已经写好，不需要自己实现（<code>DiskManager</code>）。</p>
+<p>系统中的所有内存页面都由<code>Page</code>对象表示。缓冲池管理器无需了解这些页面的内容。但作为系统开发人员，您必须明白，<code>Page</code>对象只是缓冲池中内存的容器，因此并不特定于某个页面。也就是说，每个页面对象都包含一个内存块，<code>DiskManager</code>将把它用作从磁盘读取物理页面内容的复制位置。<strong>缓冲池管理器（<code>BufferPoolManager</code>）会重复使用同一个页面对象来存储数据，因为数据会在磁盘上来回移动。这意味着，在系统的整个生命周期中，同一个页面对象可能包含不同的物理页面。</strong>页面对象的标识符（<code>page_id</code>）可追踪其包含的物理页面；如果页面对象不包含物理页面，则其<code>page_id</code>必须设置为<code>INVALID_PAGE_ID</code>。每个页面对象还维护一个计数器，用于记录 “钉住 “该页面的线程数。缓冲池管理器不允许释放被钉住的页面。每个页面对象也会记录它是否变脏。你的工作就是记录页面在解除固定前是否被修改过。<code>BufferPoolManager</code>必须先将脏页面的内容写回磁盘，然后才能重新使用该对象。</p>
+<p>您的<code>BufferPoolManager</code>实现将使用您在本作业前几步中创建的<code>LRUKReplacer</code>类。<code>LRUKReplacer</code>将跟踪页面对象被访问的时间，以便在必须释放帧以腾出空间从磁盘复制新的物理页面时，决定驱逐哪个页面对象。在<code>BufferPoolManager</code>中将<code>page_id</code>映射到<code>frame_id</code>时，请再次注意 STL 容器不是线程安全的。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Page *pages_;  <span class="comment">// 数组，索引为frame_id</span></span><br><span class="line">std::unordered_map&lt;<span class="type">page_id_t</span>, <span class="type">frame_id_t</span>&gt; page_table_;  <span class="comment">// 即内存，存放page_id与frame_id的映射</span></span><br><span class="line">std::unique_ptr&lt;LRUKReplacer&gt; replacer_;</span><br><span class="line">std::list&lt;<span class="type">frame_id_t</span>&gt; free_list_;  <span class="comment">// 记录哪些位置为空</span></span><br><span class="line">std::mutex latch_;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>NewPage</code>：<ul>
+<li>先在内存里(<code>free_list_</code>)找到一个空<code>frame</code>;</li>
+<li>若没有，则替换出一个可驱逐的<code>replacement frame</code>，并更新访问历史和不可驱逐状态，注意若包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>创建新<code>page</code>；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
 </ul>
 </li>
-<li><strong>在Linux中，如何使用多线程编程实现并发处理？项目中是如何实现的？</strong><ul>
-<li><strong>pthread库：</strong> pthread库是POSIX标准定义的线程库，在Linux系统中得到广泛支持。通过pthread库，可以创建、管理和同步线程，实现并发处理。具体包括以下几个步骤：<ul>
-<li>包含头文件 <code>pthread.h</code>。</li>
-<li>使用 <code>pthread_create</code> 函数创建线程。</li>
-<li>在线程函数中实现具体的处理逻辑。</li>
-<li>使用 <code>pthread_join</code> 函数等待线程结束并回收资源。</li>
-<li>使用互斥锁（pthread_mutex）、条件变量（pthread_cond）等进行线程同步和通信。</li>
+<li><code>FetchPage</code>：<ul>
+<li>找<code>page_id</code>对应的页：<ul>
+<li>先在<code>page_table_</code>中查找是否有<code>page_id</code>对应的页：<ul>
+<li>若找到，<code>pin_count_</code>自增；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
 </ul>
 </li>
-<li>在项目中，主要通过编写多线程的C程序来实现。其主要功能是创建两个线程，一个用于订阅MQTT消息，即sub_thread，另一个用于发布MQTT消息，即pub_thread。同时在主线程等待这两个线程的结束。<ul>
-<li><code>sub_thread</code>函数首先通过<code>pthread_mutex_lock</code>获取互斥锁，接着创建一个mosquitto客户端并连接到指定的MQTT服务器，配置连接回调函数和消息接收回调函数，最后调用<code>mosquitto_loop_forever</code>函数来循环接收消息。当业务结束时，释放互斥锁并退出线程。<ul>
-<li>回调函数是在特定事件发生时自动调用的函数，用于处理相应的事件或数据。在sub_thread中调用了mosquitto库提供的mosquitto_connect_callback_set和 mosquitto_message_callback_set。</li>
-</ul>
-</li>
-<li><code>pub_thread</code>函数操作和sub_thread类似，但不需要对其进行加锁操作。在成功建立连接后，进入一个死循环，在循环中创建一个JSON格式的消息并发布到指定的主题。</li>
-<li>在<code>main</code>函数中使用了<code>pthread_create</code>函数来创建线程，并使用<code>pthread_join</code>函数来等待线程结束。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>MQTT协议与HTTP协议相比，有何优势？为什么选择MQTT协议进行数据传送？</strong><ul>
-<li>MQTT协议相比HTTP协议在降低功耗和推送功能开发上具有明显优势，适合于资源有限的环境和实时数据传输的场景。因此选择MQTT协议进行数据传送。</li>
-</ul>
-</li>
-<li><strong>如何使用Qt开发平台设计手机App？</strong><ul>
-<li>使用Qt Creator工具进行开发，利用Qt提供的QML语言和Qt Quick控件进行界面设计和开发，同时通过C++语言编写业务逻辑代码。</li>
-</ul>
-</li>
-<li><strong>介绍一下阿里云上部署mosquitto的过程。</strong><ul>
-<li>在阿里云上安装mosquitto，配置mosquitto的配置文件，设置端口号和用户名密码等参数，启动mosquitto服务，配置防火墙规则允许外部访问。</li>
-<li>MQTT服务器的端口号通常是1883。</li>
-</ul>
-</li>
-<li><strong>如何在iTop4412开发板上实现对控制指令的接收和执行？</strong><ul>
-<li>通过Linux多线程编程，在iTop4412开发板上创建一个线程来监听MQTT服务器发送的控制指令，接收到指令后解析并执行对应的命令。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何使用JSON格式封装控制指令？</strong><ul>
-<li>使用 <code>cJSON_CreateObject()</code> 函数创建一个空的JSON对象。</li>
-<li>使用 <code>cJSON_AddNumberToObject()</code> 函数向JSON对象中添加一个键值对，键为 “temp”，值为一个随机生成的温度值 <code>a</code>。</li>
-<li>使用 <code>cJSON_Print()</code> 函数将JSON对象打印成JSON格式的字符串，并将其赋值给 <code>json_buf</code>。</li>
-<li>使用 <code>mosquitto_publish()</code> 函数将JSON字符串发布到MQTT服务器上的主题为 “temp” 的通道中。</li>
-</ul>
-</li>
-<li><strong>如何通过mosquitto服务器将客户端的控制指令转发给iTop4412开发板？</strong><ul>
-<li>在mosquitto服务器上配置相应的主题和订阅关系，客户端发布控制指令到对应的主题，mosquitto服务器将控制指令转发给iTop4412开发板的订阅者。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何处理并发访问问题？</strong><ul>
-<li>订阅者线程（<code>sub_thread</code>）需要访问共享资源，涉及到订阅者之间的状态共享或者资源竞争，因此需要使用互斥锁来保护共享资源的访问，确保线程安全。</li>
-<li>而发布者线程（<code>pub_thread</code>）只是简单地发布消息，没有涉及到共享资源的修改或竞争条件，因此不需要使用互斥锁。只是在程序结束时释放资源。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何实现共享模式和私人模式的切换？</strong><ul>
-<li>通过界面设计和用户交互实现切换按钮或选项卡，根据用户选择的模式来设置相应的控制权限和功能。</li>
-</ul>
-</li>
-<li><strong>在iTop4412开发板上，如何解析JSON格式的控制指令并执行相应的功能操作？</strong><ul>
-<li>使用第三方JSON库cJSON在Linux环境下解析JSON格式的控制指令，提取出对应的命令参数，然后调用相应的系统调用或执行命令行来控制硬件设备。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何实现用户认证和权限管理？</strong><ul>
-<li>在安卓客户端上实现用户登录和注册功能。将用户信息存储在MySQL数据库上，在登陆查询当前用户是否属于该数据库，以及用户名与密码是否匹配；若不存在，可进行注册操作。</li>
-<li>由于本设计要访问特定公网的阿里云服务器上的数据库，因此在Qt开发平台上需要首先提供所需要的驱动插件之后，再利用QSqlDatabase来处理与数据库的连接，利用QSqlQuery类来执行底层数据库支持的任何SQL语句。</li>
-</ul>
-</li>
-<li><strong>如何保证系统的稳定性和可靠性？</strong><ul>
-<li>采用日志记录功能来记录系统运行状态和处理异常情况，同时进行定期的系统监控和维护。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何实现界面的实时更新和数据同步？</strong><ul>
-<li>使用信号与槽机制： 在Qt中，通过信号与槽机制实现对象之间的通信。当数据发生变化时，可以通过信号发送变化的消息，然后在界面组件中连接相应的槽函数来更新界面。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何实现系统的扩展性和灵活性？</strong><ul>
-<li>采用模块化设计，将系统功能拆分为独立的模块，支持动态加载和卸载，从而实现系统的扩展性和灵活性。</li>
-</ul>
-</li>
-<li><strong>在iTop4412开发板上，如何实现硬件设备的驱动和控制？</strong><ul>
-<li>通过 MQTT 实现硬件设备的驱动和控制：<ul>
-<li>当用户在 UI 上进行操作时，比如点击 LED 开关按钮，UI 触发对应的槽函数，如 <code>on_ledBt_ON_1_clicked()</code>。</li>
-<li>在槽函数中构造一个JSON 数据包，其中包含了需要控制的硬件设备信息，比如 LED 的状态。然后将这个 JSON 数据包发布到 MQTT 主题上，通过 MQTT 协议发送给 MQTT 服务器。</li>
-<li>在硬件设备端，通过订阅相应的 MQTT 主题，监听来自 MQTT 服务器的消息。</li>
-<li>当硬件设备端接收到相应的消息后，解析 JSON 数据包，获取到控制指令，并执行相应的操作，例如打开或关闭 LED。</li>
+<li>若内存没有，则在<code>disk</code>中找，并在内存中腾出一个空位（<code>replacer_</code>）：<ul>
+<li>若<code>replacement frame</code>包含<code>dirty page</code>，则先将脏数据写回<code>disk</code>；</li>
+<li>更新<code>frame</code>的访问历史，设置不可驱逐状态；</li>
+<li>在<code>disk</code>中读取该<code>page</code>的内容并写入；</li>
+<li>写回内存（<code>page_table_</code>）。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>该项目还有哪些可以改进的地方？</strong><ul>
-<li>可以在mosquitto服务器上配置TLS&#x2F;SSL加密通信，客户端和服务器之间通过证书验证进行安全连接，防止数据被窃取或篡改。确保安卓客户端与mosquitto服务器之间的通信安全性。</li>
-<li>此外，对于多线程部分我觉得还可以再考虑细化锁的粒度，以及进行RAII技术管理互斥锁，避免在某些异常情况下未释放锁导致资源泄露问题。</li>
 </ul>
 </li>
-</ol>
+<li><code>UnpinPage</code>：<ul>
+<li>若<code>page_id</code>不存在，直接返回；</li>
+<li>若存在，但<code>unpin</code>后<code>pin_count_</code>为<code>0</code>，也直接返回，并设置<code>frame</code>可驱逐；</li>
+<li>除此之外，注意此处应该为：<code>pages_[frame_id].is_dirty_ |= is_dirty;</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Task2踩坑处"><a href="#Task2踩坑处" class="headerlink" title="Task2踩坑处"></a>Task2踩坑处</h2><h3 id="（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body"><a href="#（1）unknown-file-Failure-C-exception-with-description-“The-id-not-found-in-cache”-thrown-in-the-test-body" class="headerlink" title="（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body."></a>（1）unknown file: Failure C++ exception with description “The id not found in cache” thrown in the test body.</h3><p>一个很粗心的错误，那就是<code>RecordAccess</code>和<code>SetEvictable</code>的顺序搞反了。</p>
+<p>正确的顺序应该是：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">replacer_-&gt;<span class="built_in">RecordAccess</span>(frame_id);</span><br><span class="line">replacer_-&gt;<span class="built_in">SetEvictable</span>(frame_id, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、"><a href="#（2）ERROR-AddressSanitizer-SEGV-on-unknown-address-0x000000000000-pc-0x7fb0fb78fdbe-bp-0x61a0000002d0-sp-0x7ffd1c504cc0-T0-、" class="headerlink" title="（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、"></a>（2）ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x7fb0fb78fdbe bp 0x61a0000002d0 sp 0x7ffd1c504cc0 T0)、</h3><p>这个错误是由于在程序执行期间发生了段错误（<code>Segmentation Fault</code>），导致程序崩溃。</p>
+<p>根据错误信息，问题出现在调用 <code>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt;&gt;::xsgetn(char*, long)</code> 函数时，发生了对未知地址的写操作，这可能是由于访问了空指针或者其他非法内存区域引起的。</p>
+<p>引起错误的代码行为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page0 = bpm-&gt;<span class="built_in">FetchPage</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">--</span><br><span class="line"><span class="type">char</span> *page_data = <span class="literal">nullptr</span>;</span><br><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, page_data);</span><br></pre></td></tr></table></figure>
+
+<p>报错的原因可能是因为 <code>disk_manager_-&gt;ReadPage</code> 函数中的 <code>page_data</code> 参数被传入了空指针。在 C&#x2F;C++ 中，如果要通过函数修改指针指向的内存内容，需要确保传入的指针指向有效的内存空间，而不是空指针。</p>
+<p>这里实际上应该直接传入<code>pages_[frame_id].dara_</code>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">disk_manager_-&gt;<span class="built_in">ReadPage</span>(page_id, pages_[frame_id].data_);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Task-3-Read-Write-Page-Guards"><a href="#Task-3-Read-Write-Page-Guards" class="headerlink" title="Task #3 - Read&#x2F;Write Page Guards"></a>Task #3 - Read&#x2F;Write Page Guards</h1><blockquote>
+<p>您将实现BasicPageGuard，它存储指向BufferPoolManager和Page对象的指针。页面保护确保在相应的page对象超出作用域时立即在其上调用UnpinPage。注意，它仍然应该为程序员提供一个方法来手动解除页面的锁定。</p>
+<p>由于BasicPageGuard隐藏了底层的Page指针，它还可以提供只读&#x2F;写数据api，提供编译时检查，以确保针对每种用例正确设置is_dirty标志。</p>
+<p>在未来的项目中，多个线程将从同一个页面读取和写入，因此需要读写锁存器来确保数据的正确性。请注意，在Page类中，有用于此目的的相关锁存方法。与页面的解锁类似，程序员在使用页面后可能会忘记解锁页面。为了缓解这个问题，你将实现ReadPageGuard和WritePageGuard，它们会在页面超出范围时自动解锁。</p>
+<p>你需要为所有的BasicPageGuard, ReadPageGuard和WritePageGuard实现以下函数。</p>
+<ul>
+<li><code>PageGuard(PageGuard &amp;&amp;that)</code> : Move constructor.</li>
+<li><code>operator=(PageGuard &amp;&amp;that)</code> : Move operator.</li>
+<li><code>Drop()</code> : Unpin and&#x2F;or unlatch.</li>
+<li><code>~PageGuard()</code> : Destructor.</li>
+</ul>
+<p>使用新的页面保护，在BufferPoolManager中实现以下wrappers。</p>
+<ul>
+<li><code>FetchPageBasic(page_id_t page_id)</code></li>
+<li><code>FetchPageRead(page_id_t page_id)</code></li>
+<li><code>FetchPageWrite(page_id_t page_id)</code></li>
+<li><code>NewPageGuarded(page_id_t *page_id)</code></li>
+</ul>
+</blockquote>
+<p>这个<code>task</code>的重点就是实现移动构造、移动幅值、<code>Drop</code>和析构这四个函数。</p>
+<h1 id="GradeScope在线测试"><a href="#GradeScope在线测试" class="headerlink" title="GradeScope在线测试"></a>GradeScope在线测试</h1><h2 id="1、LRUKReplacerTest-Evict"><a href="#1、LRUKReplacerTest-Evict" class="headerlink" title="1、LRUKReplacerTest.Evict"></a>1、LRUKReplacerTest.Evict</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19: /autograder/source/bustub/test/buffer/grading_lru_k_replacer_test.cpp:276: Failure</span><br><span class="line">19: Expected equality of these values:</span><br><span class="line">19:   i</span><br><span class="line">19:     Which is: 100</span><br><span class="line">19:   result</span><br><span class="line">19:     Which is: 0</span><br><span class="line">19: Check your return value behavior for LRUKReplacer::Evict</span><br></pre></td></tr></table></figure>
+
+<p>这个问题我真的研究了很久，本地测试和前面的一大部分在线测试都可以过，但是就是卡在这里。后来查了很久，知乎上有一个博主说是发现他的<code>LRUKReplacer::Remove</code>。于是我去检查了我的<code>Remove</code>函数，发现我也没有写完……我只在<code>node_store_</code>中进行了删除，而没有在<code>node_less_k_</code>或者<code>node_more_k_</code>中删除，补上后这个测试就通过了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (it-&gt;second-&gt;is_evictable_) &#123;</span><br><span class="line">      <span class="comment">// 该帧为可驱逐状态，继续操作</span></span><br><span class="line">      it-&gt;second-&gt;history_.<span class="built_in">clear</span>();</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      <span class="keyword">if</span> (it-&gt;second-&gt;pos_ != node_less_k_.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        node_less_k_.<span class="built_in">erase</span>(it-&gt;second-&gt;pos_);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        node_more_k_.<span class="built_in">erase</span>(it-&gt;second);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// -------- add ------------------------------ //</span></span><br><span class="line">      node_store_.<span class="built_in">erase</span>(it);</span><br><span class="line">      curr_size_--;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、BufferPoolManagerTest-UnpinPage"><a href="#2、BufferPoolManagerTest-UnpinPage" class="headerlink" title="2、BufferPoolManagerTest.UnpinPage"></a>2、BufferPoolManagerTest.UnpinPage</h2><h3 id="DeletePage"><a href="#DeletePage" class="headerlink" title="DeletePage"></a>DeletePage</h3><p>[*]Bug:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">------------------------------------------</span><br><span class="line"><span class="number">7</span>: UnpinPage: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: --- Before UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">2</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">0</span>, frame_id: <span class="number">0</span>, pin_count: <span class="number">1</span>, page_data: page0</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:</span><br><span class="line"><span class="number">7</span>: </span><br><span class="line"><span class="number">7</span>: --- After UnpinPage: --- </span><br><span class="line"><span class="number">7</span>: ---page_table size: <span class="number">1</span></span><br><span class="line"><span class="number">7</span>: ---page_table content:</span><br><span class="line"><span class="number">7</span>: page_id: <span class="number">1</span>, frame_id: <span class="number">1</span>, pin_count: <span class="number">1</span>, page_data: page1</span><br><span class="line"><span class="number">7</span>: ---free_list size: <span class="number">0</span></span><br><span class="line"><span class="number">7</span>: ---free_list Content:  <span class="comment">// free_list的更新出错</span></span><br></pre></td></tr></table></figure>
+
+<p>要在DeletePage中实现将不再使用的frame从Replacer中删除，并重新放入free_list中</p>
+<h3 id="NewPage"><a href="#NewPage" class="headerlink" title="NewPage"></a>NewPage</h3><ul>
+<li>通过evict获取frame时，要先删除其上的old page</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">page_table_.<span class="built_in">erase</span>(pages_[frame_id].page_id_);  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="FetchPage"><a href="#FetchPage" class="headerlink" title="FetchPage"></a>FetchPage</h3><ul>
+<li><p>同NewPage，通过evict获取frame时，要先删除其上的old page；</p>
+</li>
+<li><p>若在内存中没找到对应的page，而需要从disk中获取时，注意除了要在page_table中绑定page_id和frame_id，还要在pages_对象中更新page_id和frame_id的绑定关系</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].page_id_ = page_id;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在fetch一个page后，更新其dirty状态为false，因为此时的page刚从disk写完数据</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pages_[frame_id].is_dirty_ = <span class="literal">false</span>;  <span class="comment">// debug</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3、BufferPoolManagerTest-ConcurrencyTest"><a href="#3、BufferPoolManagerTest-ConcurrencyTest" class="headerlink" title="3、BufferPoolManagerTest.ConcurrencyTest"></a>3、BufferPoolManagerTest.ConcurrencyTest</h2><p>问题出在每个函数的加锁写在了日志打印后面，因此出现并发错误。</p>
+<h2 id="4、PageGuardTest-DropTest-PageGuardTest-MoveTest"><a href="#4、PageGuardTest-DropTest-PageGuardTest-MoveTest" class="headerlink" title="4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest"></a>4、PageGuardTest.DropTest &amp;&amp; PageGuardTest.MoveTest</h2><blockquote>
+<p>PageGuardTest.DropTest (0&#x2F;8)<br>PageGuardTest.MoveTest (0&#x2F;8)<br>PageGuardTest.BPMTest (0&#x2F;9)</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403241940804.png" alt="image-20240324194001569"></p>
+<p>经过研究，我重写了PageGuard.cpp中几个函数的逻辑：</p>
+<h3 id="BasicPageGuard"><a href="#BasicPageGuard" class="headerlink" title="BasicPageGuard"></a>BasicPageGuard</h3><h4 id="（1）Drop"><a href="#（1）Drop" class="headerlink" title="（1）Drop()"></a>（1）Drop()</h4><p>忘记了对bpm_重置为nullptr;</p>
+<h4 id="（2）operator-BasicPageGuard-that"><a href="#（2）operator-BasicPageGuard-that" class="headerlink" title="（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(BasicPageGuard &amp;&amp;that)</h4><p>注意要先调用<code>Drop()</code>来drop掉当前的old guarded page，然后再进行资源转移。</p>
+<h3 id="ReadPageGuard"><a href="#ReadPageGuard" class="headerlink" title="ReadPageGuard"></a>ReadPageGuard</h3><h4 id="（1）ReadPageGuard-ReadPageGuard-that"><a href="#（1）ReadPageGuard-ReadPageGuard-that" class="headerlink" title="（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)"></a>（1）ReadPageGuard(ReadPageGuard &amp;&amp;that)</h4><p>虽然.cpp文件中写的是<code>=default</code>，但.h文件中又要求实现，所以还是实现了一下。</p>
+<h4 id="（2）operator-ReadPageGuard-that"><a href="#（2）operator-ReadPageGuard-that" class="headerlink" title="（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)"></a>（2）operator&#x3D;(ReadPageGuard &amp;&amp;that)</h4><p>这里我最开始只调用了<code>std::move(that.guard_)</code>，实际上应该1)先在page_不为空时进行解读锁；2)然后进行资源转移。</p>
+<h4 id="（3）Drop"><a href="#（3）Drop" class="headerlink" title="（3）Drop()"></a>（3）Drop()</h4><p>这里和重载移动赋值运算符一样，最开始只调用了<code>Drop()</code>，而实际上也应该先解读锁。</p>
+<h3 id="WritePageGuard"><a href="#WritePageGuard" class="headerlink" title="WritePageGuard"></a>WritePageGuard</h3><p>和ReadPageGuard同理。</p>
+<p>最后，历时许久，第一个Project终于通过了！</p>
 ]]></content>
       <categories>
-        <category>面试</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>数据库1_MySQL数据库.md</title>
-    <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="1、MySQL简介"><a href="#1、MySQL简介" class="headerlink" title="1、MySQL简介"></a>1、MySQL简介</h1><p>MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
-<p><strong>其数据通常存储在磁盘中，但也会使用缓存将一部分数据存储在内存中，以提高访问速度。</strong></p>
-<h2 id="（1）架构逻辑"><a href="#（1）架构逻辑" class="headerlink" title="（1）架构逻辑"></a>（1）架构逻辑</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061034387.png" alt="MySQL逻辑架构"></p>
-<p>MySQL的逻辑架构大致可以分为三层：客户端、Server层和存储引擎层。</p>
-<ul>
-<li><p>客户端（服务器层）：主要做连接处理、授权认证和安全保障等。</p>
-</li>
-<li><p>Server层：涵盖了 MySQL 大多数核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（例如：日期，时间，数学和加密函数等）。存储过程，触发器，视图等跨存储引擎的功能也都在这一层实现。</p>
-</li>
-<li><p>Server 层基本组件：</p>
-<ul>
-<li><p><strong>连接器</strong>：我们使用数据库，第一步是连接到数据库。而连接器负责跟客户端建立连接、获取权限、维持和管理连接；</p>
-</li>
-<li><p><strong>查询缓存</strong>：执行查询语句的时候，会先查询缓存，校验 SQL 是否执行过，如果有 SQL 的缓存，直接返回给客户端，如果没有命中，执行后续的操作；（MySQL 8.0 版本删除）</p>
-</li>
-<li><p><strong>分析器</strong>：没有命中缓存的话，SQL 语句就会经过分析器，主要分为两步，词法分析和语法分析，先看 SQL 语句要做什么，再检查 SQL 语句语法是否正确；</p>
-</li>
-<li><p><strong>优化器</strong>：优化器对查询进行优化，包括重写查询、决定表的读写顺序以及选择合适的索引等，生成执行计划，优化器主要做的操作包括：</p>
-<ul>
-<li>表里面有多个索引的时候，决定使用哪个索引；</li>
-<li>一个语句有多表关联（join）的时候，决定各个表的连接顺序；</li>
-</ul>
-</li>
-<li><p><strong>执行器</strong>：首先执行前会校验该用户有没有权限，如果没有权限，就会返回错误信息，如果有权限，就会根据执行计划去调用引擎的接口，返回结果。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>存储引擎层</strong>：主要负责数据的存储和提取，Server层通过 API 与存储引擎层进行交互。服务器通过 API 与存储引擎通信，这些接口屏蔽了不同存储引擎的差异，使得差异对上层查询过程透明。除了会解析外键定义的 InnoDB 外，存储引擎不会解析 SQL，不同存储引擎之间也不会相互通信，只是简单响应上层服务器请求。</p>
-</li>
-</ul>
-<h1 id="2、面试提问"><a href="#2、面试提问" class="headerlink" title="2、面试提问"></a>2、面试提问</h1><h2 id="（1）为什么MySQL使用B-树索引？"><a href="#（1）为什么MySQL使用B-树索引？" class="headerlink" title="（1）为什么MySQL使用B+树索引？"></a>（1）为什么MySQL使用B+树索引？</h2><p>B树是一种自平衡的多路搜索树，每个节点可以包含多个关键字和对应的指针，即B树的每个节点都会存储数据，B树的叶子节点之间是无指针相连接的。因此当读取叶子节点的数据时，只能通过父节点进行多次磁盘I&#x2F;O才能实现。</p>
-<p>B+树也是一种自平衡的多路搜索树，所有关键字都存储在叶子节点上，非叶子节点只存储索引列和指向子节点的指针。叶子节点通过指针连接起来，形成一个有序的链表，可以支持顺序访问和范围查询。这样就带来了以下好处：</p>
-<ul>
-<li>范围查询效率高；</li>
-<li>顺序访问性能好；</li>
-<li>更少的磁盘I&#x2F;O；</li>
-<li>内存友好。</li>
-</ul>
-<h2 id="（2）MySQL的慢查询如何优化"><a href="#（2）MySQL的慢查询如何优化" class="headerlink" title="（2）MySQL的慢查询如何优化"></a>（2）MySQL的慢查询如何优化</h2><p>针对SQL慢查询，可以考虑以下一些优化措施：</p>
-<ol>
-<li><strong>优化查询语句结构：</strong>检查是否存在冗余的操作、重复的子查询、不必要的排序、大量的JOIN操作等。优化查询语句的结构和逻辑，减少不必要的数据读取和计算。</li>
-<li><strong>添加合适的索引：</strong>确保查询中涉及的列都有适当的索引，并且查询条件能够充分利用索引。通过使用适当的索引，提高查询的性能。但是要避免过多的索引，因为过多的索引会增加写入操作的开销。</li>
-<li><strong>数据库表优化：</strong>对于频繁查询的表，考虑进行分库或分表操作，将数据分散存储，提高查询效率。</li>
-<li><strong>优化数据库配置：</strong>根据服务器的硬件资源和应用需求，调整MySQL的配置参数，如缓冲区大小、并发连接树、查询缓存等。</li>
-<li><strong>使用缓存技术：</strong>对于一些相对稳定的查询结果，考虑使用缓存技术，如Redis、Memcached等，减少对数据库的访问。</li>
-</ol>
-<h2 id="（3）索引的设计原则"><a href="#（3）索引的设计原则" class="headerlink" title="（3）索引的设计原则"></a>（3）索引的设计原则</h2><ol>
-<li>选择适当的列进行索引：选择那些经常被用于查询条件、连接操作和排序的列进行索引；</li>
-<li><strong>考虑查询类型：</strong>根据常见的查询模式和性能需求，选择合适的索引类型。如范围查询选择B树索引；全文搜索选择全文索引；</li>
-<li><strong>避免过多的索引：</strong>过多的索引会增加写操作的开销，占用存储空间；</li>
-<li><strong>注意索引的维护成本：</strong></li>
-<li><strong>联合索引的使用：</strong>联合索引可以包含多个列，通过多个列的组合来创建索引。在创建联合索引时，需要根据查询的频率和顺序选择合适的列顺序，将最常用的列放在前面可以提高索引的效果。</li>
-</ol>
-<h2 id="（4）什么是索引？索引有哪些优缺点？"><a href="#（4）什么是索引？索引有哪些优缺点？" class="headerlink" title="（4）什么是索引？索引有哪些优缺点？"></a>（4）什么是索引？索引有哪些优缺点？</h2><p>索引是数据库中用于提高数据检索性能的排好序的数据结构。它类似于书籍的目录，通过建立特定的数据结构将列或多个列的值与它们在数据表中对应的行关联起来，以加快查询速度。</p>
-<p>索引的优点包括：</p>
-<ol>
-<li>提高查询性能：索引可以加快数据库查找数据的速度，通过快速定位到符合查询条件的数据行，减少了数据库进行全表扫描的开销，从而显著提高查询效率。</li>
-<li>唯一性约束：通过在索引上设置唯一性约束，可以确保数据的唯一性，防止重复数据的插入。</li>
-</ol>
-<p>然而，索引也有一些缺点：</p>
-<ol>
-<li>占用存储空间：索引通常需要占用一定的磁盘空间。过多的索引可能会增加存储成本。</li>
-<li>索引维护的开销：当对数据表进行插入、更新或删除操作时，索引也需要进行相应的维护操作，这可能导致数据写入的性能下降，更新缓慢。</li>
-</ol>
-<h2 id="（5）索引分类"><a href="#（5）索引分类" class="headerlink" title="（5）索引分类"></a>（5）索引分类</h2><p>在MySQL中，索引按照索引列的类型可以分为以下几种：</p>
-<ul>
-<li><strong>主键索引：</strong>用于唯一标识每一条记录，主键索引的值不允许重复且不能为空，并且一个表只能有一个主键索引。</li>
-<li><strong>唯一索引：</strong>用于保证索引列的值唯一，允许为空值，但是一个表可以有多个唯一索引。</li>
-<li><strong>普通索引：</strong>没有唯一性限制，允许重复值和空值，是最基本的索引类型。</li>
-<li><strong>组合索引：</strong>在多个字段上创建的索引，可以包含多个列。组合索引可以提高多列查询的性能，但查询条件必须符合最左前缀原则，即查询从左到右使用组合索引中的列。</li>
-</ul>
-<h2 id="（6）什么是最左前缀原则？"><a href="#（6）什么是最左前缀原则？" class="headerlink" title="（6）什么是最左前缀原则？"></a>（6）什么是最左前缀原则？</h2><p><strong>最左前缀原则（Leftmost Prefix Rule）</strong>是索引在数据库查询中的一种使用规则。它指的是在使用复合索引时，索引的最左边的连续几个列会被用于查询过滤条件的匹配。</p>
-<p>具体来说，如果在表中创建了一个复合索引，包含多个列 A、B、C，那么最左前缀原则要求查询中的过滤条件必须从索引的最左边开始，并且不能跳过中间的列。只有当查询中的过滤条件与索引的最左前缀完全匹配时，索引才能被充分利用。</p>
-<p>例如，考虑以下复合索引 (A, B, C) 和查询语句：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> A <span class="operator">=</span> <span class="string">&#x27;value1&#x27;</span> <span class="keyword">AND</span> C <span class="operator">=</span> <span class="string">&#x27;value2&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下，最左前缀原则要求查询条件中必须包含列 A，而不能直接使用列 C 进行过滤。因为只有满足最左前缀条件，索引 (A, B, C) 才能被有效地使用。</p>
-<p>遵循最左前缀原则的好处包括：</p>
-<ol>
-<li><p>提高查询性能：通过使用索引的最左前缀，可以最大限度地减少索引扫描的数据量，提高查询的效率和响应时间。</p>
-</li>
-<li><p>减少索引占用空间：在某些情况下，使用最左前缀原则可以减少创建多个索引的需求，节省磁盘空间和索引维护的开销。</p>
-</li>
-</ol>
-<h2 id="（7）什么是索引覆盖？"><a href="#（7）什么是索引覆盖？" class="headerlink" title="（7）什么是索引覆盖？"></a>（7）什么是索引覆盖？</h2><p>覆盖索引是指一个索引包含了查询所需的所有列，而无需访问表的实际数据页。</p>
-<p>当数据库系统执行查询时，通常需要从磁盘中读取数据页到内存中才能进行处理。而如果使用了覆盖索引，由于索引已经包含了查询所需的所有列的值，数据库系统可以直接通过索引来获取这些值，而不需要额外地读取数据页。这样可以减少磁盘 I&#x2F;O 的次数和数据在内存中的占用，提高查询的效率。</p>
-<p>覆盖索引通常适用于以下场景：</p>
-<ol>
-<li><p>查询语句只需要返回索引列中的数据，而不需要访问其他列的值。</p>
-</li>
-<li><p>查询语句中的条件过滤、排序或分组的列都在同一个索引上。</p>
-</li>
-</ol>
-<h2 id="（8）聚簇索引和非聚簇索引的区别是什么？"><a href="#（8）聚簇索引和非聚簇索引的区别是什么？" class="headerlink" title="（8）聚簇索引和非聚簇索引的区别是什么？"></a>（8）聚簇索引和非聚簇索引的区别是什么？</h2><p><strong>聚簇索引</strong>也被成为主键索引，它是一种特殊类型的索引，用于存储表中的数据记录。</p>
-<p><strong>非聚簇索引</strong>用于存储对表中数据记录的引用地址。</p>
-<p>区别：</p>
-<ol>
-<li>存储方式不同：聚簇索引存储数据记录，非聚簇索引存储对数据记录的引用地址；</li>
-<li>查询速度不同：聚簇索引的查询速度快于非聚簇索引；</li>
-<li>内存占用不同：聚簇索引占用更多的内存；</li>
-<li>索引更新速度不同：由于聚簇索引存储的是数据记录，因此当数据记录发生变化时，需要重构整个索引，更新速度相对较慢；而非聚簇索引只需要修改对数据记录的引用地址，因此更苏速度较快。</li>
-</ol>
-<h2 id="（9）索引失效的场景有哪些？"><a href="#（9）索引失效的场景有哪些？" class="headerlink" title="（9）索引失效的场景有哪些？"></a>（9）索引失效的场景有哪些？</h2><ol>
-<li>当查询中涉及的列<strong>没有被索引</strong>时，索引将不会被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE age = 25</code>，如果<code>age</code>列没有被索引，索引就不会被使用。</li>
-</ul>
-</li>
-</ul>
-<ol start="2">
-<li>在索引列上<strong>使用函数或表达式</strong>会导致索引失效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE YEAR(birth_date) = 1990</code>，即使<code>birth_date</code>被索引，使用<code>YEAR()</code>函数也会使索引失效。</li>
-</ul>
-</li>
-</ul>
-<ol start="3">
-<li>当使用<code>LIKE</code>操作符，并且<strong>模式以通配符开始</strong>时，索引将不被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE name LIKE &#39;%Smith&#39;</code>；但<code>LIKE &#39;Smith%&#39;</code>可以使用索引。</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li>如果查询中有<strong>隐式类型转换</strong>，可能导致索引失效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE string_column = 123</code>，即使<code>string_column</code>被索引，但由于隐式将数字转换为字符串，索引可能失效。</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li>当查询使用<code>OR</code>条件，并且<strong>条件中的某些字段没有被索引</strong>时，整个索引可能不会被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE last_name = &#39;Smith&#39; OR age = 30</code>，如果<code>last_name</code>被索引而<code>age</code>没有，整个索引可能不会被使用。</li>
-</ul>
-</li>
-</ul>
-<ol start="6">
-<li>如果索引列的值分布非常不均匀，或者索引列大多数值都是相同的，优化器可能认为使用全表扫描更有效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，在一个大多数用户都来自同一城市的用户表中，对城市进行索引可能不会提高查询效率。</li>
-</ul>
-</li>
-</ul>
-<h2 id="（10）事务的基本特性和隔离级别？"><a href="#（10）事务的基本特性和隔离级别？" class="headerlink" title="（10）事务的基本特性和隔离级别？"></a>（10）事务的基本特性和隔离级别？</h2><p>事务具备4大特性，<strong>即原子性、一致性、隔离性和持久性</strong>。</p>
-<ol>
-<li><p><strong>原子性：</strong>事务中的所有操作要么全部执行成功，要么全部回滚到事务开始前的状态。如果在事务执行期间发生错误，系统将回滚所有已执行的操作，以保持数据的一致性。</p>
-</li>
-<li><p><strong>一致性：</strong>事务的执行不会破坏数据库的完整性约束。在事务开始和结束时，数据库必须处于一致的状态。 如小李转账100元给小白，不管操作是否成功，小李和小白的账户总额是不变的。 </p>
-</li>
-<li><p><strong>隔离性：</strong>事务的执行是相互隔离的，即每个事务对其他事务是透明的。并发执行的多个事务不会相互干扰，每个事务感知不到其他事务的存在。</p>
-</li>
-<li><p><strong>持久性：</strong>一旦事务提交成功，事务中的所有操作都必须持久化到数据库中。</p>
-</li>
-</ol>
-<p>MySQL支持以下四个事务隔离级别：</p>
-<ol>
-<li><strong>读未提交</strong>：最低的隔离级别。事务可以读取到其他事务尚未提交的数据，可能会出现脏读、不可重复读和幻读问题。</li>
-<li><strong>读已提交</strong>：事务只能读取到已经提交的数据。但在同一事务中，多次读取同一行的数据结果可能会不一致，可能会出现不可重复读和幻读问题。</li>
-<li><strong>可重复读</strong>：在同一个事务内，多次读取同一行的数据结果始终保持一致。MySQL的<strong>默认隔离级别就是可重复读</strong>。通过使用MVCC机制来实现，在读操作期间不会看到其他事务的修改，有效地解决了不可重复读问题。</li>
-<li><strong>串行化</strong>：最高的隔离级别。事务串行执行，避免了脏读、不可重复读和幻读等问题。但是并发性能较差，可能导致大量的锁竞争和资源争用。</li>
-</ol>
-<h2 id="（11）什么是脏读、幻读和不可重复读？"><a href="#（11）什么是脏读、幻读和不可重复读？" class="headerlink" title="（11）什么是脏读、幻读和不可重复读？"></a>（11）什么是脏读、幻读和不可重复读？</h2><ol>
-<li>脏读（Dirty Reads）：事务A读取到了事务B已经修改但尚未提交的数据。</li>
-<li>幻读（Phantom Reads）：事务A读取到了事务B提交的新增数据。</li>
-<li>不可重读（Non-Repeatable Reads）：事务A内部的相同查询语句在不同时刻读出的结果不一致。</li>
-</ol>
-<h2 id="（12）MySQL中in和exist的区别"><a href="#（12）MySQL中in和exist的区别" class="headerlink" title="（12）MySQL中in和exist的区别"></a>（12）MySQL中in和exist的区别</h2><p> MySQL 中的 IN 和 EXISTS都是用于查询和筛选数据的条件语句，区别在于：</p>
-<ol>
-<li><strong>IN关键字：</strong>使用 IN 条件时，我们提供一个固定的值列表，然后将其与指定列的值进行比较。如果列中的值与列表中的任何一个值匹配，就会返回结果。IN 条件适合用于确定某个字段的值是否在给定的值列表中。</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1, value2, value3); </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 如果 column_name 的值与 value1、value2 或 value3 中的任何一个相匹配</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 那么这条记录将会被返回</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><strong>EXISTS关键字：</strong>使用 EXISTS 条件时，我们需要指定一个子查询。查询的结果并不重要，而是判断子查询是否返回了至少一行结果。如果子查询返回了结果，EXISTS 条件就会被认为是满足的。EXISTS 条件适合用于判断某个条件是否至少存在于子查询的结果中。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM table_name WHERE EXISTS (SELECT * FROM another_table WHERE condition); </span><br><span class="line"></span><br><span class="line">// 如果子查询(SELECT * FROM another_table WHERE condition)返回了至少一行结果</span><br><span class="line">//那么主查询中的记录将会被返回。</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结来说：</strong></p>
-<ul>
-<li>使用 IN 条件时，比较的是指定列的值是否在给定的值列表中。</li>
-<li>使用 EXISTS 条件时，判断的是子查询是否返回了至少一行结果。</li>
-</ul>
-<h2 id="（13）DATETIME和TIMESTAMP的异同"><a href="#（13）DATETIME和TIMESTAMP的异同" class="headerlink" title="（13）DATETIME和TIMESTAMP的异同"></a>（13）DATETIME和TIMESTAMP的异同</h2><p>DATETIME 和 TIMESTAMP 是 MySQL 中用于存储日期和时间的数据类型，它们之间有一些异同点：</p>
-<ol>
-<li><strong>存储范围</strong>：<ul>
-<li>DATETIME 类型可以存储的范围是 ‘1000-01-01 00:00:00’ 到 ‘9999-12-31 23:59:59’。</li>
-<li>TIMESTAMP 类型可以存储的范围是 ‘1970-01-01 00:00:01’ UTC 到 ‘2038-01-19 03:14:07’ UTC（32 位系统的最大时间戳限制）。</li>
-</ul>
-</li>
-<li><strong>存储空间</strong>：<ul>
-<li>DATETIME 类型在存储时需要占用 8 个字节。</li>
-<li>TIMESTAMP 类型在存储时通常只需要占用 4 个字节，因为它存储的是从 UNIX 纪元开始以来的秒数，但是在一些情况下可能会占用 5 个字节，取决于时区的支持和配置。</li>
-</ul>
-</li>
-<li><strong>时区处理</strong>：<ul>
-<li>DATETIME 类型不涉及时区转换，存储的时间是按照指定的时区直接存储的。</li>
-<li>TIMESTAMP 类型存储的时间是自动转换为 UTC 时间并存储的，但在检索时会再次转换为当前会话时区的时间。</li>
-</ul>
-</li>
-<li><strong>自动更新功能</strong>：<ul>
-<li>TIMESTAMP 类型可以设置为自动更新当前时间戳，即在插入或更新记录时会自动更新为当前时间。</li>
-<li>DATETIME 类型不具备自动更新功能，需要手动在插入或更新时指定时间。</li>
-</ul>
-</li>
-<li><strong>索引性能</strong>：<ul>
-<li>在创建索引时，TIMESTAMP 类型的字段因为只占用了 4 个字节，通常会比 DATETIME 类型的字段占用的索引空间更小，因此在一些情况下查询性能可能会更好。</li>
-</ul>
-</li>
-</ol>
-<h2 id="（14）数据库的三大范式是什么？"><a href="#（14）数据库的三大范式是什么？" class="headerlink" title="（14）数据库的三大范式是什么？"></a>（14）数据库的三大范式是什么？</h2><ol>
-<li><p><strong>第一范式（1NF）</strong>：确保数据库中的每个列都是原子性的，即每个列都不可再分。</p>
-</li>
-<li><p><strong>第二范式（2NF）</strong>：在满足第一范式的基础上，确保数据库中的每个非主键列完全依赖于主键。</p>
-</li>
-<li><p><strong>第三范式（3NF）</strong>：在满足第二范式的基础上，确保数据库中的每个非主键列之间不存在传递依赖。</p>
-</li>
-</ol>
-<h2 id="（15）数据库表的连接方式"><a href="#（15）数据库表的连接方式" class="headerlink" title="（15）数据库表的连接方式"></a>（15）数据库表的连接方式</h2><ol>
-<li>内连接（INNER JOIN）：返回两个表中匹配的行，只有当左表和右表中都存在匹配的行时才会返回结果。</li>
-<li>左连接（LEFT JOIN）：左连接返回左表中的所有行，以及与右边匹配的行。若右表中无匹配行，则返回NULL值。</li>
-<li>右连接（RIGHT JOIN）：右连接返回右表中的所有行，以及与左表匹配的行。若左表中无匹配行，则返回NULL值。</li>
-<li>全连接（FULL OUTER JOIN）：全连接返回左表和右边中的所有行，如果某个表中没有匹配的行，则返回NULL值。</li>
-<li>自连接（SELF JOIN）：自连接是指在同一个表中进行连接操作，可以用于查找表中某些数据的关联信息。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>数据库</category>
+        <category>Project</category>
+        <category>cmu15-445</category>
       </categories>
   </entry>
   <entry>
@@ -3146,9 +2781,259 @@
       </categories>
   </entry>
   <entry>
+    <title>数据库1_MySQL数据库.md</title>
+    <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="1、MySQL简介"><a href="#1、MySQL简介" class="headerlink" title="1、MySQL简介"></a>1、MySQL简介</h1><p>MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
+<p><strong>其数据通常存储在磁盘中，但也会使用缓存将一部分数据存储在内存中，以提高访问速度。</strong></p>
+<span id="more"></span>
+
+<h2 id="（1）架构逻辑"><a href="#（1）架构逻辑" class="headerlink" title="（1）架构逻辑"></a>（1）架构逻辑</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061034387.png" alt="MySQL逻辑架构"></p>
+<p>MySQL的逻辑架构大致可以分为三层：客户端、Server层和存储引擎层。</p>
+<ul>
+<li><p>客户端（服务器层）：主要做连接处理、授权认证和安全保障等。</p>
+</li>
+<li><p>Server层：涵盖了 MySQL 大多数核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（例如：日期，时间，数学和加密函数等）。存储过程，触发器，视图等跨存储引擎的功能也都在这一层实现。</p>
+</li>
+<li><p>Server 层基本组件：</p>
+<ul>
+<li><p><strong>连接器</strong>：我们使用数据库，第一步是连接到数据库。而连接器负责跟客户端建立连接、获取权限、维持和管理连接；</p>
+</li>
+<li><p><strong>查询缓存</strong>：执行查询语句的时候，会先查询缓存，校验 SQL 是否执行过，如果有 SQL 的缓存，直接返回给客户端，如果没有命中，执行后续的操作；（MySQL 8.0 版本删除）</p>
+</li>
+<li><p><strong>分析器</strong>：没有命中缓存的话，SQL 语句就会经过分析器，主要分为两步，词法分析和语法分析，先看 SQL 语句要做什么，再检查 SQL 语句语法是否正确；</p>
+</li>
+<li><p><strong>优化器</strong>：优化器对查询进行优化，包括重写查询、决定表的读写顺序以及选择合适的索引等，生成执行计划，优化器主要做的操作包括：</p>
+<ul>
+<li>表里面有多个索引的时候，决定使用哪个索引；</li>
+<li>一个语句有多表关联（join）的时候，决定各个表的连接顺序；</li>
+</ul>
+</li>
+<li><p><strong>执行器</strong>：首先执行前会校验该用户有没有权限，如果没有权限，就会返回错误信息，如果有权限，就会根据执行计划去调用引擎的接口，返回结果。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>存储引擎层</strong>：主要负责数据的存储和提取，Server层通过 API 与存储引擎层进行交互。服务器通过 API 与存储引擎通信，这些接口屏蔽了不同存储引擎的差异，使得差异对上层查询过程透明。除了会解析外键定义的 InnoDB 外，存储引擎不会解析 SQL，不同存储引擎之间也不会相互通信，只是简单响应上层服务器请求。</p>
+</li>
+</ul>
+<h1 id="2、面试提问"><a href="#2、面试提问" class="headerlink" title="2、面试提问"></a>2、面试提问</h1><h2 id="（1）为什么MySQL使用B-树索引？"><a href="#（1）为什么MySQL使用B-树索引？" class="headerlink" title="（1）为什么MySQL使用B+树索引？"></a>（1）为什么MySQL使用B+树索引？</h2><p>B树是一种自平衡的多路搜索树，每个节点可以包含多个关键字和对应的指针，即B树的每个节点都会存储数据，B树的叶子节点之间是无指针相连接的。因此当读取叶子节点的数据时，只能通过父节点进行多次磁盘I&#x2F;O才能实现。</p>
+<p>B+树也是一种自平衡的多路搜索树，所有关键字都存储在叶子节点上，非叶子节点只存储索引列和指向子节点的指针。叶子节点通过指针连接起来，形成一个有序的链表，可以支持顺序访问和范围查询。这样就带来了以下好处：</p>
+<ul>
+<li>范围查询效率高；</li>
+<li>顺序访问性能好；</li>
+<li>更少的磁盘I&#x2F;O；</li>
+<li>内存友好。</li>
+</ul>
+<h2 id="（2）MySQL的慢查询如何优化"><a href="#（2）MySQL的慢查询如何优化" class="headerlink" title="（2）MySQL的慢查询如何优化"></a>（2）MySQL的慢查询如何优化</h2><p>针对SQL慢查询，可以考虑以下一些优化措施：</p>
+<ol>
+<li><strong>优化查询语句结构：</strong>检查是否存在冗余的操作、重复的子查询、不必要的排序、大量的JOIN操作等。优化查询语句的结构和逻辑，减少不必要的数据读取和计算。</li>
+<li><strong>添加合适的索引：</strong>确保查询中涉及的列都有适当的索引，并且查询条件能够充分利用索引。通过使用适当的索引，提高查询的性能。但是要避免过多的索引，因为过多的索引会增加写入操作的开销。</li>
+<li><strong>数据库表优化：</strong>对于频繁查询的表，考虑进行分库或分表操作，将数据分散存储，提高查询效率。</li>
+<li><strong>优化数据库配置：</strong>根据服务器的硬件资源和应用需求，调整MySQL的配置参数，如缓冲区大小、并发连接树、查询缓存等。</li>
+<li><strong>使用缓存技术：</strong>对于一些相对稳定的查询结果，考虑使用缓存技术，如Redis、Memcached等，减少对数据库的访问。</li>
+</ol>
+<h2 id="（3）索引的设计原则"><a href="#（3）索引的设计原则" class="headerlink" title="（3）索引的设计原则"></a>（3）索引的设计原则</h2><ol>
+<li>选择适当的列进行索引：选择那些经常被用于查询条件、连接操作和排序的列进行索引；</li>
+<li><strong>考虑查询类型：</strong>根据常见的查询模式和性能需求，选择合适的索引类型。如范围查询选择B树索引；全文搜索选择全文索引；</li>
+<li><strong>避免过多的索引：</strong>过多的索引会增加写操作的开销，占用存储空间；</li>
+<li><strong>注意索引的维护成本：</strong></li>
+<li><strong>联合索引的使用：</strong>联合索引可以包含多个列，通过多个列的组合来创建索引。在创建联合索引时，需要根据查询的频率和顺序选择合适的列顺序，将最常用的列放在前面可以提高索引的效果。</li>
+</ol>
+<h2 id="（4）什么是索引？索引有哪些优缺点？"><a href="#（4）什么是索引？索引有哪些优缺点？" class="headerlink" title="（4）什么是索引？索引有哪些优缺点？"></a>（4）什么是索引？索引有哪些优缺点？</h2><p>索引是数据库中用于提高数据检索性能的排好序的数据结构。它类似于书籍的目录，通过建立特定的数据结构将列或多个列的值与它们在数据表中对应的行关联起来，以加快查询速度。</p>
+<p>索引的优点包括：</p>
+<ol>
+<li>提高查询性能：索引可以加快数据库查找数据的速度，通过快速定位到符合查询条件的数据行，减少了数据库进行全表扫描的开销，从而显著提高查询效率。</li>
+<li>唯一性约束：通过在索引上设置唯一性约束，可以确保数据的唯一性，防止重复数据的插入。</li>
+</ol>
+<p>然而，索引也有一些缺点：</p>
+<ol>
+<li>占用存储空间：索引通常需要占用一定的磁盘空间。过多的索引可能会增加存储成本。</li>
+<li>索引维护的开销：当对数据表进行插入、更新或删除操作时，索引也需要进行相应的维护操作，这可能导致数据写入的性能下降，更新缓慢。</li>
+</ol>
+<h2 id="（5）索引分类"><a href="#（5）索引分类" class="headerlink" title="（5）索引分类"></a>（5）索引分类</h2><p>在MySQL中，索引按照索引列的类型可以分为以下几种：</p>
+<ul>
+<li><strong>主键索引：</strong>用于唯一标识每一条记录，主键索引的值不允许重复且不能为空，并且一个表只能有一个主键索引。</li>
+<li><strong>唯一索引：</strong>用于保证索引列的值唯一，允许为空值，但是一个表可以有多个唯一索引。</li>
+<li><strong>普通索引：</strong>没有唯一性限制，允许重复值和空值，是最基本的索引类型。</li>
+<li><strong>组合索引：</strong>在多个字段上创建的索引，可以包含多个列。组合索引可以提高多列查询的性能，但查询条件必须符合最左前缀原则，即查询从左到右使用组合索引中的列。</li>
+</ul>
+<h2 id="（6）什么是最左前缀原则？"><a href="#（6）什么是最左前缀原则？" class="headerlink" title="（6）什么是最左前缀原则？"></a>（6）什么是最左前缀原则？</h2><p><strong>最左前缀原则（Leftmost Prefix Rule）</strong>是索引在数据库查询中的一种使用规则。它指的是在使用复合索引时，索引的最左边的连续几个列会被用于查询过滤条件的匹配。</p>
+<p>具体来说，如果在表中创建了一个复合索引，包含多个列 A、B、C，那么最左前缀原则要求查询中的过滤条件必须从索引的最左边开始，并且不能跳过中间的列。只有当查询中的过滤条件与索引的最左前缀完全匹配时，索引才能被充分利用。</p>
+<p>例如，考虑以下复合索引 (A, B, C) 和查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> A <span class="operator">=</span> <span class="string">&#x27;value1&#x27;</span> <span class="keyword">AND</span> C <span class="operator">=</span> <span class="string">&#x27;value2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，最左前缀原则要求查询条件中必须包含列 A，而不能直接使用列 C 进行过滤。因为只有满足最左前缀条件，索引 (A, B, C) 才能被有效地使用。</p>
+<p>遵循最左前缀原则的好处包括：</p>
+<ol>
+<li><p>提高查询性能：通过使用索引的最左前缀，可以最大限度地减少索引扫描的数据量，提高查询的效率和响应时间。</p>
+</li>
+<li><p>减少索引占用空间：在某些情况下，使用最左前缀原则可以减少创建多个索引的需求，节省磁盘空间和索引维护的开销。</p>
+</li>
+</ol>
+<h2 id="（7）什么是索引覆盖？"><a href="#（7）什么是索引覆盖？" class="headerlink" title="（7）什么是索引覆盖？"></a>（7）什么是索引覆盖？</h2><p>覆盖索引是指一个索引包含了查询所需的所有列，而无需访问表的实际数据页。</p>
+<p>当数据库系统执行查询时，通常需要从磁盘中读取数据页到内存中才能进行处理。而如果使用了覆盖索引，由于索引已经包含了查询所需的所有列的值，数据库系统可以直接通过索引来获取这些值，而不需要额外地读取数据页。这样可以减少磁盘 I&#x2F;O 的次数和数据在内存中的占用，提高查询的效率。</p>
+<p>覆盖索引通常适用于以下场景：</p>
+<ol>
+<li><p>查询语句只需要返回索引列中的数据，而不需要访问其他列的值。</p>
+</li>
+<li><p>查询语句中的条件过滤、排序或分组的列都在同一个索引上。</p>
+</li>
+</ol>
+<h2 id="（8）聚簇索引和非聚簇索引的区别是什么？"><a href="#（8）聚簇索引和非聚簇索引的区别是什么？" class="headerlink" title="（8）聚簇索引和非聚簇索引的区别是什么？"></a>（8）聚簇索引和非聚簇索引的区别是什么？</h2><p><strong>聚簇索引</strong>也被成为主键索引，它是一种特殊类型的索引，用于存储表中的数据记录。</p>
+<p><strong>非聚簇索引</strong>用于存储对表中数据记录的引用地址。</p>
+<p>区别：</p>
+<ol>
+<li>存储方式不同：聚簇索引存储数据记录，非聚簇索引存储对数据记录的引用地址；</li>
+<li>查询速度不同：聚簇索引的查询速度快于非聚簇索引；</li>
+<li>内存占用不同：聚簇索引占用更多的内存；</li>
+<li>索引更新速度不同：由于聚簇索引存储的是数据记录，因此当数据记录发生变化时，需要重构整个索引，更新速度相对较慢；而非聚簇索引只需要修改对数据记录的引用地址，因此更苏速度较快。</li>
+</ol>
+<h2 id="（9）索引失效的场景有哪些？"><a href="#（9）索引失效的场景有哪些？" class="headerlink" title="（9）索引失效的场景有哪些？"></a>（9）索引失效的场景有哪些？</h2><ol>
+<li>当查询中涉及的列<strong>没有被索引</strong>时，索引将不会被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE age = 25</code>，如果<code>age</code>列没有被索引，索引就不会被使用。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>在索引列上<strong>使用函数或表达式</strong>会导致索引失效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE YEAR(birth_date) = 1990</code>，即使<code>birth_date</code>被索引，使用<code>YEAR()</code>函数也会使索引失效。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>当使用<code>LIKE</code>操作符，并且<strong>模式以通配符开始</strong>时，索引将不被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE name LIKE &#39;%Smith&#39;</code>；但<code>LIKE &#39;Smith%&#39;</code>可以使用索引。</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>如果查询中有<strong>隐式类型转换</strong>，可能导致索引失效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE string_column = 123</code>，即使<code>string_column</code>被索引，但由于隐式将数字转换为字符串，索引可能失效。</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>当查询使用<code>OR</code>条件，并且<strong>条件中的某些字段没有被索引</strong>时，整个索引可能不会被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE last_name = &#39;Smith&#39; OR age = 30</code>，如果<code>last_name</code>被索引而<code>age</code>没有，整个索引可能不会被使用。</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li>如果索引列的值分布非常不均匀，或者索引列大多数值都是相同的，优化器可能认为使用全表扫描更有效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，在一个大多数用户都来自同一城市的用户表中，对城市进行索引可能不会提高查询效率。</li>
+</ul>
+</li>
+</ul>
+<h2 id="（10）事务的基本特性和隔离级别？"><a href="#（10）事务的基本特性和隔离级别？" class="headerlink" title="（10）事务的基本特性和隔离级别？"></a>（10）事务的基本特性和隔离级别？</h2><p>事务具备4大特性，<strong>即原子性、一致性、隔离性和持久性</strong>。</p>
+<ol>
+<li><p><strong>原子性：</strong>事务中的所有操作要么全部执行成功，要么全部回滚到事务开始前的状态。如果在事务执行期间发生错误，系统将回滚所有已执行的操作，以保持数据的一致性。</p>
+</li>
+<li><p><strong>一致性：</strong>事务的执行不会破坏数据库的完整性约束。在事务开始和结束时，数据库必须处于一致的状态。 如小李转账100元给小白，不管操作是否成功，小李和小白的账户总额是不变的。 </p>
+</li>
+<li><p><strong>隔离性：</strong>事务的执行是相互隔离的，即每个事务对其他事务是透明的。并发执行的多个事务不会相互干扰，每个事务感知不到其他事务的存在。</p>
+</li>
+<li><p><strong>持久性：</strong>一旦事务提交成功，事务中的所有操作都必须持久化到数据库中。</p>
+</li>
+</ol>
+<p>MySQL支持以下四个事务隔离级别：</p>
+<ol>
+<li><strong>读未提交</strong>：最低的隔离级别。事务可以读取到其他事务尚未提交的数据，可能会出现脏读、不可重复读和幻读问题。</li>
+<li><strong>读已提交</strong>：事务只能读取到已经提交的数据。但在同一事务中，多次读取同一行的数据结果可能会不一致，可能会出现不可重复读和幻读问题。</li>
+<li><strong>可重复读</strong>：在同一个事务内，多次读取同一行的数据结果始终保持一致。MySQL的<strong>默认隔离级别就是可重复读</strong>。通过使用MVCC机制来实现，在读操作期间不会看到其他事务的修改，有效地解决了不可重复读问题。</li>
+<li><strong>串行化</strong>：最高的隔离级别。事务串行执行，避免了脏读、不可重复读和幻读等问题。但是并发性能较差，可能导致大量的锁竞争和资源争用。</li>
+</ol>
+<h2 id="（11）什么是脏读、幻读和不可重复读？"><a href="#（11）什么是脏读、幻读和不可重复读？" class="headerlink" title="（11）什么是脏读、幻读和不可重复读？"></a>（11）什么是脏读、幻读和不可重复读？</h2><ol>
+<li>脏读（Dirty Reads）：事务A读取到了事务B已经修改但尚未提交的数据。</li>
+<li>幻读（Phantom Reads）：事务A读取到了事务B提交的新增数据。</li>
+<li>不可重读（Non-Repeatable Reads）：事务A内部的相同查询语句在不同时刻读出的结果不一致。</li>
+</ol>
+<h2 id="（12）MySQL中in和exist的区别"><a href="#（12）MySQL中in和exist的区别" class="headerlink" title="（12）MySQL中in和exist的区别"></a>（12）MySQL中in和exist的区别</h2><p> MySQL 中的 IN 和 EXISTS都是用于查询和筛选数据的条件语句，区别在于：</p>
+<ol>
+<li><strong>IN关键字：</strong>使用 IN 条件时，我们提供一个固定的值列表，然后将其与指定列的值进行比较。如果列中的值与列表中的任何一个值匹配，就会返回结果。IN 条件适合用于确定某个字段的值是否在给定的值列表中。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1, value2, value3); </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 如果 column_name 的值与 value1、value2 或 value3 中的任何一个相匹配</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 那么这条记录将会被返回</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>EXISTS关键字：</strong>使用 EXISTS 条件时，我们需要指定一个子查询。查询的结果并不重要，而是判断子查询是否返回了至少一行结果。如果子查询返回了结果，EXISTS 条件就会被认为是满足的。EXISTS 条件适合用于判断某个条件是否至少存在于子查询的结果中。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM table_name WHERE EXISTS (SELECT * FROM another_table WHERE condition); </span><br><span class="line"></span><br><span class="line">// 如果子查询(SELECT * FROM another_table WHERE condition)返回了至少一行结果</span><br><span class="line">//那么主查询中的记录将会被返回。</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结来说：</strong></p>
+<ul>
+<li>使用 IN 条件时，比较的是指定列的值是否在给定的值列表中。</li>
+<li>使用 EXISTS 条件时，判断的是子查询是否返回了至少一行结果。</li>
+</ul>
+<h2 id="（13）DATETIME和TIMESTAMP的异同"><a href="#（13）DATETIME和TIMESTAMP的异同" class="headerlink" title="（13）DATETIME和TIMESTAMP的异同"></a>（13）DATETIME和TIMESTAMP的异同</h2><p>DATETIME 和 TIMESTAMP 是 MySQL 中用于存储日期和时间的数据类型，它们之间有一些异同点：</p>
+<ol>
+<li><strong>存储范围</strong>：<ul>
+<li>DATETIME 类型可以存储的范围是 ‘1000-01-01 00:00:00’ 到 ‘9999-12-31 23:59:59’。</li>
+<li>TIMESTAMP 类型可以存储的范围是 ‘1970-01-01 00:00:01’ UTC 到 ‘2038-01-19 03:14:07’ UTC（32 位系统的最大时间戳限制）。</li>
+</ul>
+</li>
+<li><strong>存储空间</strong>：<ul>
+<li>DATETIME 类型在存储时需要占用 8 个字节。</li>
+<li>TIMESTAMP 类型在存储时通常只需要占用 4 个字节，因为它存储的是从 UNIX 纪元开始以来的秒数，但是在一些情况下可能会占用 5 个字节，取决于时区的支持和配置。</li>
+</ul>
+</li>
+<li><strong>时区处理</strong>：<ul>
+<li>DATETIME 类型不涉及时区转换，存储的时间是按照指定的时区直接存储的。</li>
+<li>TIMESTAMP 类型存储的时间是自动转换为 UTC 时间并存储的，但在检索时会再次转换为当前会话时区的时间。</li>
+</ul>
+</li>
+<li><strong>自动更新功能</strong>：<ul>
+<li>TIMESTAMP 类型可以设置为自动更新当前时间戳，即在插入或更新记录时会自动更新为当前时间。</li>
+<li>DATETIME 类型不具备自动更新功能，需要手动在插入或更新时指定时间。</li>
+</ul>
+</li>
+<li><strong>索引性能</strong>：<ul>
+<li>在创建索引时，TIMESTAMP 类型的字段因为只占用了 4 个字节，通常会比 DATETIME 类型的字段占用的索引空间更小，因此在一些情况下查询性能可能会更好。</li>
+</ul>
+</li>
+</ol>
+<h2 id="（14）数据库的三大范式是什么？"><a href="#（14）数据库的三大范式是什么？" class="headerlink" title="（14）数据库的三大范式是什么？"></a>（14）数据库的三大范式是什么？</h2><ol>
+<li><p><strong>第一范式（1NF）</strong>：确保数据库中的每个列都是原子性的，即每个列都不可再分。</p>
+</li>
+<li><p><strong>第二范式（2NF）</strong>：在满足第一范式的基础上，确保数据库中的每个非主键列完全依赖于主键。</p>
+</li>
+<li><p><strong>第三范式（3NF）</strong>：在满足第二范式的基础上，确保数据库中的每个非主键列之间不存在传递依赖。</p>
+</li>
+</ol>
+<h2 id="（15）数据库表的连接方式"><a href="#（15）数据库表的连接方式" class="headerlink" title="（15）数据库表的连接方式"></a>（15）数据库表的连接方式</h2><ol>
+<li>内连接（INNER JOIN）：返回两个表中匹配的行，只有当左表和右表中都存在匹配的行时才会返回结果。</li>
+<li>左连接（LEFT JOIN）：左连接返回左表中的所有行，以及与右边匹配的行。若右表中无匹配行，则返回NULL值。</li>
+<li>右连接（RIGHT JOIN）：右连接返回右表中的所有行，以及与左表匹配的行。若左表中无匹配行，则返回NULL值。</li>
+<li>全连接（FULL OUTER JOIN）：全连接返回左表和右边中的所有行，如果某个表中没有匹配的行，则返回NULL值。</li>
+<li>自连接（SELF JOIN）：自连接是指在同一个表中进行连接操作，可以用于查找表中某些数据的关联信息。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>数据库</category>
+      </categories>
+  </entry>
+  <entry>
     <title>数据库2_Redis数据库.md</title>
     <url>/2024/04/06/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
     <content><![CDATA[<h1 id="1、Redis简介"><a href="#1、Redis简介" class="headerlink" title="1、Redis简介"></a>1、Redis简介</h1><p>Redis是一个基于内存的数据存储系统，它<strong>将数据完全存储在内存中</strong>，通过使用<strong>持久化机制</strong>来将数据定期写入磁盘以保证数据的持久性。</p>
+<span id="more"></span>
+
 <h2 id="（1）内存淘汰机制-过期策略"><a href="#（1）内存淘汰机制-过期策略" class="headerlink" title="（1）内存淘汰机制&#x2F;过期策略"></a>（1）内存淘汰机制&#x2F;过期策略</h2><p><strong>MySQL里有2000w数据，Redis中只存20w的数据，如何保证Redis中的数据都是热点数据？</strong></p>
 <p>redis 提供 6种数据淘汰策略：</p>
 <ul>
@@ -3293,6 +3178,130 @@
       </categories>
   </entry>
   <entry>
+    <title>毕设项目提问</title>
+    <url>/2024/04/08/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/</url>
+    <content><![CDATA[<p>面试官早上好！我是颜鼎鼎，本科就读于成都理工大学通信工程专业，硕士就读于重庆理工大学电子信息专业。在校期间学习成绩良好，名列班级前10%。项目经历是本科毕设的多用户智能控制系统设计，基于Qt平台开发Android客户端，同时基于MySQL数据库及多线程编程技术完成多用户操作，并利用MQTT通信协议实现了Android客户端与嵌入式控制终端之间的信息交互。在校期间我曾多次获得各类竞赛奖项及奖学金。我希望能够拥有一段实习经历来丰富自己的简历，感谢给我这次面试的机会，期待和您的进一步交流！</p>
+<span id="more"></span>
+
+<h2 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h2><p>名称：<strong>多用户智能家居控制系统设计</strong>。</p>
+<p>1、 基于Linux多线程编程，结合MQTT协议的订阅-发布模式，完成多用户智能控制；</p>
+<p>2、 在用户端设计双模式。共享模式：多个用户同时控制，且共享当前设备的状态；私人模式：被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>3、 采用MQTT协议进行数据传送。通过实验对比HTTP协议和MQTT协议在智能家居领域的应用，结果表明MQTT在降低功耗和推送功能开发上优势明显，其即便是在资源有限的环境中也能易于使用。</p>
+<p><strong>根据MQTT的基本原理，将智能家居控制系统分为三部分，即发布者、消息代理者以及订阅者：</strong></p>
+<p>1、 发布者由多个安卓客户端构成，每个安卓客户端发出独立的控制指令；</p>
+<p>2、 消息代理者是部署了通信协议的云服务器，其主要负责将客户端的控制指令转发给开发板，以实现的对应的功能操作；</p>
+<p>3、 订阅者是iTop4412开发板，包括其LED、警报及温度传感器等功能。</p>
+<p><strong>本项目的重点与核心在实现客户端的多用户控制。</strong></p>
+<p>1、 针对发布者，利用Qt开发平台设计手机App作为客户端，它有两个特点，分别是多用户和双模式。多用户指不同的客户端均可进行控制操作；双模式指针对客户端本身，有共享模式和私人模式两种，在共享模式下可实现多个用户同时控制，且共享当前设备的状态；在私人模式下被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>2、 针对消息代理者，选择在阿里云上部署mosquitto。选用MQTT协议的原因已在前述加以说明，而由于mosquitto是一种流行的mqtt服务器，且易于安装和配置，因此选用mosquitto进行部署；</p>
+<p>3、 针对订阅者，主要以iTop4412开发板作为功能实现端。同时基于Linux多线程来配合实现多用户控制。</p>
+<p><strong>本项目的数据转发过程如下。</strong></p>
+<p>每个安卓客户端是基于其特定的主题实现对开发板的控制。客户端发出的控制指令将以json数据的格式被封装，经mosquitto云服务器转发后送至开发板侧，开发板读取json包，解析出对应的命令行指令，对相应的硬件进行控制。</p>
+<h2 id="二、相关问题"><a href="#二、相关问题" class="headerlink" title="二、相关问题"></a>二、相关问题</h2><ol>
+<li><strong>为什么选择Linux作为多用户智能家居控制系统的操作系统？</strong><ul>
+<li>Linux是一个开源的操作系统，具有良好的稳定性和安全性，适合于嵌入式系统和服务器端应用，并且支持多线程编程，能够满足项目的需求。</li>
+</ul>
+</li>
+<li><strong>在Linux中，如何使用多线程编程实现并发处理？项目中是如何实现的？</strong><ul>
+<li><strong>pthread库：</strong> pthread库是POSIX标准定义的线程库，在Linux系统中得到广泛支持。通过pthread库，可以创建、管理和同步线程，实现并发处理。具体包括以下几个步骤：<ul>
+<li>包含头文件 <code>pthread.h</code>。</li>
+<li>使用 <code>pthread_create</code> 函数创建线程。</li>
+<li>在线程函数中实现具体的处理逻辑。</li>
+<li>使用 <code>pthread_join</code> 函数等待线程结束并回收资源。</li>
+<li>使用互斥锁（pthread_mutex）、条件变量（pthread_cond）等进行线程同步和通信。</li>
+</ul>
+</li>
+<li>在项目中，主要通过编写多线程的C程序来实现。其主要功能是创建两个线程，一个用于订阅MQTT消息，即sub_thread，另一个用于发布MQTT消息，即pub_thread。同时在主线程等待这两个线程的结束。<ul>
+<li><code>sub_thread</code>函数首先通过<code>pthread_mutex_lock</code>获取互斥锁，接着创建一个mosquitto客户端并连接到指定的MQTT服务器，配置连接回调函数和消息接收回调函数，最后调用<code>mosquitto_loop_forever</code>函数来循环接收消息。当业务结束时，释放互斥锁并退出线程。<ul>
+<li>回调函数是在特定事件发生时自动调用的函数，用于处理相应的事件或数据。在sub_thread中调用了mosquitto库提供的mosquitto_connect_callback_set和 mosquitto_message_callback_set。</li>
+</ul>
+</li>
+<li><code>pub_thread</code>函数操作和sub_thread类似，但不需要对其进行加锁操作。在成功建立连接后，进入一个死循环，在循环中创建一个JSON格式的消息并发布到指定的主题。</li>
+<li>在<code>main</code>函数中使用了<code>pthread_create</code>函数来创建线程，并使用<code>pthread_join</code>函数来等待线程结束。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>MQTT协议与HTTP协议相比，有何优势？为什么选择MQTT协议进行数据传送？</strong><ul>
+<li>MQTT协议相比HTTP协议在降低功耗和推送功能开发上具有明显优势，适合于资源有限的环境和实时数据传输的场景。因此选择MQTT协议进行数据传送。</li>
+</ul>
+</li>
+<li><strong>如何使用Qt开发平台设计手机App？</strong><ul>
+<li>使用Qt Creator工具进行开发，利用Qt提供的QML语言和Qt Quick控件进行界面设计和开发，同时通过C++语言编写业务逻辑代码。</li>
+</ul>
+</li>
+<li><strong>介绍一下阿里云上部署mosquitto的过程。</strong><ul>
+<li>在阿里云上安装mosquitto，配置mosquitto的配置文件，设置端口号和用户名密码等参数，启动mosquitto服务，配置防火墙规则允许外部访问。</li>
+<li>MQTT服务器的端口号通常是1883。</li>
+</ul>
+</li>
+<li><strong>如何在iTop4412开发板上实现对控制指令的接收和执行？</strong><ul>
+<li>通过Linux多线程编程，在iTop4412开发板上创建一个线程来监听MQTT服务器发送的控制指令，接收到指令后解析并执行对应的命令。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何使用JSON格式封装控制指令？</strong><ul>
+<li>使用 <code>cJSON_CreateObject()</code> 函数创建一个空的JSON对象。</li>
+<li>使用 <code>cJSON_AddNumberToObject()</code> 函数向JSON对象中添加一个键值对，键为 “temp”，值为一个随机生成的温度值 <code>a</code>。</li>
+<li>使用 <code>cJSON_Print()</code> 函数将JSON对象打印成JSON格式的字符串，并将其赋值给 <code>json_buf</code>。</li>
+<li>使用 <code>mosquitto_publish()</code> 函数将JSON字符串发布到MQTT服务器上的主题为 “temp” 的通道中。</li>
+</ul>
+</li>
+<li><strong>如何通过mosquitto服务器将客户端的控制指令转发给iTop4412开发板？</strong><ul>
+<li>在mosquitto服务器上配置相应的主题和订阅关系，客户端发布控制指令到对应的主题，mosquitto服务器将控制指令转发给iTop4412开发板的订阅者。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何处理并发访问问题？</strong><ul>
+<li>订阅者线程（<code>sub_thread</code>）需要访问共享资源，涉及到订阅者之间的状态共享或者资源竞争，因此需要使用互斥锁来保护共享资源的访问，确保线程安全。</li>
+<li>而发布者线程（<code>pub_thread</code>）只是简单地发布消息，没有涉及到共享资源的修改或竞争条件，因此不需要使用互斥锁。只是在程序结束时释放资源。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何实现共享模式和私人模式的切换？</strong><ul>
+<li>通过界面设计和用户交互实现切换按钮或选项卡，根据用户选择的模式来设置相应的控制权限和功能。</li>
+</ul>
+</li>
+<li><strong>在iTop4412开发板上，如何解析JSON格式的控制指令并执行相应的功能操作？</strong><ul>
+<li>使用第三方JSON库cJSON在Linux环境下解析JSON格式的控制指令，提取出对应的命令参数，然后调用相应的系统调用或执行命令行来控制硬件设备。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何实现用户认证和权限管理？</strong><ul>
+<li>在安卓客户端上实现用户登录和注册功能。将用户信息存储在MySQL数据库上，在登陆查询当前用户是否属于该数据库，以及用户名与密码是否匹配；若不存在，可进行注册操作。</li>
+<li>由于本设计要访问特定公网的阿里云服务器上的数据库，因此在Qt开发平台上需要首先提供所需要的驱动插件之后，再利用QSqlDatabase来处理与数据库的连接，利用QSqlQuery类来执行底层数据库支持的任何SQL语句。</li>
+</ul>
+</li>
+<li><strong>如何保证系统的稳定性和可靠性？</strong><ul>
+<li>采用日志记录功能来记录系统运行状态和处理异常情况，同时进行定期的系统监控和维护。</li>
+</ul>
+</li>
+<li><strong>在Android客户端中，如何实现界面的实时更新和数据同步？</strong><ul>
+<li>使用信号与槽机制： 在Qt中，通过信号与槽机制实现对象之间的通信。当数据发生变化时，可以通过信号发送变化的消息，然后在界面组件中连接相应的槽函数来更新界面。</li>
+</ul>
+</li>
+<li><strong>在多用户智能家居控制系统中，如何实现系统的扩展性和灵活性？</strong><ul>
+<li>采用模块化设计，将系统功能拆分为独立的模块，支持动态加载和卸载，从而实现系统的扩展性和灵活性。</li>
+</ul>
+</li>
+<li><strong>在iTop4412开发板上，如何实现硬件设备的驱动和控制？</strong><ul>
+<li>通过 MQTT 实现硬件设备的驱动和控制：<ul>
+<li>当用户在 UI 上进行操作时，比如点击 LED 开关按钮，UI 触发对应的槽函数，如 <code>on_ledBt_ON_1_clicked()</code>。</li>
+<li>在槽函数中构造一个JSON 数据包，其中包含了需要控制的硬件设备信息，比如 LED 的状态。然后将这个 JSON 数据包发布到 MQTT 主题上，通过 MQTT 协议发送给 MQTT 服务器。</li>
+<li>在硬件设备端，通过订阅相应的 MQTT 主题，监听来自 MQTT 服务器的消息。</li>
+<li>当硬件设备端接收到相应的消息后，解析 JSON 数据包，获取到控制指令，并执行相应的操作，例如打开或关闭 LED。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>该项目还有哪些可以改进的地方？</strong><ul>
+<li>可以在mosquitto服务器上配置TLS&#x2F;SSL加密通信，客户端和服务器之间通过证书验证进行安全连接，防止数据被窃取或篡改。确保安卓客户端与mosquitto服务器之间的通信安全性。</li>
+<li>此外，对于多线程部分我觉得还可以再考虑细化锁的粒度，以及进行RAII技术管理互斥锁，避免在某些异常情况下未释放锁导致资源泄露问题。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+  </entry>
+  <entry>
     <title>洛谷刷题</title>
     <url>/2024/03/15/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
     <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -3415,9 +3424,50 @@
       </categories>
   </entry>
   <entry>
+    <title>计算机网络</title>
+    <url>/2024/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<h2 id="1、计算机网络体系结构"><a href="#1、计算机网络体系结构" class="headerlink" title="1、计算机网络体系结构"></a>1、计算机网络体系结构</h2><p>OSI：开放系统互连参考模型</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png" alt="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png"></p>
+<p>在实际的学习中，按照原理体系结构的5层来学习：</p>
+<ul>
+<li>应用层：解决通过应用进程的交互来实现特定网络应用的问题；<ul>
+<li>HTTP&#x2F;SMTP&#x2F;DNS&#x2F;RTP</li>
+</ul>
+</li>
+<li>运输层：解决进程之间基于网络的通信问题；<ul>
+<li>TCP&#x2F;UDP</li>
+</ul>
+</li>
+<li>网络层：解决分组在多个网络上传输（路由）的问题；<ul>
+<li>IP</li>
+</ul>
+</li>
+<li>数据链路层：解决分组在一个网络（或一段链路）上传输的问题；</li>
+<li>物理层：解决使用何种信号来传输比特的问题。</li>
+</ul>
+<p>术语：</p>
+<ul>
+<li>对等层次间传送的数据包成 为该层的<strong>协议数据单元PDU</strong></li>
+<li>同一系统内，层与层之间交换的数据包成为<strong>服务数据单元SDU</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091442363.png" alt="image-20240409144246028"></p>
+<blockquote>
+<p><strong>在OSI参考模型中，自下而上第一个提供端到端服务的层次是：传输层。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091450968.png" alt="image-20240409145001705"></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>面试八股</title>
     <url>/2024/04/07/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/</url>
-    <content><![CDATA[<h3 id="1-如何看待C-和C的关系？"><a href="#1-如何看待C-和C的关系？" class="headerlink" title="1.如何看待C++和C的关系？"></a>1.如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
+    <content><![CDATA[<span id="more"></span>
+
+<h3 id="1-如何看待C-和C的关系？"><a href="#1-如何看待C-和C的关系？" class="headerlink" title="1.如何看待C++和C的关系？"></a>1.如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
 <h3 id="2-讲一下什么是智能指针？"><a href="#2-讲一下什么是智能指针？" class="headerlink" title="2.讲一下什么是智能指针？"></a>2.讲一下什么是智能指针？</h3><p>智能指针是对裸指针的封装，其实质上是一个类，在离开类的作用范围后会自动调用析构函数释放资源，因此避免了程序员手动操作时忘记释放资源导致的内存泄漏问题。<br>智能指针包含4类：<br>（1）auto_ptr：在C++11中已经被废弃使用。它提供独占所有权，但没有复制语义，存在潜在的危险，例如当它被复制后原始指针可能被意外释放。<br>（2）unique_ptr：实现了对资源的独占访问，同一时刻只能有一个指针对资源进行访问。<br>（3）shared_ptr：当有多个对象需要共享资源时，则使用shared_ptr。其内部维护了一个引用计数器，当引用计数减少为0时调用delete释放资源。<br>当存在下列情况时会使得引用计数增加：1）新建一个shared_ptr指向对象；2）拷贝构造函数复制一个shared_ptr；3）复制操作将一个shared_ptr复制给另一个shared_ptr。<br>当存在下列操作时会使得引用计数减少：1）当一个shared_ptr被销毁时，如离开作用域，或调用了析构函数；2）当一个shared_ptr不再指向某个资源，如调用reset方法。<br>（4）weak_ptr：指向一个shared_ptr对象，并不会增加其引用计数，而只是提供一种访问方式。可以解决shared_ptr中存在的循环引用问题。</p>
 <h3 id="3-循环引用是如何发生的？如何解决？"><a href="#3-循环引用是如何发生的？如何解决？" class="headerlink" title="3.循环引用是如何发生的？如何解决？"></a>3.循环引用是如何发生的？如何解决？</h3><p>当多个shared_ptr对象互相引用，或是在某些比较复杂的数据结构中存在多条引用路径时，可能存在循环引用问题，导致资源无法被释放。此时就可以使用weak_ptr来打破循环，因为waek_ptr不会增加引用计数。</p>
 <h3 id="4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？"><a href="#4-shared-ptr是线程安全的吗？多线程使用时需要注意什么问题？" class="headerlink" title="4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？"></a>4.shared_ptr是线程安全的吗？多线程使用时需要注意什么问题？</h3><p>shared_ptr并不是线程安全的，当多个线程同时访问或修改同一个shared_ptr对象时，可能会导致数据竞争或未定义的行为。但shared_ptr内部的计数器操作是线程安全的。<br>因此，在多线程使用时，需要避免多个线程同时访问一个shared_ptr对象或对其修改。</p>
