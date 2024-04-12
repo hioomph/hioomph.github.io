@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/%E6%97%A0%E4%BB%8E%E5%B1%9E%E7%B1%BB%E5%88%AB/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<span id="more"></span>
+
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
+<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
+<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
+<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
+</li>
+<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
+</li>
+<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
+<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
+</ul>
+<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
+<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+</li>
+<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
+<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
+<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
+<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
+<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
+<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
+</blockquote>
+<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
+<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+<ol>
+<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
+<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+</ol>
+<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
+<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
+<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
+]]></content>
+      <categories>
+        <category>无从属类别</category>
+      </categories>
+  </entry>
+  <entry>
     <title>MoCoDAD</title>
     <url>/2024/04/08/%E7%A7%91%E7%A0%94/MoCoDAD/</url>
     <content><![CDATA[<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">├── config  <span class="comment">// 保存了三个数据集相关的配置文件</span></span><br><span class="line">│   ├── Avenue</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   ├── STC</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   └── UBnormal</span><br><span class="line">│      ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad_test.yaml</span><br><span class="line">│       └── mocodad_train.yaml</span><br><span class="line">├── environment.yaml  <span class="comment">// 该模型需要的库依赖</span></span><br><span class="line">├── eval_MoCoDAD.py</span><br><span class="line">├── predict_MoCoDAD.py</span><br><span class="line">├── train_MoCoDAD.py</span><br><span class="line">├── models</span><br><span class="line">│   ├── common</span><br><span class="line">│   │   └── components.py</span><br><span class="line">│   ├── gcae</span><br><span class="line">│   │   └── stsgcn.py</span><br><span class="line">│   ├── mocodad_latent.py</span><br><span class="line">│   ├── mocodad.py</span><br><span class="line">│   └── stsae</span><br><span class="line">│       ├── stsae.py</span><br><span class="line">│       └── stsae_unet.py</span><br><span class="line">└── utils</span><br><span class="line">    ├── argparser.py</span><br><span class="line">    ├── data.py</span><br><span class="line">    ├── dataset.py</span><br><span class="line">    ├── dataset_utils.py</span><br><span class="line">    ├── diffusion_utils.py</span><br><span class="line">    ├── ema.py</span><br><span class="line">    ├── eval_utils.py</span><br><span class="line">    ├── get_robust_data.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── model_utils.py</span><br><span class="line">    ├── preprocessing.py</span><br><span class="line">    └── tools.py</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
@@ -182,9 +248,11 @@
 <li><p>AC代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">generateMatrix</span>(<span class="type">int</span> n) &#123;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">res</span>(n, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(n, <span class="number">0</span>));</span><br><span class="line">        <span class="type">int</span> startx = <span class="number">0</span>, starty = <span class="number">0</span>;     <span class="comment">// 定义每一圈的起始坐标位置</span></span><br><span class="line">        <span class="type">int</span> loop = n / <span class="number">2</span>;               <span class="comment">// 定义循环几圈</span></span><br><span class="line">        <span class="type">int</span> offset = <span class="number">1</span>;                 <span class="comment">// 定义每一条边遍历的长度 </span></span><br><span class="line">        <span class="type">int</span> count = <span class="number">1</span>;                  <span class="comment">// 用来给矩阵赋值</span></span><br><span class="line">        <span class="keyword">while</span> (loop--) &#123;</span><br><span class="line">            <span class="type">int</span> i = startx;</span><br><span class="line">            <span class="type">int</span> j = starty;</span><br><span class="line">            <span class="comment">// 从左至右</span></span><br><span class="line">            <span class="keyword">for</span> (j; j&lt;n-offset; ++j) &#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;            </span><br><span class="line">            <span class="comment">// 从上至下</span></span><br><span class="line">            <span class="keyword">for</span> (i; i&lt;n-offset; ++i) &#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 从右至左</span></span><br><span class="line">            <span class="keyword">for</span> (j; j&gt;starty; --j) &#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 从下至上</span></span><br><span class="line">            <span class="keyword">for</span> (i; i&gt;startx; --i) &#123;</span><br><span class="line">                res[i][j] = count++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            startx++;</span><br><span class="line">            starty++;</span><br><span class="line">            offset++;</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (n % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            res[n/<span class="number">2</span>][n/<span class="number">2</span>] = n*n;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="二、链表"><a href="#二、链表" class="headerlink" title="二、链表"></a>二、链表</h1><h2 id="1、链表的定义"><a href="#1、链表的定义" class="headerlink" title="1、链表的定义"></a>1、链表的定义</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 单链表</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">	<span class="type">int</span> val;</span><br><span class="line">	ListNode *next;</span><br><span class="line">	<span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="二、链表"><a href="#二、链表" class="headerlink" title="二、链表"></a>二、链表</h1><p>实际上感觉链表的题都可以用快慢指针来解决。</p>
+<h2 id="1、链表的定义"><a href="#1、链表的定义" class="headerlink" title="1、链表的定义"></a>1、链表的定义</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 单链表</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">	<span class="type">int</span> val;</span><br><span class="line">	ListNode *next;</span><br><span class="line">	<span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">NULL</span>) &#123;&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、删除链表元素"><a href="#2、删除链表元素" class="headerlink" title="2、删除链表元素"></a>2、删除链表元素</h2><h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203. 移除链表元素"></a>203. 移除链表元素</h3><ul>
+<h2 id="2、删除链表元素"><a href="#2、删除链表元素" class="headerlink" title="2、删除链表元素"></a>2、删除链表元素</h2><h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203. 移除链表元素"></a>203. 移除链表元素</h3><p><a href="https://leetcode.cn/problems/remove-linked-list-elements/">203. 移除链表元素</a></p>
+<ul>
 <li><p>解题思路</p>
 <ol>
 <li><p>举例来说，从<code>2-&gt;6-&gt;3</code>中删除节点6，需要完成以下几步：</p>
@@ -199,7 +267,8 @@
 <li><p>AC代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode *dummynode = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummynode-&gt;next = head;</span><br><span class="line">        </span><br><span class="line">        ListNode *cur = dummynode;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur-&gt;next-&gt;val == val) &#123;</span><br><span class="line">                ListNode *tmp = cur-&gt;next;</span><br><span class="line">                cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span> tmp;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cur = cur-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        head = dummynode-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> dummynode;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707. 设计链表"></a>707. 设计链表</h3><ul>
+<h3 id="707-设计链表"><a href="#707-设计链表" class="headerlink" title="707. 设计链表"></a>707. 设计链表</h3><p><a href="https://leetcode.cn/problems/design-linked-list/">707. 设计链表</a></p>
+<ul>
 <li><p>解题思路</p>
 <p>这里有一个要注意的点，那就是对于这个<code>index</code>，在访问操作和增删操作时，遍历停止的位置是不同的：</p>
 <ol>
@@ -210,7 +279,30 @@
 <li><p>AC代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line">        <span class="type">int</span> val;</span><br><span class="line">        ListNode *next;</span><br><span class="line">        <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">MyLinkedList</span>() &#123;</span><br><span class="line">        _dummyhead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        _size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">get</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= _size || index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *cur = _dummyhead-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (index-- &amp;&amp; cur-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur-&gt;val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode *tmp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val);</span><br><span class="line">        tmp-&gt;next = _dummyhead-&gt;next;</span><br><span class="line">        _dummyhead-&gt;next = tmp;</span><br><span class="line">        _size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode *tmp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val);</span><br><span class="line">        ListNode *cur = _dummyhead;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;next = tmp;</span><br><span class="line">        _size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode *tmp = <span class="keyword">new</span> <span class="built_in">ListNode</span>(val);</span><br><span class="line">        <span class="keyword">if</span> (index &gt; _size) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            index = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *cur = _dummyhead;</span><br><span class="line">        <span class="keyword">while</span> (index--) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        tmp-&gt;next = cur-&gt;next;</span><br><span class="line">        cur-&gt;next = tmp;</span><br><span class="line">        _size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= _size || index &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *cur = _dummyhead;</span><br><span class="line">        <span class="keyword">while</span> (index--) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *tmp = cur-&gt;next;</span><br><span class="line">        cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> tmp;</span><br><span class="line">        tmp = <span class="literal">nullptr</span>;</span><br><span class="line">        _size--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    ListNode *_dummyhead;</span><br><span class="line">    <span class="type">int</span> _size;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your MyLinkedList object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * MyLinkedList* obj = new MyLinkedList();</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;get(index);</span></span><br><span class="line"><span class="comment"> * obj-&gt;addAtHead(val);</span></span><br><span class="line"><span class="comment"> * obj-&gt;addAtTail(val);</span></span><br><span class="line"><span class="comment"> * obj-&gt;addAtIndex(index,val);</span></span><br><span class="line"><span class="comment"> * obj-&gt;deleteAtIndex(index);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="3、反转链表"><a href="#3、反转链表" class="headerlink" title="3、反转链表"></a>3、反转链表</h2><h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206. 反转链表"></a>206. 反转链表</h3><ul>
+<h3 id="19-删除链表的倒数第N个结点"><a href="#19-删除链表的倒数第N个结点" class="headerlink" title="19. 删除链表的倒数第N个结点"></a>19. 删除链表的倒数第N个结点</h3><p><a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第N个结点</a></p>
+<ul>
+<li><p>解题思路</p>
+<p>本题我采用了两趟扫描的方式进行解答。第一趟扫描确定了链表的长度，第二趟扫描则定位到了<strong>要删除结点的前一个结点</strong>。</p>
+<ol>
+<li><p>由于涉及到对头节点<code>head</code>的操作，因此定义一个<code>dummyhead</code>，避免需要对头结点单独操作；</p>
+</li>
+<li><p>如何定位到要删除结点的前一个结点，实际上需要分析<code>n</code>和<code>sz</code>之间的关系，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404120946983.png" alt="image-20240412094658218" style="zoom: 33%;" /></li>
+</ol>
+<blockquote>
+<p>然而这道题我看了代码随想录提供的题解，实际上也是快慢指针法的一种变体，并且使用快慢指针法就可以无需先遍历一遍链表来求出链表的总长度。</p>
+<p>只需要定义<code>fast</code>和<code>slow</code>两个指针</p>
+<ul>
+<li><code>fast</code>先走<code>n+1</code>步。之后<code>fast</code>和<code>slow</code>同时向前走；</li>
+<li>当<code>fast</code>指向<code>nullptr</code>时，<code>slow</code>就正好指向要删除结点的前一个结点。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        ListNode *cur1 = head;</span><br><span class="line">        <span class="type">int</span> sz = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (cur1 != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            cur1 = cur1-&gt;next;</span><br><span class="line">            sz++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode *dummyhead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummyhead-&gt;next = head;</span><br><span class="line">        ListNode *cur = dummyhead;</span><br><span class="line">        <span class="type">int</span> m = sz-n;</span><br><span class="line">        <span class="keyword">while</span> (m &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">            m--;</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">        head = dummyhead-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> dummyhead;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3、反转链表"><a href="#3、反转链表" class="headerlink" title="3、反转链表"></a>3、反转链表</h2><h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206. 反转链表"></a>206. 反转链表</h3><p><a href="https://leetcode.cn/problems/reverse-linked-list/">206. 反转链表</a></p>
+<ul>
 <li><p>解题思路</p>
 <ol>
 <li><p>这道题实际上也相当于是双指针法中的快慢指针，通过定义两个指针<code>pre</code>和<code>cur</code>来依次遍历链表中的所有元素，并在遍历的过程中修改指针的指向。</p>
@@ -222,13 +314,37 @@
 <li><p>AC代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *tmp;</span><br><span class="line">        ListNode *pre = <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode *cur = head;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            tmp = cur-&gt;next;</span><br><span class="line">            cur-&gt;next = pre;</span><br><span class="line">            pre = cur;</span><br><span class="line">            cur = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pre;        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a>24. 两两交换链表中的节点</h3><ul>
+<h3 id="24-两两交换链表中的节点"><a href="#24-两两交换链表中的节点" class="headerlink" title="24. 两两交换链表中的节点"></a>24. 两两交换链表中的节点</h3><p><a href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. 两两交换链表中的节点</a></p>
+<ul>
 <li><p>解题思路</p>
 <p>实际上这道题只要能够画图模拟出交换的过程，就没有问题了。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404111457295.png" alt="image-20240411145728810"></p>
 </li>
 <li><p>AC代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        ListNode *dummyhead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummyhead-&gt;next = head;</span><br><span class="line"></span><br><span class="line">        ListNode *cur = dummyhead;</span><br><span class="line">        <span class="keyword">while</span> (cur-&gt;next != <span class="literal">nullptr</span> &amp;&amp; cur-&gt;next-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            ListNode *tmp1 = cur-&gt;next;</span><br><span class="line">            ListNode *tmp2 = cur-&gt;next-&gt;next-&gt;next;</span><br><span class="line"></span><br><span class="line">            cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line">            cur-&gt;next-&gt;next = tmp1;</span><br><span class="line">            cur-&gt;next-&gt;next-&gt;next = tmp2;</span><br><span class="line"></span><br><span class="line">            cur = cur-&gt;next-&gt;next;  <span class="comment">// cur要往后跳两步</span></span><br><span class="line">        &#125;</span><br><span class="line">        head = dummyhead-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> dummyhead;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4、链表相交"><a href="#4、链表相交" class="headerlink" title="4、链表相交"></a>4、链表相交</h2><h3 id="面试题-02-07-链表相交"><a href="#面试题-02-07-链表相交" class="headerlink" title="面试题 02.07. 链表相交"></a>面试题 02.07. 链表相交</h3><p><a href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a></p>
+<ul>
+<li><p>解题思路</p>
+<p>主要有以下几个点要注意：</p>
+<ol>
+<li><p>最开始我额外定义了<code>a</code>和<code>b</code>用于去遍历两个链表来长度，实际上可以直接定义<code>curA</code>和<code>curB</code>，在遍历结束上让其重新指向头结点即可；</p>
+</li>
+<li><p>该题交点不是数值相等，而是指针相等！</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (curA-&gt;val == curB-&gt;val)  <span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">if</span> (curA == curB)			 <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> size_a = <span class="number">0</span>, size_b = <span class="number">0</span>;</span><br><span class="line">        ListNode *curA = headA;</span><br><span class="line">        ListNode *curB = headB;</span><br><span class="line">        <span class="keyword">while</span> (curA != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            curA = curA-&gt;next;</span><br><span class="line">            size_a++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (curB != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            curB = curB-&gt;next;</span><br><span class="line">            size_b++;</span><br><span class="line">        &#125;</span><br><span class="line">        curA = headA;</span><br><span class="line">        curB = headB;</span><br><span class="line">        <span class="type">int</span> len = <span class="built_in">abs</span>(size_a - size_b);</span><br><span class="line">        <span class="keyword">if</span> (size_a &lt; size_b) &#123;</span><br><span class="line">            <span class="built_in">swap</span>(curA, curB);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (len--) &#123;</span><br><span class="line">            curA = curA-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (curA != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            <span class="comment">// if (curA-&gt;val == curB-&gt;val) &#123;</span></span><br><span class="line">            <span class="keyword">if</span> (curA == curB) &#123;</span><br><span class="line">                <span class="keyword">return</span> curA;</span><br><span class="line">            &#125;</span><br><span class="line">            curA = curA-&gt;next;</span><br><span class="line">            curB = curB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="142-环形链表-II"><a href="#142-环形链表-II" class="headerlink" title="142. 环形链表 II"></a>142. 环形链表 II</h3><p><a href="https://leetcode.cn/problems/linked-list-cycle-ii/">142. 环形链表 II</a></p>
+<ul>
+<li><p>解题思路</p>
+<p>定义快慢指针<code>fast</code>和<code>slow</code>，其中<code>fast</code>每次走两个结点，<code>slow</code>每次走一个结点。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404121316807.png" alt="image-20240412131623148"></p>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">nullptr</span> &amp;&amp; fast-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            <span class="keyword">if</span> (fast == slow) &#123;</span><br><span class="line">                ListNode *index1 = fast;</span><br><span class="line">                ListNode *index2 = head;</span><br><span class="line">                <span class="keyword">while</span> (index1 != index2) &#123;</span><br><span class="line">                    index1 = index1-&gt;next;</span><br><span class="line">                    index2 = index2-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> index1;</span><br><span class="line">            &#125;   </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -358,142 +474,251 @@
       </categories>
   </entry>
   <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/%E6%97%A0%E4%BB%8E%E5%B1%9E%E7%B1%BB%E5%88%AB/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+    <title>数据库1_MySQL数据库.md</title>
+    <url>/2024/04/06/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="1、MySQL简介"><a href="#1、MySQL简介" class="headerlink" title="1、MySQL简介"></a>1、MySQL简介</h1><p>MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
+<p><strong>其数据通常存储在磁盘中，但也会使用缓存将一部分数据存储在内存中，以提高访问速度。</strong></p>
 <span id="more"></span>
 
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
-<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
-<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
-<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
-</li>
-<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
-</li>
-<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
+<h2 id="（1）架构逻辑"><a href="#（1）架构逻辑" class="headerlink" title="（1）架构逻辑"></a>（1）架构逻辑</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061034387.png" alt="MySQL逻辑架构"></p>
+<p>MySQL的逻辑架构大致可以分为三层：客户端、Server层和存储引擎层。</p>
 <ul>
-<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
-<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
-</ul>
-<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
-<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+<li><p>客户端（服务器层）：主要做连接处理、授权认证和安全保障等。</p>
 </li>
-<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
-<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+<li><p>Server层：涵盖了 MySQL 大多数核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（例如：日期，时间，数学和加密函数等）。存储过程，触发器，视图等跨存储引擎的功能也都在这一层实现。</p>
+</li>
+<li><p>Server 层基本组件：</p>
+<ul>
+<li><p><strong>连接器</strong>：我们使用数据库，第一步是连接到数据库。而连接器负责跟客户端建立连接、获取权限、维持和管理连接；</p>
+</li>
+<li><p><strong>查询缓存</strong>：执行查询语句的时候，会先查询缓存，校验 SQL 是否执行过，如果有 SQL 的缓存，直接返回给客户端，如果没有命中，执行后续的操作；（MySQL 8.0 版本删除）</p>
+</li>
+<li><p><strong>分析器</strong>：没有命中缓存的话，SQL 语句就会经过分析器，主要分为两步，词法分析和语法分析，先看 SQL 语句要做什么，再检查 SQL 语句语法是否正确；</p>
+</li>
+<li><p><strong>优化器</strong>：优化器对查询进行优化，包括重写查询、决定表的读写顺序以及选择合适的索引等，生成执行计划，优化器主要做的操作包括：</p>
+<ul>
+<li>表里面有多个索引的时候，决定使用哪个索引；</li>
+<li>一个语句有多表关联（join）的时候，决定各个表的连接顺序；</li>
+</ul>
+</li>
+<li><p><strong>执行器</strong>：首先执行前会校验该用户有没有权限，如果没有权限，就会返回错误信息，如果有权限，就会根据执行计划去调用引擎的接口，返回结果。</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
-<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
-<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
-<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
-<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
-</blockquote>
-<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
-<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+</li>
+<li><p><strong>存储引擎层</strong>：主要负责数据的存储和提取，Server层通过 API 与存储引擎层进行交互。服务器通过 API 与存储引擎通信，这些接口屏蔽了不同存储引擎的差异，使得差异对上层查询过程透明。除了会解析外键定义的 InnoDB 外，存储引擎不会解析 SQL，不同存储引擎之间也不会相互通信，只是简单响应上层服务器请求。</p>
+</li>
+</ul>
+<h1 id="2、面试提问"><a href="#2、面试提问" class="headerlink" title="2、面试提问"></a>2、面试提问</h1><h2 id="（1）为什么MySQL使用B-树索引？"><a href="#（1）为什么MySQL使用B-树索引？" class="headerlink" title="（1）为什么MySQL使用B+树索引？"></a>（1）为什么MySQL使用B+树索引？</h2><p>B树是一种自平衡的多路搜索树，每个节点可以包含多个关键字和对应的指针，即B树的每个节点都会存储数据，B树的叶子节点之间是无指针相连接的。因此当读取叶子节点的数据时，只能通过父节点进行多次磁盘I&#x2F;O才能实现。</p>
+<p>B+树也是一种自平衡的多路搜索树，所有关键字都存储在叶子节点上，非叶子节点只存储索引列和指向子节点的指针。叶子节点通过指针连接起来，形成一个有序的链表，可以支持顺序访问和范围查询。这样就带来了以下好处：</p>
+<ul>
+<li>范围查询效率高；</li>
+<li>顺序访问性能好；</li>
+<li>更少的磁盘I&#x2F;O；</li>
+<li>内存友好。</li>
+</ul>
+<h2 id="（2）MySQL的慢查询如何优化"><a href="#（2）MySQL的慢查询如何优化" class="headerlink" title="（2）MySQL的慢查询如何优化"></a>（2）MySQL的慢查询如何优化</h2><p>针对SQL慢查询，可以考虑以下一些优化措施：</p>
 <ol>
-<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
-<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+<li><strong>优化查询语句结构：</strong>检查是否存在冗余的操作、重复的子查询、不必要的排序、大量的JOIN操作等。优化查询语句的结构和逻辑，减少不必要的数据读取和计算。</li>
+<li><strong>添加合适的索引：</strong>确保查询中涉及的列都有适当的索引，并且查询条件能够充分利用索引。通过使用适当的索引，提高查询的性能。但是要避免过多的索引，因为过多的索引会增加写入操作的开销。</li>
+<li><strong>数据库表优化：</strong>对于频繁查询的表，考虑进行分库或分表操作，将数据分散存储，提高查询效率。</li>
+<li><strong>优化数据库配置：</strong>根据服务器的硬件资源和应用需求，调整MySQL的配置参数，如缓冲区大小、并发连接树、查询缓存等。</li>
+<li><strong>使用缓存技术：</strong>对于一些相对稳定的查询结果，考虑使用缓存技术，如Redis、Memcached等，减少对数据库的访问。</li>
 </ol>
-<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
-<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
-<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
+<h2 id="（3）索引的设计原则"><a href="#（3）索引的设计原则" class="headerlink" title="（3）索引的设计原则"></a>（3）索引的设计原则</h2><ol>
+<li>选择适当的列进行索引：选择那些经常被用于查询条件、连接操作和排序的列进行索引；</li>
+<li><strong>考虑查询类型：</strong>根据常见的查询模式和性能需求，选择合适的索引类型。如范围查询选择B树索引；全文搜索选择全文索引；</li>
+<li><strong>避免过多的索引：</strong>过多的索引会增加写操作的开销，占用存储空间；</li>
+<li><strong>注意索引的维护成本：</strong></li>
+<li><strong>联合索引的使用：</strong>联合索引可以包含多个列，通过多个列的组合来创建索引。在创建联合索引时，需要根据查询的频率和顺序选择合适的列顺序，将最常用的列放在前面可以提高索引的效果。</li>
+</ol>
+<h2 id="（4）什么是索引？索引有哪些优缺点？"><a href="#（4）什么是索引？索引有哪些优缺点？" class="headerlink" title="（4）什么是索引？索引有哪些优缺点？"></a>（4）什么是索引？索引有哪些优缺点？</h2><p>索引是数据库中用于提高数据检索性能的排好序的数据结构。它类似于书籍的目录，通过建立特定的数据结构将列或多个列的值与它们在数据表中对应的行关联起来，以加快查询速度。</p>
+<p>索引的优点包括：</p>
+<ol>
+<li>提高查询性能：索引可以加快数据库查找数据的速度，通过快速定位到符合查询条件的数据行，减少了数据库进行全表扫描的开销，从而显著提高查询效率。</li>
+<li>唯一性约束：通过在索引上设置唯一性约束，可以确保数据的唯一性，防止重复数据的插入。</li>
+</ol>
+<p>然而，索引也有一些缺点：</p>
+<ol>
+<li>占用存储空间：索引通常需要占用一定的磁盘空间。过多的索引可能会增加存储成本。</li>
+<li>索引维护的开销：当对数据表进行插入、更新或删除操作时，索引也需要进行相应的维护操作，这可能导致数据写入的性能下降，更新缓慢。</li>
+</ol>
+<h2 id="（5）索引分类"><a href="#（5）索引分类" class="headerlink" title="（5）索引分类"></a>（5）索引分类</h2><p>在MySQL中，索引按照索引列的类型可以分为以下几种：</p>
+<ul>
+<li><strong>主键索引：</strong>用于唯一标识每一条记录，主键索引的值不允许重复且不能为空，并且一个表只能有一个主键索引。</li>
+<li><strong>唯一索引：</strong>用于保证索引列的值唯一，允许为空值，但是一个表可以有多个唯一索引。</li>
+<li><strong>普通索引：</strong>没有唯一性限制，允许重复值和空值，是最基本的索引类型。</li>
+<li><strong>组合索引：</strong>在多个字段上创建的索引，可以包含多个列。组合索引可以提高多列查询的性能，但查询条件必须符合最左前缀原则，即查询从左到右使用组合索引中的列。</li>
+</ul>
+<h2 id="（6）什么是最左前缀原则？"><a href="#（6）什么是最左前缀原则？" class="headerlink" title="（6）什么是最左前缀原则？"></a>（6）什么是最左前缀原则？</h2><p><strong>最左前缀原则（Leftmost Prefix Rule）</strong>是索引在数据库查询中的一种使用规则。它指的是在使用复合索引时，索引的最左边的连续几个列会被用于查询过滤条件的匹配。</p>
+<p>具体来说，如果在表中创建了一个复合索引，包含多个列 A、B、C，那么最左前缀原则要求查询中的过滤条件必须从索引的最左边开始，并且不能跳过中间的列。只有当查询中的过滤条件与索引的最左前缀完全匹配时，索引才能被充分利用。</p>
+<p>例如，考虑以下复合索引 (A, B, C) 和查询语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> A <span class="operator">=</span> <span class="string">&#x27;value1&#x27;</span> <span class="keyword">AND</span> C <span class="operator">=</span> <span class="string">&#x27;value2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，最左前缀原则要求查询条件中必须包含列 A，而不能直接使用列 C 进行过滤。因为只有满足最左前缀条件，索引 (A, B, C) 才能被有效地使用。</p>
+<p>遵循最左前缀原则的好处包括：</p>
+<ol>
+<li><p>提高查询性能：通过使用索引的最左前缀，可以最大限度地减少索引扫描的数据量，提高查询的效率和响应时间。</p>
+</li>
+<li><p>减少索引占用空间：在某些情况下，使用最左前缀原则可以减少创建多个索引的需求，节省磁盘空间和索引维护的开销。</p>
+</li>
+</ol>
+<h2 id="（7）什么是索引覆盖？"><a href="#（7）什么是索引覆盖？" class="headerlink" title="（7）什么是索引覆盖？"></a>（7）什么是索引覆盖？</h2><p>覆盖索引是指一个索引包含了查询所需的所有列，而无需访问表的实际数据页。</p>
+<p>当数据库系统执行查询时，通常需要从磁盘中读取数据页到内存中才能进行处理。而如果使用了覆盖索引，由于索引已经包含了查询所需的所有列的值，数据库系统可以直接通过索引来获取这些值，而不需要额外地读取数据页。这样可以减少磁盘 I&#x2F;O 的次数和数据在内存中的占用，提高查询的效率。</p>
+<p>覆盖索引通常适用于以下场景：</p>
+<ol>
+<li><p>查询语句只需要返回索引列中的数据，而不需要访问其他列的值。</p>
+</li>
+<li><p>查询语句中的条件过滤、排序或分组的列都在同一个索引上。</p>
+</li>
+</ol>
+<h2 id="（8）聚簇索引和非聚簇索引的区别是什么？"><a href="#（8）聚簇索引和非聚簇索引的区别是什么？" class="headerlink" title="（8）聚簇索引和非聚簇索引的区别是什么？"></a>（8）聚簇索引和非聚簇索引的区别是什么？</h2><p><strong>聚簇索引</strong>也被成为主键索引，它是一种特殊类型的索引，用于存储表中的数据记录。</p>
+<p><strong>非聚簇索引</strong>用于存储对表中数据记录的引用地址。</p>
+<p>区别：</p>
+<ol>
+<li>存储方式不同：聚簇索引存储数据记录，非聚簇索引存储对数据记录的引用地址；</li>
+<li>查询速度不同：聚簇索引的查询速度快于非聚簇索引；</li>
+<li>内存占用不同：聚簇索引占用更多的内存；</li>
+<li>索引更新速度不同：由于聚簇索引存储的是数据记录，因此当数据记录发生变化时，需要重构整个索引，更新速度相对较慢；而非聚簇索引只需要修改对数据记录的引用地址，因此更苏速度较快。</li>
+</ol>
+<h2 id="（9）索引失效的场景有哪些？"><a href="#（9）索引失效的场景有哪些？" class="headerlink" title="（9）索引失效的场景有哪些？"></a>（9）索引失效的场景有哪些？</h2><ol>
+<li>当查询中涉及的列<strong>没有被索引</strong>时，索引将不会被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE age = 25</code>，如果<code>age</code>列没有被索引，索引就不会被使用。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>在索引列上<strong>使用函数或表达式</strong>会导致索引失效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE YEAR(birth_date) = 1990</code>，即使<code>birth_date</code>被索引，使用<code>YEAR()</code>函数也会使索引失效。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>当使用<code>LIKE</code>操作符，并且<strong>模式以通配符开始</strong>时，索引将不被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE name LIKE &#39;%Smith&#39;</code>；但<code>LIKE &#39;Smith%&#39;</code>可以使用索引。</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>如果查询中有<strong>隐式类型转换</strong>，可能导致索引失效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE string_column = 123</code>，即使<code>string_column</code>被索引，但由于隐式将数字转换为字符串，索引可能失效。</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>当查询使用<code>OR</code>条件，并且<strong>条件中的某些字段没有被索引</strong>时，整个索引可能不会被使用。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，<code>SELECT * FROM users WHERE last_name = &#39;Smith&#39; OR age = 30</code>，如果<code>last_name</code>被索引而<code>age</code>没有，整个索引可能不会被使用。</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li>如果索引列的值分布非常不均匀，或者索引列大多数值都是相同的，优化器可能认为使用全表扫描更有效。</li>
+</ol>
+<ul>
+<li><ul>
+<li>例如，在一个大多数用户都来自同一城市的用户表中，对城市进行索引可能不会提高查询效率。</li>
+</ul>
+</li>
+</ul>
+<h2 id="（10）事务的基本特性和隔离级别？"><a href="#（10）事务的基本特性和隔离级别？" class="headerlink" title="（10）事务的基本特性和隔离级别？"></a>（10）事务的基本特性和隔离级别？</h2><p>事务具备4大特性，<strong>即原子性、一致性、隔离性和持久性</strong>。</p>
+<ol>
+<li><p><strong>原子性：</strong>事务中的所有操作要么全部执行成功，要么全部回滚到事务开始前的状态。如果在事务执行期间发生错误，系统将回滚所有已执行的操作，以保持数据的一致性。</p>
+</li>
+<li><p><strong>一致性：</strong>事务的执行不会破坏数据库的完整性约束。在事务开始和结束时，数据库必须处于一致的状态。 如小李转账100元给小白，不管操作是否成功，小李和小白的账户总额是不变的。 </p>
+</li>
+<li><p><strong>隔离性：</strong>事务的执行是相互隔离的，即每个事务对其他事务是透明的。并发执行的多个事务不会相互干扰，每个事务感知不到其他事务的存在。</p>
+</li>
+<li><p><strong>持久性：</strong>一旦事务提交成功，事务中的所有操作都必须持久化到数据库中。</p>
+</li>
+</ol>
+<p>MySQL支持以下四个事务隔离级别：</p>
+<ol>
+<li><strong>读未提交</strong>：最低的隔离级别。事务可以读取到其他事务尚未提交的数据，可能会出现脏读、不可重复读和幻读问题。</li>
+<li><strong>读已提交</strong>：事务只能读取到已经提交的数据。但在同一事务中，多次读取同一行的数据结果可能会不一致，可能会出现不可重复读和幻读问题。</li>
+<li><strong>可重复读</strong>：在同一个事务内，多次读取同一行的数据结果始终保持一致。MySQL的<strong>默认隔离级别就是可重复读</strong>。通过使用MVCC机制来实现，在读操作期间不会看到其他事务的修改，有效地解决了不可重复读问题。</li>
+<li><strong>串行化</strong>：最高的隔离级别。事务串行执行，避免了脏读、不可重复读和幻读等问题。但是并发性能较差，可能导致大量的锁竞争和资源争用。</li>
+</ol>
+<h2 id="（11）什么是脏读、幻读和不可重复读？"><a href="#（11）什么是脏读、幻读和不可重复读？" class="headerlink" title="（11）什么是脏读、幻读和不可重复读？"></a>（11）什么是脏读、幻读和不可重复读？</h2><ol>
+<li>脏读（Dirty Reads）：事务A读取到了事务B已经修改但尚未提交的数据。</li>
+<li>幻读（Phantom Reads）：事务A读取到了事务B提交的新增数据。</li>
+<li>不可重读（Non-Repeatable Reads）：事务A内部的相同查询语句在不同时刻读出的结果不一致。</li>
+</ol>
+<h2 id="（12）MySQL中in和exist的区别"><a href="#（12）MySQL中in和exist的区别" class="headerlink" title="（12）MySQL中in和exist的区别"></a>（12）MySQL中in和exist的区别</h2><p> MySQL 中的 IN 和 EXISTS都是用于查询和筛选数据的条件语句，区别在于：</p>
+<ol>
+<li><strong>IN关键字：</strong>使用 IN 条件时，我们提供一个固定的值列表，然后将其与指定列的值进行比较。如果列中的值与列表中的任何一个值匹配，就会返回结果。IN 条件适合用于确定某个字段的值是否在给定的值列表中。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1, value2, value3); </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 如果 column_name 的值与 value1、value2 或 value3 中的任何一个相匹配</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 那么这条记录将会被返回</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>EXISTS关键字：</strong>使用 EXISTS 条件时，我们需要指定一个子查询。查询的结果并不重要，而是判断子查询是否返回了至少一行结果。如果子查询返回了结果，EXISTS 条件就会被认为是满足的。EXISTS 条件适合用于判断某个条件是否至少存在于子查询的结果中。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM table_name WHERE EXISTS (SELECT * FROM another_table WHERE condition); </span><br><span class="line"></span><br><span class="line">// 如果子查询(SELECT * FROM another_table WHERE condition)返回了至少一行结果</span><br><span class="line">//那么主查询中的记录将会被返回。</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结来说：</strong></p>
+<ul>
+<li>使用 IN 条件时，比较的是指定列的值是否在给定的值列表中。</li>
+<li>使用 EXISTS 条件时，判断的是子查询是否返回了至少一行结果。</li>
+</ul>
+<h2 id="（13）DATETIME和TIMESTAMP的异同"><a href="#（13）DATETIME和TIMESTAMP的异同" class="headerlink" title="（13）DATETIME和TIMESTAMP的异同"></a>（13）DATETIME和TIMESTAMP的异同</h2><p>DATETIME 和 TIMESTAMP 是 MySQL 中用于存储日期和时间的数据类型，它们之间有一些异同点：</p>
+<ol>
+<li><strong>存储范围</strong>：<ul>
+<li>DATETIME 类型可以存储的范围是 ‘1000-01-01 00:00:00’ 到 ‘9999-12-31 23:59:59’。</li>
+<li>TIMESTAMP 类型可以存储的范围是 ‘1970-01-01 00:00:01’ UTC 到 ‘2038-01-19 03:14:07’ UTC（32 位系统的最大时间戳限制）。</li>
+</ul>
+</li>
+<li><strong>存储空间</strong>：<ul>
+<li>DATETIME 类型在存储时需要占用 8 个字节。</li>
+<li>TIMESTAMP 类型在存储时通常只需要占用 4 个字节，因为它存储的是从 UNIX 纪元开始以来的秒数，但是在一些情况下可能会占用 5 个字节，取决于时区的支持和配置。</li>
+</ul>
+</li>
+<li><strong>时区处理</strong>：<ul>
+<li>DATETIME 类型不涉及时区转换，存储的时间是按照指定的时区直接存储的。</li>
+<li>TIMESTAMP 类型存储的时间是自动转换为 UTC 时间并存储的，但在检索时会再次转换为当前会话时区的时间。</li>
+</ul>
+</li>
+<li><strong>自动更新功能</strong>：<ul>
+<li>TIMESTAMP 类型可以设置为自动更新当前时间戳，即在插入或更新记录时会自动更新为当前时间。</li>
+<li>DATETIME 类型不具备自动更新功能，需要手动在插入或更新时指定时间。</li>
+</ul>
+</li>
+<li><strong>索引性能</strong>：<ul>
+<li>在创建索引时，TIMESTAMP 类型的字段因为只占用了 4 个字节，通常会比 DATETIME 类型的字段占用的索引空间更小，因此在一些情况下查询性能可能会更好。</li>
+</ul>
+</li>
+</ol>
+<h2 id="（14）数据库的三大范式是什么？"><a href="#（14）数据库的三大范式是什么？" class="headerlink" title="（14）数据库的三大范式是什么？"></a>（14）数据库的三大范式是什么？</h2><ol>
+<li><p><strong>第一范式（1NF）</strong>：确保数据库中的每个列都是原子性的，即每个列都不可再分。</p>
+</li>
+<li><p><strong>第二范式（2NF）</strong>：在满足第一范式的基础上，确保数据库中的每个非主键列完全依赖于主键。</p>
+</li>
+<li><p><strong>第三范式（3NF）</strong>：在满足第二范式的基础上，确保数据库中的每个非主键列之间不存在传递依赖。</p>
+</li>
+</ol>
+<h2 id="（15）数据库表的连接方式"><a href="#（15）数据库表的连接方式" class="headerlink" title="（15）数据库表的连接方式"></a>（15）数据库表的连接方式</h2><ol>
+<li>内连接（INNER JOIN）：返回两个表中匹配的行，只有当左表和右表中都存在匹配的行时才会返回结果。</li>
+<li>左连接（LEFT JOIN）：左连接返回左表中的所有行，以及与右边匹配的行。若右表中无匹配行，则返回NULL值。</li>
+<li>右连接（RIGHT JOIN）：右连接返回右表中的所有行，以及与左表匹配的行。若左表中无匹配行，则返回NULL值。</li>
+<li>全连接（FULL OUTER JOIN）：全连接返回左表和右边中的所有行，如果某个表中没有匹配的行，则返回NULL值。</li>
+<li>自连接（SELF JOIN）：自连接是指在同一个表中进行连接操作，可以用于查找表中某些数据的关联信息。</li>
+</ol>
 ]]></content>
       <categories>
-        <category>无从属类别</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计算机网络</title>
-    <url>/2024/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h2 id="1、计算机网络体系结构"><a href="#1、计算机网络体系结构" class="headerlink" title="1、计算机网络体系结构"></a>1、计算机网络体系结构</h2><p>OSI：开放系统互连参考模型</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png" alt="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png"></p>
-<p>在实际的学习中，按照原理体系结构的5层来学习：</p>
-<ul>
-<li>应用层：解决通过应用进程的交互来实现特定网络应用的问题；<ul>
-<li>HTTP&#x2F;SMTP&#x2F;DNS&#x2F;RTP</li>
-</ul>
-</li>
-<li>运输层：解决进程之间基于网络的通信问题；<ul>
-<li>TCP&#x2F;UDP</li>
-</ul>
-</li>
-<li>网络层：解决分组在多个网络上传输（路由）的问题；<ul>
-<li>IP</li>
-</ul>
-</li>
-<li>数据链路层：解决分组在一个网络（或一段链路）上传输的问题；</li>
-<li>物理层：解决使用何种信号来传输比特的问题。</li>
-</ul>
-<p>术语：</p>
-<ul>
-<li>对等层次间传送的数据包成 为该层的<strong>协议数据单元PDU</strong></li>
-<li>同一系统内，层与层之间交换的数据包成为<strong>服务数据单元SDU</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091442363.png" alt="image-20240409144246028"></p>
-<blockquote>
-<p><strong>在OSI参考模型中，自下而上第一个提供端到端服务的层次是：传输层。</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091450968.png" alt="image-20240409145001705"></p>
-</blockquote>
-<h2 id="2、网络层-网际层"><a href="#2、网络层-网际层" class="headerlink" title="2、网络层&#x2F;网际层"></a>2、网络层&#x2F;网际层</h2><p>主要任务：实现网络互联，进而实现数据包在各网络之间的传输。</p>
-<p>主要解决问题：</p>
-<ul>
-<li>网络层向运输层提供可靠传输还是不可靠传输</li>
-<li>网络层寻址问题</li>
-<li>路由选择问题</li>
-</ul>
-<p>主要包含协议：IP&#x2F;ICMP&#x2F;IGMP&#x2F;ARP</p>
-<h3 id="IPv4地址"><a href="#IPv4地址" class="headerlink" title="IPv4地址"></a>IPv4地址</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404102147479.png" alt="image-20240410214744301"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247569.png" alt="image-20240411224704153"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247924.png" alt="image-20240411224712721"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247351.png" alt="image-20240411224721026"></p>
-<h2 id="3、运输层"><a href="#3、运输层" class="headerlink" title="3、运输层"></a>3、运输层</h2><h3 id="（1）TCP和UDP的对比"><a href="#（1）TCP和UDP的对比" class="headerlink" title="（1）TCP和UDP的对比"></a>（1）TCP和UDP的对比</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253344.png" alt="image-20240411225347275"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253506.png" alt="image-20240411225336420"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253438.png" alt="image-20240411225324377"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253966.png" alt="image-20240411225311873"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112254916.png" alt="image-20240411225407846"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112254989.png" alt="image-20240411225418919"></p>
-<h3 id="（2）TCP的流量控制"><a href="#（2）TCP的流量控制" class="headerlink" title="（2）TCP的流量控制"></a>（2）TCP的流量控制</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339229.png" alt="第5章 运输层_172"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339092.png" alt="第5章 运输层_173"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339372.png" alt="第5章 运输层_173"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340245.png" alt="第5章 运输层_174"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340259.png" alt="第5章 运输层_175"></p>
-<h3 id="（3）TCP的拥塞控制"><a href="#（3）TCP的拥塞控制" class="headerlink" title="（3）TCP的拥塞控制"></a>（3）TCP的拥塞控制</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342343.png" alt="第5章 运输层_195"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342797.png" alt="第5章 运输层_205"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342640.png" alt="第5章 运输层_208"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112343369.png" alt="第5章 运输层_209"></p>
-<h3 id="（4）TCP超时重传"><a href="#（4）TCP超时重传" class="headerlink" title="（4）TCP超时重传"></a>（4）TCP超时重传</h3><h3 id="（5）TCP可靠传输的实现"><a href="#（5）TCP可靠传输的实现" class="headerlink" title="（5）TCP可靠传输的实现"></a>（5）TCP可靠传输的实现</h3><p>TCP基于以字节为单位的滑动窗口来实现可靠传输。</p>
-<p>接收方向发送方发送的“<strong>确认</strong>”是指：希望收到的下一个字节，而不是我已经收到的最后一个字节。</p>
-<h3 id="（6）TCP的“三次握手”"><a href="#（6）TCP的“三次握手”" class="headerlink" title="（6）TCP的“三次握手”"></a>（6）TCP的“三次握手”</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340257.png" alt="第5章 运输层_114"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112341766.png" alt="第5章 运输层_120"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112341276.png" alt="第5章 运输层_121"></p>
-<h3 id="（7）TCP的“四次挥手”"><a href="#（7）TCP的“四次挥手”" class="headerlink" title="（7）TCP的“四次挥手”"></a>（7）TCP的“四次挥手”</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342518.png" alt="第5章 运输层_137"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342489.png" alt="第5章 运输层_141"></p>
-<h2 id="4、应用层"><a href="#4、应用层" class="headerlink" title="4、应用层"></a>4、应用层</h2>]]></content>
-      <categories>
-        <category>计算机基础</category>
+        <category>面试</category>
+        <category>数据库</category>
       </categories>
   </entry>
   <entry>
@@ -1150,254 +1375,6 @@
       </categories>
   </entry>
   <entry>
-    <title>数据库1_MySQL数据库.md</title>
-    <url>/2024/04/06/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="1、MySQL简介"><a href="#1、MySQL简介" class="headerlink" title="1、MySQL简介"></a>1、MySQL简介</h1><p>MySQL是一种关系型数据库管理系统，关系数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
-<p><strong>其数据通常存储在磁盘中，但也会使用缓存将一部分数据存储在内存中，以提高访问速度。</strong></p>
-<span id="more"></span>
-
-<h2 id="（1）架构逻辑"><a href="#（1）架构逻辑" class="headerlink" title="（1）架构逻辑"></a>（1）架构逻辑</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061034387.png" alt="MySQL逻辑架构"></p>
-<p>MySQL的逻辑架构大致可以分为三层：客户端、Server层和存储引擎层。</p>
-<ul>
-<li><p>客户端（服务器层）：主要做连接处理、授权认证和安全保障等。</p>
-</li>
-<li><p>Server层：涵盖了 MySQL 大多数核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（例如：日期，时间，数学和加密函数等）。存储过程，触发器，视图等跨存储引擎的功能也都在这一层实现。</p>
-</li>
-<li><p>Server 层基本组件：</p>
-<ul>
-<li><p><strong>连接器</strong>：我们使用数据库，第一步是连接到数据库。而连接器负责跟客户端建立连接、获取权限、维持和管理连接；</p>
-</li>
-<li><p><strong>查询缓存</strong>：执行查询语句的时候，会先查询缓存，校验 SQL 是否执行过，如果有 SQL 的缓存，直接返回给客户端，如果没有命中，执行后续的操作；（MySQL 8.0 版本删除）</p>
-</li>
-<li><p><strong>分析器</strong>：没有命中缓存的话，SQL 语句就会经过分析器，主要分为两步，词法分析和语法分析，先看 SQL 语句要做什么，再检查 SQL 语句语法是否正确；</p>
-</li>
-<li><p><strong>优化器</strong>：优化器对查询进行优化，包括重写查询、决定表的读写顺序以及选择合适的索引等，生成执行计划，优化器主要做的操作包括：</p>
-<ul>
-<li>表里面有多个索引的时候，决定使用哪个索引；</li>
-<li>一个语句有多表关联（join）的时候，决定各个表的连接顺序；</li>
-</ul>
-</li>
-<li><p><strong>执行器</strong>：首先执行前会校验该用户有没有权限，如果没有权限，就会返回错误信息，如果有权限，就会根据执行计划去调用引擎的接口，返回结果。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>存储引擎层</strong>：主要负责数据的存储和提取，Server层通过 API 与存储引擎层进行交互。服务器通过 API 与存储引擎通信，这些接口屏蔽了不同存储引擎的差异，使得差异对上层查询过程透明。除了会解析外键定义的 InnoDB 外，存储引擎不会解析 SQL，不同存储引擎之间也不会相互通信，只是简单响应上层服务器请求。</p>
-</li>
-</ul>
-<h1 id="2、面试提问"><a href="#2、面试提问" class="headerlink" title="2、面试提问"></a>2、面试提问</h1><h2 id="（1）为什么MySQL使用B-树索引？"><a href="#（1）为什么MySQL使用B-树索引？" class="headerlink" title="（1）为什么MySQL使用B+树索引？"></a>（1）为什么MySQL使用B+树索引？</h2><p>B树是一种自平衡的多路搜索树，每个节点可以包含多个关键字和对应的指针，即B树的每个节点都会存储数据，B树的叶子节点之间是无指针相连接的。因此当读取叶子节点的数据时，只能通过父节点进行多次磁盘I&#x2F;O才能实现。</p>
-<p>B+树也是一种自平衡的多路搜索树，所有关键字都存储在叶子节点上，非叶子节点只存储索引列和指向子节点的指针。叶子节点通过指针连接起来，形成一个有序的链表，可以支持顺序访问和范围查询。这样就带来了以下好处：</p>
-<ul>
-<li>范围查询效率高；</li>
-<li>顺序访问性能好；</li>
-<li>更少的磁盘I&#x2F;O；</li>
-<li>内存友好。</li>
-</ul>
-<h2 id="（2）MySQL的慢查询如何优化"><a href="#（2）MySQL的慢查询如何优化" class="headerlink" title="（2）MySQL的慢查询如何优化"></a>（2）MySQL的慢查询如何优化</h2><p>针对SQL慢查询，可以考虑以下一些优化措施：</p>
-<ol>
-<li><strong>优化查询语句结构：</strong>检查是否存在冗余的操作、重复的子查询、不必要的排序、大量的JOIN操作等。优化查询语句的结构和逻辑，减少不必要的数据读取和计算。</li>
-<li><strong>添加合适的索引：</strong>确保查询中涉及的列都有适当的索引，并且查询条件能够充分利用索引。通过使用适当的索引，提高查询的性能。但是要避免过多的索引，因为过多的索引会增加写入操作的开销。</li>
-<li><strong>数据库表优化：</strong>对于频繁查询的表，考虑进行分库或分表操作，将数据分散存储，提高查询效率。</li>
-<li><strong>优化数据库配置：</strong>根据服务器的硬件资源和应用需求，调整MySQL的配置参数，如缓冲区大小、并发连接树、查询缓存等。</li>
-<li><strong>使用缓存技术：</strong>对于一些相对稳定的查询结果，考虑使用缓存技术，如Redis、Memcached等，减少对数据库的访问。</li>
-</ol>
-<h2 id="（3）索引的设计原则"><a href="#（3）索引的设计原则" class="headerlink" title="（3）索引的设计原则"></a>（3）索引的设计原则</h2><ol>
-<li>选择适当的列进行索引：选择那些经常被用于查询条件、连接操作和排序的列进行索引；</li>
-<li><strong>考虑查询类型：</strong>根据常见的查询模式和性能需求，选择合适的索引类型。如范围查询选择B树索引；全文搜索选择全文索引；</li>
-<li><strong>避免过多的索引：</strong>过多的索引会增加写操作的开销，占用存储空间；</li>
-<li><strong>注意索引的维护成本：</strong></li>
-<li><strong>联合索引的使用：</strong>联合索引可以包含多个列，通过多个列的组合来创建索引。在创建联合索引时，需要根据查询的频率和顺序选择合适的列顺序，将最常用的列放在前面可以提高索引的效果。</li>
-</ol>
-<h2 id="（4）什么是索引？索引有哪些优缺点？"><a href="#（4）什么是索引？索引有哪些优缺点？" class="headerlink" title="（4）什么是索引？索引有哪些优缺点？"></a>（4）什么是索引？索引有哪些优缺点？</h2><p>索引是数据库中用于提高数据检索性能的排好序的数据结构。它类似于书籍的目录，通过建立特定的数据结构将列或多个列的值与它们在数据表中对应的行关联起来，以加快查询速度。</p>
-<p>索引的优点包括：</p>
-<ol>
-<li>提高查询性能：索引可以加快数据库查找数据的速度，通过快速定位到符合查询条件的数据行，减少了数据库进行全表扫描的开销，从而显著提高查询效率。</li>
-<li>唯一性约束：通过在索引上设置唯一性约束，可以确保数据的唯一性，防止重复数据的插入。</li>
-</ol>
-<p>然而，索引也有一些缺点：</p>
-<ol>
-<li>占用存储空间：索引通常需要占用一定的磁盘空间。过多的索引可能会增加存储成本。</li>
-<li>索引维护的开销：当对数据表进行插入、更新或删除操作时，索引也需要进行相应的维护操作，这可能导致数据写入的性能下降，更新缓慢。</li>
-</ol>
-<h2 id="（5）索引分类"><a href="#（5）索引分类" class="headerlink" title="（5）索引分类"></a>（5）索引分类</h2><p>在MySQL中，索引按照索引列的类型可以分为以下几种：</p>
-<ul>
-<li><strong>主键索引：</strong>用于唯一标识每一条记录，主键索引的值不允许重复且不能为空，并且一个表只能有一个主键索引。</li>
-<li><strong>唯一索引：</strong>用于保证索引列的值唯一，允许为空值，但是一个表可以有多个唯一索引。</li>
-<li><strong>普通索引：</strong>没有唯一性限制，允许重复值和空值，是最基本的索引类型。</li>
-<li><strong>组合索引：</strong>在多个字段上创建的索引，可以包含多个列。组合索引可以提高多列查询的性能，但查询条件必须符合最左前缀原则，即查询从左到右使用组合索引中的列。</li>
-</ul>
-<h2 id="（6）什么是最左前缀原则？"><a href="#（6）什么是最左前缀原则？" class="headerlink" title="（6）什么是最左前缀原则？"></a>（6）什么是最左前缀原则？</h2><p><strong>最左前缀原则（Leftmost Prefix Rule）</strong>是索引在数据库查询中的一种使用规则。它指的是在使用复合索引时，索引的最左边的连续几个列会被用于查询过滤条件的匹配。</p>
-<p>具体来说，如果在表中创建了一个复合索引，包含多个列 A、B、C，那么最左前缀原则要求查询中的过滤条件必须从索引的最左边开始，并且不能跳过中间的列。只有当查询中的过滤条件与索引的最左前缀完全匹配时，索引才能被充分利用。</p>
-<p>例如，考虑以下复合索引 (A, B, C) 和查询语句：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> my_table <span class="keyword">WHERE</span> A <span class="operator">=</span> <span class="string">&#x27;value1&#x27;</span> <span class="keyword">AND</span> C <span class="operator">=</span> <span class="string">&#x27;value2&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>在这种情况下，最左前缀原则要求查询条件中必须包含列 A，而不能直接使用列 C 进行过滤。因为只有满足最左前缀条件，索引 (A, B, C) 才能被有效地使用。</p>
-<p>遵循最左前缀原则的好处包括：</p>
-<ol>
-<li><p>提高查询性能：通过使用索引的最左前缀，可以最大限度地减少索引扫描的数据量，提高查询的效率和响应时间。</p>
-</li>
-<li><p>减少索引占用空间：在某些情况下，使用最左前缀原则可以减少创建多个索引的需求，节省磁盘空间和索引维护的开销。</p>
-</li>
-</ol>
-<h2 id="（7）什么是索引覆盖？"><a href="#（7）什么是索引覆盖？" class="headerlink" title="（7）什么是索引覆盖？"></a>（7）什么是索引覆盖？</h2><p>覆盖索引是指一个索引包含了查询所需的所有列，而无需访问表的实际数据页。</p>
-<p>当数据库系统执行查询时，通常需要从磁盘中读取数据页到内存中才能进行处理。而如果使用了覆盖索引，由于索引已经包含了查询所需的所有列的值，数据库系统可以直接通过索引来获取这些值，而不需要额外地读取数据页。这样可以减少磁盘 I&#x2F;O 的次数和数据在内存中的占用，提高查询的效率。</p>
-<p>覆盖索引通常适用于以下场景：</p>
-<ol>
-<li><p>查询语句只需要返回索引列中的数据，而不需要访问其他列的值。</p>
-</li>
-<li><p>查询语句中的条件过滤、排序或分组的列都在同一个索引上。</p>
-</li>
-</ol>
-<h2 id="（8）聚簇索引和非聚簇索引的区别是什么？"><a href="#（8）聚簇索引和非聚簇索引的区别是什么？" class="headerlink" title="（8）聚簇索引和非聚簇索引的区别是什么？"></a>（8）聚簇索引和非聚簇索引的区别是什么？</h2><p><strong>聚簇索引</strong>也被成为主键索引，它是一种特殊类型的索引，用于存储表中的数据记录。</p>
-<p><strong>非聚簇索引</strong>用于存储对表中数据记录的引用地址。</p>
-<p>区别：</p>
-<ol>
-<li>存储方式不同：聚簇索引存储数据记录，非聚簇索引存储对数据记录的引用地址；</li>
-<li>查询速度不同：聚簇索引的查询速度快于非聚簇索引；</li>
-<li>内存占用不同：聚簇索引占用更多的内存；</li>
-<li>索引更新速度不同：由于聚簇索引存储的是数据记录，因此当数据记录发生变化时，需要重构整个索引，更新速度相对较慢；而非聚簇索引只需要修改对数据记录的引用地址，因此更苏速度较快。</li>
-</ol>
-<h2 id="（9）索引失效的场景有哪些？"><a href="#（9）索引失效的场景有哪些？" class="headerlink" title="（9）索引失效的场景有哪些？"></a>（9）索引失效的场景有哪些？</h2><ol>
-<li>当查询中涉及的列<strong>没有被索引</strong>时，索引将不会被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE age = 25</code>，如果<code>age</code>列没有被索引，索引就不会被使用。</li>
-</ul>
-</li>
-</ul>
-<ol start="2">
-<li>在索引列上<strong>使用函数或表达式</strong>会导致索引失效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE YEAR(birth_date) = 1990</code>，即使<code>birth_date</code>被索引，使用<code>YEAR()</code>函数也会使索引失效。</li>
-</ul>
-</li>
-</ul>
-<ol start="3">
-<li>当使用<code>LIKE</code>操作符，并且<strong>模式以通配符开始</strong>时，索引将不被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE name LIKE &#39;%Smith&#39;</code>；但<code>LIKE &#39;Smith%&#39;</code>可以使用索引。</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li>如果查询中有<strong>隐式类型转换</strong>，可能导致索引失效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE string_column = 123</code>，即使<code>string_column</code>被索引，但由于隐式将数字转换为字符串，索引可能失效。</li>
-</ul>
-</li>
-</ul>
-<ol start="5">
-<li>当查询使用<code>OR</code>条件，并且<strong>条件中的某些字段没有被索引</strong>时，整个索引可能不会被使用。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，<code>SELECT * FROM users WHERE last_name = &#39;Smith&#39; OR age = 30</code>，如果<code>last_name</code>被索引而<code>age</code>没有，整个索引可能不会被使用。</li>
-</ul>
-</li>
-</ul>
-<ol start="6">
-<li>如果索引列的值分布非常不均匀，或者索引列大多数值都是相同的，优化器可能认为使用全表扫描更有效。</li>
-</ol>
-<ul>
-<li><ul>
-<li>例如，在一个大多数用户都来自同一城市的用户表中，对城市进行索引可能不会提高查询效率。</li>
-</ul>
-</li>
-</ul>
-<h2 id="（10）事务的基本特性和隔离级别？"><a href="#（10）事务的基本特性和隔离级别？" class="headerlink" title="（10）事务的基本特性和隔离级别？"></a>（10）事务的基本特性和隔离级别？</h2><p>事务具备4大特性，<strong>即原子性、一致性、隔离性和持久性</strong>。</p>
-<ol>
-<li><p><strong>原子性：</strong>事务中的所有操作要么全部执行成功，要么全部回滚到事务开始前的状态。如果在事务执行期间发生错误，系统将回滚所有已执行的操作，以保持数据的一致性。</p>
-</li>
-<li><p><strong>一致性：</strong>事务的执行不会破坏数据库的完整性约束。在事务开始和结束时，数据库必须处于一致的状态。 如小李转账100元给小白，不管操作是否成功，小李和小白的账户总额是不变的。 </p>
-</li>
-<li><p><strong>隔离性：</strong>事务的执行是相互隔离的，即每个事务对其他事务是透明的。并发执行的多个事务不会相互干扰，每个事务感知不到其他事务的存在。</p>
-</li>
-<li><p><strong>持久性：</strong>一旦事务提交成功，事务中的所有操作都必须持久化到数据库中。</p>
-</li>
-</ol>
-<p>MySQL支持以下四个事务隔离级别：</p>
-<ol>
-<li><strong>读未提交</strong>：最低的隔离级别。事务可以读取到其他事务尚未提交的数据，可能会出现脏读、不可重复读和幻读问题。</li>
-<li><strong>读已提交</strong>：事务只能读取到已经提交的数据。但在同一事务中，多次读取同一行的数据结果可能会不一致，可能会出现不可重复读和幻读问题。</li>
-<li><strong>可重复读</strong>：在同一个事务内，多次读取同一行的数据结果始终保持一致。MySQL的<strong>默认隔离级别就是可重复读</strong>。通过使用MVCC机制来实现，在读操作期间不会看到其他事务的修改，有效地解决了不可重复读问题。</li>
-<li><strong>串行化</strong>：最高的隔离级别。事务串行执行，避免了脏读、不可重复读和幻读等问题。但是并发性能较差，可能导致大量的锁竞争和资源争用。</li>
-</ol>
-<h2 id="（11）什么是脏读、幻读和不可重复读？"><a href="#（11）什么是脏读、幻读和不可重复读？" class="headerlink" title="（11）什么是脏读、幻读和不可重复读？"></a>（11）什么是脏读、幻读和不可重复读？</h2><ol>
-<li>脏读（Dirty Reads）：事务A读取到了事务B已经修改但尚未提交的数据。</li>
-<li>幻读（Phantom Reads）：事务A读取到了事务B提交的新增数据。</li>
-<li>不可重读（Non-Repeatable Reads）：事务A内部的相同查询语句在不同时刻读出的结果不一致。</li>
-</ol>
-<h2 id="（12）MySQL中in和exist的区别"><a href="#（12）MySQL中in和exist的区别" class="headerlink" title="（12）MySQL中in和exist的区别"></a>（12）MySQL中in和exist的区别</h2><p> MySQL 中的 IN 和 EXISTS都是用于查询和筛选数据的条件语句，区别在于：</p>
-<ol>
-<li><strong>IN关键字：</strong>使用 IN 条件时，我们提供一个固定的值列表，然后将其与指定列的值进行比较。如果列中的值与列表中的任何一个值匹配，就会返回结果。IN 条件适合用于确定某个字段的值是否在给定的值列表中。</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1, value2, value3); </span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 如果 column_name 的值与 value1、value2 或 value3 中的任何一个相匹配</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 那么这条记录将会被返回</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li><strong>EXISTS关键字：</strong>使用 EXISTS 条件时，我们需要指定一个子查询。查询的结果并不重要，而是判断子查询是否返回了至少一行结果。如果子查询返回了结果，EXISTS 条件就会被认为是满足的。EXISTS 条件适合用于判断某个条件是否至少存在于子查询的结果中。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM table_name WHERE EXISTS (SELECT * FROM another_table WHERE condition); </span><br><span class="line"></span><br><span class="line">// 如果子查询(SELECT * FROM another_table WHERE condition)返回了至少一行结果</span><br><span class="line">//那么主查询中的记录将会被返回。</span><br></pre></td></tr></table></figure>
-
-<p><strong>总结来说：</strong></p>
-<ul>
-<li>使用 IN 条件时，比较的是指定列的值是否在给定的值列表中。</li>
-<li>使用 EXISTS 条件时，判断的是子查询是否返回了至少一行结果。</li>
-</ul>
-<h2 id="（13）DATETIME和TIMESTAMP的异同"><a href="#（13）DATETIME和TIMESTAMP的异同" class="headerlink" title="（13）DATETIME和TIMESTAMP的异同"></a>（13）DATETIME和TIMESTAMP的异同</h2><p>DATETIME 和 TIMESTAMP 是 MySQL 中用于存储日期和时间的数据类型，它们之间有一些异同点：</p>
-<ol>
-<li><strong>存储范围</strong>：<ul>
-<li>DATETIME 类型可以存储的范围是 ‘1000-01-01 00:00:00’ 到 ‘9999-12-31 23:59:59’。</li>
-<li>TIMESTAMP 类型可以存储的范围是 ‘1970-01-01 00:00:01’ UTC 到 ‘2038-01-19 03:14:07’ UTC（32 位系统的最大时间戳限制）。</li>
-</ul>
-</li>
-<li><strong>存储空间</strong>：<ul>
-<li>DATETIME 类型在存储时需要占用 8 个字节。</li>
-<li>TIMESTAMP 类型在存储时通常只需要占用 4 个字节，因为它存储的是从 UNIX 纪元开始以来的秒数，但是在一些情况下可能会占用 5 个字节，取决于时区的支持和配置。</li>
-</ul>
-</li>
-<li><strong>时区处理</strong>：<ul>
-<li>DATETIME 类型不涉及时区转换，存储的时间是按照指定的时区直接存储的。</li>
-<li>TIMESTAMP 类型存储的时间是自动转换为 UTC 时间并存储的，但在检索时会再次转换为当前会话时区的时间。</li>
-</ul>
-</li>
-<li><strong>自动更新功能</strong>：<ul>
-<li>TIMESTAMP 类型可以设置为自动更新当前时间戳，即在插入或更新记录时会自动更新为当前时间。</li>
-<li>DATETIME 类型不具备自动更新功能，需要手动在插入或更新时指定时间。</li>
-</ul>
-</li>
-<li><strong>索引性能</strong>：<ul>
-<li>在创建索引时，TIMESTAMP 类型的字段因为只占用了 4 个字节，通常会比 DATETIME 类型的字段占用的索引空间更小，因此在一些情况下查询性能可能会更好。</li>
-</ul>
-</li>
-</ol>
-<h2 id="（14）数据库的三大范式是什么？"><a href="#（14）数据库的三大范式是什么？" class="headerlink" title="（14）数据库的三大范式是什么？"></a>（14）数据库的三大范式是什么？</h2><ol>
-<li><p><strong>第一范式（1NF）</strong>：确保数据库中的每个列都是原子性的，即每个列都不可再分。</p>
-</li>
-<li><p><strong>第二范式（2NF）</strong>：在满足第一范式的基础上，确保数据库中的每个非主键列完全依赖于主键。</p>
-</li>
-<li><p><strong>第三范式（3NF）</strong>：在满足第二范式的基础上，确保数据库中的每个非主键列之间不存在传递依赖。</p>
-</li>
-</ol>
-<h2 id="（15）数据库表的连接方式"><a href="#（15）数据库表的连接方式" class="headerlink" title="（15）数据库表的连接方式"></a>（15）数据库表的连接方式</h2><ol>
-<li>内连接（INNER JOIN）：返回两个表中匹配的行，只有当左表和右表中都存在匹配的行时才会返回结果。</li>
-<li>左连接（LEFT JOIN）：左连接返回左表中的所有行，以及与右边匹配的行。若右表中无匹配行，则返回NULL值。</li>
-<li>右连接（RIGHT JOIN）：右连接返回右表中的所有行，以及与左表匹配的行。若左表中无匹配行，则返回NULL值。</li>
-<li>全连接（FULL OUTER JOIN）：全连接返回左表和右边中的所有行，如果某个表中没有匹配的行，则返回NULL值。</li>
-<li>自连接（SELF JOIN）：自连接是指在同一个表中进行连接操作，可以用于查找表中某些数据的关联信息。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>面试</category>
-        <category>数据库</category>
-      </categories>
-  </entry>
-  <entry>
     <title>毕设项目提问</title>
     <url>/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1520,370 +1497,76 @@
       </categories>
   </entry>
   <entry>
-    <title>cmu15-445 Course Related (Spring 2023)</title>
-    <url>/2024/03/02/Project/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>PPT</th>
-<th>Project</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1-5</td>
-<td>P0 &amp; P1</td>
-<td>2.26-3.24</td>
-</tr>
-<tr>
-<td>6-9</td>
-<td>P2</td>
-<td>3.24-</td>
-</tr>
-<tr>
-<td>10-14</td>
-<td>P3</td>
-<td></td>
-</tr>
-<tr>
-<td>15-21</td>
-<td>P4</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
-<ul>
-<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
-<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
-<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
-<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
+    <title>计算机网络</title>
+    <url>/2024/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<span id="more"></span>
 
-<p>整体图片：</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242055708.png" alt="image-20240324205507545"></p>
-<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
-<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
+<h2 id="1、计算机网络体系结构"><a href="#1、计算机网络体系结构" class="headerlink" title="1、计算机网络体系结构"></a>1、计算机网络体系结构</h2><p>OSI：开放系统互连参考模型</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png" alt="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091213844.png"></p>
+<p>在实际的学习中，按照原理体系结构的5层来学习：</p>
 <ul>
-<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
+<li>应用层：解决通过应用进程的交互来实现特定网络应用的问题；<ul>
+<li>HTTP&#x2F;SMTP&#x2F;DNS&#x2F;RTP</li>
+</ul>
 </li>
-<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
+<li>运输层：解决进程之间基于网络的通信问题；<ul>
+<li>TCP&#x2F;UDP</li>
+</ul>
 </li>
-<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
+<li>网络层：解决分组在多个网络上传输（路由）的问题；<ul>
+<li>IP</li>
+</ul>
 </li>
+<li>数据链路层：解决分组在一个网络（或一段链路）上传输的问题；</li>
+<li>物理层：解决使用何种信号来传输比特的问题。</li>
 </ul>
-<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
-<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
+<p>术语：</p>
 <ul>
-<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
-<li>持有直到事务结束</li>
-<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
-<li>保护元组（行），表，索引</li>
+<li>对等层次间传送的数据包成 为该层的<strong>协议数据单元PDU</strong></li>
+<li>同一系统内，层与层之间交换的数据包成为<strong>服务数据单元SDU</strong></li>
 </ul>
-<p><code>Latches/Mutex</code>（偏底层的）</p>
-<ul>
-<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
-<li>持有直到一个操作结束</li>
-<li><strong>不需要支持回滚</strong></li>
-</ul>
-<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
-
-<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
-<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
-<ul>
-<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
-<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
-</ul>
-<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
-<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
-<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
-<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091442363.png" alt="image-20240409144246028"></p>
 <blockquote>
-<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
-<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
+<p><strong>在OSI参考模型中，自下而上第一个提供端到端服务的层次是：传输层。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404091450968.png" alt="image-20240409145001705"></p>
 </blockquote>
-<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
-<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
-<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
+<h2 id="2、网络层-网际层"><a href="#2、网络层-网际层" class="headerlink" title="2、网络层&#x2F;网际层"></a>2、网络层&#x2F;网际层</h2><p>主要任务：实现网络互联，进而实现数据包在各网络之间的传输。</p>
+<p>主要解决问题：</p>
 <ul>
-<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
-<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
+<li>网络层向运输层提供可靠传输还是不可靠传输</li>
+<li>网络层寻址问题</li>
+<li>路由选择问题</li>
 </ul>
-<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
-<ul>
-<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
-</li>
-<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
-</li>
-</ul>
-<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
-<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
-<ul>
-<li><code>Sorting + Join Buffers</code></li>
-<li><code>Query Caches</code></li>
-<li><code>Maintenance Buffers</code></li>
-<li><code>Log Buffers</code></li>
-<li><code>Dictionary Caches</code></li>
-</ul>
-<h1 id="2-B-Tree-Index"><a href="#2-B-Tree-Index" class="headerlink" title="2 B+Tree Index"></a>2 B+Tree Index</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271651204.png" alt="image-20240327165111130"></p>
-<h2 id="2-1-Hash-Tables"><a href="#2-1-Hash-Tables" class="headerlink" title="2.1 Hash Tables"></a>2.1 Hash Tables</h2><h3 id="2-1-1-Hash-Functions"><a href="#2-1-1-Hash-Functions" class="headerlink" title="2.1.1 Hash Functions"></a>2.1.1 Hash Functions</h3><p>由于<code>DBMS</code>内使用的<code>Hash Function</code>并不会暴露在外，因此<strong>没必要使用加密（<code>cryptographic</code>）哈希函数</strong>，我们希望它速度越快，<code>collision rate</code>越低越好。</p>
-<p>目前各 DBMS 主要在用的 Hash Functions 包括：</p>
-<ul>
-<li><a href="https://github.com/aappleby/smhasher">MurmurHash (2008)</a></li>
-<li><a href="https://github.com/google/cityhash">Google CityHash (2011)</a></li>
-<li><a href="https://github.com/google/farmhash">Google FarmHash (2014)</a></li>
-<li><a href="https://github.com/lemire/clhash">CLHash (2016)</a></li>
-</ul>
-<h4 id="SHA256算法"><a href="#SHA256算法" class="headerlink" title="SHA256算法"></a>SHA256算法</h4><h3 id="2-1-2-Static-Hashing-Scheme"><a href="#2-1-2-Static-Hashing-Scheme" class="headerlink" title="2.1.2 Static Hashing Scheme"></a>2.1.2 Static Hashing Scheme</h3><p>（1）Linear Probe Hashing 开放地址哈希</p>
-<p>“开放”的意思就是说：对于所有的key来说地址是开放的。碰撞时则往下一个地址存。</p>
-<p>在删除时可能会因为前项被删除导致的空白，造成找不到当前项，这时有两个解决思路：</p>
-<ul>
-<li>Tombstone；</li>
-<li>Movement</li>
-</ul>
-<p>重复key出现时的解决思路：</p>
-<ul>
-<li>Separate Linked List，把当前key作为指针指向一个新的区域：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120365.png" alt="image-20240324212003301"></p>
-<ul>
-<li>Redundant Keys，把key和value拼在一起作为新的key：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120828.png" alt="image-20240324212049757"></p>
-<p>（2）Robin Hood Hashing，是开放地址哈希的变种，其基本思想是“劫富济贫”。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123712.png" alt="image-20240324212329536"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123232.png" alt="image-20240324212342001"></p>
-<p>简单来说就是，当E和A碰撞时，正常E偏移3位，但为了不让自己比D“惨”太多，它就把D推到后面去，自己占了D的位置。此时D和E均为2。</p>
-<p>（3）Cuckoo Hashing</p>
-<blockquote>
-<p>静态的哈希结构的问题在于需要DBMS能够预判所存数据的总量，否则每次数量超过范围时都需要重建 Hash Table。这显然是很困难的。</p>
-</blockquote>
-<h3 id="2-1-3-Dynamic-Hash-Tables"><a href="#2-1-3-Dynamic-Hash-Tables" class="headerlink" title="2.1.3 Dynamic Hash Tables"></a>2.1.3 Dynamic Hash Tables</h3><p>（1）Chained Hashing（※）</p>
-<p>每个 key 对应一个链表，每个节点是一个 bucket，装满了就再往后挂一个 bucket。需要写操作时，需要请求 latch。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242129786.png" alt="image-20240324212955629"></p>
-<ul>
-<li>好处：简单；</li>
-<li>坏处：最坏的情况下Hash Table可能降级为链表，操作的时间复杂度降格为 O(n)。</li>
-</ul>
-<p>（2）Extendible Hashing</p>
-<p>Extendible Hashing 的基本思路是一边扩容，一边 rehash。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134200.png" alt="image-20240324213443953"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134195.png" alt="image-20240324213451869"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134845.png" alt="image-20240324213459513"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135620.png" alt="image-20240324213509210"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135275.png" alt="image-20240324213516681"></p>
-<p>（3）Linear Hashing</p>
-<p>基本思想：维护一个指针，指向下一个将被拆分的 bucket，每当任意一个 bucket 溢出（标准自定，如利用率到达阈值等）时，将指针指向的 bucket 拆分。</p>
-<h3 id="2-1-4-总结"><a href="#2-1-4-总结" class="headerlink" title="2.1.4 总结"></a>2.1.4 总结</h3><p>Hash Tables 提供 O(1)O(1) 的访问效率，因此它被大量地应用于 DBMS 的内部实现中。即便如此，它并不适合作为 table index 的数据结构，而 table index 的首选就是下节将介绍的 B+ Tree。</p>
-<p><strong>哈希表对于范围索引是效率极低的。</strong></p>
-<h2 id="2-2-Tree-Indexes（B-索引）"><a href="#2-2-Tree-Indexes（B-索引）" class="headerlink" title="2.2 Tree Indexes（B+索引）"></a>2.2 Tree Indexes（B+索引）</h2><blockquote>
-<p>table index 为提供 DBMS 数据查询的快速索引，它本身存储着某表某列排序后的数据，并包含指向相应 tuple 的指针。DBMS 需要保证表信息与索引信息在逻辑上保持同步。用户可以在 DBMS 中为任意表建立多个索引，DBMS 负责选择最优的索引提升查询效率。但索引自身需要占用存储空间，因此在索引数量与索引存储、维护成本之间存在权衡。</p>
-</blockquote>
-<p>索引本质上就是一种小表，是把大表中的某些列抽取出来。</p>
-<h3 id="2-2-1-B-Tree"><a href="#2-2-1-B-Tree" class="headerlink" title="2.2.1 B+ Tree"></a>2.2.1 B+ Tree</h3><p>B+ Tree 是一种自平衡树，它将数据有序地存储，且在 search、sequential access、insertions 以及 deletions 操作的复杂度上都满足 O(logn)，其中 sequential access 的最终复杂度还与所需数据总量有关。</p>
-<blockquote>
-<p>这里的O(logn)的意义在于，随着数据的增长，操作的复杂度增长是要慢于数据的增长速度的。比如数据增长到原来的2倍，但搜索时间不会变成原来的2倍。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242151303.png" alt="image-20240324215134042"></p>
-<h4 id="B-Tree-Nodes"><a href="#B-Tree-Nodes" class="headerlink" title="B+ Tree Nodes"></a>B+ Tree Nodes</h4><p>B+ Tree 中的每个 node 都包含一列按 key 排好序的 key&#x2F;value pairs，key 就是 table index 对应的 column，value 的取值与 node 类型相关，在 inner nodes 和 leaf nodes 中存的内容不同。</p>
-<p>values主要有两种存法：</p>
-<ul>
-<li>Record IDs，存储指向最终 tuple 的指针。</li>
-<li>Tuple Data，直接将 tuple data 存在 leaf node 中。key为ID，v为整个行数据。如主键索引，其key为主键，value即为这张表的全部内容。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242154259.png" alt="image-20240324215455186"></p>
-<h4 id="B-Tree-Operations"><a href="#B-Tree-Operations" class="headerlink" title="B+ Tree Operations"></a>B+ Tree Operations</h4><p><em>Insert</em></p>
-<ol>
-<li>找到对应的 leaf node，L</li>
-<li>将 key&#x2F;value pair 按顺序插入到 L 中</li>
-<li>如果 L 还有足够的空间，操作结束；如果空间不足，则需要将 L 分裂成两个节点，同时在 parent node 上新增 entry，若 parent node 也空间不足，则递归地分裂，直到 root node 为止。</li>
-</ol>
-<p><em>Delete</em></p>
-<ol>
-<li>从 root 开始，找到目标 entry 所处的 leaf node, L</li>
-<li>删除该 entry</li>
-<li>如果 L 仍然至少处于半满状态，则操作结束；否则先尝试从 siblings 那里拆借 entries，如果失败，则将 L 与相应的 sibling 合并</li>
-<li>如果合并发生了，则可能需要递归地删除 parent node 中的 entry</li>
-</ol>
-<h4 id="Clustered-Indexes-聚簇索引"><a href="#Clustered-Indexes-聚簇索引" class="headerlink" title="Clustered Indexes 聚簇索引"></a>Clustered Indexes 聚簇索引</h4><h3 id="2-2-2-B-Tree-Design-Choices"><a href="#2-2-2-B-Tree-Design-Choices" class="headerlink" title="2.2.2 B+ Tree Design Choices"></a>2.2.2 B+ Tree Design Choices</h3><h4 id="Node-Size"><a href="#Node-Size" class="headerlink" title="Node Size"></a>Node Size</h4><p>通常来说，disk 的数据读取速度越慢，node size 就越大：</p>
-<table>
-<thead>
-<tr>
-<th>Disk Type</th>
-<th>Node Size</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HDD</td>
-<td>~1MB</td>
-</tr>
-<tr>
-<td>SSD</td>
-<td>~10KB</td>
-</tr>
-<tr>
-<td>In-Memory</td>
-<td>~512B</td>
-</tr>
-</tbody></table>
-<p>具体情境下的最优大小由 workload 决定。</p>
-<h4 id="Merge-Threshold"><a href="#Merge-Threshold" class="headerlink" title="Merge Threshold"></a>Merge Threshold</h4><p>由于 merge 操作引起的修改较大，有些 DBMS 选择延迟 merge 操作的发生时间，甚至可以利用其它进程来负责周期性地重建 table index。</p>
-<h4 id="Variable-Length-Keys"><a href="#Variable-Length-Keys" class="headerlink" title="Variable Length Keys"></a>Variable Length Keys</h4><p>B+ Tree 中存储的 key 经常是变长的，通常有三种手段来应对：</p>
-<ul>
-<li>Pointers：存储指向 key 的指针；</li>
-<li>Variable Length Nodes：需要精细的内存管理操作，不推荐；</li>
-<li>Padding：给每个变长的key都强制转成一致的长度；</li>
-<li>key Map：内嵌一个指针数组，指向 node 中的 key&#x2F;val list</li>
-</ul>
-<h4 id="Non-unique-Indexes-变长字段"><a href="#Non-unique-Indexes-变长字段" class="headerlink" title="Non-unique Indexes 变长字段"></a>Non-unique Indexes 变长字段</h4><p>索引针对的 key 可能是非唯一的，通常有两种手段来应对：</p>
-<ul>
-<li><p>Duplicate Keys：存储多次相同的 key；</p>
-</li>
-<li><p>Value Lists：每个 key 只出现一次，但同时维护另一个链表，存储 key 对应的多个 values，类似 chained hashing</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235897.png" alt="image-20240325123534595"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235251.png" alt="image-20240325123553069"></p>
-<h4 id="Intra-node-Search-结点的内部搜素"><a href="#Intra-node-Search-结点的内部搜素" class="headerlink" title="Intra-node Search 结点的内部搜素"></a>Intra-node Search 结点的内部搜素</h4><p>在节点内部搜索，就是在排好序的序列中检索元素，手段通常有：</p>
-<ul>
-<li>Linear Scan，这种线性扫描虽然似乎很费时，但相比把page从磁盘读到内存的时间来看几乎已经不算什么了；</li>
-<li>Binary Search，用二分来优化线性搜索；</li>
-<li>Interpolation：通过 keys 的分布统计信息来估计大概位置进行检索</li>
-</ul>
-<h3 id="2-2-3-Optimizations"><a href="#2-2-3-Optimizations" class="headerlink" title="2.2.3 Optimizations"></a>2.2.3 Optimizations</h3><h4 id="Prefix-Compression"><a href="#Prefix-Compression" class="headerlink" title="Prefix Compression"></a>Prefix Compression</h4><p>同一个 leaf node 中的 keys 通常有相同的 prefix，如下图所示。为了节省空间，可以只存所有 keys 的不同的 suffix。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251240293.png" alt="image-20240325124020194"></p>
-<h4 id="Suffix-Truncation"><a href="#Suffix-Truncation" class="headerlink" title="Suffix Truncation"></a>Suffix Truncation</h4><p>由于 inner nodes 只用于引导搜索，因此没有必要在 inner nodes 中储存完整的 key，我们可以<strong>只存储足够的 prefix 即可</strong>，如下图所示。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241456.png" alt="image-20240325124132291"></p>
-<h4 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h4><p>建 B+ Tree 的最快方式是先将 keys 排好序后，再从下往上建树，如下图所示。因此如果有<strong>大量插入操作</strong>，可以利用这种方式提高效率。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241413.png" alt="image-20240325124150282"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251242426.png" alt="image-20240325124207283"></p>
-<h4 id="Pointer-Swizzling"><a href="#Pointer-Swizzling" class="headerlink" title="Pointer Swizzling"></a>Pointer Swizzling</h4><p>Nodes 使用 page id 来存储其它 nodes 的引用，DBMS 每次需要首先从 page table 中获取对应的内存地址，然后才能获取相应的 nodes 本身，如果 page 已经在 buffer pool 中，我们可以直接存储其它 page 在 buffer pool 中的内存地址作为引用，从而提高访问效率。</p>
-<h2 id="2-3-Index-Concurrency-Control"><a href="#2-3-Index-Concurrency-Control" class="headerlink" title="2.3 Index Concurrency Control"></a>2.3 Index Concurrency Control</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251246471.png" alt="image-20240325124646316"></p>
-<h3 id="2-3-1-Latch-Modes"><a href="#2-3-1-Latch-Modes" class="headerlink" title="2.3.1 Latch Modes"></a>2.3.1 Latch Modes</h3><h4 id="Read-Mode"><a href="#Read-Mode" class="headerlink" title="Read Mode"></a>Read Mode</h4><ul>
-<li>多个线程可以同时读取相同的数据</li>
-<li>针对相同的数据，当别的线程已经获得处于 read mode 的 latch，新的线程也可以继续获取 read mode 的 latch</li>
-</ul>
-<h4 id="Write-Mode"><a href="#Write-Mode" class="headerlink" title="Write Mode"></a>Write Mode</h4><ul>
-<li>同一时间只有单个线程可以访问</li>
-<li>针对相同的数据，如果获取前已经有别的线程获得任何 mode 的 latch，新的线程就无法获取 write mode  的 latch</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251249774.png" alt="image-20240325124932586"></p>
-<p><strong>锁的实现：</strong></p>
-<ul>
-<li><p>Blocking OS Mutex：如std::mutex，好处是竞争的线程会陷入sleep，但坏处是需要OS去进行唤醒，极度浪费资源；</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251251222.png" alt="image-20240325125111105"></p>
-</li>
-<li><p>Test-ans-Set Spin Latch(TAS)：自旋锁，如std::atomic<T>，不需要OS操作，自己在死循环内不断旋转，直到可以获取到该锁；</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251253634.png" alt="image-20240325125323436"></p>
-</li>
-<li><p>Reader-Writer Latches：自旋锁的基础上实现。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251255541.png" alt="image-20240325125549330"></p>
-<p>这里注意：若有线程需要加写锁，那么此时如果再有线程希望加读锁也会被阻塞。只有等之前的读锁都释放，写锁成功加上后，后续的读锁才能正常上锁。（这样做是为了避免写锁被无止境地锁住）</p>
-</li>
-</ul>
-<h4 id="hash-table-latching"><a href="#hash-table-latching" class="headerlink" title="hash table latching"></a><strong>hash table latching</strong></h4><p>相较于B+ Tree，Hash Table不容易遇到死锁，尤其是开放地址哈希，因为大家都是朝着一个方向去进行的。一般在扩容（resize）操作时，加一个全局的写锁，因为此时哈希表内部的数据需要进行一个整理。</p>
-<ul>
-<li>page latches：块与块之间的锁独立。线程会给所有块加分段锁。例如下图，块1的写锁和块2的读锁独立。这样的优势是：1）锁的粒度不会太细；2）支持一定的并发操作。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271610143.png" alt="image-20240327161025853"></p>
-<ul>
-<li><p>slot latches：以槽为单位进行加锁。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271611923.png" alt="image-20240327161157762"></p>
-</li>
-<li><p>compare-and-swap，CAS，使得hash table实现无锁插入。例如下图：让os先0判断是否为20，若是再加到30，属于原子操作。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271629958.png" alt="image-20240327162902774"></p>
-</li>
-</ul>
-<h3 id="2-3-2-Index-Crabbing-Coupling"><a href="#2-3-2-Index-Crabbing-Coupling" class="headerlink" title="2.3.2 Index Crabbing&#x2F;Coupling"></a>2.3.2 Index Crabbing&#x2F;Coupling</h3><p>B+Tree考虑两方面的并发问题：</p>
-<ul>
-<li>1）结点内部的数据，即多个线程同时修改一个node；</li>
-<li>2）结点间的合并和分裂操作，即一个线程正在遍历 B+ Tree 的同时，另一个线程正在 splits&#x2F;merges nodes。</li>
-</ul>
-<p><strong>Latch Crabbing 的基本思想如下：</strong></p>
-<ul>
-<li>获取 parent 的 latch</li>
-<li>获取 child 的 latch</li>
-<li>如果<strong>安全</strong>，可以释放 parent 的 latch</li>
-</ul>
-<p><strong>这里的“安全”指的是，当发生更新操作时，该节点不会发生 split 或 merge 的操作，即：</strong></p>
-<ul>
-<li>在插入元素时，节点未满</li>
-<li>在删除元素时，节点超过半满</li>
-</ul>
-<p>按照上述方法，无论对叶子结点执行何种操作，第一步都是先锁住根节点，这是一种“悲观”的做法。“乐观”的做法是：一路加读锁，最后加写锁。当然也有可能出现到了最后一步，发现会改动前面的parent，因此需要放弃当前的操作，重新从root开始加写锁。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271638410.png" alt="image-20240327163836210"></p>
-<h3 id="2-3-3-Leaf-Scans"><a href="#2-3-3-Leaf-Scans" class="headerlink" title="2.3.3 Leaf Scans"></a>2.3.3 Leaf Scans</h3><p>之前的分析中我们仅仅关注了从上到下的访问模式，而没有考虑到左右方向的访问模式，在 range query 中，常常需要横向访问相邻的 nodes。</p>
-<p>当遇到横向扫描无法获取下一个节点的 latch 时，该线程将释放 latch 后自杀。这种策略逻辑简单，尽管有理论上的优化空间，但在实践中是常见的避免死锁的方式。</p>
-<h3 id="2-3-4-Delayed-Parent-Updates"><a href="#2-3-4-Delayed-Parent-Updates" class="headerlink" title="2.3.4 Delayed Parent Updates"></a>2.3.4 Delayed Parent Updates</h3><p>从上文中，我们可以观察到：每当 leaf node 溢出时，我们都需要更新至少 3 个节点：</p>
-<ul>
-<li>即将被拆分的 leaf node</li>
-<li>新的 leaf node</li>
-<li>parent node</li>
-</ul>
-<p>修改的成本较高，因此 B-link Tree 提出了一种优化策略：<strong>每当 leaf node 溢出时，只是标记一下而暂时不更新 parent node，等下一次有别的线程获取 parnet node 的 write latch 时，一并修改。</strong></p>
-<h2 id="2-4-Sorting-and-Aggregations"><a href="#2-4-Sorting-and-Aggregations" class="headerlink" title="2.4 Sorting and Aggregations"></a>2.4 Sorting and Aggregations</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271648356.png" alt="image-20240327164819130"></p>
-<p>一个disk-oriented DBMS不能假定query results和内存大小完全适配。有可能筛选出来的query results也需要存到磁盘中，和buffer pool互相配合来实现操作。需要最大化利用sequential I&#x2F;O。</p>
-<p><strong>为什么需要排序：关系型数据库是unsorted的。</strong></p>
-<h3 id="2-4-1-Sorting-Algorithm"><a href="#2-4-1-Sorting-Algorithm" class="headerlink" title="2.4.1 Sorting Algorithm"></a>2.4.1 Sorting Algorithm</h3><ul>
-<li>early materialization：排序时value直接存储当前key那一行的剩余数据；</li>
-<li>later materialization：排序时value存储ID值。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271703469.png" alt="image-20240327170300327"></p>
-<h4 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h4><p>外部排序通常有两个步骤：</p>
-<p>1、Sorting Phase：将数据分成多个 chunks，每个 chunk 可以完全读入到 memory 中，在 memory 中排好序后再写回到 disk 中</p>
-<p>2、Merge Phase：将多个子文件合并成一个大文件</p>
-<ul>
-<li><p>2-Way External Merge Sort：这里的“2-way”即是指每次读入两页。</p>
-</li>
-<li><p>General External Merge Sort：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271947535.png" alt="image-20240327194734264"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271949041.png" alt="image-20240327194933847"></p>
-</li>
-</ul>
-<h4 id="Using-B-Tree-for-Sorting"><a href="#Using-B-Tree-for-Sorting" class="headerlink" title="Using B+Tree for Sorting"></a>Using B+Tree for Sorting</h4><p>注意包含聚簇和非聚簇两种情况。</p>
-<h3 id="2-4-2-Aggregations"><a href="#2-4-2-Aggregations" class="headerlink" title="2.4.2 Aggregations"></a>2.4.2 Aggregations</h3><h4 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271953093.png" alt="image-20240327195346706"></p>
-<p>但很多时候我们并不需要排好序的数据，如：</p>
-<ul>
-<li>Forming groups in GROUP BY</li>
-<li>Removing duplicates in DISTINCT</li>
-</ul>
-<p>在这样的场景下 hashing 是更好的选择，它能有效减少排序所需的额外工作。</p>
-<h4 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h4><p>利用一个临时 (ephemeral) 的 hash table 来记录必要的信息，即检查 hash table 中是否存在已经记录过的元素并作出相应操作：</p>
-<ul>
-<li>DISTINCT: Discard duplicate</li>
-<li>GROUP BY: Perform aggregate computation</li>
-</ul>
-<p>如果所有信息都能一次性读入内存，那事情就很简单了，但如若不然，我们就得变得更聪明。</p>
-<p>hashing aggregation 同样分成两步：</p>
-<ul>
-<li>Partition Phase: 将 tuples 根据 hash key 放入不同的 buckets<ul>
-<li>use a hash function h1 to split tuples into partitions on disk<ul>
-<li>all matches live in the same partition</li>
-<li>partitions are “spilled” to disk via output buffers</li>
-</ul>
-</li>
-<li>这里有个额外的假设，即每个 partition 能够被放到 memory 中</li>
-</ul>
-</li>
-<li>ReHash Phase: 在内存中针对每个 partition 利用 hash table 计算 aggregation 的结果</li>
-</ul>
-<p>如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000471.png" alt="image-20240327200043163"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000726.png" alt="image-20240327200052468"></p>
-<p>在 ReHash phase 中，存着 (GroupKey→RunningVal)(GroupKey→RunningVal) 的键值对，当我们需要向 hash table 中插入新的 tuple 时：</p>
-<ul>
-<li>如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以</li>
-<li>反之，则插入新的 GroupKey 到 RunningVal 的键值对</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272001082.png" alt="image-20240327200117774"></p>
-]]></content>
+<p>主要包含协议：IP&#x2F;ICMP&#x2F;IGMP&#x2F;ARP</p>
+<h3 id="IPv4地址"><a href="#IPv4地址" class="headerlink" title="IPv4地址"></a>IPv4地址</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404102147479.png" alt="image-20240410214744301"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247569.png" alt="image-20240411224704153"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247924.png" alt="image-20240411224712721"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112247351.png" alt="image-20240411224721026"></p>
+<h2 id="3、运输层"><a href="#3、运输层" class="headerlink" title="3、运输层"></a>3、运输层</h2><h3 id="（1）TCP和UDP的对比"><a href="#（1）TCP和UDP的对比" class="headerlink" title="（1）TCP和UDP的对比"></a>（1）TCP和UDP的对比</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253344.png" alt="image-20240411225347275"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253506.png" alt="image-20240411225336420"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253438.png" alt="image-20240411225324377"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112253966.png" alt="image-20240411225311873"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112254916.png" alt="image-20240411225407846"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112254989.png" alt="image-20240411225418919"></p>
+<h3 id="（2）TCP的流量控制"><a href="#（2）TCP的流量控制" class="headerlink" title="（2）TCP的流量控制"></a>（2）TCP的流量控制</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339229.png" alt="第5章 运输层_172"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339092.png" alt="第5章 运输层_173"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112339372.png" alt="第5章 运输层_173"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340245.png" alt="第5章 运输层_174"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340259.png" alt="第5章 运输层_175"></p>
+<h3 id="（3）TCP的拥塞控制"><a href="#（3）TCP的拥塞控制" class="headerlink" title="（3）TCP的拥塞控制"></a>（3）TCP的拥塞控制</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342343.png" alt="第5章 运输层_195"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342797.png" alt="第5章 运输层_205"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342640.png" alt="第5章 运输层_208"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112343369.png" alt="第5章 运输层_209"></p>
+<h3 id="（4）TCP超时重传"><a href="#（4）TCP超时重传" class="headerlink" title="（4）TCP超时重传"></a>（4）TCP超时重传</h3><h3 id="（5）TCP可靠传输的实现"><a href="#（5）TCP可靠传输的实现" class="headerlink" title="（5）TCP可靠传输的实现"></a>（5）TCP可靠传输的实现</h3><p>TCP基于以字节为单位的滑动窗口来实现可靠传输。</p>
+<p>接收方向发送方发送的“<strong>确认</strong>”是指：希望收到的下一个字节，而不是我已经收到的最后一个字节。</p>
+<h3 id="（6）TCP的“三次握手”"><a href="#（6）TCP的“三次握手”" class="headerlink" title="（6）TCP的“三次握手”"></a>（6）TCP的“三次握手”</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112340257.png" alt="第5章 运输层_114"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112341766.png" alt="第5章 运输层_120"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112341276.png" alt="第5章 运输层_121"></p>
+<h3 id="（7）TCP的“四次挥手”"><a href="#（7）TCP的“四次挥手”" class="headerlink" title="（7）TCP的“四次挥手”"></a>（7）TCP的“四次挥手”</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342518.png" alt="第5章 运输层_137"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404112342489.png" alt="第5章 运输层_141"></p>
+<h2 id="4、应用层"><a href="#4、应用层" class="headerlink" title="4、应用层"></a>4、应用层</h2>]]></content>
       <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
+        <category>计算机基础</category>
       </categories>
   </entry>
   <entry>
@@ -2269,6 +1952,373 @@
       </categories>
   </entry>
   <entry>
+    <title>cmu15-445 Course Related (Spring 2023)</title>
+    <url>/2024/03/02/Project/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>PPT</th>
+<th>Project</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1-5</td>
+<td>P0 &amp; P1</td>
+<td>2.26-3.24</td>
+</tr>
+<tr>
+<td>6-9</td>
+<td>P2</td>
+<td>3.24-</td>
+</tr>
+<tr>
+<td>10-14</td>
+<td>P3</td>
+<td></td>
+</tr>
+<tr>
+<td>15-21</td>
+<td>P4</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
+<ul>
+<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
+<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
+<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
+<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<p>整体图片：</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242055708.png" alt="image-20240324205507545"></p>
+<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
+<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
+<ul>
+<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
+</li>
+<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
+</li>
+<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
+</li>
+</ul>
+<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
+<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
+<ul>
+<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
+<li>持有直到事务结束</li>
+<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
+<li>保护元组（行），表，索引</li>
+</ul>
+<p><code>Latches/Mutex</code>（偏底层的）</p>
+<ul>
+<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
+<li>持有直到一个操作结束</li>
+<li><strong>不需要支持回滚</strong></li>
+</ul>
+<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
+
+<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
+<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
+<ul>
+<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
+<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
+</ul>
+<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
+<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
+<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
+<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
+<blockquote>
+<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
+<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
+</blockquote>
+<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
+<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
+<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
+<ul>
+<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
+<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
+</ul>
+<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
+<ul>
+<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
+</li>
+<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
+</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
+<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
+<ul>
+<li><code>Sorting + Join Buffers</code></li>
+<li><code>Query Caches</code></li>
+<li><code>Maintenance Buffers</code></li>
+<li><code>Log Buffers</code></li>
+<li><code>Dictionary Caches</code></li>
+</ul>
+<h1 id="2-B-Tree-Index"><a href="#2-B-Tree-Index" class="headerlink" title="2 B+Tree Index"></a>2 B+Tree Index</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271651204.png" alt="image-20240327165111130"></p>
+<h2 id="2-1-Hash-Tables"><a href="#2-1-Hash-Tables" class="headerlink" title="2.1 Hash Tables"></a>2.1 Hash Tables</h2><h3 id="2-1-1-Hash-Functions"><a href="#2-1-1-Hash-Functions" class="headerlink" title="2.1.1 Hash Functions"></a>2.1.1 Hash Functions</h3><p>由于<code>DBMS</code>内使用的<code>Hash Function</code>并不会暴露在外，因此<strong>没必要使用加密（<code>cryptographic</code>）哈希函数</strong>，我们希望它速度越快，<code>collision rate</code>越低越好。</p>
+<p>目前各 DBMS 主要在用的 Hash Functions 包括：</p>
+<ul>
+<li><a href="https://github.com/aappleby/smhasher">MurmurHash (2008)</a></li>
+<li><a href="https://github.com/google/cityhash">Google CityHash (2011)</a></li>
+<li><a href="https://github.com/google/farmhash">Google FarmHash (2014)</a></li>
+<li><a href="https://github.com/lemire/clhash">CLHash (2016)</a></li>
+</ul>
+<h4 id="SHA256算法"><a href="#SHA256算法" class="headerlink" title="SHA256算法"></a>SHA256算法</h4><h3 id="2-1-2-Static-Hashing-Scheme"><a href="#2-1-2-Static-Hashing-Scheme" class="headerlink" title="2.1.2 Static Hashing Scheme"></a>2.1.2 Static Hashing Scheme</h3><p>（1）Linear Probe Hashing 开放地址哈希</p>
+<p>“开放”的意思就是说：对于所有的key来说地址是开放的。碰撞时则往下一个地址存。</p>
+<p>在删除时可能会因为前项被删除导致的空白，造成找不到当前项，这时有两个解决思路：</p>
+<ul>
+<li>Tombstone；</li>
+<li>Movement</li>
+</ul>
+<p>重复key出现时的解决思路：</p>
+<ul>
+<li>Separate Linked List，把当前key作为指针指向一个新的区域：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120365.png" alt="image-20240324212003301"></p>
+<ul>
+<li>Redundant Keys，把key和value拼在一起作为新的key：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120828.png" alt="image-20240324212049757"></p>
+<p>（2）Robin Hood Hashing，是开放地址哈希的变种，其基本思想是“劫富济贫”。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123712.png" alt="image-20240324212329536"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123232.png" alt="image-20240324212342001"></p>
+<p>简单来说就是，当E和A碰撞时，正常E偏移3位，但为了不让自己比D“惨”太多，它就把D推到后面去，自己占了D的位置。此时D和E均为2。</p>
+<p>（3）Cuckoo Hashing</p>
+<blockquote>
+<p>静态的哈希结构的问题在于需要DBMS能够预判所存数据的总量，否则每次数量超过范围时都需要重建 Hash Table。这显然是很困难的。</p>
+</blockquote>
+<h3 id="2-1-3-Dynamic-Hash-Tables"><a href="#2-1-3-Dynamic-Hash-Tables" class="headerlink" title="2.1.3 Dynamic Hash Tables"></a>2.1.3 Dynamic Hash Tables</h3><p>（1）Chained Hashing（※）</p>
+<p>每个 key 对应一个链表，每个节点是一个 bucket，装满了就再往后挂一个 bucket。需要写操作时，需要请求 latch。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242129786.png" alt="image-20240324212955629"></p>
+<ul>
+<li>好处：简单；</li>
+<li>坏处：最坏的情况下Hash Table可能降级为链表，操作的时间复杂度降格为 O(n)。</li>
+</ul>
+<p>（2）Extendible Hashing</p>
+<p>Extendible Hashing 的基本思路是一边扩容，一边 rehash。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134200.png" alt="image-20240324213443953"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134195.png" alt="image-20240324213451869"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134845.png" alt="image-20240324213459513"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135620.png" alt="image-20240324213509210"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135275.png" alt="image-20240324213516681"></p>
+<p>（3）Linear Hashing</p>
+<p>基本思想：维护一个指针，指向下一个将被拆分的 bucket，每当任意一个 bucket 溢出（标准自定，如利用率到达阈值等）时，将指针指向的 bucket 拆分。</p>
+<h3 id="2-1-4-总结"><a href="#2-1-4-总结" class="headerlink" title="2.1.4 总结"></a>2.1.4 总结</h3><p>Hash Tables 提供 O(1)O(1) 的访问效率，因此它被大量地应用于 DBMS 的内部实现中。即便如此，它并不适合作为 table index 的数据结构，而 table index 的首选就是下节将介绍的 B+ Tree。</p>
+<p><strong>哈希表对于范围索引是效率极低的。</strong></p>
+<h2 id="2-2-Tree-Indexes（B-索引）"><a href="#2-2-Tree-Indexes（B-索引）" class="headerlink" title="2.2 Tree Indexes（B+索引）"></a>2.2 Tree Indexes（B+索引）</h2><blockquote>
+<p>table index 为提供 DBMS 数据查询的快速索引，它本身存储着某表某列排序后的数据，并包含指向相应 tuple 的指针。DBMS 需要保证表信息与索引信息在逻辑上保持同步。用户可以在 DBMS 中为任意表建立多个索引，DBMS 负责选择最优的索引提升查询效率。但索引自身需要占用存储空间，因此在索引数量与索引存储、维护成本之间存在权衡。</p>
+</blockquote>
+<p>索引本质上就是一种小表，是把大表中的某些列抽取出来。</p>
+<h3 id="2-2-1-B-Tree"><a href="#2-2-1-B-Tree" class="headerlink" title="2.2.1 B+ Tree"></a>2.2.1 B+ Tree</h3><p>B+ Tree 是一种自平衡树，它将数据有序地存储，且在 search、sequential access、insertions 以及 deletions 操作的复杂度上都满足 O(logn)，其中 sequential access 的最终复杂度还与所需数据总量有关。</p>
+<blockquote>
+<p>这里的O(logn)的意义在于，随着数据的增长，操作的复杂度增长是要慢于数据的增长速度的。比如数据增长到原来的2倍，但搜索时间不会变成原来的2倍。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242151303.png" alt="image-20240324215134042"></p>
+<h4 id="B-Tree-Nodes"><a href="#B-Tree-Nodes" class="headerlink" title="B+ Tree Nodes"></a>B+ Tree Nodes</h4><p>B+ Tree 中的每个 node 都包含一列按 key 排好序的 key&#x2F;value pairs，key 就是 table index 对应的 column，value 的取值与 node 类型相关，在 inner nodes 和 leaf nodes 中存的内容不同。</p>
+<p>values主要有两种存法：</p>
+<ul>
+<li>Record IDs，存储指向最终 tuple 的指针。</li>
+<li>Tuple Data，直接将 tuple data 存在 leaf node 中。key为ID，v为整个行数据。如主键索引，其key为主键，value即为这张表的全部内容。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242154259.png" alt="image-20240324215455186"></p>
+<h4 id="B-Tree-Operations"><a href="#B-Tree-Operations" class="headerlink" title="B+ Tree Operations"></a>B+ Tree Operations</h4><p><em>Insert</em></p>
+<ol>
+<li>找到对应的 leaf node，L</li>
+<li>将 key&#x2F;value pair 按顺序插入到 L 中</li>
+<li>如果 L 还有足够的空间，操作结束；如果空间不足，则需要将 L 分裂成两个节点，同时在 parent node 上新增 entry，若 parent node 也空间不足，则递归地分裂，直到 root node 为止。</li>
+</ol>
+<p><em>Delete</em></p>
+<ol>
+<li>从 root 开始，找到目标 entry 所处的 leaf node, L</li>
+<li>删除该 entry</li>
+<li>如果 L 仍然至少处于半满状态，则操作结束；否则先尝试从 siblings 那里拆借 entries，如果失败，则将 L 与相应的 sibling 合并</li>
+<li>如果合并发生了，则可能需要递归地删除 parent node 中的 entry</li>
+</ol>
+<h4 id="Clustered-Indexes-聚簇索引"><a href="#Clustered-Indexes-聚簇索引" class="headerlink" title="Clustered Indexes 聚簇索引"></a>Clustered Indexes 聚簇索引</h4><h3 id="2-2-2-B-Tree-Design-Choices"><a href="#2-2-2-B-Tree-Design-Choices" class="headerlink" title="2.2.2 B+ Tree Design Choices"></a>2.2.2 B+ Tree Design Choices</h3><h4 id="Node-Size"><a href="#Node-Size" class="headerlink" title="Node Size"></a>Node Size</h4><p>通常来说，disk 的数据读取速度越慢，node size 就越大：</p>
+<table>
+<thead>
+<tr>
+<th>Disk Type</th>
+<th>Node Size</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HDD</td>
+<td>~1MB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~10KB</td>
+</tr>
+<tr>
+<td>In-Memory</td>
+<td>~512B</td>
+</tr>
+</tbody></table>
+<p>具体情境下的最优大小由 workload 决定。</p>
+<h4 id="Merge-Threshold"><a href="#Merge-Threshold" class="headerlink" title="Merge Threshold"></a>Merge Threshold</h4><p>由于 merge 操作引起的修改较大，有些 DBMS 选择延迟 merge 操作的发生时间，甚至可以利用其它进程来负责周期性地重建 table index。</p>
+<h4 id="Variable-Length-Keys"><a href="#Variable-Length-Keys" class="headerlink" title="Variable Length Keys"></a>Variable Length Keys</h4><p>B+ Tree 中存储的 key 经常是变长的，通常有三种手段来应对：</p>
+<ul>
+<li>Pointers：存储指向 key 的指针；</li>
+<li>Variable Length Nodes：需要精细的内存管理操作，不推荐；</li>
+<li>Padding：给每个变长的key都强制转成一致的长度；</li>
+<li>key Map：内嵌一个指针数组，指向 node 中的 key&#x2F;val list</li>
+</ul>
+<h4 id="Non-unique-Indexes-变长字段"><a href="#Non-unique-Indexes-变长字段" class="headerlink" title="Non-unique Indexes 变长字段"></a>Non-unique Indexes 变长字段</h4><p>索引针对的 key 可能是非唯一的，通常有两种手段来应对：</p>
+<ul>
+<li><p>Duplicate Keys：存储多次相同的 key；</p>
+</li>
+<li><p>Value Lists：每个 key 只出现一次，但同时维护另一个链表，存储 key 对应的多个 values，类似 chained hashing</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235897.png" alt="image-20240325123534595"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235251.png" alt="image-20240325123553069"></p>
+<h4 id="Intra-node-Search-结点的内部搜素"><a href="#Intra-node-Search-结点的内部搜素" class="headerlink" title="Intra-node Search 结点的内部搜素"></a>Intra-node Search 结点的内部搜素</h4><p>在节点内部搜索，就是在排好序的序列中检索元素，手段通常有：</p>
+<ul>
+<li>Linear Scan，这种线性扫描虽然似乎很费时，但相比把page从磁盘读到内存的时间来看几乎已经不算什么了；</li>
+<li>Binary Search，用二分来优化线性搜索；</li>
+<li>Interpolation：通过 keys 的分布统计信息来估计大概位置进行检索</li>
+</ul>
+<h3 id="2-2-3-Optimizations"><a href="#2-2-3-Optimizations" class="headerlink" title="2.2.3 Optimizations"></a>2.2.3 Optimizations</h3><h4 id="Prefix-Compression"><a href="#Prefix-Compression" class="headerlink" title="Prefix Compression"></a>Prefix Compression</h4><p>同一个 leaf node 中的 keys 通常有相同的 prefix，如下图所示。为了节省空间，可以只存所有 keys 的不同的 suffix。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251240293.png" alt="image-20240325124020194"></p>
+<h4 id="Suffix-Truncation"><a href="#Suffix-Truncation" class="headerlink" title="Suffix Truncation"></a>Suffix Truncation</h4><p>由于 inner nodes 只用于引导搜索，因此没有必要在 inner nodes 中储存完整的 key，我们可以<strong>只存储足够的 prefix 即可</strong>，如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241456.png" alt="image-20240325124132291"></p>
+<h4 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h4><p>建 B+ Tree 的最快方式是先将 keys 排好序后，再从下往上建树，如下图所示。因此如果有<strong>大量插入操作</strong>，可以利用这种方式提高效率。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241413.png" alt="image-20240325124150282"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251242426.png" alt="image-20240325124207283"></p>
+<h4 id="Pointer-Swizzling"><a href="#Pointer-Swizzling" class="headerlink" title="Pointer Swizzling"></a>Pointer Swizzling</h4><p>Nodes 使用 page id 来存储其它 nodes 的引用，DBMS 每次需要首先从 page table 中获取对应的内存地址，然后才能获取相应的 nodes 本身，如果 page 已经在 buffer pool 中，我们可以直接存储其它 page 在 buffer pool 中的内存地址作为引用，从而提高访问效率。</p>
+<h2 id="2-3-Index-Concurrency-Control"><a href="#2-3-Index-Concurrency-Control" class="headerlink" title="2.3 Index Concurrency Control"></a>2.3 Index Concurrency Control</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251246471.png" alt="image-20240325124646316"></p>
+<h3 id="2-3-1-Latch-Modes"><a href="#2-3-1-Latch-Modes" class="headerlink" title="2.3.1 Latch Modes"></a>2.3.1 Latch Modes</h3><h4 id="Read-Mode"><a href="#Read-Mode" class="headerlink" title="Read Mode"></a>Read Mode</h4><ul>
+<li>多个线程可以同时读取相同的数据</li>
+<li>针对相同的数据，当别的线程已经获得处于 read mode 的 latch，新的线程也可以继续获取 read mode 的 latch</li>
+</ul>
+<h4 id="Write-Mode"><a href="#Write-Mode" class="headerlink" title="Write Mode"></a>Write Mode</h4><ul>
+<li>同一时间只有单个线程可以访问</li>
+<li>针对相同的数据，如果获取前已经有别的线程获得任何 mode 的 latch，新的线程就无法获取 write mode  的 latch</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251249774.png" alt="image-20240325124932586"></p>
+<p><strong>锁的实现：</strong></p>
+<ul>
+<li><p>Blocking OS Mutex：如std::mutex，好处是竞争的线程会陷入sleep，但坏处是需要OS去进行唤醒，极度浪费资源；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251251222.png" alt="image-20240325125111105"></p>
+</li>
+<li><p>Test-ans-Set Spin Latch(TAS)：自旋锁，如std::atomic<T>，不需要OS操作，自己在死循环内不断旋转，直到可以获取到该锁；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251253634.png" alt="image-20240325125323436"></p>
+</li>
+<li><p>Reader-Writer Latches：自旋锁的基础上实现。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251255541.png" alt="image-20240325125549330"></p>
+<p>这里注意：若有线程需要加写锁，那么此时如果再有线程希望加读锁也会被阻塞。只有等之前的读锁都释放，写锁成功加上后，后续的读锁才能正常上锁。（这样做是为了避免写锁被无止境地锁住）</p>
+</li>
+</ul>
+<h4 id="hash-table-latching"><a href="#hash-table-latching" class="headerlink" title="hash table latching"></a><strong>hash table latching</strong></h4><p>相较于B+ Tree，Hash Table不容易遇到死锁，尤其是开放地址哈希，因为大家都是朝着一个方向去进行的。一般在扩容（resize）操作时，加一个全局的写锁，因为此时哈希表内部的数据需要进行一个整理。</p>
+<ul>
+<li>page latches：块与块之间的锁独立。线程会给所有块加分段锁。例如下图，块1的写锁和块2的读锁独立。这样的优势是：1）锁的粒度不会太细；2）支持一定的并发操作。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271610143.png" alt="image-20240327161025853"></p>
+<ul>
+<li><p>slot latches：以槽为单位进行加锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271611923.png" alt="image-20240327161157762"></p>
+</li>
+<li><p>compare-and-swap，CAS，使得hash table实现无锁插入。例如下图：让os先0判断是否为20，若是再加到30，属于原子操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271629958.png" alt="image-20240327162902774"></p>
+</li>
+</ul>
+<h3 id="2-3-2-Index-Crabbing-Coupling"><a href="#2-3-2-Index-Crabbing-Coupling" class="headerlink" title="2.3.2 Index Crabbing&#x2F;Coupling"></a>2.3.2 Index Crabbing&#x2F;Coupling</h3><p>B+Tree考虑两方面的并发问题：</p>
+<ul>
+<li>1）结点内部的数据，即多个线程同时修改一个node；</li>
+<li>2）结点间的合并和分裂操作，即一个线程正在遍历 B+ Tree 的同时，另一个线程正在 splits&#x2F;merges nodes。</li>
+</ul>
+<p><strong>Latch Crabbing 的基本思想如下：</strong></p>
+<ul>
+<li>获取 parent 的 latch</li>
+<li>获取 child 的 latch</li>
+<li>如果<strong>安全</strong>，可以释放 parent 的 latch</li>
+</ul>
+<p><strong>这里的“安全”指的是，当发生更新操作时，该节点不会发生 split 或 merge 的操作，即：</strong></p>
+<ul>
+<li>在插入元素时，节点未满</li>
+<li>在删除元素时，节点超过半满</li>
+</ul>
+<p>按照上述方法，无论对叶子结点执行何种操作，第一步都是先锁住根节点，这是一种“悲观”的做法。“乐观”的做法是：一路加读锁，最后加写锁。当然也有可能出现到了最后一步，发现会改动前面的parent，因此需要放弃当前的操作，重新从root开始加写锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271638410.png" alt="image-20240327163836210"></p>
+<h3 id="2-3-3-Leaf-Scans"><a href="#2-3-3-Leaf-Scans" class="headerlink" title="2.3.3 Leaf Scans"></a>2.3.3 Leaf Scans</h3><p>之前的分析中我们仅仅关注了从上到下的访问模式，而没有考虑到左右方向的访问模式，在 range query 中，常常需要横向访问相邻的 nodes。</p>
+<p>当遇到横向扫描无法获取下一个节点的 latch 时，该线程将释放 latch 后自杀。这种策略逻辑简单，尽管有理论上的优化空间，但在实践中是常见的避免死锁的方式。</p>
+<h3 id="2-3-4-Delayed-Parent-Updates"><a href="#2-3-4-Delayed-Parent-Updates" class="headerlink" title="2.3.4 Delayed Parent Updates"></a>2.3.4 Delayed Parent Updates</h3><p>从上文中，我们可以观察到：每当 leaf node 溢出时，我们都需要更新至少 3 个节点：</p>
+<ul>
+<li>即将被拆分的 leaf node</li>
+<li>新的 leaf node</li>
+<li>parent node</li>
+</ul>
+<p>修改的成本较高，因此 B-link Tree 提出了一种优化策略：<strong>每当 leaf node 溢出时，只是标记一下而暂时不更新 parent node，等下一次有别的线程获取 parnet node 的 write latch 时，一并修改。</strong></p>
+<h2 id="2-4-Sorting-and-Aggregations"><a href="#2-4-Sorting-and-Aggregations" class="headerlink" title="2.4 Sorting and Aggregations"></a>2.4 Sorting and Aggregations</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271648356.png" alt="image-20240327164819130"></p>
+<p>一个disk-oriented DBMS不能假定query results和内存大小完全适配。有可能筛选出来的query results也需要存到磁盘中，和buffer pool互相配合来实现操作。需要最大化利用sequential I&#x2F;O。</p>
+<p><strong>为什么需要排序：关系型数据库是unsorted的。</strong></p>
+<h3 id="2-4-1-Sorting-Algorithm"><a href="#2-4-1-Sorting-Algorithm" class="headerlink" title="2.4.1 Sorting Algorithm"></a>2.4.1 Sorting Algorithm</h3><ul>
+<li>early materialization：排序时value直接存储当前key那一行的剩余数据；</li>
+<li>later materialization：排序时value存储ID值。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271703469.png" alt="image-20240327170300327"></p>
+<h4 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h4><p>外部排序通常有两个步骤：</p>
+<p>1、Sorting Phase：将数据分成多个 chunks，每个 chunk 可以完全读入到 memory 中，在 memory 中排好序后再写回到 disk 中</p>
+<p>2、Merge Phase：将多个子文件合并成一个大文件</p>
+<ul>
+<li><p>2-Way External Merge Sort：这里的“2-way”即是指每次读入两页。</p>
+</li>
+<li><p>General External Merge Sort：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271947535.png" alt="image-20240327194734264"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271949041.png" alt="image-20240327194933847"></p>
+</li>
+</ul>
+<h4 id="Using-B-Tree-for-Sorting"><a href="#Using-B-Tree-for-Sorting" class="headerlink" title="Using B+Tree for Sorting"></a>Using B+Tree for Sorting</h4><p>注意包含聚簇和非聚簇两种情况。</p>
+<h3 id="2-4-2-Aggregations"><a href="#2-4-2-Aggregations" class="headerlink" title="2.4.2 Aggregations"></a>2.4.2 Aggregations</h3><h4 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271953093.png" alt="image-20240327195346706"></p>
+<p>但很多时候我们并不需要排好序的数据，如：</p>
+<ul>
+<li>Forming groups in GROUP BY</li>
+<li>Removing duplicates in DISTINCT</li>
+</ul>
+<p>在这样的场景下 hashing 是更好的选择，它能有效减少排序所需的额外工作。</p>
+<h4 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h4><p>利用一个临时 (ephemeral) 的 hash table 来记录必要的信息，即检查 hash table 中是否存在已经记录过的元素并作出相应操作：</p>
+<ul>
+<li>DISTINCT: Discard duplicate</li>
+<li>GROUP BY: Perform aggregate computation</li>
+</ul>
+<p>如果所有信息都能一次性读入内存，那事情就很简单了，但如若不然，我们就得变得更聪明。</p>
+<p>hashing aggregation 同样分成两步：</p>
+<ul>
+<li>Partition Phase: 将 tuples 根据 hash key 放入不同的 buckets<ul>
+<li>use a hash function h1 to split tuples into partitions on disk<ul>
+<li>all matches live in the same partition</li>
+<li>partitions are “spilled” to disk via output buffers</li>
+</ul>
+</li>
+<li>这里有个额外的假设，即每个 partition 能够被放到 memory 中</li>
+</ul>
+</li>
+<li>ReHash Phase: 在内存中针对每个 partition 利用 hash table 计算 aggregation 的结果</li>
+</ul>
+<p>如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000471.png" alt="image-20240327200043163"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000726.png" alt="image-20240327200052468"></p>
+<p>在 ReHash phase 中，存着 (GroupKey→RunningVal)(GroupKey→RunningVal) 的键值对，当我们需要向 hash table 中插入新的 tuple 时：</p>
+<ul>
+<li>如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以</li>
+<li>反之，则插入新的 GroupKey 到 RunningVal 的键值对</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272001082.png" alt="image-20240327200117774"></p>
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
     <title>cmu15-445 Homework1_SQL (Spring 2023)</title>
     <url>/2024/02/28/Project/cmu15-445/cmu15-445%20Homework1_SQL/</url>
     <content><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
@@ -2626,19 +2676,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch1 计算机系统漫游</title>
-    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
-    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>cmu15-445 Project 2 (Spring 2023)</title>
     <url>/2024/03/27/Project/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/</url>
     <content><![CDATA[<p>Overview：</p>
@@ -2757,6 +2794,35 @@
       </categories>
   </entry>
   <entry>
+    <title>Ch1 计算机系统漫游</title>
+    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
+    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch2 信息的表示和处理</title>
+    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ch10 系统级I/O</title>
     <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
     <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
@@ -2852,15 +2918,17 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch2 信息的表示和处理</title>
-    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
+    <title>Ch3 程序的机器级表示</title>
+    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
+    <content><![CDATA[<h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1><span id="more"></span>
 
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125101.png" alt="CSAPP Ch1-Ch3_07"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125684.png" alt="CSAPP Ch1-Ch3_08"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125146.png" alt="CSAPP Ch1-Ch3_09"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125670.png" alt="CSAPP Ch1-Ch3_10"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126892.png" alt="CSAPP Ch1-Ch3_11"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126616.png" alt="CSAPP Ch1-Ch3_12"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126789.png" alt="CSAPP Ch1-Ch3_13"></p>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -3085,17 +3153,76 @@
       </categories>
   </entry>
   <entry>
-    <title>Ch3 程序的机器级表示</title>
-    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
-    <content><![CDATA[<h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1><span id="more"></span>
+    <title>Ch5 优化程序性能</title>
+    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/</url>
+    <content><![CDATA[<h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><span id="more"></span>
 
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125101.png" alt="CSAPP Ch1-Ch3_07"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125684.png" alt="CSAPP Ch1-Ch3_08"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125146.png" alt="CSAPP Ch1-Ch3_09"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031125670.png" alt="CSAPP Ch1-Ch3_10"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126892.png" alt="CSAPP Ch1-Ch3_11"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126616.png" alt="CSAPP Ch1-Ch3_12"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031126789.png" alt="CSAPP Ch1-Ch3_13"></p>
+<h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><ul>
+<li><strong>如果编译器无法确定两个指针是否指向同一个位置，那么编译器会假设所有情况都有可能发生，反而限制了优化策略。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380" style="zoom:33%;" />
+
+<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，如下图所示，此时add1 res&#x3D;4x，add2 res&#x3D;3x，因此不能将add2用于优化add1。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648" style="zoom:33%;" />
+
+<ul>
+<li><strong>函数调用影响优化策略</strong></li>
+</ul>
+<p>如下图所示，大多数编译器不会把func1优化为func2（注意func2返回0是因为counter为后++，先返回再++）。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021006812.png" alt="image-20240402100639099" style="zoom:33%;" />
+
+<h3 id="（2）优化方式"><a href="#（2）优化方式" class="headerlink" title="（2）优化方式"></a>（2）优化方式</h3><ul>
+<li><p>1）代码移动</p>
+<ul>
+<li>循环不变式外提，比如在执行for循环前先计算出数组长度；</li>
+</ul>
+</li>
+<li><p>2）优化函数调用</p>
+<ul>
+<li><p>举例：在循环中将函数get_vec_element变为直接数组访问，这样反而降低了效率，这是因为每次操作数组时需要两次读内存和一次写内存：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022591.png" alt="image-20240402102218521"></p>
+</li>
+<li><p>基于此再进行优化，设置临时变量，直到循环结束再写入，此时只需要一次读内存，性能得到了很大的提升：</p>
+<ul>
+<li><strong>这里的acc是临时变量， 通常情况下，临时变量会被保存在栈帧（栈帧是用来存储函数调用期间的局部变量和其他临时数据的一块内存区域）中， 由于 acc 在循环中频繁使用，并且在每次迭代中都需要更新，将其保存在寄存器中可以提高访问速度，避免了频繁的内存访问操作。寄存器的访问速度比内存更快，因此可以加快循环的执行速度；</strong></li>
+<li><strong>由于循环中的代码会被频繁执行，对循环内的变量进行优化以提高性能尤为重要。将累加器保存在寄存器中可以减少内存访问次数，从而提高代码的执行效率。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022289.png" alt="image-20240402102255146" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="2、现代处理器"><a href="#2、现代处理器" class="headerlink" title="2、现代处理器"></a>2、现代处理器</h2><p>在1的基础上，考虑利用处理器的微体系结构进行优化。现代处理器可以实现多指令并行。</p>
+<h3 id="（1）功能单元"><a href="#（1）功能单元" class="headerlink" title="（1）功能单元"></a>（1）功能单元</h3><ul>
+<li>指令控制单元（Instruction Control Unit，ICU）<ul>
+<li>从内存中读取指令序列并译码，之后进行一系列操作</li>
+<li>退役单元，控制着寄存器文件<ul>
+<li>若指令执行完毕，相应更新寄存器文件；</li>
+<li>若不该执行该条指令，则丢弃所有运算结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行单元（Execution Unit，EU）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021039315.png" alt="image-20240402103925031"></p>
+<h3 id="（2）功能单元的性能衡量指标"><a href="#（2）功能单元的性能衡量指标" class="headerlink" title="（2）功能单元的性能衡量指标"></a>（2）功能单元的性能衡量指标</h3><ul>
+<li>延迟（Latency）：完成运算需要的总时间</li>
+<li>发射（Isuue）：两次运算间间隔的最小周期数</li>
+<li>容量（Capacity）：执行该运算的功能单元的数量</li>
+</ul>
+<p>CPE&#x2F;Clocks Per Instruction，每条指令所需的时钟周期数，衡量计算机指令执行效率的一个指标。</p>
+<p>延迟界限和吞吐量界限的CPE值</p>
+<ul>
+<li>延迟界限：在给定的工作负载下，系统性能受到的主要限制是每个任务或指令的执行时间（延迟）的上限<ul>
+<li>对于任何必须严格按照顺序执行的合并运算，延迟界限给出了所需要的最小的CPE值</li>
+</ul>
+</li>
+</ul>
+<p>吞吐量界限：在给定的工作负载下，系统性能受到的主要限制是系统的总体吞吐量（Throughput）的上限</p>
+<ul>
+<li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
+<li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
+</ul>
 ]]></content>
       <categories>
         <category>计算机基础</category>
@@ -3268,233 +3395,6 @@
 </li>
 <li><p>全相联cache只有一个set</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch5 优化程序性能</title>
-    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/</url>
-    <content><![CDATA[<h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><span id="more"></span>
-
-<h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><ul>
-<li><strong>如果编译器无法确定两个指针是否指向同一个位置，那么编译器会假设所有情况都有可能发生，反而限制了优化策略。</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380" style="zoom:33%;" />
-
-<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，如下图所示，此时add1 res&#x3D;4x，add2 res&#x3D;3x，因此不能将add2用于优化add1。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648" style="zoom:33%;" />
-
-<ul>
-<li><strong>函数调用影响优化策略</strong></li>
-</ul>
-<p>如下图所示，大多数编译器不会把func1优化为func2（注意func2返回0是因为counter为后++，先返回再++）。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021006812.png" alt="image-20240402100639099" style="zoom:33%;" />
-
-<h3 id="（2）优化方式"><a href="#（2）优化方式" class="headerlink" title="（2）优化方式"></a>（2）优化方式</h3><ul>
-<li><p>1）代码移动</p>
-<ul>
-<li>循环不变式外提，比如在执行for循环前先计算出数组长度；</li>
-</ul>
-</li>
-<li><p>2）优化函数调用</p>
-<ul>
-<li><p>举例：在循环中将函数get_vec_element变为直接数组访问，这样反而降低了效率，这是因为每次操作数组时需要两次读内存和一次写内存：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022591.png" alt="image-20240402102218521"></p>
-</li>
-<li><p>基于此再进行优化，设置临时变量，直到循环结束再写入，此时只需要一次读内存，性能得到了很大的提升：</p>
-<ul>
-<li><strong>这里的acc是临时变量， 通常情况下，临时变量会被保存在栈帧（栈帧是用来存储函数调用期间的局部变量和其他临时数据的一块内存区域）中， 由于 acc 在循环中频繁使用，并且在每次迭代中都需要更新，将其保存在寄存器中可以提高访问速度，避免了频繁的内存访问操作。寄存器的访问速度比内存更快，因此可以加快循环的执行速度；</strong></li>
-<li><strong>由于循环中的代码会被频繁执行，对循环内的变量进行优化以提高性能尤为重要。将累加器保存在寄存器中可以减少内存访问次数，从而提高代码的执行效率。</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022289.png" alt="image-20240402102255146" style="zoom:33%;" /></li>
-</ul>
-</li>
-</ul>
-<h2 id="2、现代处理器"><a href="#2、现代处理器" class="headerlink" title="2、现代处理器"></a>2、现代处理器</h2><p>在1的基础上，考虑利用处理器的微体系结构进行优化。现代处理器可以实现多指令并行。</p>
-<h3 id="（1）功能单元"><a href="#（1）功能单元" class="headerlink" title="（1）功能单元"></a>（1）功能单元</h3><ul>
-<li>指令控制单元（Instruction Control Unit，ICU）<ul>
-<li>从内存中读取指令序列并译码，之后进行一系列操作</li>
-<li>退役单元，控制着寄存器文件<ul>
-<li>若指令执行完毕，相应更新寄存器文件；</li>
-<li>若不该执行该条指令，则丢弃所有运算结果。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>执行单元（Execution Unit，EU）</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021039315.png" alt="image-20240402103925031"></p>
-<h3 id="（2）功能单元的性能衡量指标"><a href="#（2）功能单元的性能衡量指标" class="headerlink" title="（2）功能单元的性能衡量指标"></a>（2）功能单元的性能衡量指标</h3><ul>
-<li>延迟（Latency）：完成运算需要的总时间</li>
-<li>发射（Isuue）：两次运算间间隔的最小周期数</li>
-<li>容量（Capacity）：执行该运算的功能单元的数量</li>
-</ul>
-<p>CPE&#x2F;Clocks Per Instruction，每条指令所需的时钟周期数，衡量计算机指令执行效率的一个指标。</p>
-<p>延迟界限和吞吐量界限的CPE值</p>
-<ul>
-<li>延迟界限：在给定的工作负载下，系统性能受到的主要限制是每个任务或指令的执行时间（延迟）的上限<ul>
-<li>对于任何必须严格按照顺序执行的合并运算，延迟界限给出了所需要的最小的CPE值</li>
-</ul>
-</li>
-</ul>
-<p>吞吐量界限：在给定的工作负载下，系统性能受到的主要限制是系统的总体吞吐量（Throughput）的上限</p>
-<ul>
-<li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
-<li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch8 异常控制流</title>
-    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
-    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
-
-<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
-<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
-
-<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
-<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
-<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
-<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
-<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
-<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
-</ul>
-</li>
-</ul>
-<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
-<ul>
-<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
-<li>将控制交还给之前正在执行的指令</li>
-<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
-<li>终止程序</li>
-</ul>
-</li>
-</ul>
-<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
-<ul>
-<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
-</li>
-<li><p>陷阱（同步）</p>
-<ul>
-<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
-</li>
-<li><p>故障（同步）</p>
-<ul>
-<li>由错误情况引起，故障处理程序会尝试修复</li>
-<li>经典示例：缺页异常</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
-</li>
-<li><p>终止（同步）</p>
-<ul>
-<li>由不可恢复的致命错误导致</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
-</li>
-</ul>
-<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
-<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
-<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
-<ul>
-<li>区分并发和并行：<ul>
-<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
-<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
-<ul>
-<li><p>控制寄存器：描述进程当前的权限</p>
-</li>
-<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
-</li>
-<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
-</li>
-<li><p>上下文（Context）</p>
-<ul>
-<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
-</li>
-<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
-<ul>
-<li>保存当前进程的上下文；</li>
-<li>恢复某个先前被抢占进程的上下文；</li>
-<li>将控制传递给这个新恢复的进程。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
-<li><p>进程的状态：运行、暂停、终止</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
-</ul>
-<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
-<ul>
-<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
-</li>
-<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
-<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
-<li><p>execve函数</p>
-<ul>
-<li><code>*argv[]</code>：参数列表</li>
-<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
-
-<ul>
-<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
-</ul>
-</li>
-<li><p>waitpid函数</p>
-<ul>
-<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
-<blockquote>
-<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
-<ol>
-<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
-<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
-</ol>
-</blockquote>
-</li>
-<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
-<ul>
-<li>（1）pid &gt; 0<ul>
-<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
-</ul>
-</li>
-<li>（2）pid &#x3D; -1<ul>
-<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
-</ul>
-</li>
-<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
-</li>
-</ul>
-<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
-<ul>
-<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
 </ul>
 ]]></content>
       <categories>
@@ -3756,6 +3656,156 @@
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031115921.png" alt="image-20240403111521660" style="zoom: 50%;" /></li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032057373.png" alt="image-20240403205722302"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch8 异常控制流</title>
+    <url>/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
+
+<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
+<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
+
+<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
+<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
+<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
+<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
+<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
+<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
+</ul>
+</li>
+</ul>
+<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
+<ul>
+<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
+<li>将控制交还给之前正在执行的指令</li>
+<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
+<li>终止程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
+<ul>
+<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
+</li>
+<li><p>陷阱（同步）</p>
+<ul>
+<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
+</li>
+<li><p>故障（同步）</p>
+<ul>
+<li>由错误情况引起，故障处理程序会尝试修复</li>
+<li>经典示例：缺页异常</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
+</li>
+<li><p>终止（同步）</p>
+<ul>
+<li>由不可恢复的致命错误导致</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
+</li>
+</ul>
+<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
+<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
+<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
+<ul>
+<li>区分并发和并行：<ul>
+<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
+<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
+<ul>
+<li><p>控制寄存器：描述进程当前的权限</p>
+</li>
+<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
+</li>
+<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
+</li>
+<li><p>上下文（Context）</p>
+<ul>
+<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
+</li>
+<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
+<ul>
+<li>保存当前进程的上下文；</li>
+<li>恢复某个先前被抢占进程的上下文；</li>
+<li>将控制传递给这个新恢复的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
+<li><p>进程的状态：运行、暂停、终止</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
+</ul>
+<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
+<ul>
+<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
+</li>
+<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
+<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
+<li><p>execve函数</p>
+<ul>
+<li><code>*argv[]</code>：参数列表</li>
+<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
+
+<ul>
+<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
+</ul>
+</li>
+<li><p>waitpid函数</p>
+<ul>
+<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
+<blockquote>
+<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
+<ol>
+<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
+<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
+<ul>
+<li>（1）pid &gt; 0<ul>
+<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
+</ul>
+</li>
+<li>（2）pid &#x3D; -1<ul>
+<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
+</ul>
+</li>
+<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
+</li>
+</ul>
+<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
+<ul>
+<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
+</ul>
 ]]></content>
       <categories>
         <category>计算机基础</category>
