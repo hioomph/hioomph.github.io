@@ -189,6 +189,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/14/Untitled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/14/Untitled/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-14 19:17:03 / 修改时间：19:43:37" itemprop="dateCreated datePublished" datetime="2024-04-14T19:17:03+08:00">2024-04-14</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>967</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>野指针是指向未知内存位置的指针，其出现有以下几种情况：（1）指针定义后未初始化；（2）内存被释放后，指向该内存的指针未被赋值为NULL；（3）下标越界。</p>
+<p>智能指针是对裸指针的封装。根据RAII的思想将其封装为一个类，这样在超出其作用范围时就会被释放，避免了程序员手动操作时忘记释放内存，从而造成内存泄漏的问题。（1）auto_ptr，因为不包含复制语义，C++11已经被废除；（2）unique_ptr；（3）shared_ptr，对资源的共享式访问，其内部维护了一个引用计数器，当引用计数减少为0时，调用delete删除；（3）weak_ptr，提供了访问shared_ptr的方式，但不会增加其引用计数，因此可以用于解决循环引用的问题。</p>
+<p>weak_ptr通过lock()获得shared_ptr</p>
+<p>循环引用发生在有两个shared_ptr对象互相引用对方，或在某些复杂的数据结构中存在多条引用路径。</p>
+<p>引用计数的线程安全性是通过原子操作实现的，这就确保了在任意时刻只会有一个线程对引用计数进行修改。</p>
+<p>加锁或者结合原子操作来处理。</p>
+<p>const允许我们规定一个语义，告诉编译器某个对象是不能被修改的，可以用于修饰普通变量、函数和类等。</p>
+<p>static则指明了变量的存储和访问方式。（1）静态成员变量&#x2F;函数：不属于类的任何一个对象，而属于类本身，所有对象共享这个变量；（2）静态局部变量，在整个程序运行的过程中只会被初始化一次；（3）静态全局变量，限制了其定义只在本文件中，有助于封装和避免命名冲突。</p>
+<p>extern主要用于在多个文件之间共享变量或函数。当需要再多个源文件中使用同一个全局变量时，可以在一个文件中定义，在其他文件中用extern来声明。此外，在C++中，extern “C”告诉C++的编译器，某个函数或变量应该用C语言的方式进行链接。</p>
+<p>#define是预处理指令，在预处理阶段将标识符替换为指定的文本，不进行类型检查；const则是在编译时创建，可在运行时进行初始化，包含类型检查。</p>
+<p>sizeof是一个关键字而非函数，它用于获取某个类型或变量占用内存的大小；strlen用于获取以null结尾的C风格字符串中，有效字符的长度。</p>
+<p>预防变量的重定义有以下方式：（1）使用命名空间；（2）使用static进行修饰，使得变量仅在本文件内有效；（3）使用extern关键字，使得多个文件共享同一个全局变量。</p>
+<p>右值引用是通过避免不必要的拷贝操作来提升性能的。比如，在使用一个临时对象创建新对象时，可以使用移动构造函数，直接将资源从一个对象复制到另一个对象上，从而避免不必要的操作。</p>
+<p>基类构造函数、成员变量、派生类构造函数体。</p>
+<p>（1）深拷贝创建一个新的对象，并且复制对象的所有内容，包括其指针成员变量指向的内存空间，深拷贝后的对象和原对象之间是互相独立的。（2）浅拷贝只复制对象的引用，但仍然指向原对象所指向的内存空间。</p>
+<p>拷贝构造函数用于构建一个新的对象，但等号赋值运算符是更新已经存在的对象的值，</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/13/%E9%9D%A2%E8%AF%95/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1204,7 +1292,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/" class="post-title-link" itemprop="url">毕设项目提问</a>
+            <a href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -1221,17 +1309,8 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-11 16:35:33" itemprop="dateModified" datetime="2024-04-11T16:35:33+08:00">2024-04-11</time>
+                <time title="修改时间：2024-04-14 21:45:08" itemprop="dateModified" datetime="2024-04-14T21:45:08+08:00">2024-04-14</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -1239,7 +1318,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
+              <span>2.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1258,121 +1337,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <span id="more"></span>
-
-<h2 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h2><p>名称：<strong>多用户智能家居控制系统设计</strong>。</p>
-<p>1、 基于Linux多线程编程，结合MQTT协议的订阅-发布模式，完成多用户智能控制；</p>
-<p>2、 在用户端设计双模式。共享模式：多个用户同时控制，且共享当前设备的状态；私人模式：被控制端的某一功能同一时间只能由一个用户控制；</p>
-<p>3、 采用MQTT协议进行数据传送。通过实验对比HTTP协议和MQTT协议在智能家居领域的应用，结果表明MQTT在降低功耗和推送功能开发上优势明显，其即便是在资源有限的环境中也能易于使用。</p>
-<p><strong>本项目的重点与核心在实现客户端的多用户控制。</strong></p>
-<p>1、 针对发布者，利用Qt开发平台设计手机App作为客户端，它有两个特点，分别是多用户和双模式。多用户指不同的客户端均可进行控制操作；双模式指针对客户端本身，有共享模式和私人模式两种，在共享模式下可实现多个用户同时控制，且共享当前设备的状态；在私人模式下被控制端的某一功能同一时间只能由一个用户控制；</p>
-<p>2、 针对消息代理者，选择在阿里云上部署mosquitto。选用MQTT协议的原因已在前述加以说明，而由于mosquitto是一种流行的mqtt服务器，且易于安装和配置，因此选用mosquitto进行部署；</p>
-<p>3、 针对订阅者，主要以iTop4412开发板作为功能实现端。同时基于Linux多线程来配合实现多用户控制。</p>
-<p><strong>本项目的数据转发过程如下。</strong></p>
-<p>每个用户在该客户端程序中都对应操作两个线程：</p>
-<p>（1）发送控制指令时的发布者身份，代表用户从Android客户端向嵌入式控制终端发送照明及警报的控制指令；<br>用户可自主规定订阅主题为“home&#x2F;*”格式。</p>
-<p>（2）接收控制指令时的订阅者身份，代表开发板向用户发送温度数据；统一规定“temp”为传送温度数据的主题。</p>
-<p><strong>发布者发出的控制指令将以json数据的格式被封装，经mosquitto云服务器转发后送至开发板侧，订阅者读取json包，解析出对应的命令行指令，对相应的硬件进行控制。</strong></p>
-<h2 id="二、相关问题"><a href="#二、相关问题" class="headerlink" title="二、相关问题"></a>二、相关问题</h2><ol>
-<li><strong>为什么选择Linux作为多用户智能家居控制系统的操作系统？</strong><ul>
-<li>Linux是一个开源的操作系统，具有良好的稳定性和安全性，适合于嵌入式系统和服务器端应用，并且支持多线程编程，能够满足项目的需求。</li>
-</ul>
-</li>
-<li><strong>在Linux中，如何使用多线程编程实现并发处理？项目中是如何实现的？</strong><ul>
-<li><strong>pthread库：</strong> pthread库是POSIX标准定义的线程库，在Linux系统中得到广泛支持。通过pthread库，可以创建、管理和同步线程，实现并发处理。具体包括以下几个步骤：<ul>
-<li>包含头文件 <code>pthread.h</code>。</li>
-<li>使用 <code>pthread_create</code> 函数创建线程。</li>
-<li>在线程函数中实现具体的处理逻辑。</li>
-<li>使用 <code>pthread_join</code> 函数等待线程结束并回收资源。</li>
-<li>使用互斥锁（pthread_mutex）进行线程同步和通信。</li>
-</ul>
-</li>
-<li>在项目中，主要通过编写多线程的C程序来实现。其主要功能是创建两个线程，一个用于订阅MQTT消息，即sub_thread，另一个用于发布MQTT消息，即pub_thread。同时在主线程等待这两个线程的结束。<ul>
-<li><code>sub_thread</code>函数首先通过<code>pthread_mutex_lock</code>获取互斥锁，接着创建一个mosquitto客户端并连接到指定的MQTT服务器，配置连接回调函数和消息接收回调函数，最后调用<code>mosquitto_loop_forever</code>函数来循环接收消息。当业务结束时，释放互斥锁并退出线程。<ul>
-<li>回调函数是在特定事件发生时自动调用的函数，用于处理相应的事件或数据。在sub_thread中调用了mosquitto库提供的mosquitto_connect_callback_set和 mosquitto_message_callback_set。</li>
-</ul>
-</li>
-<li><code>pub_thread</code>函数操作和sub_thread类似，但不需要对其进行加锁操作。在成功建立连接后，进入一个死循环，在循环中创建一个JSON格式的消息并发布到指定的主题。</li>
-<li>在<code>main</code>函数中使用了<code>pthread_create</code>函数来创建线程，并使用<code>pthread_join</code>函数来等待线程结束。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>MQTT协议与HTTP协议相比，有何优势？为什么选择MQTT协议进行数据传送？</strong><ul>
-<li>MQTT协议相比HTTP协议在降低功耗和推送功能开发上具有明显优势，适合于资源有限的环境和实时数据传输的场景。因此选择MQTT协议进行数据传送。</li>
-</ul>
-</li>
-<li><strong>如何使用Qt开发平台设计手机App？</strong><ul>
-<li>使用Qt Creator工具进行开发，利用Qt提供的QML语言和Qt Quick控件进行界面设计和开发，同时通过C++语言编写业务逻辑代码。</li>
-</ul>
-</li>
-<li><strong>介绍一下阿里云上部署mosquitto的过程。</strong><ul>
-<li>在阿里云上安装mosquitto，配置mosquitto的配置文件，设置端口号和用户名密码等参数，启动mosquitto服务，配置防火墙规则允许外部访问。</li>
-<li>MQTT服务器的端口号通常是1883。</li>
-</ul>
-</li>
-<li><strong>如何在iTop4412开发板上实现对控制指令的接收和执行？</strong><ul>
-<li>通过Linux多线程编程，在iTop4412开发板上创建一个线程来监听MQTT服务器发送的控制指令，接收到指令后解析并执行对应的命令。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何使用JSON格式封装控制指令？</strong><ul>
-<li>使用 <code>cJSON_CreateObject()</code> 函数创建一个空的JSON对象。</li>
-<li>使用 <code>cJSON_AddNumberToObject()</code> 函数向JSON对象中添加一个键值对，键为 “temp”，值为一个随机生成的温度值 <code>a</code>。</li>
-<li>使用 <code>cJSON_Print()</code> 函数将JSON对象打印成JSON格式的字符串，并将其赋值给 <code>json_buf</code>。</li>
-<li>使用 <code>mosquitto_publish()</code> 函数将JSON字符串发布到MQTT服务器上的主题为 “temp” 的通道中。</li>
-</ul>
-</li>
-<li><strong>如何通过mosquitto服务器将客户端的控制指令转发给iTop4412开发板？</strong><ul>
-<li>在mosquitto服务器上配置相应的主题和订阅关系，客户端发布控制指令到对应的主题，mosquitto服务器将控制指令转发给iTop4412开发板的订阅者。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何处理并发访问问题？</strong><ul>
-<li>订阅者线程（<code>sub_thread</code>）需要访问共享资源，涉及到订阅者之间的状态共享或者资源竞争，因此需要使用互斥锁来保护共享资源的访问，确保线程安全。</li>
-<li>而发布者线程（<code>pub_thread</code>）只是简单地发布消息，没有涉及到共享资源的修改或竞争条件，因此不需要使用互斥锁。只是在程序结束时释放资源。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何实现共享模式和私人模式的切换？</strong><ul>
-<li>通过界面设计和用户交互实现切换按钮或选项卡，根据用户选择的模式来设置相应的控制权限和功能。</li>
-</ul>
-</li>
-<li><strong>在iTop4412开发板上，如何解析JSON格式的控制指令并执行相应的功能操作？</strong><ul>
-<li>使用第三方JSON库cJSON在Linux环境下解析JSON格式的控制指令，提取出对应的命令参数，然后调用相应的系统调用或执行命令行来控制硬件设备。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何实现用户认证和权限管理？</strong><ul>
-<li>在安卓客户端上实现用户登录和注册功能。将用户信息存储在MySQL数据库上，在登陆查询当前用户是否属于该数据库，以及用户名与密码是否匹配；若不存在，可进行注册操作。</li>
-<li>由于本设计要访问特定公网的阿里云服务器上的数据库，因此在Qt开发平台上需要首先提供所需要的驱动插件之后，再利用QSqlDatabase来处理与数据库的连接，利用QSqlQuery类来执行底层数据库支持的任何SQL语句。</li>
-</ul>
-</li>
-<li><strong>如何保证系统的稳定性和可靠性？</strong><ul>
-<li>采用日志记录功能来记录系统运行状态和处理异常情况，同时进行定期的系统监控和维护。</li>
-</ul>
-</li>
-<li><strong>在Android客户端中，如何实现界面的实时更新和数据同步？</strong><ul>
-<li>使用信号与槽机制： 在Qt中，通过信号与槽机制实现对象之间的通信。当数据发生变化时，可以通过信号发送变化的消息，然后在界面组件中连接相应的槽函数来更新界面。</li>
-</ul>
-</li>
-<li><strong>在多用户智能家居控制系统中，如何实现系统的扩展性和灵活性？</strong><ul>
-<li>采用模块化设计，将系统功能拆分为独立的模块，支持动态加载和卸载，从而实现系统的扩展性和灵活性。</li>
-</ul>
-</li>
-<li><strong>在iTop4412开发板上，如何实现硬件设备的驱动和控制？</strong><ul>
-<li>通过 MQTT 实现硬件设备的驱动和控制：<ul>
-<li>当用户在 UI 上进行操作时，比如点击 LED 开关按钮，UI 触发对应的槽函数，如 <code>on_ledBt_ON_1_clicked()</code>。</li>
-<li>在槽函数中构造一个JSON 数据包，其中包含了需要控制的硬件设备信息，比如 LED 的状态。然后将这个 JSON 数据包发布到 MQTT 主题上，通过 MQTT 协议发送给 MQTT 服务器。</li>
-<li>在硬件设备端，通过订阅相应的 MQTT 主题，监听来自 MQTT 服务器的消息。</li>
-<li>当硬件设备端接收到相应的消息后，解析 JSON 数据包，获取到控制指令，并执行相应的操作，例如打开或关闭 LED。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>该项目还有哪些可以改进的地方？</strong><ul>
-<li>可以在mosquitto服务器上配置TLS&#x2F;SSL加密通信，客户端和服务器之间通过证书验证进行安全连接，防止数据被窃取或篡改。确保安卓客户端与mosquitto服务器之间的通信安全性。</li>
-<li>此外，对于多线程部分我觉得还可以再考虑细化锁的粒度，以及进行RAII技术管理互斥锁，避免在某些异常情况下未释放锁导致资源泄露问题。</li>
-</ul>
-</li>
-</ol>
-
+          <p>title: 毕设项目提问<br>categories:<br>  -	面试</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1422,7 +1395,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-14 17:04:07" itemprop="dateModified" datetime="2024-04-14T17:04:07+08:00">2024-04-14</time>
+                <time title="修改时间：2024-04-14 21:17:13" itemprop="dateModified" datetime="2024-04-14T21:17:13+08:00">2024-04-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1440,14 +1413,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>31k</span>
+              <span>34k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:53</span>
+              <span>2:04</span>
             </span>
 
         </div>
@@ -1461,11 +1434,11 @@
       
           <span id="more"></span>
 
-<h1 id="一、C-C-八股"><a href="#一、C-C-八股" class="headerlink" title="一、C&#x2F;C++八股"></a>一、C&#x2F;C++八股</h1><h2 id="1、C-C"><a href="#1、C-C" class="headerlink" title="1、C&#x2F;C++"></a>1、C&#x2F;C++</h2><h3 id="如何看待C-和C的关系？"><a href="#如何看待C-和C的关系？" class="headerlink" title="如何看待C++和C的关系？"></a>如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也有延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
+<h1 id="一、C-C-八股"><a href="#一、C-C-八股" class="headerlink" title="一、C&#x2F;C++八股"></a>一、C&#x2F;C++八股</h1><h2 id="1、C-C"><a href="#1、C-C" class="headerlink" title="1、C&#x2F;C++"></a>1、C&#x2F;C++</h2><h3 id="如何看待C-和C的关系？"><a href="#如何看待C-和C的关系？" class="headerlink" title="如何看待C++和C的关系？"></a>如何看待C++和C的关系？</h3><p>C++最初只是在C的基础上增加了面向对象的特性，后来随着C++的发展，其灵活性不断增加，现在C++已经成为了一个语言联邦，他包含了C语言，但也延伸出许多其他特性。<br>（1）面向对象：C++包含封装、继承、多态的特性；<br>（2）C++支持泛型编程；<br>（3）C++包含了STL部分。</p>
 <h3 id="C和C-结构体的差别？"><a href="#C和C-结构体的差别？" class="headerlink" title="C和C++结构体的差别？"></a>C和C++结构体的差别？</h3><p>（1）默认访问修饰符</p>
 <ul>
 <li><strong>C中的结构体</strong>：C语言中结构体的成员默认都是公开（public）的。C主要用于数据存储，不支持封装和隐藏。</li>
-<li><strong>C++中的结构体</strong>：在C++中，结构体的成员默认也是公开的。这与C++中的类相比，类的成员默认是私有（private）的。</li>
+<li><strong>C++中的结构体</strong>：在C++中，结构体的成员默认也是公开的。这与C++中的类不同，类的成员默认是私有（private）的。</li>
 </ul>
 <p>（2）函数成员</p>
 <ul>
@@ -1614,9 +1587,9 @@
 <p>（1）struct默认的访问类型是public，而class默认的访问类型是private；</p>
 <p>（2）struct的继承是public的，而class的继承默认是private的；</p>
 <p>（3）struct用于较为简单的结构，而class用于更加复杂的结构。</p>
-<h3 id="C-中delete-一个对象和数组有什么区别？"><a href="#C-中delete-一个对象和数组有什么区别？" class="headerlink" title="C++中delete 一个对象和数组有什么区别？"></a>C++中delete 一个对象和数组有什么区别？</h3><p>使用<code>delete</code>释放单个对象时只调用一次析构函数，而使用<code>delete[]</code>释放对象数组时需要为数组中的每个对象调用析构函数。<code>delete</code>数组要用<code>delete[]</code>，数组头部有一块内存空间记录数组长度，调用<code>delete[]</code>才能析构每个对象。</p>
-<h3 id="如何防止重复引用头文件？"><a href="#如何防止重复引用头文件？" class="headerlink" title="如何防止重复引用头文件？"></a>如何防止重复引用头文件？</h3><p>（1）使用<code>#ifndef</code>、<code>#define</code>和<code>#endif</code>；</p>
-<p>（2）使用<code>#pragma once</code></p>
+<h3 id="C-中delete一个对象和数组有什么区别？"><a href="#C-中delete一个对象和数组有什么区别？" class="headerlink" title="C++中delete一个对象和数组有什么区别？"></a>C++中delete一个对象和数组有什么区别？</h3><p>使用<code>delete</code>释放单个对象时只调用一次析构函数，而使用<code>delete[]</code>释放对象数组时需要为数组中的每个对象调用析构函数。<code>delete</code>数组要用<code>delete[]</code>，数组头部有一块内存空间记录数组长度，调用<code>delete[]</code>才能析构每个对象。</p>
+<h3 id="如何防止重复引用头文件？"><a href="#如何防止重复引用头文件？" class="headerlink" title="如何防止重复引用头文件？"></a>如何防止重复引用头文件？</h3><p>（1）使用#ifndef&#96;、#define和#endif；</p>
+<p>（2）使用#pragma once&#96;</p>
 <h3 id="如何预防变量的重定义？"><a href="#如何预防变量的重定义？" class="headerlink" title="如何预防变量的重定义？"></a>如何预防变量的重定义？</h3><p>（1）使用命名空间</p>
 <p>（2）使用<code>static</code>关键字或匿名命名空间来限制变量的作用域至单个文件</p>
 <p>（3）使用<code>extern</code>关键字确保全局变量只有一个定义</p>
@@ -1632,6 +1605,12 @@
 <p>（2）浅拷贝只复制对象的引用，而不复制对象的内容。也就是说，浅拷贝创建一个新的对象，但是其新对象的指针成员变量指向的是原对象的指针成员变量所指向的内存空间。</p>
 <h3 id="拷贝构造函数与等号赋值运算符的区别是什么"><a href="#拷贝构造函数与等号赋值运算符的区别是什么" class="headerlink" title="拷贝构造函数与等号赋值运算符的区别是什么?"></a>拷贝构造函数与等号赋值运算符的区别是什么?</h3><p>（1）拷贝构造函数用于创建对象，没有返回值。</p>
 <p>（2）而等号赋值操作符用于更新已经存在的对象的值，返回一个引用到当前对象。</p>
+<h3 id="如果一个类要支持std-move操作，要完成哪些工作呢？"><a href="#如果一个类要支持std-move操作，要完成哪些工作呢？" class="headerlink" title="如果一个类要支持std::move操作，要完成哪些工作呢？"></a>如果一个类要支持std::move操作，要完成哪些工作呢？</h3><p>需要在类中实现移动构造函数和移动赋值函数。</p>
+<p>（1）移动构造函数接受一个右值引用到同类型的对象，通常声明为 <code>T(T&amp;&amp; other)</code>，其中 <code>T</code> 是类名。</p>
+<p>（2）移动赋值运算符通常被定义为返回类的引用，并接受一个右值引用到同类型的对象，声明为 <code>T&amp; operator=(T&amp;&amp; other)</code>。</p>
+<p>（3）为了确保移动动作不会抛出异常，添加<code>noexcept</code>关键字。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MyClass</span>(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> </span><br><span class="line">        : <span class="built_in">resource</span>(other.resource) &#123;</span><br><span class="line">        other.resource = <span class="literal">nullptr</span>; <span class="comment">// 窃取资源后，将原对象的指针设为空</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    MyClass&amp; <span class="keyword">operator</span>=(MyClass&amp;&amp; other) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;other) &#123; <span class="comment">// 防止自赋值</span></span><br><span class="line">            <span class="keyword">delete</span> resource;  <span class="comment">// 释放当前对象的资源</span></span><br><span class="line">            resource = other.resource; <span class="comment">// 窃取资源</span></span><br><span class="line">            other.resource = <span class="literal">nullptr</span>; <span class="comment">// 将原对象的指针设为空</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    ResourceType* resource;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <h3 id="移动构造函数可能会有什么问题？"><a href="#移动构造函数可能会有什么问题？" class="headerlink" title="移动构造函数可能会有什么问题？"></a>移动构造函数可能会有什么问题？</h3><p>在使用移动构造函数时，如果当一个对象的资源移动到另一个对象上时发生了异常，此时就会造成有一部分资源转移了，而另一部分没有，从而使得源对象和目标对象上的资源都不完整。因此在使用移动构造函数时应该避免发生异常。如果无法确保移动构造函数不会发生异常，应该用noexcept进行修饰。这样函数如果发生异常时不会继续执行，而是抛出std::terminate并停止。</p>
 <h3 id="移动构造函数的使用场景是什么？"><a href="#移动构造函数的使用场景是什么？" class="headerlink" title="移动构造函数的使用场景是什么？"></a>移动构造函数的使用场景是什么？</h3><p>移动构造函数是 C++11 新增的特性，用于实现右值引用语义，可以将临时对象的资源有效地转移给目标对象，避免不必要的资源复制，提高程序的性能和效率。</p>
 <p>（1）容器元素的插入和移动</p>
@@ -1651,8 +1630,7 @@
 </ol>
 <h2 id="6、多态-虚函数相关"><a href="#6、多态-虚函数相关" class="headerlink" title="6、多态&#x2F;虚函数相关"></a>6、多态&#x2F;虚函数相关</h2><h3 id="多态的实现原理是什么？"><a href="#多态的实现原理是什么？" class="headerlink" title="多态的实现原理是什么？"></a>多态的实现原理是什么？</h3><p>c++的多态包括<strong>静态多态（编译器多态）</strong>和<strong>动态多态（运行期多态）</strong>。</p>
 <p>（1）静态多态是指编译器的多态，主要由函数重载和函数模板实现。函数重载是指在同一作用域内，一组函数具有相同的函数名和不同的参数列表，编译器根据函数调用时传递的参数数量和类型选择调用哪个函数执行。函数模板允许编写通用的代码，编译器根据模板实例化的内容生成代码。</p>
-<p>（2）动态多态则是在运行时实现，主要由虚函数和继承实现。其核心思想是类的对象会根据其属性来确定究竟调用哪一个类的函数。具体来说，每一个包含虚函数的类中都分配了一个虚函数指针，每一个虚函数指针都指向一个虚函数表。当需要调用函数时，根据虚函数指针找到对应的虚函数表，然后根据函数的下标位置在虚函数表找到对应的函数实现。</p>
-<h3 id="c-是如何实现动态多态的？"><a href="#c-是如何实现动态多态的？" class="headerlink" title="c++是如何实现动态多态的？"></a>c++是如何实现动态多态的？</h3><p>c++是通过虚函数实现动态多态的。其核心是通过不同对象的特性来确定调用哪一个类的函数。具体来说，每一个包含虚函数的类都分配了一个虚函数指针，这个虚函数指针指向一个虚函数表。当需要调用对应的函数时，首先根据虚函数指针找到对应的虚函数表，然后根据这个函数在表中的下标位置找到对应的函数。</p>
+<p>（2）动态多态则是在运行时实现，主要由虚函数和继承实现。其核心思想是类的对象会根据其属性来确定究竟调用哪一个类的函数。具体来说，每一个包含虚函数的类都分配了一个虚函数指针，这个虚函数指针指向一个虚函数表。当需要调用对应的函数时，首先根据虚函数指针找到对应的虚函数表，然后根据这个函数在表中的下标位置找到对应的函数。</p>
 <h3 id="子类中需要virtual关键字吗？需要override关键字吗？编码过程中加不加override-有什么区别？"><a href="#子类中需要virtual关键字吗？需要override关键字吗？编码过程中加不加override-有什么区别？" class="headerlink" title="子类中需要virtual关键字吗？需要override关键字吗？编码过程中加不加override 有什么区别？"></a>子类中需要virtual关键字吗？需要override关键字吗？编码过程中加不加override 有什么区别？</h3><p>在基类中，声明虚函数时需要使用<code>virtual</code>关键字来指示该函数可以在派生类中被重写。在派生类中重写虚函数时，即使没有显式地使用<code>virtual</code>关键字，该函数自动被视为虚函数。</p>
 <p>使用<code>override</code>可以使得编译器帮助检查函数重写的正确性。如果标记了<code>override</code>但并未正确重写基类的虚函数（例如参数类型不匹配），编译器将报错。</p>
 <h3 id="虚函数和纯虚函数有什么区别？"><a href="#虚函数和纯虚函数有什么区别？" class="headerlink" title="虚函数和纯虚函数有什么区别？"></a>虚函数和纯虚函数有什么区别？</h3><p>（1）虚函数是一种在基类中声明的函数，它可以在派生类中被重写。声明为虚函数的目的是允许在通过基类指针或引用调用时，执行相应派生类中的函数。虚函数可以有自己的实现，也就是说，即使派生类没有重写该函数，也有一个默认的行为可供执行。</p>
@@ -1732,12 +1710,21 @@
 <h3 id="vector、list和array的区别是什么？"><a href="#vector、list和array的区别是什么？" class="headerlink" title="vector、list和array的区别是什么？"></a>vector、list和array的区别是什么？</h3><p>（1）vector是动态数组，支持随机访问，内部使用连续的内存存储元素，在进行删除和插入操作时可能需要移动其他元素；</p>
 <p>（2）list是双向链表，不支持随机访问，插入和删除的操作效率高，内存不连续，每个元素存储在独立的节点中；</p>
 <p>（3）array是静态数组，大小固定，在编译时就确定，内存连续存储，且支持随机访问。</p>
-<h3 id="C-map的实现（说了红黑树和哈希），如何考虑选择，为什么用红黑树？"><a href="#C-map的实现（说了红黑树和哈希），如何考虑选择，为什么用红黑树？" class="headerlink" title="C++map的实现（说了红黑树和哈希），如何考虑选择，为什么用红黑树？"></a>C++map的实现（说了红黑树和哈希），如何考虑选择，为什么用红黑树？</h3><h3 id="map和set保存的元素有什么区别？"><a href="#map和set保存的元素有什么区别？" class="headerlink" title="map和set保存的元素有什么区别？"></a>map和set保存的元素有什么区别？</h3><p>（1）map保存的是键值对元素，其中key是不能重复的，一旦重复将对value进行覆盖。只能通过key来访问value。</p>
+<h3 id="C-中map的实现包含哪些方式？具体应该如何选择？"><a href="#C-中map的实现包含哪些方式？具体应该如何选择？" class="headerlink" title="C++中map的实现包含哪些方式？具体应该如何选择？"></a>C++中map的实现包含哪些方式？具体应该如何选择？</h3><ul>
+<li><code>std::map</code>：通常使用红黑树实现，保证了元素按照键的排序，适合需要有序数据的场景。</li>
+<li><code>std::unordered_map</code>：使用哈希表实现，不保证元素的有序性，但在许多操作上提供了较快的执行时间。</li>
+</ul>
+<p>因此，（1）如果应用中需要一个通过键快速访问数据项且不关心元素间的顺序的关联容器，<code>std::unordered_map</code> 是一个更好的选择；（2）而如果需要有序的键值对，维护元素的插入顺序，或需要进行范围查询，那么 <code>std::map</code> 是更合适的选择。</p>
+<h3 id="map和set保存的元素有什么区别？"><a href="#map和set保存的元素有什么区别？" class="headerlink" title="map和set保存的元素有什么区别？"></a>map和set保存的元素有什么区别？</h3><p>（1）map保存的是键值对元素，其中key是不能重复的，一旦重复将对value进行覆盖。只能通过key来访问value。</p>
 <p>（2）set保存的元素是无序的，且元素也是不能重复的。只能通过迭代器遍历访问set。</p>
-<h3 id="map的插入方式和访问方式有哪些？"><a href="#map的插入方式和访问方式有哪些？" class="headerlink" title="map的插入方式和访问方式有哪些？"></a>map的插入方式和访问方式有哪些？</h3><p>插入方式：</p>
-<p>（1）operator []；（2）emplace()；（3）insert()</p>
-<p>访问方式</p>
-<p>（1）operator []；（2）使用at；（3）find()；（4）使用迭代器</p>
+<h3 id="map的插入方式和访问方式有哪些？"><a href="#map的插入方式和访问方式有哪些？" class="headerlink" title="map的插入方式和访问方式有哪些？"></a>map的插入方式和访问方式有哪些？</h3><ul>
+<li><p>插入方式：</p>
+<p>（1）operator []；（2）emplace()；（3）insert()。</p>
+</li>
+<li><p>访问方式：</p>
+<p>（1）operator []；（2）使用at；（3）find()；（4）使用迭代器。</p>
+</li>
+</ul>
 <h1 id="二、操作系统八股"><a href="#二、操作系统八股" class="headerlink" title="二、操作系统八股"></a>二、操作系统八股</h1><h2 id="1、线程与进程"><a href="#1、线程与进程" class="headerlink" title="1、线程与进程"></a>1、线程与进程</h2><h3 id="进程和线程以及并发和并行的概念是什么？"><a href="#进程和线程以及并发和并行的概念是什么？" class="headerlink" title="进程和线程以及并发和并行的概念是什么？"></a>进程和线程以及并发和并行的概念是什么？</h3><p>（1）线程是操作系统中的最小执行单元，进程是程序的一次执行过程，是系统资源分配的最小单位。并发是指多个任务交替执行，而并行是指多个任务同时执行。</p>
 <p>（2）并发是在单个处理器上实现多个线程同时执行的假象，而并行是在多个处理器上实现多个线程同时执行。</p>
 <h3 id="线程内存存储在哪里？"><a href="#线程内存存储在哪里？" class="headerlink" title="线程内存存储在哪里？"></a>线程内存存储在哪里？</h3><ol>
@@ -1811,8 +1798,24 @@
 <li>线程尝试锁定资源时添加超时时间，超时未能锁定资源则释放已占有的资源并重新尝试。</li>
 <li>设计时确保所有线程获取锁的顺序一致，避免循环等待。</li>
 </ol>
-<h3 id="多线程怎么保证线程安全？"><a href="#多线程怎么保证线程安全？" class="headerlink" title="多线程怎么保证线程安全？"></a>多线程怎么保证线程安全？</h3><p>在语言层面，一般会使用原子操作和互斥锁来确保多线程环境下的线程安全性。</p>
-<h3 id="多线程环境下对变量的读写操作是否是原子的（提示CAS，说了概念），追问内部怎么实现的（不会）？"><a href="#多线程环境下对变量的读写操作是否是原子的（提示CAS，说了概念），追问内部怎么实现的（不会）？" class="headerlink" title="多线程环境下对变量的读写操作是否是原子的（提示CAS，说了概念），追问内部怎么实现的（不会）？"></a>多线程环境下对变量的读写操作是否是原子的（提示CAS，说了概念），追问内部怎么实现的（不会）？</h3><h3 id="如何实现一个线程池？"><a href="#如何实现一个线程池？" class="headerlink" title="如何实现一个线程池？"></a>如何实现一个线程池？</h3><p>线程池是一组预先创建好的线程，用于执行多个任务。它可以提高任务调度的效率和性能。实现一个线程池可以使用 C++11 提供的 std::thread和 std::mutex 等多线程库，结合队列等数据结构来管理任务的提交和执行。</p>
+<h3 id="多线程怎么保证线程安全？"><a href="#多线程怎么保证线程安全？" class="headerlink" title="多线程怎么保证线程安全？"></a>多线程怎么保证线程安全？</h3><p>一般会使用原子操作和互斥锁来确保多线程环境下的线程安全性。</p>
+<h3 id="多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？"><a href="#多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？" class="headerlink" title="多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？"></a>多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？</h3><p>在多线程环境下，对变量的读写操作默认并不是原子的，除非使用特定的机制或工具来确保操作的原子性。</p>
+<p>（1）CAS（Compare-And-Swap）操作是一种重要的同步机制，用来实现原子操作。它涉及三个操作数：</p>
+<ul>
+<li>内存位置（V）：要更新的变量的地址；</li>
+<li>期望值（E）：预期变量当前应该拥有的值；</li>
+<li>新值（N）：如果变量的当前值与期望值相匹配，应该赋给变量的新值。</li>
+</ul>
+<p>（2）CAS 操作的步骤如下：</p>
+<ul>
+<li>首先检查内存位置的当前值是否与期望值相等。</li>
+<li>如果相等，就将新值写入到内存位置。</li>
+<li>返回之前内存位置上的值。</li>
+</ul>
+<p>如果原始值与期望值相等，更新成功；如果不相等，表示其他线程已经修改了该位置的数据，更新失败。</p>
+<p>（3）CAS 的内部实现</p>
+<p>底层实现通常依赖于处理器提供的特定指令集。例如，在 x86 架构中，CAS 通常是通过 <code>CMPXCHG</code> 指令实现的。这个指令原子地比较寄存器的值与内存位置的值，如果相同，则将新值写入内存位置。整个操作是原子的，意味着在执行过程中不会被其他线程的指令中断。</p>
+<h3 id="如何实现一个线程池？"><a href="#如何实现一个线程池？" class="headerlink" title="如何实现一个线程池？"></a>如何实现一个线程池？</h3><p>线程池是一组预先创建好的线程，用于执行多个任务。它可以提高任务调度的效率和性能。实现一个线程池可以使用 C++11 提供的 std::thread和 std::mutex 等多线程库，结合队列等数据结构来管理任务的提交和执行。</p>
 <h3 id="一个线程池中最重要的部分是什么？"><a href="#一个线程池中最重要的部分是什么？" class="headerlink" title="一个线程池中最重要的部分是什么？"></a>一个线程池中最重要的部分是什么？</h3><p>我认为线程池中最重要的部分是任务队列和线程池管理策略：</p>
 <ul>
 <li><strong>任务队列</strong>：它是线程池的核心，因为所有的任务都需要通过这个队列进行调度。队列的设计（如是否阻塞、优先级如何处理等）直接影响线程池的效率和公平性。</li>
@@ -1823,12 +1826,7 @@
 <li><strong>动态调整线程数目</strong>：根据任务的实际负载动态调整线程池中的线程数量。当任务量增加时增加线程数，任务量减少时减少线程数，以保证资源的合理使用并避免过载或资源闲置。</li>
 <li><strong>任务队列优化</strong>：优化任务队列的管理方式，如选择合适的数据结构（例如优先队列）以支持优先级调度，确保紧急任务能够优先处理。</li>
 <li><strong>线程生命周期管理</strong>：管理线程的生命周期，避免频繁地创建和销毁线程。可以设置线程的最大空闲时间，超过这个时间线程则自动销毁。</li>
-<li><strong>利用现代CPU架构</strong>：利用CPU亲和性（affinity）将线程固定到特定的CPU核心上运行，以减少上下文切换的成本和提高缓存的利用率。</li>
-<li><strong>适当使用异步编程模型</strong>：将部分可以异步处理的任务改为异步执行方式，减轻线程池的负担。</li>
 <li><strong>监控和调试</strong>：实现监控机制来监控线程池的性能，如任务等待时间、任务执行时间、线程利用率等，以便及时发现问题并进行调整。</li>
-<li><strong>负载均衡</strong>：实施负载均衡机制，确保所有线程工作负载均衡，避免某些线程过载而其他线程空闲。</li>
-<li><strong>选择合适的线程池模型</strong>：根据应用需求选择合适的线程池模型，如固定大小线程池、可缓存线程池、调度线程池等。</li>
-<li><strong>减少锁的使用</strong>：优化代码，减少锁的使用，避免线程间的频繁同步，减少等待时间。</li>
 </ol>
 <h3 id="多线程是怎么处理许多个任务一起到来的？"><a href="#多线程是怎么处理许多个任务一起到来的？" class="headerlink" title="多线程是怎么处理许多个任务一起到来的？"></a>多线程是怎么处理许多个任务一起到来的？</h3><ol>
 <li><strong>任务分配</strong>：当多个任务同时到来时，这些任务通常被添加到一个共享的任务队列中。这个队列可以被所有的线程访问。线程池中的每个线程会从这个队列中取出任务并执行。</li>
@@ -1846,7 +1844,17 @@
 </ol>
 <h3 id="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"><a href="#如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？" class="headerlink" title="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"></a>如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？</h3><p>首先判断这个请求数量远远多于线程是常态吗，如果是常态则先要考虑是不是线程数量设置有问题，然后判断机器是否能力不足以处理这些数据。</p>
 <p>假如说硬件软件都没有问题，那么考虑这个问题为什么会产生，是不是我们的高计算密集型任务太多了，如果说我们的请求任务比较复杂，那么考虑进行一个分类，将处理特别慢的请求作为一个特定类，将一些线程固定给他们使用，而不是所有线程都用来处理这种任务，因为既然很慢，那么慢1个和慢10个点区别就没有那么大了，将其他线程用来处理能够快速处理完的请求。</p>
-<h3 id="线程间的通信包括哪些方式？"><a href="#线程间的通信包括哪些方式？" class="headerlink" title="线程间的通信包括哪些方式？"></a>线程间的通信包括哪些方式？</h3><h3 id="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"><a href="#线程同步是什么？从底层原理分析一下为什么会出现线程同步？" class="headerlink" title="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"></a>线程同步是什么？从底层原理分析一下为什么会出现线程同步？</h3><p>（1）线程同步是多线程编程中保证多个线程安全访问共享资源或协调工作的一种机制。它确保在任何给定时刻，只有一个线程可以访问特定的数据或代码块，以防止数据损坏或不一致性。线程同步通常通过使用各种同步原语（如互斥锁、信号量、条件变量等）来实现。</p>
+<h3 id="线程间的通信包括哪些方式？"><a href="#线程间的通信包括哪些方式？" class="headerlink" title="线程间的通信包括哪些方式？"></a>线程间的通信包括哪些方式？</h3><ol>
+<li><strong>共享内存</strong>：线程间共享相同的内存空间，可以通过共享变量进行通信，需要同步机制（如互斥锁、信号量等）来防止数据竞争和保证一致性。</li>
+<li><strong>互斥锁（Mutex）</strong>：用于控制多个线程对共享资源的访问，保证同一时间只有一个线程可以访问资源。</li>
+<li><strong>条件变量</strong>：用于线程间的同步，允许一个或多个线程在某些条件下暂停执行并等待，直到另一个线程通知它们条件已经满足。</li>
+<li><strong>信号量（Semaphores）</strong>：用于控制对共享资源的访问数量。信号量维护了一个计数器，表示可用资源的数量，线程在进入临界区前必须获取信号量。</li>
+<li><strong>事件（Event）</strong>：类似于条件变量，用于通知一个或多个正在等待的线程某个事件已经发生。</li>
+<li><strong>消息队列</strong>：线程可以发送和接收消息，消息以队列的形式管理。消息队列允许线程以异步的方式进行数据交换和事件通知。</li>
+<li><strong>管道（Pipes）</strong>：主要用于进程间通信，但也可以在有共享文件系统的线程间使用。管道允许一个线程发送数据，另一个线程接收数据。</li>
+<li><strong>屏障（Barriers）</strong>：用于多个线程同步到某一点，当所有线程都达到屏障点后，它们再同时开始执行后续操作。常用于并行计算，确保所有线程在进行下一步操作前已完成当前操作。</li>
+</ol>
+<h3 id="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"><a href="#线程同步是什么？从底层原理分析一下为什么会出现线程同步？" class="headerlink" title="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"></a>线程同步是什么？从底层原理分析一下为什么会出现线程同步？</h3><p>（1）线程同步是多线程编程中保证多个线程安全访问共享资源或协调工作的一种机制。它确保在任何给定时刻，只有一个线程可以访问特定的数据或代码块，以防止数据损坏或不一致性。线程同步通常通过使用各种同步原语（如互斥锁、信号量、条件变量等）来实现。</p>
 <p>（2）底层原理上，线程同步问题主要是由于以下几个因素导致的：</p>
 <ol>
 <li>并发性：多个线程同时执行，导致对共享资源的访问不可控。</li>
@@ -1864,12 +1872,53 @@
 <p>4） 等待态：包括浅度睡眠跟深度睡进程在等待某种条件，条件成熟后即是就绪态。浅度睡眠时进程可以被信号唤醒，但深度睡眠时必须等到条件成熟后才能结束睡眠状态。</p>
 <p>5） 暂停态：暂时停止参与CPU调度（即使条件成熟），可以恢复。</p>
 <h3 id="两个进程的内核空间是共享的吗？"><a href="#两个进程的内核空间是共享的吗？" class="headerlink" title="两个进程的内核空间是共享的吗？"></a>两个进程的内核空间是共享的吗？</h3><p>在大多数现代操作系统中，包括Linux和Windows，内核空间是在所有进程之间共享的。这意味着内核空间中的代码和数据结构对所有进程来说都是相同的，并且在任何时候都位于相同的物理内存位置。</p>
-<h3 id="如何让进程后台运行？"><a href="#如何让进程后台运行？" class="headerlink" title="如何让进程后台运行？"></a>如何让进程后台运行？</h3><h3 id="进程间的通信包括哪些方式？"><a href="#进程间的通信包括哪些方式？" class="headerlink" title="进程间的通信包括哪些方式？"></a>进程间的通信包括哪些方式？</h3><p>（1）管道，半双工的通信方式，可以在父子进程间进行数据传递。通常用于具有亲缘关系的进程之间的通信。</p>
+<h3 id="如何让进程后台运行？"><a href="#如何让进程后台运行？" class="headerlink" title="如何让进程后台运行？"></a>如何让进程后台运行？</h3><ol>
+<li><p><strong>使用 &amp; 符号</strong>：</p>
+<ul>
+<li><p>在命令行中，在命令的末尾加上 <code>&amp;</code> 符号，可以让该命令在后台执行。</p>
+</li>
+<li><p>例如，要让 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python script.py</span><br></pre></td></tr></table></figure>
+
+<p> 在后台运行，可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">python script.py &amp;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>使用 nohup 命令</strong>：</p>
+<ul>
+<li><p><code>nohup</code> 命令用于将程序以忽略挂断信号的方式运行，这样即使终端关闭，程序也会继续在后台运行。</p>
+</li>
+<li><p>使用方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line"><span class="built_in">nohup</span> python script.py &amp;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="进程间的通信包括哪些方式？"><a href="#进程间的通信包括哪些方式？" class="headerlink" title="进程间的通信包括哪些方式？"></a>进程间的通信包括哪些方式？</h3><p>（1）管道，半双工的通信方式，可以在父子进程间进行数据传递。通常用于具有亲缘关系的进程之间的通信。</p>
 <p>（2）命名管道，与普通管道类似，但可以在无亲缘关系的进程之间使用。命名管道通过文件系统进行通信。</p>
 <p>（3）消息队列，允许一个或多个进程向队列中发送消息，并从队列中接收消息。消息队列通常用于在不同进程之间传递结构化的数据。</p>
 <p>（4）信号量，控制进程间访问共享资源的机制，可以用来解决进程同步和互斥的问题，防止竞态条件的发生。</p>
 <p>（5）共享内存，允许多个进程共享同一块内存区域，进程可以直接读写共享内存中的数据。</p>
 <p>（6）套接字，适用于在不同主机和不同进程之间进行通信，通常用于网络编程。</p>
+<h3 id="进程间的通信，哪个通信方式效率最高"><a href="#进程间的通信，哪个通信方式效率最高" class="headerlink" title="进程间的通信，哪个通信方式效率最高"></a>进程间的通信，哪个通信方式效率最高</h3><p>1、<strong>共享内存（Shared Memory）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 最高</li>
+<li><strong>原因</strong>: 共享内存允许多个进程访问同一块内存区域，没有数据复制的开销，因此通信速度非常快。不过，需要额外的同步机制（如信号量或互斥锁）来防止并发访问问题。</li>
+</ul>
+<p>2、<strong>消息队列（Message Queues）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 中等</li>
+<li><strong>原因</strong>: 消息队列提供了一种从一个进程向另一个进程发送数据包的方法，数据在发送过程中需要被复制到和从内核空间，这增加了开销，但它提供了比共享内存更好的数据管理和安全性。</li>
+</ul>
+<p>3、<em>管道（Pipes）和命名管道（Named Pipes&#x2F;FIFOs）</em>*:</p>
+<ul>
+<li><strong>效率</strong>: 较低</li>
+<li><strong>原因</strong>: 数据需要在发送进程和接收进程之间进行复制，且管道通常是半双工的，这限制了通信的灵活性和效率。</li>
+</ul>
+<p>4、<strong>套接字（Sockets）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 低到中等</li>
+<li><strong>原因</strong>: 套接字支持网络层面的通信，即使是在同一台机器上的进程间通信也涉及到网络协议栈，这增加了额外的开销。但套接字非常灵活，支持包括TCP和UDP在内的多种协议。</li>
+</ul>
 <h3 id="信号量与互斥锁的区别？"><a href="#信号量与互斥锁的区别？" class="headerlink" title="信号量与互斥锁的区别？"></a>信号量与互斥锁的区别？</h3><ol>
 <li><strong>互斥锁</strong>：用于线程的互斥，即在同一时间内只允许一个线程访问某个资源。互斥锁保证了资源的唯一性和排他性。当一个线程获得互斥锁时，其他试图访问被锁保护的资源的线程将被阻塞，直到锁被释放。</li>
 <li><strong>信号量</strong>：用于线程的同步，可以允许多个线程根据信号量的值同时访问同一资源或一组资源。信号量主要用于控制资源的可用数量。信号量有一个计数器，表示可用资源的数量。线程在访问资源前需要先获得信号量（计数器减1），如果信号量的值为0，则线程进入等待状态。当资源释放时，信号量计数器增加，等待的线程可以继续执行。</li>
@@ -1879,9 +1928,43 @@
 <li><strong>使用互斥锁</strong>：如果使用互斥锁，你可能需要配合条件变量来实现这种顺序控制。互斥锁本身只能保证互斥，不能控制线程之间的执行顺序。父线程需要在条件变量上等待一个特定条件（通常由子线程设置）。</li>
 <li><strong>使用信号量</strong>：信号量可以更直接地控制执行顺序。例如，可以初始化一个信号量为0。父线程在尝试访问资源之前会首先对信号量执行等待操作，由于信号量的初始值是0，所以父线程会阻塞。子线程在完成其任务后对信号量执行信号操作，从而增加信号量的值并解除父线程的阻塞。这样，子线程可以直接通过信号量控制父线程的执行。</li>
 </ul>
-<h3 id="哪个通信方式效率最高"><a href="#哪个通信方式效率最高" class="headerlink" title="哪个通信方式效率最高"></a>哪个通信方式效率最高</h3><h3 id="有名管道和无名管道的区别是什么？"><a href="#有名管道和无名管道的区别是什么？" class="headerlink" title="有名管道和无名管道的区别是什么？"></a>有名管道和无名管道的区别是什么？</h3><h3 id="信号和信号量是什么，信号量如何使用？"><a href="#信号和信号量是什么，信号量如何使用？" class="headerlink" title="信号和信号量是什么，信号量如何使用？"></a>信号和信号量是什么，信号量如何使用？</h3><h3 id="使用共享内存的时候需要注意什么呢？"><a href="#使用共享内存的时候需要注意什么呢？" class="headerlink" title="使用共享内存的时候需要注意什么呢？"></a>使用共享内存的时候需要注意什么呢？</h3><p>对共享资源的访问需要注意临界变量的保护，利用锁机制互斥访问，保证运行结果一致性</p>
-<h3 id="select、poll、epoll-的区别"><a href="#select、poll、epoll-的区别" class="headerlink" title="select、poll、epoll 的区别"></a>select、poll、epoll 的区别</h3><h3 id="协程了解吗，为什么比线程更轻量，协程堆栈是怎么管理的"><a href="#协程了解吗，为什么比线程更轻量，协程堆栈是怎么管理的" class="headerlink" title="协程了解吗，为什么比线程更轻量，协程堆栈是怎么管理的"></a>协程了解吗，为什么比线程更轻量，协程堆栈是怎么管理的</h3><h3 id="协程怎么实现并发的，怎么做系统I-O的"><a href="#协程怎么实现并发的，怎么做系统I-O的" class="headerlink" title="协程怎么实现并发的，怎么做系统I&#x2F;O的"></a>协程怎么实现并发的，怎么做系统I&#x2F;O的</h3><h2 id="2、内存模型-虚拟内存"><a href="#2、内存模型-虚拟内存" class="headerlink" title="2、内存模型&#x2F;虚拟内存"></a>2、内存模型&#x2F;虚拟内存</h2><h3 id="什么是虚拟内存？"><a href="#什么是虚拟内存？" class="headerlink" title="什么是虚拟内存？"></a>什么是虚拟内存？</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
+<h3 id="使用共享内存的时候需要注意什么呢？"><a href="#使用共享内存的时候需要注意什么呢？" class="headerlink" title="使用共享内存的时候需要注意什么呢？"></a>使用共享内存的时候需要注意什么呢？</h3><p>对共享资源的访问需要注意临界变量的保护，利用锁机制互斥访问，保证运行结果一致性</p>
+<h2 id="2、内存模型-虚拟内存"><a href="#2、内存模型-虚拟内存" class="headerlink" title="2、内存模型&#x2F;虚拟内存"></a>2、内存模型&#x2F;虚拟内存</h2><h3 id="什么是虚拟内存？"><a href="#什么是虚拟内存？" class="headerlink" title="什么是虚拟内存？"></a>什么是虚拟内存？</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
+<h3 id="为什么操作系统要使用虚拟内存？"><a href="#为什么操作系统要使用虚拟内存？" class="headerlink" title="为什么操作系统要使用虚拟内存？"></a>为什么操作系统要使用虚拟内存？</h3><ol>
+<li>虚拟内存允许系统使用硬盘空间来模拟额外的RAM，这样应用程序就可以使用比实际物理内存更多的内存空间。这对于运行内存需求大于物理内存的应用程序特别有用。</li>
+<li>每个进程都有自己独立的虚拟地址空间，这意味着一个进程不能直接访问另一个进程的内存空间。这种隔离提高了系统的安全性，因为它阻止了进程间的意外或恶意的内存访问。</li>
+<li>虚拟内存简化了内存的管理，因为每个进程都可以认为自己在使用一大块连续的内存区域。这使得程序的编写和调试变得更加简单，因为程序员不需要考虑内存碎片或其他内存布局问题。</li>
+<li>虚拟内存可以更方便地在不同进程之间共享内存。例如，多个进程可以映射到相同的物理内存，实现共享库等数据的共享，从而节约内存。</li>
+</ol>
 <h3 id="一个由C-C-编译的程序的内存分布（内存模型）？"><a href="#一个由C-C-编译的程序的内存分布（内存模型）？" class="headerlink" title="一个由C&#x2F;C++编译的程序的内存分布（内存模型）？"></a>一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<br>.text段，.rodata段，.data段，.bss段，堆，内存映射区，栈，内核空间。<br>其中，各项主要内容如下：<br>（1）.text段主要存在程序编译后的机器指令<br>（2）.rodata段主要存放程序中的各种只读变量<br>（3）.data段主要存放已经被初始化了的全局静态变量和局部静态变量<br>（4）.bss段主要存放未被初始化的全局静态变量和局部静态变量<br>（5）堆：由程序员进行动态分配，如调用malloc或new<br>（6）栈：由编译器自动分配释放，存放一些局部变量等<br>（7）内核空间：存放操作系统的一些内核数据和代码</p>
+<h3 id="为什么要区分代码段和数据段？"><a href="#为什么要区分代码段和数据段？" class="headerlink" title="为什么要区分代码段和数据段？"></a>为什么要区分代码段和数据段？</h3><ul>
+<li><strong>访问权限控制</strong>：代码段通常设置为只读，以防止程序代码被意外或恶意修改，这可能导致程序行为不正确或系统安全受到威胁。数据段则通常需要读写权限，因为程序在运行时需要修改数据。</li>
+<li><strong>防止代码注入</strong>：通过将代码段设置为只读，可以防止恶意代码注入和执行，这是提高系统安全性的重要措施。</li>
+<li><strong>分页策略</strong>：代码段和数据段可能会采用不同的分页和交换策略。例如，代码页可能较少交换出内存，因为它们被频繁访问；而数据段的某些部分如果使用不频繁可以被交换出去以节约资源。</li>
+</ul>
+<h3 id="为什么要区分堆区和栈区？为什么不能全部用堆？"><a href="#为什么要区分堆区和栈区？为什么不能全部用堆？" class="headerlink" title="为什么要区分堆区和栈区？为什么不能全部用堆？"></a>为什么要区分堆区和栈区？为什么不能全部用堆？</h3><ol>
+<li><strong>性能和效率</strong>：<ul>
+<li><strong>栈区</strong>：栈具有非常高的访问效率。它是线程专属的数据区，用于存储函数调用的局部变量和管理调用栈（函数调用时的参数、返回地址等）。栈的数据结构允许数据以后进先出（LIFO）的顺序存取，使得函数调用的局部变量的创建和销毁非常快速，这是因为它只涉及指针的移动。</li>
+<li><strong>堆区</strong>：相比之下，堆是用于存储动态分配的变量的，可以在运行时动态增长和缩小。堆的管理比栈复杂，涉及到更为复杂的内存分配和回收策略，如空闲链表、垃圾回收等。这使得堆的性能相对于栈而言较低。</li>
+</ul>
+</li>
+<li><strong>内存管理</strong>：<ul>
+<li><strong>栈区</strong>：栈内存的管理是自动的，由编译器自动分配释放，程序员无需手动控制，减少了内存泄漏和其他错误的风险。</li>
+<li><strong>堆区</strong>：堆内存的分配释放则需由程序员通过代码进行控制，这增加了复杂性和出错的风险，如内存泄漏、野指针等问题。</li>
+</ul>
+</li>
+<li><strong>灵活性</strong>：<ul>
+<li>栈的大小通常有限且固定，这限制了其使用的灵活性。例如，在许多操作系统中，栈的默认大小可能仅为几MB，不适合存储大量数据或大型对象。</li>
+<li>堆的大小通常受到虚拟内存大小的限制，比栈要大得多，适合存储大量数据或进行大规模的动态内存分配。</li>
+</ul>
+</li>
+<li><strong>为什么不能全部用堆</strong>：<ul>
+<li><strong>性能问题</strong>：如果全部使用堆，那么即使是最简单的局部变量也需要通过动态内存分配来实现，这将极大地降低程序的性能。</li>
+<li><strong>复杂性和错误风险</strong>：堆内存的手动管理增加了编程的复杂性和出错的可能性，特别是内存泄漏和内存损坏等问题。</li>
+<li><strong>资源利用不均</strong>：频繁的堆操作可能导致内存碎片等问题，影响内存的有效使用。</li>
+</ul>
+</li>
+</ol>
 <h3 id="不同段上的对象的生命周期是怎样的？"><a href="#不同段上的对象的生命周期是怎样的？" class="headerlink" title="不同段上的对象的生命周期是怎样的？"></a>不同段上的对象的生命周期是怎样的？</h3><p>（1）.data&#x2F;.bss段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁<br>（2）堆上的对象由程序员进行动态分配<br>（3）栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
 <h3 id="堆和栈的区别是什么？"><a href="#堆和栈的区别是什么？" class="headerlink" title="堆和栈的区别是什么？"></a>堆和栈的区别是什么？</h3><p>（1）内存分配方式</p>
 <ul>
@@ -1955,7 +2038,10 @@
 <li><p><strong>页错误（Page Fault）</strong>，如果在页表或TLB中找不到虚拟地址对应的物理地址，将触发一个页错误中断。操作系统的内存管理器会处理这个中断，可能会从磁盘加载缺失的页到物理内存中，然后更新页表并重新尝试访问。</p>
 </li>
 </ol>
-<h3 id="页表是什么，页多大，为什么是4KB？"><a href="#页表是什么，页多大，为什么是4KB？" class="headerlink" title="页表是什么，页多大，为什么是4KB？"></a>页表是什么，页多大，为什么是4KB？</h3><h3 id="缺页中断什么时候发生？"><a href="#缺页中断什么时候发生？" class="headerlink" title="缺页中断什么时候发生？"></a>缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
+<h3 id="页表是什么，页多大，为什么是4KB？"><a href="#页表是什么，页多大，为什么是4KB？" class="headerlink" title="页表是什么，页多大，为什么是4KB？"></a>页表是什么，页多大，为什么是4KB？</h3><p>页表是操作系统中用于实现虚拟内存管理的一种数据结构，它用于将虚拟地址映射到物理地址。这种机制允许计算机的操作系统为每个运行的程序提供一种看似连续的内存地址空间，即使物理内存是分散存储的。</p>
+<p>每个页表条目存储着虚拟页面到物理页面的映射信息，通常包括物理页帧的基地址和一些状态位（如访问权限、是否已加载到物理内存中等）。由于地址空间的扩大，单级页表的大小会非常庞大，因此现代操作系统通常使用多级页表结构来减少内存占用，如x86架构常用的二级或三级页表。</p>
+<p>在多数现代操作系统中，标准的页面大小是4KB（4096字节）。linux 会以页面为单位对内存进行管理。不论是将磁盘中的数据加载到内存中，还是将内存中的数据写回磁盘中，操作系统都会以页面为单位进行操作，这也意味着如果我们只向磁盘中写入一个字节的数据，操作系统也需要将整个页面中的全部数据刷入磁盘中。过小的页面大小会带来较大的页表项增加寻址时 TLB（Translation lookaside buffer）的查找速度和额外开销；过大的页面大小会浪费内存空间，造成内存碎片，降低内存的利用率；上个世纪在设计内存页大小时充分考虑了上述的两个因素，最终选择了 4KB 的内存页作为操作系统最常见的页大小，这个大小也就沿用至今。</p>
+<h3 id="缺页中断什么时候发生？"><a href="#缺页中断什么时候发生？" class="headerlink" title="缺页中断什么时候发生？"></a>缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
 <p>（2）当程序尝试进行一个违反内存规则的操作时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</p>
 <h3 id="常见的缺页中断算法有哪些？"><a href="#常见的缺页中断算法有哪些？" class="headerlink" title="常见的缺页中断算法有哪些？"></a>常见的缺页中断算法有哪些？</h3><p>（1）LRU，最近最少使用。</p>
 <p>（2）LFU，使用频率最低。</p>
@@ -2226,7 +2312,37 @@
 </ul>
 </li>
 </ol>
-<h3 id="系统调用从用户到内核的底层实现是什么？"><a href="#系统调用从用户到内核的底层实现是什么？" class="headerlink" title="系统调用从用户到内核的底层实现是什么？"></a>系统调用从用户到内核的底层实现是什么？</h3><h3 id="内核的调度方式是什么？"><a href="#内核的调度方式是什么？" class="headerlink" title="内核的调度方式是什么？"></a>内核的调度方式是什么？</h3><p>在Linux操作系统中，内核的调度方式是指如何管理和调度系统中的进程和线程，以优化性能和响应时间。Linux内核使用多种调度策略和算法，主要包括以下几种：</p>
+<h3 id="系统调用从用户到内核的底层实现是什么？"><a href="#系统调用从用户到内核的底层实现是什么？" class="headerlink" title="系统调用从用户到内核的底层实现是什么？"></a>系统调用从用户到内核的底层实现是什么？</h3><ol>
+<li><strong>系统调用接口</strong>：<ul>
+<li>用户程序通常通过一个库（如C标准库）提供的封装函数来发起系统调用。这些库函数会设置好所有必要的参数供系统调用使用。</li>
+</ul>
+</li>
+<li><strong>陷入指令（Trap）</strong>：<ul>
+<li>库函数内部会执行一个特殊的指令，通常是<code>syscall</code>（在x86-64架构中）或<code>int 0x80</code>（在较老的x86架构中）。这个指令会生成一个软件中断，将处理器从用户模式切换到内核模式。</li>
+</ul>
+</li>
+<li><strong>系统调用编号</strong>：<ul>
+<li>每个系统调用都有一个唯一的编号。这个编号由用户程序设置在一个特定的寄存器（如x86中的EAX）中，内核通过这个编号来识别具体执行哪一个系统调用。</li>
+</ul>
+</li>
+<li><strong>上下文切换</strong>：<ul>
+<li>执行系统调用指令后，CPU进入内核模式，操作系统接管控制权。此时，操作系统会保存用户程序的状态（如寄存器等），并准备执行相应的内核函数。</li>
+</ul>
+</li>
+<li><strong>执行系统调用</strong>：<ul>
+<li>内核根据寄存器中的系统调用编号，通过查找系统调用表来找到对应的处理函数，并执行之。</li>
+</ul>
+</li>
+<li><strong>返回用户态</strong>：<ul>
+<li>系统调用完成后，操作系统将结果返回给用户程序，恢复用户程序的上下文，并将CPU控制权返回给用户程序。</li>
+</ul>
+</li>
+<li><strong>结果传递</strong>：<ul>
+<li>系统调用的结果通常通过寄存器或用户空间的内存位置返回给用户程序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="内核的调度方式是什么？"><a href="#内核的调度方式是什么？" class="headerlink" title="内核的调度方式是什么？"></a>内核的调度方式是什么？</h3><p>在Linux操作系统中，内核的调度方式是指如何管理和调度系统中的进程和线程，以优化性能和响应时间。Linux内核使用多种调度策略和算法，主要包括以下几种：</p>
 <ol>
 <li><p><strong>完全公平调度器（Completely Fair Scheduler, CFS）</strong></p>
 </li>
@@ -2654,99 +2770,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="midorii">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MIDORII'S JOURNEY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="post-title-link" itemprop="url">Ch3 程序的机器级表示</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-03 11:27:38 / 修改时间：22:22:17" itemprop="dateCreated datePublished" datetime="2024-04-03T11:27:38+08:00">2024-04-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>31</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2818,7 +2841,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2861,12 +2884,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">93k</span>
+    <span title="站点总字数">98k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:40</span>
+    <span title="站点阅读时长">5:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
