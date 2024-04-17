@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/14/Untitled/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,7 +203,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/14/Untitled/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-14 19:17:03 / 修改时间：19:43:37" itemprop="dateCreated datePublished" datetime="2024-04-14T19:17:03+08:00">2024-04-14</time>
+              <time title="创建时间：2024-04-17 10:06:59 / 修改时间：10:27:57" itemprop="dateCreated datePublished" datetime="2024-04-17T10:06:59+08:00">2024-04-17</time>
             </span>
 
           <br>
@@ -223,14 +223,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>967</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>39 分钟</span>
             </span>
 
         </div>
@@ -242,23 +242,141 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>野指针是指向未知内存位置的指针，其出现有以下几种情况：（1）指针定义后未初始化；（2）内存被释放后，指向该内存的指针未被赋值为NULL；（3）下标越界。</p>
-<p>智能指针是对裸指针的封装。根据RAII的思想将其封装为一个类，这样在超出其作用范围时就会被释放，避免了程序员手动操作时忘记释放内存，从而造成内存泄漏的问题。（1）auto_ptr，因为不包含复制语义，C++11已经被废除；（2）unique_ptr；（3）shared_ptr，对资源的共享式访问，其内部维护了一个引用计数器，当引用计数减少为0时，调用delete删除；（3）weak_ptr，提供了访问shared_ptr的方式，但不会增加其引用计数，因此可以用于解决循环引用的问题。</p>
-<p>weak_ptr通过lock()获得shared_ptr</p>
-<p>循环引用发生在有两个shared_ptr对象互相引用对方，或在某些复杂的数据结构中存在多条引用路径。</p>
-<p>引用计数的线程安全性是通过原子操作实现的，这就确保了在任意时刻只会有一个线程对引用计数进行修改。</p>
-<p>加锁或者结合原子操作来处理。</p>
-<p>const允许我们规定一个语义，告诉编译器某个对象是不能被修改的，可以用于修饰普通变量、函数和类等。</p>
-<p>static则指明了变量的存储和访问方式。（1）静态成员变量&#x2F;函数：不属于类的任何一个对象，而属于类本身，所有对象共享这个变量；（2）静态局部变量，在整个程序运行的过程中只会被初始化一次；（3）静态全局变量，限制了其定义只在本文件中，有助于封装和避免命名冲突。</p>
-<p>extern主要用于在多个文件之间共享变量或函数。当需要再多个源文件中使用同一个全局变量时，可以在一个文件中定义，在其他文件中用extern来声明。此外，在C++中，extern “C”告诉C++的编译器，某个函数或变量应该用C语言的方式进行链接。</p>
-<p>#define是预处理指令，在预处理阶段将标识符替换为指定的文本，不进行类型检查；const则是在编译时创建，可在运行时进行初始化，包含类型检查。</p>
-<p>sizeof是一个关键字而非函数，它用于获取某个类型或变量占用内存的大小；strlen用于获取以null结尾的C风格字符串中，有效字符的长度。</p>
-<p>预防变量的重定义有以下方式：（1）使用命名空间；（2）使用static进行修饰，使得变量仅在本文件内有效；（3）使用extern关键字，使得多个文件共享同一个全局变量。</p>
-<p>右值引用是通过避免不必要的拷贝操作来提升性能的。比如，在使用一个临时对象创建新对象时，可以使用移动构造函数，直接将资源从一个对象复制到另一个对象上，从而避免不必要的操作。</p>
-<p>基类构造函数、成员变量、派生类构造函数体。</p>
-<p>（1）深拷贝创建一个新的对象，并且复制对象的所有内容，包括其指针成员变量指向的内存空间，深拷贝后的对象和原对象之间是互相独立的。（2）浅拷贝只复制对象的引用，但仍然指向原对象所指向的内存空间。</p>
-<p>拷贝构造函数用于构建一个新的对象，但等号赋值运算符是更新已经存在的对象的值，</p>
+          <h2 id="1、GCC安装"><a href="#1、GCC安装" class="headerlink" title="1、GCC安装"></a>1、GCC安装</h2><h3 id="（1）GCC相关知识点"><a href="#（1）GCC相关知识点" class="headerlink" title="（1）GCC相关知识点"></a>（1）GCC相关知识点</h3><p>GCC（GNU Compiler Collection， GNU编译器套件）是由GNU开发的编程语言译器。</p>
+<p>gcc和g++都是GNU（组织）的一个编译器</p>
+<ul>
+<li>误区一：gcc只能编译C程序，g++只能编译C++代码：<ul>
+<li>后缀为.c时，gcc认为其是C程序，g++认为其是C++程序；</li>
+<li>后缀为.cpp时，gcc和g++均认为其是C++程序。</li>
+</ul>
+</li>
+<li>误区二：编译只能用gcc，链接只能用g++：<ul>
+<li>严格来说不算错误，但混淆了概念，应该说：编译可以用gcc&#x2F;g++，而链接可以用g++或者gcc -lstdc++;</li>
+<li>gcc命令不能自动和C++程序使用的库链接，所以通常使用g++来完成链接。但在编译阶段，g++会自动调用gcc，二者等价。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171012036.png" alt="1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171012580.png" alt="2"></p>
+<h3 id="（2）GCC工作流程"><a href="#（2）GCC工作流程" class="headerlink" title="（2）GCC工作流程"></a>（2）GCC工作流程</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013866.png" alt="3"></p>
+<ul>
+<li><p>预处理：对头文件展开\删除代码中的注释\宏替换</p>
+</li>
+<li><p><strong>程序编译成可执行程序的过程：</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013529.png" alt="4"></p>
+</li>
+</ul>
+<h2 id="2、静态库和动态库"><a href="#2、静态库和动态库" class="headerlink" title="2、静态库和动态库"></a>2、静态库和动态库</h2><h3 id="（1）静态库"><a href="#（1）静态库" class="headerlink" title="（1）静态库"></a>（1）静态库</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013337.png" alt="5"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013840.png" alt="6"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/library<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">├── add.c</span><br><span class="line">├── div.c</span><br><span class="line">├── mult.c</span><br><span class="line">└── sub.c</span><br><span class="line">root@iisayhi:~/lesson/library<span class="comment"># gcc main.c -o app -I ./include/ -l calc -L ./lib/</span></span><br><span class="line">root@iisayhi:~/lesson/library<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── app</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">│   └── libcalc.a</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">		├── add.c</span><br><span class="line">		├── div.c</span><br><span class="line">		├── mult.c</span><br><span class="line">		└── sub.c</span><br></pre></td></tr></table></figure>
 
+<h3 id="（2）动态库"><a href="#（2）动态库" class="headerlink" title="（2）动态库"></a>（2）动态库</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013622.png" alt="7"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013961.png" alt="8"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013076.png" alt="9"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/calc# **gcc -c -fpic add.c mult.c sub.c div.c** </span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# ls</span><br><span class="line">add.c  add.o  div.c  div.o  head.h  main.c  mult.c  mult.o  sub.c  sub.o</span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# **gcc -shared *.o -o libcalc.so**</span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# ll</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root root  4096 Apr  6 22:49 ./</span><br><span class="line">drwxr-xr-x 4 root root  4096 Apr  6 22:47 ../</span><br><span class="line">-rw-r--r-- 1 root root    80 Apr  6 22:47 add.c</span><br><span class="line">-rw-r--r-- 1 root root  1376 Apr  6 22:48 add.o</span><br><span class="line">-rw-r--r-- 1 root root    94 Apr  6 22:47 div.c</span><br><span class="line">-rw-r--r-- 1 root root  1384 Apr  6 22:48 div.o</span><br><span class="line">-rw-r--r-- 1 root root   189 Apr  6 22:47 head.h</span><br><span class="line">-rwxr-xr-x 1 root root 15824 Apr  6 22:49 libcalc.so*</span><br><span class="line">-rw-r--r-- 1 root root   306 Apr  6 22:47 main.c</span><br><span class="line">-rw-r--r-- 1 root root    85 Apr  6 22:47 mult.c</span><br><span class="line">-rw-r--r-- 1 root root  1384 Apr  6 22:48 mult.o</span><br><span class="line">-rw-r--r-- 1 root root    85 Apr  6 22:47 sub.c</span><br><span class="line">-rw-r--r-- 1 root root  1376 Apr  6 22:48 sub.o</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行main可执行文件报错：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># gcc main.c -o main -I include/ -L lib/ -l calc</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ls</span></span><br><span class="line">include  lib  main  main.c  src</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">**./main: error <span class="keyword">while</span> loading shared libraries: [libcalc.so](&lt;http://libcalc.so/&gt;): cannot open shared object file: No such file or directory**</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffda29fd000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; not found</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbe8fa25000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007fbe8fc31000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>原因即是由于动态库是在程序启动后才被加载到内存中，而我们自己写的动态库libcalc.so并没有给出对应的路径去查找它，所以会报错。</p>
+<p>解决方法：</p>
+<blockquote>
+<p>对于elf格式的可执行程序，是由ld-linux.so来完成的，它先后搜索elf文件的 <strong>DT_RPATH段</strong> ——&gt; <strong>环境变量LD_LIBRARY_PATH</strong> ——&gt; <strong>&#x2F;etc&#x2F;ld.so.cache</strong>文件列表 ——&gt; <strong>&#x2F;lib&#x2F;，&#x2F;usr&#x2F;lib</strong>目录找到库文件后将其载入内存</p>
+</blockquote>
+<p><strong>1）DT_RPATH段 无法修改，系统本身固定值</strong></p>
+<p><strong>2）环境变量LD_LIBRARY_PATH</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># echo $LD_LIBRARY_PATH </span></span><br><span class="line">:/root/lesson/lesson01/library/lib</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffff57e5000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; /root/lesson/lesson01/library/lib/libcalc.so (0x00007f06515af000)</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f06513aa000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007f06515bb000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">a = 20, b = 12</span><br><span class="line">a + b = 32</span><br><span class="line">a - b = 8</span><br><span class="line">a * b = 240</span><br><span class="line">a / b = 1.666667</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>直接在终端中配置，当终端被关闭后该环境变量就会消失了，属于临时性配置。</p>
+<p>永久性配置：</p>
+<ul>
+<li><p>用户级别</p>
+<ul>
+<li><p>根目录下，<code>vim .bashrc</code></p>
+</li>
+<li><p>在最后一行加上要添加的路径</p>
+<p><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</code></p>
+</li>
+<li><p><code>source ~/.bashrc</code></p>
+</li>
+</ul>
+</li>
+<li><p>系统级别</p>
+<ul>
+<li><p><code>sudo vim /etc/profile</code></p>
+</li>
+<li><p>在最后一行加上要添加的路径</p>
+<p><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</code></p>
+</li>
+<li><p><code>source /etc/profile</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3）&#x2F;etc&#x2F;ld.so.cache文件列表</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson<span class="comment"># ll /etc/ld.so.cache</span></span><br><span class="line">-rw-r--r-- 1 root root 74025 Jan 12 21:15 /etc/ld.so.cache</span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># **sudo vim /etc/ld.so.conf**</span></span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># **sudo ldconfig**</span></span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># cd lesson01/library/</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffd633f6000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; /root/lesson/lesson01/library/lib/libcalc.so (0x00007f7b8a4e1000)</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7b8a2ef000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007f7b8a500000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">a = 20, b = 12</span><br><span class="line">a + b = 32</span><br><span class="line">a - b = 8</span><br><span class="line">a * b = 240</span><br><span class="line">a / b = 1.666667</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/etc/ld.so.cache</code>是一个二进制文件，无法直接用vim进行修改；</p>
+<p>因此要借助<code>/etc/ld.so.conf</code>的帮助：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014770.png" alt="10"></p>
+<p><strong>4）&#x2F;lib&#x2F;，&#x2F;usr&#x2F;lib目录</strong></p>
+<p>不推荐使用，因为在上述目录下已经包含很多系统自带的库文件，因此可能存在重名导致被替换的问题存在。</p>
+<h3 id="（3）静态库和动态库的对比"><a href="#（3）静态库和动态库的对比" class="headerlink" title="（3）静态库和动态库的对比"></a>（3）静态库和动态库的对比</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014481.png" alt="11"></p>
+<ul>
+<li>消耗系统资源、浪费内存：<ul>
+<li>每个程序在运行时都会将静态库复制一份到内存中，多个程序同时运行时浪费内存；</li>
+</ul>
+</li>
+<li>更新、部署、发布麻烦：<ul>
+<li>每次更新、部署或发布时都需要重新编译</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014264.png" alt="12"></p>
+<h2 id="3、Makefile"><a href="#3、Makefile" class="headerlink" title="3、Makefile"></a>3、Makefile</h2><ul>
+<li>定义<ul>
+<li>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 <code>Makefile 文件就像一个 Shell 脚本一样，也可以执行操作系统的命令</code>。</li>
+<li><strong>Makefile 带来的好处就是“自动化编译”</strong> ，一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。make 是一个命令工具，是一个解释 Makefile 文件中指令的命令工具，一般来说，大多数的 IDE 都有这个命令，比如 Delphi 的 <code>make</code>，Visual C++ 的 <code>nmake</code>，Linux 下 GNU 的 <code>make</code>。</li>
+</ul>
+</li>
+<li>命名规则</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014308.png" alt="13"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014605.png" alt="14"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014917.png" alt="15"></p>
+<ul>
+<li>工作原理</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015389.png" alt="16"></p>
+<ul>
+<li>变量</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015553.png" alt="17"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171018439.png" alt="Untitled"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171019513.png" alt="Untitled"></p>
+<p><strong>对原始写法进行简写：</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015837.png" alt="20"></p>
+<p>改进1：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171018316.png" alt="Untitled"></p>
+<p>改进2：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015549.png" alt="22"></p>
+<p>改进3：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015818.png" alt="23"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.PHONY:clean  # 定义clean为伪目标</span><br></pre></td></tr></table></figure>
+
+<p>改进4：<code>Makefile</code>中写了<code>clean</code>之后，在命令行要用<code>make clean</code>来调用</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171019153.png" alt="24"></p>
+<h2 id="4、GDB调试"><a href="#4、GDB调试" class="headerlink" title="4、GDB调试"></a>4、GDB调试</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -277,7 +395,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/13/%E9%9D%A2%E8%AF%95/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/13/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -291,7 +409,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/13/%E9%9D%A2%E8%AF%95/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">手撕算法</a>
+            <a href="/2024/04/13/%E6%89%8B%E6%92%95%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">手撕算法</a>
         </h2>
 
         <div class="post-meta">
@@ -300,17 +418,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-13 14:56:15 / 修改时间：14:57:22" itemprop="dateCreated datePublished" datetime="2024-04-13T14:56:15+08:00">2024-04-13</time>
+              <time title="创建时间：2024-04-13 14:56:15" itemprop="dateCreated datePublished" datetime="2024-04-13T14:56:15+08:00">2024-04-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-17 10:33:32" itemprop="dateModified" datetime="2024-04-17T10:33:32+08:00">2024-04-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                  <a href="/categories/%E6%9A%82%E4%B8%8D%E5%88%86%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">--暂不分类</span></a>
                 </span>
             </span>
 
@@ -320,14 +444,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>37</span>
+              <span>455</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -344,6 +468,37 @@
 <p>逆波兰表达式</p>
 <p>动态规划</p>
 <p>快排最坏情况的比较次数，归并排序呢？</p>
+<p>自定义实现strcpy函数</p>
+<h3 id="1、字符串分割函数"><a href="#1、字符串分割函数" class="headerlink" title="1、字符串分割函数"></a>1、字符串分割函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="comment">//字符串分割函数</span></span><br><span class="line"><span class="function">std::vector&lt;std::string&gt; <span class="title">split</span><span class="params">(std::string str, std::string pattern)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string::size_type pos;</span><br><span class="line">    std::vector&lt;std::string&gt; result;</span><br><span class="line">    str += pattern;<span class="comment">//扩展字符串以方便操作</span></span><br><span class="line">    <span class="type">int</span> size = str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        pos = str.<span class="built_in">find</span>(pattern, i);</span><br><span class="line">        <span class="keyword">if</span> (pos &lt; size)</span><br><span class="line">        &#123;</span><br><span class="line">            std::string s = str.<span class="built_in">substr</span>(i, pos - i);</span><br><span class="line">            result.<span class="built_in">push_back</span>(s);</span><br><span class="line">            i = pos + pattern.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、string转int"><a href="#2、string转int" class="headerlink" title="2、string转int"></a>2、string转int</h3><p>1、使用atoi转换</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">atoi</span>(str.<span class="built_in">c_str</span>());</span><br></pre></td></tr></table></figure>
+
+<p>2、 使用std::stoi</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::string str = <span class="string">&quot;-10&quot;</span>;</span><br><span class="line">std::<span class="built_in">stoi</span>(str);</span><br><span class="line"><span class="comment">// stoi()函数没有数字的话，程序虽然可以编译，但运行时会出错</span></span><br></pre></td></tr></table></figure>
+
+<p>3、 通过 istringstream 转换</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::string str = <span class="string">&quot;668&quot;</span>;</span><br><span class="line"><span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="function">std::istringstream <span class="title">ss</span><span class="params">(str)</span></span>;</span><br><span class="line">ss &gt;&gt; num;</span><br></pre></td></tr></table></figure>
+
+<p>使用 istringstream 可以从字符流中读取整数，与 ostringstream 是一种相反的操作</p>
+<p>4、使用 sscanf</p>
+<p>sscanf 函数是 C 语言标准库中的函数，可以用于从一个格式化的字符串中提取数据。在 C++ 中，可以使用 sscanf 函数将字符串转换为整数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">sscanf</span>(str.<span class="built_in">c_str</span>(), <span class="string">&quot;%d&quot;</span>, &amp;num) == <span class="number">1</span>) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Converted number: &quot;</span> &lt;&lt; num &lt;&lt; std::endl;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Failed to convert the string to an integer.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、int转为string"><a href="#3、int转为string" class="headerlink" title="3、int转为string"></a>3、int转为string</h3><p>1、通过 std::to_string() 函数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">to_string</span>(num)</span><br></pre></td></tr></table></figure>
+
+<p>这种方式在 C++11 中才能使用，编译时记得加上 –std&#x3D;c++11 的选项</p>
+<p>2、通过 ostringstream</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line">std::ostringstream ss;</span><br><span class="line">ss &lt;&lt; num;</span><br><span class="line">std::cout &lt;&lt; ss.<span class="built_in">str</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这是一种通过字符流的方式将整数转换成字符串，这种方式在C++11之前也可以使用</p>
+<p>3、通过 sprintf</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line"><span class="type">char</span> buffer[<span class="number">256</span>];</span><br><span class="line"><span class="built_in">sprintf</span>(buffer, <span class="string">&quot;%d&quot;</span>, num);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br></pre></td></tr></table></figure>
+
+<p>这是一种C语言中的转换方式，sprintf 也可以换成更安全的 snprintf 函数，如下所示。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">snprintf</span>(buffer, <span class="built_in">sizeof</span>(buffer), <span class="string">&quot;%d&quot;</span>, num);</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -363,7 +518,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/09/%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/09/Computer/DataStruct/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -377,7 +532,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/09/%E7%AE%97%E6%B3%95/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="post-title-link" itemprop="url">代码随想录</a>
+            <a href="/2024/04/09/Computer/DataStruct/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/" class="post-title-link" itemprop="url">代码随想录</a>
         </h2>
 
         <div class="post-meta">
@@ -784,7 +939,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/Computer/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -798,7 +953,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">计算机网络</a>
+            <a href="/2024/04/08/Computer/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">计算机网络</a>
         </h2>
 
         <div class="post-meta">
@@ -1192,7 +1347,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/%E7%A7%91%E7%A0%94/MoCoDAD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1206,93 +1361,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/08/%E7%A7%91%E7%A0%94/MoCoDAD/" class="post-title-link" itemprop="url">MoCoDAD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-08 14:37:33 / 修改时间：14:43:49" itemprop="dateCreated datePublished" datetime="2024-04-08T14:37:33+08:00">2024-04-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%A7%91%E7%A0%94/" itemprop="url" rel="index"><span itemprop="name">科研</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>83</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">├── config  <span class="comment">// 保存了三个数据集相关的配置文件</span></span><br><span class="line">│   ├── Avenue</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   ├── STC</span><br><span class="line">│   │   ├── mocodad_test.yaml</span><br><span class="line">│   │   └── mocodad_train.yaml</span><br><span class="line">│   └── UBnormal</span><br><span class="line">│      ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad-latent_train.yaml</span><br><span class="line">│       ├── mocodad_test.yaml</span><br><span class="line">│       └── mocodad_train.yaml</span><br><span class="line">├── environment.yaml  <span class="comment">// 该模型需要的库依赖</span></span><br><span class="line">├── eval_MoCoDAD.py</span><br><span class="line">├── predict_MoCoDAD.py</span><br><span class="line">├── train_MoCoDAD.py</span><br><span class="line">├── models</span><br><span class="line">│   ├── common</span><br><span class="line">│   │   └── components.py</span><br><span class="line">│   ├── gcae</span><br><span class="line">│   │   └── stsgcn.py</span><br><span class="line">│   ├── mocodad_latent.py</span><br><span class="line">│   ├── mocodad.py</span><br><span class="line">│   └── stsae</span><br><span class="line">│       ├── stsae.py</span><br><span class="line">│       └── stsae_unet.py</span><br><span class="line">└── utils</span><br><span class="line">    ├── argparser.py</span><br><span class="line">    ├── data.py</span><br><span class="line">    ├── dataset.py</span><br><span class="line">    ├── dataset_utils.py</span><br><span class="line">    ├── diffusion_utils.py</span><br><span class="line">    ├── ema.py</span><br><span class="line">    ├── eval_utils.py</span><br><span class="line">    ├── get_robust_data.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── model_utils.py</span><br><span class="line">    ├── preprocessing.py</span><br><span class="line">    └── tools.py</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>MoCoDAD &amp; MoCoDADlatent</p>
-<h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> utils.dataset <span class="keyword">import</span> get_dataset_and_loader</span><br></pre></td></tr></table></figure>
-
-<h2 id="EMA"><a href="#EMA" class="headerlink" title="EMA"></a>EMA</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> utils.ema <span class="keyword">import</span> EMACallback</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="midorii">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MIDORII'S JOURNEY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">毕设项目</a>
         </h2>
 
         <div class="post-meta">
@@ -1309,8 +1378,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-14 21:45:08" itemprop="dateModified" datetime="2024-04-14T21:45:08+08:00">2024-04-14</time>
+                <time title="修改时间：2024-04-17 10:32:53" itemprop="dateModified" datetime="2024-04-17T10:32:53+08:00">2024-04-17</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -1337,15 +1415,135 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title: 毕设项目提问<br>categories:<br>  -	面试</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/08/%E9%9D%A2%E8%AF%95/%E6%AF%95%E8%AE%BE%E9%A1%B9%E7%9B%AE%E6%8F%90%E9%97%AE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h2 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h2><p>名称：<strong>多用户智能家居控制系统设计</strong>。</p>
+<p><strong>设计了一个多用户智能家居控制系统。基于Qt平台开发Android客户端，同时基于MySQL数据库及多线程编程技术完成多用户操作，并利用MQTT通信协议实现了Android客户端与嵌入式控制终端之间的信息交互。、在此系统下Android 客户端的不同用户，可以通过Mosquitto云服务器转发的控制信息实现对iTop4412开发板的照明、警报及温度设备的实时控制。</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404142132653.png" alt="image-20240414213213414"></p>
+<p>1、 基于Linux多线程编程，结合MQTT协议的订阅-发布模式，完成多用户智能控制；</p>
+<p>2、 在用户端设计双模式。共享模式：多个用户同时控制，且共享当前设备的状态；私人模式：被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>3、 采用MQTT协议进行数据传送。通过实验对比HTTP协议和MQTT协议在智能家居领域的应用，结果表明MQTT在降低功耗和推送功能开发上优势明显，其即便是在资源有限的环境中也能易于使用。</p>
+<p><strong>本项目的重点与核心在实现客户端的多用户控制。</strong></p>
+<p>1、 针对发布者，利用Qt开发平台设计手机App作为客户端，它有两个特点，分别是多用户和双模式。多用户指不同的客户端均可进行控制操作；双模式指针对客户端本身，有共享模式和私人模式两种，在共享模式下可实现多个用户同时控制，且共享当前设备的状态；在私人模式下被控制端的某一功能同一时间只能由一个用户控制；</p>
+<p>2、 针对消息代理者，选择在阿里云上部署mosquitto。选用MQTT协议的原因已在前述加以说明，而由于mosquitto是一种流行的mqtt服务器，且易于安装和配置，因此选用mosquitto进行部署；</p>
+<p>3、 针对订阅者，主要以iTop4412开发板作为功能实现端。同时基于Linux多线程来配合实现多用户控制。</p>
+<p><strong>本项目的数据转发过程如下。</strong></p>
+<p>每个用户在该客户端程序中都对应操作两个线程：</p>
+<p>（1）发送控制指令时的发布者身份，代表用户从Android客户端向嵌入式控制终端发送照明及警报的控制指令；<br>用户可自主规定订阅主题为“home&#x2F;*”格式。</p>
+<p>（2）接收控制指令时的订阅者身份，代表开发板向用户发送温度数据；统一规定“temp”为传送温度数据的主题。</p>
+<p><strong>发布者发出的控制指令将以json数据的格式被封装，经mosquitto云服务器转发后送至开发板侧，订阅者读取json包，解析出对应的命令行指令，对相应的硬件进行控制。</strong></p>
+<h2 id="二、相关问题"><a href="#二、相关问题" class="headerlink" title="二、相关问题"></a>二、相关问题</h2><ol>
+<li><p><strong>在项目中做了哪些工作，遇到了哪些困难，是怎么解决的？</strong></p>
+<ul>
+<li>工作：设计并实现了一个多用户智能家居控制系统，包括Android客户端、服务器软件和嵌入式控制终端。</li>
+<li>困难：处理多用户操作的并发控制，确保数据一致性和系统稳定性。</li>
+<li>解决方法：利用多线程编程技术和锁机制，以及基于MQTT的消息订阅和发布来处理并发控制问题。</li>
+</ul>
+</li>
+<li><p><strong>整个项目包含哪几端之间的的通信？</strong></p>
+<p>项目包含（1）Android客户端与服务器的通信；（2）服务器与嵌入式控制终端的通信；以及（3）客户端之间的间接通信（通过服务器转发）。</p>
+</li>
+<li><p><strong>客户端与客户端之间的通信是基于自己实现的协议吗？</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404142133602.png" alt="image-20240414213314541"></p>
+</li>
+<li><p><strong>是在客户端上面跑的MySQL吗？</strong></p>
+<p>不是，MySQL数据库运行在服务器端，用于存储用户数据和状态信息，客户端通过网络与之通信。</p>
+</li>
+<li><p><strong>Qt可以直接打包安卓客户端吗？</strong>、</p>
+<p>是的，Qt提供了支持Android的工具和库，可以直接将应用打包为Android客户端。</p>
+</li>
+<li><p><strong>Qt中做多线程的编程，有哪一些是线程同步的技术？</strong></p>
+<p>Qt支持多种线程同步技术，包括互斥锁（QMutex）、读写锁（QReadWriteLock）、信号量（QSemaphore）、条件变量（QWaitCondition）等。</p>
+</li>
+<li><p><strong>为什么用多线程能解决冲突问题？</strong></p>
+<p>程序通过 <code>pthread_create</code> 函数创建了两个线程，多线程主要用于处理订阅和发布MQTT消息的任务。</p>
+<ol>
+<li><code>sub_thread</code> 用于订阅 MQTT 消息并处理接收到的消息，涉及到订阅者之间的状态共享或者资源竞争，因此使用互斥锁来保护共享资源的访问，确保线程安全。</li>
+<li><code>pub_thread</code> 用于发布 MQTT 消息。操作和<code>sub_thread</code>类似，但不需要对其进行加锁操作。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404142139031.png" alt="image-20240414213944988"></p>
+</li>
+<li><p><strong>锁是放在哪里的？</strong></p>
+<p>互斥锁放在嵌入式控制终端中。</p>
+</li>
+<li><p><strong>比如说你有多个客户端，你怎么知道对面锁住了呢？</strong></p>
+<p>客户端设计了共享模式和私人模式两种，当一个用户选择进入私人模式时，会通过Qt的信号与槽机制在客户端进行更新，告诉其他用户已经有用户进入了私人模式，本客户端无法再进入。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404142136791.png" alt="image-20240414213614733"></p>
+</li>
+<li><p><strong>在做技术选型的时候，什么时候选多线程，什么时候选多进程？</strong></p>
+<ul>
+<li><strong>选择多线程</strong>：当应用需要共享大量数据时，多线程是一种更合适的选择。多线程同一进程内的线程共享内存和资源，上下文切换成本较低，适用于对性能要求较高的场景，如实时计算、游戏开发等。</li>
+<li><strong>选择多进程</strong>：多进程则适用于需要增强应用稳定性和安全性的场景，因为各进程间相互独立，一个进程的崩溃不会直接影响到其他进程。此外，多进程可以利用多核CPU的优势，实现真正的并行执行，适用于需要大量并行计算的应用，如视频处理、大规模数据分析等。</li>
+</ul>
+</li>
+<li><p><strong>在Android客户端中，如何实现界面的实时更新和数据同步？</strong></p>
+<ul>
+<li>使用信号与槽机制： 在Qt中，通过信号与槽机制实现对象之间的通信。当数据发生变化时，可以通过信号发送变化的消息，然后在界面组件中连接相应的槽函数来更新界面。</li>
+</ul>
+</li>
+<li><p><strong>如何通过mosquitto服务器将客户端的控制指令转发给iTop4412开发板？</strong></p>
+<ul>
+<li>在mosquitto服务器上配置相应的主题和订阅关系，客户端发布控制指令到对应的主题，mosquitto服务器将控制指令转发给iTop4412开发板的订阅者。</li>
+</ul>
+</li>
+<li><p><strong>MQTT协议与HTTP协议相比，有何优势？为什么选择MQTT协议进行数据传送？</strong></p>
+<ul>
+<li>MQTT协议相比HTTP协议在降低功耗和推送功能开发上具有明显优势，适合于资源有限的环境和实时数据传输的场景。因此选择MQTT协议进行数据传送。</li>
+</ul>
+</li>
+<li><p><strong>介绍一下阿里云上部署mosquitto的过程。</strong></p>
+<ul>
+<li><p>在阿里云上安装mosquitto，配置mosquitto的配置文件，设置端口号和用户名密码等参数，启动mosquitto服务，配置防火墙规则允许外部访问。</p>
+</li>
+<li><p>MQTT服务器的端口号通常是1883。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>如何在iTop4412开发板上实现对控制指令的接收和执行？</strong></p>
+<ul>
+<li>通过Linux多线程编程，在iTop4412开发板上创建一个线程来监听MQTT服务器发送的控制指令，接收到指令后解析并执行对应的命令。</li>
+</ul>
+</li>
+<li><p><strong>在Android客户端中，如何使用JSON格式封装控制指令？</strong></p>
+<ul>
+<li>使用 <code>cJSON_CreateObject()</code> 函数创建一个空的JSON对象。</li>
+<li>使用 <code>cJSON_AddNumberToObject()</code> 函数向JSON对象中添加一个键值对，键为 “temp”，值为一个随机生成的温度值 <code>a</code>。</li>
+<li>使用 <code>cJSON_Print()</code> 函数将JSON对象打印成JSON格式的字符串，并将其赋值给 <code>json_buf</code>。</li>
+<li>使用 <code>mosquitto_publish()</code> 函数将JSON字符串发布到MQTT服务器上的主题为 “temp” 的通道中。</li>
+</ul>
+</li>
+<li><p><strong>在iTop4412开发板上，如何解析JSON格式的控制指令并执行相应的功能操作？</strong></p>
+<ul>
+<li>使用第三方JSON库cJSON在Linux环境下解析JSON格式的控制指令，提取出对应的命令参数，然后调用相应的系统调用或执行命令行来控制硬件设备。</li>
+</ul>
+</li>
+<li><p><strong>在多用户智能家居控制系统中，如何实现用户认证和权限管理？</strong></p>
+<ul>
+<li>在安卓客户端上实现用户登录和注册功能。将用户信息存储在MySQL数据库上，在登陆查询当前用户是否属于该数据库，以及用户名与密码是否匹配；若不存在，可进行注册操作。</li>
+<li>由于本设计要访问特定公网的阿里云服务器上的数据库，因此在Qt开发平台上需要首先提供所需要的驱动插件之后，再利用QSqlDatabase来处理与数据库的连接，利用QSqlQuery类来执行底层数据库支持的任何SQL语句。</li>
+</ul>
+</li>
+<li><p><strong>在iTop4412开发板上，如何实现硬件设备的驱动和控制？</strong></p>
+<ul>
+<li>通过 MQTT 实现硬件设备的驱动和控制：<ul>
+<li>当用户在 UI 上进行操作时，比如点击 LED 开关按钮，UI 触发对应的槽函数，如 <code>on_ledBt_ON_1_clicked()</code>。</li>
+<li>在槽函数中构造一个JSON 数据包，其中包含了需要控制的硬件设备信息，比如 LED 的状态。然后将这个 JSON 数据包发布到 MQTT 主题上，通过 MQTT 协议发送给 MQTT 服务器。</li>
+<li>在硬件设备端，通过订阅相应的 MQTT 主题，监听来自 MQTT 服务器的消息。</li>
+<li>当硬件设备端接收到相应的消息后，解析 JSON 数据包，获取到控制指令，并执行相应的操作，例如打开或关闭 LED。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>该项目还有哪些可以改进的地方？</strong></p>
+<ul>
+<li><p>可以在mosquitto服务器上配置TLS&#x2F;SSL加密通信，客户端和服务器之间通过证书验证进行安全连接，防止数据被窃取或篡改。确保安卓客户端与mosquitto服务器之间的通信安全性。</p>
+</li>
+<li><p>此外，对于多线程部分我觉得还可以再考虑细化锁的粒度，以及进行RAII技术管理互斥锁，避免在某些异常情况下未释放锁导致资源泄露问题。</p>
+</li>
+</ul>
+</li>
+</ol>
+
       
     </div>
 
@@ -1395,7 +1593,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-14 21:17:13" itemprop="dateModified" datetime="2024-04-14T21:17:13+08:00">2024-04-14</time>
+                <time title="修改时间：2024-04-17 09:53:15" itemprop="dateModified" datetime="2024-04-17T09:53:15+08:00">2024-04-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1413,14 +1611,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>34k</span>
+              <span>35k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:04</span>
+              <span>2:06</span>
             </span>
 
         </div>
@@ -1525,6 +1723,15 @@
 <li>将读取的参数按照格式字符串指定的格式转换成字符串；</li>
 <li>最终生成的字符串输出到标准输出设备。</li>
 </ol>
+<h3 id="string的size类型为什么是string-size-t而不是int？"><a href="#string的size类型为什么是string-size-t而不是int？" class="headerlink" title="string的size类型为什么是string::size_t而不是int？"></a>string的size类型为什么是string::size_t而不是int？</h3><p><code>std::string</code> 的 <code>size</code> 类型被定义为 <code>string::size_t</code> 而不是 <code>int</code>，是为了提高通用性和可移植性。这是因为字符串的大小（长度）可能非常大，而 <code>int</code> 类型的范围是有限的，因此可能无法表示所有可能的字符串大小。</p>
+<p><code>string::size_t</code> 是一个无符号整数类型，通常被定义为一个足够大的整数，以便可以容纳字符串的任何合法大小。它的大小通常与系统架构和编译器有关，但通常足够大以容纳大多数字符串的长度。</p>
+<p>使用 <code>string::size_t</code> 而不是 <code>int</code> 有以下几个好处：</p>
+<ol>
+<li><strong>能够表示更大的字符串：</strong> 无符号整数类型 <code>size_t</code> 可以容纳比 <code>int</code> 更大的值，这对于处理非常大的字符串是必要的。</li>
+<li><strong>提高可移植性：</strong> 使用 <code>string::size_t</code> 可以确保代码在不同的平台上具有相同的行为，因为 <code>size_t</code> 的大小会根据平台而变化，而不是固定的。</li>
+<li><strong>避免符号问题：</strong> <code>size_t</code> 是无符号类型，避免了符号整数的问题，如溢出等。</li>
+</ol>
+<p>综上所述，使用 <code>string::size_t</code> 作为字符串大小的类型是一种良好的设计选择，可以确保代码能够处理各种大小的字符串，并提高了代码的可移植性。如果你需要与其他整数类型进行比较，你可以将 <code>size_t</code> 强制类型转换为 <code>int</code> 或其他整数类型。</p>
 <h3 id="介绍一下static和const？"><a href="#介绍一下static和const？" class="headerlink" title="介绍一下static和const？"></a>介绍一下static和const？</h3><p>const允许我们指定一个语义约束，告诉编译器某个变量不应该被修改。<strong>const可以用于修饰普通变量、函数、类等</strong>。比如在重载解引用操作符时，就可以用const来修饰，因为在解引用操作前后指针所指向的值是不应该被改变的。<br>static则修改存储方式和可见范围。主要包含4类：<br>（1）静态成员变量：静态成员变量不属于类的任何一个对象，而只属于类本身，所有对象共享一个静态成员变量。<br>（2）静态成员函数：静态成员函数同理。<br>（3）静态局部变量：定义在函数内部，和普通局部变量不同，在函数整个运行期间只会初始化一次，即使函数被多次调用也是如此。<br>（4）静态全局变量：静态全局变量在某个源文件中被定义后则只能在该源文件中被使用，而不能在其他文件中使用，有助于封装和避免命名冲突。</p>
 <h3 id="extern-关键字的作用？"><a href="#extern-关键字的作用？" class="headerlink" title="extern 关键字的作用？"></a>extern 关键字的作用？</h3><p><code>extern</code>关键字用于声明一个变量或函数，其定义可能在另一个文件或同一文件的不同位置。使用<code>extern</code>的主要目的是在多个文件之间共享变量或函数。</p>
 <ol>
@@ -1541,6 +1748,11 @@
 </ul>
 </li>
 </ol>
+<h3 id="extern-声明全局变量的内部实现是怎样的？"><a href="#extern-声明全局变量的内部实现是怎样的？" class="headerlink" title="extern 声明全局变量的内部实现是怎样的？"></a>extern 声明全局变量的内部实现是怎样的？</h3><p>被extern修饰的全局变量，在编译期不会分配空间，而是在链接的时候通过索引去别的文件中查找索引对应的地址。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404170950469.jpeg" alt="IMG_183F6F3B95EC-1"></p>
+<h3 id="在C-程序中调用被C编译器编译后的函数，为什么要加extern-“C”？"><a href="#在C-程序中调用被C编译器编译后的函数，为什么要加extern-“C”？" class="headerlink" title="在C++ 程序中调用被C编译器编译后的函数，为什么要加extern “C”？"></a>在C++ 程序中调用被C编译器编译后的函数，为什么要加extern “C”？</h3><p>extern “C”是连接申明，被其修饰的变量和函数是按照类C的编译和连接规约来编译和连接，这样在类C的代码中就可以调用C++的函数or变量等。</p>
+<p>由于C++有重载的特性而C没有，因此函数被C++编译后在符号库中的名字与C语言的不同。例如，假设某个函数的原型为：void foo(int x，int y);该函数被C编译器编译后在符号库中的名字为_foo，而C++编译器则会产生像_foo_int_int之类的名字。 因此，extern “C”这个声明的真实目的：解决名字匹配问题，实现C++与C的混合编程。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404170951735.jpeg" alt="IMG_EC64DA9B254B-1"></p>
 <h3 id="explicit关键字用在什么情况下？"><a href="#explicit关键字用在什么情况下？" class="headerlink" title="explicit关键字用在什么情况下？"></a>explicit关键字用在什么情况下？</h3><p>explicit关键用于声明一个单参数的构造函数，阻止该构造函数隐式转换为该类的类型。</p>
 <h3 id="inline关键字遇到过吗？作用是什么？和-define有什么区别？"><a href="#inline关键字遇到过吗？作用是什么？和-define有什么区别？" class="headerlink" title="inline关键字遇到过吗？作用是什么？和#define有什么区别？"></a>inline关键字遇到过吗？作用是什么？和#define有什么区别？</h3><p>inline关键字作为函数定义的关键字，说明该函数是内联函数。内联函数会将代码块嵌入到每个调用该函数的地方，减少函数调用的开销，但增加了代码量。同时要注意inline只是对编译器的一个建议，真正能否内联还是要看编译器自己的判断。</p>
 <p>和#define的区别在于：</p>
@@ -1710,6 +1922,15 @@
 <h3 id="vector、list和array的区别是什么？"><a href="#vector、list和array的区别是什么？" class="headerlink" title="vector、list和array的区别是什么？"></a>vector、list和array的区别是什么？</h3><p>（1）vector是动态数组，支持随机访问，内部使用连续的内存存储元素，在进行删除和插入操作时可能需要移动其他元素；</p>
 <p>（2）list是双向链表，不支持随机访问，插入和删除的操作效率高，内存不连续，每个元素存储在独立的节点中；</p>
 <p>（3）array是静态数组，大小固定，在编译时就确定，内存连续存储，且支持随机访问。</p>
+<h3 id="数组和链表的区别是什么？"><a href="#数组和链表的区别是什么？" class="headerlink" title="数组和链表的区别是什么？"></a>数组和链表的区别是什么？</h3><p>（1）数组元素的个数是固定的，而链表结点的个数可按需增减；</p>
+<p>（2）数组元素的存储单元在数组定义时分配，而链表结点的存储单元在程序执行时动态申请；</p>
+<p>（3）数组元素的顺序关系由下标确定，而链表结点的顺序关系由结点所包含的指针确定；</p>
+<p>（4）对于元素频繁操作的处理场合，用链表实现会比数组实现更加有效率。比如在数组中删除一个元素时，需要将删除处之后的所有元素全部前移一个位置；但对于链表来说，只需要改变删除处相关结点的指针指向，而与结点实际的存储位置无关。</p>
+<h3 id="指针与数组的外部声明相关"><a href="#指针与数组的外部声明相关" class="headerlink" title="指针与数组的外部声明相关"></a>指针与数组的外部声明相关</h3><p><strong>数组通过外部声明为指针时，数组和指针是不能互换使用的；那么请思考一下，在 A 文件中定义数组 char a[100]；在 B 文件中声明为指针：extern char *a；此时访问 a[i]，会发生什么；</strong></p>
+<p>答1：会引起 <strong>segmentation fault</strong> 报错。链接器实际上是把指针 a 自身的地址定位到了另一个 .cpp 文件中定义的数组首地址上。也就是说，链接器将数组的首地址赋给了指针本身，而不是我们所希望的把数组的首地址赋予指针 a。原因在于使用 extern 修饰的变量在链接的时候只找寻同名的标号，不检查类型，在链接时才进行定位，所以会导致编译通过，运行时出错。</p>
+<p>首先涉及到数组和指针的区别：<strong>可以将数组名看做是右值，而指针作为变量，只能看作为左值。</strong> <strong>右值永远不等于左值，所以将指针赋予数组名是不合法的。即</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;  <span class="comment">// 声明一个包含三个整数的数组</span></span><br><span class="line">    <span class="type">int</span> *ptr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">3</span>]; <span class="comment">// 分配一个新的整数数组，并将其地址赋值给指针</span></span><br><span class="line">    <span class="comment">// 尝试将指针赋值给数组名（不合法）</span></span><br><span class="line">    arr = ptr;</span><br><span class="line">    <span class="keyword">delete</span>[] ptr; <span class="comment">// 释放内存</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="C-中map的实现包含哪些方式？具体应该如何选择？"><a href="#C-中map的实现包含哪些方式？具体应该如何选择？" class="headerlink" title="C++中map的实现包含哪些方式？具体应该如何选择？"></a>C++中map的实现包含哪些方式？具体应该如何选择？</h3><ul>
 <li><code>std::map</code>：通常使用红黑树实现，保证了元素按照键的排序，适合需要有序数据的场景。</li>
 <li><code>std::unordered_map</code>：使用哈希表实现，不保证元素的有序性，但在许多操作上提供了较快的执行时间。</li>
@@ -1829,7 +2050,7 @@
 <li><strong>监控和调试</strong>：实现监控机制来监控线程池的性能，如任务等待时间、任务执行时间、线程利用率等，以便及时发现问题并进行调整。</li>
 </ol>
 <h3 id="多线程是怎么处理许多个任务一起到来的？"><a href="#多线程是怎么处理许多个任务一起到来的？" class="headerlink" title="多线程是怎么处理许多个任务一起到来的？"></a>多线程是怎么处理许多个任务一起到来的？</h3><ol>
-<li><strong>任务分配</strong>：当多个任务同时到来时，这些任务通常被添加到一个共享的任务队列中。这个队列可以被所有的线程访问。线程池中的每个线程会从这个队列中取出任务并执行。</li>
+<li><strong>任务分配</strong>：当多个任务同时到来时，这些任务通常被添加到一个<strong>共享的任务队列</strong>中。这个队列可以被所有的线程访问。线程池中的每个线程会从这个队列中取出任务并执行。</li>
 <li><strong>并行处理</strong>：在多核处理器上，多个线程可以被同时调度到不同的核上执行。这样，多个任务可以实际上同时进行，这极大地提高了处理效率和程序的响应速度。</li>
 <li><strong>上下文切换</strong>：当某个线程等待（例如，等待I&#x2F;O操作完成）时，操作系统可以执行上下文切换，让其他的线程运行。这样可以确保CPU的使用效率最大化，即使某些线程暂时不能进行计算也不会浪费CPU资源。</li>
 <li><strong>同步机制</strong>：在多线程环境中，可能需要对共享资源进行访问控制，以避免数据不一致或竞态条件。常用的同步机制包括互斥锁、条件变量、读写锁等。这些机制帮助确保即使多个线程尝试同时访问同一资源，程序的行为也是正确和可预测的。</li>
@@ -1851,7 +2072,6 @@
 <li><strong>信号量（Semaphores）</strong>：用于控制对共享资源的访问数量。信号量维护了一个计数器，表示可用资源的数量，线程在进入临界区前必须获取信号量。</li>
 <li><strong>事件（Event）</strong>：类似于条件变量，用于通知一个或多个正在等待的线程某个事件已经发生。</li>
 <li><strong>消息队列</strong>：线程可以发送和接收消息，消息以队列的形式管理。消息队列允许线程以异步的方式进行数据交换和事件通知。</li>
-<li><strong>管道（Pipes）</strong>：主要用于进程间通信，但也可以在有共享文件系统的线程间使用。管道允许一个线程发送数据，另一个线程接收数据。</li>
 <li><strong>屏障（Barriers）</strong>：用于多个线程同步到某一点，当所有线程都达到屏障点后，它们再同时开始执行后续操作。常用于并行计算，确保所有线程在进行下一步操作前已完成当前操作。</li>
 </ol>
 <h3 id="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"><a href="#线程同步是什么？从底层原理分析一下为什么会出现线程同步？" class="headerlink" title="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"></a>线程同步是什么？从底层原理分析一下为什么会出现线程同步？</h3><p>（1）线程同步是多线程编程中保证多个线程安全访问共享资源或协调工作的一种机制。它确保在任何给定时刻，只有一个线程可以访问特定的数据或代码块，以防止数据损坏或不一致性。线程同步通常通过使用各种同步原语（如互斥锁、信号量、条件变量等）来实现。</p>
@@ -1869,8 +2089,8 @@
 <h3 id="进程的五种状态分别是？"><a href="#进程的五种状态分别是？" class="headerlink" title="进程的五种状态分别是？"></a>进程的五种状态分别是？</h3><p>1）就绪态：所有运行条件已就绪，只要得到了CPU时间就可运行。</p>
 <p>2）运行态：得到CPU时间正在运行；</p>
 <p>3）僵尸态：进程已经结束了但父进程还没来得及回收；</p>
-<p>4） 等待态：包括浅度睡眠跟深度睡进程在等待某种条件，条件成熟后即是就绪态。浅度睡眠时进程可以被信号唤醒，但深度睡眠时必须等到条件成熟后才能结束睡眠状态。</p>
-<p>5） 暂停态：暂时停止参与CPU调度（即使条件成熟），可以恢复。</p>
+<p>4）等待态：包括浅度睡眠跟深度睡进程在等待某种条件，条件成熟后即是就绪态。浅度睡眠时进程可以被信号唤醒，但深度睡眠时必须等到条件成熟后才能结束睡眠状态。</p>
+<p>5）暂停态：暂时停止参与CPU调度（即使条件成熟），可以恢复。</p>
 <h3 id="两个进程的内核空间是共享的吗？"><a href="#两个进程的内核空间是共享的吗？" class="headerlink" title="两个进程的内核空间是共享的吗？"></a>两个进程的内核空间是共享的吗？</h3><p>在大多数现代操作系统中，包括Linux和Windows，内核空间是在所有进程之间共享的。这意味着内核空间中的代码和数据结构对所有进程来说都是相同的，并且在任何时候都位于相同的物理内存位置。</p>
 <h3 id="如何让进程后台运行？"><a href="#如何让进程后台运行？" class="headerlink" title="如何让进程后台运行？"></a>如何让进程后台运行？</h3><ol>
 <li><p><strong>使用 &amp; 符号</strong>：</p>
@@ -1909,7 +2129,7 @@
 <li><strong>效率</strong>: 中等</li>
 <li><strong>原因</strong>: 消息队列提供了一种从一个进程向另一个进程发送数据包的方法，数据在发送过程中需要被复制到和从内核空间，这增加了开销，但它提供了比共享内存更好的数据管理和安全性。</li>
 </ul>
-<p>3、<em>管道（Pipes）和命名管道（Named Pipes&#x2F;FIFOs）</em>*:</p>
+<p>3、<strong>管道（Pipes）和命名管道（Named Pipes&#x2F;FIFOs）</strong>:</p>
 <ul>
 <li><strong>效率</strong>: 较低</li>
 <li><strong>原因</strong>: 数据需要在发送进程和接收进程之间进行复制，且管道通常是半双工的，这限制了通信的灵活性和效率。</li>
@@ -1942,40 +2162,9 @@
 <li><strong>防止代码注入</strong>：通过将代码段设置为只读，可以防止恶意代码注入和执行，这是提高系统安全性的重要措施。</li>
 <li><strong>分页策略</strong>：代码段和数据段可能会采用不同的分页和交换策略。例如，代码页可能较少交换出内存，因为它们被频繁访问；而数据段的某些部分如果使用不频繁可以被交换出去以节约资源。</li>
 </ul>
-<h3 id="为什么要区分堆区和栈区？为什么不能全部用堆？"><a href="#为什么要区分堆区和栈区？为什么不能全部用堆？" class="headerlink" title="为什么要区分堆区和栈区？为什么不能全部用堆？"></a>为什么要区分堆区和栈区？为什么不能全部用堆？</h3><ol>
-<li><strong>性能和效率</strong>：<ul>
-<li><strong>栈区</strong>：栈具有非常高的访问效率。它是线程专属的数据区，用于存储函数调用的局部变量和管理调用栈（函数调用时的参数、返回地址等）。栈的数据结构允许数据以后进先出（LIFO）的顺序存取，使得函数调用的局部变量的创建和销毁非常快速，这是因为它只涉及指针的移动。</li>
-<li><strong>堆区</strong>：相比之下，堆是用于存储动态分配的变量的，可以在运行时动态增长和缩小。堆的管理比栈复杂，涉及到更为复杂的内存分配和回收策略，如空闲链表、垃圾回收等。这使得堆的性能相对于栈而言较低。</li>
-</ul>
-</li>
-<li><strong>内存管理</strong>：<ul>
-<li><strong>栈区</strong>：栈内存的管理是自动的，由编译器自动分配释放，程序员无需手动控制，减少了内存泄漏和其他错误的风险。</li>
-<li><strong>堆区</strong>：堆内存的分配释放则需由程序员通过代码进行控制，这增加了复杂性和出错的风险，如内存泄漏、野指针等问题。</li>
-</ul>
-</li>
-<li><strong>灵活性</strong>：<ul>
-<li>栈的大小通常有限且固定，这限制了其使用的灵活性。例如，在许多操作系统中，栈的默认大小可能仅为几MB，不适合存储大量数据或大型对象。</li>
-<li>堆的大小通常受到虚拟内存大小的限制，比栈要大得多，适合存储大量数据或进行大规模的动态内存分配。</li>
-</ul>
-</li>
-<li><strong>为什么不能全部用堆</strong>：<ul>
-<li><strong>性能问题</strong>：如果全部使用堆，那么即使是最简单的局部变量也需要通过动态内存分配来实现，这将极大地降低程序的性能。</li>
-<li><strong>复杂性和错误风险</strong>：堆内存的手动管理增加了编程的复杂性和出错的可能性，特别是内存泄漏和内存损坏等问题。</li>
-<li><strong>资源利用不均</strong>：频繁的堆操作可能导致内存碎片等问题，影响内存的有效使用。</li>
-</ul>
-</li>
-</ol>
+<h3 id="什么时候用栈，什么时候用堆？"><a href="#什么时候用栈，什么时候用堆？" class="headerlink" title="什么时候用栈，什么时候用堆？"></a>什么时候用栈，什么时候用堆？</h3><p>1.与堆相比，栈不会导致内存碎片，分配效率高。函数调用过程中的参数，返回地址和局部变量都采取栈的形式存放，<strong>如果少量数据需要频繁的操作，那么在程序中动态申请少量栈内存会获得很好的性能提升。</strong></p>
+<p>2.堆可以申请的内存大很多，与堆相比，栈的使用没那么灵活，<strong>如果分配大量的内存空间，推荐使用堆内存。</strong></p>
 <h3 id="不同段上的对象的生命周期是怎样的？"><a href="#不同段上的对象的生命周期是怎样的？" class="headerlink" title="不同段上的对象的生命周期是怎样的？"></a>不同段上的对象的生命周期是怎样的？</h3><p>（1）.data&#x2F;.bss段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁<br>（2）堆上的对象由程序员进行动态分配<br>（3）栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
-<h3 id="堆和栈的区别是什么？"><a href="#堆和栈的区别是什么？" class="headerlink" title="堆和栈的区别是什么？"></a>堆和栈的区别是什么？</h3><p>（1）内存分配方式</p>
-<ul>
-<li>栈内存的分配和释放是由编译器在编译时静态确定的，因此具有固定的大小和生命周期</li>
-<li>堆内存的分配和释放由程序员在运行时控制，可以根据需要动态调整大小，因此它的大小和生命周期不固定。</li>
-</ul>
-<p>（2）存储内容不同。</p>
-<ul>
-<li>栈区是由操作系统自动分配并释放的内存区域，用于存储函数的局部变量、函数参数以及函数调用的返回地址</li>
-<li>堆空间适用于存储生命周期长或大小不定的数据，如动态分配的数据结构。</li>
-</ul>
 <h3 id="如何让对象只能存在于栈-堆中？"><a href="#如何让对象只能存在于栈-堆中？" class="headerlink" title="如何让对象只能存在于栈&#x2F;堆中？"></a>如何让对象只能存在于栈&#x2F;堆中？</h3><p>如果将operator new设置为私有的，此时尝试在堆上分配内存失败，对象就会存在于栈中。<br>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会存在于堆中。</p>
 <h3 id="new和malloc的区别？"><a href="#new和malloc的区别？" class="headerlink" title="new和malloc的区别？"></a>new和malloc的区别？</h3><p>主要包含以下区别：<br>（1）new是c++特有的操作符，只能在C++中使用；malloc是C中的函数，但可以同时在c&#x2F;c++中使用。<br>（2）malloc在使用时需要指定分配内存的大小，如malloc(sizeof(int))，但new的使用则比较简洁，如new int。<br>（3）malloc分配的内存是未定义的，而new在分配内存时还会调用构造函数进行初始化。<br>（4）malloc返回的是void *类型的指针，需要进行强制类型转换以得到需要的指针类型，而new会自动转换为响应的指针类型。<br>（5）malloc调用free进行释放， ew调用delete进行释放。</p>
 <h3 id="malloc函数的底层实现是什么？"><a href="#malloc函数的底层实现是什么？" class="headerlink" title="malloc函数的底层实现是什么？"></a>malloc函数的底层实现是什么？</h3><p>（1）当开辟的空间小于128kb时，调用brk()函数，先遍历空闲内存链表，如果有已释放且空间足够的内存块就拿来用。如果找不到就移动指针_enddata，即堆区的末尾地址。</p>
@@ -1983,9 +2172,8 @@
 <p>malloc()在分配用户传入大小的内存时，还分配一个用于管理的额外内存，大小为8字节。而由于堆中的内存是成块分配的，与内存对齐有关，在64为系统中，内存对齐为16字节，因此<strong>实际分配的内存大小还要考虑8字节的管理内存和内存对齐</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">mem_control_block</span> &#123;</span><br><span class="line">    <span class="type">int</span> is_available;      <span class="comment">// 1表可用，0表不可用</span></span><br><span class="line">    <span class="type">int</span> size;                 <span class="comment">// 总大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="对于malloc分配的内存，调用free后立即释放吗？"><a href="#对于malloc分配的内存，调用free后立即释放吗？" class="headerlink" title="对于malloc分配的内存，调用free后立即释放吗？"></a>对于malloc分配的内存，调用free后立即释放吗？</h3><ul>
-<li>当使用 <code>free</code> 释放内存时，这块内存并不会立即返还给操作系统，而是标记为可再利用状态。在使用 <code>brk</code> 或 <code>sbrk</code> 分配的情况下，如果释放的是堆末端的内存，程序的断点可能会被回退，从而实际上将内存返还给操作系统。而使用 <code>mmap</code> 分配的较大内存块，在调用 <code>free</code> 后通常会通过 <code>munmap</code> 立即返还给操作系统。</li>
-</ul>
+<h3 id="对于malloc分配的内存，调用free后立即释放吗？"><a href="#对于malloc分配的内存，调用free后立即释放吗？" class="headerlink" title="对于malloc分配的内存，调用free后立即释放吗？"></a>对于malloc分配的内存，调用free后立即释放吗？</h3><p>在使用 <code>brk</code> 或 <code>sbrk</code> 分配的情况下，这块内存并不会立即返还给操作系统，而是标记为可再利用状态。如果释放的是堆末端的内存，程序的断点可能会被回退，从而实际上将内存返还给操作系统。</p>
+<p>而对于使用 <code>mmap</code> 分配的较大内存块，在调用 <code>free</code> 后通常会通过 <code>munmap</code> 立即返还给操作系统。</p>
 <h3 id="既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现呢-mmap分配的内存可以会通过-munmap-进行-free-，实现真正释放-？而是仅仅对于大于-128k-的大块内存才使用-mmap-？"><a href="#既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现呢-mmap分配的内存可以会通过-munmap-进行-free-，实现真正释放-？而是仅仅对于大于-128k-的大块内存才使用-mmap-？" class="headerlink" title="既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc 不全部使用 mmap 来实现呢(mmap分配的内存可以会通过 munmap 进行 free ，实现真正释放)？而是仅仅对于大于 128k 的大块内存才使用 mmap ？"></a>既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc 不全部使用 mmap 来实现呢(mmap分配的内存可以会通过 munmap 进行 free ，实现真正释放)？而是仅仅对于大于 128k 的大块内存才使用 mmap ？</h3><p>进程向 OS 申请和释放地址空间的接口 sbrk&#x2F;mmap&#x2F;munmap 都是系统调用，<strong>频繁调用系统调用都比较消耗系统资源的</strong>。并且， mmap 申请的内存被 munmap 后，重新申请会产生更多的缺页中断。例如使用 mmap 分配 1M 空间，第一次调用产生了大量缺页中断  (1M&#x2F;4K 次 ) ，当munmap 后再次分配 1M 空间，会再次产生大量缺页中断。<strong>缺页中断是内核行为，会导致内核态CPU消耗较大。  另外，如果使用 mmap 分配小内存，会导致地址空间的分片更多，内核的管理负担更大。</strong></p>
 <p>同时堆是一个连续空间，并且堆内碎片由于没有归还 OS ，<strong>如果可重用碎片，再次访问该内存很可能不需产生任何系统调用和缺页中断，这将大大降低  CPU 的消耗。</strong> 因此， glibc 的 malloc 实现中，充分考虑了 sbrk 和 mmap 行为上的差异及优缺点，默认分配大块内存  (128k) 才使用 mmap 获得地址空间。</p>
 <h3 id="内存模型是什么？是指可执行文件中包含这些东西吗？"><a href="#内存模型是什么？是指可执行文件中包含这些东西吗？" class="headerlink" title="内存模型是什么？是指可执行文件中包含这些东西吗？"></a>内存模型是什么？是指可执行文件中包含这些东西吗？</h3><p>内存模型是指虚拟内存。<br>可执行文件中只包含.text .rodata和.data，不包含.bss、栈和堆。.bss段存放的是未初始化的全局静态变量和局部静态变量，在程序加载到内存中时，这些变量会被初始化为0或空指针，在生成可执行文件时不会占用内存空间。而栈和堆是动态加载的，只有在程序运行时才会分配。</p>
@@ -2145,13 +2333,13 @@
 </ol>
 <h3 id="Linux系统中的中断为什么分为上下两个部分？"><a href="#Linux系统中的中断为什么分为上下两个部分？" class="headerlink" title="Linux系统中的中断为什么分为上下两个部分？"></a>Linux系统中的中断为什么分为上下两个部分？</h3><p>在Linux系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
 <ol>
-<li>**上半部：<ul>
+<li><strong>上半部</strong>：<ul>
 <li>上半部是中断处理的第一阶段，它在CPU接收到中断信号后立即执行。</li>
 <li>在这一阶段中，中断和调度器通常被禁用，以避免在处理中断时发生新的中断，从而保证处理的原子性。</li>
 <li>上半部的代码通常包含处理中断的关键代码，这部分代码的执行时间应尽可能短，以快速释放CPU资源，处理更多的中断或其他任务。</li>
 </ul>
 </li>
-<li>**下半部：<ul>
+<li><strong>下半部</strong>：<ul>
 <li>下半部处理的是中断处理的后续部分，通常在上半部完成后，通过添加工作项到工作队列中来延后执行。</li>
 <li>在下半部执行时，中断通常是被允许的，这样可以在处理较长时间的任务时不阻塞其他中断的处理。</li>
 <li>下半部负责完成数据处理、复制等操作，这些操作不需要立即完成，可以稍后处理。</li>
@@ -2681,7 +2869,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -2695,7 +2883,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Ch2 信息的表示和处理</a>
+            <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Ch2 信息的表示和处理</a>
         </h2>
 
         <div class="post-meta">
@@ -2750,7 +2938,100 @@
           <h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/04/03/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/#more" rel="contents">
+              <a class="btn" href="/2024/04/03/Computer/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/" class="post-title-link" itemprop="url">Ch3 程序的机器级表示</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-03 11:27:38 / 修改时间：22:22:17" itemprop="dateCreated datePublished" datetime="2024-04-03T11:27:38+08:00">2024-04-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">计算机基础</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>31</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/03/Computer/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2841,14 +3122,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -2884,12 +3165,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">108k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:55</span>
+    <span title="站点阅读时长">6:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
