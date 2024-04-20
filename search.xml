@@ -45,72 +45,6 @@
       </categories>
   </entry>
   <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/Computer/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<span id="more"></span>
-
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
-<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
-<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
-<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
-</li>
-<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
-</li>
-<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
-<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
-</ul>
-<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
-<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
-</li>
-<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
-<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
-<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
-<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
-<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
-<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
-</blockquote>
-<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
-<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
-<ol>
-<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
-<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
-</ol>
-<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
-<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
-<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Linux基础相关</title>
     <url>/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="1、GCC安装"><a href="#1、GCC安装" class="headerlink" title="1、GCC安装"></a>1、GCC安装</h2><h3 id="（1）GCC相关知识点"><a href="#（1）GCC相关知识点" class="headerlink" title="（1）GCC相关知识点"></a>（1）GCC相关知识点</h3><p>GCC（GNU Compiler Collection， GNU编译器套件）是由GNU开发的编程语言译器。</p>
@@ -602,6 +536,72 @@ mode_t
 <p>（5）<strong>异步 asynchronous</strong></p>
 <p>Linux中，可以调用 <code>aio_read</code> 函数告诉内核描述字缓冲区指针和缓冲区的大小、文件偏移及<strong>通知的方式</strong>，然后<strong>立即返回</strong>，当内核将数据拷贝到缓冲区后，再通知应用程序。</p>
 <h1 id="11、Web-Server（网页服务器）"><a href="#11、Web-Server（网页服务器）" class="headerlink" title="11、Web Server（网页服务器）"></a>11、<strong>Web Server（网页服务器）</strong></h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171026839.png" alt="45"></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/Computer/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<span id="more"></span>
+
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
+<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
+<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
+<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
+</li>
+<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
+</li>
+<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
+<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
+</ul>
+<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
+<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+</li>
+<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
+<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
+<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
+<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
+<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
+<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
+</blockquote>
+<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
+<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+<ol>
+<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
+<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+</ol>
+<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
+<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
+<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
 ]]></content>
       <categories>
         <category>Computer</category>
@@ -1535,6 +1535,19 @@ mode_t
       </categories>
   </entry>
   <entry>
+    <title>Ch1 计算机系统漫游</title>
+    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
+    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Ch10 系统级I/O</title>
     <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/</url>
     <content><![CDATA[<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
@@ -1630,12 +1643,15 @@ mode_t
       </categories>
   </entry>
   <entry>
-    <title>Ch1 计算机系统漫游</title>
-    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
-    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
+    <title>Ch2 信息的表示和处理</title>
+    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
 
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
 ]]></content>
       <categories>
         <category>Computer</category>
@@ -2672,22 +2688,6 @@ mode_t
       </categories>
   </entry>
   <entry>
-    <title>Ch2 信息的表示和处理</title>
-    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch2%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Ch2-信息的表示和处理"><a href="#Ch2-信息的表示和处理" class="headerlink" title="Ch2 信息的表示和处理"></a>Ch2 信息的表示和处理</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130352.png" alt="CSAPP Ch1-Ch3_02"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130692.png" alt="CSAPP Ch1-Ch3_03"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031130543.png" alt="CSAPP Ch1-Ch3_04"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131731.png" alt="CSAPP Ch1-Ch3_05"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031131498.png" alt="CSAPP Ch1-Ch3_06"></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Ch3 程序的机器级表示</title>
     <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch3%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA/</url>
     <content><![CDATA[<h1 id="Ch3-程序的机器级表示"><a href="#Ch3-程序的机器级表示" class="headerlink" title="Ch3 程序的机器级表示"></a>Ch3 程序的机器级表示</h1><span id="more"></span>
@@ -2992,156 +2992,6 @@ mode_t
 <ul>
 <li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
 <li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Computer</category>
-        <category>CSAPP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch8 异常控制流</title>
-    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
-    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
-
-<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
-<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
-
-<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
-<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
-<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
-<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
-<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
-<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
-</ul>
-</li>
-</ul>
-<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
-<ul>
-<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
-<li>将控制交还给之前正在执行的指令</li>
-<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
-<li>终止程序</li>
-</ul>
-</li>
-</ul>
-<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
-<ul>
-<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
-</li>
-<li><p>陷阱（同步）</p>
-<ul>
-<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
-</li>
-<li><p>故障（同步）</p>
-<ul>
-<li>由错误情况引起，故障处理程序会尝试修复</li>
-<li>经典示例：缺页异常</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
-</li>
-<li><p>终止（同步）</p>
-<ul>
-<li>由不可恢复的致命错误导致</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
-</li>
-</ul>
-<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
-<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
-<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
-<ul>
-<li>区分并发和并行：<ul>
-<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
-<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
-</ul>
-</li>
-</ul>
-<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
-<ul>
-<li><p>控制寄存器：描述进程当前的权限</p>
-</li>
-<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
-</li>
-<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
-</li>
-<li><p>上下文（Context）</p>
-<ul>
-<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
-</li>
-<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
-<ul>
-<li>保存当前进程的上下文；</li>
-<li>恢复某个先前被抢占进程的上下文；</li>
-<li>将控制传递给这个新恢复的进程。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
-<li><p>进程的状态：运行、暂停、终止</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
-</ul>
-<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
-<ul>
-<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
-</li>
-<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
-<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
-<li><p>execve函数</p>
-<ul>
-<li><code>*argv[]</code>：参数列表</li>
-<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
-
-<ul>
-<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
-</ul>
-</li>
-<li><p>waitpid函数</p>
-<ul>
-<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
-<blockquote>
-<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
-<ol>
-<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
-<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
-</ol>
-</blockquote>
-</li>
-<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
-<ul>
-<li>（1）pid &gt; 0<ul>
-<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
-</ul>
-</li>
-<li>（2）pid &#x3D; -1<ul>
-<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
-</ul>
-</li>
-<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
-</li>
-</ul>
-<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
-<ul>
-<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
 </ul>
 ]]></content>
       <categories>
@@ -3576,6 +3426,156 @@ mode_t
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031115921.png" alt="image-20240403111521660" style="zoom: 50%;" /></li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032057373.png" alt="image-20240403205722302"></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch8 异常控制流</title>
+    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch8%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</url>
+    <content><![CDATA[<h1 id="Ch8-异常控制流"><a href="#Ch8-异常控制流" class="headerlink" title="Ch8 异常控制流"></a>Ch8 异常控制流</h1><span id="more"></span>
+
+<h2 id="1、异常控制流"><a href="#1、异常控制流" class="headerlink" title="1、异常控制流"></a>1、异常控制流</h2><h3 id="（1）控制流"><a href="#（1）控制流" class="headerlink" title="（1）控制流"></a>（1）控制流</h3><p>处理器上电运行到断点关机的过程中，如下图，从ak到ak+1的过渡称为控制转移。最简单的控制流是平滑序列，其中平滑指内存中地址相邻，当出现跳转、函数调用和返回这类指令时会造成“不平滑”，会导致突变。</p>
+<p><strong>异常控制流（Exception Control Flow）</strong>指的是程序执行过程中由于发生异常而导致的控制流程的变化。在计算机系统中，异常是一种特殊的事件，它表示了一种不寻常的情况，可能需要程序或者操作系统采取相应的措施来处理。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031243585.png" alt="image-20240403124332377" style="zoom: 33%;" />
+
+<h2 id="2、异常"><a href="#2、异常" class="headerlink" title="2、异常"></a>2、异常</h2><ul>
+<li>定义：在执行某个指令时，可能发生一个与当前指令有关或无关的<strong>事件</strong>，此时处理器将从执行应用程序切换到<strong>异常处理程序</strong>，待起处理完成后，根据引起异常的事件类型选择是否返回。</li>
+<li>对异常的处理类似于一个间接的函数调用，但存在一些细微的差异：<ul>
+<li>函数调用时，在跳转到目前函数之前，处理器首先将返回地址压入栈中；而处理器在处理异常时，会<strong>把处理器额外的一些状态压到栈中</strong></li>
+<li>此外，若控制是从用户态转向内核态，那么所有的这些内容会被压到<strong>内核栈</strong>中，而不是用户栈中</li>
+<li><strong>异常处理程序运行在内核态</strong>，因此对所有的系统资源都有访问权限</li>
+</ul>
+</li>
+</ul>
+<p>​	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031250335.png" alt="image-20240403125006994"  /></p>
+<ul>
+<li>当异常处理程序处理完事件后，有以下三种情况：<ul>
+<li>将控制交还给之前正在执行的指令</li>
+<li>将控制返回给如果未发生异常时将会执行的下一条指令</li>
+<li>终止程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="（1）异常的分类"><a href="#（1）异常的分类" class="headerlink" title="（1）异常的分类"></a>（1）异常的分类</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031334140.png" alt="image-20240403133440480"></p>
+<ul>
+<li><p>中断（异步，即由处理器，即<strong>CPU外部</strong>的I&#x2F;O设备产生的）	</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031340026.png" alt="image-20240403134055559"></p>
+</li>
+<li><p>陷阱（同步）</p>
+<ul>
+<li>故意触发异常，是执行一条指令的结果，为用户程序和操作系统内核之间提供一个类似函数的接口</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031343706.png" alt="image-20240403134303996"></p>
+</li>
+<li><p>故障（同步）</p>
+<ul>
+<li>由错误情况引起，故障处理程序会尝试修复</li>
+<li>经典示例：缺页异常</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031344402.png" alt="image-20240403134407074"></p>
+</li>
+<li><p>终止（同步）</p>
+<ul>
+<li>由不可恢复的致命错误导致</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031345806.png" alt="image-20240403134503470"></p>
+</li>
+</ul>
+<h3 id="（2）x86-64系统中的异常"><a href="#（2）x86-64系统中的异常" class="headerlink" title="（2）x86-64系统中的异常"></a>（2）x86-64系统中的异常</h3><p>共定义256种异常，其中编号0-31所对应的异常由Intel的架构师定义，因此对于任意的x86-64系统都是一样的。编号32-255所对应的异常由操作系统定义。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031346638.png" alt="image-20240403134638369"></p>
+<h2 id="3、进程"><a href="#3、进程" class="headerlink" title="3、进程"></a>3、进程</h2><p>进程即一个正在执行的程序实例。</p>
+<h3 id="（1）逻辑控制流"><a href="#（1）逻辑控制流" class="headerlink" title="（1）逻辑控制流"></a>（1）逻辑控制流</h3><p>当使用调试器来控制程序单步执行时，会得到一系列的程序计数器的数值，这些数值与可执行程序中的指令一一对应。把这个<strong>PC值的序列</strong>叫做<strong>逻辑控制流</strong>，简称逻辑流。</p>
+<ul>
+<li>区分并发和并行：<ul>
+<li><strong>并发</strong>：并发指的是，在<strong>同一个处理器核</strong>上，多个任务<strong>同一时间段内交替地执行</strong>，它们共享系统资源</li>
+<li><strong>并行</strong>：两个进程<strong>在不同的处理器核上同时运行</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）用户态和内核态"><a href="#（2）用户态和内核态" class="headerlink" title="（2）用户态和内核态"></a>（2）用户态和内核态</h3><p>为了限制应用程序执行某些特殊的指令以及限制可以访问的地址空间范围，通常处理器通过<strong>控制寄存器（Control Register）的模式位</strong>实现这些限制功能。</p>
+<ul>
+<li><p>控制寄存器：描述进程当前的权限</p>
+</li>
+<li><p><strong>用户程序可以通过系统调用来间接地访问内核的代码和数据</strong></p>
+</li>
+<li><p>从User Mode到Kernel Mode：中断&#x2F;故障&#x2F;系统调用</p>
+</li>
+<li><p>上下文（Context）</p>
+<ul>
+<li><p><strong>内核为每个进程维持了一个上下文</strong>，是内核重启一个被抢占的进程所需的状态，状态包括如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032014836.png" alt="image-20240403201459671" style="zoom: 67%;" />
+</li>
+<li><p>内核调度进程时使用上下文切换的机制将控制转移到新的进程，分为以下三步：</p>
+<ul>
+<li>保存当前进程的上下文；</li>
+<li>恢复某个先前被抢占进程的上下文；</li>
+<li>将控制传递给这个新恢复的进程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（3）进程的创建"><a href="#（3）进程的创建" class="headerlink" title="（3）进程的创建"></a>（3）进程的创建</h3><ul>
+<li><p>进程的状态：运行、暂停、终止</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032028003.png" alt="image-20240403202844940" style="zoom:50%;" /></li>
+</ul>
+<h2 id="4、进程相关函数"><a href="#4、进程相关函数" class="headerlink" title="4、进程相关函数"></a>4、进程相关函数</h2><h3 id="（1）fork函数"><a href="#（1）fork函数" class="headerlink" title="（1）fork函数"></a>（1）fork函数</h3><p>调用该函数会返回两次：1）返回到父进程；2）返回到创建的子进程。<strong>父子进程各有一份副本，不同的进程有各自的栈（即各自的地址空间）。父子进程并发执行。</strong>以下图为例，父子进程有各自的x。</p>
+<ul>
+<li><p>父进程中fork的返回值是<strong>子进程的PID</strong>；</p>
+</li>
+<li><p>子进程中fork的返回值是<strong>0</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032031897.png" alt="image-20240403203131780"></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032050294.png" alt="image-20240403205019101"></p>
+<h3 id="（2）execve-waitpid函数"><a href="#（2）execve-waitpid函数" class="headerlink" title="（2）execve&#x2F;waitpid函数"></a>（2）execve&#x2F;waitpid函数</h3><ul>
+<li><p>execve函数</p>
+<ul>
+<li><code>*argv[]</code>：参数列表</li>
+<li><code>*envp[]</code>：环境变量列表，包括当前的工作目录PWD、用户名等信息</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032052443.png" alt="image-20240403205217368" style="zoom: 67%;" />
+
+<ul>
+<li>作用：调用加载器，在执行可执行程序的main函数之前，启动代码需要设置的用户栈，并将控制传递给新程序的主函数。</li>
+</ul>
+</li>
+<li><p>waitpid函数</p>
+<ul>
+<li><p>僵尸进程(<code>zombie</code>)：一个终止运行但是还未被父进程回收的进程。</p>
+<blockquote>
+<p>在大多数情况下，僵尸进程的大部分内存资源都会被回收，因为进程的地址空间、堆栈和数据段等资源都会在进程终止时由操作系统回收。但是，还有一些资源可能没有被完全回收：</p>
+<ol>
+<li><strong>进程描述符（Process Descriptor）：</strong> 操作系统仍然会保留僵尸进程的进程描述符，其中包含了一些关于进程的信息，比如进程 ID、父进程 ID、状态等。这些信息可以被父进程使用 <code>wait()</code> 或 <code>waitpid()</code> 函数来获取。</li>
+<li><strong>进程表项（Process Table Entry）：</strong> 操作系统的进程表中仍然会保留僵尸进程的表项，这是因为操作系统需要跟踪所有进程的状态信息。</li>
+</ol>
+</blockquote>
+</li>
+<li><p>但父进程需要获取子进程的某些信息时，通过**waitpid()**等待它的子进程终止或者停止。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032103323.png" alt="image-20240403210325217"></p>
+<ul>
+<li>（1）pid &gt; 0<ul>
+<li>表示等待的进程是一个单独的子进程，那么该子进程的ID即为该pid的值</li>
+</ul>
+</li>
+<li>（2）pid &#x3D; -1<ul>
+<li>表示等待的进程是由父进程创建的所有进程组成的集合</li>
+</ul>
+</li>
+<li>status中存放导致返回的子进程的状态信息，用<code>statusp</code>指向</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032110406.png" alt="image-20240403211011042"></p>
+</li>
+</ul>
+<h2 id="5、Linux信号"><a href="#5、Linux信号" class="headerlink" title="5、Linux信号"></a>5、Linux信号</h2><p>信号是软件形式的异常。</p>
+<ul>
+<li>进程组：默认情况下，父子进程属于一个进程组。可通过<code>setpgrp()</code>修改进程组。</li>
+</ul>
 ]]></content>
       <categories>
         <category>Computer</category>
@@ -4257,496 +4257,6 @@ mode_t
       </categories>
   </entry>
   <entry>
-    <title>洛谷刷题</title>
-    <url>/2024/03/15/Computer/DataStruct/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h4 id="P2089-烤鸡"><a href="#P2089-烤鸡" class="headerlink" title="P2089 烤鸡"></a>P2089 烤鸡</h4><h4 id="P1618-三连击"><a href="#P1618-三连击" class="headerlink" title="P1618 三连击"></a>P1618 三连击</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> standard[] = <span class="string">&quot;123456789&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量数组法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> a, b, c, flag=<span class="number">1</span>;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">329</span>; i++) &#123;\</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(buf, <span class="string">&quot;%d%d%d&quot;</span>, a*i, b*i, c*i);</span><br><span class="line">    <span class="built_in">sort</span>(buf, buf+<span class="number">9</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(standard, buf) == <span class="number">0</span>) &#123;</span><br><span class="line">      flag = <span class="number">0</span>;</span><br><span class="line">      cout &lt;&lt; a*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; c*i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;No!!!&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这道题的解题用到了常量数组法。一开始我想着正推，但是没有头绪。看了题解之后我才发现可以反着从比例开始推。先遍历所有满足<code>A:B:C</code>的三位数的情况，然后将这三个三位数，共9个数看成一个整体的<code>buf</code>数组，和<code>123456789</code>对比是否一致。</p>
-<h4 id="P3392-涂国旗"><a href="#P3392-涂国旗" class="headerlink" title="P3392 涂国旗"></a>P3392 涂国旗</h4><p>思想实际很简单，注意两个调试中发现的错误点：</p>
-<p>1、输入格式为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 5</span><br><span class="line">WRWRW</span><br><span class="line">BWRWB</span><br><span class="line">WRWRW</span><br><span class="line">RWBWR</span><br></pre></td></tr></table></figure>
-
-<p>因此对应的代码为：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> a[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    string row;</span><br><span class="line">    cin &gt;&gt; row; <span class="comment">// 读取一行数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将字符串转换为字符数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        a[i][j] = row[j];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误！</span></span><br><span class="line"><span class="comment">// 这种方法会尝试直接读取整个输入流，也就是说一次读取n*m个数据，而不是逐行逐个读取</span></span><br><span class="line"><span class="comment">// for (int i=0; i&lt;n; i++) &#123;</span></span><br><span class="line"><span class="comment">//     for (int j=0; j&lt;m; ++j) &#123;</span></span><br><span class="line"><span class="comment">//         cin &gt;&gt; a[i][j];</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、在统计每一行转换为<code>w\b\r</code>需要的个数时，因为<code>wc\bc\rc</code>定义为全局变量，因此要记得及时清零；</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">int</span> wc = <span class="number">0</span>, bc = <span class="number">0</span>, rc = <span class="number">0</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 预处理：每一行转换成w\b\r的需转换的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (a[i][j]) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;W&#x27;</span>:</span><br><span class="line">            wc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">            bc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>:</span><br><span class="line">            rc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      cnt[i][<span class="number">0</span>] = m-wc;</span><br><span class="line">      cnt[i][<span class="number">1</span>] = m-bc;</span><br><span class="line">      cnt[i][<span class="number">2</span>] = m-rc;</span><br><span class="line"></span><br><span class="line">      wc = bc = rc= <span class="number">0</span>;  <span class="comment">// important!!!</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    ...       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="P3654-First-Step"><a href="#P3654-First-Step" class="headerlink" title="P3654 First Step"></a>P3654 First Step</h4><p>由于这个题算的是<code>1×K</code>的排列方式，因此遗漏掉的一点是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.###.</span><br><span class="line">##.#.</span><br><span class="line">..#..</span><br><span class="line">#..#.</span><br><span class="line">#.###</span><br></pre></td></tr></table></figure>
-
-<p>针对上述的情况，<code>K=1</code>是横着排和竖着排是一样的，因此属于特例，结果要除<code>2</code>。</p>
-<h3 id="1-1-2-子集枚举"><a href="#1-1-2-子集枚举" class="headerlink" title="1.1.2 子集枚举"></a>1.1.2 子集枚举</h3><h4 id="P1036-选数"><a href="#P1036-选数" class="headerlink" title="P1036 选数"></a>P1036 选数</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k;</span><br><span class="line"><span class="type">int</span> x[<span class="number">25</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否为素数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_prime</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=num; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归遍历查询</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> sum, <span class="type">int</span> startx)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m      当前选择了多少个数</span></span><br><span class="line">  <span class="comment">// sum    当前和</span></span><br><span class="line">  <span class="comment">// startx 升序排列</span></span><br><span class="line">  <span class="keyword">if</span> (m == k) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_prime</span>(sum)) &#123;</span><br><span class="line">      ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=startx; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>, sum+x[i], i+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    cin &gt;&gt; x[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="P1157-组合的输出※"><a href="#P1157-组合的输出※" class="headerlink" title="P1157 组合的输出※"></a>P1157 组合的输出※</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, r;</span><br><span class="line"><span class="type">int</span> a[<span class="number">25</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m ==&gt; 为当前选择的数</span></span><br><span class="line">  <span class="comment">// 已经选了足够的数</span></span><br><span class="line">  <span class="keyword">if</span> (m &gt; r) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=r; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">3</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 未选够，继续遍历</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=a[m<span class="number">-1</span>]+<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    <span class="comment">// i=a[m-1]+1指i从上一个选取的整数a[m-1]的下一个数开始</span></span><br><span class="line">    a[m] = i; <span class="comment">// 把上一行提到的那个数赋给当前a[k]</span></span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>); <span class="comment">// 递归调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; r;</span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-1-3-排列枚举"><a href="#1-1-3-排列枚举" class="headerlink" title="1.1.3 排列枚举"></a>1.1.3 排列枚举</h3><h4 id="P1706-全排列"><a href="#P1706-全排列" class="headerlink" title="P1706 全排列"></a>P1706 全排列</h4><p>1、直接用<code>c++</code>的<code>next_permutation</code>函数：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    a[i] = i+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">sort</span>(a, a+n);</span><br><span class="line">  <span class="comment">// sort(a, a+n, greater&lt;&gt;());  -- prev_permutation(a, a+n)</span></span><br><span class="line">  <span class="comment">// greater&lt;int&gt;() 是一个函数对象，用于比较两个同类型的值</span></span><br><span class="line">  <span class="comment">// 第一个参数比第二个参数大时返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(a, a+n));</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2、深度搜索：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, pos=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>], b[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深搜函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">search</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;  <span class="comment">// 用i遍历所有可能的n种可能（因为这道题遍历的对象即为自然数，因此也就是i本身）</span></span><br><span class="line">    <span class="keyword">if</span> (!b[i]) &#123;  <span class="comment">// 当前b[i]为未使用状态</span></span><br><span class="line">      b[i] = <span class="number">1</span>;  <span class="comment">// 则首先将b[i]设置为使用状态</span></span><br><span class="line">      a[pos] = i;  <span class="comment">// 存储当前i值，</span></span><br><span class="line">      pos++;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (k == n) &#123;</span><br><span class="line">        <span class="built_in">print</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">search</span>(k+<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      pos--;  <span class="comment">// 执行到这一步说明已经打印完了一组数据，因此进行回溯</span></span><br><span class="line">      b[i] = <span class="number">0</span>;  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">search</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="P1088-火星人"><a href="#P1088-火星人" class="headerlink" title="P1088 火星人"></a>P1088 火星人</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;  <span class="comment">// 火星人手指数</span></span><br><span class="line"><span class="type">int</span> m;  <span class="comment">// 要加上的数B</span></span><br><span class="line"><span class="type">int</span> k[<span class="number">10005</span>];  <span class="comment">// 加数A</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cout &lt;&lt; k[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  cin &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; k[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) &#123;</span><br><span class="line">    <span class="built_in">next_permutation</span>(k, k+n);</span><br><span class="line">    <span class="keyword">if</span> (i == m) &#123;</span><br><span class="line">      <span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-2-贪心"><a href="#1-2-贪心" class="headerlink" title="1.2 贪心"></a>1.2 贪心</h2><p>贪心算法中常见的定义<code>结构体</code>并排序：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Oj</span>&#123;</span><br><span class="line">    <span class="type">int</span> begin;</span><br><span class="line">    <span class="type">int</span> end;</span><br><span class="line">&#125;a[<span class="number">1001000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(Oj o1, Oj o2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> o1.end &lt;= o2.end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">1</span>, cmp);  <span class="comment">// 按结束时间对所有oj排序</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-1-线段覆盖"><a href="#1-2-1-线段覆盖" class="headerlink" title="1.2.1 线段覆盖"></a>1.2.1 线段覆盖</h3><blockquote>
-<p>通用问题表述：</p>
-<p>在一个数轴上有<code>n</code>条线段，现要选取其中<code>k</code>条选段使得这<code>k</code>条线段两两没有重合部分，问最大的<code>k</code>为多少？</p>
-</blockquote>
-<p>1、最左边的线段放<code>右端点最靠左的线段</code>；</p>
-<p>2、剩下的其他线段<code>按右端点排序</code>，贪心放置线段，即能放就放。</p>
-<h2 id="1-3-二分法"><a href="#1-3-二分法" class="headerlink" title="1.3 二分法"></a>1.3 二分法</h2><p><strong>二分题的几个特征：</strong></p>
-<p>1、求最大&#x2F;最小值；</p>
-<p>2、答案离散（答案有多种可能）；</p>
-<p>3、容易判断答案是否正确。</p>
-<p><strong>做法：</strong></p>
-<p>1、确定答案区间；</p>
-<p>2、在保证答案在区间内的前提下,逐步缩小区间；</p>
-<p>3、当区间缩小到仅包含一个可能解时，该可能解即为答案。</p>
-<p><strong>易错点：</strong></p>
-<p>1、取边界条件时是选择<code>while(left&lt;right)</code>还是<code>while(left&lt;=right)</code>？</p>
-<p>2、当中间值大于（或小于）所需查找的目标时，下一步要迭代更新的<code>right</code>（或<code>left</code>）应该取<code>middle</code>还是<code>middle-1</code>？</p>
-<p><strong>解答：</strong></p>
-<p>对上述边界条件的选取要参考解法选择“<strong>左闭右闭</strong>”的区间还是“<strong>左闭右开</strong>”的区间。</p>
-<ul>
-<li><p><strong>左闭右闭</strong>：（在做题时首选这种方法！）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle<span class="number">-1</span>; &amp;&amp; left = middle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>左闭右开：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle; &amp;&amp; left = midlle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="P2249-查找"><a href="#P2249-查找" class="headerlink" title="P2249 查找"></a>P2249 查找</h3><p>这道题有一个要掌握的知识点：</p>
-<p>在<code>1 3 3 3 5 7 9 11 13 15 15</code>中如何找到第一个<code>3</code>出现的位置：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(<span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> left = <span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> right = n;</span><br><span class="line">  <span class="type">int</span> res = <span class="number">-1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">    <span class="type">int</span> mid = left + (right-left)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] == target) &#123;</span><br><span class="line">      res = mid;</span><br><span class="line">      right = mid - <span class="number">1</span>;  <span class="comment">// 这两步是为了找到第一个出现a[mid]的位置</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; target) &#123;</span><br><span class="line">      left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="P1102-A-B数对"><a href="#P1102-A-B数对" class="headerlink" title="P1102 A-B数对"></a>P1102 A-B数对</h3><p>本题需要求解满足<code>A-B=C</code>的数对的个数。由于题中告知了<strong>不同位置但数字一样的数对算不同的数对</strong>，因此求解思路如下：</p>
-<p>1、<code>A-B=C</code>即<code>A-C=B</code>；首先建立<code>map</code>映射，统计<code>A</code>取不同值的个数；</p>
-<p>2、将所有的<code>A</code>减去<code>C</code>，这个时候得到<code>B</code>，再统计此时<code>map</code>中以<code>B</code>的值为键的个数，即为所求答案。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, c;</span><br><span class="line"><span class="comment">// int res;</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> res;</span><br><span class="line"><span class="type">int</span> a[<span class="number">200001</span>];  <span class="comment">// n个正整数</span></span><br><span class="line">map &lt;<span class="type">int</span>, <span class="type">int</span>&gt; boo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; c;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; a[i];</span><br><span class="line">    boo[a[i]]++;</span><br><span class="line">    a[i]-=c;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    res += boo[a[i]];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; res &lt;&lt; endl;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>还有一个易错点在第<code>6</code>行，由于</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403211101376.png" alt="image-20240321110105721" style="zoom: 67%;" />
-
-<p>因此<code>res</code>应该定义为<code>long long</code>，而非<code>int</code>。</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>取值范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>long long</td>
-<td>-2^63 ~ 2^63-1</td>
-</tr>
-<tr>
-<td>int</td>
-<td>-2^31 ~ 2^31-1</td>
-</tr>
-</tbody></table>
-<h3 id="P1873-砍树"><a href="#P1873-砍树" class="headerlink" title="P1873 砍树"></a>P1873 砍树</h3><p>这道题的“二分”思想体现如下：</p>
-<p>对于给出的N棵树的高度：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 7</span><br><span class="line">20 15 10 17</span><br></pre></td></tr></table></figure>
-
-<p>假设锯片高度为14:，此时可得到的木材长度（总和<code>s</code>）为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">6 1 0 3  ==&gt;  s=10</span><br></pre></td></tr></table></figure>
-
-<p>得到的木材多于需要的木材，因此说明<strong>得到的“答案区间大了”，需要对其进行缩小</strong>。（这就可以类比到二分的思想上）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> n, m, a[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">get</span><span class="params">(<span class="type">long</span> <span class="type">long</span> h)</span> </span>&#123;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> s = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    s += ((a[i]-h) &gt;= <span class="number">0</span> ? (a[i]-h) : <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> left = <span class="number">0</span>;  <span class="comment">// left、right和mid用来衡量锯片长度</span></span><br><span class="line">  <span class="comment">// long long right = 400001;  // 错误，若m恰好为0或所有木块长度都小于m，则不对</span></span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> right = *<span class="built_in">max_element</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">  <span class="comment">// long long s = 0;</span></span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> s = <span class="number">-1</span>;  <span class="comment">// 初始化为一个无效的值</span></span><br><span class="line">  <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// ------------------- 错误 ------------------------- //</span></span><br><span class="line">    <span class="comment">// if (get(mid) == m) &#123;</span></span><br><span class="line">    <span class="comment">//   // 如果恰好找到一个mid使得get(mid)==m，并不一定就是正确的解</span></span><br><span class="line">    <span class="comment">//   // 因为题目要求的是最大的s，而不是等于m的s</span></span><br><span class="line">    <span class="comment">//   s = mid;</span></span><br><span class="line">    <span class="comment">//   break;</span></span><br><span class="line">    <span class="comment">// &#125; else if (get(mid) &gt; m) &#123;</span></span><br><span class="line">    <span class="comment">//   // 当前获得的木材长度太大，需要增大锯片长度</span></span><br><span class="line">    <span class="comment">//   left = mid + 1;</span></span><br><span class="line">    <span class="comment">// &#125; else &#123;</span></span><br><span class="line">    <span class="comment">//   // 当前获得的木材长度太大，需要减小锯片长度</span></span><br><span class="line">    <span class="comment">//   right = mid - 1;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">//   // 同时，没有处理找不到合适的解的情况</span></span><br><span class="line">    <span class="comment">// ------------------- 错误 ------------------------- //</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">get</span>(mid) &gt;= m) &#123;  <span class="comment">// 修正条件，使得可以找到最大的s</span></span><br><span class="line">      s = mid;</span><br><span class="line">      left = mid + <span class="number">1</span>;  <span class="comment">// 向右搜索，寻找更大的锯片高度，使得得到的木材总长度减小</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;  <span class="comment">// 向左搜索，寻找更小的锯片高度，使得得到的木材总长度增大</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="P1024-一元三次方程求解"><a href="#P1024-一元三次方程求解" class="headerlink" title="P1024 一元三次方程求解"></a>P1024 一元三次方程求解</h3><p>首先分析这道题：由于这道题的答案区间很大，因此可以考虑采用二分法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">l/r/m	x取值</span><br><span class="line">a[m]	f(x)的值</span><br><span class="line">target	方程的根</span><br></pre></td></tr></table></figure>
-
-<p>但本题的特殊之处在于，不能把<code>l</code>和<code>r</code>想当然地认为是<code>-100</code>和<code>100</code>。这是因为本题需要求解出<code>3个实根</code>。根据题中给出的提示：<strong>根与根之差的绝对值 ≥1</strong>，可以得知<strong>每个长度为<code>1</code>的区间内部至多有<code>1</code>个实根</strong>。明确这一点之后，就可以依次遍历每个长度为<code>1</code>的区间，进行二分查找了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">f</span><span class="params">(<span class="type">double</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a*x*x*x+b*x*x+c*x+d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">  <span class="type">double</span> l, r, m;</span><br><span class="line">  <span class="type">int</span> s = <span class="number">0</span>;  <span class="comment">// 记录找到的根个数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">-100</span>; i&lt;<span class="number">100</span>; ++i) &#123;</span><br><span class="line">    <span class="comment">// 由于题目说根与根之差的绝对值大于等于1，也即长度为1的区间内至多只存在1个根</span></span><br><span class="line">    <span class="comment">// 因此，所要做的就是在每个长度为1的区间内进行二分查找</span></span><br><span class="line">    l = i;</span><br><span class="line">    r = i+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">f</span>(l) == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// 说明此时左端点为根，输出</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%.2lf &quot;</span>, l);</span><br><span class="line">      s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">f</span>(l) * <span class="built_in">f</span>(r) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// f(x1)*f(x2)&lt;0，说明该区间内存在根</span></span><br><span class="line">      <span class="keyword">while</span> (r-l&gt;=<span class="number">0.001</span>) &#123;  <span class="comment">// 二分控制精度</span></span><br><span class="line">        m = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">f</span>(m) * <span class="built_in">f</span>(r) &lt;=<span class="number">0</span>) &#123;</span><br><span class="line">          l = m;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          r = m;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%.2lf &quot;</span>, r);</span><br><span class="line">      s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：<code>26</code>行不用<code>while(l &lt;= r)</code>是因为：</p>
-<p><code>while(r-l&gt;=0.001)</code> 这个条件是用来控制二分法的精度，它的含义是在区间的长度小于等于0.001时停止循环。这里的0.001是一个预先设定的精度值，表示当根的范围缩小到小于等于0.001时，认为已经找到了一个满足要求的根。</p>
-<p>使用 <code>while(r-l&gt;=0.001)</code> 的原因是为了控制二分法的迭代次数，从而提高程序的效率和准确性。当根的范围缩小到足够小的时候，再继续迭代寻找根就没有必要了，因为已经达到了所需的精度要求。</p>
-<p>而如果使用 <code>while(l&lt;=r)</code> 作为条件，则无法直接控制迭代的精度。在这种情况下，循环会一直进行，直到区间的长度小于等于0时才停止，这可能会导致不必要的迭代次数，影响程序的效率。因此，使用 <code>while(r-l&gt;=0.001)</code> 能够更好地控制迭代的精度，从而提高程序的性能。</p>
-<h1 id="2-搜索算法"><a href="#2-搜索算法" class="headerlink" title="2 搜索算法"></a>2 搜索算法</h1><h2 id="2-1-深度搜索DFS"><a href="#2-1-深度搜索DFS" class="headerlink" title="2.1 深度搜索DFS"></a>2.1 深度搜索DFS</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 判断是否满足终止搜索条件</span></span><br><span class="line">  <span class="keyword">if</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 进行相应操作</span></span><br><span class="line">    <span class="keyword">return</span>;  <span class="comment">// 回溯</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历所有可能的情况</span></span><br><span class="line">  <span class="keyword">for</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 标记当前状态，或执行当前操作</span></span><br><span class="line">    <span class="built_in">dfs</span>(...);  <span class="comment">// dfs搜索</span></span><br><span class="line">    <span class="comment">// 回溯状态</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="P1605-迷宫"><a href="#P1605-迷宫" class="headerlink" title="P1605 迷宫"></a>P1605 迷宫</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251029500.png" alt="image-20240325102955228"></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-        <category>DataStruct</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cmu15-445 Course Related (Spring 2023)</title>
-    <url>/2024/03/02/Project/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
-    <content><![CDATA[<table>
-<thead>
-<tr>
-<th>PPT</th>
-<th>Project</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1-5</td>
-<td>P0 &amp; P1</td>
-<td>2.26-3.24</td>
-</tr>
-<tr>
-<td>6-9</td>
-<td>P2</td>
-<td>3.24-</td>
-</tr>
-<tr>
-<td>10-14</td>
-<td>P3</td>
-<td></td>
-</tr>
-<tr>
-<td>15-21</td>
-<td>P4</td>
-<td></td>
-</tr>
-</tbody></table>
-<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
-<ul>
-<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
-<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
-<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
-<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<p>整体图片：</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242055708.png" alt="image-20240324205507545"></p>
-<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
-<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
-<ul>
-<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
-</li>
-<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
-</li>
-<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
-</li>
-</ul>
-<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
-<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
-<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
-<ul>
-<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
-<li>持有直到事务结束</li>
-<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
-<li>保护元组（行），表，索引</li>
-</ul>
-<p><code>Latches/Mutex</code>（偏底层的）</p>
-<ul>
-<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
-<li>持有直到一个操作结束</li>
-<li><strong>不需要支持回滚</strong></li>
-</ul>
-<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
-
-<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
-<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
-<ul>
-<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
-<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
-</ul>
-<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
-<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
-<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
-<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
-<blockquote>
-<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
-<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
-</blockquote>
-<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
-<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
-<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
-<ul>
-<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
-<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
-</ul>
-<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
-<ul>
-<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
-</li>
-<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
-</li>
-</ul>
-<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
-<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
-<ul>
-<li><code>Sorting + Join Buffers</code></li>
-<li><code>Query Caches</code></li>
-<li><code>Maintenance Buffers</code></li>
-<li><code>Log Buffers</code></li>
-<li><code>Dictionary Caches</code></li>
-</ul>
-<h1 id="2-B-Tree-Index"><a href="#2-B-Tree-Index" class="headerlink" title="2 B+Tree Index"></a>2 B+Tree Index</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271651204.png" alt="image-20240327165111130"></p>
-<h2 id="2-1-Hash-Tables"><a href="#2-1-Hash-Tables" class="headerlink" title="2.1 Hash Tables"></a>2.1 Hash Tables</h2><h3 id="2-1-1-Hash-Functions"><a href="#2-1-1-Hash-Functions" class="headerlink" title="2.1.1 Hash Functions"></a>2.1.1 Hash Functions</h3><p>由于<code>DBMS</code>内使用的<code>Hash Function</code>并不会暴露在外，因此<strong>没必要使用加密（<code>cryptographic</code>）哈希函数</strong>，我们希望它速度越快，<code>collision rate</code>越低越好。</p>
-<p>目前各 DBMS 主要在用的 Hash Functions 包括：</p>
-<ul>
-<li><a href="https://github.com/aappleby/smhasher">MurmurHash (2008)</a></li>
-<li><a href="https://github.com/google/cityhash">Google CityHash (2011)</a></li>
-<li><a href="https://github.com/google/farmhash">Google FarmHash (2014)</a></li>
-<li><a href="https://github.com/lemire/clhash">CLHash (2016)</a></li>
-</ul>
-<h4 id="SHA256算法"><a href="#SHA256算法" class="headerlink" title="SHA256算法"></a>SHA256算法</h4><h3 id="2-1-2-Static-Hashing-Scheme"><a href="#2-1-2-Static-Hashing-Scheme" class="headerlink" title="2.1.2 Static Hashing Scheme"></a>2.1.2 Static Hashing Scheme</h3><p>（1）Linear Probe Hashing 开放地址哈希</p>
-<p>“开放”的意思就是说：对于所有的key来说地址是开放的。碰撞时则往下一个地址存。</p>
-<p>在删除时可能会因为前项被删除导致的空白，造成找不到当前项，这时有两个解决思路：</p>
-<ul>
-<li>Tombstone；</li>
-<li>Movement</li>
-</ul>
-<p>重复key出现时的解决思路：</p>
-<ul>
-<li>Separate Linked List，把当前key作为指针指向一个新的区域：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120365.png" alt="image-20240324212003301"></p>
-<ul>
-<li>Redundant Keys，把key和value拼在一起作为新的key：</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120828.png" alt="image-20240324212049757"></p>
-<p>（2）Robin Hood Hashing，是开放地址哈希的变种，其基本思想是“劫富济贫”。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123712.png" alt="image-20240324212329536"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123232.png" alt="image-20240324212342001"></p>
-<p>简单来说就是，当E和A碰撞时，正常E偏移3位，但为了不让自己比D“惨”太多，它就把D推到后面去，自己占了D的位置。此时D和E均为2。</p>
-<p>（3）Cuckoo Hashing</p>
-<blockquote>
-<p>静态的哈希结构的问题在于需要DBMS能够预判所存数据的总量，否则每次数量超过范围时都需要重建 Hash Table。这显然是很困难的。</p>
-</blockquote>
-<h3 id="2-1-3-Dynamic-Hash-Tables"><a href="#2-1-3-Dynamic-Hash-Tables" class="headerlink" title="2.1.3 Dynamic Hash Tables"></a>2.1.3 Dynamic Hash Tables</h3><p>（1）Chained Hashing（※）</p>
-<p>每个 key 对应一个链表，每个节点是一个 bucket，装满了就再往后挂一个 bucket。需要写操作时，需要请求 latch。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242129786.png" alt="image-20240324212955629"></p>
-<ul>
-<li>好处：简单；</li>
-<li>坏处：最坏的情况下Hash Table可能降级为链表，操作的时间复杂度降格为 O(n)。</li>
-</ul>
-<p>（2）Extendible Hashing</p>
-<p>Extendible Hashing 的基本思路是一边扩容，一边 rehash。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134200.png" alt="image-20240324213443953"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134195.png" alt="image-20240324213451869"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134845.png" alt="image-20240324213459513"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135620.png" alt="image-20240324213509210"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135275.png" alt="image-20240324213516681"></p>
-<p>（3）Linear Hashing</p>
-<p>基本思想：维护一个指针，指向下一个将被拆分的 bucket，每当任意一个 bucket 溢出（标准自定，如利用率到达阈值等）时，将指针指向的 bucket 拆分。</p>
-<h3 id="2-1-4-总结"><a href="#2-1-4-总结" class="headerlink" title="2.1.4 总结"></a>2.1.4 总结</h3><p>Hash Tables 提供 O(1)O(1) 的访问效率，因此它被大量地应用于 DBMS 的内部实现中。即便如此，它并不适合作为 table index 的数据结构，而 table index 的首选就是下节将介绍的 B+ Tree。</p>
-<p><strong>哈希表对于范围索引是效率极低的。</strong></p>
-<h2 id="2-2-Tree-Indexes（B-索引）"><a href="#2-2-Tree-Indexes（B-索引）" class="headerlink" title="2.2 Tree Indexes（B+索引）"></a>2.2 Tree Indexes（B+索引）</h2><blockquote>
-<p>table index 为提供 DBMS 数据查询的快速索引，它本身存储着某表某列排序后的数据，并包含指向相应 tuple 的指针。DBMS 需要保证表信息与索引信息在逻辑上保持同步。用户可以在 DBMS 中为任意表建立多个索引，DBMS 负责选择最优的索引提升查询效率。但索引自身需要占用存储空间，因此在索引数量与索引存储、维护成本之间存在权衡。</p>
-</blockquote>
-<p>索引本质上就是一种小表，是把大表中的某些列抽取出来。</p>
-<h3 id="2-2-1-B-Tree"><a href="#2-2-1-B-Tree" class="headerlink" title="2.2.1 B+ Tree"></a>2.2.1 B+ Tree</h3><p>B+ Tree 是一种自平衡树，它将数据有序地存储，且在 search、sequential access、insertions 以及 deletions 操作的复杂度上都满足 O(logn)，其中 sequential access 的最终复杂度还与所需数据总量有关。</p>
-<blockquote>
-<p>这里的O(logn)的意义在于，随着数据的增长，操作的复杂度增长是要慢于数据的增长速度的。比如数据增长到原来的2倍，但搜索时间不会变成原来的2倍。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242151303.png" alt="image-20240324215134042"></p>
-<h4 id="B-Tree-Nodes"><a href="#B-Tree-Nodes" class="headerlink" title="B+ Tree Nodes"></a>B+ Tree Nodes</h4><p>B+ Tree 中的每个 node 都包含一列按 key 排好序的 key&#x2F;value pairs，key 就是 table index 对应的 column，value 的取值与 node 类型相关，在 inner nodes 和 leaf nodes 中存的内容不同。</p>
-<p>values主要有两种存法：</p>
-<ul>
-<li>Record IDs，存储指向最终 tuple 的指针。</li>
-<li>Tuple Data，直接将 tuple data 存在 leaf node 中。key为ID，v为整个行数据。如主键索引，其key为主键，value即为这张表的全部内容。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242154259.png" alt="image-20240324215455186"></p>
-<h4 id="B-Tree-Operations"><a href="#B-Tree-Operations" class="headerlink" title="B+ Tree Operations"></a>B+ Tree Operations</h4><p><em>Insert</em></p>
-<ol>
-<li>找到对应的 leaf node，L</li>
-<li>将 key&#x2F;value pair 按顺序插入到 L 中</li>
-<li>如果 L 还有足够的空间，操作结束；如果空间不足，则需要将 L 分裂成两个节点，同时在 parent node 上新增 entry，若 parent node 也空间不足，则递归地分裂，直到 root node 为止。</li>
-</ol>
-<p><em>Delete</em></p>
-<ol>
-<li>从 root 开始，找到目标 entry 所处的 leaf node, L</li>
-<li>删除该 entry</li>
-<li>如果 L 仍然至少处于半满状态，则操作结束；否则先尝试从 siblings 那里拆借 entries，如果失败，则将 L 与相应的 sibling 合并</li>
-<li>如果合并发生了，则可能需要递归地删除 parent node 中的 entry</li>
-</ol>
-<h4 id="Clustered-Indexes-聚簇索引"><a href="#Clustered-Indexes-聚簇索引" class="headerlink" title="Clustered Indexes 聚簇索引"></a>Clustered Indexes 聚簇索引</h4><h3 id="2-2-2-B-Tree-Design-Choices"><a href="#2-2-2-B-Tree-Design-Choices" class="headerlink" title="2.2.2 B+ Tree Design Choices"></a>2.2.2 B+ Tree Design Choices</h3><h4 id="Node-Size"><a href="#Node-Size" class="headerlink" title="Node Size"></a>Node Size</h4><p>通常来说，disk 的数据读取速度越慢，node size 就越大：</p>
-<table>
-<thead>
-<tr>
-<th>Disk Type</th>
-<th>Node Size</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HDD</td>
-<td>~1MB</td>
-</tr>
-<tr>
-<td>SSD</td>
-<td>~10KB</td>
-</tr>
-<tr>
-<td>In-Memory</td>
-<td>~512B</td>
-</tr>
-</tbody></table>
-<p>具体情境下的最优大小由 workload 决定。</p>
-<h4 id="Merge-Threshold"><a href="#Merge-Threshold" class="headerlink" title="Merge Threshold"></a>Merge Threshold</h4><p>由于 merge 操作引起的修改较大，有些 DBMS 选择延迟 merge 操作的发生时间，甚至可以利用其它进程来负责周期性地重建 table index。</p>
-<h4 id="Variable-Length-Keys"><a href="#Variable-Length-Keys" class="headerlink" title="Variable Length Keys"></a>Variable Length Keys</h4><p>B+ Tree 中存储的 key 经常是变长的，通常有三种手段来应对：</p>
-<ul>
-<li>Pointers：存储指向 key 的指针；</li>
-<li>Variable Length Nodes：需要精细的内存管理操作，不推荐；</li>
-<li>Padding：给每个变长的key都强制转成一致的长度；</li>
-<li>key Map：内嵌一个指针数组，指向 node 中的 key&#x2F;val list</li>
-</ul>
-<h4 id="Non-unique-Indexes-变长字段"><a href="#Non-unique-Indexes-变长字段" class="headerlink" title="Non-unique Indexes 变长字段"></a>Non-unique Indexes 变长字段</h4><p>索引针对的 key 可能是非唯一的，通常有两种手段来应对：</p>
-<ul>
-<li><p>Duplicate Keys：存储多次相同的 key；</p>
-</li>
-<li><p>Value Lists：每个 key 只出现一次，但同时维护另一个链表，存储 key 对应的多个 values，类似 chained hashing</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235897.png" alt="image-20240325123534595"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235251.png" alt="image-20240325123553069"></p>
-<h4 id="Intra-node-Search-结点的内部搜素"><a href="#Intra-node-Search-结点的内部搜素" class="headerlink" title="Intra-node Search 结点的内部搜素"></a>Intra-node Search 结点的内部搜素</h4><p>在节点内部搜索，就是在排好序的序列中检索元素，手段通常有：</p>
-<ul>
-<li>Linear Scan，这种线性扫描虽然似乎很费时，但相比把page从磁盘读到内存的时间来看几乎已经不算什么了；</li>
-<li>Binary Search，用二分来优化线性搜索；</li>
-<li>Interpolation：通过 keys 的分布统计信息来估计大概位置进行检索</li>
-</ul>
-<h3 id="2-2-3-Optimizations"><a href="#2-2-3-Optimizations" class="headerlink" title="2.2.3 Optimizations"></a>2.2.3 Optimizations</h3><h4 id="Prefix-Compression"><a href="#Prefix-Compression" class="headerlink" title="Prefix Compression"></a>Prefix Compression</h4><p>同一个 leaf node 中的 keys 通常有相同的 prefix，如下图所示。为了节省空间，可以只存所有 keys 的不同的 suffix。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251240293.png" alt="image-20240325124020194"></p>
-<h4 id="Suffix-Truncation"><a href="#Suffix-Truncation" class="headerlink" title="Suffix Truncation"></a>Suffix Truncation</h4><p>由于 inner nodes 只用于引导搜索，因此没有必要在 inner nodes 中储存完整的 key，我们可以<strong>只存储足够的 prefix 即可</strong>，如下图所示。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241456.png" alt="image-20240325124132291"></p>
-<h4 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h4><p>建 B+ Tree 的最快方式是先将 keys 排好序后，再从下往上建树，如下图所示。因此如果有<strong>大量插入操作</strong>，可以利用这种方式提高效率。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241413.png" alt="image-20240325124150282"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251242426.png" alt="image-20240325124207283"></p>
-<h4 id="Pointer-Swizzling"><a href="#Pointer-Swizzling" class="headerlink" title="Pointer Swizzling"></a>Pointer Swizzling</h4><p>Nodes 使用 page id 来存储其它 nodes 的引用，DBMS 每次需要首先从 page table 中获取对应的内存地址，然后才能获取相应的 nodes 本身，如果 page 已经在 buffer pool 中，我们可以直接存储其它 page 在 buffer pool 中的内存地址作为引用，从而提高访问效率。</p>
-<h2 id="2-3-Index-Concurrency-Control"><a href="#2-3-Index-Concurrency-Control" class="headerlink" title="2.3 Index Concurrency Control"></a>2.3 Index Concurrency Control</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251246471.png" alt="image-20240325124646316"></p>
-<h3 id="2-3-1-Latch-Modes"><a href="#2-3-1-Latch-Modes" class="headerlink" title="2.3.1 Latch Modes"></a>2.3.1 Latch Modes</h3><h4 id="Read-Mode"><a href="#Read-Mode" class="headerlink" title="Read Mode"></a>Read Mode</h4><ul>
-<li>多个线程可以同时读取相同的数据</li>
-<li>针对相同的数据，当别的线程已经获得处于 read mode 的 latch，新的线程也可以继续获取 read mode 的 latch</li>
-</ul>
-<h4 id="Write-Mode"><a href="#Write-Mode" class="headerlink" title="Write Mode"></a>Write Mode</h4><ul>
-<li>同一时间只有单个线程可以访问</li>
-<li>针对相同的数据，如果获取前已经有别的线程获得任何 mode 的 latch，新的线程就无法获取 write mode  的 latch</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251249774.png" alt="image-20240325124932586"></p>
-<p><strong>锁的实现：</strong></p>
-<ul>
-<li><p>Blocking OS Mutex：如std::mutex，好处是竞争的线程会陷入sleep，但坏处是需要OS去进行唤醒，极度浪费资源；</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251251222.png" alt="image-20240325125111105"></p>
-</li>
-<li><p>Test-ans-Set Spin Latch(TAS)：自旋锁，如std::atomic<T>，不需要OS操作，自己在死循环内不断旋转，直到可以获取到该锁；</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251253634.png" alt="image-20240325125323436"></p>
-</li>
-<li><p>Reader-Writer Latches：自旋锁的基础上实现。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251255541.png" alt="image-20240325125549330"></p>
-<p>这里注意：若有线程需要加写锁，那么此时如果再有线程希望加读锁也会被阻塞。只有等之前的读锁都释放，写锁成功加上后，后续的读锁才能正常上锁。（这样做是为了避免写锁被无止境地锁住）</p>
-</li>
-</ul>
-<h4 id="hash-table-latching"><a href="#hash-table-latching" class="headerlink" title="hash table latching"></a><strong>hash table latching</strong></h4><p>相较于B+ Tree，Hash Table不容易遇到死锁，尤其是开放地址哈希，因为大家都是朝着一个方向去进行的。一般在扩容（resize）操作时，加一个全局的写锁，因为此时哈希表内部的数据需要进行一个整理。</p>
-<ul>
-<li>page latches：块与块之间的锁独立。线程会给所有块加分段锁。例如下图，块1的写锁和块2的读锁独立。这样的优势是：1）锁的粒度不会太细；2）支持一定的并发操作。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271610143.png" alt="image-20240327161025853"></p>
-<ul>
-<li><p>slot latches：以槽为单位进行加锁。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271611923.png" alt="image-20240327161157762"></p>
-</li>
-<li><p>compare-and-swap，CAS，使得hash table实现无锁插入。例如下图：让os先0判断是否为20，若是再加到30，属于原子操作。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271629958.png" alt="image-20240327162902774"></p>
-</li>
-</ul>
-<h3 id="2-3-2-Index-Crabbing-Coupling"><a href="#2-3-2-Index-Crabbing-Coupling" class="headerlink" title="2.3.2 Index Crabbing&#x2F;Coupling"></a>2.3.2 Index Crabbing&#x2F;Coupling</h3><p>B+Tree考虑两方面的并发问题：</p>
-<ul>
-<li>1）结点内部的数据，即多个线程同时修改一个node；</li>
-<li>2）结点间的合并和分裂操作，即一个线程正在遍历 B+ Tree 的同时，另一个线程正在 splits&#x2F;merges nodes。</li>
-</ul>
-<p><strong>Latch Crabbing 的基本思想如下：</strong></p>
-<ul>
-<li>获取 parent 的 latch</li>
-<li>获取 child 的 latch</li>
-<li>如果<strong>安全</strong>，可以释放 parent 的 latch</li>
-</ul>
-<p><strong>这里的“安全”指的是，当发生更新操作时，该节点不会发生 split 或 merge 的操作，即：</strong></p>
-<ul>
-<li>在插入元素时，节点未满</li>
-<li>在删除元素时，节点超过半满</li>
-</ul>
-<p>按照上述方法，无论对叶子结点执行何种操作，第一步都是先锁住根节点，这是一种“悲观”的做法。“乐观”的做法是：一路加读锁，最后加写锁。当然也有可能出现到了最后一步，发现会改动前面的parent，因此需要放弃当前的操作，重新从root开始加写锁。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271638410.png" alt="image-20240327163836210"></p>
-<h3 id="2-3-3-Leaf-Scans"><a href="#2-3-3-Leaf-Scans" class="headerlink" title="2.3.3 Leaf Scans"></a>2.3.3 Leaf Scans</h3><p>之前的分析中我们仅仅关注了从上到下的访问模式，而没有考虑到左右方向的访问模式，在 range query 中，常常需要横向访问相邻的 nodes。</p>
-<p>当遇到横向扫描无法获取下一个节点的 latch 时，该线程将释放 latch 后自杀。这种策略逻辑简单，尽管有理论上的优化空间，但在实践中是常见的避免死锁的方式。</p>
-<h3 id="2-3-4-Delayed-Parent-Updates"><a href="#2-3-4-Delayed-Parent-Updates" class="headerlink" title="2.3.4 Delayed Parent Updates"></a>2.3.4 Delayed Parent Updates</h3><p>从上文中，我们可以观察到：每当 leaf node 溢出时，我们都需要更新至少 3 个节点：</p>
-<ul>
-<li>即将被拆分的 leaf node</li>
-<li>新的 leaf node</li>
-<li>parent node</li>
-</ul>
-<p>修改的成本较高，因此 B-link Tree 提出了一种优化策略：<strong>每当 leaf node 溢出时，只是标记一下而暂时不更新 parent node，等下一次有别的线程获取 parnet node 的 write latch 时，一并修改。</strong></p>
-<h2 id="2-4-Sorting-and-Aggregations"><a href="#2-4-Sorting-and-Aggregations" class="headerlink" title="2.4 Sorting and Aggregations"></a>2.4 Sorting and Aggregations</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271648356.png" alt="image-20240327164819130"></p>
-<p>一个disk-oriented DBMS不能假定query results和内存大小完全适配。有可能筛选出来的query results也需要存到磁盘中，和buffer pool互相配合来实现操作。需要最大化利用sequential I&#x2F;O。</p>
-<p><strong>为什么需要排序：关系型数据库是unsorted的。</strong></p>
-<h3 id="2-4-1-Sorting-Algorithm"><a href="#2-4-1-Sorting-Algorithm" class="headerlink" title="2.4.1 Sorting Algorithm"></a>2.4.1 Sorting Algorithm</h3><ul>
-<li>early materialization：排序时value直接存储当前key那一行的剩余数据；</li>
-<li>later materialization：排序时value存储ID值。</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271703469.png" alt="image-20240327170300327"></p>
-<h4 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h4><p>外部排序通常有两个步骤：</p>
-<p>1、Sorting Phase：将数据分成多个 chunks，每个 chunk 可以完全读入到 memory 中，在 memory 中排好序后再写回到 disk 中</p>
-<p>2、Merge Phase：将多个子文件合并成一个大文件</p>
-<ul>
-<li><p>2-Way External Merge Sort：这里的“2-way”即是指每次读入两页。</p>
-</li>
-<li><p>General External Merge Sort：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271947535.png" alt="image-20240327194734264"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271949041.png" alt="image-20240327194933847"></p>
-</li>
-</ul>
-<h4 id="Using-B-Tree-for-Sorting"><a href="#Using-B-Tree-for-Sorting" class="headerlink" title="Using B+Tree for Sorting"></a>Using B+Tree for Sorting</h4><p>注意包含聚簇和非聚簇两种情况。</p>
-<h3 id="2-4-2-Aggregations"><a href="#2-4-2-Aggregations" class="headerlink" title="2.4.2 Aggregations"></a>2.4.2 Aggregations</h3><h4 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271953093.png" alt="image-20240327195346706"></p>
-<p>但很多时候我们并不需要排好序的数据，如：</p>
-<ul>
-<li>Forming groups in GROUP BY</li>
-<li>Removing duplicates in DISTINCT</li>
-</ul>
-<p>在这样的场景下 hashing 是更好的选择，它能有效减少排序所需的额外工作。</p>
-<h4 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h4><p>利用一个临时 (ephemeral) 的 hash table 来记录必要的信息，即检查 hash table 中是否存在已经记录过的元素并作出相应操作：</p>
-<ul>
-<li>DISTINCT: Discard duplicate</li>
-<li>GROUP BY: Perform aggregate computation</li>
-</ul>
-<p>如果所有信息都能一次性读入内存，那事情就很简单了，但如若不然，我们就得变得更聪明。</p>
-<p>hashing aggregation 同样分成两步：</p>
-<ul>
-<li>Partition Phase: 将 tuples 根据 hash key 放入不同的 buckets<ul>
-<li>use a hash function h1 to split tuples into partitions on disk<ul>
-<li>all matches live in the same partition</li>
-<li>partitions are “spilled” to disk via output buffers</li>
-</ul>
-</li>
-<li>这里有个额外的假设，即每个 partition 能够被放到 memory 中</li>
-</ul>
-</li>
-<li>ReHash Phase: 在内存中针对每个 partition 利用 hash table 计算 aggregation 的结果</li>
-</ul>
-<p>如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000471.png" alt="image-20240327200043163"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000726.png" alt="image-20240327200052468"></p>
-<p>在 ReHash phase 中，存着 (GroupKey→RunningVal)(GroupKey→RunningVal) 的键值对，当我们需要向 hash table 中插入新的 tuple 时：</p>
-<ul>
-<li>如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以</li>
-<li>反之，则插入新的 GroupKey 到 RunningVal 的键值对</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272001082.png" alt="image-20240327200117774"></p>
-]]></content>
-      <categories>
-        <category>Project</category>
-        <category>cmu15-445</category>
-      </categories>
-  </entry>
-  <entry>
     <title>数据结构</title>
     <url>/2023/12/05/Computer/DataStruct/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p>《数据结构（严蔚敏）》_b站鲍松山</p>
@@ -5249,6 +4759,496 @@ mode_t
       <categories>
         <category>Computer</category>
         <category>DataStruct</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>洛谷刷题</title>
+    <url>/2024/03/15/Computer/DataStruct/%E6%B4%9B%E8%B0%B7%E5%88%B7%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="1-基础算法"><a href="#1-基础算法" class="headerlink" title="1 基础算法"></a>1 基础算法</h1><h2 id="1-1-枚举"><a href="#1-1-枚举" class="headerlink" title="1.1 枚举"></a>1.1 枚举</h2><h3 id="1-1-1-循环枚举"><a href="#1-1-1-循环枚举" class="headerlink" title="1.1.1 循环枚举"></a>1.1.1 循环枚举</h3><h4 id="P2241-统计方形"><a href="#P2241-统计方形" class="headerlink" title="P2241 统计方形"></a>P2241 统计方形</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> n, m;</span><br><span class="line">  std::cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> sq_cnt = <span class="number">0</span>, rec_cnt = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; j++) &#123;</span><br><span class="line">      <span class="type">int</span> temp = std::<span class="built_in">min</span>(n-i, m-j);  <span class="comment">// important</span></span><br><span class="line">      sq_cnt += temp;</span><br><span class="line">      rec_cnt += (n-i)*(m-j) - temp;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  std::cout &lt;&lt; sq_cnt &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; rec_cnt &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="P2089-烤鸡"><a href="#P2089-烤鸡" class="headerlink" title="P2089 烤鸡"></a>P2089 烤鸡</h4><h4 id="P1618-三连击"><a href="#P1618-三连击" class="headerlink" title="P1618 三连击"></a>P1618 三连击</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> standard[] = <span class="string">&quot;123456789&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量数组法</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> a, b, c, flag=<span class="number">1</span>;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=<span class="number">329</span>; i++) &#123;\</span><br><span class="line">    <span class="type">char</span> buf[<span class="number">20</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(buf, <span class="string">&quot;%d%d%d&quot;</span>, a*i, b*i, c*i);</span><br><span class="line">    <span class="built_in">sort</span>(buf, buf+<span class="number">9</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(standard, buf) == <span class="number">0</span>) &#123;</span><br><span class="line">      flag = <span class="number">0</span>;</span><br><span class="line">      cout &lt;&lt; a*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; b*i &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; c*i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;No!!!&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题的解题用到了常量数组法。一开始我想着正推，但是没有头绪。看了题解之后我才发现可以反着从比例开始推。先遍历所有满足<code>A:B:C</code>的三位数的情况，然后将这三个三位数，共9个数看成一个整体的<code>buf</code>数组，和<code>123456789</code>对比是否一致。</p>
+<h4 id="P3392-涂国旗"><a href="#P3392-涂国旗" class="headerlink" title="P3392 涂国旗"></a>P3392 涂国旗</h4><p>思想实际很简单，注意两个调试中发现的错误点：</p>
+<p>1、输入格式为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 5</span><br><span class="line">WRWRW</span><br><span class="line">BWRWB</span><br><span class="line">WRWRW</span><br><span class="line">RWBWR</span><br></pre></td></tr></table></figure>
+
+<p>因此对应的代码为：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">char</span> a[<span class="number">100</span>][<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">    string row;</span><br><span class="line">    cin &gt;&gt; row; <span class="comment">// 读取一行数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将字符串转换为字符数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; m; ++j) &#123;</span><br><span class="line">        a[i][j] = row[j];</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误！</span></span><br><span class="line"><span class="comment">// 这种方法会尝试直接读取整个输入流，也就是说一次读取n*m个数据，而不是逐行逐个读取</span></span><br><span class="line"><span class="comment">// for (int i=0; i&lt;n; i++) &#123;</span></span><br><span class="line"><span class="comment">//     for (int j=0; j&lt;m; ++j) &#123;</span></span><br><span class="line"><span class="comment">//         cin &gt;&gt; a[i][j];</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、在统计每一行转换为<code>w\b\r</code>需要的个数时，因为<code>wc\bc\rc</code>定义为全局变量，因此要记得及时清零；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="type">int</span> wc = <span class="number">0</span>, bc = <span class="number">0</span>, rc = <span class="number">0</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 预处理：每一行转换成w\b\r的需转换的个数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (a[i][j]) &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;W&#x27;</span>:</span><br><span class="line">            wc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">            bc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>:</span><br><span class="line">            rc++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      cnt[i][<span class="number">0</span>] = m-wc;</span><br><span class="line">      cnt[i][<span class="number">1</span>] = m-bc;</span><br><span class="line">      cnt[i][<span class="number">2</span>] = m-rc;</span><br><span class="line"></span><br><span class="line">      wc = bc = rc= <span class="number">0</span>;  <span class="comment">// important!!!</span></span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    ...       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="P3654-First-Step"><a href="#P3654-First-Step" class="headerlink" title="P3654 First Step"></a>P3654 First Step</h4><p>由于这个题算的是<code>1×K</code>的排列方式，因此遗漏掉的一点是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.###.</span><br><span class="line">##.#.</span><br><span class="line">..#..</span><br><span class="line">#..#.</span><br><span class="line">#.###</span><br></pre></td></tr></table></figure>
+
+<p>针对上述的情况，<code>K=1</code>是横着排和竖着排是一样的，因此属于特例，结果要除<code>2</code>。</p>
+<h3 id="1-1-2-子集枚举"><a href="#1-1-2-子集枚举" class="headerlink" title="1.1.2 子集枚举"></a>1.1.2 子集枚举</h3><h4 id="P1036-选数"><a href="#P1036-选数" class="headerlink" title="P1036 选数"></a>P1036 选数</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, k;</span><br><span class="line"><span class="type">int</span> x[<span class="number">25</span>];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否为素数</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">is_prime</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">2</span>; i*i&lt;=num; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归遍历查询</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> sum, <span class="type">int</span> startx)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m      当前选择了多少个数</span></span><br><span class="line">  <span class="comment">// sum    当前和</span></span><br><span class="line">  <span class="comment">// startx 升序排列</span></span><br><span class="line">  <span class="keyword">if</span> (m == k) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_prime</span>(sum)) &#123;</span><br><span class="line">      ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=startx; i&lt;n; i++) &#123;</span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>, sum+x[i], i+<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    cin &gt;&gt; x[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="P1157-组合的输出※"><a href="#P1157-组合的输出※" class="headerlink" title="P1157 组合的输出※"></a>P1157 组合的输出※</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, r;</span><br><span class="line"><span class="type">int</span> a[<span class="number">25</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// m ==&gt; 为当前选择的数</span></span><br><span class="line">  <span class="comment">// 已经选了足够的数</span></span><br><span class="line">  <span class="keyword">if</span> (m &gt; r) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=r; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">3</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 未选够，继续遍历</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=a[m<span class="number">-1</span>]+<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    <span class="comment">// i=a[m-1]+1指i从上一个选取的整数a[m-1]的下一个数开始</span></span><br><span class="line">    a[m] = i; <span class="comment">// 把上一行提到的那个数赋给当前a[k]</span></span><br><span class="line">    <span class="built_in">dfs</span>(m+<span class="number">1</span>); <span class="comment">// 递归调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; r;</span><br><span class="line">  <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-3-排列枚举"><a href="#1-1-3-排列枚举" class="headerlink" title="1.1.3 排列枚举"></a>1.1.3 排列枚举</h3><h4 id="P1706-全排列"><a href="#P1706-全排列" class="headerlink" title="P1706 全排列"></a>P1706 全排列</h4><p>1、直接用<code>c++</code>的<code>next_permutation</code>函数：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">    a[i] = i+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">sort</span>(a, a+n);</span><br><span class="line">  <span class="comment">// sort(a, a+n, greater&lt;&gt;());  -- prev_permutation(a, a+n)</span></span><br><span class="line">  <span class="comment">// greater&lt;int&gt;() 是一个函数对象，用于比较两个同类型的值</span></span><br><span class="line">  <span class="comment">// 第一个参数比第二个参数大时返回true</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">      cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(a, a+n));</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、深度搜索：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, pos=<span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">100</span>], b[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">setw</span>(<span class="number">5</span>) &lt;&lt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 深搜函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">search</span><span class="params">(<span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;  <span class="comment">// 用i遍历所有可能的n种可能（因为这道题遍历的对象即为自然数，因此也就是i本身）</span></span><br><span class="line">    <span class="keyword">if</span> (!b[i]) &#123;  <span class="comment">// 当前b[i]为未使用状态</span></span><br><span class="line">      b[i] = <span class="number">1</span>;  <span class="comment">// 则首先将b[i]设置为使用状态</span></span><br><span class="line">      a[pos] = i;  <span class="comment">// 存储当前i值，</span></span><br><span class="line">      pos++;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (k == n) &#123;</span><br><span class="line">        <span class="built_in">print</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">search</span>(k+<span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      pos--;  <span class="comment">// 执行到这一步说明已经打印完了一组数据，因此进行回溯</span></span><br><span class="line">      b[i] = <span class="number">0</span>;  <span class="comment">// 回溯</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">search</span>(<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="P1088-火星人"><a href="#P1088-火星人" class="headerlink" title="P1088 火星人"></a>P1088 火星人</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;  <span class="comment">// 火星人手指数</span></span><br><span class="line"><span class="type">int</span> m;  <span class="comment">// 要加上的数B</span></span><br><span class="line"><span class="type">int</span> k[<span class="number">10005</span>];  <span class="comment">// 加数A</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cout &lt;&lt; k[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n;</span><br><span class="line">  cin &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; k[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=m; ++i) &#123;</span><br><span class="line">    <span class="built_in">next_permutation</span>(k, k+n);</span><br><span class="line">    <span class="keyword">if</span> (i == m) &#123;</span><br><span class="line">      <span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-贪心"><a href="#1-2-贪心" class="headerlink" title="1.2 贪心"></a>1.2 贪心</h2><p>贪心算法中常见的定义<code>结构体</code>并排序：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Oj</span>&#123;</span><br><span class="line">    <span class="type">int</span> begin;</span><br><span class="line">    <span class="type">int</span> end;</span><br><span class="line">&#125;a[<span class="number">1001000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(Oj o1, Oj o2)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> o1.end &lt;= o2.end;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="built_in">sort</span>(a+<span class="number">1</span>, a+n+<span class="number">1</span>, cmp);  <span class="comment">// 按结束时间对所有oj排序</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-1-线段覆盖"><a href="#1-2-1-线段覆盖" class="headerlink" title="1.2.1 线段覆盖"></a>1.2.1 线段覆盖</h3><blockquote>
+<p>通用问题表述：</p>
+<p>在一个数轴上有<code>n</code>条线段，现要选取其中<code>k</code>条选段使得这<code>k</code>条线段两两没有重合部分，问最大的<code>k</code>为多少？</p>
+</blockquote>
+<p>1、最左边的线段放<code>右端点最靠左的线段</code>；</p>
+<p>2、剩下的其他线段<code>按右端点排序</code>，贪心放置线段，即能放就放。</p>
+<h2 id="1-3-二分法"><a href="#1-3-二分法" class="headerlink" title="1.3 二分法"></a>1.3 二分法</h2><p><strong>二分题的几个特征：</strong></p>
+<p>1、求最大&#x2F;最小值；</p>
+<p>2、答案离散（答案有多种可能）；</p>
+<p>3、容易判断答案是否正确。</p>
+<p><strong>做法：</strong></p>
+<p>1、确定答案区间；</p>
+<p>2、在保证答案在区间内的前提下,逐步缩小区间；</p>
+<p>3、当区间缩小到仅包含一个可能解时，该可能解即为答案。</p>
+<p><strong>易错点：</strong></p>
+<p>1、取边界条件时是选择<code>while(left&lt;right)</code>还是<code>while(left&lt;=right)</code>？</p>
+<p>2、当中间值大于（或小于）所需查找的目标时，下一步要迭代更新的<code>right</code>（或<code>left</code>）应该取<code>middle</code>还是<code>middle-1</code>？</p>
+<p><strong>解答：</strong></p>
+<p>对上述边界条件的选取要参考解法选择“<strong>左闭右闭</strong>”的区间还是“<strong>左闭右开</strong>”的区间。</p>
+<ul>
+<li><p><strong>左闭右闭</strong>：（在做题时首选这种方法！）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle<span class="number">-1</span>; &amp;&amp; left = middle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>左闭右开：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">left = <span class="number">0</span>;</span><br><span class="line">right = nums.size;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left&lt;right)&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right = middle; &amp;&amp; left = midlle+<span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="P2249-查找"><a href="#P2249-查找" class="headerlink" title="P2249 查找"></a>P2249 查找</h3><p>这道题有一个要掌握的知识点：</p>
+<p>在<code>1 3 3 3 5 7 9 11 13 15 15</code>中如何找到第一个<code>3</code>出现的位置：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(<span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> left = <span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> right = n;</span><br><span class="line">  <span class="type">int</span> res = <span class="number">-1</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">    <span class="type">int</span> mid = left + (right-left)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid] == target) &#123;</span><br><span class="line">      res = mid;</span><br><span class="line">      right = mid - <span class="number">1</span>;  <span class="comment">// 这两步是为了找到第一个出现a[mid]的位置</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a[mid] &lt; target) &#123;</span><br><span class="line">      left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="P1102-A-B数对"><a href="#P1102-A-B数对" class="headerlink" title="P1102 A-B数对"></a>P1102 A-B数对</h3><p>本题需要求解满足<code>A-B=C</code>的数对的个数。由于题中告知了<strong>不同位置但数字一样的数对算不同的数对</strong>，因此求解思路如下：</p>
+<p>1、<code>A-B=C</code>即<code>A-C=B</code>；首先建立<code>map</code>映射，统计<code>A</code>取不同值的个数；</p>
+<p>2、将所有的<code>A</code>减去<code>C</code>，这个时候得到<code>B</code>，再统计此时<code>map</code>中以<code>B</code>的值为键的个数，即为所求答案。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n, c;</span><br><span class="line"><span class="comment">// int res;</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> res;</span><br><span class="line"><span class="type">int</span> a[<span class="number">200001</span>];  <span class="comment">// n个正整数</span></span><br><span class="line">map &lt;<span class="type">int</span>, <span class="type">int</span>&gt; boo;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; c;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; a[i];</span><br><span class="line">    boo[a[i]]++;</span><br><span class="line">    a[i]-=c;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    res += boo[a[i]];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; res &lt;&lt; endl;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有一个易错点在第<code>6</code>行，由于</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403211101376.png" alt="image-20240321110105721" style="zoom: 67%;" />
+
+<p>因此<code>res</code>应该定义为<code>long long</code>，而非<code>int</code>。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>long long</td>
+<td>-2^63 ~ 2^63-1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>-2^31 ~ 2^31-1</td>
+</tr>
+</tbody></table>
+<h3 id="P1873-砍树"><a href="#P1873-砍树" class="headerlink" title="P1873 砍树"></a>P1873 砍树</h3><p>这道题的“二分”思想体现如下：</p>
+<p>对于给出的N棵树的高度：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4 7</span><br><span class="line">20 15 10 17</span><br></pre></td></tr></table></figure>
+
+<p>假设锯片高度为14:，此时可得到的木材长度（总和<code>s</code>）为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">6 1 0 3  ==&gt;  s=10</span><br></pre></td></tr></table></figure>
+
+<p>得到的木材多于需要的木材，因此说明<strong>得到的“答案区间大了”，需要对其进行缩小</strong>。（这就可以类比到二分的思想上）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> n, m, a[<span class="number">1000001</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">get</span><span class="params">(<span class="type">long</span> <span class="type">long</span> h)</span> </span>&#123;</span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> s = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    s += ((a[i]-h) &gt;= <span class="number">0</span> ? (a[i]-h) : <span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; ++i) &#123;</span><br><span class="line">    cin &gt;&gt; a[i];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> left = <span class="number">0</span>;  <span class="comment">// left、right和mid用来衡量锯片长度</span></span><br><span class="line">  <span class="comment">// long long right = 400001;  // 错误，若m恰好为0或所有木块长度都小于m，则不对</span></span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> right = *<span class="built_in">max_element</span>(a + <span class="number">1</span>, a + n + <span class="number">1</span>);</span><br><span class="line">  <span class="comment">// long long s = 0;</span></span><br><span class="line">  <span class="type">long</span> <span class="type">long</span> s = <span class="number">-1</span>;  <span class="comment">// 初始化为一个无效的值</span></span><br><span class="line">  <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    <span class="comment">// ------------------- 错误 ------------------------- //</span></span><br><span class="line">    <span class="comment">// if (get(mid) == m) &#123;</span></span><br><span class="line">    <span class="comment">//   // 如果恰好找到一个mid使得get(mid)==m，并不一定就是正确的解</span></span><br><span class="line">    <span class="comment">//   // 因为题目要求的是最大的s，而不是等于m的s</span></span><br><span class="line">    <span class="comment">//   s = mid;</span></span><br><span class="line">    <span class="comment">//   break;</span></span><br><span class="line">    <span class="comment">// &#125; else if (get(mid) &gt; m) &#123;</span></span><br><span class="line">    <span class="comment">//   // 当前获得的木材长度太大，需要增大锯片长度</span></span><br><span class="line">    <span class="comment">//   left = mid + 1;</span></span><br><span class="line">    <span class="comment">// &#125; else &#123;</span></span><br><span class="line">    <span class="comment">//   // 当前获得的木材长度太大，需要减小锯片长度</span></span><br><span class="line">    <span class="comment">//   right = mid - 1;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">//   // 同时，没有处理找不到合适的解的情况</span></span><br><span class="line">    <span class="comment">// ------------------- 错误 ------------------------- //</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">get</span>(mid) &gt;= m) &#123;  <span class="comment">// 修正条件，使得可以找到最大的s</span></span><br><span class="line">      s = mid;</span><br><span class="line">      left = mid + <span class="number">1</span>;  <span class="comment">// 向右搜索，寻找更大的锯片高度，使得得到的木材总长度减小</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      right = mid - <span class="number">1</span>;  <span class="comment">// 向左搜索，寻找更小的锯片高度，使得得到的木材总长度增大</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="P1024-一元三次方程求解"><a href="#P1024-一元三次方程求解" class="headerlink" title="P1024 一元三次方程求解"></a>P1024 一元三次方程求解</h3><p>首先分析这道题：由于这道题的答案区间很大，因此可以考虑采用二分法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">l/r/m	x取值</span><br><span class="line">a[m]	f(x)的值</span><br><span class="line">target	方程的根</span><br></pre></td></tr></table></figure>
+
+<p>但本题的特殊之处在于，不能把<code>l</code>和<code>r</code>想当然地认为是<code>-100</code>和<code>100</code>。这是因为本题需要求解出<code>3个实根</code>。根据题中给出的提示：<strong>根与根之差的绝对值 ≥1</strong>，可以得知<strong>每个长度为<code>1</code>的区间内部至多有<code>1</code>个实根</strong>。明确这一点之后，就可以依次遍历每个长度为<code>1</code>的区间，进行二分查找了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">f</span><span class="params">(<span class="type">double</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a*x*x*x+b*x*x+c*x+d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">  <span class="type">double</span> l, r, m;</span><br><span class="line">  <span class="type">int</span> s = <span class="number">0</span>;  <span class="comment">// 记录找到的根个数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">-100</span>; i&lt;<span class="number">100</span>; ++i) &#123;</span><br><span class="line">    <span class="comment">// 由于题目说根与根之差的绝对值大于等于1，也即长度为1的区间内至多只存在1个根</span></span><br><span class="line">    <span class="comment">// 因此，所要做的就是在每个长度为1的区间内进行二分查找</span></span><br><span class="line">    l = i;</span><br><span class="line">    r = i+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">f</span>(l) == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// 说明此时左端点为根，输出</span></span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%.2lf &quot;</span>, l);</span><br><span class="line">      s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">f</span>(l) * <span class="built_in">f</span>(r) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// f(x1)*f(x2)&lt;0，说明该区间内存在根</span></span><br><span class="line">      <span class="keyword">while</span> (r-l&gt;=<span class="number">0.001</span>) &#123;  <span class="comment">// 二分控制精度</span></span><br><span class="line">        m = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">f</span>(m) * <span class="built_in">f</span>(r) &lt;=<span class="number">0</span>) &#123;</span><br><span class="line">          l = m;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          r = m;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%.2lf &quot;</span>, r);</span><br><span class="line">      s++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (s == <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>26</code>行不用<code>while(l &lt;= r)</code>是因为：</p>
+<p><code>while(r-l&gt;=0.001)</code> 这个条件是用来控制二分法的精度，它的含义是在区间的长度小于等于0.001时停止循环。这里的0.001是一个预先设定的精度值，表示当根的范围缩小到小于等于0.001时，认为已经找到了一个满足要求的根。</p>
+<p>使用 <code>while(r-l&gt;=0.001)</code> 的原因是为了控制二分法的迭代次数，从而提高程序的效率和准确性。当根的范围缩小到足够小的时候，再继续迭代寻找根就没有必要了，因为已经达到了所需的精度要求。</p>
+<p>而如果使用 <code>while(l&lt;=r)</code> 作为条件，则无法直接控制迭代的精度。在这种情况下，循环会一直进行，直到区间的长度小于等于0时才停止，这可能会导致不必要的迭代次数，影响程序的效率。因此，使用 <code>while(r-l&gt;=0.001)</code> 能够更好地控制迭代的精度，从而提高程序的性能。</p>
+<h1 id="2-搜索算法"><a href="#2-搜索算法" class="headerlink" title="2 搜索算法"></a>2 搜索算法</h1><h2 id="2-1-深度搜索DFS"><a href="#2-1-深度搜索DFS" class="headerlink" title="2.1 深度搜索DFS"></a>2.1 深度搜索DFS</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 判断是否满足终止搜索条件</span></span><br><span class="line">  <span class="keyword">if</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 进行相应操作</span></span><br><span class="line">    <span class="keyword">return</span>;  <span class="comment">// 回溯</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 遍历所有可能的情况</span></span><br><span class="line">  <span class="keyword">for</span> (...) &#123;</span><br><span class="line">    <span class="comment">// 标记当前状态，或执行当前操作</span></span><br><span class="line">    <span class="built_in">dfs</span>(...);  <span class="comment">// dfs搜索</span></span><br><span class="line">    <span class="comment">// 回溯状态</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="P1605-迷宫"><a href="#P1605-迷宫" class="headerlink" title="P1605 迷宫"></a>P1605 迷宫</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251029500.png" alt="image-20240325102955228"></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>DataStruct</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cmu15-445 Course Related (Spring 2023)</title>
+    <url>/2024/03/02/Project/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>PPT</th>
+<th>Project</th>
+<th>Date</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1-5</td>
+<td>P0 &amp; P1</td>
+<td>2.26-3.24</td>
+</tr>
+<tr>
+<td>6-9</td>
+<td>P2</td>
+<td>3.24-</td>
+</tr>
+<tr>
+<td>10-14</td>
+<td>P3</td>
+<td></td>
+</tr>
+<tr>
+<td>15-21</td>
+<td>P4</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><code>DBMS</code>的磁盘管理模块主要解决两个问题：</p>
+<ul>
+<li>如何使用磁盘文件来表示数据库的数据（元数据、索引、数据表等）；</li>
+<li>（<code>Buffer Pool</code>）如何管理数据在内存与磁盘之间的移动<ul>
+<li>空间控制（<code>Spatio Control</code>）：决定将<code>pages</code>写入磁盘的哪个位置，使得尝尝一起使用的<code>pages</code>能离得更近，提高<code>I/O</code>效率；</li>
+<li>时间控制（<code>Temporal Control</code>）：决定何时将<code>pages</code>读入内存，写回磁盘，使得读写的次数最小，从而提高<code>I/O</code>效率。</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<p>整体图片：</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUJRryGLyHUdcOnhD0%2FScreen%20Shot%202019-02-24%20at%207.43.51%20PM.jpg?alt=media&token=5ca91d06-1e09-43be-afd2-5a52918ad9c9" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242055708.png" alt="image-20240324205507545"></p>
+<h1 id="1-Buffer-Pool"><a href="#1-Buffer-Pool" class="headerlink" title="1 Buffer Pool"></a>1 Buffer Pool</h1><h2 id="1-1-Buffer-Pool-Manager"><a href="#1-1-Buffer-Pool-Manager" class="headerlink" title="1.1 Buffer Pool Manager"></a>1.1 Buffer Pool Manager</h2><p><code>DBMS</code>启动时，从<code>OS</code>申请一片<strong>内存区域</strong>，即<code>Buffer Pool</code>，并把这块区域划分成大小相同的<code>pages</code>，通常称为 <code>frames</code>，当<code>DBMS</code>请求一个<code>disk page</code>时，它首先需要被复制到<code>Buffer Pool</code>的一个<code>frame</code>中。</p>
+<p><code>Page Table</code>中存储的<code>meta-data</code>包括：</p>
+<ul>
+<li><p><code>page_table</code>：内存中的哈希表，跟踪当前在内存中的页面；</p>
+</li>
+<li><p><code>dirty flag</code>：当线程修改页面时设置（需要回写）；</p>
+</li>
+<li><p><code>pin count</code>：在有线程<strong>读页面</strong>时加<code>1</code>。</p>
+</li>
+</ul>
+<p>当有线程需要**写<code>Page Table</code>**时，需要加一个<code>latch</code>。</p>
+<p><img src="https://2836672763-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-LMjQD5UezC9P8miypMG%2F-LZUa28zEosfmp4uFA77%2F-LZUP5rlT7qWNo8qYSuD%2FScreen%20Shot%202019-02-24%20at%208.08.44%20PM.jpg?alt=media&token=f492f425-12b9-47bc-af9a-b4e2430e12bf" alt="img"></p>
+<h3 id="locks和latches"><a href="#locks和latches" class="headerlink" title="locks和latches"></a>locks和latches</h3><p><code>Locks</code>（逻辑上的）</p>
+<ul>
+<li>保护<strong>数据库逻辑内容</strong>免受其他事务的影响</li>
+<li>持有直到事务结束</li>
+<li><strong>需要支持回滚</strong>（回滚即回到之前的版本状态）</li>
+<li>保护元组（行），表，索引</li>
+</ul>
+<p><code>Latches/Mutex</code>（偏底层的）</p>
+<ul>
+<li>保护**<code>DBMS</code>内部数据结构**的关键部分不受其他线程的影响</li>
+<li>持有直到一个操作结束</li>
+<li><strong>不需要支持回滚</strong></li>
+</ul>
+<h3 id="scan-sharing"><a href="#scan-sharing" class="headerlink" title="scan sharing"></a>scan sharing</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403021705443.png" alt="image-20240302170551246" style="zoom:33%;" />
+
+<p>图中的查询语句可能会导致<code>Q2</code>得不到自己真实想要的结果，需要加上<code>ORDER BY</code>限制才行。</p>
+<p>假如有<code>Page0-Page199</code>，<code>scan sharing</code>可能导致：</p>
+<ul>
+<li><code>Q1</code>-&gt;<code>Page0-Page99</code></li>
+<li><code>Q2</code>-&gt;<code>Page40-Page139</code></li>
+</ul>
+<h3 id="buffer-pool-bypass"><a href="#buffer-pool-bypass" class="headerlink" title="buffer pool bypass"></a>buffer pool bypass</h3><p>只需要调用一次的<code>page</code>，用完后直接丢弃，则可以不放入<code>buffer pool</code>。</p>
+<h2 id="1-2-Buffer-Replacement-Policies"><a href="#1-2-Buffer-Replacement-Policies" class="headerlink" title="1.2 Buffer Replacement Policies"></a>1.2 Buffer Replacement Policies</h2><p>当<code>Buffer Pool</code>空间不足时，选择移除其中的哪些<code>pages</code>的问题。</p>
+<h3 id="Least-Recently-Used-LRU"><a href="#Least-Recently-Used-LRU" class="headerlink" title="Least-Recently Used(LRU)"></a>Least-Recently Used(LRU)</h3><p><code>LRU</code>维护每个<code>page</code>上一次被访问的时间戳，每次移除时间戳最早的<code>page</code>。</p>
+<h3 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h3><p><code>LRU</code>的近似实现。快速的<code>LRU</code>实现。</p>
+<blockquote>
+<p>但<code>LRU</code>和<code>Clock</code>容易被<code>sequential flooding</code>现象影响，从而导致最近被访问的<code>page</code>实际上却是最不可能需要的<code>page</code>。<strong>比如在全表扫描时，刚被访问的<code>page</code>实际上再访问完成后就不再需要了，因此反而成为了最不需要的<code>page</code>。</strong></p>
+<p>为了解决这个问题，提出了<code>LRU-K</code>策略。</p>
+</blockquote>
+<h3 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h3><p><code>LRU-K</code>保存每个<code>page</code>的最后<code>K</code>次访问时间戳，利用这些时间戳来估计它们下次被访问的时间，通常<code>K</code>取<code>1</code>就能获得很好的效果。</p>
+<p><strong>时间局部性原理：程序最近访问的地址在不久的将来很可能再次被访问。</strong></p>
+<p><code>K</code>指的是最后第<code>K</code>次访问的距离，也就是倒数第<code>K</code>次访问时和最近一次访问的时间差。<code>LRU-K</code>算法主要是对比最后第<code>K</code>次的访问距离，访问距离越大则代表每次的访问间隔越长，因此更容易被替换出<code>cahce</code>。</p>
+<ul>
+<li><code>Correlated References Period</code>：指的是块首次访问后的一段时间。在这段时间以内的多次访问不会被记录，只有这段时间过后再次访问才会被记录。</li>
+<li><code>Reference Retained Information Period</code>：指的是块被替换出<code>cache</code>后的一段时间。为了避免块被替换出<code>cache</code>后短时间内被反复重新访问、替换，因此对于替换出<code>cache</code>后的块会继续保留访问信息一段时间。</li>
+</ul>
+<h3 id="Dirty-Page"><a href="#Dirty-Page" class="headerlink" title="Dirty Page"></a>Dirty Page</h3><p><code>Dirty</code>：内存中的<code>page</code>和磁盘中的<code>page</code>有差别。</p>
+<ul>
+<li><p><code>FAST</code>：如果缓冲池中的页面不脏，那么<code>DBMS</code>可以简单地“删除”它；</p>
+</li>
+<li><p><code>SLOW</code>：如果页面是脏的，则<code>DBMS</code>必须写回磁盘以确保其更改是持久的。</p>
+</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/f242bc1e95ff">MySQL的WAL（Write-Ahead Logging）机制</a></p>
+<h2 id="1-3-Other-Memory-Pools"><a href="#1-3-Other-Memory-Pools" class="headerlink" title="1.3 Other Memory Pools"></a>1.3 Other Memory Pools</h2><p>除了存储<code>tuples</code>和<code>indexes</code>，<code>DBMS</code>还需要<code>Memory Pools</code>来存储其它数据：</p>
+<ul>
+<li><code>Sorting + Join Buffers</code></li>
+<li><code>Query Caches</code></li>
+<li><code>Maintenance Buffers</code></li>
+<li><code>Log Buffers</code></li>
+<li><code>Dictionary Caches</code></li>
+</ul>
+<h1 id="2-B-Tree-Index"><a href="#2-B-Tree-Index" class="headerlink" title="2 B+Tree Index"></a>2 B+Tree Index</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271651204.png" alt="image-20240327165111130"></p>
+<h2 id="2-1-Hash-Tables"><a href="#2-1-Hash-Tables" class="headerlink" title="2.1 Hash Tables"></a>2.1 Hash Tables</h2><h3 id="2-1-1-Hash-Functions"><a href="#2-1-1-Hash-Functions" class="headerlink" title="2.1.1 Hash Functions"></a>2.1.1 Hash Functions</h3><p>由于<code>DBMS</code>内使用的<code>Hash Function</code>并不会暴露在外，因此<strong>没必要使用加密（<code>cryptographic</code>）哈希函数</strong>，我们希望它速度越快，<code>collision rate</code>越低越好。</p>
+<p>目前各 DBMS 主要在用的 Hash Functions 包括：</p>
+<ul>
+<li><a href="https://github.com/aappleby/smhasher">MurmurHash (2008)</a></li>
+<li><a href="https://github.com/google/cityhash">Google CityHash (2011)</a></li>
+<li><a href="https://github.com/google/farmhash">Google FarmHash (2014)</a></li>
+<li><a href="https://github.com/lemire/clhash">CLHash (2016)</a></li>
+</ul>
+<h4 id="SHA256算法"><a href="#SHA256算法" class="headerlink" title="SHA256算法"></a>SHA256算法</h4><h3 id="2-1-2-Static-Hashing-Scheme"><a href="#2-1-2-Static-Hashing-Scheme" class="headerlink" title="2.1.2 Static Hashing Scheme"></a>2.1.2 Static Hashing Scheme</h3><p>（1）Linear Probe Hashing 开放地址哈希</p>
+<p>“开放”的意思就是说：对于所有的key来说地址是开放的。碰撞时则往下一个地址存。</p>
+<p>在删除时可能会因为前项被删除导致的空白，造成找不到当前项，这时有两个解决思路：</p>
+<ul>
+<li>Tombstone；</li>
+<li>Movement</li>
+</ul>
+<p>重复key出现时的解决思路：</p>
+<ul>
+<li>Separate Linked List，把当前key作为指针指向一个新的区域：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120365.png" alt="image-20240324212003301"></p>
+<ul>
+<li>Redundant Keys，把key和value拼在一起作为新的key：</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242120828.png" alt="image-20240324212049757"></p>
+<p>（2）Robin Hood Hashing，是开放地址哈希的变种，其基本思想是“劫富济贫”。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123712.png" alt="image-20240324212329536"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242123232.png" alt="image-20240324212342001"></p>
+<p>简单来说就是，当E和A碰撞时，正常E偏移3位，但为了不让自己比D“惨”太多，它就把D推到后面去，自己占了D的位置。此时D和E均为2。</p>
+<p>（3）Cuckoo Hashing</p>
+<blockquote>
+<p>静态的哈希结构的问题在于需要DBMS能够预判所存数据的总量，否则每次数量超过范围时都需要重建 Hash Table。这显然是很困难的。</p>
+</blockquote>
+<h3 id="2-1-3-Dynamic-Hash-Tables"><a href="#2-1-3-Dynamic-Hash-Tables" class="headerlink" title="2.1.3 Dynamic Hash Tables"></a>2.1.3 Dynamic Hash Tables</h3><p>（1）Chained Hashing（※）</p>
+<p>每个 key 对应一个链表，每个节点是一个 bucket，装满了就再往后挂一个 bucket。需要写操作时，需要请求 latch。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242129786.png" alt="image-20240324212955629"></p>
+<ul>
+<li>好处：简单；</li>
+<li>坏处：最坏的情况下Hash Table可能降级为链表，操作的时间复杂度降格为 O(n)。</li>
+</ul>
+<p>（2）Extendible Hashing</p>
+<p>Extendible Hashing 的基本思路是一边扩容，一边 rehash。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134200.png" alt="image-20240324213443953"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134195.png" alt="image-20240324213451869"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242134845.png" alt="image-20240324213459513"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135620.png" alt="image-20240324213509210"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242135275.png" alt="image-20240324213516681"></p>
+<p>（3）Linear Hashing</p>
+<p>基本思想：维护一个指针，指向下一个将被拆分的 bucket，每当任意一个 bucket 溢出（标准自定，如利用率到达阈值等）时，将指针指向的 bucket 拆分。</p>
+<h3 id="2-1-4-总结"><a href="#2-1-4-总结" class="headerlink" title="2.1.4 总结"></a>2.1.4 总结</h3><p>Hash Tables 提供 O(1)O(1) 的访问效率，因此它被大量地应用于 DBMS 的内部实现中。即便如此，它并不适合作为 table index 的数据结构，而 table index 的首选就是下节将介绍的 B+ Tree。</p>
+<p><strong>哈希表对于范围索引是效率极低的。</strong></p>
+<h2 id="2-2-Tree-Indexes（B-索引）"><a href="#2-2-Tree-Indexes（B-索引）" class="headerlink" title="2.2 Tree Indexes（B+索引）"></a>2.2 Tree Indexes（B+索引）</h2><blockquote>
+<p>table index 为提供 DBMS 数据查询的快速索引，它本身存储着某表某列排序后的数据，并包含指向相应 tuple 的指针。DBMS 需要保证表信息与索引信息在逻辑上保持同步。用户可以在 DBMS 中为任意表建立多个索引，DBMS 负责选择最优的索引提升查询效率。但索引自身需要占用存储空间，因此在索引数量与索引存储、维护成本之间存在权衡。</p>
+</blockquote>
+<p>索引本质上就是一种小表，是把大表中的某些列抽取出来。</p>
+<h3 id="2-2-1-B-Tree"><a href="#2-2-1-B-Tree" class="headerlink" title="2.2.1 B+ Tree"></a>2.2.1 B+ Tree</h3><p>B+ Tree 是一种自平衡树，它将数据有序地存储，且在 search、sequential access、insertions 以及 deletions 操作的复杂度上都满足 O(logn)，其中 sequential access 的最终复杂度还与所需数据总量有关。</p>
+<blockquote>
+<p>这里的O(logn)的意义在于，随着数据的增长，操作的复杂度增长是要慢于数据的增长速度的。比如数据增长到原来的2倍，但搜索时间不会变成原来的2倍。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242151303.png" alt="image-20240324215134042"></p>
+<h4 id="B-Tree-Nodes"><a href="#B-Tree-Nodes" class="headerlink" title="B+ Tree Nodes"></a>B+ Tree Nodes</h4><p>B+ Tree 中的每个 node 都包含一列按 key 排好序的 key&#x2F;value pairs，key 就是 table index 对应的 column，value 的取值与 node 类型相关，在 inner nodes 和 leaf nodes 中存的内容不同。</p>
+<p>values主要有两种存法：</p>
+<ul>
+<li>Record IDs，存储指向最终 tuple 的指针。</li>
+<li>Tuple Data，直接将 tuple data 存在 leaf node 中。key为ID，v为整个行数据。如主键索引，其key为主键，value即为这张表的全部内容。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403242154259.png" alt="image-20240324215455186"></p>
+<h4 id="B-Tree-Operations"><a href="#B-Tree-Operations" class="headerlink" title="B+ Tree Operations"></a>B+ Tree Operations</h4><p><em>Insert</em></p>
+<ol>
+<li>找到对应的 leaf node，L</li>
+<li>将 key&#x2F;value pair 按顺序插入到 L 中</li>
+<li>如果 L 还有足够的空间，操作结束；如果空间不足，则需要将 L 分裂成两个节点，同时在 parent node 上新增 entry，若 parent node 也空间不足，则递归地分裂，直到 root node 为止。</li>
+</ol>
+<p><em>Delete</em></p>
+<ol>
+<li>从 root 开始，找到目标 entry 所处的 leaf node, L</li>
+<li>删除该 entry</li>
+<li>如果 L 仍然至少处于半满状态，则操作结束；否则先尝试从 siblings 那里拆借 entries，如果失败，则将 L 与相应的 sibling 合并</li>
+<li>如果合并发生了，则可能需要递归地删除 parent node 中的 entry</li>
+</ol>
+<h4 id="Clustered-Indexes-聚簇索引"><a href="#Clustered-Indexes-聚簇索引" class="headerlink" title="Clustered Indexes 聚簇索引"></a>Clustered Indexes 聚簇索引</h4><h3 id="2-2-2-B-Tree-Design-Choices"><a href="#2-2-2-B-Tree-Design-Choices" class="headerlink" title="2.2.2 B+ Tree Design Choices"></a>2.2.2 B+ Tree Design Choices</h3><h4 id="Node-Size"><a href="#Node-Size" class="headerlink" title="Node Size"></a>Node Size</h4><p>通常来说，disk 的数据读取速度越慢，node size 就越大：</p>
+<table>
+<thead>
+<tr>
+<th>Disk Type</th>
+<th>Node Size</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HDD</td>
+<td>~1MB</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>~10KB</td>
+</tr>
+<tr>
+<td>In-Memory</td>
+<td>~512B</td>
+</tr>
+</tbody></table>
+<p>具体情境下的最优大小由 workload 决定。</p>
+<h4 id="Merge-Threshold"><a href="#Merge-Threshold" class="headerlink" title="Merge Threshold"></a>Merge Threshold</h4><p>由于 merge 操作引起的修改较大，有些 DBMS 选择延迟 merge 操作的发生时间，甚至可以利用其它进程来负责周期性地重建 table index。</p>
+<h4 id="Variable-Length-Keys"><a href="#Variable-Length-Keys" class="headerlink" title="Variable Length Keys"></a>Variable Length Keys</h4><p>B+ Tree 中存储的 key 经常是变长的，通常有三种手段来应对：</p>
+<ul>
+<li>Pointers：存储指向 key 的指针；</li>
+<li>Variable Length Nodes：需要精细的内存管理操作，不推荐；</li>
+<li>Padding：给每个变长的key都强制转成一致的长度；</li>
+<li>key Map：内嵌一个指针数组，指向 node 中的 key&#x2F;val list</li>
+</ul>
+<h4 id="Non-unique-Indexes-变长字段"><a href="#Non-unique-Indexes-变长字段" class="headerlink" title="Non-unique Indexes 变长字段"></a>Non-unique Indexes 变长字段</h4><p>索引针对的 key 可能是非唯一的，通常有两种手段来应对：</p>
+<ul>
+<li><p>Duplicate Keys：存储多次相同的 key；</p>
+</li>
+<li><p>Value Lists：每个 key 只出现一次，但同时维护另一个链表，存储 key 对应的多个 values，类似 chained hashing</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235897.png" alt="image-20240325123534595"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251235251.png" alt="image-20240325123553069"></p>
+<h4 id="Intra-node-Search-结点的内部搜素"><a href="#Intra-node-Search-结点的内部搜素" class="headerlink" title="Intra-node Search 结点的内部搜素"></a>Intra-node Search 结点的内部搜素</h4><p>在节点内部搜索，就是在排好序的序列中检索元素，手段通常有：</p>
+<ul>
+<li>Linear Scan，这种线性扫描虽然似乎很费时，但相比把page从磁盘读到内存的时间来看几乎已经不算什么了；</li>
+<li>Binary Search，用二分来优化线性搜索；</li>
+<li>Interpolation：通过 keys 的分布统计信息来估计大概位置进行检索</li>
+</ul>
+<h3 id="2-2-3-Optimizations"><a href="#2-2-3-Optimizations" class="headerlink" title="2.2.3 Optimizations"></a>2.2.3 Optimizations</h3><h4 id="Prefix-Compression"><a href="#Prefix-Compression" class="headerlink" title="Prefix Compression"></a>Prefix Compression</h4><p>同一个 leaf node 中的 keys 通常有相同的 prefix，如下图所示。为了节省空间，可以只存所有 keys 的不同的 suffix。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251240293.png" alt="image-20240325124020194"></p>
+<h4 id="Suffix-Truncation"><a href="#Suffix-Truncation" class="headerlink" title="Suffix Truncation"></a>Suffix Truncation</h4><p>由于 inner nodes 只用于引导搜索，因此没有必要在 inner nodes 中储存完整的 key，我们可以<strong>只存储足够的 prefix 即可</strong>，如下图所示。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241456.png" alt="image-20240325124132291"></p>
+<h4 id="Bulk-Insert"><a href="#Bulk-Insert" class="headerlink" title="Bulk Insert"></a>Bulk Insert</h4><p>建 B+ Tree 的最快方式是先将 keys 排好序后，再从下往上建树，如下图所示。因此如果有<strong>大量插入操作</strong>，可以利用这种方式提高效率。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251241413.png" alt="image-20240325124150282"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251242426.png" alt="image-20240325124207283"></p>
+<h4 id="Pointer-Swizzling"><a href="#Pointer-Swizzling" class="headerlink" title="Pointer Swizzling"></a>Pointer Swizzling</h4><p>Nodes 使用 page id 来存储其它 nodes 的引用，DBMS 每次需要首先从 page table 中获取对应的内存地址，然后才能获取相应的 nodes 本身，如果 page 已经在 buffer pool 中，我们可以直接存储其它 page 在 buffer pool 中的内存地址作为引用，从而提高访问效率。</p>
+<h2 id="2-3-Index-Concurrency-Control"><a href="#2-3-Index-Concurrency-Control" class="headerlink" title="2.3 Index Concurrency Control"></a>2.3 Index Concurrency Control</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251246471.png" alt="image-20240325124646316"></p>
+<h3 id="2-3-1-Latch-Modes"><a href="#2-3-1-Latch-Modes" class="headerlink" title="2.3.1 Latch Modes"></a>2.3.1 Latch Modes</h3><h4 id="Read-Mode"><a href="#Read-Mode" class="headerlink" title="Read Mode"></a>Read Mode</h4><ul>
+<li>多个线程可以同时读取相同的数据</li>
+<li>针对相同的数据，当别的线程已经获得处于 read mode 的 latch，新的线程也可以继续获取 read mode 的 latch</li>
+</ul>
+<h4 id="Write-Mode"><a href="#Write-Mode" class="headerlink" title="Write Mode"></a>Write Mode</h4><ul>
+<li>同一时间只有单个线程可以访问</li>
+<li>针对相同的数据，如果获取前已经有别的线程获得任何 mode 的 latch，新的线程就无法获取 write mode  的 latch</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251249774.png" alt="image-20240325124932586"></p>
+<p><strong>锁的实现：</strong></p>
+<ul>
+<li><p>Blocking OS Mutex：如std::mutex，好处是竞争的线程会陷入sleep，但坏处是需要OS去进行唤醒，极度浪费资源；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251251222.png" alt="image-20240325125111105"></p>
+</li>
+<li><p>Test-ans-Set Spin Latch(TAS)：自旋锁，如std::atomic<T>，不需要OS操作，自己在死循环内不断旋转，直到可以获取到该锁；</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251253634.png" alt="image-20240325125323436"></p>
+</li>
+<li><p>Reader-Writer Latches：自旋锁的基础上实现。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403251255541.png" alt="image-20240325125549330"></p>
+<p>这里注意：若有线程需要加写锁，那么此时如果再有线程希望加读锁也会被阻塞。只有等之前的读锁都释放，写锁成功加上后，后续的读锁才能正常上锁。（这样做是为了避免写锁被无止境地锁住）</p>
+</li>
+</ul>
+<h4 id="hash-table-latching"><a href="#hash-table-latching" class="headerlink" title="hash table latching"></a><strong>hash table latching</strong></h4><p>相较于B+ Tree，Hash Table不容易遇到死锁，尤其是开放地址哈希，因为大家都是朝着一个方向去进行的。一般在扩容（resize）操作时，加一个全局的写锁，因为此时哈希表内部的数据需要进行一个整理。</p>
+<ul>
+<li>page latches：块与块之间的锁独立。线程会给所有块加分段锁。例如下图，块1的写锁和块2的读锁独立。这样的优势是：1）锁的粒度不会太细；2）支持一定的并发操作。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271610143.png" alt="image-20240327161025853"></p>
+<ul>
+<li><p>slot latches：以槽为单位进行加锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271611923.png" alt="image-20240327161157762"></p>
+</li>
+<li><p>compare-and-swap，CAS，使得hash table实现无锁插入。例如下图：让os先0判断是否为20，若是再加到30，属于原子操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271629958.png" alt="image-20240327162902774"></p>
+</li>
+</ul>
+<h3 id="2-3-2-Index-Crabbing-Coupling"><a href="#2-3-2-Index-Crabbing-Coupling" class="headerlink" title="2.3.2 Index Crabbing&#x2F;Coupling"></a>2.3.2 Index Crabbing&#x2F;Coupling</h3><p>B+Tree考虑两方面的并发问题：</p>
+<ul>
+<li>1）结点内部的数据，即多个线程同时修改一个node；</li>
+<li>2）结点间的合并和分裂操作，即一个线程正在遍历 B+ Tree 的同时，另一个线程正在 splits&#x2F;merges nodes。</li>
+</ul>
+<p><strong>Latch Crabbing 的基本思想如下：</strong></p>
+<ul>
+<li>获取 parent 的 latch</li>
+<li>获取 child 的 latch</li>
+<li>如果<strong>安全</strong>，可以释放 parent 的 latch</li>
+</ul>
+<p><strong>这里的“安全”指的是，当发生更新操作时，该节点不会发生 split 或 merge 的操作，即：</strong></p>
+<ul>
+<li>在插入元素时，节点未满</li>
+<li>在删除元素时，节点超过半满</li>
+</ul>
+<p>按照上述方法，无论对叶子结点执行何种操作，第一步都是先锁住根节点，这是一种“悲观”的做法。“乐观”的做法是：一路加读锁，最后加写锁。当然也有可能出现到了最后一步，发现会改动前面的parent，因此需要放弃当前的操作，重新从root开始加写锁。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271638410.png" alt="image-20240327163836210"></p>
+<h3 id="2-3-3-Leaf-Scans"><a href="#2-3-3-Leaf-Scans" class="headerlink" title="2.3.3 Leaf Scans"></a>2.3.3 Leaf Scans</h3><p>之前的分析中我们仅仅关注了从上到下的访问模式，而没有考虑到左右方向的访问模式，在 range query 中，常常需要横向访问相邻的 nodes。</p>
+<p>当遇到横向扫描无法获取下一个节点的 latch 时，该线程将释放 latch 后自杀。这种策略逻辑简单，尽管有理论上的优化空间，但在实践中是常见的避免死锁的方式。</p>
+<h3 id="2-3-4-Delayed-Parent-Updates"><a href="#2-3-4-Delayed-Parent-Updates" class="headerlink" title="2.3.4 Delayed Parent Updates"></a>2.3.4 Delayed Parent Updates</h3><p>从上文中，我们可以观察到：每当 leaf node 溢出时，我们都需要更新至少 3 个节点：</p>
+<ul>
+<li>即将被拆分的 leaf node</li>
+<li>新的 leaf node</li>
+<li>parent node</li>
+</ul>
+<p>修改的成本较高，因此 B-link Tree 提出了一种优化策略：<strong>每当 leaf node 溢出时，只是标记一下而暂时不更新 parent node，等下一次有别的线程获取 parnet node 的 write latch 时，一并修改。</strong></p>
+<h2 id="2-4-Sorting-and-Aggregations"><a href="#2-4-Sorting-and-Aggregations" class="headerlink" title="2.4 Sorting and Aggregations"></a>2.4 Sorting and Aggregations</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271648356.png" alt="image-20240327164819130"></p>
+<p>一个disk-oriented DBMS不能假定query results和内存大小完全适配。有可能筛选出来的query results也需要存到磁盘中，和buffer pool互相配合来实现操作。需要最大化利用sequential I&#x2F;O。</p>
+<p><strong>为什么需要排序：关系型数据库是unsorted的。</strong></p>
+<h3 id="2-4-1-Sorting-Algorithm"><a href="#2-4-1-Sorting-Algorithm" class="headerlink" title="2.4.1 Sorting Algorithm"></a>2.4.1 Sorting Algorithm</h3><ul>
+<li>early materialization：排序时value直接存储当前key那一行的剩余数据；</li>
+<li>later materialization：排序时value存储ID值。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271703469.png" alt="image-20240327170300327"></p>
+<h4 id="External-Merge-Sort"><a href="#External-Merge-Sort" class="headerlink" title="External Merge Sort"></a>External Merge Sort</h4><p>外部排序通常有两个步骤：</p>
+<p>1、Sorting Phase：将数据分成多个 chunks，每个 chunk 可以完全读入到 memory 中，在 memory 中排好序后再写回到 disk 中</p>
+<p>2、Merge Phase：将多个子文件合并成一个大文件</p>
+<ul>
+<li><p>2-Way External Merge Sort：这里的“2-way”即是指每次读入两页。</p>
+</li>
+<li><p>General External Merge Sort：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271947535.png" alt="image-20240327194734264"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271949041.png" alt="image-20240327194933847"></p>
+</li>
+</ul>
+<h4 id="Using-B-Tree-for-Sorting"><a href="#Using-B-Tree-for-Sorting" class="headerlink" title="Using B+Tree for Sorting"></a>Using B+Tree for Sorting</h4><p>注意包含聚簇和非聚簇两种情况。</p>
+<h3 id="2-4-2-Aggregations"><a href="#2-4-2-Aggregations" class="headerlink" title="2.4.2 Aggregations"></a>2.4.2 Aggregations</h3><h4 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403271953093.png" alt="image-20240327195346706"></p>
+<p>但很多时候我们并不需要排好序的数据，如：</p>
+<ul>
+<li>Forming groups in GROUP BY</li>
+<li>Removing duplicates in DISTINCT</li>
+</ul>
+<p>在这样的场景下 hashing 是更好的选择，它能有效减少排序所需的额外工作。</p>
+<h4 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h4><p>利用一个临时 (ephemeral) 的 hash table 来记录必要的信息，即检查 hash table 中是否存在已经记录过的元素并作出相应操作：</p>
+<ul>
+<li>DISTINCT: Discard duplicate</li>
+<li>GROUP BY: Perform aggregate computation</li>
+</ul>
+<p>如果所有信息都能一次性读入内存，那事情就很简单了，但如若不然，我们就得变得更聪明。</p>
+<p>hashing aggregation 同样分成两步：</p>
+<ul>
+<li>Partition Phase: 将 tuples 根据 hash key 放入不同的 buckets<ul>
+<li>use a hash function h1 to split tuples into partitions on disk<ul>
+<li>all matches live in the same partition</li>
+<li>partitions are “spilled” to disk via output buffers</li>
+</ul>
+</li>
+<li>这里有个额外的假设，即每个 partition 能够被放到 memory 中</li>
+</ul>
+</li>
+<li>ReHash Phase: 在内存中针对每个 partition 利用 hash table 计算 aggregation 的结果</li>
+</ul>
+<p>如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000471.png" alt="image-20240327200043163"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272000726.png" alt="image-20240327200052468"></p>
+<p>在 ReHash phase 中，存着 (GroupKey→RunningVal)(GroupKey→RunningVal) 的键值对，当我们需要向 hash table 中插入新的 tuple 时：</p>
+<ul>
+<li>如果我们发现相应的 GroupKey 已经在内存中，只需要更新 RunningVal 就可以</li>
+<li>反之，则插入新的 GroupKey 到 RunningVal 的键值对</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202403272001082.png" alt="image-20240327200117774"></p>
+]]></content>
+      <categories>
+        <category>Project</category>
+        <category>cmu15-445</category>
       </categories>
   </entry>
   <entry>
