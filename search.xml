@@ -45,72 +45,6 @@
       </categories>
   </entry>
   <entry>
-    <title>vscode相关</title>
-    <url>/2023/08/01/Computer/vscode%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
-
-<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
-<p>2）复制<code>id_rsa.pub</code>中的内容</p>
-<span id="more"></span>
-
-<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-
-<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
-<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
-<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
-<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
-<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
-<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
-<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
-</li>
-<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
-</li>
-<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
-</li>
-</ul>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，</p>
-<ul>
-<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
-<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
-</ul>
-<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
-<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
-</li>
-<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
-<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
-<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
-<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
-<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
-<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
-</blockquote>
-<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
-<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
-<ol>
-<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
-<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
-</ol>
-<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
-<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
-<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Linux基础相关</title>
     <url>/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/</url>
     <content><![CDATA[<h2 id="1、GCC安装"><a href="#1、GCC安装" class="headerlink" title="1、GCC安装"></a>1、GCC安装</h2><h3 id="（1）GCC相关知识点"><a href="#（1）GCC相关知识点" class="headerlink" title="（1）GCC相关知识点"></a>（1）GCC相关知识点</h3><p>GCC（GNU Compiler Collection， GNU编译器套件）是由GNU开发的编程语言译器。</p>
@@ -608,6 +542,139 @@ mode_t
       </categories>
   </entry>
   <entry>
+    <title>vscode相关</title>
+    <url>/2023/08/01/Computer/vscode%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h1 id="1、-vscode连接阿里云如何免密？"><a href="#1、-vscode连接阿里云如何免密？" class="headerlink" title="1、 vscode连接阿里云如何免密？"></a>1、 vscode连接阿里云如何免密？</h1><h2 id="windows端："><a href="#windows端：" class="headerlink" title="windows端："></a><code>windows</code>端：</h2><p>1）在<code>cmd</code>中输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096</span><br></pre></td></tr></table></figure>
+
+<p>在<code>c:\Users\用户名\\.ssh</code>下会生成私钥和公钥。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308021257775.png" alt="image-20230802125702563"></p>
+<p>2）复制<code>id_rsa.pub</code>中的内容</p>
+<span id="more"></span>
+
+<h2 id="linux端："><a href="#linux端：" class="headerlink" title="linux端："></a><code>linux</code>端：</h2><p>1）输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成<code>linux</code>端的密钥，进入<code>/root/.ssh/id_rsa</code>路径下。</p>
+<p>2）创建一个文件，名字叫<code>authorized_keys</code></p>
+<p>3）把复制的<code>windows</code>公钥粘贴到<code>authorized_keys</code>中，保存退出</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202308012055885.png" alt="Snipaste_2023-08-01_20-46-53"></p>
+<h1 id="2、Linux环境使用VSCode调试简单C-代码"><a href="#2、Linux环境使用VSCode调试简单C-代码" class="headerlink" title="2、Linux环境使用VSCode调试简单C++代码"></a>2、Linux环境使用VSCode调试简单C++代码</h1><p>参考教程：<a href="https://blog.csdn.net/hypc9709/article/details/129413482?ops_request_misc=&request_id=&biz_id=102&utm_term=vscode%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-3-129413482.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">Linux环境使用VSCode调试简单C++代码</a></p>
+<h2 id="1）终端命令行进行编译、调试"><a href="#1）终端命令行进行编译、调试" class="headerlink" title="1）终端命令行进行编译、调试"></a>1）终端命令行进行编译、调试</h2><h2 id="2）通过VSCode进行编译、调试"><a href="#2）通过VSCode进行编译、调试" class="headerlink" title="2）通过VSCode进行编译、调试"></a>2）通过VSCode进行编译、调试</h2><h3 id="（1）前置条件"><a href="#（1）前置条件" class="headerlink" title="（1）前置条件"></a>（1）前置条件</h3><p>插件<code>C/C++</code>已安装；<code>g++编译器</code>和<code>gdb调试器</code>已安装。</p>
+<h3 id="（2）配置tasks-json"><a href="#（2）配置tasks-json" class="headerlink" title="（2）配置tasks.json"></a>（2）配置<code>tasks.json</code></h3><ul>
+<li><p>在<code>VSCode</code>的主菜单中，选择<code>Terminal&gt;Configure Default Build Task</code></p>
+</li>
+<li><p>出现一个下拉菜单，显示<code>C++</code>编译器的各种预定义编译任务。选择<code>C/C++: g++ build active file</code>（如果配置了中文，会显示<code>C/C++: g++ 生成活动文件</code>）</p>
+</li>
+<li><p>选择后，<code>VSCode</code>会自动生成一个<code>.vscode</code>文件夹和<code>tasks.json</code>文件，如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071610116.png" alt="image-20231207144919415"></p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++ 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/g++&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;$gcc&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;调试器生成的任务。&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tasks.json</code>的作用是告诉<code>VSCode</code>如何编译程序，因此从其中的<code>Command</code>和<code>args</code>可以看出，实际上是执行了以下命令：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++ -g $&#123;file&#125; -o $&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，</p>
+<ul>
+<li><code>$&#123;file&#125;</code>：当前活动文件是<code>VSCode</code>当前查看的文件，如<code>Main.cpp</code>；</li>
+<li><code>$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;</code>：用于获取当前文件的目录和不包含扩展名的文件名，如<code>Main</code>。</li>
+</ul>
+<h3 id="（3）执行编译"><a href="#（3）执行编译" class="headerlink" title="（3）执行编译"></a>（3）执行编译</h3><ul>
+<li><p><strong>回到需要执行编译的文件</strong>（这一步很重要，否则<code>\$&#123;file&#125;</code>和<code>$&#123;fileDirname&#125;</code>这些变量都会错）；</p>
+</li>
+<li><p>快捷键<code>ctrl+shift+B</code>或从菜单中选择运行：<strong>Terminal -&gt; Run Build Task</strong>，即可执行<code>tasks.json</code>中指定的编译过程；</p>
+<p>编译任务完成后，会出现终端提示，对于成功的g++编译，输出如下：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312071609602.png" alt="image-20231207150223290"></p>
+<p>（这里我将<code>tasks.json</code>中的<code>&quot;$&#123;file&#125;&quot;</code>项更改为<code>&quot;$&#123;fileDirname&#125;/*.cpp&quot;</code></p>
+<h3 id="（4）调试文件"><a href="#（4）调试文件" class="headerlink" title="（4）调试文件"></a>（4）调试文件</h3><p>对需要调试的文件设置断点，选择<code>Debug C/C++ file</code>进行调试。</p>
+<h3 id="（5）个性化配置launch-json"><a href="#（5）个性化配置launch-json" class="headerlink" title="（5）个性化配置launch.json"></a>（5）个性化配置<code>launch.json</code></h3><blockquote>
+<p>这里<code>launch.json</code>的作用就是告诉<code>VSCode</code>如何调用<code>gdb调试器</code>。</p>
+</blockquote>
+<p>如果想要在调试&#x2F;运行程序时添加参数，只需要把参数添加在<code>&quot;args&quot;</code>选项中即可。</p>
+<h4 id="（6）总结"><a href="#（6）总结" class="headerlink" title="（6）总结"></a>（6）总结</h4><p>在<code>VSCode</code>中编译、调试一个简单的<code>.cpp</code>文件，所需要做的就是：</p>
+<ol>
+<li>在<code>tasks.json</code>中调用<code>g++</code>生成一个可执行二进制文件；</li>
+<li>在<code>launch.json</code>中调用<code>gdb</code>对生成的可执行文件进行调试。</li>
+</ol>
+<h3 id="（7）复用C-配置"><a href="#（7）复用C-配置" class="headerlink" title="（7）复用C++配置"></a>（7）复用C++配置</h3><p>上面的过程已经完成了在<code>VSCode</code>中调试<code>Linux</code>环境下的<code>C++</code>代码的配置，但只适用于当前工作空间。</p>
+<p>如果想要在其他的工程文件夹下复用这种配置，只需要把<code>tasks.json</code>和<code>launch.json</code>文件复制到新文件夹下的<code>.vscode</code>目录下，然后根据需要改变对应的源文件和可执行文件的名称即可。</p>
+<h1 id="3、VSCode自动生成头文件的-ifndef-define-endif"><a href="#3、VSCode自动生成头文件的-ifndef-define-endif" class="headerlink" title="3、VSCode自动生成头文件的 #ifndef #define #endif"></a>3、VSCode自动生成头文件的 #ifndef #define #endif</h1><p>参考这篇博客：<a href="https://blog.csdn.net/p1279030826/article/details/123851420">VSCode自动生成头文件的 #ifndef #define #endif</a></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>OpenPose原理及编译</title>
+    <url>/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/</url>
+    <content><![CDATA[<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
+<p>识别人体骨干躯干的关键点，并进行定位与拼接。</p>
+<span id="more"></span>
+
+<p>2、姿态估计中的难点是什么？</p>
+<p><strong>（1）遮挡；（2）匹配。</strong></p>
+<p>3、COCO数据集的关键点有几个，分别是？</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524168.png" alt="COCO数据集关键点" style="zoom: 50%;" />
+
+<p>数据集中是<code>17</code>个点，实际上训练时候还要加上<code>1</code>个脖子的点，共<code>18</code>个点。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Joint index:</span></span><br><span class="line"><span class="comment"># &#123;0,  &quot;Nose&quot;&#125;</span></span><br><span class="line"><span class="comment"># &#123;1,  &quot;Neck&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;2,  &quot;RShoulder&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;3,  &quot;RElbow&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;4,  &quot;RWrist&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;5,  &quot;LShoulder&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;6,  &quot;LElbow&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;7,  &quot;LWrist&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;8,  &quot;RHip&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;9,  &quot;RKnee&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;10, &quot;RAnkle&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;11, &quot;LHip&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;12, &quot;LKnee&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;13, &quot;LAnkle&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;14, &quot;REye&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;15, &quot;LEye&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;16, &quot;REar&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;17, &quot;LEar&quot;&#125;,</span></span><br></pre></td></tr></table></figure>
+
+<p>4、姿态估计方法分为几个大类？</p>
+<p>（1）<code>Top-down</code>（自顶向下）：先检测所有的人，再对每个框的人进行姿态估计输出结果</p>
+<p>优点：准确率高，点的回归率高；</p>
+<p>缺点：算法性能依赖检测效果，复杂度较高，实时性比较差。</p>
+<p>主要用于一些离线的项目，对实时性没要求。</p>
+<p>（2）<code>bottom-up</code>（自底向上）：先检测所有关键点，再进行匹配连接</p>
+<p>优点：计算量较小，可以达到实时性的效果；</p>
+<p>缺点：精度较差，匹配策略比较复杂。</p>
+<h2 id="2-论文解读"><a href="#2-论文解读" class="headerlink" title="2 论文解读"></a>2 论文解读</h2><p>论文地址：<a href="https://arxiv.org/pdf/1611.08050.pdf">https://arxiv.org/pdf/1611.08050.pdf</a></p>
+<h3 id="1、网络框架"><a href="#1、网络框架" class="headerlink" title="1、网络框架"></a>1、网络框架</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524273.png" alt="网络整体流程图">	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251532476.jpg" alt="网络框架1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251534898.png" alt="网络框架2"></p>
+<p>其中的重点：</p>
+<p>（1）关键点的<code>heatmap</code>标注生成，采用高斯热度图的方式；</p>
+<p>（2）<code>PAF</code>：部分亲和域。这也是论文中的重点和难点；</p>
+<p>（3）匹配策略：匈牙利匹配。</p>
+<h3 id="2、数据制作"><a href="#2、数据制作" class="headerlink" title="2、数据制作"></a>2、数据制作</h3><p>采用的数据集为<code>COCO</code>数据集，其中人体骨骼点的标注信息为<code>[x, y, label]</code>。</p>
+<p><code>label</code>取值为<code>0</code>、<code>1</code>、<code>2</code>，分别表示不存在、遮挡、正常，其中不存在的关键点是需要去除的。</p>
+<p>（1）关键点高斯热力图实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putGaussianMaps</span>(<span class="params">center, accumulate_confid_map, sigma, grid_y, grid_x, stride</span>):</span><br><span class="line"></span><br><span class="line">    start = stride / <span class="number">2.0</span> - <span class="number">0.5</span></span><br><span class="line">    y_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_y))]</span><br><span class="line">    x_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_x))]</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)      <span class="comment"># 构建棋盘</span></span><br><span class="line">    xx = xx * stride + start                    <span class="comment"># 每个点在原始图像上的位置</span></span><br><span class="line">    yy = yy * stride + start</span><br><span class="line">    d2 = (xx - center[<span class="number">0</span>]) ** <span class="number">2</span> + (yy - center[<span class="number">1</span>]) ** <span class="number">2</span>  <span class="comment"># 计算每个点和GT点的距离</span></span><br><span class="line">    exponent = d2 / <span class="number">2.0</span> / sigma / sigma                 <span class="comment"># 这里在做一个高斯计算</span></span><br><span class="line">    mask = exponent &lt;= <span class="number">4.6052</span>                           <span class="comment"># 将在这个阈值范围内的点用True记录</span></span><br><span class="line">    cofid_map = np.exp(-exponent)                       <span class="comment"># 这里做一个标准化</span></span><br><span class="line">    cofid_map = np.multiply(mask, cofid_map)            <span class="comment"># 取出对应关系为True的点</span></span><br><span class="line">    accumulate_confid_map += cofid_map                  <span class="comment"># 将每个点计算的结果都累加到上一次的特征中</span></span><br><span class="line">    accumulate_confid_map[accumulate_confid_map &gt; <span class="number">1.0</span>] = <span class="number">1.0</span>      <span class="comment"># 对结果大于1的值，只取1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> accumulate_confid_map    <span class="comment"># 返回热力图（heatmap）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（2）PAF数据计算的实现：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putVecMaps</span>(<span class="params">centerA, centerB, accumulate_vec_map, count, grid_y, grid_x, stride</span>):</span><br><span class="line">    centerA = centerA.astype(<span class="built_in">float</span>)</span><br><span class="line">    centerB = centerB.astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line">    thre = <span class="number">1</span>  <span class="comment"># 表示宽度，也就是一个设定好的参数</span></span><br><span class="line">    centerB = centerB / stride  <span class="comment"># 缩放比例特定到特征图中</span></span><br><span class="line">    centerA = centerA / stride</span><br><span class="line"></span><br><span class="line">    limb_vec = centerB - centerA  <span class="comment"># 求出两个点的向量</span></span><br><span class="line">    norm = np.linalg.norm(limb_vec)  <span class="comment"># 是需要求单位向量，所以先计算范数，也就是向量模长</span></span><br><span class="line">    <span class="keyword">if</span> (norm == <span class="number">0.0</span>):  <span class="comment"># 这里表示两个点基本重合了</span></span><br><span class="line">        <span class="comment"># print &#x27;limb is too short, ignore it...&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line">    limb_vec_unit = limb_vec / norm  <span class="comment"># 向量除以模长，得到单位向量</span></span><br><span class="line">    <span class="comment"># print &#x27;limb unit vector: &#123;&#125;&#x27;.format(limb_vec_unit)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To make sure not beyond the border of this two points</span></span><br><span class="line">    <span class="comment"># 得到所有可能存在方向的区域(这里就用到了之前的超参数阈值)</span></span><br><span class="line">    min_x = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_x = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) + thre)), grid_x)</span><br><span class="line">    min_y = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_y = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) + thre)), grid_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到一个可能存在向量的矩形框</span></span><br><span class="line">    range_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_x), <span class="built_in">int</span>(max_x), <span class="number">1</span>))</span><br><span class="line">    range_y = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_y), <span class="built_in">int</span>(max_y), <span class="number">1</span>))</span><br><span class="line">    xx, yy = np.meshgrid(range_x, range_y)  <span class="comment"># 制作一个网格</span></span><br><span class="line">    ba_x = xx - centerA[<span class="number">0</span>]  <span class="comment"># the vector from (x,y) to centerA 根据位置判断是否在该区域上（分别得到X和Y方向的）</span></span><br><span class="line">    ba_y = yy - centerA[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 向量叉乘根据阈值选择赋值区域，任何向量与单位向量的叉乘即为四边形的面积</span></span><br><span class="line">    <span class="comment"># 这里是重点步骤，也就是论文中的公式，表示计算出两个向量组成四边形的面积</span></span><br><span class="line">    limb_width = np.<span class="built_in">abs</span>(ba_x * limb_vec_unit[<span class="number">1</span>] - ba_y * limb_vec_unit[<span class="number">0</span>])</span><br><span class="line">    mask = limb_width &lt; thre  <span class="comment"># mask is 2D （小于阈值的表示在该区域上）</span></span><br><span class="line"></span><br><span class="line">    vec_map = np.copy(accumulate_vec_map) * <span class="number">0.0</span>  <span class="comment"># 构建一个全为0的矩阵</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这行代码主要作用是将mask扩展一个维度并且赋值给vec_map数组</span></span><br><span class="line">    vec_map[yy, xx] = np.repeat(mask[:, :, np.newaxis], <span class="number">2</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 在该区域上的都用对应的方向向量表示（根据mask结果表示是否在，通过乘法的方式）</span></span><br><span class="line">    vec_map[yy, xx] *= limb_vec_unit[np.newaxis, np.newaxis, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #在特征图中（46*46）中 哪些区域是该躯干所在区域，判断x或者y向量都不为0</span></span><br><span class="line">    mask = np.logical_or.reduce(</span><br><span class="line">        (np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">0</span>]) &gt; <span class="number">0</span>, np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每次返回的accumulate_vec_map都是平均值，现在还原成实际值</span></span><br><span class="line">    accumulate_vec_map = np.multiply(</span><br><span class="line">        accumulate_vec_map, count[:, :, np.newaxis])</span><br><span class="line">    accumulate_vec_map += vec_map  <span class="comment"># 加上当前关键点位置形成的向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] += <span class="number">1</span>  <span class="comment"># 该区域计算次数都+1</span></span><br><span class="line"></span><br><span class="line">    mask = count == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">1</span>  <span class="comment"># 没有被计算过的地方就等于自身（因为一会要除法）</span></span><br><span class="line"></span><br><span class="line">    accumulate_vec_map = np.divide(accumulate_vec_map, count[:, :, np.newaxis])  <span class="comment"># 算平均向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">0</span>  <span class="comment"># 还原回去</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这两个函数是最重要的两个部分，也就是对训练数据的处理，生成出需要的训练数据。</p>
+<h3 id="3、预测推理"><a href="#3、预测推理" class="headerlink" title="3、预测推理"></a>3、预测推理</h3><p>预测模型这里，在官方源码中是将<code>paf</code>的处理封装在一个<code>cpp</code>库中，<strong>通过编译得到静态库，代码中可以调用</strong>。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">swig -python -c++ pafprocess.i</span><br><span class="line">python3 setup.py build_ext --inplace</span><br></pre></td></tr></table></figure>
+
+<p>这里PAF的处理主要是采用积分计算的方式，也就是对于连线的点的方向选择，采用积分的方式计算最佳连线策略。</p>
+<h2 id="3-OpenPose-Windows-cpu-only-编译"><a href="#3-OpenPose-Windows-cpu-only-编译" class="headerlink" title="3 OpenPose_Windows_cpu_only 编译"></a>3 OpenPose_Windows_cpu_only 编译</h2><p>主要步骤参考：</p>
+<p><a href="https://blog.csdn.net/qq_51209492/article/details/124185106?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AE%89%E8%A3%85openpose%E5%B9%B6%E4%BD%BF%E7%94%A8python%E8%B0%83%E7%94%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124185106.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">CSDN——win10环境下下载安装openpose(only cpu)并在pycharm中运行代码（超详细）</a></p>
+<p>基本按照这上面来走就可以正确编译，但其中要注意以下几点：</p>
+<p><strong>1、<code>bat</code>批处理命令运行时给的网站我根本无法访问，一直<code>retry</code></strong></p>
+<p>最后选择用迅雷下载，然后放进<code>\openpose\3rdparty\windows</code>文件夹下。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272200864.png" alt="image-20231227220003816"></p>
+<p>同时这里面的<code>caffe_cpu</code>不是用这4个<code>bat</code>文件下载的，但是由于网址同样进不去，也选择先用迅雷下载好后放进去。</p>
+<p>我这里的4个<code>zip</code>文件大小显示为<code>0kb</code>似乎是<code>cmake</code>编译后自己更改的，不用去管。</p>
+<p><strong>2、用迅雷提前下载好<code>\openpose\models</code>后，<code>cmake</code>编译依然会重新下载模型。</strong></p>
+<p>这里我参考了<a href="https://zhuanlan.zhihu.com/p/446981890">OpenPose-CPU版本安装</a>的方法：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272207425.png" alt="image-20231227220706339"></p>
+<p>修改<code>CmakeLists.txt</code>文件后就不会再重新下载模型了。</p>
+<p><strong>3、用<code>CMAKE</code>编译<code>openpose</code>项目时，一定要在第一次<code>configure</code>之前，点击<code>Add Entry</code>选择<code>Python</code>版本。</strong></p>
+<p>如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272202637.png" alt="在这里插入图片描述"></p>
+<p>实际上这一步就是要确保在<code>cmake</code>编译时访问的<code>python</code>解释器和最后在<code>pycharm</code>中运行时选择的python解释器一致，否则可能会在<code>pycharm</code>中报错<code>No module named pyopenpose</code>。</p>
+<p>我第一次在这里就是因为没有关注这个细节，导致<code>cmake</code>选择的是<code>python 3.6.5</code>的编译器，而<code>pycharm</code>选择的是<code>3.7.6</code>的编译器，出现错误。</p>
+<p><strong>4、最好采用本地<code>python</code>解释器，不要用<code>anaconda</code>虚拟环境。</strong></p>
+<p>我也不知道为什么虚拟环境会报错，可能还是路径的问题吧。</p>
+]]></content>
+      <categories>
+        <category>科研</category>
+      </categories>
+  </entry>
+  <entry>
     <title>计算机网络</title>
     <url>/2024/04/08/Computer/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</url>
     <content><![CDATA[<span id="more"></span>
@@ -934,71 +1001,6 @@ mode_t
 ]]></content>
       <categories>
         <category>Computer</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>OpenPose原理及编译</title>
-    <url>/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/</url>
-    <content><![CDATA[<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
-<p>识别人体骨干躯干的关键点，并进行定位与拼接。</p>
-<span id="more"></span>
-
-<p>2、姿态估计中的难点是什么？</p>
-<p><strong>（1）遮挡；（2）匹配。</strong></p>
-<p>3、COCO数据集的关键点有几个，分别是？</p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524168.png" alt="COCO数据集关键点" style="zoom: 50%;" />
-
-<p>数据集中是<code>17</code>个点，实际上训练时候还要加上<code>1</code>个脖子的点，共<code>18</code>个点。</p>
-<p>4、姿态估计方法分为几个大类？</p>
-<p>（1）<code>Top-down</code>（自顶向下）：先检测所有的人，再对每个框的人进行姿态估计输出结果</p>
-<p>优点：准确率高，点的回归率高；</p>
-<p>缺点：算法性能依赖检测效果，复杂度较高，实时性比较差。</p>
-<p>主要用于一些离线的项目，对实时性没要求。</p>
-<p>（2）<code>bottom-up</code>（自底向上）：先检测所有关键点，再进行匹配连接</p>
-<p>优点：计算量较小，可以达到实时性的效果；</p>
-<p>缺点：精度较差，匹配策略比较复杂。</p>
-<h2 id="2-论文解读"><a href="#2-论文解读" class="headerlink" title="2 论文解读"></a>2 论文解读</h2><p>论文地址：<a href="https://arxiv.org/pdf/1611.08050.pdf">https://arxiv.org/pdf/1611.08050.pdf</a></p>
-<h3 id="1、网络框架"><a href="#1、网络框架" class="headerlink" title="1、网络框架"></a>1、网络框架</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524273.png" alt="网络整体流程图">	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251532476.jpg" alt="网络框架1"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251534898.png" alt="网络框架2"></p>
-<p>其中的重点：</p>
-<p>（1）关键点的<code>heatmap</code>标注生成，采用高斯热度图的方式；</p>
-<p>（2）<code>PAF</code>：部分亲和域。这也是论文中的重点和难点；</p>
-<p>（3）匹配策略：匈牙利匹配。</p>
-<h3 id="2、数据制作"><a href="#2、数据制作" class="headerlink" title="2、数据制作"></a>2、数据制作</h3><p>采用的数据集为<code>COCO</code>数据集，其中人体骨骼点的标注信息为<code>[x, y, label]</code>。</p>
-<p><code>label</code>取值为<code>0</code>、<code>1</code>、<code>2</code>，分别表示不存在、遮挡、正常，其中不存在的关键点是需要去除的。</p>
-<p>（1）关键点高斯热力图实现：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putGaussianMaps</span>(<span class="params">center, accumulate_confid_map, sigma, grid_y, grid_x, stride</span>):</span><br><span class="line"></span><br><span class="line">    start = stride / <span class="number">2.0</span> - <span class="number">0.5</span></span><br><span class="line">    y_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_y))]</span><br><span class="line">    x_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_x))]</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)      <span class="comment"># 构建棋盘</span></span><br><span class="line">    xx = xx * stride + start                    <span class="comment"># 每个点在原始图像上的位置</span></span><br><span class="line">    yy = yy * stride + start</span><br><span class="line">    d2 = (xx - center[<span class="number">0</span>]) ** <span class="number">2</span> + (yy - center[<span class="number">1</span>]) ** <span class="number">2</span>  <span class="comment"># 计算每个点和GT点的距离</span></span><br><span class="line">    exponent = d2 / <span class="number">2.0</span> / sigma / sigma                 <span class="comment"># 这里在做一个高斯计算</span></span><br><span class="line">    mask = exponent &lt;= <span class="number">4.6052</span>                           <span class="comment"># 将在这个阈值范围内的点用True记录</span></span><br><span class="line">    cofid_map = np.exp(-exponent)                       <span class="comment"># 这里做一个标准化</span></span><br><span class="line">    cofid_map = np.multiply(mask, cofid_map)            <span class="comment"># 取出对应关系为True的点</span></span><br><span class="line">    accumulate_confid_map += cofid_map                  <span class="comment"># 将每个点计算的结果都累加到上一次的特征中</span></span><br><span class="line">    accumulate_confid_map[accumulate_confid_map &gt; <span class="number">1.0</span>] = <span class="number">1.0</span>      <span class="comment"># 对结果大于1的值，只取1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> accumulate_confid_map    <span class="comment"># 返回热力图（heatmap）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>（2）PAF数据计算的实现：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putVecMaps</span>(<span class="params">centerA, centerB, accumulate_vec_map, count, grid_y, grid_x, stride</span>):</span><br><span class="line">    centerA = centerA.astype(<span class="built_in">float</span>)</span><br><span class="line">    centerB = centerB.astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line">    thre = <span class="number">1</span>  <span class="comment"># 表示宽度，也就是一个设定好的参数</span></span><br><span class="line">    centerB = centerB / stride  <span class="comment"># 缩放比例特定到特征图中</span></span><br><span class="line">    centerA = centerA / stride</span><br><span class="line"></span><br><span class="line">    limb_vec = centerB - centerA  <span class="comment"># 求出两个点的向量</span></span><br><span class="line">    norm = np.linalg.norm(limb_vec)  <span class="comment"># 是需要求单位向量，所以先计算范数，也就是向量模长</span></span><br><span class="line">    <span class="keyword">if</span> (norm == <span class="number">0.0</span>):  <span class="comment"># 这里表示两个点基本重合了</span></span><br><span class="line">        <span class="comment"># print &#x27;limb is too short, ignore it...&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line">    limb_vec_unit = limb_vec / norm  <span class="comment"># 向量除以模长，得到单位向量</span></span><br><span class="line">    <span class="comment"># print &#x27;limb unit vector: &#123;&#125;&#x27;.format(limb_vec_unit)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To make sure not beyond the border of this two points</span></span><br><span class="line">    <span class="comment"># 得到所有可能存在方向的区域(这里就用到了之前的超参数阈值)</span></span><br><span class="line">    min_x = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_x = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) + thre)), grid_x)</span><br><span class="line">    min_y = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_y = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) + thre)), grid_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到一个可能存在向量的矩形框</span></span><br><span class="line">    range_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_x), <span class="built_in">int</span>(max_x), <span class="number">1</span>))</span><br><span class="line">    range_y = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_y), <span class="built_in">int</span>(max_y), <span class="number">1</span>))</span><br><span class="line">    xx, yy = np.meshgrid(range_x, range_y)  <span class="comment"># 制作一个网格</span></span><br><span class="line">    ba_x = xx - centerA[<span class="number">0</span>]  <span class="comment"># the vector from (x,y) to centerA 根据位置判断是否在该区域上（分别得到X和Y方向的）</span></span><br><span class="line">    ba_y = yy - centerA[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 向量叉乘根据阈值选择赋值区域，任何向量与单位向量的叉乘即为四边形的面积</span></span><br><span class="line">    <span class="comment"># 这里是重点步骤，也就是论文中的公式，表示计算出两个向量组成四边形的面积</span></span><br><span class="line">    limb_width = np.<span class="built_in">abs</span>(ba_x * limb_vec_unit[<span class="number">1</span>] - ba_y * limb_vec_unit[<span class="number">0</span>])</span><br><span class="line">    mask = limb_width &lt; thre  <span class="comment"># mask is 2D （小于阈值的表示在该区域上）</span></span><br><span class="line"></span><br><span class="line">    vec_map = np.copy(accumulate_vec_map) * <span class="number">0.0</span>  <span class="comment"># 构建一个全为0的矩阵</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这行代码主要作用是将mask扩展一个维度并且赋值给vec_map数组</span></span><br><span class="line">    vec_map[yy, xx] = np.repeat(mask[:, :, np.newaxis], <span class="number">2</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 在该区域上的都用对应的方向向量表示（根据mask结果表示是否在，通过乘法的方式）</span></span><br><span class="line">    vec_map[yy, xx] *= limb_vec_unit[np.newaxis, np.newaxis, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #在特征图中（46*46）中 哪些区域是该躯干所在区域，判断x或者y向量都不为0</span></span><br><span class="line">    mask = np.logical_or.reduce(</span><br><span class="line">        (np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">0</span>]) &gt; <span class="number">0</span>, np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每次返回的accumulate_vec_map都是平均值，现在还原成实际值</span></span><br><span class="line">    accumulate_vec_map = np.multiply(</span><br><span class="line">        accumulate_vec_map, count[:, :, np.newaxis])</span><br><span class="line">    accumulate_vec_map += vec_map  <span class="comment"># 加上当前关键点位置形成的向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] += <span class="number">1</span>  <span class="comment"># 该区域计算次数都+1</span></span><br><span class="line"></span><br><span class="line">    mask = count == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">1</span>  <span class="comment"># 没有被计算过的地方就等于自身（因为一会要除法）</span></span><br><span class="line"></span><br><span class="line">    accumulate_vec_map = np.divide(accumulate_vec_map, count[:, :, np.newaxis])  <span class="comment"># 算平均向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">0</span>  <span class="comment"># 还原回去</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这两个函数是最重要的两个部分，也就是对训练数据的处理，生成出需要的训练数据。</p>
-<h3 id="3、预测推理"><a href="#3、预测推理" class="headerlink" title="3、预测推理"></a>3、预测推理</h3><p>预测模型这里，在官方源码中是将<code>paf</code>的处理封装在一个<code>cpp</code>库中，<strong>通过编译得到静态库，代码中可以调用</strong>。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">swig -python -c++ pafprocess.i</span><br><span class="line">python3 setup.py build_ext --inplace</span><br></pre></td></tr></table></figure>
-
-<p>这里PAF的处理主要是采用积分计算的方式，也就是对于连线的点的方向选择，采用积分的方式计算最佳连线策略。</p>
-<h2 id="3-OpenPose-Windows-cpu-only-编译"><a href="#3-OpenPose-Windows-cpu-only-编译" class="headerlink" title="3 OpenPose_Windows_cpu_only 编译"></a>3 OpenPose_Windows_cpu_only 编译</h2><p>主要步骤参考：</p>
-<p><a href="https://blog.csdn.net/qq_51209492/article/details/124185106?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AE%89%E8%A3%85openpose%E5%B9%B6%E4%BD%BF%E7%94%A8python%E8%B0%83%E7%94%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124185106.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">CSDN——win10环境下下载安装openpose(only cpu)并在pycharm中运行代码（超详细）</a></p>
-<p>基本按照这上面来走就可以正确编译，但其中要注意以下几点：</p>
-<p><strong>1、<code>bat</code>批处理命令运行时给的网站我根本无法访问，一直<code>retry</code></strong></p>
-<p>最后选择用迅雷下载，然后放进<code>\openpose\3rdparty\windows</code>文件夹下。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272200864.png" alt="image-20231227220003816"></p>
-<p>同时这里面的<code>caffe_cpu</code>不是用这4个<code>bat</code>文件下载的，但是由于网址同样进不去，也选择先用迅雷下载好后放进去。</p>
-<p>我这里的4个<code>zip</code>文件大小显示为<code>0kb</code>似乎是<code>cmake</code>编译后自己更改的，不用去管。</p>
-<p><strong>2、用迅雷提前下载好<code>\openpose\models</code>后，<code>cmake</code>编译依然会重新下载模型。</strong></p>
-<p>这里我参考了<a href="https://zhuanlan.zhihu.com/p/446981890">OpenPose-CPU版本安装</a>的方法：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272207425.png" alt="image-20231227220706339"></p>
-<p>修改<code>CmakeLists.txt</code>文件后就不会再重新下载模型了。</p>
-<p><strong>3、用<code>CMAKE</code>编译<code>openpose</code>项目时，一定要在第一次<code>configure</code>之前，点击<code>Add Entry</code>选择<code>Python</code>版本。</strong></p>
-<p>如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272202637.png" alt="在这里插入图片描述"></p>
-<p>实际上这一步就是要确保在<code>cmake</code>编译时访问的<code>python</code>解释器和最后在<code>pycharm</code>中运行时选择的python解释器一致，否则可能会在<code>pycharm</code>中报错<code>No module named pyopenpose</code>。</p>
-<p>我第一次在这里就是因为没有关注这个细节，导致<code>cmake</code>选择的是<code>python 3.6.5</code>的编译器，而<code>pycharm</code>选择的是<code>3.7.6</code>的编译器，出现错误。</p>
-<p><strong>4、最好采用本地<code>python</code>解释器，不要用<code>anaconda</code>虚拟环境。</strong></p>
-<p>我也不知道为什么虚拟环境会报错，可能还是路径的问题吧。</p>
-]]></content>
-      <categories>
-        <category>科研</category>
       </categories>
   </entry>
   <entry>
@@ -1535,6 +1537,81 @@ mode_t
       </categories>
   </entry>
   <entry>
+    <title>new与operator new</title>
+    <url>/2024/04/24/Computer/C++/new%E4%B8%8Eoperator%20new/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>区分三个概念：new operator、operator new和placement new</strong></p>
+</blockquote>
+<h1 id="一、new-operator、operator-new和placement-new"><a href="#一、new-operator、operator-new和placement-new" class="headerlink" title="一、new operator、operator new和placement new"></a>一、new operator、operator new和placement new</h1><h2 id="1、new-operator（new-操作符）"><a href="#1、new-operator（new-操作符）" class="headerlink" title="1、new operator（new 操作符）"></a>1、new operator（new 操作符）</h2><p>当写下<code>string *ps = new string(&quot;Memory Management&quot;)</code>时，使用的<code>new</code>是<strong>new操作符</strong>。这个操作符和<code>sizeof</code>一样是语言内置的，它总是完成以下功能：</p>
+<ol>
+<li>分配内存（调用operator new函数）；</li>
+<li>调用构造函数初始化内存中的对象。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241419515.png" alt="image-20240424141921292"></p>
+<h2 id="2、operator-new"><a href="#2、operator-new" class="headerlink" title="2、operator new"></a>2、operator new</h2><p>new操作符调用一个函数来完毕必需的内存分配，即<strong>operator new</strong>。注意这个函数的职责和<code>malloc</code>一样，只是为了分配内存。</p>
+<p>函数operator new 通常这样声明：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>返回值类型：<code>void *</code>（返回一个未经处理的<code>raw</code>指针）</li>
+<li>参数<code>size_t size</code>：确定分配多少内存。可以添加额外的參数重载函数<code>operator new</code>，但第一个參数类型必须是<code>size_t</code>。</li>
+</ul>
+<h2 id="3、placement-new"><a href="#3、placement-new" class="headerlink" title="3、placement new"></a>3、placement new</h2><blockquote>
+<p><strong>placement new是一种特殊的operator new，作用于一块已分配但未处理或未初始化的raw内存。</strong></p>
+</blockquote>
+<p>当存在一些已经被分配单尚未被处理的<code>raw</code>内存时，如果需要再这些内存中构造一个对象，可以使用<strong>一个特殊的operator new</strong> ，它被称为<strong>placement new</strong>。当程序使用共享内存或memory-mapped I&#x2F;O时这个函数可能实用，由于在这样程序里对象必须被放置在一个确定地址上或一块被例程分配的内存里。</p>
+<p>如下例所示：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Widget</span> &#123;</span><br><span class="line">　<span class="keyword">public</span>:</span><br><span class="line">　　<span class="built_in">Widget</span>(<span class="type">int</span> widgetSize);</span><br><span class="line">　　...</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function">Widget * <span class="title">constructWidgetInBuffer</span><span class="params">(<span class="type">void</span> *buffer,<span class="type">int</span> widgetSize)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　<span class="keyword">return</span> <span class="built_in">new</span> (buffer) <span class="built_in">Widget</span>(widgetSize);  <span class="comment">// placement new的用法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>详细来说，<code>new (buffer) Widget(widgetSize)</code>是new操作符的一个使用方法，需要使用一个额外的变量<code>buffer</code>。当new操作符隐含调用operator new函数时，把这个变量传递给它，此时，被调用的operator new函数除了带有强制的参数<code>size_t</code>外，还必须接受<code>void *</code>指针参数，指向构造对象占用的内存空间。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span>, <span class="type">void</span> *location)</span>  <span class="comment">// size_t没有名字，以防止编译器发出警告说它没有使用</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　<span class="keyword">return</span> location;</span><br><span class="line">  <span class="comment">// 在使用placement new的情况下，调用者已经获得了指向内存的指针</span></span><br><span class="line">  <span class="comment">// 由于调用者知道对象应该放在哪里，placement new必须做的就是返回转递给它的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p><strong>new 、operator new 和 placement new 区别</strong></p>
+<p>（1）<code>new</code>：不能被重载，其行为总是一致的。它先调用operator new分配内存，然后调用构造函数初始化那段内存。</p>
+<p>（2）<code>operator new</code>：要实现不同的内存分配行为，应该重载operator new，而不是new。</p>
+<p>operator new就像operator +一样，是可以重载的。如果类中没有重载operator new，那么调用的就是全局的::operator  new来完成堆的分配。同理，operator new[]、operator delete、operator delete[]也是可以重载的。</p>
+<p>重载时，返回类型必须声明为void*，第一个参数类型必须为表达要求分配空间的大小（字节），类型为size_t，可以带其它参数。</p>
+<p>（3）<code>placement new</code>：只是operator new重载的一个标准、全局的版本。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针。因此不能删除它，但需要调用对象的析构函数。</p>
+<p>如果你想在已经分配的内存中创建一个对象，使用new时行不通的。也就是说placement new允许你在一个已经分配好的内存中（栈或者堆中）构造一个新的对象。原型中void* p实际上就是指向一个已经分配好的内存缓冲区的的首地址。</p>
+<h1 id="二、Deletion-and-Memory-Deallocation"><a href="#二、Deletion-and-Memory-Deallocation" class="headerlink" title="二、Deletion and Memory Deallocation"></a>二、Deletion and Memory Deallocation</h1><h2 id="1、delete和operator-delete"><a href="#1、delete和operator-delete" class="headerlink" title="1、delete和operator delete"></a>1、delete和operator delete</h2><p>为了避免内存泄漏，每一个动态内存分配必须与一个等同相反的deallocation相应。<strong>函数operator delete</strong>与<strong>delete操作符</strong>的关系与<strong>operator new</strong>与<strong>new操作符</strong>的关系一样。</p>
+<p><code>delete</code>总是完成下述功能：</p>
+<ol>
+<li>调用析构函数；</li>
+<li>释放内存。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241445181.png" alt="image-20240424144503094"></p>
+<p><code>operator delete</code>函数用来释放内存，声明如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span> *memoryToBeDeallocated)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>因此，<strong>假设你仅仅想处理未被初始化的内存，你应该绕过new和delete操作符，而调用operator new 获得内存和operator delete释放内存给系统</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> *buffer = <span class="keyword">operator</span> <span class="built_in">new</span>(<span class="number">50</span>*<span class="built_in">sizeof</span>(<span class="type">char</span>)); <span class="comment">// 分配足够的内存以容纳50个char</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//没有调用构造函数</span></span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(buffer)</span></span>; <span class="comment">// 释放内存</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 没有调用析构函数</span></span><br></pre></td></tr></table></figure>
+
+<p>这与在C中调用malloc和free等同。</p>
+<h2 id="2、placement-new建立的对象怎样释放？"><a href="#2、placement-new建立的对象怎样释放？" class="headerlink" title="2、placement new建立的对象怎样释放？"></a>2、placement new建立的对象怎样释放？</h2><p>假设用<code>placement new</code>在内存中建立对象，应该避免在该内存中使用delete 操作符。</p>
+<p>由于delete操作符调用operator delete释放内存，但这片存最开始并不是被operator new分配的，placement new只是返回传递给它的这片内存的指针，因此无法得知这片内存究竟来自何处。因此，<strong>应该显式调用析构函数来解除构造函数的影响</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在共享内存中分配和释放内存的函数 void * mallocShared(size_t size);</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">freeShared</span><span class="params">(<span class="type">void</span> *memory)</span></span>;</span><br><span class="line"><span class="type">void</span> *sharedMemory = <span class="built_in">mallocShared</span>(<span class="built_in">sizeof</span>(Widget));</span><br><span class="line">Widget *pw = <span class="comment">// 如上所看到的</span></span><br><span class="line"><span class="built_in">constructWidgetInBuffer</span>(sharedMemory, <span class="number">10</span>); <span class="comment">// 使用</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 执行placement new操作 </span></span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">delete</span> pw;      <span class="comment">// 结果不确定! 共享内存来自mallocShared, 而不是operator new</span></span><br><span class="line">pw-&gt;~<span class="built_in">Widget</span>();  <span class="comment">// 正确。 析构pw指向的Widget，但并未释放存放Widget的这片内存</span></span><br><span class="line"><span class="built_in">freeShared</span>(pw); <span class="comment">// 正确。 释放pw指向的共享内存，但并未调用析构函数</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、new-delete和array-new-array-delete应该搭配使用"><a href="#3、new-delete和array-new-array-delete应该搭配使用" class="headerlink" title="3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用"></a>3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241457401.png" alt="image-20240424145754309"></p>
+<h1 id="三、相关问题"><a href="#三、相关问题" class="headerlink" title="三、相关问题"></a>三、相关问题</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Accoun *parray= <span class="keyword">new</span> Account[<span class="number">100</span>]; </span><br><span class="line"><span class="keyword">delete</span> parray; </span><br><span class="line"><span class="keyword">delete</span>[] parray; </span><br></pre></td></tr></table></figure>
+
+<p>方括号的存在会使编译器获取数组大小（size）然后析构函数再被依次应用在每个元素上，一共size次。否则，只有一个元素被析构。 但无论哪种情况，分配的全部空间被返还给自由存储区。 </p>
+<h2 id="1、为什么无论哪种情况，分配的全部空间被返还给自由存储区"><a href="#1、为什么无论哪种情况，分配的全部空间被返还给自由存储区" class="headerlink" title="1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?"></a>1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?</h2><p>首先，针对最后一句话“<strong>无论哪种情况，分配的全部空间被返还给自由存储区</strong>”，实际上是指：</p>
+<p>无论是使用 <code>delete</code> 还是 <code>delete []</code>，分配的全部空间都会被释放，并返回给自由存储区。区别在于，<code>delete</code> 只会调用一次析构函数，而 <code>delete []</code> 会调用数组中每个元素的析构函数。因此，如果你分配了一个数组并使用 <code>delete</code> 来释放，只有一个元素的析构函数会被调用，可能导致内存泄漏，因为其他元素的资源没有得到正确释放。而使用 <code>delete []</code> 则能保证每个元素的析构函数都被正确调用，避免了这种潜在的内存泄漏问题。</p>
+<h2 id="2、对于delete-parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？"><a href="#2、对于delete-parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？" class="headerlink" title="2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？"></a>2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？</h2><p>（1）一般在分配时分配器会自动写一个日志（即在分配的内存之前有一个结构）用于记录分配的大小，分配内容的sizeof等等。 </p>
+<p>直观来说，<code>delete</code>和<code>delete[]</code>都是传入一个<code>void*</code>，因此如果不保存日志就无法知道分配时到底是分配了一个还是多个单元。所以虽然<code>delete</code>和<code>delete[]</code>不同，但是分配器在执行释放过程中都会读取这个日志，从而了解到底应该释放多少内存，但是从程序员的角度来说，既然分配了数组，就应该用<code>delete[]</code>。</p>
+<p>（2）在VC下用汇编跟过delete[]的执行情况,发现这个 “日志 “就是一个4字节长的整数记录数组元素个数,紧挨在数组第一个元素之前。但是有个前提：对象类型(或其基类)有显式析构函数.换句话说,析构函数是非<code>virtual</code>的。否则的话,数组前面是没有这个日志的。其实对于析构函数是<code>virtual</code>的情况，<code>delete[]</code>时无需调用其析构函数，因此此时<code>VC</code>把<code>delete[]</code>当做<code>delete</code>同样处理。</p>
+<p>（3）<code>delete parray</code>，编译器得到类型信息是<code>Account</code>单个的指针，那么释放时，只调用一次析构函数。<br><code>delete[] parray</code>，编译器得到的类型信息是<code>Account[]</code>类型，则按照<code>Account</code>数组来处理，依次调用每个元素的析构函数。 </p>
+<h2 id="3、编译器又是如何获知这个数组的大小？"><a href="#3、编译器又是如何获知这个数组的大小？" class="headerlink" title="3、编译器又是如何获知这个数组的大小？"></a>3、编译器又是如何获知这个数组的大小？</h2><p>当我们使用<code>operator new</code>为一个自定义类型对象分配内存时，我们得到的内存要比实际对象的内存大一些，这些内存除了要存储对象数据外，还需要记录这片内存的大小，此方法称为<code>cookie</code>。这一点上的实现依据不同的编译器不同。（例如<code>MFC</code>选择在所分配内存的头部存储对象实际数据，而后面的部分存储边界标志和内存大小信息。<code>g++</code>则采用在所分配内存的头4个自己存储相关信息，而后面的内存存储对象实际数据。）当我们使用<code>delete operator</code>进行内存释放操作时，<code>delete operator</code>就可以根据这些信息正确的释放指针所指向的内存块。<br>对于<code>parray</code>指针，可以根据这样的<code>cookie</code>信息来得到指向内存空间的大小，<code>delete parray</code>和<code>delete[] parray</code>都是一样的，同样一个指针，<code>cookie</code>信息是相同的，所以对应的内存都会被释放掉。但是由于编译器理解两种情况下的类型是不同的，所以调用析构函数会有不同。 </p>
+<h1 id="四、相关参考"><a href="#四、相关参考" class="headerlink" title="四、相关参考"></a>四、相关参考</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530554.png" alt="image-20240424153034458"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530444.png" alt="image-20240424153053351"></p>
+<p><a href="https://www.cnblogs.com/luxiaoxun/archive/2012/08/10/2631812.html">C++中的new、operator new与placement new</a></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>面试八股</title>
     <url>/2024/04/07/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1842,6 +1919,7 @@ mode_t
 <p>（2）数组元素的存储单元在数组定义时分配，而链表结点的存储单元在程序执行时动态申请；</p>
 <p>（3）数组元素的顺序关系由下标确定，而链表结点的顺序关系由结点所包含的指针确定；</p>
 <p>（4）对于元素频繁操作的处理场合，用链表实现会比数组实现更加有效率。比如在数组中删除一个元素时，需要将删除处之后的所有元素全部前移一个位置；但对于链表来说，只需要改变删除处相关结点的指针指向，而与结点实际的存储位置无关。</p>
+<h3 id="为什么list不能用-sort-，而要用自己的sort-？"><a href="#为什么list不能用-sort-，而要用自己的sort-？" class="headerlink" title="为什么list不能用::sort()，而要用自己的sort()？"></a>为什么list不能用::sort()，而要用自己的sort()？</h3><p>list不能用::sort()，而要用自己的sort()的原因是，全局实现::sort()中有一个操作是对迭代器进行(first + (last - first) &#x2F; 2)，而这个只有针对RandomAccessIterator才能如此操作，而list的在内存中的存放是不连续的，因此不能随机存取。</p>
 <h3 id="指针与数组的外部声明相关"><a href="#指针与数组的外部声明相关" class="headerlink" title="指针与数组的外部声明相关"></a>指针与数组的外部声明相关</h3><p><strong>数组通过外部声明为指针时，数组和指针是不能互换使用的；那么请思考一下，在 A 文件中定义数组 char a[100]；在 B 文件中声明为指针：extern char *a；此时访问 a[i]，会发生什么；</strong></p>
 <p>答1：会引起 <strong>segmentation fault</strong> 报错。链接器实际上是把指针 a 自身的地址定位到了另一个 .cpp 文件中定义的数组首地址上。也就是说，链接器将数组的首地址赋给了指针本身，而不是我们所希望的把数组的首地址赋予指针 a。原因在于使用 extern 修饰的变量在链接的时候只找寻同名的标号，不检查类型，在链接时才进行定位，所以会导致编译通过，运行时出错。</p>
 <p>首先涉及到数组和指针的区别：<strong>可以将数组名看做是右值，而指针作为变量，只能看作为左值。</strong> <strong>右值永远不等于左值，所以将指针赋予数组名是不合法的。即</strong></p>
@@ -2581,6 +2659,51 @@ mode_t
       </categories>
   </entry>
   <entry>
+    <title>字符串与整数的相互转换</title>
+    <url>/2024/04/26/Computer/C++/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<p>今天在做<strong>Leetcode 150. 逆波兰表达式求值</strong>一题时，涉及到字符串转换为整数的相关问题，遂进行如下探讨：</p>
+<h2 id="1、字符串转换为整数"><a href="#1、字符串转换为整数" class="headerlink" title="1、字符串转换为整数"></a>1、字符串转换为整数</h2><h3 id="（1）为什么下面四行代码得到了如下结果？"><a href="#（1）为什么下面四行代码得到了如下结果？" class="headerlink" title="（1）为什么下面四行代码得到了如下结果？"></a>（1）为什么下面四行代码得到了如下结果？</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">cout &lt;&lt; <span class="built_in">stoi</span>(<span class="string">&quot;13&quot;</span>) &lt;&lt; endl;  <span class="comment">// 13</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;13&quot;</span> - <span class="string">&quot;0&quot;</span> &lt;&lt; endl;  <span class="comment">// -3</span></span><br><span class="line">cout &lt;&lt; <span class="string">&#x27;1&#x27;</span> - <span class="string">&#x27;0&#x27;</span> &lt;&lt; endl;   <span class="comment">// 1</span></span><br><span class="line">cout &lt;&lt; <span class="string">&quot;1&quot;</span> - <span class="string">&quot;0&quot;</span> &lt;&lt; endl;   <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>解释如下：</p>
+<ol>
+<li><code>stoi(&quot;13&quot;)</code> 将字符串 “13” 转换为整数，结果是 13。</li>
+<li><code>&quot;13&quot; - &quot;0&quot;</code> 这里使用了字符串字面值进行减法运算，实际上这是不允许的，因为 C++ 中字符串字面值不能直接进行减法运算。但是在这个上下文中，编译器会尝试将字符串字面值转换为字符指针，然后进行指针运算，因此得到的结果是字符指针之间的差，即指向字符串 “13” 和 “0” 的地址之间的距离，而不是它们所代表的整数之差。在这个例子中，”13” 的地址比 “0” 的地址大，因此结果是负值，具体数值取决于编译器和平台。</li>
+<li><code>&#39;1&#39; - &#39;0&#39;</code> 是字符之间的减法运算。字符 ‘1’ 对应的 ASCII 码是 49，字符 ‘0’ 对应的 ASCII 码是 48，因此结果是 1。</li>
+<li><code>&quot;1&quot; - &quot;0&quot;</code> 和第二行的情况类似，仍然是字符串字面值之间的指针运算，结果是字符串指针之间的差，而不是字符串所代表的整数之差。</li>
+</ol>
+<h3 id="（2）四种转换方法"><a href="#（2）四种转换方法" class="headerlink" title="（2）四种转换方法"></a>（2）四种转换方法</h3><ol>
+<li><p><strong>使用标准库函数 stoi() 或 atoi()：</strong> 这两个函数都可以将字符串转换为整数。stoi() 是 C++11 引入的函数，建议优先使用。atoi() 是 C 语言标准库中的函数，也可以用于 C++ 中。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用 stoi()</span></span><br><span class="line"><span class="type">int</span> num = <span class="built_in">stoi</span>(<span class="string">&quot;123&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 atoi()</span></span><br><span class="line"><span class="type">int</span> num = <span class="built_in">atoi</span>(<span class="string">&quot;123&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 stringstream 类：</strong> 可以将字符串写入 stringstream 对象中，然后从中读取整数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::string str = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="function">std::stringstream <span class="title">ss</span><span class="params">(str)</span></span>;</span><br><span class="line"><span class="type">int</span> num;</span><br><span class="line">ss &gt;&gt; num;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手动实现转换函数：</strong> 可以遍历字符串中的每个字符，并根据 ASCII 码将字符转换为对应的整数。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">stringToInt</span><span class="params">(<span class="type">const</span> std::string&amp; str)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> ch : str) &#123;</span><br><span class="line">        num = num * <span class="number">10</span> + (ch - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">std::string str = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="type">int</span> num = <span class="built_in">stringToInt</span>(str);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 C 语言的 sscanf() 函数：</strong> 这个函数可以根据指定的格式从字符串中提取数据。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::string str = <span class="string">&quot;123&quot;</span>;</span><br><span class="line"><span class="type">int</span> num;</span><br><span class="line"><span class="built_in">sscanf</span>(str.<span class="built_in">c_str</span>(), <span class="string">&quot;%d&quot;</span>, &amp;num);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2、整数转换为字符串"><a href="#2、整数转换为字符串" class="headerlink" title="2、整数转换为字符串"></a>2、整数转换为字符串</h2><ol>
+<li><p><strong>使用标准库函数 to_string()：</strong> 这是 C++11 引入的函数，可以直接将整数转换为字符串。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line">std::string str = std::<span class="built_in">to_string</span>(num);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 stringstream 类：</strong> 可以将整数写入 stringstream 对象中，然后从中读取字符串。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line">std::stringstream ss;</span><br><span class="line">ss &lt;&lt; num;</span><br><span class="line">std::string str = ss.<span class="built_in">str</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 sprintf() 函数：</strong> 这是 C 语言标准库中的函数，可以将格式化的数据写入字符串缓冲区中。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line"><span class="type">char</span> buffer[<span class="number">20</span>];  <span class="comment">// 需要足够的缓冲区大小</span></span><br><span class="line"><span class="built_in">sprintf</span>(buffer, <span class="string">&quot;%d&quot;</span>, num);</span><br><span class="line"><span class="function">std::string <span class="title">str</span><span class="params">(buffer)</span></span>;  <span class="comment">// 将字符数组转换为字符串</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手动实现转换函数：</strong> 可以根据整数的每一位数字，将其转换为字符并逐个拼接到字符串中。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">intToString</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">    std::string str;</span><br><span class="line">    <span class="keyword">while</span> (num != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> digit = num % <span class="number">10</span>;</span><br><span class="line">        <span class="type">char</span> ch = digit + <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">        str = ch + str;  <span class="comment">// 将字符添加到字符串的前面</span></span><br><span class="line">        num /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line">std::string str = <span class="built_in">intToString</span>(num);</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>代码随想录</title>
     <url>/2024/04/09/Computer/DataStruct/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95/</url>
     <content><![CDATA[<h1 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h1><h2 id="1、二分法"><a href="#1、二分法" class="headerlink" title="1、二分法"></a>1、二分法</h2><h3 id="704-二分查找"><a href="#704-二分查找" class="headerlink" title="704. 二分查找"></a>704. 二分查找</h3><p><a href="https://leetcode.cn/problems/binary-search/">704. 二分查找</a></p>
@@ -3047,6 +3170,66 @@ mode_t
 <li>SGI STL 由Silicon Graphics Computer Systems公司参照HP STL实现，被Linux的C++编译器GCC所采用，SGI STL是开源软件，源码可读性甚高。</li>
 </ol>
 </blockquote>
+<h2 id="2-栈的基本操作"><a href="#2-栈的基本操作" class="headerlink" title="2. 栈的基本操作"></a>2. 栈的基本操作</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line">st.<span class="built_in">empty</span>();		<span class="comment">// 栈为空时返回1，非空返回0</span></span><br><span class="line">st.<span class="built_in">size</span>();		<span class="comment">// 返回栈中元素数量，size_type size() const;</span></span><br><span class="line">st.<span class="built_in">top</span>();		<span class="comment">// 返回栈顶元素，value_type&amp; top();</span></span><br><span class="line">st.<span class="built_in">push</span>(value);	<span class="comment">// 在栈顶插入一个元素，void push( const value_tyoe&amp; val );</span></span><br><span class="line">st.<span class="built_in">emplace</span>(value);	<span class="comment">// 在栈顶增加一个元素，void emplace( args&amp;&amp; args );</span></span><br><span class="line">st.<span class="built_in">pop</span>();			<span class="comment">// 栈顶元素出栈，即删除栈顶元素，void pop(); </span></span><br><span class="line"></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; st2;</span><br><span class="line">st1.<span class="built_in">swap</span>( st2 );	<span class="comment">// 交换两个栈中的内容，void swap( stack&amp; x );</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 与vector一样，重载了运算符：== != &lt; &lt;= &gt; &gt;=</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、队列的基本操作"><a href="#3、队列的基本操作" class="headerlink" title="3、队列的基本操作"></a>3、队列的基本操作</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">queue&lt;<span class="type">double</span>&gt; d;</span><br><span class="line">queue&lt;node&gt; n;  <span class="comment">// node是一个结构体</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">front</span>();	<span class="comment">// 返回q的第一个元素</span></span><br><span class="line">q.<span class="built_in">back</span>();	<span class="comment">// 返回q的末尾元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、对称匹配问题"><a href="#4、对称匹配问题" class="headerlink" title="4、对称匹配问题"></a>4、对称匹配问题</h2><h3 id="20-有效的括号"><a href="#20-有效的括号" class="headerlink" title="20. 有效的括号"></a>20. 有效的括号</h3><p><a href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></p>
+<ul>
+<li><p>解题思路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404252121420.png" alt="image-20240425212136199"></p>
+<p>这里有两个要注意的地方：</p>
+<ol>
+<li><p>在遍历到左括号时，可以直接向栈中放入对应的右括号，这样遍历到右括号时可以直接比较是否相等；</p>
+</li>
+<li><p>注意在遍历到右括号时需要先判断此时栈是否为空。</p>
+<p>对于<code>s = &quot;)&#123;&quot;</code>的情况，由于遍历到左括号时才会入栈，遍历到右括号时只执行比较操作，因此此时<code>st</code>为空，若直接执行<code>st.top()</code>会造成错误！</p>
+</li>
+</ol>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isValid</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s.<span class="built_in">size</span>() % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    stack&lt;<span class="type">char</span>&gt; st;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> i : s) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            st.<span class="built_in">push</span>(<span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="string">&#x27;[&#x27;</span>) &#123;</span><br><span class="line">            st.<span class="built_in">push</span>(<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="string">&#x27;&#123;&#x27;</span>) &#123;</span><br><span class="line">            st.<span class="built_in">push</span>(<span class="string">&#x27;&#125;&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (i == <span class="string">&#x27;)&#x27;</span> || i == <span class="string">&#x27;]&#x27;</span> || i == <span class="string">&#x27;&#125;&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!st.<span class="built_in">empty</span>() &amp;&amp; st.<span class="built_in">top</span>() == i) &#123;</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1047-删除字符串中的所有相邻重复项"><a href="#1047-删除字符串中的所有相邻重复项" class="headerlink" title="1047. 删除字符串中的所有相邻重复项"></a>1047. 删除字符串中的所有相邻重复项</h3><p><a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">1047. 删除字符串中的所有相邻重复项</a></p>
+<ul>
+<li><p>解题思路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404252121802.png" alt="image-20240425212128346"></p>
+<p>注意输出的时候要进行一个reverse操作，因为栈是先进先出，和需要的结果次序是相反的。</p>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">removeDuplicates</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="type">char</span>&gt; st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> i : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!st.<span class="built_in">empty</span>() &amp;&amp; st.<span class="built_in">top</span>() == i) &#123;</span><br><span class="line">                st.<span class="built_in">pop</span>();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                st.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">while</span> (!st.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            res += st.<span class="built_in">top</span>();</span><br><span class="line">            st.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">reverse</span>(res.<span class="built_in">begin</span>(), res.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="150-逆波兰表达式求值"><a href="#150-逆波兰表达式求值" class="headerlink" title="150. 逆波兰表达式求值"></a>150. 逆波兰表达式求值</h3><p><a href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></p>
+<ul>
+<li><p>解题思路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404261554153.png" alt="image-20240426155453665"></p>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isDigit</span><span class="params">(string &amp;s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.<span class="built_in">size</span>() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ch : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">isdigit</span>(ch)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">evalRPN</span><span class="params">(vector&lt;string&gt;&amp; tokens)</span> </span>&#123;</span><br><span class="line">        stack&lt;<span class="type">long</span> <span class="type">long</span>&gt; res;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> token : tokens) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">isDigit</span>(token)) &#123;</span><br><span class="line">                    <span class="comment">// 操作符</span></span><br><span class="line">                    <span class="type">long</span> <span class="type">long</span> tmp1 = res.<span class="built_in">top</span>();</span><br><span class="line">                    res.<span class="built_in">pop</span>();</span><br><span class="line">                    <span class="type">long</span> <span class="type">long</span> tmp2 = res.<span class="built_in">top</span>();</span><br><span class="line">                    res.<span class="built_in">pop</span>();</span><br><span class="line">                    <span class="type">long</span> <span class="type">long</span> tmp = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">if</span> (token == <span class="string">&quot;+&quot;</span>) &#123;</span><br><span class="line">                        tmp = tmp2 + tmp1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (token == <span class="string">&quot;-&quot;</span>) &#123;</span><br><span class="line">                        tmp = tmp2 - tmp1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (token == <span class="string">&quot;*&quot;</span>) &#123;</span><br><span class="line">                        tmp = tmp2 * tmp1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (token == <span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">                        tmp = tmp2 / tmp1;</span><br><span class="line">                    &#125;</span><br><span class="line">                    res.<span class="built_in">push</span>(tmp);   </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.<span class="built_in">push</span>(<span class="built_in">stoi</span>(token));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res.<span class="built_in">top</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5、队列解决相关问题"><a href="#5、队列解决相关问题" class="headerlink" title="5、队列解决相关问题"></a>5、队列解决相关问题</h2><blockquote>
+<p>可用于以下题目：</p>
+<ol>
+<li>单调队列解决“<strong>区间内的最大值</strong>”问题；</li>
+<li>优先级队列解决“<strong>统计元素出现频率</strong>”问题</li>
+</ol>
+</blockquote>
+<h3 id="239-滑动窗口最大值"><a href="#239-滑动窗口最大值" class="headerlink" title="239. 滑动窗口最大值"></a>239. 滑动窗口最大值</h3><p><a href="https://leetcode.cn/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></p>
+<ul>
+<li><p>解题思路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404261557720.png" alt="image-20240426155748508"></p>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">MyQueue</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        deque&lt;<span class="type">int</span>&gt; que;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">pop</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (!que.<span class="built_in">empty</span>() &amp;&amp; val == que.<span class="built_in">front</span>()) &#123;</span><br><span class="line">            <span class="comment">// 如果val == que.front()</span></span><br><span class="line">            <span class="comment">// 说明队列要pop()的元素为此时滑动窗口的最大值，需要执行实际的pop()操作</span></span><br><span class="line">            que.<span class="built_in">pop_front</span>();</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">while</span> (!que.<span class="built_in">empty</span>() &amp;&amp; val &gt; que.<span class="built_in">back</span>()) &#123;</span><br><span class="line">            que.<span class="built_in">pop_back</span>();</span><br><span class="line">          &#125;</span><br><span class="line">          que.<span class="built_in">push_back</span>(val);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">getMaxValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> que.<span class="built_in">front</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">      MyQueue que;</span><br><span class="line">      vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">      <span class="comment">// 先将前k个元素放进单调队列</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;k; ++i) &#123;</span><br><span class="line">        que.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// res先记录这前k个元素的最大值</span></span><br><span class="line">      res.<span class="built_in">push_back</span>(que.<span class="built_in">getMaxValue</span>());</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i=k; i&lt;nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">        que.<span class="built_in">pop</span>(nums[i-k]);</span><br><span class="line">        que.<span class="built_in">push</span>((nums[i]));</span><br><span class="line">        res.<span class="built_in">push_back</span>(que.<span class="built_in">getMaxValue</span>());</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="347-前-K-个高频元素"><a href="#347-前-K-个高频元素" class="headerlink" title="347.前 K 个高频元素"></a>347.前 K 个高频元素</h3><p><a href="https://leetcode.cn/problems/top-k-frequent-elements/">347.前 K 个高频元素</a></p>
+<ul>
+<li><p>解题思路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404261557691.png" alt="image-20240426155759481"></p>
+</li>
+<li><p>AC代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">mycomparison</span> &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; lhs, <span class="type">const</span> pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&amp; rhs)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> lhs.second &gt; rhs.second;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">topKFrequent</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// step1</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; map;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> num : nums) &#123;</span><br><span class="line">            map[num]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// step2</span></span><br><span class="line">        priority_queue&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;, vector&lt;pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt;&gt;, mycomparison&gt; pri_que;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it=map.<span class="built_in">begin</span>(); it!=map.<span class="built_in">end</span>(); ++it) &#123;</span><br><span class="line">            pri_que.<span class="built_in">push</span>(*it);</span><br><span class="line">            <span class="comment">// step3</span></span><br><span class="line">            <span class="keyword">if</span> (pri_que.<span class="built_in">size</span>() &gt; k) &#123;</span><br><span class="line">                pri_que.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// step4</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">res</span><span class="params">(k)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=k<span class="number">-1</span>; i&gt;=<span class="number">0</span>; --i) &#123;</span><br><span class="line">            res[i] = pri_que.<span class="built_in">top</span>().first;</span><br><span class="line">            pri_que.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>Computer</category>
@@ -3174,6 +3357,19 @@ mode_t
       <categories>
         <category>Computer</category>
         <category>DataStruct</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Ch1 计算机系统漫游</title>
+    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
+    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>CSAPP</category>
       </categories>
   </entry>
   <entry>
@@ -3679,19 +3875,6 @@ mode_t
       <categories>
         <category>Computer</category>
         <category>DataStruct</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ch1 计算机系统漫游</title>
-    <url>/2024/04/03/Computer/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/</url>
-    <content><![CDATA[<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><span id="more"></span>
-
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-        <category>CSAPP</category>
       </categories>
   </entry>
   <entry>
@@ -4973,81 +5156,6 @@ mode_t
       </categories>
   </entry>
   <entry>
-    <title>new与operator new</title>
-    <url>/2024/04/24/Computer/C++/new%E4%B8%8Eoperator%20new/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>区分三个概念：new operator、operator new和placement new</strong></p>
-</blockquote>
-<h1 id="一、new-operator、operator-new和placement-new"><a href="#一、new-operator、operator-new和placement-new" class="headerlink" title="一、new operator、operator new和placement new"></a>一、new operator、operator new和placement new</h1><h2 id="1、new-operator（new-操作符）"><a href="#1、new-operator（new-操作符）" class="headerlink" title="1、new operator（new 操作符）"></a>1、new operator（new 操作符）</h2><p>当写下<code>string *ps = new string(&quot;Memory Management&quot;)</code>时，使用的<code>new</code>是<strong>new操作符</strong>。这个操作符和<code>sizeof</code>一样是语言内置的，它总是完成以下功能：</p>
-<ol>
-<li>分配内存（调用operator new函数）；</li>
-<li>调用构造函数初始化内存中的对象。</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241419515.png" alt="image-20240424141921292"></p>
-<h2 id="2、operator-new"><a href="#2、operator-new" class="headerlink" title="2、operator new"></a>2、operator new</h2><p>new操作符调用一个函数来完毕必需的内存分配，即<strong>operator new</strong>。注意这个函数的职责和<code>malloc</code>一样，只是为了分配内存。</p>
-<p>函数operator new 通常这样声明：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>返回值类型：<code>void *</code>（返回一个未经处理的<code>raw</code>指针）</li>
-<li>参数<code>size_t size</code>：确定分配多少内存。可以添加额外的參数重载函数<code>operator new</code>，但第一个參数类型必须是<code>size_t</code>。</li>
-</ul>
-<h2 id="3、placement-new"><a href="#3、placement-new" class="headerlink" title="3、placement new"></a>3、placement new</h2><blockquote>
-<p><strong>placement new是一种特殊的operator new，作用于一块已分配但未处理或未初始化的raw内存。</strong></p>
-</blockquote>
-<p>当存在一些已经被分配单尚未被处理的<code>raw</code>内存时，如果需要再这些内存中构造一个对象，可以使用<strong>一个特殊的operator new</strong> ，它被称为<strong>placement new</strong>。当程序使用共享内存或memory-mapped I&#x2F;O时这个函数可能实用，由于在这样程序里对象必须被放置在一个确定地址上或一块被例程分配的内存里。</p>
-<p>如下例所示：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Widget</span> &#123;</span><br><span class="line">　<span class="keyword">public</span>:</span><br><span class="line">　　<span class="built_in">Widget</span>(<span class="type">int</span> widgetSize);</span><br><span class="line">　　...</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function">Widget * <span class="title">constructWidgetInBuffer</span><span class="params">(<span class="type">void</span> *buffer,<span class="type">int</span> widgetSize)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　<span class="keyword">return</span> <span class="built_in">new</span> (buffer) <span class="built_in">Widget</span>(widgetSize);  <span class="comment">// placement new的用法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>详细来说，<code>new (buffer) Widget(widgetSize)</code>是new操作符的一个使用方法，需要使用一个额外的变量<code>buffer</code>。当new操作符隐含调用operator new函数时，把这个变量传递给它，此时，被调用的operator new函数除了带有强制的参数<code>size_t</code>外，还必须接受<code>void *</code>指针参数，指向构造对象占用的内存空间。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span>, <span class="type">void</span> *location)</span>  <span class="comment">// size_t没有名字，以防止编译器发出警告说它没有使用</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">　<span class="keyword">return</span> location;</span><br><span class="line">  <span class="comment">// 在使用placement new的情况下，调用者已经获得了指向内存的指针</span></span><br><span class="line">  <span class="comment">// 由于调用者知道对象应该放在哪里，placement new必须做的就是返回转递给它的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p><strong>new 、operator new 和 placement new 区别</strong></p>
-<p>（1）<code>new</code>：不能被重载，其行为总是一致的。它先调用operator new分配内存，然后调用构造函数初始化那段内存。</p>
-<p>（2）<code>operator new</code>：要实现不同的内存分配行为，应该重载operator new，而不是new。</p>
-<p>operator new就像operator +一样，是可以重载的。如果类中没有重载operator new，那么调用的就是全局的::operator  new来完成堆的分配。同理，operator new[]、operator delete、operator delete[]也是可以重载的。</p>
-<p>重载时，返回类型必须声明为void*，第一个参数类型必须为表达要求分配空间的大小（字节），类型为size_t，可以带其它参数。</p>
-<p>（3）<code>placement new</code>：只是operator new重载的一个标准、全局的版本。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针。因此不能删除它，但需要调用对象的析构函数。</p>
-<p>如果你想在已经分配的内存中创建一个对象，使用new时行不通的。也就是说placement new允许你在一个已经分配好的内存中（栈或者堆中）构造一个新的对象。原型中void* p实际上就是指向一个已经分配好的内存缓冲区的的首地址。</p>
-<h1 id="二、Deletion-and-Memory-Deallocation"><a href="#二、Deletion-and-Memory-Deallocation" class="headerlink" title="二、Deletion and Memory Deallocation"></a>二、Deletion and Memory Deallocation</h1><h2 id="1、delete和operator-delete"><a href="#1、delete和operator-delete" class="headerlink" title="1、delete和operator delete"></a>1、delete和operator delete</h2><p>为了避免内存泄漏，每一个动态内存分配必须与一个等同相反的deallocation相应。<strong>函数operator delete</strong>与<strong>delete操作符</strong>的关系与<strong>operator new</strong>与<strong>new操作符</strong>的关系一样。</p>
-<p><code>delete</code>总是完成下述功能：</p>
-<ol>
-<li>调用析构函数；</li>
-<li>释放内存。</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241445181.png" alt="image-20240424144503094"></p>
-<p><code>operator delete</code>函数用来释放内存，声明如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span> *memoryToBeDeallocated)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>因此，<strong>假设你仅仅想处理未被初始化的内存，你应该绕过new和delete操作符，而调用operator new 获得内存和operator delete释放内存给系统</strong>：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> *buffer = <span class="keyword">operator</span> <span class="built_in">new</span>(<span class="number">50</span>*<span class="built_in">sizeof</span>(<span class="type">char</span>)); <span class="comment">// 分配足够的内存以容纳50个char</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//没有调用构造函数</span></span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(buffer)</span></span>; <span class="comment">// 释放内存</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 没有调用析构函数</span></span><br></pre></td></tr></table></figure>
-
-<p>这与在C中调用malloc和free等同。</p>
-<h2 id="2、placement-new建立的对象怎样释放？"><a href="#2、placement-new建立的对象怎样释放？" class="headerlink" title="2、placement new建立的对象怎样释放？"></a>2、placement new建立的对象怎样释放？</h2><p>假设用<code>placement new</code>在内存中建立对象，应该避免在该内存中使用delete 操作符。</p>
-<p>由于delete操作符调用operator delete释放内存，但这片存最开始并不是被operator new分配的，placement new只是返回传递给它的这片内存的指针，因此无法得知这片内存究竟来自何处。因此，<strong>应该显式调用析构函数来解除构造函数的影响</strong>。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在共享内存中分配和释放内存的函数 void * mallocShared(size_t size);</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">freeShared</span><span class="params">(<span class="type">void</span> *memory)</span></span>;</span><br><span class="line"><span class="type">void</span> *sharedMemory = <span class="built_in">mallocShared</span>(<span class="built_in">sizeof</span>(Widget));</span><br><span class="line">Widget *pw = <span class="comment">// 如上所看到的</span></span><br><span class="line"><span class="built_in">constructWidgetInBuffer</span>(sharedMemory, <span class="number">10</span>); <span class="comment">// 使用</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 执行placement new操作 </span></span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line"><span class="keyword">delete</span> pw;      <span class="comment">// 结果不确定! 共享内存来自mallocShared, 而不是operator new</span></span><br><span class="line">pw-&gt;~<span class="built_in">Widget</span>();  <span class="comment">// 正确。 析构pw指向的Widget，但并未释放存放Widget的这片内存</span></span><br><span class="line"><span class="built_in">freeShared</span>(pw); <span class="comment">// 正确。 释放pw指向的共享内存，但并未调用析构函数</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="3、new-delete和array-new-array-delete应该搭配使用"><a href="#3、new-delete和array-new-array-delete应该搭配使用" class="headerlink" title="3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用"></a>3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241457401.png" alt="image-20240424145754309"></p>
-<h1 id="三、相关问题"><a href="#三、相关问题" class="headerlink" title="三、相关问题"></a>三、相关问题</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">Accoun *parray= <span class="keyword">new</span> Account[<span class="number">100</span>]; </span><br><span class="line"><span class="keyword">delete</span> parray; </span><br><span class="line"><span class="keyword">delete</span>[] parray; </span><br></pre></td></tr></table></figure>
-
-<p>方括号的存在会使编译器获取数组大小（size）然后析构函数再被依次应用在每个元素上，一共size次。否则，只有一个元素被析构。 但无论哪种情况，分配的全部空间被返还给自由存储区。 </p>
-<h2 id="1、为什么无论哪种情况，分配的全部空间被返还给自由存储区"><a href="#1、为什么无论哪种情况，分配的全部空间被返还给自由存储区" class="headerlink" title="1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?"></a>1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?</h2><p>首先，针对最后一句话“<strong>无论哪种情况，分配的全部空间被返还给自由存储区</strong>”，实际上是指：</p>
-<p>无论是使用 <code>delete</code> 还是 <code>delete []</code>，分配的全部空间都会被释放，并返回给自由存储区。区别在于，<code>delete</code> 只会调用一次析构函数，而 <code>delete []</code> 会调用数组中每个元素的析构函数。因此，如果你分配了一个数组并使用 <code>delete</code> 来释放，只有一个元素的析构函数会被调用，可能导致内存泄漏，因为其他元素的资源没有得到正确释放。而使用 <code>delete []</code> 则能保证每个元素的析构函数都被正确调用，避免了这种潜在的内存泄漏问题。</p>
-<h2 id="2、对于delete-parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？"><a href="#2、对于delete-parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？" class="headerlink" title="2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？"></a>2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？</h2><p>（1）一般在分配时分配器会自动写一个日志（即在分配的内存之前有一个结构）用于记录分配的大小，分配内容的sizeof等等。 </p>
-<p>直观来说，<code>delete</code>和<code>delete[]</code>都是传入一个<code>void*</code>，因此如果不保存日志就无法知道分配时到底是分配了一个还是多个单元。所以虽然<code>delete</code>和<code>delete[]</code>不同，但是分配器在执行释放过程中都会读取这个日志，从而了解到底应该释放多少内存，但是从程序员的角度来说，既然分配了数组，就应该用<code>delete[]</code>。</p>
-<p>（2）在VC下用汇编跟过delete[]的执行情况,发现这个 “日志 “就是一个4字节长的整数记录数组元素个数,紧挨在数组第一个元素之前。但是有个前提：对象类型(或其基类)有显式析构函数.换句话说,析构函数是非<code>virtual</code>的。否则的话,数组前面是没有这个日志的。其实对于析构函数是<code>virtual</code>的情况，<code>delete[]</code>时无需调用其析构函数，因此此时<code>VC</code>把<code>delete[]</code>当做<code>delete</code>同样处理。</p>
-<p>（3）<code>delete parray</code>，编译器得到类型信息是<code>Account</code>单个的指针，那么释放时，只调用一次析构函数。<br><code>delete[] parray</code>，编译器得到的类型信息是<code>Account[]</code>类型，则按照<code>Account</code>数组来处理，依次调用每个元素的析构函数。 </p>
-<h2 id="3、编译器又是如何获知这个数组的大小？"><a href="#3、编译器又是如何获知这个数组的大小？" class="headerlink" title="3、编译器又是如何获知这个数组的大小？"></a>3、编译器又是如何获知这个数组的大小？</h2><p>当我们使用<code>operator new</code>为一个自定义类型对象分配内存时，我们得到的内存要比实际对象的内存大一些，这些内存除了要存储对象数据外，还需要记录这片内存的大小，此方法称为<code>cookie</code>。这一点上的实现依据不同的编译器不同。（例如<code>MFC</code>选择在所分配内存的头部存储对象实际数据，而后面的部分存储边界标志和内存大小信息。<code>g++</code>则采用在所分配内存的头4个自己存储相关信息，而后面的内存存储对象实际数据。）当我们使用<code>delete operator</code>进行内存释放操作时，<code>delete operator</code>就可以根据这些信息正确的释放指针所指向的内存块。<br>对于<code>parray</code>指针，可以根据这样的<code>cookie</code>信息来得到指向内存空间的大小，<code>delete parray</code>和<code>delete[] parray</code>都是一样的，同样一个指针，<code>cookie</code>信息是相同的，所以对应的内存都会被释放掉。但是由于编译器理解两种情况下的类型是不同的，所以调用析构函数会有不同。 </p>
-<h1 id="四、相关参考"><a href="#四、相关参考" class="headerlink" title="四、相关参考"></a>四、相关参考</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530554.png" alt="image-20240424153034458"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530444.png" alt="image-20240424153053351"></p>
-<p><a href="https://www.cnblogs.com/luxiaoxun/archive/2012/08/10/2631812.html">C++中的new、operator new与placement new</a></p>
-]]></content>
-      <categories>
-        <category>Computer</category>
-        <category>C++</category>
-      </categories>
-  </entry>
-  <entry>
     <title>cmu15-445 Course Related (Spring 2023)</title>
     <url>/2024/03/02/Project/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/</url>
     <content><![CDATA[<table>
@@ -5887,6 +5995,38 @@ mode_t
       <categories>
         <category>Project</category>
         <category>cmu15-445</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>STL之优先级队列（priority_queue）</title>
+    <url>/2024/04/26/Computer/C++/STL/STL%E4%B9%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88priority_queue%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><p>优先级队列（priority_queue）是C++标准库中的一个容器适配器（container adapter），其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆（heap）数据结构。</p>
+<p>定义在<queue>头文件中。</p>
+<p>默认情况下，priority_queue使用std::less作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+<h2 id="二、特点"><a href="#二、特点" class="headerlink" title="二、特点"></a>二、特点</h2><p>优先级排序：priority_queue中的元素按照一定的优先级进行排序。默认情况下，元素的优先级按照从大到小的顺序排列，也可以通过自定义的比较函数来指定不同的排序方式。</p>
+<p>自动排序：在插入元素时，priority_queue会根据元素的优先级自动进行排序。每次插入新元素时，都会将新元素放置在正确的位置上。</p>
+<p>取出优先级最高元素：priority_queue提供了一种方便的方式来取出优先级最高的元素。使用top()函数可以访问优先级最高的元素，而使用pop()函数可以将该元素从队列中移除。</p>
+<p>底层实现采用堆：priority_queue通常使用堆（heap）数据结构来实现。堆是一种具有特定性质的二叉树，可以高效地插入新元素和取出优先级最高的元素。</p>
+<p>动态大小：priority_queue的大小可以根据需要进行动态调整。可以随时插入新元素和删除已有元素，并在必要时自动重新排序。</p>
+<h2 id="三、相关函数"><a href="#三、相关函数" class="headerlink" title="三、相关函数"></a>三、相关函数</h2><h3 id="1-声明"><a href="#1-声明" class="headerlink" title="1. 声明"></a>1. 声明</h3>   <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">priority_queue &lt;node&gt; q;</span><br><span class="line"><span class="comment">// node是一个结构体</span></span><br><span class="line"><span class="comment">// 结构体里重载了‘&lt;’小于符号</span></span><br><span class="line"></span><br><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"><span class="comment">// 不需要#include&lt;vector&gt;头文件</span></span><br><span class="line"><span class="comment">// 注意后面两个“&gt;”不要写在一起，“&gt;&gt;”是右移运算符</span></span><br><span class="line"></span><br><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt; &gt;q;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2. 基本操作"></a>2. 基本操作</h3>   <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">top</span>();	<span class="comment">// 返回q的第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-排序实现"><a href="#3-排序实现" class="headerlink" title="3. 排序实现"></a>3. 排序实现</h3><ol>
+<li><p>默认的优先队列（结构体，重载小于）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp; a) <span class="type">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> x&lt;a.x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>less和greater优先队列</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt; p;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">// less&lt;int&gt;:14 12 10 8 6（大顶堆）</span></span><br><span class="line"><span class="comment">// greater&lt;int&gt;:6 8 10 12 14（小顶堆）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义仿函数如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 自定义仿函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareByAge</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.age &gt; p2.age;  <span class="comment">// 按照年龄从小到大排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Computer</category>
+        <category>C++</category>
+        <category>STL</category>
       </categories>
   </entry>
 </search>

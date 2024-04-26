@@ -22,30 +22,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Ch10 系统级I&#x2F;O">
+  <meta name="description" content="一、概念优先级队列（priority_queue）是C++标准库中的一个容器适配器（container adapter），其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆（heap）数据结构。 定义在头文件中。 默认情况下，priority_queue使用std::less作为比较函数，即元素的优先级按照从大到小的顺序排列。 二、特点优先级排序：priori">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ch10 系统级I&#x2F;O">
-<meta property="og:url" content="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/index.html">
+<meta property="og:title" content="STL之优先级队列（priority_queue）">
+<meta property="og:url" content="http://example.com/2024/04/26/Computer/C++/STL/STL%E4%B9%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88priority_queue%EF%BC%89/index.html">
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
-<meta property="og:description" content="Ch10 系统级I&#x2F;O">
+<meta property="og:description" content="一、概念优先级队列（priority_queue）是C++标准库中的一个容器适配器（container adapter），其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆（heap）数据结构。 定义在头文件中。 默认情况下，priority_queue使用std::less作为比较函数，即元素的优先级按照从大到小的顺序排列。 二、特点优先级排序：priori">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052220580.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052222286.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052223245.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052227053.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052233018.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235910.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235669.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052239600.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png">
-<meta property="article:published_time" content="2024-04-03T03:20:45.363Z">
-<meta property="article:modified_time" content="2024-04-17T02:37:02.726Z">
+<meta property="article:published_time" content="2024-04-26T07:58:50.769Z">
+<meta property="article:modified_time" content="2024-04-26T08:33:23.185Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png">
 
-<link rel="canonical" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/">
+<link rel="canonical" href="http://example.com/2024/04/26/Computer/C++/STL/STL%E4%B9%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88priority_queue%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -58,7 +47,7 @@
   };
 </script>
 
-  <title>Ch10 系统级I/O | MIDORII'S JOURNEY</title>
+  <title>STL之优先级队列（priority_queue） | MIDORII'S JOURNEY</title>
   
 
 
@@ -205,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/26/Computer/C++/STL/STL%E4%B9%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88priority_queue%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -218,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Ch10 系统级I/O
+          STL之优先级队列（priority_queue）
         </h1>
 
         <div class="post-meta">
@@ -227,16 +216,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-04-03 11:20:45" itemprop="dateCreated datePublished" datetime="2024-04-03T11:20:45+08:00">2024-04-03</time>
+              <time title="创建时间：2024-04-26 15:58:50 / 修改时间：16:33:23" itemprop="dateCreated datePublished" datetime="2024-04-26T15:58:50+08:00">2024-04-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-17 10:37:02" itemprop="dateModified" datetime="2024-04-17T10:37:02+08:00">2024-04-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -247,7 +230,11 @@
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                  <a href="/categories/Computer/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer/C/STL/" itemprop="url" rel="index"><span itemprop="name">STL</span></a>
                 </span>
             </span>
 
@@ -257,7 +244,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>680</span>
+              <span>659</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -276,92 +263,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><span id="more"></span>
+        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><p>优先级队列（priority_queue）是C++标准库中的一个容器适配器（container adapter），其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆（heap）数据结构。</p>
+<p>定义在<queue>头文件中。</p>
+<p>默认情况下，priority_queue使用std::less作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+<h2 id="二、特点"><a href="#二、特点" class="headerlink" title="二、特点"></a>二、特点</h2><p>优先级排序：priority_queue中的元素按照一定的优先级进行排序。默认情况下，元素的优先级按照从大到小的顺序排列，也可以通过自定义的比较函数来指定不同的排序方式。</p>
+<p>自动排序：在插入元素时，priority_queue会根据元素的优先级自动进行排序。每次插入新元素时，都会将新元素放置在正确的位置上。</p>
+<p>取出优先级最高元素：priority_queue提供了一种方便的方式来取出优先级最高的元素。使用top()函数可以访问优先级最高的元素，而使用pop()函数可以将该元素从队列中移除。</p>
+<p>底层实现采用堆：priority_queue通常使用堆（heap）数据结构来实现。堆是一种具有特定性质的二叉树，可以高效地插入新元素和取出优先级最高的元素。</p>
+<p>动态大小：priority_queue的大小可以根据需要进行动态调整。可以随时插入新元素和删除已有元素，并在必要时自动重新排序。</p>
+<h2 id="三、相关函数"><a href="#三、相关函数" class="headerlink" title="三、相关函数"></a>三、相关函数</h2><h3 id="1-声明"><a href="#1-声明" class="headerlink" title="1. 声明"></a>1. 声明</h3>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;node&gt; q;</span><br><span class="line"><span class="comment">// node是一个结构体</span></span><br><span class="line"><span class="comment">// 结构体里重载了‘&lt;’小于符号</span></span><br><span class="line"></span><br><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"><span class="comment">// 不需要#include&lt;vector&gt;头文件</span></span><br><span class="line"><span class="comment">// 注意后面两个“&gt;”不要写在一起，“&gt;&gt;”是右移运算符</span></span><br><span class="line"></span><br><span class="line">priority_queue &lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt; &gt;q;</span><br></pre></td></tr></table></figure>
 
-<p><strong>I-Input&#x2F;O-Output：外设和内存之间进行数据交互的过程</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png" alt="image-20240405220142526"></p>
-<h2 id="1、系统级I-O"><a href="#1、系统级I-O" class="headerlink" title="1、系统级I&#x2F;O"></a>1、系统级I&#x2F;O</h2><h3 id="（1）Unix-I-O"><a href="#（1）Unix-I-O" class="headerlink" title="（1）Unix I&#x2F;O"></a>（1）Unix I&#x2F;O</h3><ul>
-<li>Opening files——返回文件描述符（file discripitor，fd）<ul>
-<li>standard unput</li>
-<li>standard output</li>
-<li>standard err</li>
-</ul>
+<h3 id="2-基本操作"><a href="#2-基本操作" class="headerlink" title="2. 基本操作"></a>2. 基本操作</h3>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">top</span>();	<span class="comment">// 返回q的第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-排序实现"><a href="#3-排序实现" class="headerlink" title="3. 排序实现"></a>3. 排序实现</h3><ol>
+<li><p>默认的优先队列（结构体，重载小于）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	<span class="type">bool</span> <span class="keyword">operator</span> &lt; (<span class="type">const</span> node &amp; a) <span class="type">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> x&lt;a.x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
-<li>Changing the current file（改变当前文件的位置）</li>
-<li>Reading and Writing files</li>
-<li>Closing files</li>
-</ul>
-<h3 id="（2）Files"><a href="#（2）Files" class="headerlink" title="（2）Files"></a>（2）Files</h3><ul>
-<li><p><strong>Regular file</strong>（普通文件）</p>
+<li><p>less和greater优先队列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt; p;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">// less&lt;int&gt;:14 12 10 8 6（大顶堆）</span></span><br><span class="line"><span class="comment">// greater&lt;int&gt;:6 8 10 12 14（小顶堆）</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>Directory</strong>（目录文件）</p>
-<ul>
-<li>相当于文件夹，是一个<strong>存储链接信息</strong>的数组，即<strong>文件和文件名的映射</strong></li>
-</ul>
-</li>
-<li><p><strong>Socket</strong>（套接字）</p>
-</li>
-<li><p><strong>named pipe</strong>（命名管道），<strong>symbolic link</strong>（符号链接），<strong>character and block device</strong>（字符和块设备）</p>
-<ul>
-<li>如键盘、鼠标等为字符设备；硬盘为块设备</li>
-</ul>
-</li>
-<li><p><strong>usr</strong>——Unix Software Resources的缩写</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052220580.png" alt="image-20240405222033196"></p>
-<h3 id="（3）Opening-and-Closing-Files"><a href="#（3）Opening-and-Closing-Files" class="headerlink" title="（3）Opening and Closing Files"></a>（3）Opening and Closing Files</h3><ul>
-<li><p>打开文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052222286.png" alt="image-20240405222257203"></p>
-</li>
-<li><p>关闭文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052223245.png" alt="image-20240405222318176"></p>
-</li>
-</ul>
-<h3 id="（4）File-Permission"><a href="#（4）File-Permission" class="headerlink" title="（4）File Permission"></a>（4）File Permission</h3><ul>
-<li><p>User（文件拥有者）</p>
-</li>
-<li><p>Group（群组）</p>
-</li>
-<li><p>Others（其他人）</p>
-</li>
-<li><p>观察下图，可以看出：</p>
-<ul>
-<li>普通文件由<code>-</code>开头；目录文件由<code>d</code>开头</li>
-<li><code>rwx</code>：<ul>
-<li><code>r</code>：read</li>
-<li><code>w</code>：write</li>
-<li><code>x</code>：execute</li>
-</ul>
-</li>
-<li>一共有三组，如hello.c：<code>-rw-rw-r--</code>，可以看作是：<code>-|rw-|rw-|r--</code>，分别对应User、Group和Others的权限</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052227053.png" alt="image-20240405222704994"></p>
-<h3 id="（5）Reading-and-Writing-Files"><a href="#（5）Reading-and-Writing-Files" class="headerlink" title="（5）Reading and Writing Files"></a>（5）Reading and Writing Files</h3><ul>
-<li><code>EOF</code>：End of File</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052233018.png" alt="image-20240405223313949"></p>
-<h3 id="（6）Reading-File-Metadata"><a href="#（6）Reading-File-Metadata" class="headerlink" title="（6）Reading File Metadata"></a>（6）Reading File Metadata</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235910.png" alt="image-20240405223528846"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235669.png" alt="image-20240405223540586"></p>
-<h2 id="2、Robust-I-O"><a href="#2、Robust-I-O" class="headerlink" title="2、Robust I&#x2F;O"></a>2、Robust I&#x2F;O</h2><p><strong>Robust I&#x2F;O主要用于网络中。</strong></p>
-<blockquote>
-<p>Robust I&#x2F;O（健壮的I&#x2F;O）是一种设计模式，旨在提高程序对输入输出（I&#x2F;O）操作的稳健性和可靠性。具体来说，Robust I&#x2F;O 的作用包括以下几个方面：</p>
-<ol>
-<li><strong>错误处理：</strong> Robust I&#x2F;O 强调对I&#x2F;O操作的错误处理。它会在发生错误时进行适当的处理，例如捕获异常、返回错误码或者记录日志，从而确保程序在出现异常情况时能够做出合适的应对，而不会导致程序崩溃或者数据丢失。</li>
-<li><strong>超时处理：</strong> Robust I&#x2F;O 考虑到可能发生的网络超时、设备故障等情况，会设置适当的超时时间，并在超时发生时进行处理，例如重新尝试连接或者报告错误，以保证程序能够及时响应并继续执行。</li>
-<li><strong>资源释放：</strong> Robust I&#x2F;O 确保在完成I&#x2F;O操作后及时释放资源，避免资源泄露和内存溢出等问题，提高程序的稳定性和性能。</li>
-<li><strong>容错机制：</strong> Robust I&#x2F;O 通过实现容错机制，可以在遇到部分错误或异常情况时，仍然保持程序的正常运行，尽量避免中断整个操作流程。</li>
-<li><strong>重试机制：</strong> Robust I&#x2F;O 可能会实现重试机制，以确保在出现一次性错误时，能够尝试多次重复操作，从而提高操作的成功率。</li>
+<li><p>自定义仿函数如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义仿函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareByAge</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.age &gt; p2.age;  <span class="comment">// 按照年龄从小到大排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
 </ol>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052239600.png" alt="image-20240405223951531"></p>
-<ul>
-<li><p>rio_t结构体</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png" alt="image-20240405224031108"></p>
-</li>
-</ul>
 
     </div>
 
@@ -377,13 +300,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch9%20%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" rel="prev" title="Ch9 虚拟内存">
-      <i class="fa fa-chevron-left"></i> Ch9 虚拟内存
+    <a href="/2024/04/26/Computer/C++/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97/" rel="prev" title="字符串与整数的相互转换">
+      <i class="fa fa-chevron-left"></i> 字符串与整数的相互转换
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/" rel="next" title="Ch1 计算机系统漫游">
-      Ch1 计算机系统漫游 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -442,7 +362,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ch10-%E7%B3%BB%E7%BB%9F%E7%BA%A7I-O"><span class="nav-text">Ch10 系统级I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E7%BA%A7I-O"><span class="nav-text">1、系统级I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Unix-I-O"><span class="nav-text">（1）Unix I&#x2F;O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Files"><span class="nav-text">（2）Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Opening-and-Closing-Files"><span class="nav-text">（3）Opening and Closing Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89File-Permission"><span class="nav-text">（4）File Permission</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%885%EF%BC%89Reading-and-Writing-Files"><span class="nav-text">（5）Reading and Writing Files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%886%EF%BC%89Reading-File-Metadata"><span class="nav-text">（6）Reading File Metadata</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81Robust-I-O"><span class="nav-text">2、Robust I&#x2F;O</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E5%BF%B5"><span class="nav-text">一、概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%89%B9%E7%82%B9"><span class="nav-text">二、特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="nav-text">三、相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A3%B0%E6%98%8E"><span class="nav-text">1. 声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">2. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-text">3. 排序实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
