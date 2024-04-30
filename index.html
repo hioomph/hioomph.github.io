@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-30 13:07:46 / 修改时间：20:19:21" itemprop="dateCreated datePublished" datetime="2024-04-30T13:07:46+08:00">2024-04-30</time>
+              <time title="创建时间：2024-04-30 13:07:46 / 修改时间：20:52:26" itemprop="dateCreated datePublished" datetime="2024-04-30T13:07:46+08:00">2024-04-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,14 +240,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>854</span>
+              <span>3.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>14 分钟</span>
             </span>
 
         </div>
@@ -289,9 +289,138 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="5-基本构件之一new-delete-expression中"><a href="#5-基本构件之一new-delete-expression中" class="headerlink" title="5 基本构件之一new delete expression中"></a>5 基本构件之一new delete expression中</h3><h3 id="6-基本构件之一new-delete-expression下"><a href="#6-基本构件之一new-delete-expression下" class="headerlink" title="6 基本构件之一new delete expression下"></a>6 基本构件之一new delete expression下</h3><h3 id="7-Array-new"><a href="#7-Array-new" class="headerlink" title="7 Array new"></a>7 Array new</h3><p>如果<code>new[]</code>不搭配<code>delete[]</code>的话，实际上是针对<code>class with pointer member</code>的情况造成内存泄漏。<strong>此时若调用<code>delete</code>，带有<code>cookie</code>的动态数组部分实际上仍然会被回收，发生错误的地方是需要调用3次析构函数（如下图右边），但实际上只调用了1次，因此造成内存泄漏</strong>。</p>
-<h3 id="8-placement-new"><a href="#8-placement-new" class="headerlink" title="8 placement new"></a>8 placement new</h3><p>palcement new允许我们将object建构于allocated memory中。没有所谓的placement new，因为placement new根本没分配memory。</p>
-<h3 id="9-重载"><a href="#9-重载" class="headerlink" title="9 重载"></a>9 重载</h3><h3 id="10-重载示例（上）"><a href="#10-重载示例（上）" class="headerlink" title="10 重载示例（上）"></a>10 重载示例（上）</h3><h3 id="11-重载示例（下）"><a href="#11-重载示例（下）" class="headerlink" title="11 重载示例（下）"></a>11 重载示例（下）</h3><h3 id="12-Per-class-allocator"><a href="#12-Per-class-allocator" class="headerlink" title="12 Per class allocator"></a>12 Per class allocator</h3><h3 id="13-Per-class-allocator-2"><a href="#13-Per-class-allocator-2" class="headerlink" title="13 Per class allocator 2"></a>13 Per class allocator 2</h3><h3 id="14-Static-allocator"><a href="#14-Static-allocator" class="headerlink" title="14 Static allocator"></a>14 Static allocator</h3><h3 id="15-Macro-for-static-allocator"><a href="#15-Macro-for-static-allocator" class="headerlink" title="15 Macro for static allocator"></a>15 Macro for static allocator</h3><h3 id="16-New-Handler"><a href="#16-New-Handler" class="headerlink" title="16 New Handler"></a>16 New Handler</h3>
+<h3 id="5-基本构件之一new-delete-expression中"><a href="#5-基本构件之一new-delete-expression中" class="headerlink" title="5 基本构件之一new delete expression中"></a>5 基本构件之一new delete expression中</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302021318.png" alt="4_内存管理_06"></p>
+<h3 id="6-基本构件之一new-delete-expression下"><a href="#6-基本构件之一new-delete-expression下" class="headerlink" title="6 基本构件之一new delete expression下"></a>6 基本构件之一new delete expression下</h3><p>下面显示不能直接调用构造函数，而只有编译器会进行隐式调用。调用时在vc6编译通过，在GCC中编译失败。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A* pA = <span class="keyword">new</span> <span class="built_in">A</span>(<span class="number">1</span>);         	<span class="comment">//ctor. this=000307A8 id=1</span></span><br><span class="line">cout &lt;&lt; pA-&gt;id &lt;&lt; endl;   	<span class="comment">//1</span></span><br><span class="line"><span class="comment">//!	pA-&gt;A::A(3);                //in VC6 : ctor. this=000307A8 id=3</span></span><br><span class="line">  								<span class="comment">//in GCC : [Error] cannot call constructor &#x27;jj02::A::A&#x27; directly</span></span><br><span class="line">  								</span><br><span class="line"><span class="comment">//!	A::A(5);	  				//in VC6 : ctor. this=0013FF60 id=5</span></span><br><span class="line">                      			<span class="comment">//         dtor. this=0013FF60  	</span></span><br><span class="line">  								<span class="comment">//in GCC : [Error] cannot call constructor &#x27;jj02::A::A&#x27; directly</span></span><br><span class="line">  								<span class="comment">//         [Note] for a function-style cast, remove the redundant &#x27;::A&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Array-new"><a href="#7-Array-new" class="headerlink" title="7 Array new"></a>7 Array new</h3><p>（1）array new和array delete的搭配使用</p>
+<p>如果<code>new[]</code>不搭配<code>delete[]</code>的话，实际上是针对<code>class with pointer member</code>的情况造成内存泄漏。<strong>此时若调用<code>delete</code>，带有<code>cookie</code>的动态数组部分实际上仍然会被回收，发生错误的地方是需要调用3次析构函数（如下图右边），但实际上只调用了1次，因此造成内存泄漏</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Complex* pca = <span class="keyword">new</span> Complex[<span class="number">3</span>];  <span class="comment">// 调用三次构造函数</span></span><br><span class="line"><span class="keyword">delete</span>[] pca;  <span class="comment">// 唤起三次析构函数， 这是正确的</span></span><br><span class="line"></span><br><span class="line">string* psa = <span class="keyword">new</span> string[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">delete</span> psa;  <span class="comment">// 唤起一次析构函数，这是错误的</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302024595.png" alt="4_内存管理_08"></p>
+<p>（2）array size in memory size</p>
+<ul>
+<li>右侧的图是new int[10]的内存布局，其中：<strong>灰色</strong>表示具体数据，<strong>橙色</strong>表示debug模式下添加的内存，最上面和最下面的两个0x61(61H)是cookie，记录整体内存分配的大小；<strong>浅蓝色</strong>的pad表示补齐，填补到16的倍数。<ul>
+<li>61H实际上是60H，表示内存分配的大小，后面1H意思是占用最后一位，表示内存分配出去</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302027115.png" alt="4_内存管理_10"></p>
+<h3 id="8-placement-new"><a href="#8-placement-new" class="headerlink" title="8 placement new"></a>8 placement new</h3><p>palcement new允许我们将object建构于allocated memory中。<strong>没有所谓的placement new，因为placement new根本没分配memory。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;new&gt;</span></span></span><br><span class="line"><span class="type">char</span>* buf = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">sizeof</span>(Complex) * <span class="number">3</span>]; <span class="comment">// 已经分配了内存</span></span><br><span class="line">Complex* pc = <span class="built_in">new</span>(buf)<span class="built_in">Complex</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 把上面分配的内存位置传进来</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span>[] buf;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>Complex* pc = new(buf)Complex(1, 2);</code>这句话会被编译器转换为下图中的1，2，3三行，分别调用operator new（和上文看到的不同，这里需要第二个参数，表示位置，这个函数只是传回这个位置，不再分配内存），指针转型，调用构造函数。</p>
+<p>这种用法被称为 “placement new”，它允许程序员在指定的内存位置上创建对象。这通常用于特殊的内存管理场景，例如在预分配的内存池中创建对象。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302031495.png" alt="4_内存管理_12"></p>
+<h3 id="9-重载"><a href="#9-重载" class="headerlink" title="9 重载"></a>9 重载</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302031922.png" alt="4_内存管理_13"></p>
+<p>（1）C++容器分配内存的途径</p>
+<p>容器会走分配器，分配器会调用::operator new和::operator delete，底层也是调用malloc和free。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302033606.png" alt="4_内存管理_14"></p>
+<p>在 C++ 中，容器使用分配器（Allocator）来进行内存分配和释放。分配器是负责管理容器内部元素内存的组件。下面是容器分配内存的一般途径：</p>
+<ol>
+<li><p>容器使用分配器：<br>C++ 容器（如 std::vector、std::list、std::map 等）通常使用分配器来分配和释放内存。分配器是容器的一部分，负责处理元素的内存分配和释放操作。</p>
+</li>
+<li><p>分配器调用 ::operator new 和 ::operator delete：<br>分配器的实现通常会调用全局作用域下的 ::operator new 来分配内存，并在需要释放内存时调用 ::operator delete。<br>::operator new 和 ::operator delete 是 C++ 中的全局内存分配和释放函数。它们底层可能调用标准库的 malloc 和 free。</p>
+</li>
+<li><p>底层可能调用 malloc 和 free：<br>malloc 和 free 是 C 标准库中的内存分配和释放函数，用于分配和释放原始的、未构造的内存块。C++ 的 ::operator new 和 ::operator delete 可能在底层调用这些函数。</p>
+</li>
+</ol>
+<p>总体来说，C++ 容器使用分配器来管理内存，而分配器可能在其实现中调用 ::operator new 和 ::operator delete，从而涉及到底层的内存分配函数 malloc 和 free。这种设计允许用户自定义容器的内存管理行为，以适应不同的需求。用户可以通过提供自定义分配器来实现特定的内存分配策略。</p>
+<p>（2）重载全局的::operator new 和::operator delete</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302034363.png" alt="4_内存管理_15"></p>
+<p>（3）重载operator new和operator delete</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302034714.png" alt="4_内存管理_16"></p>
+<p>（3）重载operator new[]和operator delete[]</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302035382.png" alt="4_内存管理_17"></p>
+<h3 id="10-重载示例（上）"><a href="#10-重载示例（上）" class="headerlink" title="10 重载示例（上）"></a>10 重载示例（上）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036272.png" alt="4_内存管理_18"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036230.png" alt="4_内存管理_19"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036668.png" alt="4_内存管理_20"></p>
+<h3 id="11-重载示例（下）"><a href="#11-重载示例（下）" class="headerlink" title="11 重载示例（下）"></a>11 重载示例（下）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036617.png" alt="4_内存管理_21"></p>
+<p>placement new的重载第一参数必须是size_t类型，对于如何区分operator new和placement new，要看调用的时候怎么用。在调用时，编译器会根据传递给new表达式的参数来匹配适当的重载版本。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038221.png" alt="4_内存管理_22"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038657.png" alt="4_内存管理_23"></p>
+<p>basic_string使用new(extra)扩充申请量</p>
+<p>重载了operator new，其实是placement new。因为用法为<code>new(extra) Rep;</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038299.png" alt="4_内存管理_24"></p>
+<h3 id="12-Per-class-allocator"><a href="#12-Per-class-allocator" class="headerlink" title="12 Per class allocator"></a>12 Per class allocator</h3><p>（1）内存池</p>
+<p>内存池是一种用于管理和分配内存的机制，它可以提高内存分配的效率，减少内存碎片，并降低动态内存分配的开销。在 C++ 中，内存池通常通过重载 operator new 和 operator delete 来实现。</p>
+<p>下面简要描述一下内存池的概念，并提供一个简单的示意图：</p>
+<ol>
+<li><p>内存池概念：</p>
+<ul>
+<li>内存池是一块预先分配的内存区域，它被划分为多个小块，每个小块可以被分配给程序使用；</li>
+<li>内存池通常由一个或多个链表、堆栈或其他数据结构来管理，以追踪哪些内存块是空闲的，哪些是已分配的；</li>
+<li>内存池的目的是减少因频繁的内存分配和释放而引起的性能开销。</li>
+</ul>
+</li>
+<li><p>示意图：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------------+</span><br><span class="line">|            Memory Pool             |</span><br><span class="line">+------------------------------------+</span><br><span class="line">|   Free Block <span class="number">1</span>   |   Free Block <span class="number">2</span>  |</span><br><span class="line">+------------------+-----------------+</span><br><span class="line">|   Allocated Block <span class="number">1</span>                |</span><br><span class="line">+------------------------------------+</span><br><span class="line">|   Free Block <span class="number">3</span>   |   Free Block <span class="number">4</span>  |</span><br><span class="line">+------------------+-----------------+</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的示意图展示了一个简单的内存池，其中包含多个内存块，有一些是空闲的，有一些是已经分配给程序使用的；</li>
+<li>每个内存块的大小可能不同，取决于内存池的设计；</li>
+<li>空闲的内存块可以通过链表或其他数据结构连接在一起，以便快速分配。</li>
+</ul>
+</li>
+<li><p>内存池的操作：</p>
+<ul>
+<li>当程序需要分配内存时，内存池会从空闲块中选择一个合适的块分配给程序；</li>
+<li>当程序释放内存时，将相应的内存块标记为空闲，并重新加入空闲块链表，以便下次分配使用。</li>
+</ul>
+</li>
+<li><p>自定义内存池的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MemoryPool</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Block</span> &#123;</span><br><span class="line">        <span class="type">size_t</span> size;</span><br><span class="line">        Block* next;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Block* freeList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MemoryPool</span>(<span class="type">size_t</span> poolSize) &#123;</span><br><span class="line">        <span class="comment">// 初始化内存池</span></span><br><span class="line">        <span class="type">void</span>* memory = ::<span class="keyword">operator</span> <span class="built_in">new</span>(poolSize);</span><br><span class="line">        freeList = <span class="built_in">static_cast</span>&lt;Block*&gt;(memory);</span><br><span class="line">        freeList-&gt;size = poolSize;</span><br><span class="line">        freeList-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="title">allocate</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 从内存池中分配内存</span></span><br><span class="line">        <span class="keyword">if</span> (!freeList || freeList-&gt;size &lt; size) &#123;</span><br><span class="line">            <span class="comment">// 内存不足，或者没有空闲块，可以根据实际情况扩展内存池</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Block* allocatedBlock = freeList;</span><br><span class="line">        freeList = freeList-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">void</span>*&gt;(allocatedBlock);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deallocate</span><span class="params">(<span class="type">void</span>* ptr)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 释放内存到内存池</span></span><br><span class="line">        Block* block = <span class="built_in">static_cast</span>&lt;Block*&gt;(ptr);</span><br><span class="line">        block-&gt;next = freeList;</span><br><span class="line">        freeList = block;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上述示例为了简洁，省略了一些内存池的管理细节</span></span><br><span class="line"><span class="comment">// 实际的内存池实现可能需要更复杂的数据结构和算法。</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>引入内存池的考量：</p>
+<p>当需要多次调用new来分配内存时，为了减少malloc分配内存的数量，以及减少cookie的用量，可以选择用malloc分配一大块内存（即内存池），然后将这块内存池分成小块，在实际的分配时直接取用其中的一小块，从而减少malloc的调用次数。</p>
+</blockquote>
+<p>（2）对类Screen进行内存设置的示例（设计类的内存分配器_版本1）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302045487.png" alt="4_内存管理_25"></p>
+<p>如下图右侧所示：</p>
+<ul>
+<li>左边间隔8，表示每个Screen对象内存分配的大小为8B，说明每个Screen分配的时候没有cookie；</li>
+<li>右边间隔16，表示每个Screen对象内存分配的大小为16B，这是因为对象分配的时候上下加了cookie，最上面和最下面的cookie大小共为8B。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302046008.png" alt="4_内存管理_26"></p>
+<h3 id="13-Per-class-allocator-2"><a href="#13-Per-class-allocator-2" class="headerlink" title="13 Per class allocator 2"></a>13 Per class allocator 2</h3><p>（1）设计类的内存分配器_版本2</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302047081.png" alt="4_内存管理_27"></p>
+<p>这里和第一版本的最大不同是设计上采用union。</p>
+<p>在C++中，union 是一种特殊的数据结构，允许在相同的内存位置存储不同类型的对象。它的每个成员共享相同的内存空间，只能同时使用一个成员。union 提供了一种有效利用内存的方式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">AirplaneRep</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> miles;  <span class="comment">// 4B</span></span><br><span class="line">	<span class="type">char</span> type;  <span class="comment">// 1B</span></span><br><span class="line">    <span class="comment">// 由于对齐，这5B会变成8B</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">union</span> &#123;</span><br><span class="line">	AirplaneRep rep;</span><br><span class="line">	Airplane* next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302047903.png" alt="4_内存管理_28"></p>
+<h3 id="14-Static-allocator"><a href="#14-Static-allocator" class="headerlink" title="14 Static allocator"></a>14 Static allocator</h3><p>（1）设计类的内存分配器_版本3</p>
+<p>下面是内存分配的第三版本。</p>
+<p>从软件工程的角度看，上面的operator new和operator delete对于不同 类都要重载，明显不是一个好的解法，下面是将allocator抽象成一个类。</p>
+<p>allocator类中定义allocate和deallocate函数，用于分配和回收。</p>
+<p>下图中右侧是具体的实现。这里每次分配CHUNK个大小的一大块，然后切割成小块，并用链表串起来。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049167.png" alt="4_内存管理_29"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049165.png" alt="4_内存管理_30"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049639.png" alt="4_内存管理_31"></p>
+<h3 id="15-Macro-for-static-allocator"><a href="#15-Macro-for-static-allocator" class="headerlink" title="15 Macro for static allocator"></a>15 Macro for static allocator</h3><p>（1）设计类的内存分配器_版本4</p>
+<p>把allocator的部分拿出来用宏来定义。</p>
+<p>在C++中，宏（macro）是一种预处理指令，用于在编译过程中执行文本替换。宏通常通过 #define 关键字定义，并在代码中通过宏名称来调用。它们是一种简单的文本替换机制，可以用于创建常量、函数替代、条件编译等。</p>
+<p>在宏定义的末尾使用反斜杠是为了告诉编译器该宏定义将在下一行继续。如果在宏定义的最后一行没有使用反斜杠，那么编译器会认为宏定义结束了。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302050403.png" alt="4_内存管理_32"></p>
+<p>（2）标准库中的allocator</p>
+<p>其中一种分配器有16条自由链表，来应对不同大小的块分配，不同的大小的类对象，分配到不同的链表中。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302050613.png" alt="4_内存管理_34"></p>
+<h3 id="16-New-Handler"><a href="#16-New-Handler" class="headerlink" title="16 New Handler"></a>16 New Handler</h3><p>new handler</p>
+<p>new handler 是一个与 C++ 内存分配和 new 操作符相关的概念。它是一个函数指针，指向一个用户定义的函数，该函数负责处理 new 操作符无法满足内存分配请求时的情况。</p>
+<p>当 new 操作符无法分配所需的内存时，它会调用与之关联的 new handler。new handler 可以执行一些操作，例如释放一些已分配的内存、尝试扩展堆的大小、选择性地抛出异常，或者执行其他用户定义的操作。</p>
+<p>使用 set_new_handler 函数设置 new handler：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;new&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">customNewHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cerr &lt;&lt; <span class="string">&quot;Memory allocation failed! Custom new handler called.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::<span class="built_in">terminate</span>();  <span class="comment">// 终止程序或者执行其他处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::<span class="built_in">set_new_handler</span>(customNewHandler);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 尝试分配大块内存</span></span><br><span class="line">    <span class="type">int</span>* arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">1000000000000</span>];  <span class="comment">// 如果分配失败，会调用 customNewHandler</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，通过 set_new_handler 函数设置了一个自定义的 new handler，即 customNewHandler。当 new 操作符在尝试分配非常大的内存块时失败，会调用这个自定义的 new handler。</p>
+<p>注意事项：</p>
+<ul>
+<li>new handler 是全局的，一旦设置，会在程序的生命周期内一直有效，直到被其他<code>set_new_handler</code>覆盖。</li>
+<li>如果 new handler 返回，new 操作符会再次尝试分配内存，如果还失败，则再次调用 new handler。这个过程会一直重复，直到 new handler 抛出异常或者不返回（例如调用 <code>std::terminate()</code>）。</li>
+<li>在 C++11 及以后的版本中，可以使用 std::get_new_handler 获取当前的 new handler，以便在需要时进行保存和恢复。</li>
+</ul>
+<p>使用 new handler 可以提供一些灵活性，允许程序员在内存分配失败的情况下采取定制的操作，而不是默认的行为（即抛出 std::bad_alloc 异常）。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302052495.png" alt="4_内存管理_35"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302052411.png" alt="4_内存管理_36"></p>
+
       
     </div>
 
@@ -2587,12 +2716,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">118k</span>
+    <span title="站点总字数">121k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7:10</span>
+    <span title="站点阅读时长">7:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
