@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="第一讲 Primitives2 内存分配的每一层面 C++的 Applications可以调用STL，里面会有allocator进行内存分配； 也可以使用C++ 基本工具primitives，比如new, new[], new(), ::operator new()； 还可以使用更底层的malloc和free分配和释放内存； 最底层的是系统调用，比如HeapAlloc，VirtualAlloc等。">
+  <meta name="description" content="第一讲 Primitives2 内存分配的每一层面  C++内存分配的深度一般是有五个层面，它们分别是 C++ application 常见：vector等容器 C++ allocator 常见：vector自带的allocator分配器 C++ primitives 常见：new delete CRT 常见：malloc free OS API 常见：heapalloc等等    一般情况下，为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存管理机制">
 <meta property="og:url" content="http://example.com/2024/04/30/Computer/C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
-<meta property="og:description" content="第一讲 Primitives2 内存分配的每一层面 C++的 Applications可以调用STL，里面会有allocator进行内存分配； 也可以使用C++ 基本工具primitives，比如new, new[], new(), ::operator new()； 还可以使用更底层的malloc和free分配和释放内存； 最底层的是系统调用，比如HeapAlloc，VirtualAlloc等。">
+<meta property="og:description" content="第一讲 Primitives2 内存分配的每一层面  C++内存分配的深度一般是有五个层面，它们分别是 C++ application 常见：vector等容器 C++ allocator 常见：vector自带的allocator分配器 C++ primitives 常见：new delete CRT 常见：malloc free OS API 常见：heapalloc等等    一般情况下，为">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404301822840.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302008310.png">
@@ -158,7 +158,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062000036.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062000522.png">
 <meta property="article:published_time" content="2024-04-30T05:07:46.686Z">
-<meta property="article:modified_time" content="2024-05-06T12:07:39.331Z">
+<meta property="article:modified_time" content="2024-05-06T12:29:52.653Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404301822840.png">
@@ -353,7 +353,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-06 20:07:39" itemprop="dateModified" datetime="2024-05-06T20:07:39+08:00">2024-05-06</time>
+                <time title="修改时间：2024-05-06 20:29:52" itemprop="dateModified" datetime="2024-05-06T20:29:52+08:00">2024-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -398,12 +398,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="第一讲-Primitives"><a href="#第一讲-Primitives" class="headerlink" title="第一讲 Primitives"></a>第一讲 Primitives</h1><h2 id="2-内存分配的每一层面"><a href="#2-内存分配的每一层面" class="headerlink" title="2 内存分配的每一层面"></a>2 内存分配的每一层面</h2><ul>
-<li>C++的 Applications可以调用STL，里面会有allocator进行内存分配；</li>
-<li>也可以使用C++ 基本工具primitives，比如new, new[], new(), ::operator new()；</li>
-<li>还可以使用更底层的malloc和free分配和释放内存；</li>
-<li>最底层的是系统调用，比如HeapAlloc，VirtualAlloc等。</li>
+        <h1 id="第一讲-Primitives"><a href="#第一讲-Primitives" class="headerlink" title="第一讲 Primitives"></a>第一讲 Primitives</h1><h2 id="2-内存分配的每一层面"><a href="#2-内存分配的每一层面" class="headerlink" title="2 内存分配的每一层面"></a>2 内存分配的每一层面</h2><blockquote>
+<ul>
+<li>C++内存分配的深度一般是有五个层面，它们分别是<ul>
+<li>C++ application 常见：vector等容器</li>
+<li>C++ allocator 常见：vector自带的allocator分配器</li>
+<li>C++ primitives 常见：new delete</li>
+<li>CRT 常见：malloc free</li>
+<li>OS API 常见：heapalloc等等</li>
 </ul>
+</li>
+</ul>
+<p>一般情况下，为了保证可移植性质，一般最底层就到了malloc free，如果调用OS API就基本上丧失了可移植性质。每一个层面的对应的基本上都会依次向下调用，然后进行内存的分配。</p>
+</blockquote>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404301822840.png" alt="4_内存管理_01"></p>
 <p>C++ memory primitives</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302008310.png" alt="4_内存管理_02"></p>
@@ -1346,7 +1353,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1389,12 +1396,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">135k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:10</span>
+    <span title="站点阅读时长">8:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

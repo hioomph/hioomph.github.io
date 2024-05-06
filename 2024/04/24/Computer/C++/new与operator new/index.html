@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530554.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530444.png">
 <meta property="article:published_time" content="2024-04-24T06:13:55.768Z">
-<meta property="article:modified_time" content="2024-04-24T07:30:55.192Z">
+<meta property="article:modified_time" content="2024-05-06T12:32:56.229Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241419515.png">
@@ -222,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-24 14:13:55 / 修改时间：15:30:55" itemprop="dateCreated datePublished" datetime="2024-04-24T14:13:55+08:00">2024-04-24</time>
+              <time title="创建时间：2024-04-24 14:13:55" itemprop="dateCreated datePublished" datetime="2024-04-24T14:13:55+08:00">2024-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-06 20:32:56" itemprop="dateModified" datetime="2024-05-06T20:32:56+08:00">2024-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -246,7 +252,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -282,6 +288,9 @@
 <li>返回值类型：<code>void *</code>（返回一个未经处理的<code>raw</code>指针）</li>
 <li>参数<code>size_t size</code>：确定分配多少内存。可以添加额外的參数重载函数<code>operator new</code>，但第一个參数类型必须是<code>size_t</code>。</li>
 </ul>
+<blockquote>
+<p>operator new&#x2F;delete是可以被设定为&#x3D;delete，当&#x3D;delete时候。其不允许被分配。</p>
+</blockquote>
 <h2 id="3、placement-new"><a href="#3、placement-new" class="headerlink" title="3、placement new"></a>3、placement new</h2><blockquote>
 <p><strong>placement new是一种特殊的operator new，作用于一块已分配但未处理或未初始化的raw内存。</strong></p>
 </blockquote>
@@ -328,6 +337,16 @@
 <p>（2）在VC下用汇编跟过delete[]的执行情况,发现这个 “日志 “就是一个4字节长的整数记录数组元素个数,紧挨在数组第一个元素之前。但是有个前提：对象类型(或其基类)有显式析构函数.换句话说,析构函数是非<code>virtual</code>的。否则的话,数组前面是没有这个日志的。其实对于析构函数是<code>virtual</code>的情况，<code>delete[]</code>时无需调用其析构函数，因此此时<code>VC</code>把<code>delete[]</code>当做<code>delete</code>同样处理。</p>
 <p>（3）<code>delete parray</code>，编译器得到类型信息是<code>Account</code>单个的指针，那么释放时，只调用一次析构函数。<br><code>delete[] parray</code>，编译器得到的类型信息是<code>Account[]</code>类型，则按照<code>Account</code>数组来处理，依次调用每个元素的析构函数。 </p>
 <h2 id="3、编译器又是如何获知这个数组的大小？"><a href="#3、编译器又是如何获知这个数组的大小？" class="headerlink" title="3、编译器又是如何获知这个数组的大小？"></a>3、编译器又是如何获知这个数组的大小？</h2><p>当我们使用<code>operator new</code>为一个自定义类型对象分配内存时，我们得到的内存要比实际对象的内存大一些，这些内存除了要存储对象数据外，还需要记录这片内存的大小，此方法称为<code>cookie</code>。这一点上的实现依据不同的编译器不同。（例如<code>MFC</code>选择在所分配内存的头部存储对象实际数据，而后面的部分存储边界标志和内存大小信息。<code>g++</code>则采用在所分配内存的头4个自己存储相关信息，而后面的内存存储对象实际数据。）当我们使用<code>delete operator</code>进行内存释放操作时，<code>delete operator</code>就可以根据这些信息正确的释放指针所指向的内存块。<br>对于<code>parray</code>指针，可以根据这样的<code>cookie</code>信息来得到指向内存空间的大小，<code>delete parray</code>和<code>delete[] parray</code>都是一样的，同样一个指针，<code>cookie</code>信息是相同的，所以对应的内存都会被释放掉。但是由于编译器理解两种情况下的类型是不同的，所以调用析构函数会有不同。 </p>
+<h2 id="4、new-handler相关"><a href="#4、new-handler相关" class="headerlink" title="4、new handler相关"></a>4、new handler相关</h2><p>我们在分配内存的时候。分配内存可能会有失败的情况，在失败的时候往往会抛出异常。对于内存，我们在抛出失败之前。可以先调用一个自己制作的<code>handler</code>，这个<code>handler</code>可能能帮助正确的分配内存或者终止进程</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*<span class="keyword">new</span> handler)</span><span class="params">()</span></span>;<span class="comment">//定义一个handler</span></span><br><span class="line"><span class="function">new_handler <span class="title">set_new_handler</span><span class="params">(new_handler p)</span><span class="title">throw</span><span class="params">()</span></span>;<span class="comment">//设定一个handler</span></span><br></pre></td></tr></table></figure>
+
+<p><code>new handler</code>的两种选择</p>
+<ul>
+<li>让更多<code>memory</code>可以被使用</li>
+<li>抛出异常（<code>abort()</code>或<code>exit()</code>）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例子</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">handlerx</span><span class="params">()</span></span>&#123;<span class="comment">//类似这样的就可以</span></span><br><span class="line">	cerr&lt;&lt;<span class="string">&quot;no&quot;</span>;</span><br><span class="line">	<span class="built_in">abort</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">set_new_handler</span>(handler);</span><br><span class="line">	..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="四、相关参考"><a href="#四、相关参考" class="headerlink" title="四、相关参考"></a>四、相关参考</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530554.png" alt="image-20240424153034458"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404241530444.png" alt="image-20240424153053351"></p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luxiaoxun/archive/2012/08/10/2631812.html">C++中的new、operator new与placement new</a></p>
@@ -411,7 +430,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81new-operator%E3%80%81operator-new%E5%92%8Cplacement-new"><span class="nav-text">一、new operator、operator new和placement new</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81new-operator%EF%BC%88new-%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%89"><span class="nav-text">1、new operator（new 操作符）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81operator-new"><span class="nav-text">2、operator new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81placement-new"><span class="nav-text">3、placement new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">4、总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Deletion-and-Memory-Deallocation"><span class="nav-text">二、Deletion and Memory Deallocation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81delete%E5%92%8Coperator-delete"><span class="nav-text">1、delete和operator delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81placement-new%E5%BB%BA%E7%AB%8B%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%80%8E%E6%A0%B7%E9%87%8A%E6%94%BE%EF%BC%9F"><span class="nav-text">2、placement new建立的对象怎样释放？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81new-delete%E5%92%8Carray-new-array-delete%E5%BA%94%E8%AF%A5%E6%90%AD%E9%85%8D%E4%BD%BF%E7%94%A8"><span class="nav-text">3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-text">三、相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%97%A0%E8%AE%BA%E5%93%AA%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%8C%E5%88%86%E9%85%8D%E7%9A%84%E5%85%A8%E9%83%A8%E7%A9%BA%E9%97%B4%E8%A2%AB%E8%BF%94%E8%BF%98%E7%BB%99%E8%87%AA%E7%94%B1%E5%AD%98%E5%82%A8%E5%8C%BA"><span class="nav-text">1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AF%B9%E4%BA%8Edelete-parray%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93parray%E8%BF%99%E4%B8%AA%E6%8C%87%E9%92%88%E5%AE%9E%E9%99%85%E6%8C%87%E5%90%91%E7%9A%84%E6%98%AF%E6%95%B0%E7%BB%84%E8%BF%98%E6%98%AF%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="nav-text">2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E8%8E%B7%E7%9F%A5%E8%BF%99%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%9F"><span class="nav-text">3、编译器又是如何获知这个数组的大小？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%9B%B8%E5%85%B3%E5%8F%82%E8%80%83"><span class="nav-text">四、相关参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81new-operator%E3%80%81operator-new%E5%92%8Cplacement-new"><span class="nav-text">一、new operator、operator new和placement new</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81new-operator%EF%BC%88new-%E6%93%8D%E4%BD%9C%E7%AC%A6%EF%BC%89"><span class="nav-text">1、new operator（new 操作符）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81operator-new"><span class="nav-text">2、operator new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81placement-new"><span class="nav-text">3、placement new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">4、总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Deletion-and-Memory-Deallocation"><span class="nav-text">二、Deletion and Memory Deallocation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81delete%E5%92%8Coperator-delete"><span class="nav-text">1、delete和operator delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81placement-new%E5%BB%BA%E7%AB%8B%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%80%8E%E6%A0%B7%E9%87%8A%E6%94%BE%EF%BC%9F"><span class="nav-text">2、placement new建立的对象怎样释放？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81new-delete%E5%92%8Carray-new-array-delete%E5%BA%94%E8%AF%A5%E6%90%AD%E9%85%8D%E4%BD%BF%E7%94%A8"><span class="nav-text">3、new&#x2F;delete和array new&#x2F;array delete应该搭配使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-text">三、相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E6%97%A0%E8%AE%BA%E5%93%AA%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%8C%E5%88%86%E9%85%8D%E7%9A%84%E5%85%A8%E9%83%A8%E7%A9%BA%E9%97%B4%E8%A2%AB%E8%BF%94%E8%BF%98%E7%BB%99%E8%87%AA%E7%94%B1%E5%AD%98%E5%82%A8%E5%8C%BA"><span class="nav-text">1、为什么无论哪种情况，分配的全部空间被返还给自由存储区?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%AF%B9%E4%BA%8Edelete-parray%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93parray%E8%BF%99%E4%B8%AA%E6%8C%87%E9%92%88%E5%AE%9E%E9%99%85%E6%8C%87%E5%90%91%E7%9A%84%E6%98%AF%E6%95%B0%E7%BB%84%E8%BF%98%E6%98%AF%E5%8D%95%E4%B8%AA%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="nav-text">2、对于delete[] parray，编译器怎么知道parray这个指针实际指向的是数组还是单个元素？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E5%8F%88%E6%98%AF%E5%A6%82%E4%BD%95%E8%8E%B7%E7%9F%A5%E8%BF%99%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%9F"><span class="nav-text">3、编译器又是如何获知这个数组的大小？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81new-handler%E7%9B%B8%E5%85%B3"><span class="nav-text">4、new handler相关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E7%9B%B8%E5%85%B3%E5%8F%82%E8%80%83"><span class="nav-text">四、相关参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -427,7 +446,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -470,12 +489,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">135k</span>
+    <span title="站点总字数">137k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:10</span>
+    <span title="站点阅读时长">8:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
