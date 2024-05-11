@@ -82,8 +82,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112021480.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112105777.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112030942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112120766.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112119587.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112121617.png">
 <meta property="article:published_time" content="2024-05-08T07:15:01.228Z">
-<meta property="article:modified_time" content="2024-05-11T13:15:19.662Z">
+<meta property="article:modified_time" content="2024-05-11T13:22:38.264Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405081530696.png">
@@ -278,7 +281,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-11 21:15:19" itemprop="dateModified" datetime="2024-05-11T21:15:19+08:00">2024-05-11</time>
+                <time title="修改时间：2024-05-11 21:22:38" itemprop="dateModified" datetime="2024-05-11T21:22:38+08:00">2024-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -300,7 +303,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.5k</span>
+              <span>6.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -866,6 +869,11 @@
 <li>也就是说，<code>0x100000</code>处只是存放一个临时的<code>ELF</code>文件，实际的内容会被加载到<code>0x10000</code>处执行。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112030942.png" alt="image-20240511203046852"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">uint32_t</span> <span class="title function_">reload_elf_file</span><span class="params">(<span class="type">uint8_t</span> *file_buffer)</span> &#123;</span><br><span class="line">    Elf32_Ehdr *elf_hdr = (Elf32_Ehdr *)file_buffer;</span><br><span class="line">    <span class="comment">// 检查是否为有效文件（粗略检查）</span></span><br><span class="line">    <span class="keyword">if</span> ((elf_hdr-&gt;e_ident[<span class="number">0</span>] != <span class="number">0x7F</span>) || (elf_hdr-&gt;e_ident[<span class="number">1</span>] != <span class="string">&#x27;E&#x27;</span>)</span><br><span class="line">        || (elf_hdr-&gt;e_ident[<span class="number">2</span>] != <span class="string">&#x27;L&#x27;</span>) || (elf_hdr-&gt;e_ident[<span class="number">3</span>] != <span class="string">&#x27;F&#x27;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提取相应的数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; elf_hdr-&gt;e_phnum; i++) &#123;</span><br><span class="line">        Elf32_Phdr *phdr = (Elf32_Phdr *)(file_buffer + elf_hdr-&gt;e_phoff) + i;  <span class="comment">// 偏移量：elf_hdr-&gt;e_phoff</span></span><br><span class="line">        <span class="comment">// 判断该段是需要被加载到内存中的可执行代码或数据段</span></span><br><span class="line">        <span class="keyword">if</span> (phdr-&gt;p_type != PT_LOAD) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将可执行代码或数据段从文件中拷贝到内存中</span></span><br><span class="line">        <span class="type">uint8_t</span> *src = file_buffer + phdr-&gt;p_offset;</span><br><span class="line">        <span class="type">uint8_t</span> *dest = (<span class="type">uint8_t</span> *)phdr-&gt;p_paddr;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; phdr-&gt;p_filesz; j++) &#123;</span><br><span class="line">            *dest++ = *src++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 针对.data和.bss做进一步处理</span></span><br><span class="line">        dest = (<span class="type">uint8_t</span> *)phdr-&gt;p_paddr + phdr-&gt;p_filesz;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; phdr-&gt;p_memsz - phdr-&gt;p_filesz; j++) &#123;</span><br><span class="line">            *dest++ = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> elf_hdr-&gt;e_entry;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112120766.png" alt="image-20240511212046693"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112119587.png" alt="image-20240511211959453"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405112121617.png" alt="image-20240511212122548"></p>
 
     </div>
 
