@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-29 15:04:41" itemprop="dateModified" datetime="2024-05-29T15:04:41+08:00">2024-05-29</time>
+                <time title="修改时间：2024-05-30 15:35:26" itemprop="dateModified" datetime="2024-05-30T15:35:26+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,14 +238,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
+              <span>20k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:02</span>
+              <span>1:14</span>
             </span>
 
         </div>
@@ -257,588 +257,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="一、基础篇"><a href="#一、基础篇" class="headerlink" title="一、基础篇"></a>一、基础篇</h1><h2 id="1-1-TCP-IP网络模型"><a href="#1-1-TCP-IP网络模型" class="headerlink" title="1.1 TCP&#x2F;IP网络模型"></a>1.1 TCP&#x2F;IP网络模型</h2><h3 id="1、为什么要有TCP-IP网络模型？"><a href="#1、为什么要有TCP-IP网络模型？" class="headerlink" title="1、为什么要有TCP&#x2F;IP网络模型？"></a>1、为什么要有TCP&#x2F;IP网络模型？</h3><p>为了实现不同设备间的通信，需要网络通信。又由于需要兼容多样性的设备，因此需要一套通用的网络协议。</p>
-<h3 id="2、TCP-IP网络模型概述"><a href="#2、TCP-IP网络模型概述" class="headerlink" title="2、TCP&#x2F;IP网络模型概述"></a>2、TCP&#x2F;IP网络模型概述</h3><p><strong>1、应用层</strong></p>
-<p>应用层工作在操作系统的用户态，不关心数据如何传输，只需要为用户提供应用功能，如HTTP、FTP、Telent、DNS和SMTP等。</p>
-<p><strong>2、传输层</strong></p>
-<p>传输层为应用层提供网络支持，包含两个传输协议，TCP（可靠）和UDP（不可靠）。由于应用需要传输的数据可能会非常大，因此当传输层的数据包超过MSS（TCP 最大报文段长度）时 ，就要将数据包分块（即TCP段）。</p>
-<p>当设备作为接收方时，传输层则要负责把数据包传给应用，根据传输层报文中携带的端口号，应用层识别出该报文发送给哪个应用。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/https/TCP%E6%AE%B5.png" alt="img" style="zoom:50%;" />
-
-<p><strong>3、网络层</strong></p>
-<p>网络层负责将数据从一个设备传输到另一个设备（与此相比，传输层只负责作为应用间数据传输的媒介）。</p>
-<p>网络层最常使用的是 IP 协议（Internet Protocol），IP 协议会将传输层的报文作为数据部分，再加上 IP 包头组装成 IP 报文，如果 IP 报文大小超过 MTU（以太网中一般为 1500 字节）就会<strong>再次进行分片</strong>，得到一个即将发送到网络的 IP 报文。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E8%BF%87%E7%A8%8B/12.jpg" alt="img" style="zoom:50%;" />
-
-<p>用IP地址作为区分不同设备的编号。一个IP地址包括两部分：</p>
-<ul>
-<li>一个是<strong>网络号</strong>，负责标识该 IP 地址是属于哪个「子网」的；</li>
-<li>一个是<strong>主机号</strong>，负责标识同一「子网」下的不同主机。</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405280946647.jpeg" alt="img" style="zoom:50%;" />
-
-<p>除了寻址能力， IP 协议还有另一个重要的能力就是<strong>路由</strong>。实际场景中，两台设备并不是用一条网线连接起来的，而是通过很多网关、路由器、交换机等众多网络设备连接起来的，那么就会形成很多条网络的路径，因此当数据包到达一个网络节点，就需要通过路由算法决定下一步走哪条路径。</p>
-<p>路由器寻址工作中，就是要找到目标地址的子网，找到后进而把数据包转发给对应的网络内。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/IP/17.jpg" alt="IP地址的网络号" style="zoom:50%;" />
-
-<p>所以，<strong>IP 协议的寻址作用是告诉我们去往下一个目的地该朝哪个方向走，路由则是根据「下一个目的地」选择路径。寻址更像在导航，路由更像在操作方向盘</strong>。</p>
-<p><strong>4、网络接口层</strong></p>
-<p>网络接口层主要为网络层提供链路级别传输的服务，负责在以太网、WiFi这样的底层网络上发送原始数据包，工作在网卡这个层次，使用MAC地址来标识网络上的设备。</p>
-<p>什么是以太网呢？电脑上的以太网接口，Wi-Fi接口，以太网交换机、路由器上的千兆，万兆以太网口，还有网线，它们都是以太网的组成部分。以太网就是一种在「局域网」内，把附近的设备连接起来，使它们之间可以进行通讯的技术。</p>
-<p>以太网在判断网络包目的地时必须采用相匹配的方式才能在以太网中将包发往目的地，MAC 头部是以太网使用的头部，它包含了接收方和发送方的 MAC 地址等信息，我们可以通过 ARP 协议获取对方的 MAC 地址。</p>
-<p><strong>5、总结</strong></p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.drawio.png" alt="img" style="zoom: 50%;" />
-
-<p>每一层的封装格式：</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%B5%AE%E7%82%B9/%E5%B0%81%E8%A3%85.png" alt="img" style="zoom: 50%;" />
-
-<h2 id="1-2-键入网址到网页显示，期间发生了什么？"><a href="#1-2-键入网址到网页显示，期间发生了什么？" class="headerlink" title="1.2 键入网址到网页显示，期间发生了什么？"></a>1.2 键入网址到网页显示，期间发生了什么？</h2><blockquote>
-<p><strong>第一步</strong>，浏览器对URL进行解析，确定Web服务器和文件名；</p>
-<p><strong>第二步</strong>，生成发送给Web服务器的HTTP请求信息；</p>
-<p><strong>第三步</strong>：通过DNS查询与服务器域名对应的IP地址；</p>
-<p><strong>第四步</strong>，将HTTP的传输工作交给操作系统中的协议栈；</p>
-<p><strong>第五步</strong>，将请求信息封装为TCP报文，交给下面的网络层处理；</p>
-<p><strong>第六步</strong>，根据查询到的IP信息将TCP报文封装为IP报文；</p>
-<p><strong>第七步</strong>，根据自己的网络获取源MAC地址，根据ARP协议找到目的IP地址对应的MAC地址，从而封装好MAC报文，生成最终的网络包；</p>
-<p><strong>第八步</strong>，通过网卡将网络包这串数字信号转为电信号，通过网线发送出去；</p>
-<p><strong>第九步</strong>，通过交换机和路由器的转发，最终到达Web服务器；</p>
-<p><strong>第十步</strong>，Web服务器的HTTP进程接收到请求报文后，将请求的网页封装在HTTP相应报文里，根据类似的步骤发送至客户端。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405280953095.png" alt="简单的网络模型"></p>
-<h3 id="1、第一步，浏览器对URL进行解析，确定Web服务器和文件名；"><a href="#1、第一步，浏览器对URL进行解析，确定Web服务器和文件名；" class="headerlink" title="1、第一步，浏览器对URL进行解析，确定Web服务器和文件名；"></a>1、第一步，浏览器对URL进行解析，确定Web服务器和文件名；</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281022515.jpeg" alt="URL 解析"></p>
-<ul>
-<li><strong>当URL中并未给出表示数据源&#x2F;文件的路径名时，请求的是哪个文件？</strong></li>
-</ul>
-<p>当没有路径名时，就代表访问根目录下事先设置的<strong>默认文件</strong>，也就是 &#x2F;index.html 或者 &#x2F;default.html 等这些文件。</p>
-<h3 id="2、第二步，生成发送给Web服务器的HTTP请求信息；"><a href="#2、第二步，生成发送给Web服务器的HTTP请求信息；" class="headerlink" title="2、第二步，生成发送给Web服务器的HTTP请求信息；"></a>2、第二步，生成发送给Web服务器的HTTP请求信息；</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281022489.png" alt="HTTP 的消息格式" style="zoom:50%;" />
-
-<h3 id="3、第三步：通过DNS查询与服务器域名对应的IP地址；"><a href="#3、第三步：通过DNS查询与服务器域名对应的IP地址；" class="headerlink" title="3、第三步：通过DNS查询与服务器域名对应的IP地址；"></a>3、<strong>第三步：通过DNS查询与服务器域名对应的IP地址；</strong></h3><p>DNS服务器负责保存Web服务器域名与IP的对应关系。当然，首先会考虑是否能在缓存中直接找到，因此总的寻找顺序如下：</p>
-<p>1、浏览器自身的缓存；</p>
-<p>2、操作系统自身的缓存；</p>
-<p>3、hosts文件；</p>
-<p>4、本地DNS服务器。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281023787.png" alt="域名解析的工作流程"></p>
-<h3 id="4、第四步，将HTTP的传输工作交给操作系统中的协议栈；"><a href="#4、第四步，将HTTP的传输工作交给操作系统中的协议栈；" class="headerlink" title="4、第四步，将HTTP的传输工作交给操作系统中的协议栈；"></a>4、第四步，将HTTP的传输工作交给操作系统中的协议栈；</h3><ul>
-<li>应用程序（浏览器）通过调用 Socket 库，来委托协议栈工作；</li>
-<li>TCP&#x2F;UDP接受应用层的委托，执行收发数据的操作；</li>
-<li>IP协议控制网络包的收发操作；</li>
-<li>网卡驱动程序负责控制网卡硬件；</li>
-<li>网卡则负责完成实际的收发操作，也就是对网线中的信号执行发送和接收操作。</li>
-</ul>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E8%BF%87%E7%A8%8B/7.jpg" alt="img" style="zoom:50%;" />
-
-<h3 id="5、第五步，将请求信息封装为TCP报文，交给下面的网络层处理；"><a href="#5、第五步，将请求信息封装为TCP报文，交给下面的网络层处理；" class="headerlink" title="5、第五步，将请求信息封装为TCP报文，交给下面的网络层处理；"></a>5、第五步，将请求信息封装为TCP报文，交给下面的网络层处理；</h3><ul>
-<li>根据三次握手建立连接；</li>
-<li>将HTTP信息以 <code>MSS</code> 的长度为单位进行拆分；</li>
-<li>封装TCP报文。</li>
-</ul>
-<h3 id="6、第六步，根据查询到的IP信息将TCP报文封装为IP报文；"><a href="#6、第六步，根据查询到的IP信息将TCP报文封装为IP报文；" class="headerlink" title="6、第六步，根据查询到的IP信息将TCP报文封装为IP报文；"></a>6、第六步，根据查询到的IP信息将TCP报文封装为IP报文；</h3><ul>
-<li><strong>假设客户端有多个网卡，就会有多个 IP 地址，那 IP 头部的源地址应该选择哪个 IP 呢？</strong></li>
-</ul>
-<p>当存在多个网卡时，在填写源地址 IP 时，就需要判断到底应该填写哪个地址。这个判断相当于在多块网卡中判断应该使用哪个一块网卡来发送包。这个时候就需要根据<strong>路由表</strong>规则，来判断哪一个网卡作为源地址 IP。</p>
-<h3 id="7、第七步，根据自己的网络获取源MAC地址，根据ARP协议找到目的IP地址对应的MAC地址，从而封装好MAC报文，生成最终的网络包；"><a href="#7、第七步，根据自己的网络获取源MAC地址，根据ARP协议找到目的IP地址对应的MAC地址，从而封装好MAC报文，生成最终的网络包；" class="headerlink" title="7、第七步，根据自己的网络获取源MAC地址，根据ARP协议找到目的IP地址对应的MAC地址，从而封装好MAC报文，生成最终的网络包；"></a>7、第七步，根据自己的网络获取源MAC地址，根据ARP协议找到目的IP地址对应的MAC地址，从而封装好MAC报文，生成最终的网络包；</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281111484.jpeg" alt="MAC 层报文" style="zoom:50%;" />
-
-<h3 id="8、第八步，通过网卡将网络包这串数字信号转为电信号，通过网线发送出去；"><a href="#8、第八步，通过网卡将网络包这串数字信号转为电信号，通过网线发送出去；" class="headerlink" title="8、第八步，通过网卡将网络包这串数字信号转为电信号，通过网线发送出去；"></a>8、第八步，通过网卡将网络包这串数字信号转为电信号，通过网线发送出去；</h3><p>网卡驱动获取网络包之后，会将其<strong>复制</strong>到网卡内的缓存区中，接着会在其<strong>开头加上报头和起始帧分界符，在末尾加上用于检测错误的帧校验序列</strong>。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4/%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E5%8C%85.drawio.png" alt="数据包" style="zoom: 67%;" />
-
-<h3 id="9、第九步，通过交换机和路由器的转发，最终到达Web服务器；"><a href="#9、第九步，通过交换机和路由器的转发，最终到达Web服务器；" class="headerlink" title="9、第九步，通过交换机和路由器的转发，最终到达Web服务器；"></a>9、第九步，通过交换机和路由器的转发，最终到达Web服务器；</h3><p><strong>交换机的工作方式和网卡不同：</strong></p>
-<p>计算机的网卡本身具有 MAC 地址，并通过核对收到的包的接收方 MAC 地址判断是不是发给自己的，如果不是发给自己的则丢弃；相对地，交换机的端口不核对接收方 MAC 地址，而是直接接收所有的包并存放到缓冲区中。因此，和网卡不同，<strong>交换机的端口不具有 MAC 地址</strong>。</p>
-<h3 id="10、第十步，Web服务器的HTTP进程接收到请求报文后，将请求的网页封装在HTTP相应报文里，根据类似的步骤发送至客户端。"><a href="#10、第十步，Web服务器的HTTP进程接收到请求报文后，将请求的网页封装在HTTP相应报文里，根据类似的步骤发送至客户端。" class="headerlink" title="10、第十步，Web服务器的HTTP进程接收到请求报文后，将请求的网页封装在HTTP相应报文里，根据类似的步骤发送至客户端。"></a>10、第十步，Web服务器的HTTP进程接收到请求报文后，将请求的网页封装在HTTP相应报文里，根据类似的步骤发送至客户端。</h3><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E9%94%AE%E5%85%A5%E7%BD%91%E5%9D%80%E8%BF%87%E7%A8%8B/25.jpg" alt="网络分层模型" style="zoom:50%;" />
-
-<ul>
-<li><p>读者问：“请问公网服务器的 Mac 地址是在什么时机通过什么方式获取到的？我看 arp 获取Mac地址只能获取到内网机器的 Mac 地址吧？”</p>
-<p>在发送数据包时，如果目标主机不是本地局域网，填入的MAC地址是路由器，也就是把数据包转发给路由器，路由器一直转发下一个路由器，直到转发到目标主机的路由器，发现 IP 地址是自己局域网内的主机，就会 ARP 请求获取目标主机的 MAC 地址，从而转发到这个服务器主机。</p>
-<p>转发的过程中，源IP地址和目标IP地址是不会变的（前提：没有使用 NAT 网络的），源 MAC 地址和目标 MAC 地址是会变化的。</p>
-</li>
-</ul>
-<h2 id="1-3-Linux-系统是如何收发网络包的？"><a href="#1-3-Linux-系统是如何收发网络包的？" class="headerlink" title="1.3 Linux 系统是如何收发网络包的？"></a>1.3 Linux 系统是如何收发网络包的？</h2><p>Linux 网络协议栈：</p>
-<ul>
-<li>应用程序需要通过系统调用，来跟 Socket 层进行数据交互；</li>
-<li>Socket 层的下面就是传输层、网络层和网络接口层；</li>
-<li>最下面的一层，则是网卡驱动程序和硬件网卡设备；</li>
-</ul>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281119851.png" alt="img" style="zoom: 67%;" />
-
-
-
-
-
-<p>一个网络包的收发流程：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281124646.png" alt="img"></p>
-<h3 id="1、Linux接收网络包的流程"><a href="#1、Linux接收网络包的流程" class="headerlink" title="1、Linux接收网络包的流程"></a>1、Linux接收网络包的流程</h3><blockquote>
-<p>当网卡接收到网络包后，通过DMA将网络包写入Ring Buffer中，并通过中断和轮询的方式告诉操作系统该网络包已到达。</p>
-<p>操作系统首先调用硬件中断处理函数表示已经知道内存中有数据了，告诉网卡下次再收到数据包直接写内存就可以，不需要再通知CPU了，接着发起软中断，恢复刚才屏蔽的中断。软中断则从Ring Buffer中获取一个数据帧，即<code>sk_buff</code>，作为网络包交给网络协议栈进行逐层处理。</p>
-<p>逐层处理的过程是（1）先进入网络接口层，检查报文的合法性，并并找出上层协议的类型；（2）交给网络层，取出IP包，判断是要转发出去还是交给本机上层处理；（3）传输层取出TCP&#x2F;UDP头，根据四元组「源 IP、源端口、目的 IP、目的端口」 作为标识，找出对应的Socket，将数据放入Socket对应的接收缓冲区；（4）最后，应用进程调用Socket接口，将内核的Socket接收缓冲区的数据「拷贝」到应用层的缓冲区，然后唤醒用户进程。</p>
-</blockquote>
-<p>（1）网卡是计算机里的一个硬件，专门负责接收和发送网络包，当网卡接收到一个网络包后，会通过 DMA 技术，将网络包写入到指定的内存地址，也就是写入到 Ring Buffer ，这个是一个环形缓冲区，接着就会告诉操作系统这个网络包已经到达。</p>
-<p>（2）通过触发中断的方式来告诉操作系统这个网络包已到达，但为了解决频繁中断带来的性能开销，Linux 内核在 2.6 版本中引入了 <strong>NAPI 机制</strong>，它是混合「中断和轮询」的方式来接收网络包，它的核心概念就是<strong>不采用中断的方式读取数据</strong>，而是首先采用中断唤醒数据接收的服务程序，然后 <code>poll</code> 的方法来轮询数据。</p>
-<ul>
-<li>硬件中断处理函数：<ul>
-<li>需要先「暂时屏蔽中断」，表示已经知道内存中有数据了，告诉网卡下次再收到数据包直接写内存就可以了，不要再通知 CPU 了，这样可以提高效率，避免 CPU 不停的被中断。</li>
-<li>接着，发起「软中断」，然后恢复刚才屏蔽的中断。</li>
-</ul>
-</li>
-<li>软件中断处理函数：<ul>
-<li>内核中的 ksoftirqd 线程专门负责软中断的处理，当 ksoftirqd 内核线程收到软中断后，轮询处理数据。</li>
-<li>ksoftirqd 线程会从 Ring Buffer 中获取一个数据帧，用 <code>sk_buff</code> 表示，从而可以作为一个网络包交给网络协议栈进行逐层处理。</li>
-</ul>
-</li>
-</ul>
-<p>（3）逐层处理的流程如下。</p>
-<ul>
-<li>首先，会先进入到网络接口层，在这一层会检查报文的合法性，如果不合法则丢弃，合法则会找出该网络包的上层协议的类型，比如是 IPv4，还是 IPv6，接着再去掉帧头和帧尾，然后交给网络层。</li>
-<li>到了网络层，则取出 IP 包，判断网络包下一步的走向，比如是交给上层处理还是转发出去。当确认这个网络包要发送给本机后，就会从 IP 头里看看上一层协议的类型是 TCP 还是 UDP，接着去掉 IP 头，然后交给传输层。</li>
-<li>传输层取出 TCP 头或 UDP 头，根据四元组「源 IP、源端口、目的 IP、目的端口」 作为标识，找出对应的 Socket，并把数据放到 Socket 的接收缓冲区。</li>
-<li>最后，应用层程序调用 Socket 接口，将内核的 Socket 接收缓冲区的数据「拷贝」到应用层的缓冲区，然后唤醒用户进程。</li>
-</ul>
-<p>至此，一个网络包的接收过程就已经结束了。</p>
-<h3 id="2、Linux发送网络包的流程"><a href="#2、Linux发送网络包的流程" class="headerlink" title="2、Linux发送网络包的流程"></a>2、Linux发送网络包的流程</h3><blockquote>
-<p>首先，应用进程调用Socket发送数据的接口，从用户态进入内核态，内核申请一个<code>sk_buff</code>内存，将用户待发送的数据拷贝到<code>sk_buff</code>内存，并将其加入到发送缓冲区。</p>
-<p>其次，网络协议栈从Socket发送缓冲区取出<code>sk_buff</code>，<code>sk_buff</code>通过调整其data的指针，可以表示各个层的数据包。因此按照TCP&#x2F;IP协议栈从上到下逐层处理，最终将<code>sk_buff</code>放到网卡的发送队列中。注意如果使用的是 TCP 传输协议发送数据，需要先拷贝一个新的 <code>sk_buff</code> 副本。</p>
-<p>此时，会触发「软中断」告诉网卡驱动程序有新的网络包需要发送。驱动程序从发送队列中读取<code>sk_buff</code>并挂到<code>Ring Buffer</code>中，并将<code>sk_buff</code>的数据映射到网卡可访问的内存DMA区域，并触发真实的发送。</p>
-<p>当数据发送完成后，网卡设备会触发硬中断释放内存，主要是释放<code>sk_buff</code> 内存和清理<code>Ring Buffer</code>内存。并且，当收到这个 TCP 报文的 ACK 应答时，传输层会释放原始的<code>sk_buff</code>。</p>
-</blockquote>
-<p>（1）首先，应用程序会调用 Socket 发送数据包的接口，由于这个是系统调用，所以会从用户态陷入到内核态中的 Socket 层，内核会申请一个内核态的 <code>sk_buff</code>内存，<strong>将用户待发送的数据拷贝到 <code>sk_buff</code> 内存，并将其加入到发送缓冲区</strong>。</p>
-<p>（2）接下来，网络协议栈从 Socket 发送缓冲区中取出<code>sk_buff</code>，并按照 TCP&#x2F;IP 协议栈从上到下逐层处理。</p>
-<p><strong>（3）如果使用的是 TCP 传输协议发送数据，那么先拷贝一个新的 <code>sk_buff</code> 副本 ，这是因为 <code>sk_buff</code>后续在调用网络层，最后到达网卡发送完成的时候，这个<code>sk_buff</code>会被释放掉。而 TCP 协议是支持丢失重传的，在收到对方的 ACK  之前，这个<code>sk_buff</code>不能被删除。所以内核的做法就是每次调用网卡发送的时候，实际上传递出去的是<code>sk_buff</code>的一个拷贝，等收到 ACK 再真正删除。</strong></p>
-<p>（4）接着，对<code>sk_buff</code> 填充 TCP 头。这里提一下，<code>sk_buff</code>可以表示各个层的数据包，在应用层数据包叫 data，在 TCP 层我们称为 segment，在 IP 层我们叫 packet，在数据链路层称为 frame。</p>
-<blockquote>
-<p>于是，为了在层级之间传递数据时，不发生拷贝，只用<code>sk_buff</code> 一个结构体来描述所有的网络包，那它是如何做到的呢？是通过调整 <code>sk_buff</code> 中 <code>data</code> 的指针，比如：</p>
-<ul>
-<li>当接收报文时，从网卡驱动开始，通过协议栈层层往上传送数据报，通过增加 skb-&gt;data 的值，来逐步剥离协议首部。</li>
-<li>当要发送报文时，创建 <code>sk_buff</code> 结构体，数据缓存区的头部预留足够的空间，用来填充各层首部，在经过各下层协议时，通过减少 skb-&gt;data 的值来增加协议首部。</li>
-</ul>
-</blockquote>
-<p>（5）然后交给网络层，在网络层里会做这些工作：选取路由（确认下一跳的 IP）、填充 IP 头、netfilter 过滤、对超过 MTU 大小的数据包进行分片。处理完这些工作后会交给网络接口层处理。</p>
-<p>（6）网络接口层会通过 ARP 协议获得下一跳的 MAC 地址，然后对<code>sk_buff</code> 填充帧头和帧尾，接着将 <code>sk_buff</code> 放到网卡的发送队列中。</p>
-<p>（7）这一些工作准备好后，会触发「软中断」告诉网卡驱动程序，这里有新的网络包需要发送，驱动程序会从发送队列中读取<code>sk_buff</code>，将这个<code>sk_buff</code>挂到 RingBuffer 中，接着将<code>sk_buff</code>数据映射到网卡可访问的内存 DMA 区域，最后触发真实的发送。</p>
-<p>（8）当数据发送完成以后，其实工作并没有结束，因为内存还没有清理。当发送完成的时候，网卡设备会触发一个硬中断来释放内存，主要是释放<code>sk_buff</code> 内存和清理 RingBuffer 内存。</p>
-<p>（9）最后，当收到这个 TCP 报文的 ACK 应答时，传输层就会释放原始的<code>sk_buff</code>。</p>
-<blockquote>
-<ul>
-<li>发送网络数据的时候，涉及几次内存拷贝操作？</li>
-</ul>
-<p>第一次，调用发送数据的系统调用的时候，内核会申请一个内核态的 <code>sk_buff</code> 内存，将用户待发送的数据拷贝到 <code>sk_buff</code> 内存，并将其加入到发送缓冲区。</p>
-<p>第二次，在使用 TCP 传输协议的情况下，从传输层进入网络层的时候，每一个 <code>sk_buff</code> 都会被克隆一个新的副本出来。副本 <code>sk_buff</code>  会被送往网络层，等它发送完的时候就会释放掉，然后原始的 <code>sk_buff</code> 还保留在传输层，目的是为了实现 TCP 的可靠传输，等收到这个数据包的  ACK 时，才会释放原始的 <code>sk_buff</code> 。</p>
-<p>第三次，当 IP 层发现 <code>sk_buff</code> 大于 MTU 时才需要进行。会再申请额外的 <code>sk_buff</code>，并将原来的 <code>sk_buff</code> 拷贝为多个小的 <code>sk_buff</code>。</p>
-</blockquote>
-<h3 id="3、技术补充"><a href="#3、技术补充" class="headerlink" title="3、技术补充"></a>3、技术补充</h3><h4 id="（1）DMA（Direct-Memory-Access）"><a href="#（1）DMA（Direct-Memory-Access）" class="headerlink" title="（1）DMA（Direct Memory Access）"></a>（1）DMA（Direct Memory Access）</h4><p>一种内存访问技术，允许某些电脑内部的硬件子系统（电脑外设）可以独立地直接读写系统内存，而不需要中央处理器（CPU）介入处理。</p>
-<ol>
-<li>传统CPU存取数据</li>
-</ol>
-<p>CPU 不直接存取外设的原因：</p>
-<ul>
-<li>CPU 的工作速度和外设的工作速度差距太大；</li>
-<li>外设格式种类繁多，无法直接存取，需要经过转换</li>
-</ul>
-<p>基于上述原因，CPU 不能直接从外设获取或者向外设写入内容。传统CPU 获取数据的步骤如下：</p>
-<blockquote>
-<p>1、CPU 将外设数据加载到内存（和CPU的处理速度最接近）</p>
-<p>2、CPU 检查 cache 是否有自己需要的数据（是否命中）</p>
-<p>3、如果命中，直接返回数据；如未命中，继续从内存获取（这里暂时不考虑MMU）</p>
-<p>4、返回数据</p>
-</blockquote>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405281501833.png" alt="img" style="zoom:50%;" />
-
-<ol start="2">
-<li>DMA</li>
-</ol>
-<p>由上面CPU 读取数据来看，无论是将外设数据搬移到内存，还是从内存读取数据，都需要CPU 的参与。为了让 CPU 能够专注于处理手中事务，DMA 将负责数据的搬移工作。</p>
-<p>DMA（Direct Memory Access）即直接存储器访问，借助内部的控制器来实现内存和外设之间的数据传输。有了DMA，CPU 可以专注于内存数据的存取；数据的搬运过程完全可以交由DMA硬件完成。有了DMA以后，不代表完全不需要CPU了，只是不会像中断那样频繁向CPU发送请求。</p>
-<img src="https://img-blog.csdnimg.cn/57fc82764f3c4ca9b45bef7d402a083a.png" alt="img" style="zoom:50%;" />
-
-<h4 id="（2）ksoftirqd内核线程"><a href="#（2）ksoftirqd内核线程" class="headerlink" title="（2）ksoftirqd内核线程"></a>（2）ksoftirqd内核线程</h4><p><a target="_blank" rel="noopener" href="https://www.kerneltravel.net/blog/2020/ksoftirqd_ljr/">Linux内核网络中的软中断ksoftirqd</a></p>
-<p>当执行到网卡通过硬件中断（IRQ）通知CPU，告诉它有数据来了，CPU会根据中断表，调用已经注册的中断函数，这个中断函数会调到驱动程序（NIC Driver）中相应的函数。驱动先禁用网卡的中断，表示驱动程序已经知道内存中有数据了，告诉网卡下次再收到数据包直接写内存就可以了，不要再通知CPU了，这样可以提高效率，避免CPU不停的被中断。</p>
-<p>由于硬中断处理程序执行的过程中不能被中断，所以如果它执行时间过长，会导致CPU没法响应其它硬件的中断，于是内核引入软中断，这样可以将硬中断处理函数中耗时的部分移到软中断处理函数里面来慢慢处理。内核中的<code>ksoftirqd</code>进程专门负责软中断的处理，当它收到软中断后，就会调用相应软中断所对应的处理函数，网卡驱动模块抛出的软中断，<code>ksoftirqd</code>会调用网络模块的<code>net_rx_action</code>函数。</p>
-<p>中断是一种异步的事件处理机制，用来提高系统的并发处理能力。中断事件发生，会触发执行中断处理程序，而中断处理程序被分为上半部和下半部这两个部分。上半部对应硬中断，用来快速处理中断；下半部对应软中断，用来异步处理上半部未完成的工作。Linux 中的软中断包括网络收发、定时、调度、RCU 锁等各种类型，我们可以查看 proc 文件系统中的 <code>/proc/softirqs</code>  ，观察软中断的运行情况。在 Linux 中，每个 CPU 都对应一个软中断内核线程，名字是 <code>ksoftirqd/CPU </code>编号。当软中断事件的频率过高时，内核线程也会因为 CPU 使用率过高而导致软中断处理不及时，进而引发网络收发延迟、调度缓慢等性能问题。</p>
-<h4 id="（3）NAPI机制分析"><a href="#（3）NAPI机制分析" class="headerlink" title="（3）NAPI机制分析"></a>（3）NAPI机制分析</h4><h1 id="二、HTTP篇"><a href="#二、HTTP篇" class="headerlink" title="二、HTTP篇"></a>二、HTTP篇</h1><h2 id="2-1-HTTP-基本概念"><a href="#2-1-HTTP-基本概念" class="headerlink" title="2.1 HTTP 基本概念"></a>2.1 HTTP 基本概念</h2><blockquote>
-<p>HTTP 是一个用于在<strong>服务器和服务器之间</strong>，或<strong>服务器和本地浏览器之间</strong>传输文字、图片、音频和视频等超文本数据的规范和约定。</p>
-</blockquote>
-<h3 id="1、HTTP是什么？"><a href="#1、HTTP是什么？" class="headerlink" title="1、HTTP是什么？"></a>1、HTTP是什么？</h3><p>HTTP是超文本传输协议，也就是<code>HyperText Transfer Protocol</code>。</p>
-<p>「超文本」：文字、图片和视频等的混合体。其本身只是纯文字文件，但内部用很多标签定义了图片、视频等的链接，再经过浏览器的解释，呈现出来的就是一个有文字、有画面的网页了。</p>
-<h3 id="2、HTTP的常见状态码有哪些？"><a href="#2、HTTP的常见状态码有哪些？" class="headerlink" title="2、HTTP的常见状态码有哪些？"></a>2、HTTP的常见状态码有哪些？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291014235.png" alt="HTTP常见状态码"></p>
-<h3 id="3、HTTP的常见字段有哪些？"><a href="#3、HTTP的常见字段有哪些？" class="headerlink" title="3、HTTP的常见字段有哪些？"></a>3、HTTP的常见字段有哪些？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291021674.png" alt="HTTP常见字段"></p>
-<h2 id="2-2-Get-与-Post"><a href="#2-2-Get-与-Post" class="headerlink" title="2.2 Get 与 Post"></a>2.2 Get 与 Post</h2><p><strong>GET 的语义是从服务器获取指定的资源</strong>。GET 请求的参数位置一般是写在 URL 中，URL 规定只能支持 ASCII，所以 GET 请求的参数只允许 ASCII 字符 ，而且浏览器会对 URL 的长度有限制（HTTP协议本身对 URL长度并没有做任何规定）。GET 方法是安全、幂等、可被缓存的。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291431547.png" alt="GET 请求"></p>
-<p><strong>POST 的语义是根据请求负荷（报文body）对指定的资源做出处理</strong>。POST 请求携带数据的位置一般是写在报文 body 中，body 中的数据可以是任意格式的数据，只要客户端与服务端协商好即可，而且浏览器不会对 body 大小做限制。POST 不安全，不幂等，（大部分实现）不可缓存。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291431269.png" alt="POST 请求"></p>
-<h2 id="2-3-HTTP缓存技术"><a href="#2-3-HTTP缓存技术" class="headerlink" title="2.3 HTTP缓存技术"></a>2.3 HTTP缓存技术</h2><blockquote>
-<p>HTTP 缓存有两种实现方式，分别是<strong>强制缓存和协商缓存</strong>。</p>
-<p>强制缓存指的是只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存。决定是否使用缓存的主动性在于浏览器这边。基于两个HTTP响应头部字段实现：Cache-Control和Expires。</p>
-<p>协商缓存指的是与服务端协商之后，通过协商结果来判断是否使用本地缓存。涉及304状态码。基于两种头部来实现，一种是请求头部中的 <code>If-Modified-Since</code> 字段与响应头部中的 <code>Last-Modified</code> 字段，另一种是请求头部中的 <code>If-None-Match</code> 字段与响应头部中的 <code>ETag</code> 字段。注意，<strong>协商缓存这两个字段都需要配合强制缓存中 Cache-Control 字段来使用，只有在未能命中强制缓存的时候，才能发起带有协商缓存字段的请求</strong>。</p>
-</blockquote>
-<h3 id="1、强制缓存"><a href="#1、强制缓存" class="headerlink" title="1、强制缓存"></a>1、强制缓存</h3><p>下图中，返回的是 200 状态码，但在 size 项中标识的是 from disk cache，就是使用了强制缓存。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291035054.png" alt="img"></p>
-<p>强缓存利用下面两个HTTP响应头部字段实现：</p>
-<ul>
-<li><code>Cache-Control</code>， 是一个相对时间，优先级较高；</li>
-<li><code>Expires</code>，是一个绝对时间；</li>
-</ul>
-<h3 id="2、协商缓存"><a href="#2、协商缓存" class="headerlink" title="2、协商缓存"></a>2、协商缓存</h3><p>当我们在浏览器使用开发者工具的时候，你可能会看到过某些请求的响应码是 <code>304</code>，这个是告诉浏览器可以使用本地缓存的资源，通常这种通过服务端告知客户端是否可以使用缓存的方式被称为协商缓存。</p>
-<p>协商缓存的过程如下：</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/http1.1%E4%BC%98%E5%8C%96/%E7%BC%93%E5%AD%98etag.png" alt="img" style="zoom:50%;" />
-
-<p>协商缓存可以基于两种头部来实现。</p>
-<p>第一种：请求头部中的 <code>If-Modified-Since</code> 字段与响应头部中的 <code>Last-Modified</code> 字段实现，这两个字段的意思是：</p>
-<ul>
-<li>响应头部中的 <code>Last-Modified</code>：标示这个响应资源的最后修改时间；</li>
-<li>请求头部中的 <code>If-Modified-Since</code>：当资源过期了，发现响应头中具有 Last-Modified 声明，则再次发起请求的时候带上 Last-Modified 的时间，服务器收到请求后发现有  If-Modified-Since，则与被请求资源的最后修改时间进行对比（Last-Modified），如果最后修改时间较新（大），说明资源又被改过，则返回最新资源，HTTP  200 OK；如果最后修改时间较旧（小），说明资源无新修改，响应 HTTP 304 走缓存。</li>
-</ul>
-<p>第二种：请求头部中的 <code>If-None-Match</code> 字段与响应头部中的 <code>ETag</code> 字段，这两个字段的意思是：</p>
-<ul>
-<li>响应头部中 <code>Etag</code>：唯一标识响应资源；</li>
-<li>请求头部中的 <code>If-None-Match</code>：当资源过期时，浏览器发现响应头里有 Etag，则再次向服务器发起请求时，会将请求头 If-None-Match 值设置为 Etag 的值。服务器收到请求后进行比对，如果资源没有变化返回 304，如果资源变化了返回 200。</li>
-</ul>
-<p>第一种实现方式是基于时间实现的，第二种实现方式是基于一个唯一标识实现的，相对来说后者可以更加准确地判断文件内容是否被修改，避免由于时间篡改导致的不可靠问题。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291109906.png" alt="img"></p>
-<p><strong>当使用 ETag 字段实现的协商缓存的过程：</strong></p>
-<ul>
-<li><p>当浏览器第一次请求访问服务器资源时，服务器会在返回这个资源的同时，在 Response 头部加上 ETag 唯一标识，这个唯一标识的值是根据当前请求的资源生成的；</p>
-</li>
-<li><p>当浏览器再次请求访问服务器中的该资源时，首先会先检查强制缓存是否过期：</p>
-<ul>
-<li>如果没有过期，则直接使用本地缓存；</li>
-<li>如果缓存过期了，会在 Request 头部加上 If-None-Match 字段，该字段的值就是 ETag 唯一标识；</li>
-</ul>
-</li>
-<li><p>服务器再次收到请求后，</p>
-<p>会根据请求中的 If-None-Match 值与当前请求的资源生成的唯一标识进行比较：</p>
-<ul>
-<li><strong>如果值相等，则返回 304 Not Modified，不会返回资源</strong>；</li>
-<li>如果不相等，则返回 200 状态码和返回资源，并在 Response 头部加上新的 ETag 唯一标识；</li>
-</ul>
-</li>
-<li><p>如果浏览器收到 304 的请求响应状态码，则会从本地缓存中加载资源，否则更新资源。</p>
-</li>
-</ul>
-<h2 id="2-4-HTTP与HTTPS"><a href="#2-4-HTTP与HTTPS" class="headerlink" title="2.4 HTTP与HTTPS"></a>2.4 HTTP与HTTPS</h2><h3 id="1、HTTP-与-HTTPS-有哪些区别？"><a href="#1、HTTP-与-HTTPS-有哪些区别？" class="headerlink" title="1、HTTP 与 HTTPS 有哪些区别？"></a>1、HTTP 与 HTTPS 有哪些区别？</h3><blockquote>
-<ul>
-<li>TTP 是超文本传输协议，信息是明文传输，存在安全风险的问题。HTTPS 则解决 HTTP 不安全的缺陷，在 TCP 和 HTTP 网络层之间加入了 SSL&#x2F;TLS 安全协议，使得报文能够加密传输。</li>
-<li>HTTP 连接建立相对简单， TCP 三次握手之后便可进行 HTTP 的报文传输。而 HTTPS 在 TCP 三次握手之后，还需进行 SSL&#x2F;TLS 的握手过程，才可进入加密报文传输。</li>
-<li>两者的默认端口不一样，HTTP 默认端口号是 80，HTTPS 默认端口号是 443。</li>
-<li>HTTPS 协议需要向 CA（证书权威机构）申请数字证书，来保证服务器的身份是可信的。</li>
-</ul>
-</blockquote>
-<h3 id="2、HTTPS解决了HTTP的哪些问题？"><a href="#2、HTTPS解决了HTTP的哪些问题？" class="headerlink" title="2、HTTPS解决了HTTP的哪些问题？"></a>2、HTTPS解决了HTTP的哪些问题？</h3><blockquote>
-<p>HTTP存在三个风险：1）窃听风险；2）篡改风险；3）冒充风险。</p>
-<p>HTTPS通过在HTTP与TCP之间加入<code>SLL/TSL</code>协议，解决上述风险，具体实现如下：</p>
-<p>1、<strong>混合加密</strong>的方式实现信息的<strong>机密性</strong>，解决了窃听的风险。</p>
-<p>2、<strong>摘要算法</strong>的方式来实现<strong>完整性</strong>，它能够为数据生成独一无二的「指纹」，指纹用于校验数据的完整性，解决了篡改的风险。</p>
-<p>3、将服务器公钥放入到<strong>数字证书</strong>中，解决了冒充的风险。</p>
-</blockquote>
-<p>HTTP存在三个风险：<strong>1）窃听风险；2）篡改风险；3）冒充风险</strong>。</p>
-<p>HTTPS通过在HTTP与TCP之间加入<code>SLL/TSL</code>协议，解决上述风险，具体实现如下：</p>
-<blockquote>
-<p>1、<strong>混合加密</strong>的方式实现信息的<strong>机密性</strong>，解决了窃听的风险。</p>
-</blockquote>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291122854.png" alt="混合加密" style="zoom:80%;" />
-
-<p>HTTPS 采用的是<strong>对称加密</strong>和<strong>非对称加密</strong>结合的「混合加密」方式：</p>
-<ul>
-<li>在通信建立前采用<strong>非对称加密</strong>的方式交换「会话秘钥」，后续就不再使用非对称加密。</li>
-<li>在通信过程中全部使用<strong>对称加密</strong>的「会话秘钥」方式加密明文数据。</li>
-</ul>
-<p>采用「混合加密」的方式的原因：</p>
-<ul>
-<li><strong>对称加密</strong>只使用一个密钥，运算速度快，密钥必须保密，无法做到安全的密钥交换。</li>
-<li><strong>非对称加密</strong>使用两个密钥：公钥和私钥，公钥可以任意分发而私钥保密，解决了密钥交换问题但速度慢。</li>
-</ul>
-<blockquote>
-<p>2、<strong>摘要算法</strong>的方式来实现<strong>完整性</strong>，它能够为数据生成独一无二的「指纹」，指纹用于校验数据的完整性，解决了篡改的风险。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291125568.png" alt="img"></p>
-<p>通过哈希算法可以确保内容不会被篡改，<strong>但是并不能保证「内容 + 哈希值」不会被中间人替换，因为这里缺少对客户端收到的消息是否来源于服务端的证明</strong>。为了避免这种情况，计算机里会用<strong>非对称加密算法</strong>来解决，共有两个密钥：</p>
-<ul>
-<li>一个是公钥，这个是可以公开给所有人的；</li>
-<li>一个是私钥，这个必须由本人管理，不可泄露。</li>
-</ul>
-<p>这两个密钥可以<strong>双向加解密</strong>的，比如可以用公钥加密内容，然后用私钥解密，也可以用私钥加密内容，公钥解密内容。</p>
-<p>流程的不同，意味着目的也不相同：</p>
-<ul>
-<li><strong>公钥加密，私钥解密</strong>。这个目的是为了<strong>保证内容传输的安全</strong>，因为被公钥加密的内容，其他人是无法解密的，只有持有私钥的人，才能解密出实际的内容；</li>
-<li><strong>私钥加密，公钥解密</strong>。这个目的是为了<strong>保证消息不会被冒充</strong>，因为私钥是不可泄露的，如果公钥能正常解密出私钥加密的内容，就能证明这个消息是来源于持有私钥身份的人发送的。</li>
-</ul>
-<p>一般我们不会用非对称加密来加密实际的传输内容，因为非对称加密的计算比较耗费性能的。</p>
-<p>所以非对称加密的用途主要在于<strong>通过「私钥加密，公钥解密」的方式，来确认消息的身份</strong>，我们常说的<strong>数字签名算法</strong>，就是用的是这种方式，不过私钥加密内容不是内容本身，而是<strong>对内容的哈希值加密</strong>。</p>
-<blockquote>
-<p>3、将服务器公钥放入到<strong>数字证书</strong>中，解决了冒充的风险。</p>
-</blockquote>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/22-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt="数子证书工作流程" style="zoom: 80%;" />
-
-<h3 id="3、HTTPS-是如何建立连接的？其间交互了什么？"><a href="#3、HTTPS-是如何建立连接的？其间交互了什么？" class="headerlink" title="3、HTTPS  是如何建立连接的？其间交互了什么？"></a>3、HTTPS  是如何建立连接的？其间交互了什么？</h3><p>待学习，较复杂</p>
-<h3 id="4、HTTPS-一定安全可靠吗？"><a href="#4、HTTPS-一定安全可靠吗？" class="headerlink" title="4、HTTPS 一定安全可靠吗？"></a>4、HTTPS 一定安全可靠吗？</h3><h4 id="（1）HTTPS一定安全可靠吗，如果有假基站起了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"><a href="#（1）HTTPS一定安全可靠吗，如果有假基站起了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？" class="headerlink" title="（1）HTTPS一定安全可靠吗，如果有假基站起了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"></a>（1）HTTPS一定安全可靠吗，如果有假基站起了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？</h4><blockquote>
-<p>HTTPS 协议本身到目前为止还是没有任何漏洞的，即使你成功进行中间人攻击，本质上是利用了客户端的漏洞（用户点击继续访问或者被恶意导入伪造的根证书），并不是 HTTPS 不够安全。</p>
-</blockquote>
-<p>这个问题的场景是这样的：客户端通过浏览器向服务端发起 HTTPS 请求时，被「假基站」转发到了一个「中间人服务器」，于是客户端是和「中间人服务器」完成了 TLS 握手，然后这个「中间人服务器」再与真正的服务端完成 TLS 握手。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/http/https%E4%B8%AD%E9%97%B4%E4%BA%BA.drawio.png" alt="img" style="zoom:50%;" />
-
-
-
-<p>从客户端的角度看，其实并不知道网络中存在中间人服务器这个角色。那么中间人就可以解开浏览器发起的 HTTPS  请求里的数据，也可以解开服务端响应给浏览器的 HTTPS 响应数据。相当于，中间人能够 “偷看” 浏览器与服务端之间的 HTTPS  请求和响应的数据。</p>
-<p>但是要发生这种场景是有前提的，前提是用户点击接受了中间人服务器的证书。中间人服务器与客户端在 TLS 握手过程中，实际上发送了自己伪造的证书给浏览器，而这个伪造的证书是能被浏览器（客户端）识别出是非法的，于是就会提醒用户该证书存在问题。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291132705.png" alt="img"></p>
-<p>所以，<strong>HTTPS 协议本身到目前为止还是没有任何漏洞的，即使你成功进行中间人攻击，本质上是利用了客户端的漏洞（用户点击继续访问或者被恶意导入伪造的根证书），并不是 HTTPS 不够安全</strong>。</p>
-<h4 id="（2）为什么抓包工具能截取-HTTPS-数据？"><a href="#（2）为什么抓包工具能截取-HTTPS-数据？" class="headerlink" title="（2）为什么抓包工具能截取 HTTPS 数据？"></a>（2）为什么抓包工具能截取 HTTPS 数据？</h4><blockquote>
-<p>抓包工具能够抓包的关键是客户端会往系统受信任的根证书列表中导入抓包工具生成的证书，而这个证书会被浏览器信任，也就是抓包工具给自己创建了一个认证中心 CA，客户端拿着中间人签发的证书去中间人自己的 CA 去认证，就会认为这个证书是有效的。</p>
-</blockquote>
-<p>很多抓包工具 之所以可以明文看到 HTTPS 数据，工作原理与中间人一致。</p>
-<p>对于 HTTPS 连接来说，中间人要满足以下两点，才能实现真正的明文代理:</p>
-<ol>
-<li>中间人，作为客户端与真实服务端建立连接这一步不会有问题，因为服务端不会校验客户端的身份；</li>
-<li>中间人，作为服务端与真实客户端建立连接，这里会有客户端信任服务端的问题，也就是服务端必须有对应域名的私钥；</li>
-</ol>
-<p>中间人要拿到私钥只能通过如下方式：</p>
-<ol>
-<li>去网站服务端拿到私钥；</li>
-<li>去CA处拿域名签发私钥；</li>
-<li>自己签发证书，切要被浏览器信任；</li>
-</ol>
-<p>不用解释，抓包工具只能使用第三种方式取得中间人的身份。使用抓包工具进行 HTTPS 抓包的时候，需要在客户端安装 Fiddler 的根证书，这里实际上起认证中心（CA）的作用。</p>
-<p>抓包工具能够抓包的关键是客户端会往系统受信任的根证书列表中导入抓包工具生成的证书，而这个证书会被浏览器信任，也就是抓包工具给自己创建了一个认证中心 CA，客户端拿着中间人签发的证书去中间人自己的 CA 去认证，当然认为这个证书是有效的。</p>
-<h4 id="（3）如何避免被中间人抓取数据？"><a href="#（3）如何避免被中间人抓取数据？" class="headerlink" title="（3）如何避免被中间人抓取数据？"></a>（3）如何避免被中间人抓取数据？</h4><blockquote>
-<p>1、不要点击任务证书非法的网站；</p>
-<p>2、通过 HTTPS 双向认证来避免，不仅客户端会验证服务端的身份，而且服务端也会验证客户端的身份。服务端一旦验证到请求自己的客户端为不可信任的，服务端就拒绝继续通信，客户端如果发现服务端为不可信任的，那么也中止通信。</p>
-</blockquote>
-<p>我们要保证自己电脑的安全，不要被病毒乘虚而入，而且也不要点击任何证书非法的网站，这样 HTTPS 数据就不会被中间人截取到了。</p>
-<p>当然，我们还可以通过 <strong>HTTPS 双向认证</strong>来避免这种问题。一般我们的 HTTPS 是单向认证，客户端只会验证了服务端的身份，但是服务端并不会验证客户端的身份。<strong>如果用了双向认证方式，不仅客户端会验证服务端的身份，而且服务端也会验证客户端的身份。服务端一旦验证到请求自己的客户端为不可信任的，服务端就拒绝继续通信，客户端如果发现服务端为不可信任的，那么也中止通信。</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291145819.png" alt="img"></p>
-<h2 id="2-5-HTTP-1-1、HTTP-2、HTPP-3的演变"><a href="#2-5-HTTP-1-1、HTTP-2、HTPP-3的演变" class="headerlink" title="2.5 HTTP&#x2F;1.1、HTTP&#x2F;2、HTPP&#x2F;3的演变"></a>2.5 HTTP&#x2F;1.1、HTTP&#x2F;2、HTPP&#x2F;3的演变</h2><h3 id="1、HTTP-1-1"><a href="#1、HTTP-1-1" class="headerlink" title="1、HTTP&#x2F;1.1"></a>1、HTTP&#x2F;1.1</h3><blockquote>
-<p>优点：</p>
-<ol>
-<li>简单</li>
-<li>灵活和易于拓展</li>
-<li>应用广泛和跨平台</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>无状态</li>
-<li>明文传输</li>
-<li>不安全</li>
-</ol>
-<p>性能：</p>
-<ol>
-<li>长连接</li>
-<li>管道网络传输</li>
-</ol>
-</blockquote>
-<p><strong>优点：</strong></p>
-<ol>
-<li><p>简单</p>
-<p>基本的报文格式是 <code>header + body</code>，头部信息也是 <code>key-value</code> 简单文本的形式。</p>
-</li>
-<li><p>灵活和易于拓展</p>
-<p>HTTP 协议里的各类请求方法、URI&#x2F;URL、状态码和头字段等每个组成要求都没有被固定死，都允许开发人员<strong>自定义和扩充</strong>。</p>
-<p>同时 HTTP 由于是工作在应用层（ <code>OSI</code> 第七层），其<strong>下层可以随意变化</strong>，比如：</p>
-<ul>
-<li>HTTPS 就是在 HTTP 与 TCP 层之间增加了 SSL&#x2F;TLS 安全传输层；</li>
-<li>HTTP&#x2F;1.1 和 HTTP&#x2F;2.0 传输协议使用的是 TCP 协议，而到了 HTTP&#x2F;3.0 传输协议改用了 UDP 协议。</li>
-</ul>
-</li>
-<li><p>应用广泛和跨平台</p>
-</li>
-</ol>
-<p><strong>缺点：</strong></p>
-<ol>
-<li><p>无状态</p>
-<p>HTTP协议本身是无状态的，也就是说每个请求之间是相互独立的，服务器不会在不同请求之间保留任何关于客户端请求的状态信息。这意味着<strong>每个HTTP请求都是独立的，服务器不会记住之前的请求或会话信息。</strong></p>
-<p>对于无状态的问题，解法方案有很多种，其中比较简单的方式用 <strong>Cookie</strong> 技术。</p>
-<p><code>Cookie</code> 通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291443907.png" alt="Cookie 技术"></p>
-</li>
-<li><p>明文传输</p>
-</li>
-<li><p>不安全</p>
-</li>
-</ol>
-<p><strong>性能：</strong></p>
-<ol>
-<li><p>长连接：只要任意一端没有明确提出断开连接，则保持 TCP 连接状态。如果某个 HTTP 长连接超过一定时间没有任何数据交互，服务端就会主动断开这个连接。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291444931.png" alt="短连接与长连接"></p>
-</li>
-<li><p>管道网络传输：在同一个 TCP 连接里面，客户端可以发起多个请求，只要第一个请求发出去了，不必等其回来，就可以发第二个请求出去，可以<strong>减少整体的响应时间。</strong>但是<strong>服务器必须按照接收请求的顺序发送对这些管道化请求的响应</strong>。如果服务端在处理 A 请求时耗时比较长，那么后续的请求的处理都会被阻塞住，这称为「队头堵塞」。所以，<strong>HTTP&#x2F;1.1 管道解决了请求的队头阻塞，但是没有解决响应的队头阻塞</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291445813.png" alt="管道网络传输"></p>
-</li>
-</ol>
-<blockquote>
-<p><strong>注意</strong></p>
-<p>实际上 HTTP&#x2F;1.1 管道化技术不是默认开启，而且浏览器基本都没有支持，所以<strong>后面所有文章讨论 HTTP&#x2F;1.1 都是建立在没有使用管道化的前提</strong>。大家知道有这个功能，但是没有被使用就行了。</p>
-</blockquote>
-<ol start="3">
-<li><p>队头阻塞：当顺序发送的请求序列中的一个请求因为某种原因被阻塞时，在后面排队的所有请求也一同被阻塞了，会招致客户端一直请求不到数据，这也就是「<strong>队头阻塞</strong>」。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291447597.png" alt="队头阻塞"></p>
-</li>
-</ol>
-<h3 id="2、HTTP-2"><a href="#2、HTTP-2" class="headerlink" title="2、HTTP&#x2F;2"></a>2、HTTP&#x2F;2</h3><blockquote>
-<p>HTTP&#x2F;2 相比 HTTP&#x2F;1.1 性能上的改进：</p>
-<ol>
-<li>头部压缩</li>
-<li>二进制格式</li>
-<li>并发传输</li>
-<li>服务器主动推送资源</li>
-</ol>
-<p>但其缺陷在于：HTTP&#x2F;2 虽然通过多个请求复用一个 TCP 连接解决了 HTTP 的队头阻塞 ，但是<strong>一旦发生丢包，就会阻塞住所有的 HTTP 请求</strong>，这属于 TCP 层队头阻塞。</p>
-</blockquote>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/25-HTTP2.png" alt="HTT/1 ~ HTTP/2" style="zoom:80%;" />
-
-<ol>
-<li><p>头部压缩</p>
-<p>HTTP&#x2F;2 会<strong>压缩头</strong>（Header）如果你同时发出多个请求，他们的头是一样的或是相似的，那么，协议会帮你<strong>消除重复的部分</strong>。</p>
-<p>这就是所谓的 <code>HPACK</code> 算法：在客户端和服务器同时维护一张头信息表，所有字段都会存入这个表，生成一个索引号，以后就不发送同样字段了，只发送索引号，这样就<strong>提高速度</strong>了。</p>
-</li>
-<li><p>二进制格式</p>
-<p>HTTP&#x2F;2 不再像 HTTP&#x2F;1.1 里的纯文本形式的报文，而是全面采用了<strong>二进制格式</strong>，头信息和数据体都是二进制，并且统称为帧（frame）：<strong>头信息帧（Headers Frame）和数据帧（Data Frame）</strong>。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291449629.png" alt="HTTP/1 与 HTTP/2 "></p>
-<p>比如状态码 200 ，在 HTTP&#x2F;1.1 是用 ‘2’’0’’0’ 三个字符来表示（二进制：00110010 00110000 00110000），共用了 3 个字节，如下图</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291450660.png" alt="img"></p>
-<p>在 HTTP&#x2F;2 对于状态码 200 的二进制编码是 10001000，只用了 1 字节就能表示，相比于 HTTP&#x2F;1.1 节省了 2 个字节，如下图：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291450575.png" alt="img"></p>
-</li>
-<li><p>并发传输</p>
-<p>引入了 Stream 概念，多个 Stream 复用在一条 TCP 连接。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291452845.png" alt="img"></p>
-<p>1 个 TCP 连接包含多个 Stream，1个Stream 里可以包含 1 个或多个 Message，Message 对应 HTTP&#x2F;1  中的请求或响应，由 HTTP 头部和包体构成。Message 里包含一条或者多个 Frame，Frame 是 HTTP&#x2F;2  最小单位，以二进制压缩格式存放 HTTP&#x2F;1 中的内容（头部和包体）。</p>
-<p><strong>针对不同的 HTTP 请求用独一无二的 Stream ID 来区分，接收端可以通过 Stream ID 有序组装成 HTTP  消息，不同 Stream 的帧是可以乱序发送的，因此可以并发不同的 Stream ，也就是 HTTP&#x2F;2 可以并行交错地发送请求和响应</strong>。</p>
-<p>比如下图，服务端<strong>并行交错地</strong>发送了两个响应： Stream 1 和 Stream 3，这两个 Stream 都是跑在一个 TCP 连接上，客户端收到后，会根据相同的 Stream ID 有序组装成 HTTP 消息。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291453175.jpeg" alt="img"></p>
-</li>
-<li><p>服务器主动推送资源</p>
-<p>客户端和服务器<strong>双方都可以建立 Stream</strong>， Stream ID 也是有区别的，客户端建立的 Stream 必须是奇数号，而服务器建立的 Stream 必须是偶数号。</p>
-<p>比如下图，Stream 1 是客户端向服务端请求的资源，属于客户端建立的 Stream，所以该 Stream 的 ID 是奇数（数字  1）；Stream 2 和 4 都是服务端主动向客户端推送的资源，属于服务端建立的 Stream，所以这两个 Stream 的 ID  是偶数（数字 2 和 4）。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291453212.png" alt="img"></p>
-<p>HTTP&#x2F;2的仍旧存在“队头阻塞”问题，但是问题不是在HTTP层面，而是在TCP层面。</p>
-<p><strong>HTTP&#x2F;2 是基于 TCP 协议来传输数据的，TCP 是字节流协议，TCP  层必须保证收到的字节数据是完整且连续的，这样内核才会将缓冲区里的数据返回给 HTTP 应用，那么当「前 1  个字节数据」没有到达时，后收到的字节数据只能存放在内核缓冲区里，只有等到这 1 个字节数据到达时，HTTP&#x2F;2  应用层才能从内核中拿到数据，这就是 HTTP&#x2F;2 队头阻塞问题。</strong></p>
-<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291455599.jpeg" alt="img" style="zoom:67%;" />
-
-<p>举个例子，如下图：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291455330.gif" alt="img"></p>
-</li>
-</ol>
-<h3 id="3、HTTP-3"><a href="#3、HTTP-3" class="headerlink" title="3、HTTP&#x2F;3"></a>3、HTTP&#x2F;3</h3><blockquote>
-<p>为了解决HTTP&#x2F;2的队头阻塞问题，HTTP&#x2F;3将下层的TCP协议修改成了UDP协议。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291456442.jpeg" alt="HTTP/1 ~ HTTP/3"></p>
-<p>UDP 发送是不管顺序，也不管丢包的，所以不会出现像 HTTP&#x2F;2 队头阻塞的问题。大家都知道 UDP 是不可靠传输的，但基于 UDP 的 <strong>QUIC 协议</strong> 可以实现类似 TCP 的可靠性传输。</p>
-<p>QUIC 有以下 3 个特点。</p>
-<ul>
-<li>无队头阻塞</li>
-<li>更快的连接建立</li>
-<li>连接迁移</li>
-</ul>
-<p>1、无队头阻塞</p>
-<p>QUIC 协议也有类似 HTTP&#x2F;2 Stream 与多路复用的概念，也是可以在同一条连接上并发传输多个 Stream，Stream 可以认为就是一条 HTTP 请求。</p>
-<p>QUIC 有自己的一套机制可以保证传输的可靠性的。<strong>当某个流发生丢包时，只会阻塞这个流，其他流不会受到影响，因此不存在队头阻塞问题</strong>，这与 HTTP&#x2F;2 不同，HTTP&#x2F;2 只要某个流中的数据包丢失了，其他流也会因此受影响。所以，QUIC 连接上的多个 Stream 之间并没有依赖，都是独立的，某个流发生丢包了，只会影响该流，其他流不受影响。</p>
-<img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/quic/quic%E6%97%A0%E9%98%BB%E5%A1%9E.jpeg" alt="img" style="zoom: 67%;" />
-
-<p>2、更快的连接建立</p>
-<p>对于 HTTP&#x2F;1 和 HTTP&#x2F;2 协议，TCP 和 TLS 是分层的，分别属于内核实现的传输层、openssl 库实现的表示层，因此它们难以合并在一起，需要分批次来握手，先 TCP 握手，再 TLS 握手。</p>
-<p>HTTP&#x2F;3 在传输数据前虽然需要 QUIC 协议握手，但是这个握手过程只需要 1 RTT，握手的目的是为确认双方的「连接 ID」，连接迁移就是基于连接 ID 实现的。此外，HTTP&#x2F;3 的 QUIC 协议并不是与 TLS 分层，而是 QUIC 内部包含了 TLS，它在自己的帧会携带 TLS 里的“记录”，再加上 QUIC 使用的是 TLS&#x2F;1.3，因此仅需 1 个 RTT 就可以「同时」完成建立连接与密钥协商，如下图：</p>
-<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/28-HTTP3%E4%BA%A4%E4%BA%92%E6%AC%A1%E6%95%B0.png" alt="TCP HTTPS（TLS/1.3） 和 QUIC HTTPS "></p>
-<p>3、连接迁移</p>
-<p>基于 TCP 传输协议的 HTTP 协议，由于是通过四元组（源 IP、源端口、目的 IP、目的端口）确定一条 TCP 连接。</p>
-<img src="https://cdn.xiaolincoding.com//mysql/other/format,png-20230309231026577.png" alt="TCP 四元组" style="zoom:50%;" />
-
-<p>那么<strong>当移动设备的网络从 4G 切换到 WIFI 时，意味着 IP 地址变化了，那么就必须要断开连接，然后重新建立连接</strong>。而建立连接的过程包含 TCP 三次握手和 TLS 四次握手的时延，以及 TCP 慢启动的减速过程，给用户的感觉就是网络突然卡顿了一下，因此连接的迁移成本是很高的。</p>
-<p>而 QUIC 协议没有用四元组的方式来“绑定”连接，而是通过<strong>连接 ID</strong> 来标记通信的两个端点，客户端和服务器可以各自选择一组 ID 来标记自己，因此即使移动设备的网络变化后，导致 IP 地址变化了，只要仍保有上下文信息（比如连接 ID、TLS 密钥等），就可以“无缝”地复用原连接，消除重连的成本，没有丝毫卡顿感，达到了<strong>连接迁移</strong>的功能。</p>
-<p><strong>所以， QUIC 是一个在 UDP 之上的伪 TCP + TLS + HTTP&#x2F;2 的多路复用的协议。</strong></p>
-<p>QUIC 是新协议，对于很多网络设备，根本不知道什么是 QUIC，只会当做 UDP，这样会出现新的问题，因为有的网络设备是会丢掉 UDP 包的，而  QUIC 是基于 UDP 实现的，那么如果网络设备无法识别这个是 QUIC 包，那么就会当作 UDP包，然后被丢弃。HTTP&#x2F;3 现在普及的进度非常的缓慢，不知道未来 UDP 是否能够逆袭 TCP。</p>
-<h2 id="1、网络层"><a href="#1、网络层" class="headerlink" title="1、网络层"></a>1、网络层</h2><h3 id="什么是ICMP？"><a href="#什么是ICMP？" class="headerlink" title="什么是ICMP？"></a>什么是ICMP？</h3><p>ICMP是TCP&#x2F;IP协议族中网络层的协议，通过传输网络层控制消息的协议来实现网络诊断，以及发送错误报告的目的。<br>如ping&#x2F;traceout就是通过icmp来诊断网络质量以及追踪数据包在网络中的传输路径来达到网络诊断的目的。</p>
-<h2 id="2、TCP和UD"><a href="#2、TCP和UD" class="headerlink" title="2、TCP和UD"></a>2、TCP和UD</h2><h3 id="什么是TCP粘包？"><a href="#什么是TCP粘包？" class="headerlink" title="什么是TCP粘包？"></a>什么是TCP粘包？</h3><p>TCP粘包是指在使用TCP协议传输数据时，发送方发送的多个数据包被接收方一次性接收。这是由于TCP发送的数据是以字节流为单位的，无法确定消数据边界。</p>
-<h3 id="如何解决TCP粘包？"><a href="#如何解决TCP粘包？" class="headerlink" title="如何解决TCP粘包？"></a>如何解决TCP粘包？</h3><p>（1）添加数据边界，在数据中添加一个一个特定边界标识<br>（2）发送定长数据，不满足定长的数据用特定字符填充<br>（3）添加消息头<br>（4）使用应用层协议，如HTTP&#x2F;FTP协议都已经针对粘包问题进行了处理</p>
-<h3 id="UDP会发生粘包吗？"><a href="#UDP会发生粘包吗？" class="headerlink" title="UDP会发生粘包吗？"></a>UDP会发生粘包吗？</h3><p>不会，因为UDP数据报格式的协议，发送时的数据报是独立的，因此有明确的边界。</p>
-<h3 id="UDP为什么会发生乱序问题？"><a href="#UDP为什么会发生乱序问题？" class="headerlink" title="UDP为什么会发生乱序问题？"></a>UDP为什么会发生乱序问题？</h3><p>UDP不像TCP，存在滑动窗、序列号、确认序列和超时重传机制。因此由于存在网络抖动问题，接收方接收到的UDP数据报可能是乱序的，需要自行处理。</p>
-<h3 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h3><p>TCP（Transmission Control Protocol）和UDP（User Datagram Protocol）是两种常见的传输层协议，它们在网络通信中有以下几点区别：</p>
-<ol>
-<li><strong>连接性：</strong>TCP 是面向连接的协议；UDP 是无连接的协议</li>
-<li><strong>可靠性：</strong><ul>
-<li>TCP 提供可靠的数据传输，保证数据的完整性和顺序性，通过确认应答机制和重传机制来确保数据的可靠传输。</li>
-<li>UDP 不提供可靠的数据传输，数据包可能会丢失、重复或者乱序，不保证数据的可靠性和顺序性。</li>
-</ul>
-</li>
-<li><strong>传输效率：</strong><ul>
-<li>TCP 的数据传输效率相对较低</li>
-<li>UDP 的数据传输效率相对较高，适用于实时性要求较高的应用场景。</li>
-</ul>
-</li>
-<li><strong>应用场景：</strong><ul>
-<li>TCP 可进行网页浏览、文件传输、电子邮件等。</li>
-<li>UDP 适用于实时性要求较高、对数据可靠性要求不高的应用，如音视频传输、在线游戏、DNS 查询等。</li>
-</ul>
-</li>
-<li><strong>头部开销：</strong><ul>
-<li>TCP 头部开销较大，包含了序列号、确认号、窗口大小等字段，用于实现可靠传输和流量控制。</li>
-<li>UDP 头部开销较小，只包含了源端口、目标端口、长度和校验和字段，不包含额外的控制信息。</li>
-</ul>
-</li>
-</ol>
-<h3 id="UDP报文的最大报文限制（说错了，应该是DNS中UDP限制512字节）？"><a href="#UDP报文的最大报文限制（说错了，应该是DNS中UDP限制512字节）？" class="headerlink" title="UDP报文的最大报文限制（说错了，应该是DNS中UDP限制512字节）？"></a>UDP报文的最大报文限制（说错了，应该是DNS中UDP限制512字节）？</h3><h2 id="3、TCP三次握手"><a href="#3、TCP三次握手" class="headerlink" title="3、TCP三次握手"></a>3、TCP三次握手</h2><h3 id="详细说明三次握手"><a href="#详细说明三次握手" class="headerlink" title="详细说明三次握手"></a>详细说明三次握手</h3><ol>
-<li><p>TCP服务器进程创建传输控制块，用来存储TCP连接中的一些重要信息，并进入监听状态，等待TCP客户端进程的连接请求</p>
-</li>
-<li><p>TCP客户进程也是首先创建传输控制块</p>
-</li>
-<li><p>TCP客户进程向TCP服务器进程发送TCP连接请求报文段，并进入同步已发送状态。</p>
-</li>
-<li><p>TCP服务器进程收到TCP连接请求报文段后，如果同意建立连接，则向TCP客户进程发送TCP连接请求确认报文段，并进入同步已接收状态。</p>
-</li>
-<li><p>TCP客户进程收到TCP连接请求确认报文段后，还要向TCP服务器进程发送一个普通的TCP确认报文段，并进入连接已连接状态。</p>
-</li>
-<li><p>TCP服务器进程收到该确认报文段后也进入连接已建立状态。</p>
-</li>
-</ol>
-<h3 id="为什么不能两次握手？"><a href="#为什么不能两次握手？" class="headerlink" title="为什么不能两次握手？"></a>为什么不能两次握手？</h3><p>不采用两次握手主要是为了<strong>防止已经失效的连接请求报文段突然又传到服务端</strong>，因而产生错误。</p>
-<p>这种情况是：<strong>客户端发出的第一个连接请求报文并没有丢失，而是因为某些未知的原因在某个网络节点上发生滞留，导致延迟到下一个连接释放以后的某个时间才到达服务器端。</strong>当服务器端收到此失效报文后，会误认为是客户端发出的一个新连接请求，于是客户端又发出确认报文，表示同意建立连接。</p>
-<p>如果不采用“三次握手”，那么只要服务器端发出确认报文就会认为新的连接已经建立了，但此时客户端并没有发出建立连接的请求，因此不会向服务器端发送数据。服务器端没有收到数据就会一直等待，这样就会白白浪费掉很多资源。</p>
-<p>所以必须采用“三次握手”而非“两次握手”。</p>
-<h3 id="三次握手为什么ACK信号是SYN信号值-1？"><a href="#三次握手为什么ACK信号是SYN信号值-1？" class="headerlink" title="三次握手为什么ACK信号是SYN信号值+1？"></a>三次握手为什么ACK信号是SYN信号值+1？</h3><p>TCP（传输控制协议）的三次握手过程是建立一个可靠的连接会话的关键步骤。在这个过程中，ACK（确认）信号的值为SYN（同步）信号的值加1的原因主要是为了确认双方的接收能力和确保序列号的同步。</p>
-<h3 id="TCP三次握手的过程中可以携带数据吗"><a href="#TCP三次握手的过程中可以携带数据吗" class="headerlink" title="TCP三次握手的过程中可以携带数据吗"></a>TCP三次握手的过程中可以携带数据吗</h3><p>第三次握手的时候可以携带数据，第一次和第二次握手不可以。</p>
-<h3 id="TCP挥手过程中，为什么存在一个time-wait状态？"><a href="#TCP挥手过程中，为什么存在一个time-wait状态？" class="headerlink" title="TCP挥手过程中，为什么存在一个time_wait状态？"></a>TCP挥手过程中，为什么存在一个time_wait状态？</h3><p>（1）防止错误接收报文。如果立刻断掉连接，那么当客户端复位ip地址和端口号重新建立连接时，可能会收到上一个连接发送过来的历史报文，而当前建立的新连接无法判断这个报文是否为历史报文，因此会出现错误。</p>
-<p>（2）确保双方正常关闭。当客户端发送ACK报文给服务器端时，若该报文丢失，需要等待服务器端重新发送一个FIN报文给客户端，这个等待的时间最大为2MSL，因此需要一个time_wait状态来让客户端等到是否再次接受到一个FIN报文。</p>
-<h3 id="什么情况下会出现大量time-wait状态？如何优化？"><a href="#什么情况下会出现大量time-wait状态？如何优化？" class="headerlink" title="什么情况下会出现大量time_wait状态？如何优化？"></a>什么情况下会出现大量time_wait状态？如何优化？</h3><p>在以下两种场景会出现大量time_wait状态：</p>
-<p>（1）高并发场景下。此时存在大量的客户端和服务器端建立连接，因此在断开连接时就会出现大量的time_wait状态。</p>
-<p>（2）短连接场景下。短连接场景下的TCP连接生命周期较短，很快就会断开连接，就导致出现大量的time_wait状态。</p>
-<p>可以通过下列方式进行优化：</p>
-<p>（1）缩短MSL的时间。</p>
-<p>（2）建立连接池。在客户端和服务器端中间建立连接池，这样就可以复用已经建立的的TCP连接。</p>
-<p>（3）在服务器端开启SO_REUSEADDR套接字，这样可以使得服务器端在time_wait状态时就可以重新绑定并监听端口号。</p>
-<p>（4）在客户端开启SO_LINGER套接字，并将延迟设置为0。这样当断开连接时，客户端会直接发送一个RST信号，不再进行四次挥手，从而避免进入time_wait状态。</p>
-<h2 id="4、TCP四次挥手"><a href="#4、TCP四次挥手" class="headerlink" title="4、TCP四次挥手"></a>4、TCP四次挥手</h2><h3 id="详细说明四次挥手"><a href="#详细说明四次挥手" class="headerlink" title="详细说明四次挥手"></a>详细说明四次挥手</h3><ol>
-<li>当客户端和服务器端都处于连接已建立状态时，若要释放连接，客户进程会发送TCP连接释放报文段，并进入终止等待状态。</li>
-<li>服务器进程收到TCP连接释放报文段后，会发送一个普通的TCP确认报文段并进入关闭等待状态。</li>
-<li>此时，从客户进程到服务器进程这个方向的连接就释放了，这时的TCP连接属于半关闭状态，也就是客户进程已经没有数据要发送了。但如果服务器进程还有数据要发送，客户进程仍要接收，也就是说从服务器进程到客户进程这个方向的连接并未关闭。</li>
-<li>客户进程收到TCP确认报文段后就进入终止等待状态，等待服务器进程发出的TCP连接释放报文段。若服务器进程已经没有数据要发送了，服务器进程即释放连接。由于TCP连接释放是由TCP客户进程主动发起的，因此TCP服务器进程对TCP连接的释放称为被动关闭连接。</li>
-<li>服务器进程发送TCP连接释放报文段并进入最后确认状态。</li>
-<li>客户进程收到TCP连接释放报文段后，必须针对该报文段发送普通的TCP确认报文段，之后进入时间等待状态。服务器进程收到该报文段后就进入关闭状态，而TCP客户进程还要经过2MSL后才能进入关闭状态。</li>
-</ol>
-<h3 id="为什么不能三次挥手？"><a href="#为什么不能三次挥手？" class="headerlink" title="为什么不能三次挥手？"></a>为什么不能三次挥手？</h3><p>因为时间等待状态以及处于该状态2MSL时长，可以确保TCP服务器进程可以收到最后一个TCP确认报文段而进入关闭状态。</p>
-<p>另外，TCP客户进程在发送完最后一个TCP确认报文段后，在经过2MSL时长，就可以使本次连接持续时间内所产生的所有报文段都从网络中消失，这样就可以使下一个新的TCP连接中，不会出现旧连接中的报文段。</p>
-<h2 id="5、TCP可靠传输"><a href="#5、TCP可靠传输" class="headerlink" title="5、TCP可靠传输"></a>5、TCP可靠传输</h2><h3 id="流量控制和拥塞控制"><a href="#流量控制和拥塞控制" class="headerlink" title="流量控制和拥塞控制"></a>流量控制和拥塞控制</h3><p>流量控制和拥塞控制都是网络通信中用于控制数据传输的机制，但它们针对的对象和目的略有不同。</p>
-<p>（1）流量控制（Flow Control）</p>
-<p>流量控制是指在数据传输过程中，接收方通过一定的方式告诉发送方自己的接收能力，以控制发送方的发送速率，防止发送方发送过多的数据导致接收方无法及时处理。流量控制通常发生在端到端之间，其主要目的是保护接收方不被发送方的数据压倒。</p>
-<p>常见的流量控制机制包括<strong>滑动窗口协议（如TCP的滑动窗口机制）和通告窗口大小（advertised window size）</strong>等。接收方通过不断调整通告窗口大小来告诉发送方自己的接收能力，从而控制发送方的发送速率。</p>
-<p>（2）拥塞控制（Congestion Control）</p>
-<p>拥塞控制是指在网络中避免过多的数据包拥塞在网络节点或链路上，从而影响网络性能和吞吐量的机制。拥塞控制通常发生在网络中，其主要目的是保护网络免受过载和崩溃。</p>
-<p>拥塞控制通过监控网络的拥塞程度，并采取一系列措施来降低数据包的发送速率，从而避免网络拥塞。常见的拥塞控制算法包括<strong>拥塞窗口控制、慢启动、拥塞避免、快速重传、快速恢复</strong>等。这些算法通过动态调整数据包的发送速率，以适应网络的负载情况，从而确保网络的稳定性和性能。</p>
-<h3 id="在流量控制中，如果接受窗口已经是0了，还会发生吗？"><a href="#在流量控制中，如果接受窗口已经是0了，还会发生吗？" class="headerlink" title="在流量控制中，如果接受窗口已经是0了，还会发生吗？"></a>在流量控制中，如果接受窗口已经是0了，还会发生吗？</h3><ul>
-<li><strong>窗口更新</strong>：即使窗口大小为0，发送方仍然需要接收来自接收方的ACK包。接收方在其缓冲区有了新的空间可用时，会发送一个新的窗口大小。这可以是在处理了一些数据之后。</li>
-<li><strong>零窗口探测</strong>：TCP实现通常会使用零窗口探测（Zero Window Probing）机制。如果窗口大小长时间保持为0，发送方会定期发送探测包以检查接收方的窗口是否已经开放。这些探测包通常很小，确保不会因额外的数据负载而导致问题。</li>
-<li><strong>窗口开放</strong>：一旦接收方的窗口再次开放，它会通过发送一个窗口更新的ACK包来通知发送方。收到这个ACK后，发送方可以恢复数据传输。</li>
-</ul>
-<h3 id="TCP可靠传输的⼏种机制"><a href="#TCP可靠传输的⼏种机制" class="headerlink" title="TCP可靠传输的⼏种机制"></a>TCP可靠传输的⼏种机制</h3><p>TCP（Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层协议。它采用了多种机制来保证数据的可靠传输，以下是几种常见的机制：</p>
-<ol>
-<li><strong>序列号和确认应答：</strong> TCP 使用序列号和确认应答机制来确保数据的可靠传输。发送方将每个数据包都标记上序列号，并等待接收方发送确认应答。接收方收到数据后，会发送确认应答，告诉发送方已成功接收到数据，如果发送方在一定时间内没有收到确认应答，则会重新发送数据。</li>
-<li><strong>超时重传：</strong> TCP 采用超时重传机制来处理丢失的数据包。如果发送方在一定时间内没有收到确认应答，则会认为数据包丢失，会重新发送该数据包。</li>
-<li><strong>滑动窗口：</strong> TCP 使用滑动窗口机制来进行流量控制和拥塞控制。滑动窗口指定了发送方可以发送的数据量，接收方通过发送窗口大小来告知发送方自己的接收能力。发送方根据接收窗口的大小来控制发送速率，以避免发送过多的数据导致接收方无法及时处理。</li>
-<li><strong>累积确认：</strong> TCP 使用累积确认机制来确认已成功接收的数据。接收方发送的确认应答中包含了已成功接收的数据的最大序列号，发送方根据该确认号来确认哪些数据已经被成功接收。</li>
-<li><strong>拥塞控制算法：</strong> TCP 使用拥塞控制算法来避免网络拥塞和过载。常见的拥塞控制算法包括慢启动、拥塞避免、快速重传和快速恢复等，通过动态调整发送窗口大小和数据包的发送速率来适应网络的负载情况，从而确保网络的稳定性和性能。</li>
-</ol>
-<h2 id="6、应用层"><a href="#6、应用层" class="headerlink" title="6、应用层"></a>6、应用层</h2><h3 id="打开一个网址，发生了什么，HTTP报文怎么发送Server的（提示路由，不会）"><a href="#打开一个网址，发生了什么，HTTP报文怎么发送Server的（提示路由，不会）" class="headerlink" title="打开一个网址，发生了什么，HTTP报文怎么发送Server的（提示路由，不会）?"></a>打开一个网址，发生了什么，HTTP报文怎么发送Server的（提示路由，不会）?</h3><h3 id="HTTP的状态码有哪些？"><a href="#HTTP的状态码有哪些？" class="headerlink" title="HTTP的状态码有哪些？"></a>HTTP的状态码有哪些？</h3><h3 id="HTTPS和HTTP的区别是什么？"><a href="#HTTPS和HTTP的区别是什么？" class="headerlink" title="HTTPS和HTTP的区别是什么？"></a>HTTPS和HTTP的区别是什么？</h3><h3 id="HTTPS是如何进行加密的？"><a href="#HTTPS是如何进行加密的？" class="headerlink" title="HTTPS是如何进行加密的？"></a>HTTPS是如何进行加密的？</h3><p>HTTPS（HyperText Transfer Protocol Secure）是一种基于HTTP协议和SSL&#x2F;TLS协议的安全传输协议，它通过使用加密技术来保护通信数据的安全性和完整性。下面是HTTPS进行加密的基本流程：</p>
-<ol>
-<li><strong>建立SSL&#x2F;TLS连接：</strong> 客户端与服务器之间首先建立SSL&#x2F;TLS连接，这个过程通常称为SSL&#x2F;TLS握手。在握手过程中，客户端和服务器协商使用的加密算法、密钥长度和其他参数，同时进行身份验证。</li>
-<li><strong>进行证书交换：</strong> 在握手过程中，服务器会向客户端发送数字证书，用于证明服务器的身份。数字证书包含了服务器的公钥以及与证书相关的信息，如证书颁发者、有效期等。</li>
-<li><strong>验证证书：</strong> 客户端收到服务器的证书后，会对证书进行验证。这个过程通常包括检查证书的有效性、签发者的可信度、证书是否过期等。如果证书验证通过，则客户端继续握手过程；否则，可能会发出警告或中止连接。</li>
-<li><strong>生成会话密钥：</strong> 一旦证书验证通过，客户端会生成一个用于对通信数据进行加密和解密的会话密钥（Session Key）。通常情况下，客户端使用服务器的公钥来加密这个会话密钥，并发送给服务器。</li>
-<li><strong>加密通信：</strong> 一旦服务器收到客户端发送的加密的会话密钥，服务器使用自己的私钥解密会话密钥。此后，客户端和服务器之间的通信就使用这个会话密钥来进行对称加密和解密了。这意味着通信数据在传输过程中是加密的，保护了数据的机密性和完整性。</li>
-</ol>
-<h3 id="对称加密和非对称加密的区别，哈希散列算不算加密算法"><a href="#对称加密和非对称加密的区别，哈希散列算不算加密算法" class="headerlink" title="对称加密和非对称加密的区别，哈希散列算不算加密算法"></a>对称加密和非对称加密的区别，哈希散列算不算加密算法</h3><h3 id="HTTPS的端口？其证书是怎么验证的？"><a href="#HTTPS的端口？其证书是怎么验证的？" class="headerlink" title="HTTPS的端口？其证书是怎么验证的？"></a>HTTPS的端口？其证书是怎么验证的？</h3><h3 id="OKHttp的原理、功能，以及在哪些地方应用，做了哪些优化"><a href="#OKHttp的原理、功能，以及在哪些地方应用，做了哪些优化" class="headerlink" title="OKHttp的原理、功能，以及在哪些地方应用，做了哪些优化"></a>OKHttp的原理、功能，以及在哪些地方应用，做了哪些优化</h3><h3 id="大量网络请求，怎么优化（不会，应该是在客户端做离散化处理）？"><a href="#大量网络请求，怎么优化（不会，应该是在客户端做离散化处理）？" class="headerlink" title="大量网络请求，怎么优化（不会，应该是在客户端做离散化处理）？"></a>大量网络请求，怎么优化（不会，应该是在客户端做离散化处理）？</h3>
+          <p>[TOC]</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -888,7 +315,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-27 18:57:28" itemprop="dateModified" datetime="2024-05-27T18:57:28+08:00">2024-05-27</time>
+                <time title="修改时间：2024-05-30 10:42:01" itemprop="dateModified" datetime="2024-05-30T10:42:01+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -929,7 +356,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="一、源码测试过程报错"><a href="#一、源码测试过程报错" class="headerlink" title="一、源码测试过程报错"></a>一、源码测试过程报错</h1>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/05/08/Project/diyx86os/diyx86os/#more" rel="contents">
@@ -987,7 +414,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-08 20:21:06" itemprop="dateModified" datetime="2024-05-08T20:21:06+08:00">2024-05-08</time>
+                <time title="修改时间：2024-05-30 10:35:37" itemprop="dateModified" datetime="2024-05-30T10:35:37+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1028,11 +455,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1、GNU-allocator总述（pool-allocator"><a href="#1、GNU-allocator总述（pool-allocator" class="headerlink" title="1、GNU allocator总述（pool_allocator)"></a>1、GNU allocator总述（pool_allocator)</h2><p>allocator，作为一个STL的分配器，其底层是由<code>new/delete</code>进行实现的。</p>
-<h3 id="在GNU的编译器里面"><a href="#在GNU的编译器里面" class="headerlink" title="在GNU的编译器里面"></a><strong>在GNU的编译器里面</strong></h3><ul>
-<li>对于比较大的或者一般的allocator，我们一般调用<code>::operator new/delete allocator和deallocate</code>进行</li>
-<li>对于较小块内存的分配，在GNU2.9里面有一个比较特殊的设计。</li>
-</ul>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/05/06/Computer/C++/C++%20Allocator/#more" rel="contents">
@@ -1194,7 +617,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-08 20:20:04" itemprop="dateModified" datetime="2024-05-08T20:20:04+08:00">2024-05-08</time>
+                <time title="修改时间：2024-05-30 10:35:10" itemprop="dateModified" datetime="2024-05-30T10:35:10+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1239,7 +662,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第一讲-Primitives"><a href="#第一讲-Primitives" class="headerlink" title="第一讲 Primitives"></a>第一讲 Primitives</h1>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/30/Computer/C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/#more" rel="contents">
@@ -1401,7 +824,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-08 20:20:40" itemprop="dateModified" datetime="2024-05-08T20:20:40+08:00">2024-05-08</time>
+                <time title="修改时间：2024-05-30 10:42:26" itemprop="dateModified" datetime="2024-05-30T10:42:26+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1427,7 +850,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>660</span>
+              <span>661</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1446,9 +869,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><p>优先级队列（priority_queue）是C++标准库中的一个容器适配器（container adapter），其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆（heap）数据结构。</p>
-<p>定义在<queue>头文件中。</p>
-<p>默认情况下，priority_queue使用std::less作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/26/Computer/C++/STL/STL%E4%B9%8B%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97%EF%BC%88priority_queue%EF%BC%89/#more" rel="contents">
@@ -1506,7 +927,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-08 20:21:00" itemprop="dateModified" datetime="2024-05-08T20:21:00+08:00">2024-05-08</time>
+                <time title="修改时间：2024-05-30 10:35:29" itemprop="dateModified" datetime="2024-05-30T10:35:29+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1528,7 +949,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>530</span>
+              <span>531</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1547,7 +968,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>今天在做<strong>Leetcode 150. 逆波兰表达式求值</strong>一题时，涉及到字符串转换为整数的相关问题，遂进行如下探讨：</p>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/26/Computer/C++/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97/#more" rel="contents">
@@ -1605,7 +1026,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-08 20:21:13" itemprop="dateModified" datetime="2024-05-08T20:21:13+08:00">2024-05-08</time>
+                <time title="修改时间：2024-05-30 10:35:44" itemprop="dateModified" datetime="2024-05-30T10:35:44+08:00">2024-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1649,6 +1070,7 @@
           <blockquote>
 <p><strong>区分三个概念：new operator、operator new和placement new</strong></p>
 </blockquote>
+<p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/24/Computer/C++/new%E4%B8%8Eoperator%20new/#more" rel="contents">
@@ -1698,10 +1120,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-17 10:06:59 / 修改时间：10:36:05" itemprop="dateCreated datePublished" datetime="2024-04-17T10:06:59+08:00">2024-04-17</time>
+              <time title="创建时间：2024-04-17 10:06:59" itemprop="dateCreated datePublished" datetime="2024-04-17T10:06:59+08:00">2024-04-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-30 10:40:20" itemprop="dateModified" datetime="2024-05-30T10:40:20+08:00">2024-05-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1737,133 +1165,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1、GCC安装"><a href="#1、GCC安装" class="headerlink" title="1、GCC安装"></a>1、GCC安装</h2><h3 id="（1）GCC相关知识点"><a href="#（1）GCC相关知识点" class="headerlink" title="（1）GCC相关知识点"></a>（1）GCC相关知识点</h3><p>GCC（GNU Compiler Collection， GNU编译器套件）是由GNU开发的编程语言译器。</p>
-<p>gcc和g++都是GNU（组织）的一个编译器</p>
-<ul>
-<li>误区一：gcc只能编译C程序，g++只能编译C++代码：<ul>
-<li>后缀为.c时，gcc认为其是C程序，g++认为其是C++程序；</li>
-<li>后缀为.cpp时，gcc和g++均认为其是C++程序。</li>
-</ul>
-</li>
-<li>误区二：编译只能用gcc，链接只能用g++：<ul>
-<li>严格来说不算错误，但混淆了概念，应该说：编译可以用gcc&#x2F;g++，而链接可以用g++或者gcc -lstdc++;</li>
-<li>gcc命令不能自动和C++程序使用的库链接，所以通常使用g++来完成链接。但在编译阶段，g++会自动调用gcc，二者等价。</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171012036.png" alt="1"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171012580.png" alt="2"></p>
-<h3 id="（2）GCC工作流程"><a href="#（2）GCC工作流程" class="headerlink" title="（2）GCC工作流程"></a>（2）GCC工作流程</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013866.png" alt="3"></p>
-<ul>
-<li><p>预处理：对头文件展开\删除代码中的注释\宏替换</p>
-</li>
-<li><p><strong>程序编译成可执行程序的过程：</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013529.png" alt="4"></p>
-</li>
-</ul>
-<h2 id="2、静态库和动态库"><a href="#2、静态库和动态库" class="headerlink" title="2、静态库和动态库"></a>2、静态库和动态库</h2><h3 id="（1）静态库"><a href="#（1）静态库" class="headerlink" title="（1）静态库"></a>（1）静态库</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013337.png" alt="5"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013840.png" alt="6"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/library<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">├── add.c</span><br><span class="line">├── div.c</span><br><span class="line">├── mult.c</span><br><span class="line">└── sub.c</span><br><span class="line">root@iisayhi:~/lesson/library<span class="comment"># gcc main.c -o app -I ./include/ -l calc -L ./lib/</span></span><br><span class="line">root@iisayhi:~/lesson/library<span class="comment"># tree</span></span><br><span class="line">.</span><br><span class="line">├── app</span><br><span class="line">├── include</span><br><span class="line">│   └── head.h</span><br><span class="line">├── lib</span><br><span class="line">│   └── libcalc.a</span><br><span class="line">├── main.c</span><br><span class="line">└── src</span><br><span class="line">		├── add.c</span><br><span class="line">		├── div.c</span><br><span class="line">		├── mult.c</span><br><span class="line">		└── sub.c</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）动态库"><a href="#（2）动态库" class="headerlink" title="（2）动态库"></a>（2）动态库</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013622.png" alt="7"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013961.png" alt="8"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171013076.png" alt="9"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/calc# **gcc -c -fpic add.c mult.c sub.c div.c** </span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# ls</span><br><span class="line">add.c  add.o  div.c  div.o  head.h  main.c  mult.c  mult.o  sub.c  sub.o</span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# **gcc -shared *.o -o libcalc.so**</span><br><span class="line">root@iisayhi:~/lesson/lesson01/calc# ll</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root root  4096 Apr  6 22:49 ./</span><br><span class="line">drwxr-xr-x 4 root root  4096 Apr  6 22:47 ../</span><br><span class="line">-rw-r--r-- 1 root root    80 Apr  6 22:47 add.c</span><br><span class="line">-rw-r--r-- 1 root root  1376 Apr  6 22:48 add.o</span><br><span class="line">-rw-r--r-- 1 root root    94 Apr  6 22:47 div.c</span><br><span class="line">-rw-r--r-- 1 root root  1384 Apr  6 22:48 div.o</span><br><span class="line">-rw-r--r-- 1 root root   189 Apr  6 22:47 head.h</span><br><span class="line">-rwxr-xr-x 1 root root 15824 Apr  6 22:49 libcalc.so*</span><br><span class="line">-rw-r--r-- 1 root root   306 Apr  6 22:47 main.c</span><br><span class="line">-rw-r--r-- 1 root root    85 Apr  6 22:47 mult.c</span><br><span class="line">-rw-r--r-- 1 root root  1384 Apr  6 22:48 mult.o</span><br><span class="line">-rw-r--r-- 1 root root    85 Apr  6 22:47 sub.c</span><br><span class="line">-rw-r--r-- 1 root root  1376 Apr  6 22:48 sub.o</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>运行main可执行文件报错：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># gcc main.c -o main -I include/ -L lib/ -l calc</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ls</span></span><br><span class="line">include  lib  main  main.c  src</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">**./main: error <span class="keyword">while</span> loading shared libraries: [libcalc.so](&lt;http://libcalc.so/&gt;): cannot open shared object file: No such file or directory**</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffda29fd000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; not found</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbe8fa25000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007fbe8fc31000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-<p>原因即是由于动态库是在程序启动后才被加载到内存中，而我们自己写的动态库libcalc.so并没有给出对应的路径去查找它，所以会报错。</p>
-<p>解决方法：</p>
-<blockquote>
-<p>对于elf格式的可执行程序，是由ld-linux.so来完成的，它先后搜索elf文件的 <strong>DT_RPATH段</strong> ——&gt; <strong>环境变量LD_LIBRARY_PATH</strong> ——&gt; <strong>&#x2F;etc&#x2F;ld.so.cache</strong>文件列表 ——&gt; <strong>&#x2F;lib&#x2F;，&#x2F;usr&#x2F;lib</strong>目录找到库文件后将其载入内存</p>
-</blockquote>
-<p><strong>1）DT_RPATH段 无法修改，系统本身固定值</strong></p>
-<p><strong>2）环境变量LD_LIBRARY_PATH</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># echo $LD_LIBRARY_PATH </span></span><br><span class="line">:/root/lesson/lesson01/library/lib</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffff57e5000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; /root/lesson/lesson01/library/lib/libcalc.so (0x00007f06515af000)</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f06513aa000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007f06515bb000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">a = 20, b = 12</span><br><span class="line">a + b = 32</span><br><span class="line">a - b = 8</span><br><span class="line">a * b = 240</span><br><span class="line">a / b = 1.666667</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-<p>直接在终端中配置，当终端被关闭后该环境变量就会消失了，属于临时性配置。</p>
-<p>永久性配置：</p>
-<ul>
-<li><p>用户级别</p>
-<ul>
-<li><p>根目录下，<code>vim .bashrc</code></p>
-</li>
-<li><p>在最后一行加上要添加的路径</p>
-<p><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</code></p>
-</li>
-<li><p><code>source ~/.bashrc</code></p>
-</li>
-</ul>
-</li>
-<li><p>系统级别</p>
-<ul>
-<li><p><code>sudo vim /etc/profile</code></p>
-</li>
-<li><p>在最后一行加上要添加的路径</p>
-<p><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/root/lesson/lesson01/library/lib</code></p>
-</li>
-<li><p><code>source /etc/profile</code></p>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>3）&#x2F;etc&#x2F;ld.so.cache文件列表</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/lesson<span class="comment"># ll /etc/ld.so.cache</span></span><br><span class="line">-rw-r--r-- 1 root root 74025 Jan 12 21:15 /etc/ld.so.cache</span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># **sudo vim /etc/ld.so.conf**</span></span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># **sudo ldconfig**</span></span><br><span class="line">root@iisayhi:~/lesson<span class="comment"># cd lesson01/library/</span></span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ldd main</span></span><br><span class="line">linux-vdso.so.1 (0x00007ffd633f6000)</span><br><span class="line">[libcalc.so](&lt;http://libcalc.so/&gt;) =&gt; /root/lesson/lesson01/library/lib/libcalc.so (0x00007f7b8a4e1000)</span><br><span class="line">libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7b8a2ef000)</span><br><span class="line">/lib64/ld-linux-x86-64.so.2 (0x00007f7b8a500000)</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment"># ./main</span></span><br><span class="line">a = 20, b = 12</span><br><span class="line">a + b = 32</span><br><span class="line">a - b = 8</span><br><span class="line">a * b = 240</span><br><span class="line">a / b = 1.666667</span><br><span class="line">root@iisayhi:~/lesson/lesson01/library<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-
-<p><code>/etc/ld.so.cache</code>是一个二进制文件，无法直接用vim进行修改；</p>
-<p>因此要借助<code>/etc/ld.so.conf</code>的帮助：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014770.png" alt="10"></p>
-<p><strong>4）&#x2F;lib&#x2F;，&#x2F;usr&#x2F;lib目录</strong></p>
-<p>不推荐使用，因为在上述目录下已经包含很多系统自带的库文件，因此可能存在重名导致被替换的问题存在。</p>
-<h3 id="（3）静态库和动态库的对比"><a href="#（3）静态库和动态库的对比" class="headerlink" title="（3）静态库和动态库的对比"></a>（3）静态库和动态库的对比</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014481.png" alt="11"></p>
-<ul>
-<li>消耗系统资源、浪费内存：<ul>
-<li>每个程序在运行时都会将静态库复制一份到内存中，多个程序同时运行时浪费内存；</li>
-</ul>
-</li>
-<li>更新、部署、发布麻烦：<ul>
-<li>每次更新、部署或发布时都需要重新编译</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014264.png" alt="12"></p>
-<h2 id="3、Makefile"><a href="#3、Makefile" class="headerlink" title="3、Makefile"></a>3、Makefile</h2><ul>
-<li>定义<ul>
-<li>一个工程中的源文件不计其数，其按类型、功能、模块分别放在若干个目录中，Makefile 文件定义了一系列的规则来指定哪些文件需要先编译，哪些文件需要后编译，哪些文件需要重新编译，甚至于进行更复杂的功能操作，因为 <code>Makefile 文件就像一个 Shell 脚本一样，也可以执行操作系统的命令</code>。</li>
-<li><strong>Makefile 带来的好处就是“自动化编译”</strong> ，一旦写好，只需要一个 make 命令，整个工程完全自动编译，极大的提高了软件开发的效率。make 是一个命令工具，是一个解释 Makefile 文件中指令的命令工具，一般来说，大多数的 IDE 都有这个命令，比如 Delphi 的 <code>make</code>，Visual C++ 的 <code>nmake</code>，Linux 下 GNU 的 <code>make</code>。</li>
-</ul>
-</li>
-<li>命名规则</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014308.png" alt="13"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014605.png" alt="14"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171014917.png" alt="15"></p>
-<ul>
-<li>工作原理</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015389.png" alt="16"></p>
-<ul>
-<li>变量</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015553.png" alt="17"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171018439.png" alt="Untitled"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171019513.png" alt="Untitled"></p>
-<p><strong>对原始写法进行简写：</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015837.png" alt="20"></p>
-<p>改进1：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171018316.png" alt="Untitled"></p>
-<p>改进2：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015549.png" alt="22"></p>
-<p>改进3：</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171015818.png" alt="23"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.PHONY:clean  # 定义clean为伪目标</span><br></pre></td></tr></table></figure>
-
-<p>改进4：<code>Makefile</code>中写了<code>clean</code>之后，在命令行要用<code>make clean</code>来调用</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404171019153.png" alt="24"></p>
-<h2 id="4、GDB调试"><a href="#4、GDB调试" class="headerlink" title="4、GDB调试"></a>4、GDB调试</h2>
+          <p>[TOC]</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/17/Computer/Linux%E5%9F%BA%E7%A1%80%E7%9B%B8%E5%85%B3/#more" rel="contents">
@@ -2000,12 +1302,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">208k</span>
+    <span title="站点总字数">212k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:37</span>
+    <span title="站点阅读时长">12:49</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
