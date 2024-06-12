@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[TOC]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="http://example.com/2024/06/12/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="[TOC]">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-12T09:03:47.949Z">
+<meta property="article:modified_time" content="2024-06-12T09:05:32.182Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/06/12/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>操作系统 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-06-12 17:03:47 / 修改时间：17:05:32" itemprop="dateCreated datePublished" datetime="2024-06-12T17:03:47+08:00">2024-06-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/" itemprop="url" rel="index"><span itemprop="name">八股</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>22k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1:18</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<span id="more"></span>
+
+<h2 id="1、线程与进程"><a href="#1、线程与进程" class="headerlink" title="1、线程与进程"></a>1、线程与进程</h2><h3 id="进程和线程以及并发和并行的概念是什么？"><a href="#进程和线程以及并发和并行的概念是什么？" class="headerlink" title="进程和线程以及并发和并行的概念是什么？"></a>进程和线程以及并发和并行的概念是什么？</h3><p>（1）线程是操作系统中的最小执行单元，进程是程序的一次执行过程，是系统资源分配的最小单位。</p>
+<p>（2）并发是在单个处理器上多个任务交替执行，实现多个线程同时执行的假象；而并行是在多个处理器上实现多个线程同时执行。</p>
+<p>在 Linux 中，<strong>线程不会拥有独立的内存空间。所有线程共享进程的虚拟地址空间，但每个线程拥有自己独立的栈空间和寄存器集合。</strong>共享内存空间使得线程之间的通信比进程间通信更加高效，但也意味着需要通过同步机制（如互斥锁）来保护共享资源，防止竞态条件。Linux中进程和线程的区别如下：</p>
+<p><strong>进程</strong>：</p>
+<ul>
+<li>进程在 Linux 中通过 <code>fork</code> 系统调用创建，子进程拥有独立的内存空间（地址空间）。</li>
+<li>每个进程有独立的进程控制块（PCB），包含进程状态、寄存器、内存管理信息等。</li>
+</ul>
+<p><strong>线程</strong>：</p>
+<ul>
+<li>线程在 Linux 中通过 <code>pthread_create</code> 创建，所有线程共享进程的地址空间和全局变量。</li>
+<li>线程在 Linux 内核中被实现为轻量级进程（LWP），每个线程都有独立的线程控制块（TCB），但共享进程的资源。</li>
+</ul>
+<h3 id="线程内存存储在哪里？"><a href="#线程内存存储在哪里？" class="headerlink" title="线程内存存储在哪里？"></a>线程内存存储在哪里？</h3><ol>
+<li><strong>线程栈</strong>（Thread Stack）：每个线程都有自己的栈空间，这是线程存储本地变量、函数参数和返回地址的地方。线程栈通常有固定的大小，这个大小可以在创建线程时指定，也可能由操作系统预设。这部分内存通常位于用户空间的栈内存中。</li>
+<li><strong>线程堆</strong>（Thread Heap）：虽然线程可以访问进程级的堆（共享资源），但它们通常不拥有私有的堆空间。然而，线程可以通过特定的内存分配策略（如使用线程局部存储）在堆上分配数据，这些数据只对分配它的线程可见。</li>
+<li><strong>寄存器集</strong>：包括程序计数器、堆栈指针和其他必要的硬件寄存器。这些通常是在处理器内部维护的，并且每个线程都有自己的寄存器状态。</li>
+<li><strong>线程局部存储（TLS）</strong>：这是一种允许数据在多个线程之间被隔离的机制。每个线程可以访问自己的专用数据副本，对其他线程不可见。这在编程中用于保持数据的线程安全性。</li>
+<li><strong>线程控制块（TCB）</strong>：这是一个内核数据结构，包含了管理线程所需的所有信息，如线程的状态、优先级、调度信息等。线程控制块通常存储在操作系统内核的内存中。</li>
+</ol>
+<p>这些部分合在一起定义了一个线程的运行环境。每个线程的栈是独立的，但它们共享进程的堆和其他全局资源。</p>
+<h3 id="线程中的锁包含哪些？"><a href="#线程中的锁包含哪些？" class="headerlink" title="线程中的锁包含哪些？"></a>线程中的锁包含哪些？</h3><p>（1）互斥锁：用于对共享资源的互斥访问。当有线程对该资源加了互斥锁后，其他线程尝试加锁时会被阻塞，直至锁被释放。</p>
+<p>（2）递归锁：是一种特殊的互斥锁，当有同一个线程尝试对同一个线程不断加锁时，不会被阻塞。</p>
+<p>（3）读写锁：允许多个线程同时进行读操作，但仅允许一个线程进行写操作，使用在读多于写的场景。</p>
+<p>（4）自旋锁：当有线程对资源加了自旋锁后，其他线程尝试加锁时将忙等待，而非被阻塞。</p>
+<h3 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h3><p>死锁（Deadlock）是指在多线程或多进程的环境中，两个或多个执行单元因为争夺资源而造成的一种相互等待的现象，如果没有外力干涉，这些进程将无法向前推进。</p>
+<h3 id="死锁产生的原因"><a href="#死锁产生的原因" class="headerlink" title="死锁产生的原因"></a>死锁产生的原因</h3><p>死锁产生主要有以下几个条件，这些条件同时满足时，就可能发生死锁：</p>
+<ol>
+<li><strong>互斥条件</strong>：资源不能被多个线程（或进程）共享，只能被一个线程（或进程）所占用。</li>
+<li><strong>请求与保持条件</strong>：线程已经保持至少一个资源，但又提出了新的资源请求，而该资源已被其他线程占有。</li>
+<li><strong>不剥夺条件</strong>：线程所获得的资源在未使用完之前，不能被其他线程强行剥夺。</li>
+<li><strong>循环等待条件</strong>：存在一种线程资源循环等待链，每个线程占有一种资源并等待另一种被下一个线程占有的资源。</li>
+</ol>
+<h3 id="如何避免死锁？"><a href="#如何避免死锁？" class="headerlink" title="如何避免死锁？"></a>如何避免死锁？</h3><ol>
+<li>尽可能将资源设置为可以共享，这在实际中可能较难实现，因为某些资源本身就是不可共享的。</li>
+<li>一次性申请所有需要的资源，不再分步申请；只有当所有请求的资源都得到满足时，线程才开始执行。</li>
+<li>如果一个已经持有某些资源的线程进一步申请其他资源时被拒绝，则释放它原先持有的资源。允许剥夺已分配的资源，重新分配给其他线程。</li>
+<li>对所有资源类型进行排序，强制每个线程按顺序申请资源。</li>
+<li>线程尝试锁定资源时添加超时时间，超时未能锁定资源则释放已占有的资源并重新尝试。</li>
+<li>设计时确保所有线程获取锁的顺序一致，避免循环等待。</li>
+</ol>
+<h3 id="从锁的粒度来说，有哪些？"><a href="#从锁的粒度来说，有哪些？" class="headerlink" title="从锁的粒度来说，有哪些？"></a>从锁的粒度来说，有哪些？</h3><p><strong>粗粒度锁</strong>：</p>
+<ul>
+<li><strong>全局锁</strong>：对整个应用程序或系统加锁，通常用于单个进程或单个应用实例中。这种锁的开销大，但实现简单。</li>
+<li><strong>模块级锁</strong>：对某个模块或组件加锁，通常用于大型系统中，锁的范围缩小，提高了并发性。</li>
+</ul>
+<p><strong>细粒度锁</strong>：</p>
+<ul>
+<li><strong>对象锁</strong>：对单个对象加锁，通常用于面向对象编程中。</li>
+<li><strong>方法锁</strong>：对单个方法加锁，确保方法执行的线程安全。</li>
+<li><strong>变量锁</strong>：对单个变量或数据结构加锁，提供最小粒度的锁定范围，最大化并发性。</li>
+</ul>
+<h3 id="Atomic-内部实现？是有锁还是没锁的？所有的原子变量都没锁吗？对原子变量的内存序（memory-order）有了解吗？"><a href="#Atomic-内部实现？是有锁还是没锁的？所有的原子变量都没锁吗？对原子变量的内存序（memory-order）有了解吗？" class="headerlink" title="Atomic 内部实现？是有锁还是没锁的？所有的原子变量都没锁吗？对原子变量的内存序（memory order）有了解吗？"></a>Atomic 内部实现？是有锁还是没锁的？所有的原子变量都没锁吗？对原子变量的内存序（memory order）有了解吗？</h3><p>（1）Atomic 内部实现</p>
+<p><code>std::atomic</code> 在 C++ 中用于实现原子操作，通常通过硬件提供的原子指令来实现，无需使用锁。</p>
+<p>（2）是有锁还是没锁的？</p>
+<p>大多数 <code>std::atomic</code> 操作是无锁的，因为它们依赖于底层硬件的原子指令，如 <code>compare-and-swap</code>（CAS），来确保操作的原子性。</p>
+<p>（3）所有的原子变量都没锁吗？</p>
+<p>并非所有的原子操作都完全无锁。在某些情况下，编译器可能会选择使用锁来实现更复杂的原子操作，尤其是在不支持相关硬件指令的平台上。</p>
+<p>（4）对原子变量的内存序（memory order）有了解吗？</p>
+<p><code>std::atomic</code> 支持几种内存序（memory order），用于控制操作的内存可见性和排序：</p>
+<ol>
+<li><strong>memory_order_relaxed</strong>：<ul>
+<li>不保证任何顺序，仅保证操作的原子性。用于不依赖于操作顺序的场景。</li>
+</ul>
+</li>
+<li><strong>memory_order_consume</strong>：<ul>
+<li>保证对当前操作之前的写入可见，类似于 acquire，但针对更少的变量，使用较少。</li>
+</ul>
+</li>
+<li><strong>memory_order_acquire</strong>：<ul>
+<li>保证对当前操作之前的写入可见，确保读取操作在此操作之后执行。</li>
+</ul>
+</li>
+<li><strong>memory_order_release</strong>：<ul>
+<li>保证当前操作之前的写入对后续的操作可见，确保写入操作在此操作之前执行。</li>
+</ul>
+</li>
+<li><strong>memory_order_acq_rel</strong>：<ul>
+<li>结合 acquire 和 release，适用于读-改-写操作，确保之前的写入可见，并确保当前操作之前的写入对后续操作可见。</li>
+</ul>
+</li>
+<li><strong>memory_order_seq_cst</strong>：<ul>
+<li>最严格的内存顺序，确保所有操作按程序顺序执行，并对所有线程可见。</li>
+</ul>
+</li>
+</ol>
+<h3 id="忙等待和阻塞的区别是什么？"><a href="#忙等待和阻塞的区别是什么？" class="headerlink" title="忙等待和阻塞的区别是什么？"></a>忙等待和阻塞的区别是什么？</h3><p><strong>（1）忙等待（Busy Waiting）</strong></p>
+<p>忙等待是一种等待机制，线程在等待锁或资源可用期间不断地检查锁的状态，而不进行任何上下文切换，因而具有低延迟的特点。这种等待方式会使线程保持活跃状态，占用 CPU 时间。适用于短时间的等待或预计锁很快会释放的情况。如果锁等待时间较长，忙等待会导致大量的 CPU 资源浪费。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!<span class="built_in">try_lock</span>()) &#123;</span><br><span class="line">    <span class="comment">// Busy-wait</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（2）阻塞（Blocking）</strong></p>
+<p>阻塞是一种等待机制，线程在等待锁或资源可用期间会被挂起，进入睡眠状态，直到条件满足或锁可用时被唤醒。这种机制释放了 CPU 资源，可以被其他线程使用。适用于长时间等待或锁持有时间较长的情况，避免了 CPU 资源的浪费。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(mutex)</span></span>;</span><br><span class="line">condition_variable.<span class="built_in">wait</span>(lock, []&#123; <span class="keyword">return</span> <span class="built_in">condition_met</span>(); &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>（3）忙等待和阻塞的区别</strong></p>
+<ol>
+<li><strong>CPU 占用</strong>：<ul>
+<li>忙等待：线程在等待期间不断占用 CPU。</li>
+<li>阻塞：线程在等待期间被挂起，不占用 CPU。</li>
+</ul>
+</li>
+<li><strong>实现复杂度</strong>：<ul>
+<li>忙等待：实现简单，不需要操作系统支持。</li>
+<li>阻塞：实现复杂，需要操作系统的线程调度和上下文切换支持。</li>
+</ul>
+</li>
+<li><strong>等待延迟</strong>：<ul>
+<li>忙等待：低延迟，当锁可用时可以立即获取。</li>
+<li>阻塞：高延迟，由于涉及线程挂起和唤醒，有一定的延迟。</li>
+</ul>
+</li>
+<li><strong>资源效率</strong>：<ul>
+<li>忙等待：低效，浪费 CPU 资源。</li>
+<li>阻塞：高效，释放 CPU 资源供其他任务使用。</li>
+</ul>
+</li>
+</ol>
+<p><strong>（4）选择忙等待还是阻塞</strong></p>
+<ul>
+<li><strong>忙等待</strong>适用于：<ul>
+<li>锁等待时间非常短，频繁获取和释放锁的场景。</li>
+<li>高并发、低延迟需求的实时系统。</li>
+<li>多核处理器环境下，减少锁竞争延迟。</li>
+</ul>
+</li>
+<li><strong>阻塞</strong>适用于：<ul>
+<li>锁等待时间较长，锁持有时间较长的场景。</li>
+<li>系统资源有限，希望最大化 CPU 资源利用率的场景。</li>
+<li>一般的多线程编程，避免不必要的 CPU 资源浪费。</li>
+</ul>
+</li>
+</ul>
+<h3 id="一个进程可以创建多少线程？和什么有关？"><a href="#一个进程可以创建多少线程？和什么有关？" class="headerlink" title="一个进程可以创建多少线程？和什么有关？"></a>一个进程可以创建多少线程？和什么有关？</h3><p>分不同系统去看。</p>
+<ul>
+<li>如果是32 位系统，用户态的虚拟空间只有 3G，如果创建线程时分配的栈空间是 10M，那么一个进程最多只能创建300 个左右的线程。</li>
+<li>如果是64 位系统，用户态的虚拟空间大到有 128T，理论上不会受虚拟内存大小的限制，而会受系统的参数或性能限制。</li>
+</ul>
+<h3 id="怎么保证单例线程安全？"><a href="#怎么保证单例线程安全？" class="headerlink" title="怎么保证单例线程安全？"></a>怎么保证单例线程安全？</h3><ol>
+<li>懒汉式（Lazy Initialization）加锁</li>
+</ol>
+<p>在第一次使用单例实例时进行初始化，并通过加锁保证线程安全。</p>
+<p>这种方法虽然线程安全，但每次获取实例时都需要加锁，效率较低。</p>
+<ol start="2">
+<li>双重检查锁定（Double-Checked Locking）</li>
+</ol>
+<p>通过减少加锁的次数来提高效率。</p>
+<p>双重检查锁定在C++11及以上版本中是安全的，但在早期的C++版本中可能会有问题。</p>
+<ol start="3">
+<li>使用<code>std::call_once</code></li>
+</ol>
+<p>使用C++11提供的<code>std::call_once</code>和<code>std::once_flag</code>，保证初始化代码只执行一次。</p>
+<ol start="4">
+<li><p>饿汉式（Eager Initialization）</p>
+</li>
+<li><p>C++11 本地静态变量</p>
+<p>C++11之后，可以利用函数内的静态变量的线程安全特性来实现单例模式。这种方法最简单，也是推荐的实现方式，因为它利用了语言的特性来保证线程安全和懒初始化。</p>
+</li>
+</ol>
+<p>在程序启动时就创建单例实例，这样可以避免线程同步问题，但可能会导致程序启动时间增加。</p>
+<h3 id="写一个线程安全的单例模式"><a href="#写一个线程安全的单例模式" class="headerlink" title="写一个线程安全的单例模式"></a>写一个线程安全的单例模式</h3><blockquote>
+<p>1）static那个singlton的变量放在getTnstance函数里可不可以？可以，并且是自动实现的线程安全</p>
+<p>2）其他的那些移动构造,移动赋值,拷贝构造,拷贝赋值函数怎么处理呢</p>
+</blockquote>
+<p>要实现线程安全的单例模式，可以使用C++11提供的局部静态变量的特性。局部静态变量在函数内第一次被访问时初始化，并且保证线程安全。我们可以在<code>getInstance</code>方法中使用这种特性来创建单例实例。此外，还需要删除拷贝构造函数、拷贝赋值运算符、移动构造函数和移动赋值运算符，以确保单例对象不能被复制或移动。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 获取实例的静态方法</span></span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton&amp; <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">static</span> Singleton instance; <span class="comment">// 局部静态变量，线程安全</span></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除拷贝构造函数</span></span><br><span class="line">    <span class="built_in">Singleton</span>(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="comment">// 删除拷贝赋值运算符</span></span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Singleton&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="comment">// 删除移动构造函数</span></span><br><span class="line">    <span class="built_in">Singleton</span>(Singleton&amp;&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="comment">// 删除移动赋值运算符</span></span><br><span class="line">    Singleton&amp; <span class="keyword">operator</span>=(Singleton&amp;&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Doing something with the singleton instance.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 私有构造函数，防止外部创建实例</span></span><br><span class="line">    <span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Singleton instance created.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Singleton</span>() &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Singleton instance destroyed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 通过getInstance方法获取单例实例</span></span><br><span class="line">    Singleton&amp; instance = Singleton::<span class="built_in">getInstance</span>();</span><br><span class="line">    instance.<span class="built_in">doSomething</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多线程怎么保证线程安全？"><a href="#多线程怎么保证线程安全？" class="headerlink" title="多线程怎么保证线程安全？"></a>多线程怎么保证线程安全？</h3><p>一般会使用原子操作和互斥锁来确保多线程环境下的线程安全性。</p>
+<h3 id="多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？"><a href="#多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？" class="headerlink" title="多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？"></a>多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？</h3><p>在多线程环境下，对变量的读写操作默认并不是原子的，除非使用特定的机制或工具来确保操作的原子性。</p>
+<p>（1）CAS（Compare-And-Swap）操作是一种重要的同步机制，用来实现原子操作。它涉及三个操作数：</p>
+<ul>
+<li>内存位置（V）：要更新的变量的地址；</li>
+<li>期望值（E）：预期变量当前应该拥有的值；</li>
+<li>新值（N）：如果变量的当前值与期望值相匹配，应该赋给变量的新值。</li>
+</ul>
+<p>（2）CAS 操作的步骤如下：</p>
+<ul>
+<li>首先检查内存位置的当前值是否与期望值相等。</li>
+<li>如果相等，就将新值写入到内存位置。</li>
+<li>返回之前内存位置上的值。</li>
+</ul>
+<p>如果原始值与期望值相等，更新成功；如果不相等，表示其他线程已经修改了该位置的数据，更新失败。</p>
+<p>（3）CAS 的内部实现</p>
+<p>底层实现通常依赖于处理器提供的特定指令集。例如，在 x86 架构中，CAS 通常是通过 <code>CMPXCHG</code> 指令实现的。这个指令原子地比较寄存器的值与内存位置的值，如果相同，则将新值写入内存位置。整个操作是原子的，意味着在执行过程中不会被其他线程的指令中断。</p>
+<h3 id="线程调度的开销？"><a href="#线程调度的开销？" class="headerlink" title="线程调度的开销？"></a>线程调度的开销？</h3><p>线程调度的开销是指在多线程系统中，由于操作系统需要进行线程之间的切换而产生的开销。这种开销包括以下几个方面：</p>
+<ol>
+<li><strong>上下文切换开销</strong>： 当操作系统决定暂停当前运行的线程并切换到另一个线程时，需要保存当前线程的执行状态（包括寄存器内容、程序计数器、栈指针等）到内存中，并加载下一个线程的执行状态到 CPU 寄存器中。这个过程就是上下文切换。上下文切换的开销取决于硬件和操作系统的实现，但通常包括保存和恢复寄存器内容、切换内存地址空间等操作，可能会导致缓存失效和 TLB（Translation Lookaside Buffer）失效，增加了额外的内存访问开销。</li>
+<li><strong>调度器开销</strong>： 操作系统的调度器负责决定在何时以及如何切换线程。调度器需要维护线程的状态信息，如就绪队列、等待队列等，以及进行调度策略的选择。调度器的开销包括调度算法的执行、数据结构的维护、调度器本身的运行开销等。</li>
+<li><strong>缓存失效</strong>： 当线程切换导致内存中的数据被替换，或者线程切换导致不同线程访问的数据不在同一缓存行中时，会发生缓存失效。缓存失效会导致额外的内存访问开销，降低了程序的性能。</li>
+<li><strong>TLB（Translation Lookaside Buffer）失效</strong>： TLB 是用于加速虚拟地址到物理地址转换的高速缓存。当线程切换导致内存页的映射关系发生变化时，会导致 TLB 失效，进而增加了额外的地址转换开销。</li>
+<li><strong>内存分配和释放开销</strong>： 线程的创建和销毁都需要操作系统进行内存分配和释放操作，这些操作可能会导致内存碎片和额外的内存管理开销。</li>
+</ol>
+<h3 id="如何实现一个线程池？"><a href="#如何实现一个线程池？" class="headerlink" title="如何实现一个线程池？"></a>如何实现一个线程池？</h3><p>线程池是一组预先创建好的线程，用于执行多个任务。它可以提高任务调度的效率和性能。实现一个线程池可以使用 C++11 提供的 std::thread和 std::mutex 等多线程库，结合队列等数据结构来管理任务的提交和执行。</p>
+<h3 id="一个线程池中最重要的部分是什么？"><a href="#一个线程池中最重要的部分是什么？" class="headerlink" title="一个线程池中最重要的部分是什么？"></a>一个线程池中最重要的部分是什么？</h3><p>我认为线程池中最重要的部分是任务队列和线程池管理策略：</p>
+<ul>
+<li><strong>任务队列</strong>：它是线程池的核心，因为所有的任务都需要通过这个队列进行调度。队列的设计（如是否阻塞、优先级如何处理等）直接影响线程池的效率和公平性。</li>
+<li><strong>线程池管理策略</strong>：包括线程池的大小管理、线程的创建与销毁、负载均衡和异常处理等。管理策略决定了线程池如何响应不同的负载情况，以及如何有效地利用系统资源，避免过载或资源浪费。</li>
+</ul>
+<h3 id="线程池中的线程数量是保持不变的吗？"><a href="#线程池中的线程数量是保持不变的吗？" class="headerlink" title="线程池中的线程数量是保持不变的吗？"></a>线程池中的线程数量是保持不变的吗？</h3><p>不一定。线程池有固定大小的线程池和动态大小的线程池两种。</p>
+<h3 id="线程池中的线程数如何确定？"><a href="#线程池中的线程数如何确定？" class="headerlink" title="线程池中的线程数如何确定？"></a>线程池中的线程数如何确定？</h3><ol>
+<li><p>根据硬件资源决定线程数</p>
+<p>一般的经验法则是根据系统的硬件资源，特别是CPU的核心数来确定线程数。</p>
+<ul>
+<li><p><strong>计算密集型任务</strong>（CPU-bound tasks）：对于计算密集型任务，线程数通常设置为等于或稍大于CPU核心数。这样可以最大化CPU利用率，避免上下文切换的开销。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> numThreads = std::thread::<span class="built_in">hardware_concurrency</span>();</span><br></pre></td></tr></table></figure>
+
+<p><code>std::thread::hardware_concurrency()</code> 返回可用的并发线程数（通常等于CPU核心数）。</p>
+</li>
+<li><p><strong>I&#x2F;O密集型任务</strong>（I&#x2F;O-bound tasks）：对于I&#x2F;O密集型任务，由于这些任务在执行过程中经常会等待I&#x2F;O操作完成，线程数可以设置为高于CPU核心数，以隐藏I&#x2F;O等待时间，提高整体吞吐量。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> numThreads = std::thread::<span class="built_in">hardware_concurrency</span>() * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个倍数可以根据实际情况调整，通常在2到4之间。</p>
+</li>
+</ul>
+</li>
+<li><p>动态调整线程数</p>
+<p>在一些高级场景中，可以根据运行时的负载情况动态调整线程数。这种方法需要监控线程池的负载和任务执行情况，并根据实际需求增加或减少线程。</p>
+</li>
+</ol>
+<h3 id="为什么这样决定线程数"><a href="#为什么这样决定线程数" class="headerlink" title="为什么这样决定线程数"></a>为什么这样决定线程数</h3><ol>
+<li><p>线程数过多的问题</p>
+<ul>
+<li><p><strong>资源开销</strong>：每个线程都有自己的栈空间和内核资源，占用系统内存。过多的线程会增加内存消耗。</p>
+</li>
+<li><p><strong>上下文切换</strong>：线程数过多会导致频繁的上下文切换，增加CPU的开销，反而降低整体性能。</p>
+</li>
+<li><p><strong>调度复杂性</strong>：操作系统需要管理更多的线程，调度变得更加复杂，可能导致性能瓶颈。</p>
+</li>
+</ul>
+</li>
+<li><p>线程数过少的问题</p>
+<ul>
+<li><p><strong>资源未充分利用</strong>：如果线程数过少，无法充分利用多核CPU的计算能力，导致资源浪费。</p>
+</li>
+<li><p><strong>任务等待时间增加</strong>：线程数过少会导致任务排队等待，增加任务的平均等待时间和完成时间。</p>
+</li>
+</ul>
+</li>
+<li><p>计算密集型和I&#x2F;O密集型的区别</p>
+<ul>
+<li><p><strong>计算密集型任务</strong>：这些任务主要消耗CPU资源，线程数接近CPU核心数可以最大化利用CPU资源。</p>
+</li>
+<li><p><strong>I&#x2F;O密集型任务</strong>：这些任务在等待I&#x2F;O操作时，CPU处于空闲状态。增加线程数可以在一个线程等待I&#x2F;O时，另一个线程执行其他任务，从而提高CPU利用率和系统吞吐量。</p>
+</li>
+</ul>
+</li>
+<li><p>实际应用中，还需要考虑以下因素：</p>
+<ul>
+<li><p><strong>任务类型和特点</strong>：了解任务的具体类型是计算密集型还是I&#x2F;O密集型，或者是混合型任务。</p>
+</li>
+<li><p><strong>系统的其他负载</strong>：考虑系统上其他进程和任务的负载情况，避免设置的线程数影响其他任务的执行。</p>
+</li>
+<li><p><strong>性能测试和调整</strong>：通过性能测试和监控调整线程池的大小，找到最佳的线程数配置。</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;future&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;condition_variable&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ThreadPool</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ThreadPool</span>(<span class="type">size_t</span> numThreads);</span><br><span class="line">    ~<span class="built_in">ThreadPool</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">F</span>, <span class="keyword">class</span>... Args&gt;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">enqueue</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> -&gt; std::future&lt;<span class="keyword">typename</span> std::result_of&lt;<span class="title">F</span><span class="params">(Args...)</span>&gt;::type&gt;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;std::thread&gt; workers;</span><br><span class="line">    std::queue&lt;std::function&lt;<span class="type">void</span>()&gt;&gt; tasks;</span><br><span class="line"></span><br><span class="line">    std::mutex queueMutex;</span><br><span class="line">    std::condition_variable condition;</span><br><span class="line">    <span class="type">bool</span> stop;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="title">ThreadPool::ThreadPool</span><span class="params">(<span class="type">size_t</span> numThreads)</span> : stop(false) &#123;</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; numThreads; ++i) &#123;</span><br><span class="line">        workers.<span class="built_in">emplace_back</span>([<span class="keyword">this</span>] &#123;</span><br><span class="line">            <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">                std::function&lt;<span class="built_in">void</span>()&gt; task;</span><br><span class="line"></span><br><span class="line">                &#123;</span><br><span class="line">                    std::unique_lock&lt;std::mutex&gt; <span class="built_in">lock</span>(<span class="keyword">this</span>-&gt;queueMutex);</span><br><span class="line">                    <span class="keyword">this</span>-&gt;condition.<span class="built_in">wait</span>(lock, [<span class="keyword">this</span>] &#123; <span class="keyword">return</span> <span class="keyword">this</span>-&gt;stop || !<span class="keyword">this</span>-&gt;tasks.<span class="built_in">empty</span>(); &#125;);</span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">this</span>-&gt;stop &amp;&amp; <span class="keyword">this</span>-&gt;tasks.<span class="built_in">empty</span>()) <span class="keyword">return</span>;</span><br><span class="line">                    task = std::<span class="built_in">move</span>(<span class="keyword">this</span>-&gt;tasks.<span class="built_in">front</span>());</span><br><span class="line">                    <span class="keyword">this</span>-&gt;tasks.<span class="built_in">pop</span>();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">task</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">inline</span> ThreadPool::~<span class="built_in">ThreadPool</span>() &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(queueMutex)</span></span>;</span><br><span class="line">        stop = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    condition.<span class="built_in">notify_all</span>();</span><br><span class="line">    <span class="keyword">for</span> (std::thread&amp; worker : workers) worker.<span class="built_in">join</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">F</span>, <span class="keyword">class</span>... Args&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">ThreadPool::enqueue</span><span class="params">(F&amp;&amp; f, Args&amp;&amp;... args)</span> -&gt; std::future&lt;<span class="keyword">typename</span> std::result_of&lt;<span class="title">F</span><span class="params">(Args...)</span>&gt;::type&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">using</span> return_type = <span class="keyword">typename</span> std::result_of&lt;<span class="built_in">F</span>(Args...)&gt;::type;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> task = std::make_shared&lt;std::packaged_task&lt;<span class="built_in">return_type</span>()&gt;&gt;(std::<span class="built_in">bind</span>(std::forward&lt;F&gt;(f), std::forward&lt;Args&gt;(args)...));</span><br><span class="line"></span><br><span class="line">    std::future&lt;return_type&gt; res = task-&gt;<span class="built_in">get_future</span>();</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::unique_lock&lt;std::mutex&gt; <span class="title">lock</span><span class="params">(queueMutex)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (stop) <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;enqueue on stopped ThreadPool&quot;</span>);</span><br><span class="line"></span><br><span class="line">        tasks.<span class="built_in">emplace</span>([task]() &#123; (*task)(); &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    condition.<span class="built_in">notify_one</span>();</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 根据硬件资源和任务类型设置线程数</span></span><br><span class="line">    <span class="type">int</span> numThreads = std::thread::<span class="built_in">hardware_concurrency</span>();</span><br><span class="line">    <span class="function">ThreadPool <span class="title">pool</span><span class="params">(numThreads)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向线程池中添加任务</span></span><br><span class="line">    <span class="keyword">auto</span> result = pool.<span class="built_in">enqueue</span>([] &#123; <span class="keyword">return</span> <span class="string">&quot;Hello, ThreadPool!&quot;</span>; &#125;);</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; result.<span class="built_in">get</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程池如何优化？"><a href="#线程池如何优化？" class="headerlink" title="线程池如何优化？"></a>线程池如何优化？</h3><ol>
+<li><strong>动态调整线程数目</strong>：根据任务的实际负载动态调整线程池中的线程数量。当任务量增加时增加线程数，任务量减少时减少线程数，以保证资源的合理使用并避免过载或资源闲置。</li>
+<li><strong>任务队列优化</strong>：优化任务队列的管理方式，如选择合适的数据结构（例如优先队列）以支持优先级调度，确保紧急任务能够优先处理。</li>
+<li><strong>线程生命周期管理</strong>：管理线程的生命周期，避免频繁地创建和销毁线程。可以设置线程的最大空闲时间，超过这个时间线程则自动销毁。</li>
+<li><strong>监控和调试</strong>：实现监控机制来监控线程池的性能，如任务等待时间、任务执行时间、线程利用率等，以便及时发现问题并进行调整。</li>
+</ol>
+<h3 id="多线程是怎么处理许多个任务一起到来的？"><a href="#多线程是怎么处理许多个任务一起到来的？" class="headerlink" title="多线程是怎么处理许多个任务一起到来的？"></a>多线程是怎么处理许多个任务一起到来的？</h3><ol>
+<li><strong>任务分配</strong>：当多个任务同时到来时，这些任务通常被添加到一个<strong>共享的任务队列</strong>中。这个队列可以被所有的线程访问。线程池中的每个线程会从这个队列中取出任务并执行。</li>
+<li><strong>并行处理</strong>：在多核处理器上，多个线程可以被同时调度到不同的核上执行。这样，多个任务可以实际上同时进行，这极大地提高了处理效率和程序的响应速度。</li>
+<li><strong>上下文切换</strong>：当某个线程等待（例如，等待I&#x2F;O操作完成）时，操作系统可以执行上下文切换，让其他的线程运行。这样可以确保CPU的使用效率最大化，即使某些线程暂时不能进行计算也不会浪费CPU资源。</li>
+<li><strong>同步机制</strong>：在多线程环境中，可能需要对共享资源进行访问控制，以避免数据不一致或竞态条件。常用的同步机制包括互斥锁、条件变量、读写锁等。这些机制帮助确保即使多个线程尝试同时访问同一资源，程序的行为也是正确和可预测的。</li>
+</ol>
+<h3 id="C-多线程编程时要链接什么库，怎么找到对应的动态库？"><a href="#C-多线程编程时要链接什么库，怎么找到对应的动态库？" class="headerlink" title="C++多线程编程时要链接什么库，怎么找到对应的动态库？"></a>C++多线程编程时要链接什么库，怎么找到对应的动态库？</h3><p>在C++中进行多线程编程时，常用的库是<code>pthread</code>（POSIX threads）库或C++11标准库提供的线程支持库。如果使用<code>pthread</code>库，需要在编译时链接<code>pthread</code>库，并且明确指定动态库的路径。而如果使用C++11标准库，编译器会自动处理所需的链接和路径问题。</p>
+<ol>
+<li><p>使用<code>pthread</code>库</p>
+<ol>
+<li><p>链接<code>pthread</code>库</p>
+<p>在Linux系统中，使用<code>pthread</code>库时需要在编译时加上<code>-pthread</code>选项。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -o my_program my_program.cpp -pthread</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查找和链接动态库</p>
+<p>动态库一般位于系统的标准库路径中，如<code>/usr/lib</code>或<code>/usr/local/lib</code>。在运行时，操作系统会自动从这些路径中查找所需的动态库。如果动态库位于非标准路径，可以通过设置<code>LD_LIBRARY_PATH</code>环境变量来指定动态库路径。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/path/to/your/library:<span class="variable">$LD_LIBRARY_PATH</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>pthread</code>库进行多线程编程</p>
+</li>
+</ol>
+</li>
+<li><p>使用C++11标准库</p>
+<ol>
+<li><p>使用C++11线程库</p>
+<p>使用C++11的线程库时，不需要额外链接任何库，编译器会自动处理。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -o my_program my_program.cpp -std=c++11</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h3 id="多线程切换，cpu和内存会做一些什么处理"><a href="#多线程切换，cpu和内存会做一些什么处理" class="headerlink" title="多线程切换，cpu和内存会做一些什么处理"></a>多线程切换，cpu和内存会做一些什么处理</h3><p>在多线程环境下，当操作系统进行线程切换时，CPU 和内存会做一些处理：</p>
+<ol>
+<li><strong>保存当前线程的上下文：</strong> 当一个线程被抢占时，CPU 会保存当前线程的上下文信息，包括程序计数器（PC）、寄存器状态、栈指针（SP）等。这样做是为了在之后恢复线程时能够继续执行。</li>
+<li><strong>加载下一个线程的上下文：</strong> CPU 根据调度算法选择下一个需要执行的线程，然后加载其上下文信息到寄存器和其他硬件状态中。</li>
+<li><strong>切换内存空间：</strong> 在多线程环境下，不同线程可能会访问不同的内存区域。因此，在线程切换时，操作系统需要更新页表（Page Table）等内存映射表，以确保下一个线程能够访问到正确的内存空间。</li>
+<li><strong>处理器流水线的清空和填充：</strong> 在 CPU 进行线程切换时，可能存在流水线（Pipeline）中的指令未执行完毕。在切换时，CPU 可能需要将流水线清空，以避免对新线程执行的指令产生影响。</li>
+<li><strong>更新调度器信息：</strong> 操作系统需要更新线程的调度信息，包括线程的状态（就绪、运行、阻塞等），以及相关的时间片（Time Slice）等调度参数。</li>
+</ol>
+<h3 id="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"><a href="#如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？" class="headerlink" title="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"></a>如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？</h3><p>首先判断这个请求数量远远多于线程是常态吗，如果是常态则先要考虑是不是线程数量设置有问题，然后判断机器是否能力不足以处理这些数据。</p>
+<p>假如说硬件软件都没有问题，那么考虑这个问题为什么会产生，是不是我们的高计算密集型任务太多了，如果说我们的请求任务比较复杂，那么考虑进行一个分类，将处理特别慢的请求作为一个特定类，将一些线程固定给他们使用，而不是所有线程都用来处理这种任务，因为既然很慢，那么慢1个和慢10个点区别就没有那么大了，将其他线程用来处理能够快速处理完的请求。</p>
+<h3 id="线程间的通信包括哪些方式？"><a href="#线程间的通信包括哪些方式？" class="headerlink" title="线程间的通信包括哪些方式？"></a>线程间的通信包括哪些方式？</h3><ol>
+<li><strong>共享内存</strong>：线程间共享相同的内存空间，可以通过共享变量进行通信，需要同步机制（如互斥锁、信号量等）来防止数据竞争和保证一致性。</li>
+<li><strong>互斥锁（Mutex）</strong>：用于控制多个线程对共享资源的访问，保证同一时间只有一个线程可以访问资源。</li>
+<li><strong>条件变量</strong>：用于线程间的同步，允许一个或多个线程在某些条件下暂停执行并等待，直到另一个线程通知它们条件已经满足。</li>
+<li><strong>信号量（Semaphores）</strong>：用于控制对共享资源的访问数量。信号量维护了一个计数器，表示可用资源的数量，线程在进入临界区前必须获取信号量。</li>
+<li><strong>事件（Event）</strong>：类似于条件变量，用于通知一个或多个正在等待的线程某个事件已经发生。</li>
+<li><strong>消息队列</strong>：线程可以发送和接收消息，消息以队列的形式管理。消息队列允许线程以异步的方式进行数据交换和事件通知。</li>
+<li><strong>屏障（Barriers）</strong>：用于多个线程同步到某一点，当所有线程都达到屏障点后，它们再同时开始执行后续操作。常用于并行计算，确保所有线程在进行下一步操作前已完成当前操作。</li>
+</ol>
+<h3 id="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"><a href="#线程同步是什么？从底层原理分析一下为什么会出现线程同步？" class="headerlink" title="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"></a>线程同步是什么？从底层原理分析一下为什么会出现线程同步？</h3><p>（1）线程同步是多线程编程中保证多个线程安全访问共享资源或协调工作的一种机制。它确保在任何给定时刻，只有一个线程可以访问特定的数据或代码块，以防止数据损坏或不一致性。线程同步通常通过使用各种同步原语（如互斥锁、信号量、条件变量等）来实现。</p>
+<p>（2）底层原理上，线程同步问题主要是由于以下几个因素导致的：</p>
+<ol>
+<li>并发性：多个线程同时执行，导致对共享资源的访问不可控。</li>
+<li>不确定性：线程的执行顺序和执行时间不确定，可能导致对共享资源的交叉访问。</li>
+<li>原子性：对共享资源的操作可能不是原子操作，而是由多条指令组成，这会导致中间状态的出现，从而引发问题。</li>
+</ol>
+<h3 id="处理多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"><a href="#处理多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？" class="headerlink" title="处理多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？"></a>处理多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？</h3><p>在处理多线程同步问题时，常用的机制包括互斥锁（Mutex）、条件变量（Condition Variable）、信号量（Semaphore）等。下面简要介绍一下信号量的实现和处理方式，并举例说明如何使用。</p>
+<p>（1）信号量（Semaphore）</p>
+<p>信号量是一种用于多线程同步的机制，它可以用来控制对临界资源的访问。信号量维护了一个计数器，表示可用资源的数量，线程在访问临界资源之前必须先获取信号量，如果信号量计数器大于零，则线程可以获取资源并将计数器减一；如果计数器等于零，则线程将被阻塞，直到有其他线程释放资源并增加计数器。当线程使用完资源后，需要释放信号量，使计数器加一，以便其他线程可以继续访问资源。</p>
+<p>（2）等待线程A执行完任务后再执行线程B的处理方式</p>
+<p>在示例中，使用了条件变量 <code>std::condition_variable</code> 来等待线程A执行完任务后再执行线程B。线程A在等待条件时会调用 <code>cv.wait(lock, predicate)</code> 函数，其中 <code>predicate</code> 是一个lambda表达式，表示等待的条件。线程B在执行完任务后调用 <code>cv.notify_one()</code> 函数来发送信号给等待中的线程A，从而唤醒线程A并开始执行任务。</p>
+<h3 id="进程的五种状态分别是？"><a href="#进程的五种状态分别是？" class="headerlink" title="进程的五种状态分别是？"></a>进程的五种状态分别是？</h3><p>1）就绪态：所有运行条件已就绪，只要得到了CPU时间就可运行。</p>
+<p>2）运行态：得到CPU时间正在运行；</p>
+<p>3）僵尸态：进程已经结束了但父进程还没来得及回收；</p>
+<p>4）等待态：包括浅度睡眠跟深度睡进程在等待某种条件，条件成熟后即是就绪态。浅度睡眠时进程可以被信号唤醒，但深度睡眠时必须等到条件成熟后才能结束睡眠状态。</p>
+<p>5）暂停态：暂时停止参与CPU调度（即使条件成熟），可以恢复。</p>
+<h3 id="两个进程的内核空间是共享的吗？"><a href="#两个进程的内核空间是共享的吗？" class="headerlink" title="两个进程的内核空间是共享的吗？"></a>两个进程的内核空间是共享的吗？</h3><p>在大多数现代操作系统中，包括Linux和Windows，内核空间是在所有进程之间共享的。这意味着内核空间中的代码和数据结构对所有进程来说都是相同的，并且在任何时候都位于相同的物理内存位置。</p>
+<h3 id="如何让进程后台运行？"><a href="#如何让进程后台运行？" class="headerlink" title="如何让进程后台运行？"></a>如何让进程后台运行？</h3><ol>
+<li><p><strong>使用 &amp; 符号</strong>：</p>
+<ul>
+<li><p>在命令行中，在命令的末尾加上 <code>&amp;</code> 符号，可以让该命令在后台执行。</p>
+</li>
+<li><p>例如，要让 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python script.py</span><br></pre></td></tr></table></figure>
+
+<p> 在后台运行，可以使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">python script.py &amp;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>使用 nohup 命令</strong>：</p>
+<ul>
+<li><p><code>nohup</code> 命令用于将程序以忽略挂断信号的方式运行，这样即使终端关闭，程序也会继续在后台运行。</p>
+</li>
+<li><p>使用方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line"><span class="built_in">nohup</span> python script.py &amp;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="进程间的通信包括哪些方式？"><a href="#进程间的通信包括哪些方式？" class="headerlink" title="进程间的通信包括哪些方式？"></a>进程间的通信包括哪些方式？</h3><p>（1）管道，半双工的通信方式，可以在父子进程间进行数据传递。通常用于具有亲缘关系的进程之间的通信。</p>
+<p>（2）命名管道，与普通管道类似，但可以在无亲缘关系的进程之间使用。命名管道通过文件系统进行通信。</p>
+<p>（3）消息队列，允许一个或多个进程向队列中发送消息，并从队列中接收消息。消息队列通常用于在不同进程之间传递结构化的数据。</p>
+<p>（4）信号量，控制进程间访问共享资源的机制，可以用来解决进程同步和互斥的问题，防止竞态条件的发生。</p>
+<p>（5）共享内存，允许多个进程共享同一块内存区域，进程可以直接读写共享内存中的数据。</p>
+<p>（6）套接字，适用于在不同主机和不同进程之间进行通信，通常用于网络编程。</p>
+<h3 id="进程间的通信，哪个通信方式效率最高"><a href="#进程间的通信，哪个通信方式效率最高" class="headerlink" title="进程间的通信，哪个通信方式效率最高"></a>进程间的通信，哪个通信方式效率最高</h3><p>1、<strong>共享内存（Shared Memory）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 最高</li>
+<li><strong>原因</strong>: 共享内存允许多个进程访问同一块内存区域，没有数据复制的开销，因此通信速度非常快。不过，需要额外的同步机制（如信号量或互斥锁）来防止并发访问问题。</li>
+</ul>
+<p>2、<strong>消息队列（Message Queues）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 中等</li>
+<li><strong>原因</strong>: 消息队列提供了一种从一个进程向另一个进程发送数据包的方法，数据在发送过程中需要被复制到和从内核空间，这增加了开销，但它提供了比共享内存更好的数据管理和安全性。</li>
+</ul>
+<p>3、<strong>管道（Pipes）和命名管道（Named Pipes&#x2F;FIFOs）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 较低</li>
+<li><strong>原因</strong>: 数据需要在发送进程和接收进程之间进行复制，且管道通常是半双工的，这限制了通信的灵活性和效率。</li>
+</ul>
+<p>4、<strong>套接字（Sockets）</strong>:</p>
+<ul>
+<li><strong>效率</strong>: 低到中等</li>
+<li><strong>原因</strong>: 套接字支持网络层面的通信，即使是在同一台机器上的进程间通信也涉及到网络协议栈，这增加了额外的开销。但套接字非常灵活，支持包括TCP和UDP在内的多种协议。</li>
+</ul>
+<h3 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h3><p><strong>1、先来先服务 first-come first-serverd(FCFS)</strong></p>
+<p>非抢占式的调度算法，按照请求的顺序进行调度。</p>
+<p>有利于长作业，但不利于短作业，因为短作业必须一直等待前面的长作业执行完毕才能执行，而长作业又需要执行很长时间，造成了短作业等待时间过长。</p>
+<p><strong>2、短作业优先 shortest job first(SJF)</strong></p>
+<p>非抢占式的调度算法，按估计运行时间最短的顺序进行调度。</p>
+<p>长作业有可能会饿死，处于一直等待短作业执行完毕的状态。因为如果一直有短作业到来，那么长作业永远得不到调度。</p>
+<p><strong>3、最短剩余时间优先 shortest remaining time next(SRTN)</strong></p>
+<p>最短作业优先的抢占式版本，按剩余运行时间的顺序进行调度。 当一个新的作业到达时，其整个运行时间与当前进程的剩余时间作比较。</p>
+<p>如果新的进程需要的时间更少，则挂起当前进程，运行新的进程。否则新的进程等待。</p>
+<p><strong>4、时间片轮转</strong></p>
+<p>将所有就绪进程按 FCFS 的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。</p>
+<p>当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把CPU 时间分配给队首的进程。</p>
+<p>时间片轮转算法的效率和时间片的大小有很大关系：</p>
+<ul>
+<li>因为进程切换都要保存进程的信息并且载入新进程的信息，如果时间片太小，会导致进程切换得太频繁，在进程切换上就会花过多时间；</li>
+<li>而如果时间片过长，那么实时性就不能得到保证。</li>
+</ul>
+<p><strong>5、优先级调度</strong></p>
+<p>为每个进程分配一个优先级，按优先级进行调度。为了防止低优先级的进程永远等不到调度，可以随着时间的推移增加等待进程的优先级。</p>
+<p><strong>6、多级反馈队列</strong></p>
+<p>一个进程需要执行 100 个时间片，如果采用时间片轮转调度算法，那么需要交换 100 次。</p>
+<p>多级队列是为这种需要连续执行多个时间片的进程考虑，它设置了多个队列，每个队列时间片大小都不同，例如1,2,4,8..。进程在第一个队列没执行完，就会被移到下一个队列。</p>
+<p>这种方式下，之前的进程只需要交换7次。每个队列优先权也不同，最上面的优先权最高。因此只有上一个队列没有进程在排队，才能调度当前队烈上的进程。</p>
+<p>可以将这种调度算法看成是时间片轮转调度算法和优先级调度算法的结合。</p>
+<h3 id="信号量与互斥锁的区别？"><a href="#信号量与互斥锁的区别？" class="headerlink" title="信号量与互斥锁的区别？"></a>信号量与互斥锁的区别？</h3><ol>
+<li><strong>互斥锁</strong>：用于线程的互斥，即在同一时间内只允许一个线程访问某个资源。互斥锁保证了资源的唯一性和排他性。当一个线程获得互斥锁时，其他试图访问被锁保护的资源的线程将被阻塞，直到锁被释放。</li>
+<li><strong>信号量</strong>：用于线程的同步，可以允许多个线程根据信号量的值同时访问同一资源或一组资源。信号量主要用于控制资源的可用数量。信号量有一个计数器，表示可用资源的数量。线程在访问资源前需要先获得信号量（计数器减1），如果信号量的值为0，则线程进入等待状态。当资源释放时，信号量计数器增加，等待的线程可以继续执行。</li>
+</ol>
+<h3 id="信号量和互斥锁解决父子线程同时阻塞的区别"><a href="#信号量和互斥锁解决父子线程同时阻塞的区别" class="headerlink" title="信号量和互斥锁解决父子线程同时阻塞的区别"></a>信号量和互斥锁解决父子线程同时阻塞的区别</h3><p>假设有一个场景，其中父线程和子线程需要按特定顺序访问某个资源（例如，父线程需要等待子线程完成某个任务后才能继续执行）。</p>
+<ul>
+<li><strong>使用互斥锁</strong>：如果使用互斥锁，你可能需要配合条件变量来实现这种顺序控制。互斥锁本身只能保证互斥，不能控制线程之间的执行顺序。父线程需要在条件变量上等待一个特定条件（通常由子线程设置）。</li>
+<li><strong>使用信号量</strong>：信号量可以更直接地控制执行顺序。例如，可以初始化一个信号量为0。父线程在尝试访问资源之前会首先对信号量执行等待操作，由于信号量的初始值是0，所以父线程会阻塞。子线程在完成其任务后对信号量执行信号操作，从而增加信号量的值并解除父线程的阻塞。这样，子线程可以直接通过信号量控制父线程的执行。</li>
+</ul>
+<h3 id="使用共享内存的时候需要注意什么呢？"><a href="#使用共享内存的时候需要注意什么呢？" class="headerlink" title="使用共享内存的时候需要注意什么呢？"></a>使用共享内存的时候需要注意什么呢？</h3><p>对共享资源的访问需要注意临界变量的保护，利用锁机制互斥访问，保证运行结果一致性</p>
+<h2 id="2、内存模型-虚拟内存"><a href="#2、内存模型-虚拟内存" class="headerlink" title="2、内存模型&#x2F;虚拟内存"></a>2、内存模型&#x2F;虚拟内存</h2><h3 id="什么是虚拟内存？"><a href="#什么是虚拟内存？" class="headerlink" title="什么是虚拟内存？"></a>什么是虚拟内存？</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
+<h3 id="为什么操作系统要使用虚拟内存？"><a href="#为什么操作系统要使用虚拟内存？" class="headerlink" title="为什么操作系统要使用虚拟内存？"></a>为什么操作系统要使用虚拟内存？</h3><ol>
+<li>虚拟内存允许系统使用硬盘空间来模拟额外的RAM，这样应用程序就可以使用比实际物理内存更多的内存空间。这对于运行内存需求大于物理内存的应用程序特别有用。</li>
+<li>每个进程都有自己独立的虚拟地址空间，这意味着一个进程不能直接访问另一个进程的内存空间。这种隔离提高了系统的安全性，因为它阻止了进程间的意外或恶意的内存访问。</li>
+<li>虚拟内存简化了内存的管理，因为每个进程都可以认为自己在使用一大块连续的内存区域。这使得程序的编写和调试变得更加简单，因为程序员不需要考虑内存碎片或其他内存布局问题。</li>
+<li>虚拟内存可以更方便地在不同进程之间共享内存。例如，多个进程可以映射到相同的物理内存，实现共享库等数据的共享，从而节约内存。</li>
+</ol>
+<h3 id="一个由C-C-编译的程序的内存分布（内存模型）？"><a href="#一个由C-C-编译的程序的内存分布（内存模型）？" class="headerlink" title="一个由C&#x2F;C++编译的程序的内存分布（内存模型）？"></a>一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<br>.text段，.rodata段，.data段，.bss段，堆，内存映射区，栈，内核空间。<br>其中，各项主要内容如下：<br>（1）.text段主要存在程序编译后的机器指令<br>（2）.rodata段主要存放程序中的各种只读变量<br>（3）.data段主要存放已经被初始化了的全局静态变量和局部静态变量<br>（4）.bss段主要存放未被初始化的全局静态变量和局部静态变量<br>（5）堆：由程序员进行动态分配，如调用malloc或new<br>（6）栈：由编译器自动分配释放，存放一些局部变量等<br>（7）内核空间：存放操作系统的一些内核数据和代码</p>
+<h3 id="为什么要区分代码段和数据段？"><a href="#为什么要区分代码段和数据段？" class="headerlink" title="为什么要区分代码段和数据段？"></a>为什么要区分代码段和数据段？</h3><ul>
+<li><strong>访问权限控制</strong>：代码段通常设置为只读，以防止程序代码被意外或恶意修改，这可能导致程序行为不正确或系统安全受到威胁。数据段则通常需要读写权限，因为程序在运行时需要修改数据。</li>
+<li><strong>防止代码注入</strong>：通过将代码段设置为只读，可以防止恶意代码注入和执行，这是提高系统安全性的重要措施。</li>
+<li><strong>分页策略</strong>：代码段和数据段可能会采用不同的分页和交换策略。例如，代码页可能较少交换出内存，因为它们被频繁访问；而数据段的某些部分如果使用不频繁可以被交换出去以节约资源。</li>
+</ul>
+<h3 id="什么时候用栈，什么时候用堆？"><a href="#什么时候用栈，什么时候用堆？" class="headerlink" title="什么时候用栈，什么时候用堆？"></a>什么时候用栈，什么时候用堆？</h3><p>1.与堆相比，栈不会导致内存碎片，分配效率高。函数调用过程中的参数，返回地址和局部变量都采取栈的形式存放，<strong>如果少量数据需要频繁的操作，那么在程序中动态申请少量栈内存会获得很好的性能提升。</strong></p>
+<p>2.堆可以申请的内存大很多，与堆相比，栈的使用没那么灵活，<strong>如果分配大量的内存空间，推荐使用堆内存。</strong></p>
+<h3 id="不同段上的对象的生命周期是怎样的？"><a href="#不同段上的对象的生命周期是怎样的？" class="headerlink" title="不同段上的对象的生命周期是怎样的？"></a>不同段上的对象的生命周期是怎样的？</h3><p>（1）.data&#x2F;.bss段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁<br>（2）堆上的对象由程序员进行动态分配<br>（3）栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
+<h3 id="如何让对象只能存在于栈-堆中？"><a href="#如何让对象只能存在于栈-堆中？" class="headerlink" title="如何让对象只能存在于栈&#x2F;堆中？"></a>如何让对象只能存在于栈&#x2F;堆中？</h3><p>如果将operator new设置为私有的，此时尝试在堆上分配内存失败，对象就会存在于栈中。<br>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会存在于堆中。</p>
+<h3 id="new和malloc的区别？"><a href="#new和malloc的区别？" class="headerlink" title="new和malloc的区别？"></a>new和malloc的区别？</h3><p>主要包含以下区别：<br>（1）new是c++特有的操作符，只能在C++中使用；malloc是C中的函数，但可以同时在c&#x2F;c++中使用。<br>（2）malloc在使用时需要指定分配内存的大小，如malloc(sizeof(int))，但new的使用则比较简洁，如new int。<br>（3）malloc分配的内存是未定义的，而new在分配内存时还会调用构造函数进行初始化。<br>（4）malloc返回的是void *类型的指针，需要进行强制类型转换以得到需要的指针类型，而new会自动转换为响应的指针类型。<br>（5）malloc调用free进行释放， ew调用delete进行释放。</p>
+<h3 id="malloc函数的底层实现是什么？"><a href="#malloc函数的底层实现是什么？" class="headerlink" title="malloc函数的底层实现是什么？"></a>malloc函数的底层实现是什么？</h3><p>（1）当开辟的空间小于128kb时，调用brk()函数，先遍历空闲内存链表，如果有已释放且空间足够的内存块就拿来用。如果找不到就移动指针_enddata，即堆区的末尾地址。</p>
+<p>（2）当开辟的空间大于128kb时，系统调用mmap()函数来在虚拟地址中找一块空间来开辟，即堆和栈中间的文件映射区域。</p>
+<p>malloc()在分配用户传入大小的内存时，还分配一个用于管理的额外内存，大小为8字节。而由于堆中的内存是成块分配的，与内存对齐有关，在64为系统中，内存对齐为16字节，因此<strong>实际分配的内存大小还要考虑8字节的管理内存和内存对齐</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">mem_control_block</span> &#123;</span><br><span class="line">    <span class="type">int</span> is_available;      <span class="comment">// 1表可用，0表不可用</span></span><br><span class="line">    <span class="type">int</span> size;                 <span class="comment">// 总大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对于malloc分配的内存，调用free后立即释放吗？"><a href="#对于malloc分配的内存，调用free后立即释放吗？" class="headerlink" title="对于malloc分配的内存，调用free后立即释放吗？"></a>对于malloc分配的内存，调用free后立即释放吗？</h3><p>在使用 <code>brk</code> 或 <code>sbrk</code> 分配的情况下，这块内存并不会立即返还给操作系统，而是标记为可再利用状态。如果释放的是堆末端的内存，程序的断点可能会被回退，从而实际上将内存返还给操作系统。</p>
+<p>而对于使用 <code>mmap</code> 分配的较大内存块，在调用 <code>free</code> 后通常会通过 <code>munmap</code> 立即返还给操作系统。</p>
+<h3 id="既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现呢-mmap分配的内存可以会通过-munmap-进行-free-，实现真正释放-？而是仅仅对于大于-128k-的大块内存才使用-mmap-？"><a href="#既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现呢-mmap分配的内存可以会通过-munmap-进行-free-，实现真正释放-？而是仅仅对于大于-128k-的大块内存才使用-mmap-？" class="headerlink" title="既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc 不全部使用 mmap 来实现呢(mmap分配的内存可以会通过 munmap 进行 free ，实现真正释放)？而是仅仅对于大于 128k 的大块内存才使用 mmap ？"></a>既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc 不全部使用 mmap 来实现呢(mmap分配的内存可以会通过 munmap 进行 free ，实现真正释放)？而是仅仅对于大于 128k 的大块内存才使用 mmap ？</h3><p>进程向 OS 申请和释放地址空间的接口 sbrk&#x2F;mmap&#x2F;munmap 都是系统调用，<strong>频繁调用系统调用都比较消耗系统资源的</strong>。并且， mmap 申请的内存被 munmap 后，重新申请会产生更多的缺页中断。例如使用 mmap 分配 1M 空间，第一次调用产生了大量缺页中断  (1M&#x2F;4K 次 ) ，当munmap 后再次分配 1M 空间，会再次产生大量缺页中断。<strong>缺页中断是内核行为，会导致内核态CPU消耗较大。  另外，如果使用 mmap 分配小内存，会导致地址空间的分片更多，内核的管理负担更大。</strong></p>
+<p>同时堆是一个连续空间，并且堆内碎片由于没有归还 OS ，<strong>如果可重用碎片，再次访问该内存很可能不需产生任何系统调用和缺页中断，这将大大降低  CPU 的消耗。</strong> 因此， glibc 的 malloc 实现中，充分考虑了 sbrk 和 mmap 行为上的差异及优缺点，默认分配大块内存  (128k) 才使用 mmap 获得地址空间。</p>
+<h3 id="内存模型是什么？是指可执行文件中包含这些东西吗？"><a href="#内存模型是什么？是指可执行文件中包含这些东西吗？" class="headerlink" title="内存模型是什么？是指可执行文件中包含这些东西吗？"></a>内存模型是什么？是指可执行文件中包含这些东西吗？</h3><p>内存模型是指虚拟内存。<br>可执行文件中只包含.text .rodata和.data，不包含.bss、栈和堆。.bss段存放的是未初始化的全局静态变量和局部静态变量，在程序加载到内存中时，这些变量会被初始化为0或空指针，在生成可执行文件时不会占用内存空间。而栈和堆是动态加载的，只有在程序运行时才会分配。</p>
+<h3 id="在已申请的内存中构造对象如何实现？"><a href="#在已申请的内存中构造对象如何实现？" class="headerlink" title="在已申请的内存中构造对象如何实现？"></a>在已申请的内存中构造对象如何实现？</h3><p>使用<code>placement new</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buffer[<span class="built_in">sizeof</span>(MyClass)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在buffer指定的地址上构造MyClass对象</span></span><br><span class="line">MyClass* pMyClass = <span class="built_in">new</span> (buffer) <span class="built_in">MyClass</span>(<span class="number">123</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 手动调用析构函数</span></span><br><span class="line">pMyClass-&gt;~<span class="built_in">MyClass</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>构造和析构</strong>：使用placement new构造对象后，必须手动调用该对象的析构函数来确保正确的资源释放。因为普通的<code>delete</code>操作符会尝试释放内存，这在使用placement new时是不适用的。</li>
+<li><strong>对齐要求</strong>：需要确保传递给placement new的内存地址满足对象的对齐要求。</li>
+<li><strong>内存管理</strong>：使用placement new的代码需要格外注意内存的管理，以避免内存泄露或重复析构等问题。</li>
+</ul>
+<h3 id="swap分区"><a href="#swap分区" class="headerlink" title="swap分区"></a>swap分区</h3><p>Swap分区是操作系统中用于扩展物理内存（RAM）的一种机制。当系统的物理内存不足时，操作系统可以使用swap分区作为虚拟内存，将不活跃的内存页（即暂时不需要的数据）移出物理内存，存储到硬盘上的swap分区中。这样可以释放物理内存空间，供当前活跃的应用程序使用。</p>
+<p>在Linux系统中，配置swap分区通常涉及以下步骤：</p>
+<ul>
+<li><strong>创建Swap分区</strong>：使用磁盘分区工具（如fdisk或parted）创建一个新的分区，并将其类型设置为swap。</li>
+<li><strong>格式化Swap分区</strong>：使用<code>mkswap</code>命令格式化新创建的分区。</li>
+<li><strong>启用Swap分区</strong>：使用<code>swapon</code>命令启用swap分区。</li>
+<li><strong>配置自动挂载</strong>：在<code>/etc/fstab</code>文件中添加条目，以便在系统启动时自动启用swap分区。</li>
+</ul>
+<h3 id="虚拟地址怎么转换到物理地址？"><a href="#虚拟地址怎么转换到物理地址？" class="headerlink" title="虚拟地址怎么转换到物理地址？"></a>虚拟地址怎么转换到物理地址？</h3><ol>
+<li><p><strong>分页机制</strong>，Linux使用分页机制来管理内存，这意味着虚拟内存和物理内存都被分割成固定大小的块，称为页（通常大小为4KB）。每个虚拟页通过页表映射到相应的物理页。</p>
+</li>
+<li><p><strong>页表</strong>，页表是一种数据结构，用于存储虚拟地址到物理地址的映射信息。每个进程都有自己的页表，这使得每个进程都有自己独立的虚拟地址空间。</p>
+</li>
+<li><p><strong>页表条目（PTE）</strong>，页表中的每一项称为页表条目（PTE），它包含了映射到的物理页的地址以及一些状态位（如访问权限、是否已加载到物理内存等）。</p>
+</li>
+<li><p><strong>地址转换过程</strong>，当CPU尝试访问一个虚拟地址时，MMU会将这个地址分解为两部分：页号和页内偏移。如果找到的PTE表明该虚拟页已经映射到一个物理页，MMU就将虚拟页号替换为物理页号，加上原始的页内偏移，形成完整的物理地址。</p>
+<ul>
+<li><p><strong>页号</strong>用于在页表中查找对应的PTE。</p>
+</li>
+<li><p><strong>页内偏移</strong>指示在物理页中的具体位置。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>TLB（Translation Lookaside Buffer）</strong>，为了加速地址转换过程，MMU使用一种称为转换后援缓冲（TLB）的缓存，它存储最近使用的页表条目。如果虚拟地址的转换在TLB中找到匹配，那么就不需要再访问完整的页表，从而大大加快了内存访问速度。</p>
+</li>
+<li><p><strong>页错误（Page Fault）</strong>，如果在页表或TLB中找不到虚拟地址对应的物理地址，将触发一个页错误中断。操作系统的内存管理器会处理这个中断，可能会从磁盘加载缺失的页到物理内存中，然后更新页表并重新尝试访问。</p>
+</li>
+</ol>
+<h3 id="页表是什么，页多大，为什么是4KB？"><a href="#页表是什么，页多大，为什么是4KB？" class="headerlink" title="页表是什么，页多大，为什么是4KB？"></a>页表是什么，页多大，为什么是4KB？</h3><p>页表是操作系统中用于实现虚拟内存管理的一种数据结构，它用于将虚拟地址映射到物理地址。这种机制允许计算机的操作系统为每个运行的程序提供一种看似连续的内存地址空间，即使物理内存是分散存储的。</p>
+<p>每个页表条目存储着虚拟页面到物理页面的映射信息，通常包括物理页帧的基地址和一些状态位（如访问权限、是否已加载到物理内存中等）。由于地址空间的扩大，单级页表的大小会非常庞大，因此现代操作系统通常使用多级页表结构来减少内存占用，如x86架构常用的二级或三级页表。</p>
+<p>在多数现代操作系统中，标准的页面大小是4KB（4096字节）。linux 会以页面为单位对内存进行管理。不论是将磁盘中的数据加载到内存中，还是将内存中的数据写回磁盘中，操作系统都会以页面为单位进行操作，这也意味着如果我们只向磁盘中写入一个字节的数据，操作系统也需要将整个页面中的全部数据刷入磁盘中。过小的页面大小会带来较大的页表项增加寻址时 TLB（Translation lookaside buffer）的查找速度和额外开销；过大的页面大小会浪费内存空间，造成内存碎片，降低内存的利用率；上个世纪在设计内存页大小时充分考虑了上述的两个因素，最终选择了 4KB 的内存页作为操作系统最常见的页大小，这个大小也就沿用至今。</p>
+<h3 id="缺页中断什么时候发生？"><a href="#缺页中断什么时候发生？" class="headerlink" title="缺页中断什么时候发生？"></a>缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
+<p>（2）当程序尝试进行一个违反内存规则的操作时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</p>
+<h3 id="常见的缺页中断算法有哪些？"><a href="#常见的缺页中断算法有哪些？" class="headerlink" title="常见的缺页中断算法有哪些？"></a>常见的缺页中断算法有哪些？</h3><p>（1）LRU，最近最少使用。</p>
+<p>（2）LFU，使用频率最低。</p>
+<p>（3）FIFO，先进先出。</p>
+<h3 id="写时拷贝在操作系统中有哪些应用？"><a href="#写时拷贝在操作系统中有哪些应用？" class="headerlink" title="写时拷贝在操作系统中有哪些应用？"></a>写时拷贝在操作系统中有哪些应用？</h3><ol>
+<li><strong>内存管理</strong>：<ul>
+<li><strong>分页系统</strong>：在许多操作系统中，写时拷贝技术常用于内存管理。当进程执行fork操作创建子进程时，操作系统并不立即为子进程复制父进程的整个地址空间。相反，它让父子进程共享同一物理内存页面，只有当其中一个进程尝试修改这些共享页面时，操作系统才会复制这些页面（COW），从而实现了资源的有效利用和快速的进程创建。</li>
+<li><strong>虚拟内存系统</strong>：在虚拟内存系统中，写时拷贝技术可以减少不必要的数据复制，提高内存使用效率，只有在需要写入时才进行物理内存的分配和数据复制。</li>
+</ul>
+</li>
+<li><strong>文件系统</strong>：<ul>
+<li><strong>快照功能</strong>：在支持快照的文件系统（如ZFS或Btrfs）中，写时拷贝用于实现文件系统的版本控制。当文件系统状态需要保存为历史快照时，原始数据保持不变，任何对数据的修改都通过复制修改前的数据块来实现，从而快速创建快照并节省空间。</li>
+</ul>
+</li>
+</ol>
+<h2 id="3、编译程序相关"><a href="#3、编译程序相关" class="headerlink" title="3、编译程序相关"></a>3、编译程序相关</h2><h3 id="kmalloc（）和用户态的malloc（）有什么区别。"><a href="#kmalloc（）和用户态的malloc（）有什么区别。" class="headerlink" title="kmalloc（）和用户态的malloc（）有什么区别。"></a>kmalloc（）和用户态的malloc（）有什么区别。</h3><ul>
+<li><code>kmalloc()</code> 是在内核空间中使用的内存分配函数，主要用于为内核模块或驱动程序分配内存，直接从操作系统的内核内存池中分配内存，这部分内存通常是预先保留给内核的，不会被用户空间的应用程序直接访问。</li>
+<li><code>malloc()</code> 是在用户空间中使用的内存分配函数，用于应用程序分配内存，分配的内存来自于用户空间的堆区，这部分内存是由操作系统管理，供所有用户程序共享使用。</li>
+</ul>
+<h3 id="什么是内存泄漏，如何防止？"><a href="#什么是内存泄漏，如何防止？" class="headerlink" title="什么是内存泄漏，如何防止？"></a>什么是内存泄漏，如何防止？</h3><p>内存泄漏是发生在程序分配了堆内存但未释放，导致内存无法被再次使用。长时间的内存泄漏可能导致程序运行缓慢或异常终止。</p>
+<p>主要有以下策略来防止内存泄漏：</p>
+<p>（1）使用智能指针。这些智能指针利用RAII（Resource Acquisition Is Initialization）原则，确保资源（如动态分配的内存）在不再需要时能够被自动释放。</p>
+<p>（2）手动管理内存。</p>
+<p>（3）使用RAII原则。RAII是C++中的一种编程技术，通过将资源封装在对象中，并在对象的构造函数中分配资源，在析构函数中释放资源，可以确保资源总是被正确管理。</p>
+<p>（4）使用内存泄漏检测工具。如Valgrind、AddressSanitizer等，可以帮助识别程序中的内存泄漏。</p>
+<h3 id="从C-文件到可执行文件经过了哪几个阶段？"><a href="#从C-文件到可执行文件经过了哪几个阶段？" class="headerlink" title="从C++文件到可执行文件经过了哪几个阶段？"></a>从C++文件到可执行文件经过了哪几个阶段？</h3><p>预编译、编译、汇编、链接，最后生成可执行文件。</p>
+<h3 id="预编译的过程？"><a href="#预编译的过程？" class="headerlink" title="预编译的过程？"></a>预编译的过程？</h3><p>（1）处理包含指令<code>#include</code></p>
+<p>（2）进行宏展开</p>
+<p>（3）进行条件编译</p>
+<p>（4）删除注释</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E myfile.c -o myfile.i</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么需要有链接的过程？"><a href="#为什么需要有链接的过程？" class="headerlink" title="为什么需要有链接的过程？"></a>为什么需要有链接的过程？</h3><p>因为软件开发的规模很大，不可能将它们都放在同一个模块中。因此按照层次化以及模块化的视线方法，将代码分成多个部分，每个部分分别开发。因此就需要在最后将它们组装起来，这就是链接的过程。通过链接，实现符号解析、地址分配和库依赖管理等工作。</p>
+<h3 id="链接这个过程做了什么？"><a href="#链接这个过程做了什么？" class="headerlink" title="链接这个过程做了什么？"></a>链接这个过程做了什么？</h3><p>（1）符号解析。在目标文件和库中存在许多符号（如函数名或变量名等），需要在其他的目标文件或库中找到相应的定义，并将它们连接起来，使得程序在运行时可以找到正确的内存地址。</p>
+<p>（2）地址分配。给目标文件和库分配内存地址，并确定其在程序中的内存布局。同时需要完成重定位的工作，用实际的内存地址去替换其中的地址引用。</p>
+<p>（3）库依赖管理。链接器处理程序和库之间的依赖关系，确保所有库都被正确地包含在目标文件中。同时要处理库与库之间的依赖关系。</p>
+<h3 id="程序链接完毕之后分几部分？"><a href="#程序链接完毕之后分几部分？" class="headerlink" title="程序链接完毕之后分几部分？"></a>程序链接完毕之后分几部分？</h3><p>程序连接完毕后生成可执行文件，包含代码段和数据段。不包含堆区和栈区，这两个区是在程序运行时由操作系统动态管理的内存区域。</p>
+<h3 id="假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？"><a href="#假设有一个A-dll和B-dll，A-dll调用了B-dll的方法，A-dll是如何找到B-dll中的方法的？" class="headerlink" title="假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？"></a>假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？</h3><p>在使用动态库时，链接器会将动态库的相关信息，包括动态库的名字、符号表以及可重定位信息存储到相应的可执行文件中。在可执行文件运行时，链接器会根据这些信息找到动态库是否存在、在哪里、符号引用的内存地址是哪里，也就是说找到A.dll引用的B.dll的相关方法，并通过重定位找到其物理内存地址。</p>
+<h3 id="函数调用中堆和栈的变化情况是怎样的？"><a href="#函数调用中堆和栈的变化情况是怎样的？" class="headerlink" title="函数调用中堆和栈的变化情况是怎样的？"></a>函数调用中堆和栈的变化情况是怎样的？</h3><p>函数调用时主要影响的是栈（stack）的变化，而不直接影响堆（heap）的变化。</p>
+<ul>
+<li><strong>函数进栈</strong>：<ul>
+<li>调用函数时，会先将函数的参数压入栈中，参数的顺序通常是从右向左依次压入。</li>
+<li>接着将当前函数的返回地址压入栈中，这个返回地址指向了调用该函数的下一条指令，用于函数执行结束后返回到调用处继续执行。</li>
+<li>如果函数中有局部变量，则会在栈上为这些变量分配空间，并进行初始化。</li>
+<li>最后，将当前栈指针（ESP）的值赋给基址指针（EBP），建立当前函数的栈帧。</li>
+</ul>
+</li>
+<li><strong>函数退栈</strong>：<ul>
+<li>当函数执行结束时，首先会将局部变量的值从栈中弹出，释放局部变量所占用的空间。</li>
+<li>接着会将基址指针（EBP）的值赋给栈指针（ESP），恢复到函数调用之前的栈状态。</li>
+</ul>
+</li>
+</ul>
+<p>在这个过程中，函数的参数传递通常是通过栈来完成的。对于一般的函数调用，在调用函数前，调用者会将参数压入栈中；而在函数内部，被调用函数通过栈指针（ESP）来访问这些参数。在 x86 架构中，通常采用栈来传递函数参数，参数从右向左依次入栈。</p>
+<h3 id="代码崩溃怎么解决，常见的原因是什么？"><a href="#代码崩溃怎么解决，常见的原因是什么？" class="headerlink" title="代码崩溃怎么解决，常见的原因是什么？"></a>代码崩溃怎么解决，常见的原因是什么？</h3><p><strong>（1）常见的崩溃原因</strong></p>
+<ol>
+<li><strong>访问非法内存</strong>，如已释放的内存（悬挂指针）、未初始化的指针或越界访问数组或字符串</li>
+<li><strong>资源管理错误</strong>，如内存泄露，或文件或网络句柄未正确关闭</li>
+<li><strong>并发错误</strong>：1）竞态条件：多个线程或进程争用数据，未正确同步；2）死锁：多个线程或进程相互等待对方持有的资源</li>
+<li><strong>栈溢出</strong>：递归调用过深，或大量局部变量分配</li>
+<li><strong>除零错误</strong>：整数或浮点数除以零</li>
+</ol>
+<p><strong>（2）解决方法</strong></p>
+<ol>
+<li><strong>调试工具</strong>：使用调试器（如 GDB）检查崩溃时的栈跟踪（stack trace）</li>
+<li><strong>代码审查</strong></li>
+<li><strong>增加日志记录</strong>：在关键操作前后添加日志记录，以追踪崩溃前的程序状态和行为；使用断言检查程序运行时的预期状态</li>
+<li><strong>单元测试</strong>：编写和维护单元测试</li>
+<li><strong>优化设计</strong>，避免过深的递归调用，考虑使用循环或其他算法策略；为并发操作设计合理的锁策略和线程同步机制</li>
+</ol>
+<h2 id="4、Linux相关"><a href="#4、Linux相关" class="headerlink" title="4、Linux相关"></a>4、Linux相关</h2><h3 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h3><ol>
+<li><p>切换目录：<code>cd</code></p>
+</li>
+<li><p>查看端口绑定情况：<code>lsof -i : [端口号]</code>或<code>netstat -tuln</code>（列出所有监听端口）</p>
+</li>
+<li><p>查看CPU利用率：<code>top</code>或<code>htop</code></p>
+</li>
+<li><p>查看进程状态：<code>ps</code>，其中进程的状态码如下：</p>
+</li>
+</ol>
+<ul>
+<li>**R (Running)**：进程正在运行或在运行队列中等待</li>
+<li>**S (Sleeping)**：进程处于睡眠状态，等待某个事件或资源。</li>
+<li>**D (Uninterruptible Sleep)**：进程处于不可中断的睡眠状态，通常是在等待I&#x2F;O操作</li>
+<li>**T (Stopped)**：进程已停止运行，通常是因为它正在被调试或已经收到停止信号</li>
+<li>**Z (Zombie)**：进程已完成执行，但仍在进程表中等待父进程读取其退出状态</li>
+<li>**I (Idle)**：这是一个空闲的内核线程，这个状态在某些版本的ps输出中可能不会显示</li>
+</ul>
+<ol start="5">
+<li>查询网络状态：<code>ifconfig</code>、<code>netstat -r # 显示路由表</code></li>
+<li>查看磁盘：<code>df -h</code>、<code>lsblk</code></li>
+<li>查看是哪个进程的内存占用最大：<code>top</code>+<code>M</code>键、<code>ps aux --sort=-%mem | head -10</code></li>
+<li>查找文件：<code>find</code>、<code>locate</code></li>
+<li>查找文件内容：<code>grep -r &quot;hello&quot; /path/to/directory</code></li>
+<li>查找系统命令的位置：<code>which ls</code></li>
+</ol>
+<h3 id="0、1、2的文件描述符是什么含义？指向什么类型的文件？"><a href="#0、1、2的文件描述符是什么含义？指向什么类型的文件？" class="headerlink" title="0、1、2的文件描述符是什么含义？指向什么类型的文件？"></a>0、1、2的文件描述符是什么含义？指向什么类型的文件？</h3><ol>
+<li>文件描述符0（标准输入）：指向标准输入设备，通常是终端（键盘）。</li>
+<li>文件描述符1（标准输出）：指向标准输出设备，通常是终端（屏幕）。</li>
+<li>文件描述符2（标准错误）：指向标准错误设备，通常也是终端（屏幕）。</li>
+</ol>
+<h3 id="Linux系统中的中断为什么分为上下两个部分？"><a href="#Linux系统中的中断为什么分为上下两个部分？" class="headerlink" title="Linux系统中的中断为什么分为上下两个部分？"></a>Linux系统中的中断为什么分为上下两个部分？</h3><p>在Linux系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
+<ol>
+<li><strong>上半部</strong>：<ul>
+<li>上半部是中断处理的第一阶段，它在CPU接收到中断信号后立即执行。</li>
+<li>在这一阶段中，中断和调度器通常被禁用，以避免在处理中断时发生新的中断，从而保证处理的原子性。</li>
+<li>上半部的代码通常包含处理中断的关键代码，这部分代码的执行时间应尽可能短，以快速释放CPU资源，处理更多的中断或其他任务。</li>
+</ul>
+</li>
+<li><strong>下半部</strong>：<ul>
+<li>下半部处理的是中断处理的后续部分，通常在上半部完成后，通过添加工作项到工作队列中来延后执行。</li>
+<li>在下半部执行时，中断通常是被允许的，这样可以在处理较长时间的任务时不阻塞其他中断的处理。</li>
+<li>下半部负责完成数据处理、复制等操作，这些操作不需要立即完成，可以稍后处理。</li>
+</ul>
+</li>
+</ol>
+<p>这种分割方法的主要优点是能够快速响应中断，同时又不会因为长时间的数据处理而阻塞CPU，影响系统的整体性能。通过这种方式，Linux系统能够在保证响应速度的同时，也能有效地处理大量的数据。</p>
+<h3 id="0-3G用户空间有哪些内容"><a href="#0-3G用户空间有哪些内容" class="headerlink" title="0-3G用户空间有哪些内容"></a>0-3G用户空间有哪些内容</h3><p>在传统的 32 位 Linux 操作系统中，内存通常被分为用户空间和内核空间。用户空间占据了低地址部分，从 0 到 3GB（0-3G），而内核空间占据了高地址部分，从 3GB 到 4GB。这种分配方式是基于 4GB 总地址空间的限制。</p>
+<h3 id="Linux用户态如何进入内核态？"><a href="#Linux用户态如何进入内核态？" class="headerlink" title="Linux用户态如何进入内核态？"></a>Linux用户态如何进入内核态？</h3><ol>
+<li><strong>系统调用（System Call）</strong>:<ul>
+<li>系统调用是最常见的从用户态切换到内核态的方式。</li>
+<li>程序在需要执行诸如文件操作、网络通信、进程控制等操作时，会通过系统调用请求操作系统提供服务。</li>
+<li>Linux提供了大量的系统调用，例如<code>read()</code>, <code>write()</code>, <code>open()</code>, <code>fork()</code>等。</li>
+<li>系统调用通过软件中断（通常是中断指令<code>int 0x80</code>或<code>syscall</code>指令）来实现，这导致处理器从用户态切换到内核态，并跳转到预定义的内核入口点执行相应的内核代码。</li>
+</ul>
+</li>
+<li><strong>异常（Exception）</strong>:<ul>
+<li>当程序执行出现错误时（如除零、访问非法内存等），会触发异常。</li>
+<li>处理器会自动从用户态切换到内核态，并调用相应的异常处理程序。</li>
+<li>异常处理程序在内核中定义，负责处理这些错误并决定如何恢复程序执行或终止出错的程序。</li>
+</ul>
+</li>
+<li><strong>中断（Interrupt）</strong>:<ul>
+<li>当外部设备（如键盘、鼠标、网络接口等）需要处理时，它们会向处理器发送中断信号。</li>
+<li>中断信号会导致当前正在执行的用户态程序被挂起，处理器切换到内核态处理这些外部事件。</li>
+<li>中断处理程序在内核中定义，用于响应和处理这些外部事件。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Linux设备树解析是什么时候"><a href="#Linux设备树解析是什么时候" class="headerlink" title="Linux设备树解析是什么时候"></a>Linux设备树解析是什么时候</h3><p>在Linux系统中，设备树（Device  Tree）是一种数据结构，用于描述硬件设备的信息，特别是在嵌入式系统中。设备树以一种树状的格式组织，提供了硬件设备的详细信息，如设备的类型、配置参数和与其他设备的关系等。这种机制特别适用于那些硬件配置多样化的平台，如ARM架构。</p>
+<p>设备树的解析主要发生在Linux内核的启动阶段，具体步骤如下：</p>
+<ol>
+<li><strong>引导加载器阶段</strong>：<ul>
+<li>在系统启动时，引导加载器（如U-Boot）首先读取设备树文件（通常是<code>.dtb</code>文件，即Device Tree Blob）。引导加载器负责将设备树文件和内核映像加载到内存中。</li>
+</ul>
+</li>
+<li><strong>内核初始化阶段</strong>：<ul>
+<li>内核在启动初期，会从引导加载器传递过来的设备树中读取硬件配置信息。</li>
+<li>在内核的早期初始化代码中，会解析设备树数据结构，以构建内核的内部表示，这包括设置CPU、内存、各种外设的配置和驱动加载等。</li>
+</ul>
+</li>
+<li><strong>设备和驱动初始化</strong>：<ul>
+<li>根据设备树中的描述，内核会初始化硬件设备，并加载相应的驱动程序。设备树中的节点和属性告诉内核哪些驱动需要被初始化，以及如何配置这些硬件设备。</li>
+</ul>
+</li>
+<li><strong>运行时访问</strong>：<ul>
+<li>虽然设备树主要在启动时解析，但内核和驱动程序可以在整个系统运行期间访问设备树的信息，以获取设备的配置详情或进行某些特定的硬件操作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="如何用gbd调试发现线程阻塞？"><a href="#如何用gbd调试发现线程阻塞？" class="headerlink" title="如何用gbd调试发现线程阻塞？"></a>如何用gbd调试发现线程阻塞？</h3><ol>
+<li><strong>启动GDB并附加到进程</strong></li>
+</ol>
+<p>从GDB启动程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy codegdb ./your_program</span><br><span class="line">run [arguments]</span><br></pre></td></tr></table></figure>
+
+<p>附加到已经运行的程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">gdb -p [pid]</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>列出所有线程</strong></li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">info threads</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>切换线程</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">thread [thread-id]</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>检查线程的栈帧</strong></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bashCopy code</span><br><span class="line">backtrace</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><strong>检查锁的状态。如果怀疑是死锁或资源竞争引起的阻塞，你可以检查锁的状态。这通常需要一些对应用程序逻辑的理解，以及可能需要查看源码来确定哪些锁可能涉及阻塞。</strong></li>
+</ol>
+<h3 id="gdb查看所有线程线程栈的命令是什么？"><a href="#gdb查看所有线程线程栈的命令是什么？" class="headerlink" title="gdb查看所有线程线程栈的命令是什么？"></a>gdb查看所有线程线程栈的命令是什么？</h3><ol>
+<li>查看所有线程： <code>info threads</code></li>
+<li>查看所有线程的栈信息： <code>thread apply all bt</code></li>
+</ol>
+<h3 id="gdb-查看内存地址的命令是什么？"><a href="#gdb-查看内存地址的命令是什么？" class="headerlink" title="gdb 查看内存地址的命令是什么？"></a>gdb 查看内存地址的命令是什么？</h3><p><code>x/NFU address</code></p>
+<ul>
+<li><code>N</code> 表示要检查的单元格的数量。</li>
+<li><code>F</code> 表示显示格式，例如 <code>x</code>（十六进制）、<code>d</code>（十进制）、<code>u</code>（无符号十进制）、<code>t</code>（二进制）、<code>a</code>（地址）、<code>i</code>（机器指令）、<code>c</code>（字符）等。</li>
+<li><code>U</code> 表示单位大小，例如 <code>b</code>（字节）、<code>h</code>（半字，2字节）、<code>w</code>（字，4字节）、<code>g</code>（双字，8字节）。</li>
+</ul>
+<h2 id="5、处理器相关"><a href="#5、处理器相关" class="headerlink" title="5、处理器相关"></a>5、处理器相关</h2><h3 id="什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？"><a href="#什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？" class="headerlink" title="什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？"></a>什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？</h3><ol>
+<li><p>大端字节序是指高位字节存储在内存的低地址端，低位字节存储在内存的高地址端；小端字节序则与之相反。</p>
+</li>
+<li><p>区分的方法如下：</p>
+<p>（1）通过检查整数的首个字节来确定字节序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> x = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="type">char</span> *c = (<span class="type">char</span>*)&amp;x;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">0x78</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Little Endian\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Big Endian\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）<code>htons()</code>和<code>ntohs()</code></p>
+<ul>
+<li><code>htons(host_port)</code>：将端口号从主机字节序转换为网络字节序</li>
+<li><code>ntohs(net_port)</code>：将端口号从网络字节序转换回主机字节序</li>
+</ul>
+</li>
+<li><p>网络通信一般是大端字节序，即无论发送和接收的系统是大端还是小端，数据在通过网络传输时都必须转换为网络字节序。</p>
+</li>
+</ol>
+<h3 id="什么是qps和tps，如何计算？"><a href="#什么是qps和tps，如何计算？" class="headerlink" title="什么是qps和tps，如何计算？"></a>什么是qps和tps，如何计算？</h3><p>（1）<strong>QPS（Queries Per Second）</strong>：每秒查询率，是衡量每秒能处理多少个查询请求的指标。它通常用于评估搜索引擎、数据库服务器和Web服务器的性能。QPS可以通过将总查询数除以时间（秒）来计算。</p>
+<p>（2）<strong>TPS（Transactions Per Second）</strong>：每秒事务数，是衡量系统每秒能处理多少个事务的指标。一个事务是指一个完整的业务操作，可能包含多个查询和更新。TPS是数据库操作和商业应用（如在线支付平台）的常用性能指标。TPS的计算方法与QPS类似，将总事务数除以时间（秒）。</p>
+<h3 id="CPU利用率拉满的时候在线程池中增加线程是否能提高qps？"><a href="#CPU利用率拉满的时候在线程池中增加线程是否能提高qps？" class="headerlink" title="CPU利用率拉满的时候在线程池中增加线程是否能提高qps？"></a>CPU利用率拉满的时候在线程池中增加线程是否能提高qps？</h3><p>（1）对于CPU密集型应用，CPU是性能瓶颈。如果CPU利用率已经达到100%，这意味着CPU资源已经被完全使用。在这种情况下，增加更多的线程实际上会导致线程之间的竞争更加激烈，因为更多的线程需要共享有限的CPU资源。这可能导致上下文切换增加，反而降低了程序的效率和QPS。</p>
+<p>（2）对于IO密集型应用，主要的瓶颈在于IO操作，如磁盘读写或网络通信等。即使CPU利用率很高，增加线程数仍然可能提高QPS，因为当一部分线程在等待IO操作完成时，其他线程可以继续执行，从而提高整体的吞吐量。在这种情况下，增加线程数可以有效利用CPU在等待IO时的空闲周期，提高QPS。</p>
+<p>（3）混合型应用同时包含CPU密集型和IO密集型的操作。在这种情况下，是否增加线程以提高QPS取决于应用中CPU密集型和IO密集型操作的比例。如果IO操作占主导，增加线程可能有助于提高QPS；但如果CPU密集型操作占主导，增加线程可能不会带来预期的效果，甚至可能因为线程竞争导致性能下降。</p>
+<h3 id="什么是CPU密集型应用和IO密集型应用？"><a href="#什么是CPU密集型应用和IO密集型应用？" class="headerlink" title="什么是CPU密集型应用和IO密集型应用？"></a>什么是CPU密集型应用和IO密集型应用？</h3><p>（1）CPU密集型应用是指那些需要进行大量计算，消耗大量CPU资源的应用。这类应用的特点是CPU使用率很高，因为它们主要进行数学计算、逻辑判断或者数据处理等操作，这些操作需要大量的CPU周期来完成。CPU密集型应用的性能很大程度上依赖于CPU的处理能力。</p>
+<p><strong>示例</strong>：</p>
+<ul>
+<li>科学计算软件</li>
+<li>图像处理和视频编码</li>
+<li>大数据处理应用</li>
+<li>游戏服务器的游戏逻辑处理</li>
+<li>加密和解密操作</li>
+</ul>
+<p>（2）IO密集型应用是指那些主要时间花费在输入输出操作上，而不是CPU计算上的应用。这类应用的特点是频繁地进行磁盘操作或网络通信，CPU使用率不高，但是需要等待IO操作的完成，因此对IO性能的依赖很高。</p>
+<p><strong>示例</strong>：</p>
+<ul>
+<li>Web服务器</li>
+<li>数据库服务器</li>
+<li>文件服务器</li>
+<li>客户端&#x2F;服务器应用</li>
+<li>大规模日志处理系统</li>
+</ul>
+<h3 id="IO密集型任务把IO和业务逻辑分离有什么好处？"><a href="#IO密集型任务把IO和业务逻辑分离有什么好处？" class="headerlink" title="IO密集型任务把IO和业务逻辑分离有什么好处？"></a>IO密集型任务把IO和业务逻辑分离有什么好处？</h3><p>（1）在IO密集型应用中，IO操作（如文件读写、网络数据传输等）往往是性能瓶颈。通过异步IO或使用专门的线程&#x2F;进程处理IO操作，主业务逻辑不需要等待IO操作的完成，从而减少等待时间，提高整体应用的响应速度和吞吐量。</p>
+<p>（2）分离IO和业务逻辑可以使系统更有效地使用CPU和IO资源。当IO操作在执行时，通常涉及等待外部设备响应，这段时间CPU可以处理其他任务，从而提高资源的利用率。</p>
+<p>（3）当IO操作与业务逻辑分开后，更易于对系统进行扩展。例如，可以根据需要增加处理IO的线程或进程，或者改用更高效的IO处理模式（如使用更高级的异步IO库），而不需要重大修改应用的业务逻辑部分。</p>
+<p>（4）分离IO和业务逻辑可以使测试变得更加简单。可以独立地对IO部分和业务逻辑部分进行测试，例如使用模拟的IO操作来测试业务逻辑，确保业务逻辑的正确性而不受IO影响。</p>
+<h3 id="CPU流水线技术是什么？"><a href="#CPU流水线技术是什么？" class="headerlink" title="CPU流水线技术是什么？"></a>CPU流水线技术是什么？</h3><p>CPU流水线技术是一种将指令分解为多步骤并让这些步骤并行执行的技术，从而提高CPU的执行效率。<strong>流水线技术通过将指令执行过程分解为取指令、译码、执行、访存和写回等阶段</strong>，每个阶段由不同的硬件单元处理，使得<strong>多条指令能够重叠执行</strong>，提高了处理速度。</p>
+<h3 id="流水线技术中的分支预测的实现和意义？"><a href="#流水线技术中的分支预测的实现和意义？" class="headerlink" title="流水线技术中的分支预测的实现和意义？"></a>流水线技术中的分支预测的实现和意义？</h3><p>（1） 分支预测是流水线技术中用来<strong>处理指令跳转（如条件分支）带来的中断问题</strong>。现代CPU使用复杂的算法来预测程序中的分支跳转是否会发生，以及跳转到哪里。常见的分支预测技术包括静态分支预测（如始终预测跳转或不跳转）和动态分支预测（如基于历史信息的预测）。</p>
+<p>（2）分支预测的主要目的是减少由于分支指令导致的流水线中断，从而提高程序执行的效率。正确的分支预测可以使CPU继续填充流水线而不必等待分支决定，错误的预测则会导致已经进入流水线的指令被撤销，降低效率。</p>
+<h3 id="内核和应用进行数据交互的方法有哪些？"><a href="#内核和应用进行数据交互的方法有哪些？" class="headerlink" title="内核和应用进行数据交互的方法有哪些？"></a>内核和应用进行数据交互的方法有哪些？</h3><ol>
+<li><strong>系统调用</strong> (System Calls):<ul>
+<li>系统调用是应用程序与操作系统内核之间进行交互的主要方式。应用程序通过系统调用请求内核提供服务，如文件操作、进程控制、网络通信等。系统调用提供了一种安全的机制来执行硬件操作或访问内核级资源。</li>
+</ul>
+</li>
+<li><strong>中断和异常</strong> (Interrupts and Exceptions):<ul>
+<li>中断是外部设备或条件触发的，用于通知内核需要处理某些事件。异常则是程序执行错误时的一种特殊类型的中断，如除零错误或访问违规。</li>
+<li>应用程序可以通过处理这些中断和异常来与内核交互，响应外部事件或错误。</li>
+</ul>
+</li>
+<li><strong>共享内存</strong> (Shared Memory):<ul>
+<li>共享内存是一种高效的数据交换方式，允许内核和一个或多个进程之间共享一段内存区域。这种方法可以避免复制数据，提高性能。</li>
+</ul>
+</li>
+<li><strong>信号</strong> (Signals):<ul>
+<li>信号是一种通知机制，用于通知进程发生了某些事件。内核可以向进程发送信号，以响应外部事件或内部错误，进程也可以发送信号给其他进程。</li>
+</ul>
+</li>
+<li><strong>管道和套接字</strong> (Pipes and Sockets):<ul>
+<li>管道提供了一种进程间通信的方法，允许数据在进程之间单向流动。套接字则支持更复杂的网络通信，包括进程间和网络间的数据交换。</li>
+</ul>
+</li>
+<li><strong>文件系统操作</strong>:<ul>
+<li>文件系统提供了一种存储和检索数据的方法，应用程序可以通过文件操作API与内核交互，进行数据的读写、查询和管理。</li>
+</ul>
+</li>
+</ol>
+<h3 id="系统调用从用户到内核的底层实现是什么？"><a href="#系统调用从用户到内核的底层实现是什么？" class="headerlink" title="系统调用从用户到内核的底层实现是什么？"></a>系统调用从用户到内核的底层实现是什么？</h3><ol>
+<li><strong>系统调用接口</strong>：<ul>
+<li>用户程序通常通过一个库（如C标准库）提供的封装函数来发起系统调用。这些库函数会设置好所有必要的参数供系统调用使用。</li>
+</ul>
+</li>
+<li><strong>陷入指令（Trap）</strong>：<ul>
+<li>库函数内部会执行一个特殊的指令，通常是<code>syscall</code>（在x86-64架构中）或<code>int 0x80</code>（在较老的x86架构中）。这个指令会生成一个软件中断，将处理器从用户模式切换到内核模式。</li>
+</ul>
+</li>
+<li><strong>系统调用编号</strong>：<ul>
+<li>每个系统调用都有一个唯一的编号。这个编号由用户程序设置在一个特定的寄存器（如x86中的EAX）中，内核通过这个编号来识别具体执行哪一个系统调用。</li>
+</ul>
+</li>
+<li><strong>上下文切换</strong>：<ul>
+<li>执行系统调用指令后，CPU进入内核模式，操作系统接管控制权。此时，操作系统会保存用户程序的状态（如寄存器等），并准备执行相应的内核函数。</li>
+</ul>
+</li>
+<li><strong>执行系统调用</strong>：<ul>
+<li>内核根据寄存器中的系统调用编号，通过查找系统调用表来找到对应的处理函数，并执行之。</li>
+</ul>
+</li>
+<li><strong>返回用户态</strong>：<ul>
+<li>系统调用完成后，操作系统将结果返回给用户程序，恢复用户程序的上下文，并将CPU控制权返回给用户程序。</li>
+</ul>
+</li>
+<li><strong>结果传递</strong>：<ul>
+<li>系统调用的结果通常通过寄存器或用户空间的内存位置返回给用户程序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="内核的调度方式是什么？"><a href="#内核的调度方式是什么？" class="headerlink" title="内核的调度方式是什么？"></a>内核的调度方式是什么？</h3><p>在Linux操作系统中，内核的调度方式是指如何管理和调度系统中的进程和线程，以优化性能和响应时间。Linux内核使用多种调度策略和算法，主要包括以下几种：</p>
+<ol>
+<li><p><strong>完全公平调度器（Completely Fair Scheduler, CFS）</strong></p>
+</li>
+<li><p><strong>实时调度器</strong>，Linux 提供了两种实时调度策略：<code>SCHED_FIFO</code>（先进先出）和 <code>SCHED_RR</code>（时间片轮转）。</p>
+</li>
+<li><p><strong>Deadline 调度器（SCHED_DEADLINE）</strong>，这是一种较新的调度策略，用于确保任务在指定的截止时间之前完成。</p>
+</li>
+</ol>
+<ul>
+<li><strong>Cgroups 和任务组</strong>，Linux 还支持通过控制组（cgroups）对进程进行分组管理，这允许系统管理员根据需要对不同组的资源使用进行限制和监控。</li>
+</ul>
+<h3 id="为什么要设计用户态和内核态两种状态？"><a href="#为什么要设计用户态和内核态两种状态？" class="headerlink" title="为什么要设计用户态和内核态两种状态？"></a>为什么要设计用户态和内核态两种状态？</h3><p>这样做是为了保护操作系统的核心部分不被用户程序直接访问和修改，从而增加系统的稳定性和安全性。</p>
+<p>（1）内核态主要允许操作系统访问受保护的硬件资源和内存区域，而用户态的控制程序则限制执行一些会影响系统稳定性和安全性的操作。</p>
+<p>（2）如果用户态程序崩溃，它通常不会影响运行在内核态的系统核心部分，因此整个操作系统可以继续稳定运行。</p>
+<p>（3）同时用户态程序也可能因为一些错误而尝试执行非法操作，此时操作系统可以拦截这些操作，避免对核心部分造成影响。</p>
+<h3 id="单片机启动程序，在执行main之前的是什么"><a href="#单片机启动程序，在执行main之前的是什么" class="headerlink" title="单片机启动程序，在执行main之前的是什么"></a>单片机启动程序，在执行main之前的是什么</h3><p>在单片机启动程序中，执行main函数之前的过程主要包括以下几个步骤：</p>
+<ol>
+<li><strong>硬件设置</strong>：单片机上电后，首先进行的是硬件的初始化，包括设置堆栈指针（SP）和程序计数器（PC）。</li>
+<li><strong>启动文件执行</strong>：接下来，单片机会执行启动文件，通常是名为 <code>startup_xxxxx.s</code> 的汇编语言文件。这个文件负责设置单片机的初始环境和配置，为main函数的执行做准备。</li>
+<li><strong>初始化代码</strong>：在启动文件执行后，可能还会有一些初始化代码，这些代码用于初始化单片机的硬件和软件环境，比如设置时钟、配置中断等。</li>
+<li><strong>跳转到main函数</strong>：所有的初始化和设置完成后，单片机最终会跳转到main函数开始执行用户的程序。</li>
+</ol>
+<p>这个过程确保了单片机在执行用户代码之前，硬件和系统环境已经被正确地设置和初始化，从而可以正确地运行用户程序。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/12/Computer/C++/C++11/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="prev" title="智能指针">
+      <i class="fa fa-chevron-left"></i> 智能指针
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%BF%9B%E7%A8%8B"><span class="nav-text">1、线程与进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E4%BB%A5%E5%8F%8A%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C%E7%9A%84%E6%A6%82%E5%BF%B5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">进程和线程以及并发和并行的概念是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%86%85%E5%AD%98%E5%AD%98%E5%82%A8%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="nav-text">线程内存存储在哪里？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84%E9%94%81%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">线程中的锁包含哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="nav-text">什么是死锁？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-text">死锁产生的原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="nav-text">如何避免死锁？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E9%94%81%E7%9A%84%E7%B2%92%E5%BA%A6%E6%9D%A5%E8%AF%B4%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">从锁的粒度来说，有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Atomic-%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0%EF%BC%9F%E6%98%AF%E6%9C%89%E9%94%81%E8%BF%98%E6%98%AF%E6%B2%A1%E9%94%81%E7%9A%84%EF%BC%9F%E6%89%80%E6%9C%89%E7%9A%84%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E9%83%BD%E6%B2%A1%E9%94%81%E5%90%97%EF%BC%9F%E5%AF%B9%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%BA%8F%EF%BC%88memory-order%EF%BC%89%E6%9C%89%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9F"><span class="nav-text">Atomic 内部实现？是有锁还是没锁的？所有的原子变量都没锁吗？对原子变量的内存序（memory order）有了解吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%99%E7%AD%89%E5%BE%85%E5%92%8C%E9%98%BB%E5%A1%9E%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">忙等待和阻塞的区别是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E8%BF%9B%E7%A8%8B%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%A4%9A%E5%B0%91%E7%BA%BF%E7%A8%8B%EF%BC%9F%E5%92%8C%E4%BB%80%E4%B9%88%E6%9C%89%E5%85%B3%EF%BC%9F"><span class="nav-text">一个进程可以创建多少线程？和什么有关？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E5%8D%95%E4%BE%8B%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-text">怎么保证单例线程安全？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">写一个线程安全的单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%80%8E%E4%B9%88%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-text">多线程怎么保证线程安全？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AF%B9%E5%8F%98%E9%87%8F%E7%9A%84%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%E6%98%AF%E5%90%A6%E6%98%AF%E5%8E%9F%E5%AD%90%E7%9A%84%EF%BC%9F%E5%86%85%E9%83%A8%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-text">多线程环境下对变量的读写操作是否是原子的？内部是怎么实现的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%9A%84%E5%BC%80%E9%94%80%EF%BC%9F"><span class="nav-text">线程调度的开销？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%B1%A0%EF%BC%9F"><span class="nav-text">如何实现一个线程池？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E9%83%A8%E5%88%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">一个线程池中最重要的部分是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%95%B0%E9%87%8F%E6%98%AF%E4%BF%9D%E6%8C%81%E4%B8%8D%E5%8F%98%E7%9A%84%E5%90%97%EF%BC%9F"><span class="nav-text">线程池中的线程数量是保持不变的吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%95%B0%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%EF%BC%9F"><span class="nav-text">线程池中的线程数如何确定？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E5%86%B3%E5%AE%9A%E7%BA%BF%E7%A8%8B%E6%95%B0"><span class="nav-text">为什么这样决定线程数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96%EF%BC%9F"><span class="nav-text">线程池如何优化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%E8%AE%B8%E5%A4%9A%E4%B8%AA%E4%BB%BB%E5%8A%A1%E4%B8%80%E8%B5%B7%E5%88%B0%E6%9D%A5%E7%9A%84%EF%BC%9F"><span class="nav-text">多线程是怎么处理许多个任务一起到来的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%97%B6%E8%A6%81%E9%93%BE%E6%8E%A5%E4%BB%80%E4%B9%88%E5%BA%93%EF%BC%8C%E6%80%8E%E4%B9%88%E6%89%BE%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E5%8A%A8%E6%80%81%E5%BA%93%EF%BC%9F"><span class="nav-text">C++多线程编程时要链接什么库，怎么找到对应的动态库？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%88%87%E6%8D%A2%EF%BC%8Ccpu%E5%92%8C%E5%86%85%E5%AD%98%E4%BC%9A%E5%81%9A%E4%B8%80%E4%BA%9B%E4%BB%80%E4%B9%88%E5%A4%84%E7%90%86"><span class="nav-text">多线程切换，cpu和内存会做一些什么处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E7%8E%B0%E5%9C%A8%E6%9C%89%E8%BF%9C%E8%BF%9C%E5%A4%9A%E4%BA%8E%E7%BA%BF%E7%A8%8B%E6%95%B0%E9%87%8F%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%9C%A8%E7%AD%89%E5%BE%85%E5%A4%84%E7%90%86%EF%BC%8C%E8%A6%81%E6%80%8E%E4%B9%88%E5%88%86%E6%9E%90%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-text">线程间的通信包括哪些方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BB%8E%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90%E4%B8%80%E4%B8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%EF%BC%9F"><span class="nav-text">线程同步是什么？从底层原理分析一下为什么会出现线程同步？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BE%E4%BE%8B%E6%9D%A5%E8%AF%B4%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F%E4%BB%96%E4%BB%AC%E4%B8%80%E8%88%AC%E4%BC%9A%E8%B0%83%E7%94%A8%E5%88%B0%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%9F%E5%A6%82%E6%9E%9C%E6%83%B3%E7%AD%89%E5%BE%85%E7%BA%BF%E7%A8%8Ba%E6%89%A7%E8%A1%8C%E5%AE%8C%E4%BB%BB%E5%8A%A1%E5%90%8E%E5%86%8D%E5%8E%BB%E6%89%A7%E8%A1%8Cb%EF%BC%8C%E8%BF%99%E7%A7%8D%E6%83%85%E5%86%B5%E8%A6%81%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86%EF%BC%9F"><span class="nav-text">处理多线程同步问题有哪些机制？举例来说信号量如何实现？他们一般会调用到什么样的函数？如果想等待线程a执行完任务后再去执行b，这种情况要怎么处理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%BA%94%E7%A7%8D%E7%8A%B6%E6%80%81%E5%88%86%E5%88%AB%E6%98%AF%EF%BC%9F"><span class="nav-text">进程的五种状态分别是？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4%E6%98%AF%E5%85%B1%E4%BA%AB%E7%9A%84%E5%90%97%EF%BC%9F"><span class="nav-text">两个进程的内核空间是共享的吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E8%BF%9B%E7%A8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%EF%BC%9F"><span class="nav-text">如何让进程后台运行？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%E5%8C%85%E6%8B%AC%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-text">进程间的通信包括哪些方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1%EF%BC%8C%E5%93%AA%E4%B8%AA%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E6%95%88%E7%8E%87%E6%9C%80%E9%AB%98"><span class="nav-text">进程间的通信，哪个通信方式效率最高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text">进程调度算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E4%B8%8E%E4%BA%92%E6%96%A5%E9%94%81%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">信号量与互斥锁的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%92%8C%E4%BA%92%E6%96%A5%E9%94%81%E8%A7%A3%E5%86%B3%E7%88%B6%E5%AD%90%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%97%B6%E9%98%BB%E5%A1%9E%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">信号量和互斥锁解决父子线程同时阻塞的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%9A%84%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="nav-text">使用共享内存的时候需要注意什么呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B-%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-text">2、内存模型&#x2F;虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F"><span class="nav-text">什么是虚拟内存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%A6%81%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%EF%BC%9F"><span class="nav-text">为什么操作系统要使用虚拟内存？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E7%94%B1C-C-%E7%BC%96%E8%AF%91%E7%9A%84%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83%EF%BC%88%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%89%EF%BC%9F"><span class="nav-text">一个由C&#x2F;C++编译的程序的内存分布（内存模型）？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8C%BA%E5%88%86%E4%BB%A3%E7%A0%81%E6%AE%B5%E5%92%8C%E6%95%B0%E6%8D%AE%E6%AE%B5%EF%BC%9F"><span class="nav-text">为什么要区分代码段和数据段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E6%A0%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8%E5%A0%86%EF%BC%9F"><span class="nav-text">什么时候用栈，什么时候用堆？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%8A%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">不同段上的对象的生命周期是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E5%AF%B9%E8%B1%A1%E5%8F%AA%E8%83%BD%E5%AD%98%E5%9C%A8%E4%BA%8E%E6%A0%88-%E5%A0%86%E4%B8%AD%EF%BC%9F"><span class="nav-text">如何让对象只能存在于栈&#x2F;堆中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#new%E5%92%8Cmalloc%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="nav-text">new和malloc的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">malloc函数的底层实现是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8Emalloc%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%EF%BC%8C%E8%B0%83%E7%94%A8free%E5%90%8E%E7%AB%8B%E5%8D%B3%E9%87%8A%E6%94%BE%E5%90%97%EF%BC%9F"><span class="nav-text">对于malloc分配的内存，调用free后立即释放吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A2%E7%84%B6%E5%A0%86%E5%86%85%E7%A2%8E%E7%89%87%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E9%87%8A%E6%94%BE%EF%BC%8C%E5%AF%BC%E8%87%B4%E7%96%91%E4%BC%BC%E2%80%9C%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E2%80%9D%E9%97%AE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88-malloc-%E4%B8%8D%E5%85%A8%E9%83%A8%E4%BD%BF%E7%94%A8-mmap-%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%91%A2-mmap%E5%88%86%E9%85%8D%E7%9A%84%E5%86%85%E5%AD%98%E5%8F%AF%E4%BB%A5%E4%BC%9A%E9%80%9A%E8%BF%87-munmap-%E8%BF%9B%E8%A1%8C-free-%EF%BC%8C%E5%AE%9E%E7%8E%B0%E7%9C%9F%E6%AD%A3%E9%87%8A%E6%94%BE-%EF%BC%9F%E8%80%8C%E6%98%AF%E4%BB%85%E4%BB%85%E5%AF%B9%E4%BA%8E%E5%A4%A7%E4%BA%8E-128k-%E7%9A%84%E5%A4%A7%E5%9D%97%E5%86%85%E5%AD%98%E6%89%8D%E4%BD%BF%E7%94%A8-mmap-%EF%BC%9F"><span class="nav-text">既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc 不全部使用 mmap 来实现呢(mmap分配的内存可以会通过 munmap 进行 free ，实现真正释放)？而是仅仅对于大于 128k 的大块内存才使用 mmap ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%8C%87%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8C%85%E5%90%AB%E8%BF%99%E4%BA%9B%E4%B8%9C%E8%A5%BF%E5%90%97%EF%BC%9F"><span class="nav-text">内存模型是什么？是指可执行文件中包含这些东西吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E5%B7%B2%E7%94%B3%E8%AF%B7%E7%9A%84%E5%86%85%E5%AD%98%E4%B8%AD%E6%9E%84%E9%80%A0%E5%AF%B9%E8%B1%A1%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-text">在已申请的内存中构造对象如何实现？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swap%E5%88%86%E5%8C%BA"><span class="nav-text">swap分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E6%80%8E%E4%B9%88%E8%BD%AC%E6%8D%A2%E5%88%B0%E7%89%A9%E7%90%86%E5%9C%B0%E5%9D%80%EF%BC%9F"><span class="nav-text">虚拟地址怎么转换到物理地址？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E8%A1%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E9%A1%B5%E5%A4%9A%E5%A4%A7%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF4KB%EF%BC%9F"><span class="nav-text">页表是什么，页多大，为什么是4KB？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%8F%91%E7%94%9F%EF%BC%9F"><span class="nav-text">缺页中断什么时候发生？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BC%BA%E9%A1%B5%E4%B8%AD%E6%96%AD%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">常见的缺页中断算法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E6%97%B6%E6%8B%B7%E8%B4%9D%E5%9C%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BA%94%E7%94%A8%EF%BC%9F"><span class="nav-text">写时拷贝在操作系统中有哪些应用？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%AF%91%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3"><span class="nav-text">3、编译程序相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kmalloc%EF%BC%88%EF%BC%89%E5%92%8C%E7%94%A8%E6%88%B7%E6%80%81%E7%9A%84malloc%EF%BC%88%EF%BC%89%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%E3%80%82"><span class="nav-text">kmalloc（）和用户态的malloc（）有什么区别。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%EF%BC%8C%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%EF%BC%9F"><span class="nav-text">什么是内存泄漏，如何防止？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8EC-%E6%96%87%E4%BB%B6%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E7%BB%8F%E8%BF%87%E4%BA%86%E5%93%AA%E5%87%A0%E4%B8%AA%E9%98%B6%E6%AE%B5%EF%BC%9F"><span class="nav-text">从C++文件到可执行文件经过了哪几个阶段？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E7%BC%96%E8%AF%91%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="nav-text">预编译的过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%89%E9%93%BE%E6%8E%A5%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="nav-text">为什么需要有链接的过程？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5%E8%BF%99%E4%B8%AA%E8%BF%87%E7%A8%8B%E5%81%9A%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">链接这个过程做了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E9%93%BE%E6%8E%A5%E5%AE%8C%E6%AF%95%E4%B9%8B%E5%90%8E%E5%88%86%E5%87%A0%E9%83%A8%E5%88%86%EF%BC%9F"><span class="nav-text">程序链接完毕之后分几部分？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E6%9C%89%E4%B8%80%E4%B8%AAA-dll%E5%92%8CB-dll%EF%BC%8CA-dll%E8%B0%83%E7%94%A8%E4%BA%86B-dll%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8CA-dll%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0B-dll%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%E7%9A%84%EF%BC%9F"><span class="nav-text">假设有一个A.dll和B.dll，A.dll调用了B.dll的方法，A.dll是如何找到B.dll中的方法的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E4%B8%AD%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">函数调用中堆和栈的变化情况是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%B4%A9%E6%BA%83%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">代码崩溃怎么解决，常见的原因是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81Linux%E7%9B%B8%E5%85%B3"><span class="nav-text">4、Linux相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">Linux常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0%E3%80%811%E3%80%812%E7%9A%84%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E6%98%AF%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89%EF%BC%9F%E6%8C%87%E5%90%91%E4%BB%80%E4%B9%88%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="nav-text">0、1、2的文件描述符是什么含义？指向什么类型的文件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E4%B8%AD%E6%96%AD%E4%B8%BA%E4%BB%80%E4%B9%88%E5%88%86%E4%B8%BA%E4%B8%8A%E4%B8%8B%E4%B8%A4%E4%B8%AA%E9%83%A8%E5%88%86%EF%BC%9F"><span class="nav-text">Linux系统中的中断为什么分为上下两个部分？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3G%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E6%9C%89%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9"><span class="nav-text">0-3G用户空间有哪些内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E7%94%A8%E6%88%B7%E6%80%81%E5%A6%82%E4%BD%95%E8%BF%9B%E5%85%A5%E5%86%85%E6%A0%B8%E6%80%81%EF%BC%9F"><span class="nav-text">Linux用户态如何进入内核态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E8%AE%BE%E5%A4%87%E6%A0%91%E8%A7%A3%E6%9E%90%E6%98%AF%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99"><span class="nav-text">Linux设备树解析是什么时候</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%94%A8gbd%E8%B0%83%E8%AF%95%E5%8F%91%E7%8E%B0%E7%BA%BF%E7%A8%8B%E9%98%BB%E5%A1%9E%EF%BC%9F"><span class="nav-text">如何用gbd调试发现线程阻塞？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%A0%88%E7%9A%84%E5%91%BD%E4%BB%A4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">gdb查看所有线程线程栈的命令是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb-%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E5%9C%B0%E5%9D%80%E7%9A%84%E5%91%BD%E4%BB%A4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">gdb 查看内存地址的命令是什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%A4%84%E7%90%86%E5%99%A8%E7%9B%B8%E5%85%B3"><span class="nav-text">5、处理器相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%A7%E5%B0%8F%E7%AB%AF%EF%BC%9F%E5%A6%82%E4%BD%95%E5%8C%BA%E5%88%86%EF%BC%9F%E6%9C%89%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9F%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B8%80%E8%88%AC%E6%98%AF%E4%BB%80%E4%B9%88%E5%AD%97%E8%8A%82%E5%BA%8F%EF%BC%9F"><span class="nav-text">什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFqps%E5%92%8Ctps%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%EF%BC%9F"><span class="nav-text">什么是qps和tps，如何计算？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E5%88%A9%E7%94%A8%E7%8E%87%E6%8B%89%E6%BB%A1%E7%9A%84%E6%97%B6%E5%80%99%E5%9C%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%B8%AD%E5%A2%9E%E5%8A%A0%E7%BA%BF%E7%A8%8B%E6%98%AF%E5%90%A6%E8%83%BD%E6%8F%90%E9%AB%98qps%EF%BC%9F"><span class="nav-text">CPU利用率拉满的时候在线程池中增加线程是否能提高qps？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFCPU%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E5%92%8CIO%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%EF%BC%9F"><span class="nav-text">什么是CPU密集型应用和IO密集型应用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO%E5%AF%86%E9%9B%86%E5%9E%8B%E4%BB%BB%E5%8A%A1%E6%8A%8AIO%E5%92%8C%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91%E5%88%86%E7%A6%BB%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-text">IO密集型任务把IO和业务逻辑分离有什么好处？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%8A%80%E6%9C%AF%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">CPU流水线技术是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%8A%80%E6%9C%AF%E4%B8%AD%E7%9A%84%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8C%E6%84%8F%E4%B9%89%EF%BC%9F"><span class="nav-text">流水线技术中的分支预测的实现和意义？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%92%8C%E5%BA%94%E7%94%A8%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-text">内核和应用进行数据交互的方法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E4%BB%8E%E7%94%A8%E6%88%B7%E5%88%B0%E5%86%85%E6%A0%B8%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">系统调用从用户到内核的底层实现是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E7%9A%84%E8%B0%83%E5%BA%A6%E6%96%B9%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">内核的调度方式是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%BE%E8%AE%A1%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%A4%E7%A7%8D%E7%8A%B6%E6%80%81%EF%BC%9F"><span class="nav-text">为什么要设计用户态和内核态两种状态？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%89%87%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%A8%8B%E5%BA%8F%EF%BC%8C%E5%9C%A8%E6%89%A7%E8%A1%8Cmain%E4%B9%8B%E5%89%8D%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">单片机启动程序，在执行main之前的是什么</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">251k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:13</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

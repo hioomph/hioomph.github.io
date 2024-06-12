@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="[TOC]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库2_Redis数据库">
+<meta property="og:url" content="http://example.com/2024/04/06/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="[TOC]">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061114362.png">
+<meta property="article:published_time" content="2024-04-06T02:43:45.013Z">
+<meta property="article:modified_time" content="2024-06-12T09:05:55.038Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061114362.png">
+
+<link rel="canonical" href="http://example.com/2024/04/06/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据库2_Redis数据库 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/06/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%95%B0%E6%8D%AE%E5%BA%932_Redis%E6%95%B0%E6%8D%AE%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库2_Redis数据库
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-06 10:43:45" itemprop="dateCreated datePublished" datetime="2024-04-06T10:43:45+08:00">2024-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-12 17:05:55" itemprop="dateModified" datetime="2024-06-12T17:05:55+08:00">2024-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/" itemprop="url" rel="index"><span itemprop="name">八股</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p>
+<span id="more"></span>
+
+<h1 id="1、Redis简介"><a href="#1、Redis简介" class="headerlink" title="1、Redis简介"></a>1、Redis简介</h1><p>Redis是一个基于内存的数据存储系统，它<strong>将数据完全存储在内存中</strong>，通过使用<strong>持久化机制</strong>来将数据定期写入磁盘以保证数据的持久性。</p>
+<h2 id="（1）内存淘汰机制-过期策略"><a href="#（1）内存淘汰机制-过期策略" class="headerlink" title="（1）内存淘汰机制&#x2F;过期策略"></a>（1）内存淘汰机制&#x2F;过期策略</h2><p><strong>MySQL里有2000w数据，Redis中只存20w的数据，如何保证Redis中的数据都是热点数据？</strong></p>
+<p>redis 提供 6种数据淘汰策略：</p>
+<ul>
+<li>volatile-lru： 从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</li>
+<li>volatile-ttl： 从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰</li>
+<li>volatile-random： 从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</li>
+<li>allkeys-lru： 当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（这个是最常用的）.</li>
+<li>allkeys-random： 从数据集（server.db[i].dict）中任意选择数据淘汰</li>
+<li>no-eviction： 禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。</li>
+</ul>
+<h2 id="（2）持久化机制"><a href="#（2）持久化机制" class="headerlink" title="（2）持久化机制"></a>（2）持久化机制</h2><p><strong>怎么保证 redis 挂掉之后再重启数据可以进行恢复？</strong></p>
+<p><strong>持久化数据</strong>：也就是将内存中的数据写入磁盘。</p>
+<ul>
+<li><p>目的：</p>
+<ul>
+<li>为了之后重用数据（比如重启机器、机器故障之后恢复数据），</li>
+<li>为了防止系统故障而将数据备份到一个远程位置。</li>
+</ul>
+</li>
+<li><p><strong>快照（snapshotting，RDB）</strong></p>
+<ul>
+<li>在指定的时间间隔内将内存中的数据集快照写入磁盘，RDB是内存快照（内存数据的二进制序列化形式）的方式持久化，每次都是从Redis中生成一个快照进行数据的全量备份。</li>
+<li>Redis持久化<strong>默认开启为RDB持久化</strong>。<ul>
+<li>指定的时间间隔：体现在主进程fork子进程的阶段。</li>
+<li>触发规则：<ul>
+<li><strong>手动触发</strong><ul>
+<li><strong>save</strong>：阻塞当前Redis进程，直到RDB持久化完成（尽量不使用）</li>
+<li><strong>bgsave</strong>：Redis主进程fork子进程，由子进程完成持久化</li>
+</ul>
+</li>
+<li><strong>自动触发</strong>：<ul>
+<li><strong>配置触发</strong>：redis.conf——&#x2F;snapshot即可定位到触发的配置位置<ul>
+<li>save 3600 1 300 100 600 60 10000<ul>
+<li>save 3600 1：3600秒内有1个key被修改，触发RDB</li>
+<li>save 300 100：300秒内有100个key被修改，触发RDB</li>
+<li>save 60 10000：60秒内有10000个key被修改，触发RDB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>shutdown触发</strong></li>
+<li><strong>flushall触发</strong>：清空Redis数据的同时清空dump.rdb文件，等同于删库跑路</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>优点<ul>
+<li>性能高：RDB持久化通过生成一个快照文件来保存数据，因此在恢复数据时速度非常快；</li>
+<li>文件紧凑：RDB文件是二进制格式的数据库文件，相较于AOF文件来说，文件体积小。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能丢失数据：由于RDB是定期生成的快照文件，如果Redis意外宕机，最近一次的修改可能会丢失。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>只追加文件（append-only file，AOF）</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404061114362.png" alt="image-20240406111403297"></p>
+<ul>
+<li>开启AOF持久化后每执行一条会更改Redis中的数据的命令，Redis就会将该命令写入硬盘中的AOF文件。</li>
+<li><strong>同步策略</strong>：<ul>
+<li><code>appendfsync always</code>：每次有数据修改发生时都会写入AOF文件，但会严重降低Redis的速度；</li>
+<li><code>appendfsync everysec</code>：每秒刷新一次缓冲区中的数据到AOF文件，显式地将多个写命令同步到硬盘；</li>
+<li><code>appendfsync no</code>：Redis进程不会主动地去刷新缓冲区的数据到AOF文件，让操作系统决定何时进行同步。</li>
+</ul>
+</li>
+<li><strong>重写策略</strong><ul>
+<li><code>auto-aof-rewrite-percentage 100</code>：当AOF文件体积达到上次重写之后的体积的100%时，触发AOF重写；</li>
+<li><code>auto-aof-rewrite-min-size 64mb</code>：当AOF文件体积超过该阈值时，触发AOF重写。</li>
+</ul>
+</li>
+<li><strong>优点</strong><ul>
+<li>数据更加可靠：AOF持久化记录了每个写命令的操作，因此在出现故障时，可以通过重新执行AOF文件来保证数据的完整性；</li>
+<li>可以保留写命令历史：AOF文件是一个追加日志文件，可以用于回放过去的写操作。</li>
+</ul>
+</li>
+<li><strong>缺点</strong><ul>
+<li>文件较大：由于记录了每个写命令，AOF文件体积通常比RDB文件要大；</li>
+<li>恢复速度较慢：当AOF文件较大时，Redis重启时需要重新执行整个AOF文件，恢复速度相对较慢。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="（3）缓存击穿、缓存雪崩和缓存穿透"><a href="#（3）缓存击穿、缓存雪崩和缓存穿透" class="headerlink" title="（3）缓存击穿、缓存雪崩和缓存穿透"></a>（3）缓存击穿、缓存雪崩和缓存穿透</h2><h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>在高并发的访问下，一个热点数据失效时，大量请求会直接绕过缓存，直接查询数据库，导致数据库压力剧增。</p>
+<p>解决方案：</p>
+<ul>
+<li><strong>设置热点数据永不过期</strong>：对于一些热点数据，可以设置不过期，或者设置较长的过期时间，以保证这部分数据在缓存中一直可用，减少因数据过期引起的击穿问题；</li>
+<li><strong>设置互斥锁</strong>：在缓存失效时，只允许一个请求访问数据库，其他请求需要等待该请求执行完毕后再从缓存中获取数据，可以减少并发请求对数据库的冲击；</li>
+<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果不存在，可以直接返回避免对数据库的查询，缓解击穿压力。</li>
+</ul>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>在高并发的访问下，大规模缓存失效同时失效或者缓存宕机，大量请求同时涌入数据库，导致数据库负载过大甚至崩溃的情况。 </p>
+<p>解决方案：</p>
+<ul>
+<li><strong>随机分布过期时间</strong>：在设置缓存数据的过期时间时，可以随机分布过期时间，避免缓存数据同时大规模失效；</li>
+<li><strong>使用多级缓存</strong>：引入多级缓存架构，将请求分散到不同的缓存层，即使一个缓存层发生雪崩，也能够有其他缓存层提供服务。</li>
+</ul>
+<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>缓存穿透是指恶意请求或者大量查询不存在于缓存中的数据，导致请求直接绕过缓存层，直接访问后端存储系统（如数据库），从而给后端系统造成巨大压力的现象。</p>
+<p>解决方法主要包括：</p>
+<ul>
+<li><strong>空值缓存</strong>：对于查询数据库返回空结果的情况，也将其缓存起来，但设置一个较短的过期时间，防止缓存穿透的请求直接击穿数据库；</li>
+<li><strong>采用布隆过滤器（Bloom Filter）</strong>：使用布隆过滤器判断请求的数据是否存在，如果数据不存在，则直接拒绝访问，从而避免了对后端系统的查询请求，减轻了后端压力；</li>
+<li><strong>数据预热</strong>：在系统启动或者定时任务中，预先将热点数据加载到缓存中，避免缓存穿透带来的大量请求直接击穿数据库；</li>
+<li><strong>合法性校验</strong>：在接收到请求后，首先进行参数的合法性校验，对非法请求直接拒绝，从而减少无效请求对后端系统的压力。</li>
+</ul>
+<h2 id="（4）Redis的哨兵机制是怎样的？"><a href="#（4）Redis的哨兵机制是怎样的？" class="headerlink" title="（4）Redis的哨兵机制是怎样的？"></a>（4）Redis的哨兵机制是怎样的？</h2><p>设置多个哨兵监视Master节点。只有当多个哨兵都认为Master节点宕掉时，才进行主从切换；同时，针对由哪一个哨兵来进行主从切换的问题，进行哨兵选举，通过选举选出一个主导的哨兵进行主从切换。</p>
+<h2 id="（5）Redis数据类型"><a href="#（5）Redis数据类型" class="headerlink" title="（5）Redis数据类型"></a>（5）Redis数据类型</h2><ul>
+<li>String：String是最常用的数据类型，在Redis中以二进制安全的方式存储字符串值。它可以包含任何类型的数据，比如文本、整数或二进制数据。</li>
+</ul>
+<ol start="2">
+<li>Hash：Hash是一个键值对的集合，其中每个键都与一个值相关联。在Redis中，Hash可以用于存储和操作对象，每个键值对相当于对象的字段和值。</li>
+<li>List：List是一个按照插入顺序排序的字符串元素集合。集合中的元素可以重复，可以从列表的两端进行插入和删除操作，可用于实现队列、栈等数据结构。</li>
+<li>Set：Set是一个无序、唯一的字符串集合，不允许重复的成员。可以对集合执行添加、删除和判断成员是否存在等操作，也支持集合间的交集、并集和差集运算。</li>
+<li>Sorted Set：Sorted Set是一个有序的字符串集合，每个成员都关联着一个分数。集合中的成员根据分数的大小进行排序，可以进行范围查询和按分数排名操作。</li>
+</ol>
+<h2 id="（6）Redis是单线程的，为什么还会这么快呢？"><a href="#（6）Redis是单线程的，为什么还会这么快呢？" class="headerlink" title="（6）Redis是单线程的，为什么还会这么快呢？"></a>（6）Redis是单线程的，为什么还会这么快呢？</h2><ul>
+<li>首先Redis是基于内存的nosql数据库，基于内存的读写效率本身就非常高；</li>
+<li>Redis内部对应核心命令的执行采用了单线程模型，并且给予内存模型，单条命令的执行速度远小于线程上下文的开销，所以使用单线程能够大大提升我们Redis的吞吐量；</li>
+<li>内部提供了高效查询和操作的数据结构；</li>
+<li>采用IO多路复用模型，能够同时处理大量连接，并且使用reator模型，能够并发的处理连接以及对连接进行响应，但是内部命令执行还是单线程的；</li>
+<li>对Redis常用操作进行旅游化，提供了管道技术和批量操作技术，能够减少单次Redis操作的网络开销</li>
+</ul>
+<h2 id="（7）使用缓存的好处？"><a href="#（7）使用缓存的好处？" class="headerlink" title="（7）使用缓存的好处？"></a>（7）使用缓存的好处？</h2><ul>
+<li>高性能</li>
+<li>高并发</li>
+</ul>
+<h2 id="（8）对Redis的理解"><a href="#（8）对Redis的理解" class="headerlink" title="（8）对Redis的理解"></a>（8）对Redis的理解</h2><p>首先，Redis本质上是一个nosql数据库，内部提供了非常多的数据结构，帮助我们满足各种场景的需求实现。</p>
+<p>并且内部使用了IO多路复用的模型，使得Redis能够处理大量的连接，并且内部对于核心命令的执行部分使用了单线程，使得我们的不需要考虑线程安全的问题。</p>
+<p>Redis完全是基于内存操作，速度很快，他的并发读写性能非常高，并且Redis6之后，对于协议解析和响应使用率了多线程模型，进一步降低核心单线程处理任务的复杂度，使得我们Redis的性能又提升了一个量级。</p>
+<p>Redis本身提供了非常多的高可用机制，帮助我们实现Redis的高可用集群，目前企业中已经大量使用Redis作为我们缓存 等场景</p>
+<h2 id="（7）一个Redis实例最多能存放多少Keys？"><a href="#（7）一个Redis实例最多能存放多少Keys？" class="headerlink" title="（7）一个Redis实例最多能存放多少Keys？"></a>（7）一个Redis实例最多能存放多少Keys？</h2><p>Redis 的每个实例最多可以存放约 2^32 - 1 个keys，即大约 42 亿个keys。</p>
+<p>这是由 Redis 内部使用的哈希表实现决定的，它使用 32 位有符号整数作为索引。Redis 使用的哈希函数和负载因子等因素也会影响实际可存放键的数量。</p>
+<h2 id="（8）说说你对缓存双写不一致的理解？"><a href="#（8）说说你对缓存双写不一致的理解？" class="headerlink" title="（8）说说你对缓存双写不一致的理解？"></a>（8）说说你对缓存双写不一致的理解？</h2><p>缓存不一致主要是指我们的业务系统里面引入了缓存提生我们查询性能，但是当我们数据库数据发生变更的时候，我们如何去保证缓存和数据库中数据的一致性问题，主要有两大种方案首先是异步通知，可以利用canal监听我们mysql的数据变化，然后发送变更缓存消息到mq，让业务系统去对缓存进行更新，由于我们一般监听binlog都是在从mysql上进行，而主从同步有一定的延时，监听完消息发送到mq又存在一定的延时，所以他的实时性不是很好，比较适合用在一致性要求不是很高的缓存场景，并且异步通知最大的优点就是解耦，对于更新缓存的逻辑不需要耦合在代码中</p>
+<p>第二种方案也是得物使用规范的中最推荐的同步双写，之所以使用这种方案，就是非常多的业务中都涉及到钱相关，如果缓存长时间不一致容易造成大量的资损，比如：我们商品中心大量商品数据进行了缓存，此时我们管理员修改了价格，这个缓存怎么同步，其实就是缓存一致性的问题，对于这种一致性比较高的业务，我们推荐最佳方案是采用延时双删，先删缓存，然后写数据库，然后过500ms再删一次缓存，这种方案能够尽可能避免出现缓存不一致的问题，但是也是无法完全避免，因为可能出现一些极端情况，比如出现了慢SQL，查了半天还是旧数据，结果我们双删也删完了，他又走了旧数据的逻辑，但是这种都可以通过监控来进行优化，尽最大可能不出现问题，如果想要保证强一致性，其实方案就是使用读写锁来保证了，但是一般C端业务，优先考虑用户体验性，如果不是直接操作钱一般不使用这种方案</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/04/06/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%95%B0%E6%8D%AE%E5%BA%931_MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="prev" title="数据库1_MySQL数据库">
+      <i class="fa fa-chevron-left"></i> 数据库1_MySQL数据库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/04/07/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/C&C++/" rel="next" title="C/C++">
+      C/C++ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81Redis%E7%AE%80%E4%BB%8B"><span class="nav-text">1、Redis简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E6%9C%BA%E5%88%B6-%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5"><span class="nav-text">（1）内存淘汰机制&#x2F;过期策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="nav-text">（2）持久化机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9%E5%92%8C%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">（3）缓存击穿、缓存雪崩和缓存穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="nav-text">缓存击穿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">缓存雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">缓存穿透</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Redis%E7%9A%84%E5%93%A8%E5%85%B5%E6%9C%BA%E5%88%B6%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-text">（4）Redis的哨兵机制是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%885%EF%BC%89Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-text">（5）Redis数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%886%EF%BC%89Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E7%9A%84%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E8%BF%99%E4%B9%88%E5%BF%AB%E5%91%A2%EF%BC%9F"><span class="nav-text">（6）Redis是单线程的，为什么还会这么快呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="nav-text">（7）使用缓存的好处？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%888%EF%BC%89%E5%AF%B9Redis%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-text">（8）对Redis的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E4%B8%80%E4%B8%AARedis%E5%AE%9E%E4%BE%8B%E6%9C%80%E5%A4%9A%E8%83%BD%E5%AD%98%E6%94%BE%E5%A4%9A%E5%B0%91Keys%EF%BC%9F"><span class="nav-text">（7）一个Redis实例最多能存放多少Keys？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%888%EF%BC%89%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E7%BC%93%E5%AD%98%E5%8F%8C%E5%86%99%E4%B8%8D%E4%B8%80%E8%87%B4%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F"><span class="nav-text">（8）说说你对缓存双写不一致的理解？</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">251k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:13</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
