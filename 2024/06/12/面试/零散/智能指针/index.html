@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121436029.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121521900.png">
 <meta property="article:published_time" content="2024-06-12T06:29:34.067Z">
-<meta property="article:modified_time" content="2024-06-14T09:35:01.675Z">
+<meta property="article:modified_time" content="2024-06-15T06:27:32.669Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121430079.png">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-14 17:35:01" itemprop="dateModified" datetime="2024-06-14T17:35:01+08:00">2024-06-14</time>
+                <time title="修改时间：2024-06-15 14:27:32" itemprop="dateModified" datetime="2024-06-15T14:27:32+08:00">2024-06-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -318,7 +318,7 @@
 </blockquote>
 <p>这首先要从<code>shared_ptr</code>的拷贝构造或者赋值构造说起。当一个<code>shared_ptr</code>对象<code>sp2</code>是由<code>sp1</code>拷贝构造或者赋值构造得来的时候，实际上<strong>构造完成后<code>sp1</code>内部的<code>__shared_count</code>对象包含的指向管理对象的指针与<code>sp2</code>内部的<code>__shared_count</code>对象包含的指向管理对象的指针是相等的</strong>，也就是说当多个<code>shared_ptr</code>对象来管理同一个对象时，它们共同使用同一个动态分配的管理对象。</p>
 <p>这可以从下面的<code>__share_ptr</code>的构造函数和<code>__shared_count</code>的构造函数清楚地看出。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp1&gt;</span><br><span class="line"> __shared_ptr(<span class="type">const</span> __shared_ptr&lt;_Tp1, _Lp&gt;&amp; __r)</span><br><span class="line"> : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount) <span class="comment">// never throws</span></span><br><span class="line">&#123; __glibcxx_function_requires(_ConvertibleConcept&lt;_Tp1*, _Tp*&gt;) &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">__shared_count&amp;</span><br><span class="line">    <span class="keyword">operator</span>=(<span class="type">const</span> __shared_count&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != _M_pi)  <span class="comment">// 避免自我赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">            __tmp-&gt;_M_add_ref_copy();  <span class="comment">// 增加目标控制块的引用计数</span></span><br><span class="line">        <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)  </span><br><span class="line">            _M_pi-&gt;_M_release();</span><br><span class="line">        _M_pi = __tmp;   <span class="comment">// 更新当前实例的控制块指针 _M_pi，使其指向目标控制块</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp1&gt;</span><br><span class="line"> __shared_ptr(<span class="type">const</span> __shared_ptr&lt;_Tp1, _Lp&gt;&amp; __r)</span><br><span class="line"> : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount) <span class="comment">// never throws</span></span><br><span class="line">&#123; __glibcxx_function_requires(_ConvertibleConcept&lt;_Tp1*, _Tp*&gt;) &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">__shared_count&amp;</span><br><span class="line">    <span class="keyword">operator</span>=(<span class="type">const</span> __shared_count&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != _M_pi)  <span class="comment">// 避免自我赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">            __tmp-&gt;_M_add_ref_copy();  <span class="comment">// 增加目标控制块的引用计数</span></span><br><span class="line">        <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)  </span><br><span class="line">            _M_pi-&gt;_M_release();  <span class="comment">// 减少当前控制块的引用计数</span></span><br><span class="line">        _M_pi = __tmp;   <span class="comment">// 更新当前实例的控制块指针 _M_pi，使其指向目标控制块</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>针对<code>if (_M_pi != 0)</code>，考虑以下两种情况：</p>
 <ul>
@@ -514,12 +514,12 @@ sp2 = sp1;  // 调用赋值运算符
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">260k</span>
+    <span title="站点总字数">262k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:46</span>
+    <span title="站点阅读时长">15:51</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
