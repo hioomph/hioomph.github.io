@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406131948229.png">
 <meta property="article:published_time" content="2024-06-12T09:03:47.949Z">
-<meta property="article:modified_time" content="2024-06-17T04:40:50.662Z">
+<meta property="article:modified_time" content="2024-06-17T11:51:39.675Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406131948229.png">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-17 12:40:50" itemprop="dateModified" datetime="2024-06-17T12:40:50+08:00">2024-06-17</time>
+                <time title="修改时间：2024-06-17 19:51:39" itemprop="dateModified" datetime="2024-06-17T19:51:39+08:00">2024-06-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,14 +248,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>22k</span>
+              <span>23k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:21</span>
+              <span>1:25</span>
             </span>
 
         </div>
@@ -283,6 +283,9 @@
 <li>线程在 Linux 中通过 <code>pthread_create</code> 创建，所有线程共享进程的地址空间和全局变量。</li>
 <li>线程在 Linux 内核中被实现为轻量级进程（LWP），每个线程都有独立的线程控制块（TCB），但共享进程的资源。</li>
 </ul>
+<blockquote>
+<p>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。<strong>但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</strong></p>
+</blockquote>
 <h3 id="线程内存存储在哪里？"><a href="#线程内存存储在哪里？" class="headerlink" title="线程内存存储在哪里？"></a>线程内存存储在哪里？</h3><ol>
 <li><strong>线程栈</strong>（Thread Stack）：每个线程都有自己的栈空间，这是线程存储本地变量、函数参数和返回地址的地方。线程栈通常有固定的大小，这个大小可以在创建线程时指定，也可能由操作系统预设。这部分内存通常位于用户空间的栈内存中。</li>
 <li><strong>线程堆</strong>（Thread Heap）：虽然线程可以访问进程级的堆（共享资源），但它们通常不拥有私有的堆空间。然而，线程可以通过特定的内存分配策略（如使用线程局部存储）在堆上分配数据，这些数据只对分配它的线程可见。</li>
@@ -304,12 +307,8 @@
 <li><strong>循环等待条件</strong>：存在一种线程资源循环等待链，每个线程占有一种资源并等待另一种被下一个线程占有的资源。</li>
 </ol>
 <h3 id="如何避免死锁？"><a href="#如何避免死锁？" class="headerlink" title="如何避免死锁？"></a>如何避免死锁？</h3><ol>
-<li>尽可能将资源设置为可以共享，这在实际中可能较难实现，因为某些资源本身就是不可共享的。</li>
-<li>一次性申请所有需要的资源，不再分步申请；只有当所有请求的资源都得到满足时，线程才开始执行。</li>
-<li>如果一个已经持有某些资源的线程进一步申请其他资源时被拒绝，则释放它原先持有的资源。允许剥夺已分配的资源，重新分配给其他线程。</li>
-<li>对所有资源类型进行排序，强制每个线程按顺序申请资源。</li>
-<li>线程尝试锁定资源时添加超时时间，超时未能锁定资源则释放已占有的资源并重新尝试。</li>
-<li>设计时确保所有线程获取锁的顺序一致，避免循环等待。</li>
+<li>系统对进程发出每一个系统能够满足的资源申请进行动态检查,并根据检查结果决定是否分配资源,如果分配后系统可能发生死锁,则不予分配,否则予以分配。这是一种保证系统不进入死锁状态的动态策略。</li>
+<li>在系统设计、进程调度等方面注意如何让这四个必要条件不成立，如何确定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态的情况下占用资源。因此，对资源的分配要给予合理的规划。</li>
 </ol>
 <h3 id="从锁的粒度来说，有哪些？"><a href="#从锁的粒度来说，有哪些？" class="headerlink" title="从锁的粒度来说，有哪些？"></a>从锁的粒度来说，有哪些？</h3><p><strong>粗粒度锁</strong>：</p>
 <ul>
@@ -468,13 +467,56 @@
 <h3 id="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"><a href="#如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？" class="headerlink" title="如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"></a>如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？</h3><p>首先判断这个请求数量远远多于线程是常态吗，如果是常态则先要考虑是不是线程数量设置有问题，然后判断机器是否能力不足以处理这些数据。</p>
 <p>假如说硬件软件都没有问题，那么考虑这个问题为什么会产生，是不是我们的高计算密集型任务太多了，如果说我们的请求任务比较复杂，那么考虑进行一个分类，将处理特别慢的请求作为一个特定类，将一些线程固定给他们使用，而不是所有线程都用来处理这种任务，因为既然很慢，那么慢1个和慢10个点区别就没有那么大了，将其他线程用来处理能够快速处理完的请求。</p>
 <h3 id="线程间的通信包括哪些方式？"><a href="#线程间的通信包括哪些方式？" class="headerlink" title="线程间的通信包括哪些方式？"></a>线程间的通信包括哪些方式？</h3><ol>
-<li><strong>共享内存</strong>：线程间共享相同的内存空间，可以通过共享变量进行通信，需要同步机制（如互斥锁、信号量等）来防止数据竞争和保证一致性。</li>
-<li><strong>互斥锁（Mutex）</strong>：用于控制多个线程对共享资源的访问，保证同一时间只有一个线程可以访问资源。</li>
-<li><strong>条件变量</strong>：用于线程间的同步，允许一个或多个线程在某些条件下暂停执行并等待，直到另一个线程通知它们条件已经满足。</li>
-<li><strong>信号量（Semaphores）</strong>：用于控制对共享资源的访问数量。信号量维护了一个计数器，表示可用资源的数量，线程在进入临界区前必须获取信号量。</li>
-<li><strong>事件（Event）</strong>：类似于条件变量，用于通知一个或多个正在等待的线程某个事件已经发生。</li>
-<li><strong>消息队列</strong>：线程可以发送和接收消息，消息以队列的形式管理。消息队列允许线程以异步的方式进行数据交换和事件通知。</li>
-<li><strong>屏障（Barriers）</strong>：用于多个线程同步到某一点，当所有线程都达到屏障点后，它们再同时开始执行后续操作。常用于并行计算，确保所有线程在进行下一步操作前已完成当前操作。</li>
+<li><p><strong>互斥锁（Mutex）</strong>：用于控制多个线程对共享资源的访问，保证同一时间只有一个线程可以访问资源。</p>
+</li>
+<li><p><strong>条件变量</strong>：利用线程间共享全局变量进行同步的一种机制。允许一个或多个线程在某些条件下暂停执行并等待，直到另一个线程通知它们条件已经满足，从而避免了线程不断轮询检查该条件是否成立而降低效率的情况。</p>
+<blockquote>
+<p><strong>条件变量为什么要和互斥锁一起使用？</strong></p>
+<p>这是为了应对线程<code>1</code>在调用<code>pthread_cond_wait()</code>但线程<code>1</code>还没有进入<code>wait cond</code>的状态时，线程<code>2</code>调用了<code>cond_singal</code>的情况。 </p>
+<p>如果不用互斥锁的话，这个<code>cond_singal</code>就丢失了。加了锁的情况下，线程<code>2</code>必须等到<code>mutex</code>被释放（也就是<code>pthread_cond_wait()</code>释放锁并进入<code>wait_cond</code>状态 ，此时线程<code>2</code>上锁） 的时候才能调用<code>cond_singal</code>。</p>
+</blockquote>
+<ol>
+<li><p>包含两种等待方式，无条件等待<code>pthread_cond_wait()</code>和计时等待<code>pthread_cond_timewait()</code>两种。注意无论哪种等待方式，都必须和一个互斥锁配合，以防止多个线程同时请求竞争条件；</p>
+<blockquote>
+<p><strong><code>pthread_cond_wait()</code> 和 <code>pthread_cond_timewait()</code> 函数为什么需要互斥锁？</strong></p>
+<p>条件变量是线程同步的一种方法，这两个函数又是等待信号的函数，函数内部一定有须要同步保护的数据。</p>
+</blockquote>
+</li>
+<li><p>互斥锁必须是普通锁或者适应锁；</p>
+</li>
+<li><p>在调用<code>pthread_cond_wait()</code>前必须由本线程加锁，而在更新条件等待队列以前，<code>mutex</code>保持锁定状态，并<strong>在线程挂起进入等待前解锁</strong>；</p>
+<blockquote>
+<p><strong>为什么必须由本线程加锁，而不在函数内部定义？</strong></p>
+<p>无法确定会有多少用户使用条件变量，所以每个互斥锁都须要动态定义，而且管理大量互斥锁的开销太大，使用用户定义的锁会更加灵活又方便。</p>
+</blockquote>
+</li>
+<li><p>在条件满足从而离开<code>pthread_cond_wait()</code>之前，<code>mutex</code>将被重新加锁，以与进入<code>pthread_cond_wait()</code>前的加锁动作对应。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">thread2</span><span class="params">(<span class="type">void</span> *arg)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        pthread_mutex_lock(&amp;mutex);  <span class="comment">// 调用前由本线程加锁</span></span><br><span class="line">        pthread_cond_wait(&amp;cond,&amp;mutex);  <span class="comment">// 无条件等待（经历了解锁-&gt;加锁的过程）</span></span><br><span class="line">        pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">        sleep(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p><strong>信号量（Semaphores）</strong>：如同进程一样，线程也可以通过信号量来实现通信，虽然是轻量级的。 </p>
+<ol>
+<li><p>初始化信号量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_init</span> <span class="params">(<span class="type">sem_t</span> *sem , <span class="type">int</span> pshared, <span class="type">unsigned</span> <span class="type">int</span> value)</span>; </span><br><span class="line"></span><br><span class="line"><span class="comment">// sem 		- 指定要初始化的信号量； </span></span><br><span class="line"><span class="comment">// pshared 	- 信号量 sem 的共享选项，linux只支持0，表示它是当前进程的局部信号量； </span></span><br><span class="line"><span class="comment">// value 	- 信号量 sem 的初始值。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>信号量值加<code>1 </code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_post</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>信号量值减<code>1 </code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_wait</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>sem</code>所指的信号量的数值为<code>0</code>，函数将会等待直到有其它线程使它不再是<code>0</code>为止，此时相当于获取到该信号。</p>
+</li>
+<li><p>销毁信号量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_destroy</span><span class="params">(<span class="type">sem_t</span> *sem)</span>;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p><strong>事件（Event）</strong>：类似于条件变量，用于通知一个或多个正在等待的线程某个事件已经发生。</p>
+</li>
+<li><p><strong>消息队列</strong>：线程可以发送和接收消息，消息以队列的形式管理。消息队列允许线程以异步的方式进行数据交换和事件通知。</p>
+</li>
+<li><p><strong>屏障（Barriers）</strong>：用于多个线程同步到某一点，当所有线程都达到屏障点后，它们再同时开始执行后续操作。常用于并行计算，确保所有线程在进行下一步操作前已完成当前操作。</p>
+</li>
 </ol>
 <h3 id="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"><a href="#线程同步是什么？从底层原理分析一下为什么会出现线程同步？" class="headerlink" title="线程同步是什么？从底层原理分析一下为什么会出现线程同步？"></a>线程同步是什么？从底层原理分析一下为什么会出现线程同步？</h3><p>（1）线程同步是多线程编程中保证多个线程安全访问共享资源或协调工作的一种机制。它确保在任何给定时刻，只有一个线程可以访问特定的数据或代码块，以防止数据损坏或不一致性。线程同步通常通过使用各种同步原语（如互斥锁、信号量、条件变量等）来实现。</p>
 <p>（2）底层原理上，线程同步问题主要是由于以下几个因素导致的：</p>
@@ -556,32 +598,47 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sig_child</span><span class="params">(<span class="type">int</span> signo)</span> </span>&#123;</span><br><span class="line">    <span class="type">pid_t</span> pid;</span><br><span class="line">    <span class="type">int</span> stat;</span><br><span class="line">    <span class="comment">// 使用循环回收所有已经结束的子进程</span></span><br><span class="line">    <span class="keyword">while</span> ((pid = <span class="built_in">waitpid</span>(<span class="number">-1</span>, &amp;stat, WNOHANG)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Child &quot;</span> &lt;&lt; pid &lt;&lt; <span class="string">&quot; terminated&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">signal</span>(SIGCHLD, sig_child); <span class="comment">// 设置信号处理程序</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i) &#123;</span><br><span class="line">        <span class="type">pid_t</span> pid = fork();</span><br><span class="line">        <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 子进程</span></span><br><span class="line">            std::cout &lt;&lt; <span class="string">&quot;Child process &quot;</span> &lt;&lt; <span class="built_in">getpid</span>() &lt;&lt; <span class="string">&quot; started&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">2</span>); <span class="comment">// 模拟子进程工作</span></span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);  <span class="comment">// 子进程结束</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 父进程可以继续做其他工作，不会被阻塞</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Parent process doing work...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">        <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="两个进程的内核空间是共享的吗？"><a href="#两个进程的内核空间是共享的吗？" class="headerlink" title="两个进程的内核空间是共享的吗？"></a>两个进程的内核空间是共享的吗？</h3><p>在大多数现代操作系统中，包括Linux和Windows，内核空间是在所有进程之间共享的。这意味着内核空间中的代码和数据结构对所有进程来说都是相同的，并且在任何时候都位于相同的物理内存位置。</p>
-<h3 id="进程间的通信包括哪些方式？"><a href="#进程间的通信包括哪些方式？" class="headerlink" title="进程间的通信包括哪些方式？"></a>进程间的通信包括哪些方式？</h3><p>（1）<strong>管道</strong>，半双工的通信方式，通常用于具有亲缘关系的进程之间的通信。</p>
-<p>（2）<strong>命名管道</strong>，与普通管道类似，但可以在无亲缘关系的进程之间使用。命名管道通过文件系统进行通信。</p>
-<p>（3）<strong>消息队列</strong>，允许一个或多个进程向队列中发送消息，并从队列中接收消息。消息队列通常用于在不同进程之间传递结构化的数据。</p>
-<blockquote>
-<p>post_message和send_message</p>
-</blockquote>
-<p>（4）<strong>信号量</strong>，控制进程间访问共享资源的机制，可以用来解决进程同步和互斥的问题，防止竞态条件的发生。</p>
-<p>（5）<strong>共享内存</strong>：</p>
+<h3 id="进程间的通信包括哪些方式？"><a href="#进程间的通信包括哪些方式？" class="headerlink" title="进程间的通信包括哪些方式？"></a>进程间的通信包括哪些方式？</h3><ol>
+<li><p><strong>管道</strong>，半双工的通信方式，通常用于具有亲缘关系的进程之间的通信。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建管道</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> pipefd[<span class="number">2</span>])</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>命名管道</strong>，与普通管道类似，但可以在无亲缘关系的进程之间使用。命名管道通过文件系统进行通信。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> FIFO_FILE <span class="string">&quot;/tmp/my_fifo&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> fd;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *message = <span class="string">&quot;&#x27;hi midori&#x27; from writer(fifo)&quot;</span>;</span><br><span class="line">    </span><br><span class="line">    fd = open(FIFO_FILE, O_WRONLY);  <span class="comment">// 打开命名管道</span></span><br><span class="line">    write(fd, message, <span class="built_in">strlen</span>(message) + <span class="number">1</span>);      <span class="comment">// 向命名管道写入数据</span></span><br><span class="line">    close(fd);      <span class="comment">// 关闭命名管道</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>消息队列</strong>，允许一个或多个进程向队列中发送消息，并从队列中接收消息。消息队列通常用于在不同进程之间传递结构化的数据。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MSG_SIZE 128</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 消息结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">msg_buffer</span> &#123;</span></span><br><span class="line">    <span class="type">long</span> msg_type;</span><br><span class="line">    <span class="type">char</span> msg_text[MSG_SIZE];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建消息队列或获取现有消息队列的标识符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向消息队列发送消息</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgsnd</span><span class="params">(<span class="type">int</span> msqid, <span class="type">const</span> <span class="type">void</span> *msgp, <span class="type">size_t</span> msgsz, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从消息队列接收消息</span></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">msgrcv</span><span class="params">(<span class="type">int</span> msqid, <span class="type">void</span> *msgp, <span class="type">size_t</span> msgsz, <span class="type">long</span> msgtyp, <span class="type">int</span> msgflg)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对消息队列进行控制操作，如获取信息、修改权限、删除消息队列等</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">msgctl</span><span class="params">(<span class="type">int</span> msqid, <span class="type">int</span> cmd, <span class="keyword">struct</span> msqid_ds *buf)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>信号量</strong>，控制进程间访问共享资源的机制，可以用来解决进程同步和互斥的问题，防止竞态条件的发生。</p>
+</li>
+<li><p><strong>共享内存</strong>：</p>
 <ul>
-<li><strong>效率</strong>最高，允许多个进程共享同一块内存区域，没有数据复制的开销，进程可以直接读写共享内存中的数据。</li>
-<li>不过，1）需要额外的同步机制（如信号量或互斥锁）来防止并发访问问题；2）同时，共享内存的数据一旦被破坏，所有依赖于该数据的进程都会受到影响，容错性较差；3）需要注意临界变量的保护。</li>
+<li><p><strong>效率</strong>最高，允许多个进程共享同一块内存区域，没有数据复制的开销，进程可以直接读写共享内存中的数据。</p>
+</li>
+<li><p>不过，1）需要额外的同步机制（如信号量或互斥锁）来防止并发访问问题；2）同时，共享内存的数据一旦被破坏，所有依赖于该数据的进程都会受到影响，容错性较差；3）需要注意临界变量的保护。</p>
+</li>
 </ul>
-<p>（6）<strong>套接字</strong>，适用于在不同主机和不同进程之间进行通信，通常用于网络编程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建共享内存段或获取现有共享内存段的标识符</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmget</span><span class="params">(<span class="type">key_t</span> key, <span class="type">size_t</span> size, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将共享内存连接到当前进程的地址空间，返回共享内存段的首地址</span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">shmat</span><span class="params">(<span class="type">int</span> shmid, <span class="type">const</span> <span class="type">void</span> *shmaddr, <span class="type">int</span> shmflg)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将共享内存段从当前进程的地址空间中分离，即解除映射</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmdt</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *shmaddr)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对共享内存段进行控制操作，如获取信息、修改权限、删除共享内存段等</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">shmctl</span><span class="params">(<span class="type">int</span> shmid, <span class="type">int</span> cmd, <span class="keyword">struct</span> shmid_ds *buf)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>套接字</strong>，适用于在不同主机和不同进程之间进行通信，通常用于网络编程。</p>
+</li>
+</ol>
 <h3 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h3><ol>
 <li><p><strong>先来先服务 first-come first-serverd(FCFS)</strong></p>
-<p>非抢占式的调度算法，按照请求的顺序进行调度。有利于长作业，但不利于短作业，因为短作业必须一直等待前面的长作业执行完毕才能执行，而长作业又需要执行很长时间，造成了短作业等待时间过长。</p>
+<p><strong>非抢占式的调度算法，</strong>按照请求的顺序进行调度。</p>
+<p>有利于长作业，但不利于短作业，因为短作业必须一直等待前面的长作业执行完毕才能执行，而长作业又需要执行很长时间，造成了短作业等待时间过长。</p>
 </li>
 <li><p><strong>短作业优先 shortest job first(SJF)</strong></p>
-<p>非抢占式的调度算法，按估计运行时间最短的顺序进行调度。长作业有可能会饿死，处于一直等待短作业执行完毕的状态。因为如果一直有短作业到来，那么长作业永远得不到调度。</p>
+<p><strong>非抢占式的调度算法，</strong>按估计运行时间最短的顺序进行调度。</p>
+<p>长作业有可能会饿死，处于一直等待短作业执行完毕的状态。因为如果一直有短作业到来，那么长作业永远得不到调度。</p>
 </li>
 <li><p><strong>最短剩余时间优先 shortest remaining time next(SRTN)</strong></p>
-<p>最短作业优先的抢占式版本，按剩余运行时间的顺序进行调度。 当一个新的作业到达时，其整个运行时间与当前进程的剩余时间作比较。如果新的进程需要的时间更少，则挂起当前进程，运行新的进程。否则新的进程等待。</p>
+<p><strong>最短作业优先的抢占式版本</strong>，按剩余运行时间的顺序进行调度。 </p>
+<p>当一个新的作业到达时，其整个运行时间与当前进程的剩余时间作比较。如果新的进程需要的时间更少，则挂起当前进程，运行新的进程。否则新的进程等待。</p>
 </li>
 <li><p><strong>时间片轮转</strong></p>
-<p>将所有就绪进程按 FCFS 的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。</p>
-<p>当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把CPU 时间分配给队首的进程。</p>
+<p>将所有就绪进程按 FCFS 的原则排成一个队列，每次调度时，把 CPU 时间分配给队首进程，该进程可以执行一个时间片。当时间片用完时，由计时器发出时钟中断，调度程序便停止该进程的执行，并将它送往就绪队列的末尾，同时继续把CPU 时间分配给队首的进程。</p>
 <p>时间片轮转算法的效率和时间片的大小有很大关系：</p>
 <ul>
 <li><p>因为进程切换都要保存进程的信息并且载入新进程的信息，如果时间片太小，会导致进程切换得太频繁，在进程切换上就会花过多时间；</p>
@@ -1243,12 +1300,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">261k</span>
+    <span title="站点总字数">262k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:48</span>
+    <span title="站点阅读时长">15:54</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
