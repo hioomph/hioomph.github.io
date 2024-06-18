@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406131948229.png">
 <meta property="article:published_time" content="2024-06-12T09:03:47.949Z">
-<meta property="article:modified_time" content="2024-06-17T11:51:39.675Z">
+<meta property="article:modified_time" content="2024-06-18T02:01:48.302Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406131948229.png">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-17 19:51:39" itemprop="dateModified" datetime="2024-06-17T19:51:39+08:00">2024-06-17</time>
+                <time title="修改时间：2024-06-18 10:01:48" itemprop="dateModified" datetime="2024-06-18T10:01:48+08:00">2024-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -679,7 +679,7 @@
 <li>虚拟内存<strong>可以更方便地在不同进程之间共享内存</strong>。例如，多个进程可以映射到相同的物理内存，实现共享库等数据的共享，从而节约内存。</li>
 </ol>
 <h3 id="虚拟内存有没有大小的限制？"><a href="#虚拟内存有没有大小的限制？" class="headerlink" title="虚拟内存有没有大小的限制？"></a>虚拟内存有没有大小的限制？</h3><ol>
-<li><p>虚拟内存的大小受到地址线的限制：</p>
+<li><p>虚拟内存的大小<strong>受到地址线的限制</strong>：</p>
 <ul>
 <li><p><code>32</code>位系统下虚拟内存空间的大小为2^32^字节（约4GB）；</p>
 </li>
@@ -690,10 +690,7 @@
 <li><p>另外，操作系统还可以通过配置来限制每个进程能够使用的虚拟内存大小。</p>
 </li>
 </ol>
-<h3 id="虚拟内存中分页算法是为了解决什么样的问题？"><a href="#虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="虚拟内存中分页算法是为了解决什么样的问题？"></a>虚拟内存中分页算法是为了解决什么样的问题？</h3><blockquote>
-<p>解决连续长内存的分配问题。</p>
-</blockquote>
-<p>虚拟内存中的分页算法是为了解决物理内存不足的问题。它通过将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件中，来提供更大的地址空间。</p>
+<h3 id="虚拟内存中分页算法是为了解决什么样的问题？"><a href="#虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="虚拟内存中分页算法是为了解决什么样的问题？"></a>虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
 <h3 id="一个由-C-C-编译的程序的内存分布（内存模型）？"><a href="#一个由-C-C-编译的程序的内存分布（内存模型）？" class="headerlink" title="一个由 C&#x2F;C++ 编译的程序的内存分布（内存模型）？"></a>一个由 C&#x2F;C++ 编译的程序的内存分布（内存模型）？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<code>.text</code>段，<code>.rodata</code>段，<code>.data</code>段，<code>.bss</code>段，堆，内存映射区，栈，内核空间。其中，各项主要内容如下：</p>
 <p>（1）**.text段**主要存在程序编译后的机器指令；</p>
 <p>（2）**.rodata段**主要存放程序中的各种只读变量；</p>
@@ -703,25 +700,29 @@
 <p>（6）<strong>栈</strong>：由编译器自动分配释放，存放一些局部变量等；</p>
 <p>（7）<strong>内核空间</strong>：存放操作系统的一些内核数据和代码。</p>
 <h3 id="为什么要区分代码段和数据段？"><a href="#为什么要区分代码段和数据段？" class="headerlink" title="为什么要区分代码段和数据段？"></a>为什么要区分代码段和数据段？</h3><ul>
-<li><strong>访问权限控制</strong>：代码段通常设置为只读，以防止程序代码被意外或恶意修改，这可能导致程序行为不正确或系统安全受到威胁。数据段则通常需要读写权限，因为程序在运行时需要修改数据。</li>
-<li><strong>防止代码注入</strong>：通过将代码段设置为只读，可以防止恶意代码注入和执行，这是提高系统安全性的重要措施。</li>
-<li><strong>分页策略</strong>：代码段和数据段可能会采用不同的分页和交换策略。例如，代码页可能较少交换出内存，因为它们被频繁访问；而数据段的某些部分如果使用不频繁可以被交换出去以节约资源。</li>
+<li><strong>访问权限控制</strong>：<strong>代码段通常设置为只读</strong>，以防止程序代码被意外或恶意修改，这可能导致程序行为不正确或系统安全受到威胁。<strong>数据段则通常需要读写权限</strong>，因为程序在运行时需要修改数据。</li>
+<li><strong>分页策略</strong>：代码段和数据段可能会<strong>采用不同的分页和交换策略</strong>。例如，代码页可能较少交换出内存，因为它们被频繁访问；而数据段的某些部分<strong>如果使用不频繁可以被交换出去</strong>以节约资源。</li>
 </ul>
 <h3 id="什么时候用栈，什么时候用堆？"><a href="#什么时候用栈，什么时候用堆？" class="headerlink" title="什么时候用栈，什么时候用堆？"></a>什么时候用栈，什么时候用堆？</h3><ol>
-<li><p>与堆相比，栈不会导致内存碎片，分配效率高。函数调用过程中的参数，返回地址和局部变量都采取栈的形式存放，<strong>如果少量数据需要频繁的操作，那么在程序中动态申请少量栈内存会获得很好的性能提升。</strong></p>
+<li><p>与堆相比，栈不会导致内存碎片，分配效率高。函数调用过程中的参数，返回地址和局部变量都采取栈的形式存放，如果<strong>少量数据需要频繁的操作</strong>，那么在程序中动态申请少量栈内存会获得很好的性能提升。</p>
 </li>
-<li><p>堆可以申请的内存大很多，与堆相比，栈的使用没那么灵活，<strong>如果分配大量的内存空间，推荐使用堆内存。</strong></p>
+<li><p>堆可以申请的内存大很多，与堆相比，栈的使用没那么灵活，如果<strong>分配大量的内存空间</strong>，推荐使用堆内存。</p>
 </li>
 </ol>
 <h3 id="不同段上的对象的生命周期是怎样的？"><a href="#不同段上的对象的生命周期是怎样的？" class="headerlink" title="不同段上的对象的生命周期是怎样的？"></a>不同段上的对象的生命周期是怎样的？</h3><ol>
-<li><p><code>.data/.bss</code>段的生命周期和程序的生命周期一致，在程序加载到内存时被分配，程序结束时被销毁</p>
+<li><p><code>.data/.bss</code>段的生命周期<strong>和程序的生命周期一致</strong>，在程序加载到内存时被分配，程序结束时被销毁；</p>
 </li>
-<li><p>堆上的对象由程序员进行动态分配</p>
+<li><p><code>堆</code>上的对象<strong>由程序员进行动态分配</strong>；</p>
 </li>
-<li><p>栈上的对象由编译器进行分配，当离开作用域范围时被编译器销毁</p>
+<li><p><code>栈</code>上的对象由编译器进行分配，当<strong>离开作用域范围时被编译器销毁</strong>。</p>
 </li>
 </ol>
-<h3 id="如何让对象只能存在于栈-堆中？"><a href="#如何让对象只能存在于栈-堆中？" class="headerlink" title="如何让对象只能存在于栈&#x2F;堆中？"></a>如何让对象只能存在于栈&#x2F;堆中？</h3><p>如果将operator new设置为私有的，此时尝试在堆上分配内存失败，对象就会存在于栈中。<br>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会存在于堆中。</p>
+<h3 id="如何让对象只能存在于栈-堆中？"><a href="#如何让对象只能存在于栈-堆中？" class="headerlink" title="如何让对象只能存在于栈&#x2F;堆中？"></a>如何让对象只能存在于栈&#x2F;堆中？</h3><ol>
+<li><p>如果将<code>operator new</code>设置为私有的，此时尝试在堆上分配内存失败，对象就会<strong>存在于栈中</strong>。</p>
+</li>
+<li><p>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果将析构函数设置为私有的，在栈上分配内存失败，对象就会<strong>存在于堆中</strong>。</p>
+</li>
+</ol>
 <h3 id="new-和-malloc-的区别？"><a href="#new-和-malloc-的区别？" class="headerlink" title="new 和 malloc 的区别？"></a>new 和 malloc 的区别？</h3><p>主要包含以下区别：<br>（1）new是c++特有的操作符，只能在C++中使用；malloc是C中的函数，但可以同时在c&#x2F;c++中使用。</p>
 <p>（2）malloc在使用时需要指定分配内存的大小，如malloc(sizeof(int))，但new的使用则比较简洁，如new int。</p>
 <p>（3）malloc分配的内存是未定义的，而new在分配内存时还会调用构造函数进行初始化。</p>
@@ -1305,7 +1306,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:54</span>
+    <span title="站点阅读时长">15:53</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
