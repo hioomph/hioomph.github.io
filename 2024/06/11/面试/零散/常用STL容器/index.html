@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111952632.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404242029774.png">
 <meta property="article:published_time" content="2024-06-11T07:54:29.864Z">
-<meta property="article:modified_time" content="2024-06-17T11:54:33.429Z">
+<meta property="article:modified_time" content="2024-06-18T06:45:35.157Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111938752.png">
@@ -232,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-17 19:54:33" itemprop="dateModified" datetime="2024-06-17T19:54:33+08:00">2024-06-17</time>
+                <time title="修改时间：2024-06-18 14:45:35" itemprop="dateModified" datetime="2024-06-18T14:45:35+08:00">2024-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,14 +254,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>13 分钟</span>
+              <span>15 分钟</span>
             </span>
 
         </div>
@@ -400,6 +400,32 @@
 </blockquote>
 <h1 id="std-queue"><a href="#std-queue" class="headerlink" title="std::queue"></a>std::queue</h1><h2 id="1、基本用法-4"><a href="#1、基本用法-4" class="headerlink" title="1、基本用法"></a>1、基本用法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">queue&lt;<span class="type">double</span>&gt; d;</span><br><span class="line">queue&lt;node&gt; n;  <span class="comment">// node是一个结构体</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">front</span>();	<span class="comment">// 返回q的第一个元素</span></span><br><span class="line">q.<span class="built_in">back</span>();	<span class="comment">// 返回q的末尾元素</span></span><br></pre></td></tr></table></figure>
 
+<h1 id="std-priority-queue"><a href="#std-priority-queue" class="headerlink" title="std::priority_queue"></a>std::priority_queue</h1><h2 id="1、基本用法-5"><a href="#1、基本用法-5" class="headerlink" title="1、基本用法"></a>1、基本用法</h2><h3 id="（1）声明"><a href="#（1）声明" class="headerlink" title="（1）声明"></a>（1）声明</h3>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Container</span> = vector&lt;T&gt;, <span class="keyword">class</span> Compare = less&lt;<span class="keyword">typename</span> Container::value_type&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> priority_queue;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>T</code>：优先队列中的元素类型；</li>
+<li><code>Container</code>：底层容器的类型；</li>
+<li><code>Compare</code>：比较函数对象，决定了优先队列的排序方式。</li>
+</ul>
+<h3 id="（2）基本操作"><a href="#（2）基本操作" class="headerlink" title="（2）基本操作"></a>（2）基本操作</h3>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">top</span>();	<span class="comment">// 返回q的第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）排序实现"><a href="#（3）排序实现" class="headerlink" title="（3）排序实现"></a>（3）排序实现</h3><ol>
+<li><p><code>less</code>和<code>greater</code>优先队列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt; p;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">// less&lt;int&gt;:14 12 10 8 6（大顶堆）</span></span><br><span class="line"><span class="comment">// greater&lt;int&gt;:6 8 10 12 14（小顶堆）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义仿函数如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义仿函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareByAge</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.age &gt; p2.age;  <span class="comment">// 按照年龄从小到大排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="2、理论相关-1"><a href="#2、理论相关-1" class="headerlink" title="2、理论相关"></a>2、理论相关</h2><h3 id="（1）概念"><a href="#（1）概念" class="headerlink" title="（1）概念"></a>（1）概念</h3><p>优先级队列（<code>priority_queue</code>）是C++标准库中的一个<strong>容器适配器（container adapter）</strong>，其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆<strong>（heap）</strong>数据结构。</p>
+<p>定义在<code>&lt;queue&gt;</code>头文件中。</p>
+<p>默认情况下，<code>priority_queue</code>使用<code>std::less</code>作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+<h3 id="（2）特点"><a href="#（2）特点" class="headerlink" title="（2）特点"></a>（2）特点</h3><ul>
+<li><strong>优先级排序</strong>：priority_queue中的元素按照一定的优先级进行排序。默认情况下，元素的优先级按照从大到小的顺序排列，也可以通过自定义的比较函数来指定不同的排序方式。</li>
+<li><strong>自动排序</strong>：在插入元素时，priority_queue会根据元素的优先级自动进行排序。每次插入新元素时，都会将新元素放置在正确的位置上。</li>
+<li><strong>取出优先级最高元素</strong>：priority_queue提供了一种方便的方式来取出优先级最高的元素。使用top()函数可以访问优先级最高的元素，而使用pop()函数可以将该元素从队列中移除。</li>
+<li><strong>底层实现采用堆</strong>：priority_queue通常使用堆（heap）数据结构来实现。堆是一种具有特定性质的二叉树，可以高效地插入新元素和取出优先级最高的元素。</li>
+<li><strong>动态大小</strong>：priority_queue的大小可以根据需要进行动态调整。可以随时插入新元素和删除已有元素，并在必要时自动重新排序。</li>
+</ul>
 
     </div>
 
@@ -480,7 +506,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#std-vector"><span class="nav-text">std::vector</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="nav-text">2、内部实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81vector%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-text">3、vector的扩容机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-text">（1）扩容机制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%95%88%E7%8E%87%E9%99%8D%E4%BD%8E"><span class="nav-text">（2）如何避免动态扩容，导致效率降低</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A91-5%E5%80%8D%E6%88%96%E8%80%852%E5%80%8D%E6%96%B9%E5%BC%8F%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF3%E5%80%8D%E3%80%814%E5%80%8D"><span class="nav-text">（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Windows%E5%92%8CLinux%E7%9A%84%E6%89%A9%E5%AE%B9%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">（4）Windows和Linux的扩容底层原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-unordered-set"><span class="nav-text">std::unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-1"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">2、内部实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-unordered-map"><span class="nav-text">std::unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-2"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-2"><span class="nav-text">2、内部实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-stack"><span class="nav-text">std::stack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-3"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E7%9B%B8%E5%85%B3"><span class="nav-text">2、理论相关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-queue"><span class="nav-text">std::queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-4"><span class="nav-text">1、基本用法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#std-vector"><span class="nav-text">std::vector</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="nav-text">2、内部实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81vector%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-text">3、vector的扩容机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-text">（1）扩容机制原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%95%88%E7%8E%87%E9%99%8D%E4%BD%8E"><span class="nav-text">（2）如何避免动态扩容，导致效率降低</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A91-5%E5%80%8D%E6%88%96%E8%80%852%E5%80%8D%E6%96%B9%E5%BC%8F%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF3%E5%80%8D%E3%80%814%E5%80%8D"><span class="nav-text">（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Windows%E5%92%8CLinux%E7%9A%84%E6%89%A9%E5%AE%B9%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">（4）Windows和Linux的扩容底层原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-unordered-set"><span class="nav-text">std::unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-1"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">2、内部实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-unordered-map"><span class="nav-text">std::unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-2"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-2"><span class="nav-text">2、内部实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-stack"><span class="nav-text">std::stack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-3"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E7%9B%B8%E5%85%B3"><span class="nav-text">2、理论相关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-queue"><span class="nav-text">std::queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-4"><span class="nav-text">1、基本用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#std-priority-queue"><span class="nav-text">std::priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-5"><span class="nav-text">1、基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%A3%B0%E6%98%8E"><span class="nav-text">（1）声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">（2）基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-text">（3）排序实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E7%9B%B8%E5%85%B3-1"><span class="nav-text">2、理论相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="nav-text">（1）概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%89%B9%E7%82%B9"><span class="nav-text">（2）特点</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -496,14 +522,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -539,12 +565,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">262k</span>
+    <span title="站点总字数">264k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:53</span>
+    <span title="站点阅读时长">16:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
