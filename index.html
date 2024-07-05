@@ -3839,7 +3839,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-04 21:27:35" itemprop="dateModified" datetime="2024-07-04T21:27:35+08:00">2024-07-04</time>
+                <time title="修改时间：2024-07-05 10:35:31" itemprop="dateModified" datetime="2024-07-05T10:35:31+08:00">2024-07-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -3868,7 +3868,7 @@ add $4, %esp：
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:09</span>
+              <span>2:08</span>
             </span>
 
         </div>
@@ -4259,7 +4259,7 @@ add $4, %esp：
 </li>
 <li><p><strong>多级反馈队列</strong></p>
 <p>一个进程需要执行 100 个时间片，如果采用时间片轮转调度算法，那么需要交换 100 次。</p>
-<p>多级队列是为这种需要连续执行多个时间片的进程考虑，它设置了多个队列，每个队列时间片大小都不同，例如1,2,4,8..。进程在第一个队列没执行完，就会被移到下一个队列。</p>
+<p>多级队列是为这种需要连续执行多个时间片的进程考虑，它设置了多个队列，每个队列时间片大小都不同，例如 1,2,4,8..。进程在第一个队列没执行完，就会被移到下一个队列。</p>
 <p>这种方式下，之前的进程只需要交换7次。每个队列优先权也不同，最上面的优先权最高。因此只有上一个队列没有进程在排队，才能调度当前队烈上的进程。</p>
 <p>可以将这种调度算法看成是时间片轮转调度算法和优先级调度算法的结合。</p>
 </li>
@@ -4274,32 +4274,26 @@ add $4, %esp：
 <h3 id="33、信号量和互斥锁解决父子线程同时阻塞的区别？"><a href="#33、信号量和互斥锁解决父子线程同时阻塞的区别？" class="headerlink" title="33、信号量和互斥锁解决父子线程同时阻塞的区别？"></a>33、信号量和互斥锁解决父子线程同时阻塞的区别？</h3><p>假设有一个场景，其中父线程和子线程需要按特定顺序访问某个资源（例如，父线程需要等待子线程完成某个任务后才能继续执行）。</p>
 <ul>
 <li><strong>使用互斥锁</strong>：如果使用互斥锁，需要<strong>配合条件变量</strong>来实现这种顺序控制。<strong>互斥锁本身只能保证互斥，不能控制线程之间的执行顺序</strong>。父线程需要在条件变量上等待一个特定条件（通常由子线程设置）。</li>
-<li><strong>使用信号量</strong>：信号量可以更直接地控制执行顺序。父线程等待子线程释放某个信号后才能继续执行，这样就实现了对资源的访问顺序。</li>
+<li><strong>使用信号量</strong>：信号量可以更直接地控制执行顺序。父线程等待子线程释放某个信号后才能继续执行，这样就控制了对资源的访问顺序。</li>
 </ul>
-<h3 id="34、windows-下-thread-create-会有什么问题？"><a href="#34、windows-下-thread-create-会有什么问题？" class="headerlink" title="34、windows 下 thread_create 会有什么问题？"></a>34、windows 下 thread_create 会有什么问题？</h3><h3 id="35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT"><a href="#35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT" class="headerlink" title="35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?"></a>35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?</h3><p><strong>SIGALRM</strong>：时钟定时器超时信号，通常用于定时操作。</p>
+<h3 id="34、windows-下-thread-create-会有什么问题？"><a href="#34、windows-下-thread-create-会有什么问题？" class="headerlink" title="34、windows 下 thread_create 会有什么问题？"></a>34、windows 下 thread_create 会有什么问题？</h3><p>？</p>
+<h3 id="35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT"><a href="#35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT" class="headerlink" title="35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?"></a>35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?</h3><p><strong>SIGALRM</strong>：时钟定时器超时信号，通常用于定时操作。</p>
 <p><strong>SIGSEGV</strong>：非法内存访问信号，通常由无效的指针或越界访问引发。</p>
 <p><strong>SIGINT</strong>：中断信号，通常由用户通过 Ctrl+C 发出，用于中断程序执行。</p>
 <h3 id="36、Ctrl-C-后发生了什么？"><a href="#36、Ctrl-C-后发生了什么？" class="headerlink" title="36、Ctrl+C 后发生了什么？"></a>36、Ctrl+C 后发生了什么？</h3><p>按下 Ctrl+C 后，会向前台运行的进程发送 SIGINT 信号。这个信号通常用于中断和终止正在运行的程序。如果程序捕获并处理了 SIGINT 信号，它可以执行清理操作或选择忽略信号；否则，默认行为是终止程序。</p>
-<h3 id="37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，在处理信号时比较灵活，它可以完成以下几个主要的功能：</p>
+<h3 id="37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，主要有以下功能：</p>
 <ol>
 <li><strong>设置信号处理函数</strong>：可以用于指定一个函数，用来处理特定信号发生时的行为。</li>
 <li><strong>指定信号的处理方式</strong>：可以指定信号的处理方式，比如忽略信号、执行默认操作、或者调用指定的处理函数。</li>
 <li><strong>检查和修改信号的屏蔽集</strong>：可以检查当前对信号的屏蔽状态，也可以修改进程对信号的屏蔽集。</li>
 </ol>
-<p><strong>屏蔽集（Signal Mask）</strong> 是一个用来管理信号处理的机制，它决定了在特定时间点一个进程可以接收哪些信号。当信号被屏蔽时，进程在收到该信号时不会立即处理，而是被加入到未决信号集中，直到信号被解除屏蔽后才会处理。</p>
-<p>屏蔽集可以通过 <code>sigprocmask</code> 系统调用来设置和修改，主要有以下几个操作：</p>
-<ul>
-<li><strong>阻塞信号</strong>：将某些信号添加到屏蔽集中，使得进程在屏蔽集中的信号处于阻塞状态，不会被处理。</li>
-<li><strong>解除信号阻塞</strong>：从屏蔽集中移除某些信号，使得进程可以处理这些信号。</li>
-<li><strong>查询当前屏蔽集</strong>：获取当前进程的信号屏蔽状态。</li>
-</ul>
-<p>屏蔽集在多线程环境中尤为重要，可以帮助控制每个线程对信号的响应方式，从而避免因信号处理不当而导致的竞态条件或者其他问题。</p>
-<h3 id="38、线程崩溃，进程一定会崩溃吗？"><a href="#38、线程崩溃，进程一定会崩溃吗？" class="headerlink" title="38、线程崩溃，进程一定会崩溃吗？"></a>38、线程崩溃，进程一定会崩溃吗？</h3><p>一般来说，如果线程是因为非法访问内存引起的崩溃，那么进程肯定会崩溃，为什么系统要让进程崩溃呢，这主要是因为在进程中，<strong>各个线程的地址空间是共享的</strong>，既然是共享，那么某个线程对地址的非法访问就会导致内存的不确定性，进而可能会影响到其他线程，这种操作是危险的，操作系统会认为这很可能导致一系列严重的后果，于是干脆让整个进程崩溃。</p>
+<p><strong>屏蔽集</strong> 是一个用来管理信号处理的机制，它决定了<strong>在特定时间点一个进程可以接收哪些信号</strong>。当信号被屏蔽时，进程在收到该信号时不会立即处理，而是被加入到<strong>未决信号集</strong>中，直到信号被解除屏蔽后才会处理。屏蔽集可以通过 <code>sigprocmask</code> 系统调用来设置和修改。</p>
+<h3 id="38、线程崩溃，进程一定会崩溃吗？"><a href="#38、线程崩溃，进程一定会崩溃吗？" class="headerlink" title="38、线程崩溃，进程一定会崩溃吗？"></a>38、线程崩溃，进程一定会崩溃吗？</h3><p>一般来说，如果线程是因为非法访问内存引起的崩溃，那么进程肯定会崩溃。因为在进程中，<strong>各个线程的地址空间是共享的</strong>，既然是共享，那么某个线程对地址的非法访问就会导致内存的不确定性，进而可能会影响到其他线程，这种操作是危险的，操作系统会认为这很可能导致一系列严重的后果，于是干脆让整个进程崩溃。</p>
 <h2 id="二、内存模型-虚拟内存"><a href="#二、内存模型-虚拟内存" class="headerlink" title="二、内存模型&#x2F;虚拟内存"></a>二、内存模型&#x2F;虚拟内存</h2><h3 id="39、什么是虚拟内存？"><a href="#39、什么是虚拟内存？" class="headerlink" title="39、什么是虚拟内存？"></a>39、什么是虚拟内存？</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301943905.png" alt="img" style="zoom: 67%;" />
 
-<h3 id="40、为什么操作系统要使用虚拟内存？"><a href="#40、为什么操作系统要使用虚拟内存？" class="headerlink" title="40、为什么操作系统要使用虚拟内存？"></a>40、为什么操作系统要使用虚拟内存？</h3><ol>
-<li>第一，虚拟内存可以<strong>使得进程对运行内存超过物理内存大小</strong>，因为程序运行符合局部性原理，CPU 访问内存会有很明显的重复访问的倾向性，对于那些没有被经常使用到的内存，我们可以把它换出到物理内存之外，比如硬盘上的 swap 区域。</li>
+<h3 id="【-】40、为什么操作系统要使用虚拟内存？"><a href="#【-】40、为什么操作系统要使用虚拟内存？" class="headerlink" title="【*】40、为什么操作系统要使用虚拟内存？"></a>【*】40、为什么操作系统要使用虚拟内存？</h3><ol>
+<li>第一，虚拟内存可以<strong>使得进程的运行内存超过物理内存大小</strong>，因为程序运行符合局部性原理，CPU 访问内存会有很明显的重复访问的倾向性，对于那些没有被经常使用到的内存，我们可以把它换出到物理内存之外，比如硬盘上的 swap 区域。</li>
 <li>第二，由于每个进程都有自己的页表，所以每个进程的虚拟内存空间就是相互独立的。进程也没有办法访问其他进程的页表，所以这些页表是私有的，这就<strong>解决了多进程之间地址冲突的问题</strong>。</li>
 <li>第三，页表里的页表项中除了物理地址之外，还有一些标记属性的比特，比如控制一个页的读写权限，标记该页是否存在等。在内存访问方面，操作系统<strong>提供了更好的安全性</strong>。</li>
 </ol>
@@ -7608,7 +7602,7 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:23</span>
+    <span title="站点阅读时长">17:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

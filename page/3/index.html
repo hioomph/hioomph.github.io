@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-04 20:48:33" itemprop="dateModified" datetime="2024-07-04T20:48:33+08:00">2024-07-04</time>
+                <time title="修改时间：2024-07-05 09:09:13" itemprop="dateModified" datetime="2024-07-05T09:09:13+08:00">2024-07-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -473,21 +473,23 @@
 
 <h3 id="33、使用-lambda-表达式，捕获局部变量时有什么规则？"><a href="#33、使用-lambda-表达式，捕获局部变量时有什么规则？" class="headerlink" title="33、使用 lambda 表达式，捕获局部变量时有什么规则？"></a>33、使用 lambda 表达式，捕获局部变量时有什么规则？</h3><p>Lambada表达式的捕获规则主要有：<strong>值捕获</strong>，<strong>引用捕获</strong>，<strong>隐式捕获</strong>和<strong>显示捕获</strong>。</p>
 <ol>
-<li><strong>值捕获</strong>：使用值捕获时，lambda 表达式会复制外部作用域的局部变量，并在 lambda 表达式内部使用它们的副本。这意味着捕获的变量在 lambda 表达式创建时就被复制，lambda 表达式内部的操作不会影响原始变量的值。</li>
-<li><strong>引用捕获</strong>：使用引用捕获时，lambda 表达式会获取外部作用域的局部变量的引用。这意味着 lambda 表达式内部对变量的操作会影响到原始变量。</li>
+<li><strong>值捕获</strong>指复制外部作用域的局部变量，并在 lambda 表达式内部使用它们的副本，表达式内部的操作不会影响原始变量的值。</li>
+<li><strong>引用捕获</strong>指获取外部作用域的局部变量的引用，表达式内部对变量的操作会影响到原始变量。</li>
 <li><strong>隐式捕获</strong>：通过在捕获列表中使用 &#x3D; 或 &amp; 符号，可以实现隐式捕获。使用 &#x3D; 捕获外部作用域的所有变量的副本，而使用 &amp; 捕获所有变量的引用。</li>
 <li><strong>显式捕获</strong>：在捕获列表中，可以指定要捕获的特定变量，并且可以同时使用值捕获和引用捕获。</li>
 </ol>
-<h3 id="34、virtual-和-override-的区别和应用场景？"><a href="#34、virtual-和-override-的区别和应用场景？" class="headerlink" title="34、virtual 和 override 的区别和应用场景？"></a>34、virtual 和 override 的区别和应用场景？</h3><p>(1)virtual 用于声明虚函数，即在基类中声明一个函数为虚函数，以便在派生类中进行覆盖或重写。</p>
-<p>(2)override 用于显式地告诉编辑器，当前函数是基类中虚函数的重写版本。</p>
-<h3 id="35、volatile-关键字的作用？应用场景如何？"><a href="#35、volatile-关键字的作用？应用场景如何？" class="headerlink" title="35、volatile 关键字的作用？应用场景如何？"></a>35、volatile 关键字的作用？应用场景如何？</h3><p>使用<code>volatile</code>关键字则提醒编译器它后面所定义的变量随时都有可能改变，因此编译后的程序每次需要存储或读取这个变量的时候，告诉编译器对该变量不做优化，而总是重新从它所在的内存读取数据，即使它前面的指令刚刚从该处读取过数据，而且读取的数据立刻被保存。</p>
+<h3 id="34、virtual-和-override-的区别和应用场景？"><a href="#34、virtual-和-override-的区别和应用场景？" class="headerlink" title="34、virtual 和 override 的区别和应用场景？"></a>34、virtual 和 override 的区别和应用场景？</h3><ol>
+<li><code>virtual</code> 用于声明虚函数，即在基类中声明一个函数为虚函数，以便在派生类中进行覆盖或重写。</li>
+<li><code>override</code> 用于显式地告诉编辑器，当前函数是基类中虚函数的重写版本。</li>
+</ol>
+<h3 id="35、volatile-关键字的作用？应用场景如何？"><a href="#35、volatile-关键字的作用？应用场景如何？" class="headerlink" title="35、volatile 关键字的作用？应用场景如何？"></a>35、volatile 关键字的作用？应用场景如何？</h3><p>使用<code>volatile</code>关键字是为了提醒编译器它后面所定义的变量随时都有可能改变，因此编译后的程序每次需要存储或读取这个变量的时候，告诉编译器对该变量不做优化，而总是重新从它所在的内存读取数据，而且读取的数据立刻被保存。</p>
 <p><code>volatile</code>有以下应用场景：</p>
 <p><strong>(1)中断服务程序中修改的供其它程序检测的变量，需要加 volatile</strong></p>
 <p>当变量在触发某中断程序后修改，而编译器判断主函数里面没有修改该变量，因此可能只执行一次从内存到某寄存器的读操作，而后每次只会从该寄存器中读取变量副本，使得中断程序的操作被短路。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">     <span class="keyword">if</span> (i) &#123; dosomething();&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Interrupt service routine. */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">ISR_2</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">      i=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>(2)多任务环境下各任务间共享的标志，应该加 volatile</strong></p>
-<p>在本次线程内，当读取一个变量时，为提高存取速度，编译器优化时可能会先把变量读取到一个寄存器中，之后再取变量值时，就直接从寄存器中取值。当变量值在本线程里改变时，会同时把变量的新值copy到该寄存器中，以便保持一致。此时，当变量因其它线程改变了值时，该寄存器的值不会改变，从而造成应用程序读取的值和实际的变量值不一致。</p>
+<p>在本次线程内，当读取一个变量时，为提高存取速度，编译器优化时可能会先把变量读取到一个寄存器中，之后再取变量值时，就直接从寄存器中取值。当变量值在本线程里改变时，会同时把变量的新值 copy 到该寄存器中，以便保持一致。此时，当变量因其它线程改变了值时，该寄存器的值不会改变，从而造成应用程序读取的值和实际的变量值不一致。</p>
 <p><strong>(3)存储器映射的硬件寄存器通常也要加 volatile，因为每次对它的读写都可能有不同意义</strong></p>
 <p>例如，在做按键检测时是如下流程：</p>
 <ul>
@@ -495,26 +497,26 @@
 <li>不断地去访问 GPIO 电平标志寄存器(或者是一个寄存器的标志位)；</li>
 <li>根据寄存器值的某个二进制位确定当前引脚电平</li>
 </ul>
-<p>硬件寄存器上的值的是和底层电路相关的，硬件寄存器的值会影响电路，电路也会反过来影响硬件寄存器的值。所以在这种情况下，编译器更不应该拷贝副本，而应该每次读写都从内存中读写，保证数据正确，声明成volatile可以防止出现数据出错问题。</p>
+<p>硬件寄存器上的值的是和底层电路相关的，硬件寄存器的值会影响电路，电路也会反过来影响硬件寄存器的值。所以在这种情况下，编译器更不应该拷贝副本，而应该每次读写都从内存中读写，保证数据正确，声明成 volatile 可以防止出现数据出错问题。</p>
 <p>假设要对一个设备进行初始化，此设备的某一个寄存器为 0xff800000：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>  *output = (<span class="type">unsigned</span>  <span class="type">int</span> *)<span class="number">0xff800000</span>;<span class="comment">//定义一个IO端口；</span></span><br><span class="line"><span class="type">int</span>   <span class="title function_">init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="type">int</span> i;</span><br><span class="line">      <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt; <span class="number">10</span>;i++)</span><br><span class="line">     &#123;</span><br><span class="line">      *output = i;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>经过编译器优化后，编译器认为前面循环半天都是废话，对最后的结果毫无影响，因为最终只是将output这个指针赋值为9，所以编译器最后给你编译编译的代码结果相当于：</p>
+<p>经过编译器优化后，编译器认为前面循环半天都是废话，对最后的结果毫无影响，因为最终只是将 output 这个指针赋值为 9，所以编译器最后给你编译编译的代码结果相当于：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>  <span class="title function_">init</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">      *output = <span class="number">9</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="36、sizeof-和-strlen-之间的区别是什么？"><a href="#36、sizeof-和-strlen-之间的区别是什么？" class="headerlink" title="36、sizeof 和 strlen 之间的区别是什么？"></a>36、sizeof 和 strlen 之间的区别是什么？</h3><p>(1)sizeof 是一个运算符而不是函数，用于获取指定类型或变量在内存中占用的字节数，在编译时进行计算，不会对实际的内存内容进行操作，返回类型是 <code>size_t</code>。</p>
-<p>(2)strlen 是一个函数，用于获取以 null 结尾的 C 风格字符串的长度，即字符串中有效字符的数量，不包含结尾的null字符。在运行时进行遍历计算，返回类型是 <code>size_t</code>。</p>
 <blockquote>
 <ul>
 <li>下面的函数有什么错误？</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> *ptr)</span></span><br><span class="line">&gt;&#123;</span><br><span class="line">   <span class="keyword">return</span> *ptr * *ptr;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> *ptr)</span></span><br><span class="line">&gt;&#123;</span><br><span class="line">  <span class="keyword">return</span> *ptr * *ptr;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>该程序的目的是用来返指针<code>*ptr</code>指向值的平方，但是，由于<code>*ptr</code>指向一个volatile型参数，编译器将产生类似下面的代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> *ptr)</span></span><br><span class="line">&gt;&#123;</span><br><span class="line">   <span class="type">int</span> a，b;</span><br><span class="line">   a = *ptr;</span><br><span class="line">   b = *ptr;</span><br><span class="line">   <span class="keyword">return</span> a * b;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+<p>该程序的目的是用来返指针<code>*ptr</code>指向值的平方，但是，由于<code>*ptr</code>指向一个 volatile 型参数，编译器将产生类似下面的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="type">int</span> <span class="title function_">square</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span> *ptr)</span></span><br><span class="line">&gt;&#123;</span><br><span class="line">  <span class="type">int</span> a，b;</span><br><span class="line">  a = *ptr;</span><br><span class="line">  b = *ptr;</span><br><span class="line">  <span class="keyword">return</span> a * b;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>由于<code>*ptr</code>的值可能被意想不到地该变，因此a和b可能是不同的。结果，这段代码可能返不是你所期望的平方值</p>
+<p>由于<code>*ptr</code>的值可能被意想不到地该变，因此 a 和 b 可能是不同的。结果，这段代码可能返不是你所期望的平方值。</p>
 </blockquote>
+<h3 id="36、sizeof-和-strlen-之间的区别是什么？"><a href="#36、sizeof-和-strlen-之间的区别是什么？" class="headerlink" title="36、sizeof 和 strlen 之间的区别是什么？"></a>36、sizeof 和 strlen 之间的区别是什么？</h3><p>(1)<code>sizeof</code> 是一个运算符而不是函数，用于获取指定类型或变量在内存中占用的字节数，在编译时进行计算，不会对实际的内存内容进行操作，返回类型是 <code>size_t</code>。</p>
+<p>(2)<code>strlen</code> 是一个函数，用于获取以 <code>null</code> 结尾的 <code>C</code> 风格字符串的长度，即字符串中有效字符的数量，不包含结尾的 <code>null</code> 字符。在运行时进行遍历计算，返回类型是 <code>size_t</code>。</p>
 <h3 id="37、scanf-和-std-cin-有什么区别？"><a href="#37、scanf-和-std-cin-有什么区别？" class="headerlink" title="37、scanf() 和 std::cin 有什么区别？"></a>37、scanf() 和 std::cin 有什么区别？</h3><p>(1)<code>scanf()</code> 是 C 标准库中的一个函数，用于<strong>从标准输入(通常是键盘)读取格式化输入</strong>；<code>std::cin</code> 是 C++ 标准库中的一个对象，用于<strong>从标准输入流读取数据，可以链式输入多个变量</strong>，格式更加灵活；同时<strong>自动跳过空白字符</strong>(如空格、换行符等)。</p>
 <p>(2)<code>scanf()</code> <strong>对输入的类型不进行类型检查</strong>，可能会导致类型不匹配或溢出等问题，相对于 <code>std::cin</code>通常更高效，因为它直接操作输入缓冲区；<code>std::cin</code> 是 C+ 中的<strong>类型安全输入方式</strong>；</p>
 <h3 id="38、struct-和-class-的区别是什么？"><a href="#38、struct-和-class-的区别是什么？" class="headerlink" title="38、struct 和 class 的区别是什么？"></a>38、struct 和 class 的区别是什么？</h3><p>struct 和 class 是用于定义自定义数据类型的关键字。其中：</p>
@@ -2357,7 +2359,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:23</span>
+    <span title="站点阅读时长">17:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
