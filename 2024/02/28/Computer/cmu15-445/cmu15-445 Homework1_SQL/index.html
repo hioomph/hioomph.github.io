@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Q112345678910sqlite&gt; SELECT CategoryName FROM Category ORDER BY CategoryName;BeveragesCondimentsConfectionsDairy ProductsGrains&#x2F;CerealsMeat&#x2F;PoultryProduceSeafood">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cmu15-445 Homework1_SQL (Spring 2023)">
+<meta property="og:url" content="http://example.com/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="Q112345678910sqlite&gt; SELECT CategoryName FROM Category ORDER BY CategoryName;BeveragesCondimentsConfectionsDairy ProductsGrains&#x2F;CerealsMeat&#x2F;PoultryProduceSeafood">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-28T02:43:09.375Z">
+<meta property="article:modified_time" content="2024-07-05T02:42:51.907Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>cmu15-445 Homework1_SQL (Spring 2023) | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cmu15-445 Homework1_SQL (Spring 2023)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-28 10:43:09" itemprop="dateCreated datePublished" datetime="2024-02-28T10:43:09+08:00">2024-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-05 10:42:51" itemprop="dateModified" datetime="2024-07-05T10:42:51+08:00">2024-07-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span>  ShipName <span class="keyword">LIKE</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante</span><br><span class="line">HILARION<span class="operator">-</span>Abastos</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers</span><br><span class="line">LILA<span class="operator">-</span>Supermercado</span><br><span class="line">LINO<span class="operator">-</span>Delicateses</span><br><span class="line">QUICK<span class="operator">-</span>Stop</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets</span><br><span class="line"></span><br><span class="line">DETAILS:</span><br><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> ShipName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>) <span class="keyword">AS</span> formatted_res</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ShipName <span class="keyword">like</span> <span class="string">&#x27;%-%&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> ShipName;</span><br><span class="line"></span><br><span class="line">Bottom<span class="operator">-</span>Dollar Markets<span class="operator">|</span>Bottom</span><br><span class="line">Chop<span class="operator">-</span>suey Chinese<span class="operator">|</span>Chop</span><br><span class="line">GROSELLA<span class="operator">-</span>Restaurante<span class="operator">|</span>GROSELLA</span><br><span class="line">HILARION<span class="operator">-</span>Abastos<span class="operator">|</span>HILARION</span><br><span class="line">Hungry Owl <span class="keyword">All</span><span class="operator">-</span>Night Grocers<span class="operator">|</span>Hungry Owl <span class="keyword">All</span></span><br><span class="line">LILA<span class="operator">-</span>Supermercado<span class="operator">|</span>LILA</span><br><span class="line">LINO<span class="operator">-</span>Delicateses<span class="operator">|</span>LINO</span><br><span class="line">QUICK<span class="operator">-</span>Stop<span class="operator">|</span>QUICK</span><br><span class="line">Save<span class="operator">-</span>a<span class="operator">-</span>lot Markets<span class="operator">|</span>Save</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>)：该函数找到在 ShipName 字符串中连字符（<span class="string">&#x27;-&#x27;</span>）的位置</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> SUBSTR(ShipName, <span class="number">1</span>, INSTR(ShipName, <span class="string">&#x27;-&#x27;</span>) <span class="operator">-</span> <span class="number">1</span>)：该 SUBSTR 函数从 ShipName 字符串的开头（位置<span class="number">1</span>）提取子字符串，直到连字符的位置减<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> ShipCountry <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">CASE</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">WHEN</span> ShipCountry <span class="keyword">IN</span> (<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;Mexico&#x27;</span>, <span class="string">&#x27;Canada&#x27;</span>) <span class="keyword">THEN</span> <span class="string">&#x27;NorthAmerica&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span>   <span class="keyword">ELSE</span> <span class="string">&#x27;OtherPlace&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">END</span> <span class="keyword">AS</span> Region</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> <span class="string">&#x27;Order&#x27;</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> Id<span class="operator">&gt;=</span><span class="number">15445</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Id</span><br><span class="line">   ...<span class="operator">&gt;</span> LIMIT <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="number">15445</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15446</span><span class="operator">|</span>Italy<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15447</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15448</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15449</span><span class="operator">|</span>Portugal<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15450</span><span class="operator">|</span>Venezuela<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15451</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15452</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15453</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15454</span><span class="operator">|</span>Canada<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15455</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15456</span><span class="operator">|</span>France<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15457</span><span class="operator">|</span>Mexico<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15458</span><span class="operator">|</span>USA<span class="operator">|</span>NorthAmerica</span><br><span class="line"><span class="number">15459</span><span class="operator">|</span>Germany<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15460</span><span class="operator">|</span>Argentina<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15461</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15462</span><span class="operator">|</span>Austria<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15463</span><span class="operator">|</span>Finland<span class="operator">|</span>OtherPlace</span><br><span class="line"><span class="number">15464</span><span class="operator">|</span>Brazil<span class="operator">|</span>OtherPlace</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> s.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span></span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(<span class="built_in">SUM</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> o.ShippedDate <span class="operator">&gt;</span> o.RequiredDate <span class="keyword">THEN</span> <span class="number">1</span> <span class="keyword">ELSE</span> <span class="number">0</span> <span class="keyword">END</span>) <span class="operator">*</span> <span class="number">100.0</span> <span class="operator">/</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>), <span class="number">2</span>) <span class="keyword">AS</span> Percentage</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Shipper <span class="keyword">as</span> s</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] <span class="keyword">as</span> o <span class="keyword">ON</span> s.Id <span class="operator">=</span> o.ShipVia</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> s.CompanyName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> Percentage <span class="keyword">DESC</span>; </span><br><span class="line"></span><br><span class="line">United Package<span class="operator">|</span><span class="number">23.44</span></span><br><span class="line">Speedy Express<span class="operator">|</span><span class="number">23.46</span></span><br><span class="line">Federal Shipping<span class="operator">|</span><span class="number">23.61</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span> a.CategoryName,</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">COUNT</span>(a.Id) <span class="keyword">AS</span> TotalCategoryCount,</span><br><span class="line">   ...<span class="operator">&gt;</span> ROUND(((<span class="keyword">SELECT</span> <span class="built_in">SUM</span>(UnitPrice) <span class="keyword">FROM</span> Category b, Product c <span class="keyword">WHERE</span> b.Id <span class="operator">=</span> c.CategoryId <span class="keyword">AND</span> b.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) <span class="operator">/</span> ((<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> Category d, Product e <span class="keyword">WHERE</span> d.Id <span class="operator">=</span> e.CategoryId <span class="keyword">AND</span> d.CategoryName <span class="operator">=</span> a.CategoryName) <span class="operator">*</span> <span class="number">1.0</span>) , <span class="number">2</span>),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MIN</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">MAX</span>(f.UnitPrice),</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="built_in">SUM</span>(f.UnitsOnOrder)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> Category a, Product f</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> f.CategoryId</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">GROUP</span> <span class="keyword">BY</span> a.CategoryName</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> a.Id <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">Beverages<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">37.98</span><span class="operator">|</span><span class="number">4.5</span><span class="operator">|</span><span class="number">263.5</span><span class="operator">|</span><span class="number">60</span></span><br><span class="line">Condiments<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">23.06</span><span class="operator">|</span><span class="number">10</span><span class="operator">|</span><span class="number">43.9</span><span class="operator">|</span><span class="number">170</span></span><br><span class="line">Confections<span class="operator">|</span><span class="number">13</span><span class="operator">|</span><span class="number">25.16</span><span class="operator">|</span><span class="number">9.2</span><span class="operator">|</span><span class="number">81</span><span class="operator">|</span><span class="number">180</span></span><br><span class="line">Seafood<span class="operator">|</span><span class="number">12</span><span class="operator">|</span><span class="number">20.68</span><span class="operator">|</span><span class="number">6</span><span class="operator">|</span><span class="number">62.5</span><span class="operator">|</span><span class="number">120</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> b.CategoryName <span class="operator">=</span> a.CategoryName 这个条件确保了在计算每个类别的商品价格总和时，只考虑了与当前类别相关的商品</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 这是为了满足 <span class="keyword">HAVING</span> TotalCategoryCount <span class="operator">&gt;</span> <span class="number">10</span> 中的条件</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">*</span><span class="number">1.0</span> 的目的是将整数值转换为浮点数。这是为了确保在计算平均商品价格时，得到的结果是一个浮点数，而不是整数</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q6"><a href="#Q6" class="headerlink" title="Q6*"></a>Q6*</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> </span><br><span class="line"><span class="keyword">SELECT</span> p.ProductName, </span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  c1.CompanyName <span class="operator">||</span> <span class="string">&#x27;|&#x27;</span> <span class="operator">||</span> c1.ContactName </span><br><span class="line">  <span class="keyword">FROM</span> Customer c1 </span><br><span class="line">  <span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o1 <span class="keyword">ON</span> o1.CustomerId <span class="operator">=</span> c1.Id</span><br><span class="line">  <span class="keyword">JOIN</span> OrderDetail od1 <span class="keyword">ON</span> o1.Id <span class="operator">=</span> od1.OrderID</span><br><span class="line">  <span class="keyword">WHERE</span> od1.ProductId <span class="operator">=</span> p.Id</span><br><span class="line">  <span class="keyword">ORDER</span> <span class="keyword">BY</span> o1.OrderDate <span class="keyword">ASC</span> LIMIT <span class="number">1</span>) <span class="keyword">AS</span> CustomerInfo</span><br><span class="line"><span class="keyword">FROM</span> Product p</span><br><span class="line"><span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> p.Id <span class="operator">=</span> od.ProductId</span><br><span class="line"><span class="keyword">JOIN</span> [<span class="keyword">Order</span>] o <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line"><span class="keyword">JOIN</span> CUSTOMER c <span class="keyword">ON</span> o.CustomerID <span class="operator">=</span> c.Id</span><br><span class="line"><span class="keyword">WHERE</span> p.Discontinued <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> p.ProductName;</span><br><span class="line"></span><br><span class="line">Alice Mutton<span class="operator">|</span>Consolidated Holdings<span class="operator">|</span>Elizabeth Brown</span><br><span class="line">Chef Anton<span class="string">&#x27;s Gumbo Mix|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Guaraná Fantástica|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Mishi Kobe Niku|Old World Delicatessen|Rene Phillips</span></span><br><span class="line"><span class="string">Perth Pasties|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Rössle Sauerkraut|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string">Singaporean Hokkien Fried Mee|Vins et alcools Chevalier|Paul Henriot</span></span><br><span class="line"><span class="string">Thüringer Rostbratwurst|Piccolo und mehr|Georg Pipps</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// c1		==&gt; FROM Customer c1 </span></span><br><span class="line"><span class="string">// c1-&gt;o1	==&gt; JOIN [Order] o1 ON o1.CustomerId = c1.Id</span></span><br><span class="line"><span class="string">// o1-&gt;od1	==&gt; JOIN OrderDetail od1 ON o1.Id = od1.OrderID</span></span><br><span class="line"><span class="string">// od1-&gt;p	==&gt; (将子查询和外部主查询联系起来)WHERE od1.ProductId = p.Id</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Q7"><a href="#Q7" class="headerlink" title="Q7*"></a>Q7*</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> Id, Orderdate, pre_OrderDate, ROUND(julianday(OrderDate)<span class="operator">-</span>julianday(pre_orderdate) , <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> (<span class="keyword">SELECT</span> Id, OrderDate, <span class="built_in">LAG</span>(Orderdate, <span class="number">1</span>, <span class="number">0</span>) <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> CustomerId <span class="keyword">ORDER</span> <span class="keyword">BY</span> OrderDate <span class="keyword">ASC</span>) pre_OrderDate</span><br><span class="line">      <span class="keyword">FROM</span> [<span class="keyword">Order</span>]</span><br><span class="line">      <span class="keyword">WHERE</span> CustomerId <span class="operator">=</span> <span class="string">&#x27;BLONP&#x27;</span></span><br><span class="line">      LIMIT <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">16766</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0</span><span class="operator">|</span><span class="number">2456131.47</span></span><br><span class="line"><span class="number">10265</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-22</span> <span class="number">23</span>:<span class="number">11</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2.03</span></span><br><span class="line"><span class="number">12594</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-07</span><span class="number">-25</span><span class="operator">|</span><span class="number">22.52</span></span><br><span class="line"><span class="number">20249</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">12</span>:<span class="number">35</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.18</span></span><br><span class="line"><span class="number">20882</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-16</span> <span class="number">16</span>:<span class="number">52</span>:<span class="number">23</span><span class="operator">|</span><span class="number">2.1</span></span><br><span class="line"><span class="number">18443</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-18</span> <span class="number">19</span>:<span class="number">11</span>:<span class="number">48</span><span class="operator">|</span><span class="number">9.43</span></span><br><span class="line"><span class="number">10297</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">2012</span><span class="number">-08</span><span class="number">-28</span> <span class="number">05</span>:<span class="number">34</span>:<span class="number">03</span><span class="operator">|</span><span class="number">6.77</span></span><br><span class="line"><span class="number">11694</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-04</span><span class="operator">|</span><span class="number">13.02</span></span><br><span class="line"><span class="number">25613</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-17</span> <span class="number">00</span>:<span class="number">27</span>:<span class="number">14</span><span class="operator">|</span><span class="number">1.92</span></span><br><span class="line"><span class="number">17361</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-19</span> <span class="number">12</span>:<span class="number">13</span>:<span class="number">21</span><span class="operator">|</span><span class="number">2012</span><span class="number">-09</span><span class="number">-18</span> <span class="number">22</span>:<span class="number">37</span>:<span class="number">15</span><span class="operator">|</span><span class="number">0.57</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">SELECT</span> julianday(<span class="string">&#x27;now&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">Result</span>: <span class="number">2458220.59892027</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 返回从格林尼治时间的公元前 <span class="number">4714</span> 年 <span class="number">11</span> 月 <span class="number">24</span> 日正午算起的天数</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">LAG</span>(expr, <span class="keyword">offset</span>, <span class="keyword">default</span>) <span class="keyword">OVER</span> (partition_by_clause order_by_clause)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 计算当前行向前数若干行的值，该函数专门用作窗口函数(<span class="keyword">window</span> functions)，<span class="keyword">partition</span> <span class="keyword">by</span>功能类似<span class="keyword">group</span> <span class="keyword">by</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Q8"><a href="#Q8" class="headerlink" title="Q8*"></a>Q8*</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">WITH</span> expenditures <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span> </span><br><span class="line">   ...<span class="operator">&gt;</span>                        IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        o.CustomerId,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        ROUND((<span class="built_in">SUM</span>(od.Quantity <span class="operator">*</span> od.UnitPrice)) , <span class="number">2</span>) <span class="keyword">AS</span> totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> [<span class="keyword">Order</span>] o</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">JOIN</span> OrderDetail od <span class="keyword">ON</span> od.OrderId <span class="operator">=</span> o.Id</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">GROUP</span> <span class="keyword">BY</span> o.CustomerId),</span><br><span class="line">   ...<span class="operator">&gt;</span>      quartiles <span class="keyword">AS</span>(</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">SELECT</span></span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="operator">*</span>,</span><br><span class="line">   ...<span class="operator">&gt;</span>                        <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line">   ...<span class="operator">&gt;</span>                      <span class="keyword">FROM</span> expenditures)</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CompanyName, CustomerId, totalcost</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">FROM</span> quartiles</span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">WHERE</span> ExpenditureQuartile <span class="operator">=</span> <span class="number">1</span></span><br><span class="line">   ...<span class="operator">&gt;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line">MISSING_NAME<span class="operator">|</span>DUMO<span class="operator">|</span><span class="number">1615.9</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>OCEA<span class="operator">|</span><span class="number">3460.2</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>ANTO<span class="operator">|</span><span class="number">7515.35</span></span><br><span class="line">MISSING_NAME<span class="operator">|</span>QUEE<span class="operator">|</span><span class="number">30226.1</span></span><br><span class="line">Trail<span class="string">&#x27;s Head Gourmet Provisioners|TRAIH|3874502.02</span></span><br><span class="line"><span class="string">Blondesddsl père et fils|BLONP|3879728.69</span></span><br><span class="line"><span class="string">Around the Horn|AROUT|4395636.28</span></span><br><span class="line"><span class="string">Hungry Owl All-Night Grocers|HUNGO|4431457.1</span></span><br><span class="line"><span class="string">Bon app|BONAP|4485708.49</span></span><br><span class="line"><span class="string">Bólido Comidas preparadas|BOLID|4520121.88</span></span><br><span class="line"><span class="string">Galería del gastrónomo|GALED|4533089.9</span></span><br><span class="line"><span class="string">FISSA Fabrica Inter. Salchichas S.A.|FISSA|4554591.02</span></span><br><span class="line"><span class="string">Maison Dewey|MAISD|4555931.37</span></span><br><span class="line"><span class="string">Cactus Comidas para llevar|CACTU|4559046.87</span></span><br><span class="line"><span class="string">Spécialités du monde|SPECD|4571764.89</span></span><br><span class="line"><span class="string">Magazzini Alimentari Riuniti|MAGAA|4572382.35</span></span><br><span class="line"><span class="string">Toms Spezialitäten|TOMSP|4628403.36</span></span><br><span class="line"><span class="string">Split Rail Beer &amp; Ale|SPLIR|4641383.53</span></span><br><span class="line"><span class="string">Santé Gourmet|SANTG|4647668.15</span></span><br><span class="line"><span class="string">Morgenstern Gesundkost|MORGK|4676234.2</span></span><br><span class="line"><span class="string">White Clover Markets|WHITC|4681531.74</span></span><br><span class="line"><span class="string">La corne d&#x27;</span>abondance<span class="operator">|</span>LACOR<span class="operator">|</span><span class="number">4724494.22</span></span><br><span class="line">Victuailles en stock<span class="operator">|</span>VICTE<span class="operator">|</span><span class="number">4726476.33</span></span><br><span class="line">Lonesome Pine Restaurant<span class="operator">|</span>LONEP<span class="operator">|</span><span class="number">4735780.66</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> IFNULL(c.CompanyName, <span class="string">&#x27;MISSING_NAME&#x27;</span>) <span class="keyword">AS</span> CompanyName  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 处理<span class="keyword">NULL</span>值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Customer c <span class="keyword">ON</span> c.Id <span class="operator">=</span> o.CustomerId</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 这种连接类型包含左表的所有行，以及右表中满足连接条件的行。如果右表中没有匹配的行，那么结果集中将包含 <span class="keyword">NULL</span> 值</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">NTILE</span>(<span class="number">4</span>) <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> totalcost <span class="keyword">ASC</span>) <span class="keyword">AS</span> ExpenditureQuartile</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 它将结果集划分为指定数量的桶（buckets），并为每个桶分配一个标识号（bucket number）</span><br></pre></td></tr></table></figure>
+<p>现在，假设有以下支出数据：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<p><code>NTILE(4) OVER (ORDER BY totalcost ASC) AS ExpenditureQuartile</code>将分配 ExpenditureQuartile 值，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>CompanyName</th>
+<th>CustomerId</th>
+<th>totalcost</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Company1</td>
+<td>1</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Company2</td>
+<td>2</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Company3</td>
+<td>3</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Company4</td>
+<td>4</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Company5</td>
+<td>5</td>
+<td>300</td>
+</tr>
+</tbody></table>
+<h1 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> r.RegionDescription, e.FirstName, e.LastName, <span class="built_in">MAX</span>(e.BirthDate)</span><br><span class="line"><span class="keyword">FROM</span> Region r</span><br><span class="line"><span class="keyword">JOIN</span> Territory t <span class="keyword">ON</span> t.RegionId <span class="operator">=</span> r.Id</span><br><span class="line"><span class="keyword">JOIN</span> EmployeeTerritory et <span class="keyword">ON</span> et.TerritoryId <span class="operator">=</span> t.Id</span><br><span class="line"><span class="keyword">JOIN</span> Employee e <span class="keyword">On</span> e.Id <span class="operator">=</span> et.EmployeeId</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> t.RegionId;</span><br><span class="line"></span><br><span class="line">Eastern<span class="operator">|</span>Steven<span class="operator">|</span>Buchanan<span class="operator">|</span><span class="number">1987</span><span class="number">-03</span><span class="number">-04</span></span><br><span class="line">Western<span class="operator">|</span>Michael<span class="operator">|</span>Suyama<span class="operator">|</span><span class="number">1995</span><span class="number">-07</span><span class="number">-02</span></span><br><span class="line">Northern<span class="operator">|</span>Anne<span class="operator">|</span>Dodsworth<span class="operator">|</span><span class="number">1998</span><span class="number">-01</span><span class="number">-27</span></span><br><span class="line">Southern<span class="operator">|</span>Janet<span class="operator">|</span>Leverling<span class="operator">|</span><span class="number">1995</span><span class="number">-08</span><span class="number">-30</span></span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="built_in">MAX</span>(e.BirthDate)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> temptable <span class="keyword">AS</span>(</span><br><span class="line">                  <span class="keyword">SELECT</span> </span><br><span class="line">                    d.ProductName myproductname,</span><br><span class="line">                    strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span></span><br><span class="line">                  <span class="keyword">FROM</span> Customer a, [<span class="keyword">Order</span>] b, OrderDetail c, Product d</span><br><span class="line">                  <span class="keyword">WHERE</span> a.Id <span class="operator">=</span> b.CustomerId </span><br><span class="line">                    <span class="keyword">AND</span> b.Id <span class="operator">=</span> c.OrderId </span><br><span class="line">                    <span class="keyword">AND</span> c.ProductId <span class="operator">=</span> d.Id </span><br><span class="line">                    <span class="keyword">AND</span> a.CompanyName <span class="operator">=</span> <span class="string">&#x27;Queen Cozinha&#x27;</span> </span><br><span class="line">                    <span class="keyword">AND</span> <span class="type">date</span> <span class="operator">=</span> <span class="string">&#x27;2014-12-25&#x27;</span></span><br><span class="line">                  <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.Id <span class="keyword">ASC</span>)</span><br><span class="line"><span class="keyword">SELECT</span> group_concat(myproductname)</span><br><span class="line"><span class="keyword">FROM</span> temptable;</span><br><span class="line"></span><br><span class="line">Mishi Kobe Niku,NuNuCa Nuß<span class="operator">-</span>Nougat<span class="operator">-</span>Creme,Schoggi Schokolade,Mascarpone Fabioli,Sasquatch Ale,Boston Crab Meat,Manjimup Dried Apples,Longlife Tofu,Lakkalikööri</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>, b.OrderDate) <span class="type">date</span>  </span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="operator">=</span><span class="operator">=</span><span class="operator">&gt;</span> 将日期和时间格式化为字符串，将原始日期格式转换为 &quot;年-月-日&quot; 的字符串格式</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/" rel="prev" title="OpenPose原理及编译">
+      <i class="fa fa-chevron-left"></i> OpenPose原理及编译
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/02/28/Computer/cmu15-445/cmu15-445%20Project%200%20(Spring%202023)%20%20/" rel="next" title="cmu15-445 Project 0 (Spring 2023)">
+      cmu15-445 Project 0 (Spring 2023) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q1"><span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2"><span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q3"><span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q4"><span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q5"><span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q6"><span class="nav-text">Q6*</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q7"><span class="nav-text">Q7*</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q8"><span class="nav-text">Q8*</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q9"><span class="nav-text">Q9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q10"><span class="nav-text">Q10</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">284k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:11</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
