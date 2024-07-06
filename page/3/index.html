@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 09:09:13" itemprop="dateModified" datetime="2024-07-05T09:09:13+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-06 10:09:20" itemprop="dateModified" datetime="2024-07-06T10:09:20+08:00">2024-07-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>32k</span>
+              <span>31k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1:56</span>
+              <span>1:55</span>
             </span>
 
         </div>
@@ -531,34 +531,31 @@
 <p><code>delete</code>数组要用<code>delete[]</code>，数组头部有一块内存空间记录数组长度，调用<code>delete[]</code>才能析构每个对象。</p>
 <h3 id="40、如何防止重复引用头文件？"><a href="#40、如何防止重复引用头文件？" class="headerlink" title="40、如何防止重复引用头文件？"></a>40、如何防止重复引用头文件？</h3><p>(1)使用<code>#ifndef</code>、<code>#define</code>和<code>#endif</code>；</p>
 <p>(2)使用<code>#pragma once</code></p>
-<h3 id="41、如何预防变量的重定义？"><a href="#41、如何预防变量的重定义？" class="headerlink" title="41、如何预防变量的重定义？"></a>41、如何预防变量的重定义？</h3><p>(1)使用命名空间</p>
-<p>(2)使用<code>static</code>关键字或匿名命名空间来限制变量的作用域至单个文件</p>
-<p>(3)使用<code>extern</code>关键字确保全局变量只有一个定义</p>
-<p>(4)避免在头文件中定义变量，将定义放在源文件(<code>.cpp</code>)中</p>
+<h3 id="41、如何预防变量的重定义？"><a href="#41、如何预防变量的重定义？" class="headerlink" title="41、如何预防变量的重定义？"></a>41、如何预防变量的重定义？</h3><ol>
+<li>使用命名空间；</li>
+<li>使用 <code>static</code> 关键字或匿名命名空间来限制变量的作用域至单个文件；</li>
+<li>使用 <code>extern</code> 关键字确保全局变量只有一个定义；</li>
+<li>避免在头文件中定义变量，将定义放在源文件( <code>.cpp</code> )中</li>
+</ol>
 <h3 id="42、virtual-和-static-为什么不能修饰同一个成员函数？"><a href="#42、virtual-和-static-为什么不能修饰同一个成员函数？" class="headerlink" title="42、virtual 和 static 为什么不能修饰同一个成员函数？"></a>42、virtual 和 static 为什么不能修饰同一个成员函数？</h3><p>因为它们的语义和用途在本质上是互相冲突的。</p>
-<p>(1)<code>virtual</code> 关键字</p>
-<ul>
-<li><code>virtual</code> 关键字用于支持多态性。一个虚函数允许在派生类中重写，并通过基类的指针或引用在运行时调用派生类的实现。</li>
-<li>虚函数的调用需要对象的实例，并且是通过虚函数表(vtable)实现的。虚函数表是每个对象的一部分，用于在运行时解析函数调用。</li>
-</ul>
-<p>(2)<code>static</code> 关键字</p>
-<ul>
-<li><code>static</code> 关键字用于声明类的静态成员函数。静态成员函数属于类，而不是类的实例。也就是说，静态成员函数可以在没有任何对象实例的情况下调用。</li>
-<li>静态成员函数不依赖于具体的对象实例，因此它们不能访问非静态成员变量或调用非静态成员函数(因为它们没有 <code>this</code> 指针)。</li>
-</ul>
+<ol>
+<li><p><code>virtual</code> 关键字用于支持多态性，在基类中声明虚函数。虚函数的调用需要对象的实例，通过对象实例的虚函数指针 vptr 指向虚函数表 vtable 实现来解析其函数调用。</p>
+</li>
+<li><p><code>static</code> 关键字：<code>static</code> 关键字用于声明类的静态成员函数。静态成员函数属于类本身，而不属于类的任何一个对象实例，也就是说，静态成员函数可以在没有任何对象实例的情况下调用。</p>
+</li>
+</ol>
 <h3 id="43、sizeof-一个-std-string-变量的结果？"><a href="#43、sizeof-一个-std-string-变量的结果？" class="headerlink" title="43、sizeof 一个 std::string 变量的结果？"></a>43、sizeof 一个 std::string 变量的结果？</h3><p>当对一个 <code>std::string</code> 类型的变量使用 <code>sizeof</code> 时，得到的结果是该 <code>std::string</code> 对象本身在栈上所占的大小，而不是它所管理的字符串数据的大小。</p>
-<p><code>std::string</code> 通常由以下成员组成：</p>
+<p><code>std::string</code> 通常由以下成员组成，在 64 位系统下通常为 32 字节：</p>
 <ul>
 <li>一个<strong>指向存储实际字符数据的指针</strong>。</li>
 <li>一个<strong>表示字符串长度</strong>的整数。</li>
 <li>一个<strong>表示分配容量</strong>的整数。</li>
 </ul>
-<p>在 64 位系统上，每个指针通常占用 8 字节(64 位)，而每个整数通常占用 4 或 8 字节(32 或 64 位)，所以总大小通常为 24 或 32 字节。</p>
 <h3 id="44、空类的-sizeof-结果是多少？为什么？"><a href="#44、空类的-sizeof-结果是多少？为什么？" class="headerlink" title="44、空类的 sizeof 结果是多少？为什么？"></a>44、空类的 sizeof 结果是多少？为什么？</h3><p>空类会占用至少一个字节的内存空间。 <code>sizeof</code> 结果通常是 1，但也可能会更大，这取决于编译器和平台的实现。</p>
 <p><strong>-为什么？</strong></p>
 <p>因为编译器需要区分空类的实例，而我们区分的方法就是看其在内存中的地址是不是相同的。所以编译器强制给它分配了冗余的空间，这样创建空类实例时返回的地址才会不一样。</p>
-<h3 id="45、只包含虚函数的类-sizeof-的结果是多少？"><a href="#45、只包含虚函数的类-sizeof-的结果是多少？" class="headerlink" title="45、只包含虚函数的类 sizeof 的结果是多少？"></a>45、只包含虚函数的类 sizeof 的结果是多少？</h3><p>类中包含一个指向虚函数表的指针，结果是<code>8</code>(64位系统)。</p>
-<h3 id="46、decltype"><a href="#46、decltype" class="headerlink" title="46、decltype"></a>46、decltype</h3><p><code>decltype(declare type)</code>关键字在C++11中引入，它可以在<strong>编译</strong>时获取<strong>表达式</strong>的类型，包括变量、函数调用、表达式等。</p>
+<h3 id="45、只包含虚函数的类-sizeof-的结果是多少？"><a href="#45、只包含虚函数的类-sizeof-的结果是多少？" class="headerlink" title="45、只包含虚函数的类 sizeof 的结果是多少？"></a>45、只包含虚函数的类 sizeof 的结果是多少？</h3><p>类中包含一个指向虚函数表的指针，结果是<code>8</code>(64 位系统)。</p>
+<h3 id="【-】46、decltype"><a href="#【-】46、decltype" class="headerlink" title="【*】46、decltype"></a>【*】46、decltype</h3><p><code>decltype(declare type)</code>关键字在 C++11 中引入，它可以在<strong>编译</strong>时获取<strong>表达式</strong>的类型，包括变量、函数调用、表达式等。</p>
 <p>decltype 的一些关键点解读如下：</p>
 <ul>
 <li>表达式类型的推导：decltype 可以用来推导几乎任何表达式的类型，包括变量、函数调用、解引用操作符、成员访问等。它推导的类型是表达式的静态类型，而不是运行时类型。</li>
@@ -567,21 +564,14 @@
 <li>decltype 与 decltype specifier：decltype 还可以用作模板参数的 specifier，这允许模板根据其参数的类型来推导其他模板参数的类型。</li>
 <li>推导 Lambda 表达式的类型：decltype 可以用来推导 Lambda 表达式的类型，这在泛型编程中非常有用。</li>
 </ul>
-<h3 id="47、static-在-C-与-C-中的差别？"><a href="#47、static-在-C-与-C-中的差别？" class="headerlink" title="47、static 在 C++与 C 中的差别？"></a>47、static 在 C++与 C 中的差别？</h3><p>在C中：</p>
-<ol>
-<li>在函数内部，<code>static</code> 修饰的局部变量意味着该变量的生命周期扩展到整个程序运行期间，并且只初始化一次。</li>
-<li>在全局范围内，<code>static</code> 修饰的全局变量或函数只在声明它们的文件中可见，无法被其他文件访问。</li>
+<h3 id="47、static-在-C-与-C-中的差别？"><a href="#47、static-在-C-与-C-中的差别？" class="headerlink" title="47、static 在 C++与 C 中的差别？"></a>47、static 在 C++与 C 中的差别？</h3><ol>
+<li>在 C 中，<code>static </code>关键字用于扩展局部变量的生命周期和限制全局变量&#x2F;函数的作用域。</li>
+<li>在 C++ 中，<code>static</code> 关键字除了具有与 C 中相同的功能外，还用于定义类的静态成员变量和静态成员函数，使这些成员在类的所有实例之间共享，并且可以通过类名直接访问。</li>
 </ol>
-<p>在C++中：</p>
-<ol>
-<li>在函数内部，<code>static</code> 修饰的局部变量与C中的含义相同，生命周期扩展到整个程序运行期间，并且只初始化一次。</li>
-<li>在类中，<code>static</code> 修饰的成员变量属于类，而不是属于类的任何特定实例。这意味着，所有该类的实例共享同一静态成员变量的内存空间，而不是每个实例都有自己的副本。静态成员变量可以通过类名直接访问，也可以通过对象访问，但推荐使用类名访问。</li>
-<li>在类中，<code>static</code> 修饰的成员函数是类的静态成员函数，它不属于类的任何特定实例，可以通过类名直接调用，不需要创建类的实例对象。</li>
-</ol>
-<h3 id="48、静态变量什么时候初始化"><a href="#48、静态变量什么时候初始化" class="headerlink" title="48、静态变量什么时候初始化?"></a>48、静态变量什么时候初始化?</h3><ol>
-<li>初始化只有一次，但是可以多次赋值，在主程序之前，编译器已经为其分配好了内存。</li>
-<li>静态局部变量和全局变量一样，数据都存放在全局区域，所以在主程序之前，编译器已经为其分配好了内存，但在 C 和 C++ 中静态局部变量的初始化节点又有点不太一样。在 C 中，初始化发生在代码执行之前，编译阶段分配好内存之后，就会进行初始化，所以我们看到在 C 语言中无法使用变量对静态局部变量进行初始化，在程序运行结束，变量所处的全局内存会被全部回收。</li>
-<li>而在 C++ 中，初始化时在执行相关代码时才会进行初始化，主要是由于 C++ 引入对象后，要进行初始化必须执行相应构造函数和析构函数，在构造函数或析构函数中经常会需要进行某些程序中需要进行的特定操作，并非简单地分配内存。所以 C++ 标准定为全局或静态对象是有首次用到时才会进行构造，并通过 atexit() 来管理。在程序结束，按照构造顺序反方向进行逐个析构。所以在 C++ 中是可以使用变量对静态局部变量进行初始化的。</li>
+<h3 id="【-】48、静态变量什么时候初始化"><a href="#【-】48、静态变量什么时候初始化" class="headerlink" title="【*】48、静态变量什么时候初始化?"></a>【*】48、静态变量什么时候初始化?</h3><ol>
+<li>静态变量在程序开始时分配内存，即在全局数据区分配。<strong>只能初始化一次，但在整个程序生命周期中可以多次赋值。</strong></li>
+<li>在 C 语言中，全局静态变量和局部静态变量都在程序加载时初始化。由于初始化在编译阶段完成，所以无法使用运行时变量对静态局部变量进行初始化。</li>
+<li>C++ 引入了对象和构造函数，要求在对象首次使用时才进行初始化。这种延迟初始化（lazy initialization）是为了确保对象在使用时已被正确构造。全局或静态对象在程序加载时不立即初始化，而是在第一次使用时初始化。这称为“静态局部变量初始化规则”。</li>
 </ol>
 <h3 id="49、C-中新增了-string，它与-C-语言中的-char-有什么区别吗？如何实现？"><a href="#49、C-中新增了-string，它与-C-语言中的-char-有什么区别吗？如何实现？" class="headerlink" title="49、C++ 中新增了 string，它与 C 语言中的 char * 有什么区别吗？如何实现？"></a>49、C++ 中新增了 string，它与 C 语言中的 char * 有什么区别吗？如何实现？</h3><ol>
 <li><code>string</code> 继承自 <code>basic_string</code>，其实是对 <code>char*</code>进行了封装，封装的 <code>string</code> 包含了 <code>char*</code> 数组，容量，长度等等属性。</li>
@@ -2354,12 +2344,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">285k</span>
+    <span title="站点总字数">284k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:13</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
