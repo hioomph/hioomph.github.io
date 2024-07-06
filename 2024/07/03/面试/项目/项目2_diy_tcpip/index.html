@@ -40,8 +40,11 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051937633.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051938284.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051948347.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061944836.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png">
 <meta property="article:published_time" content="2024-07-03T08:21:03.815Z">
-<meta property="article:modified_time" content="2024-07-05T12:50:19.685Z">
+<meta property="article:modified_time" content="2024-07-06T12:52:03.766Z">
 <meta property="article:author" content="midorii">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042007671.png">
@@ -236,7 +239,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 20:50:19" itemprop="dateModified" datetime="2024-07-05T20:50:19+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-06 20:52:03" itemprop="dateModified" datetime="2024-07-06T20:52:03+08:00">2024-07-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,14 +261,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -365,7 +368,30 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">键盘  --(fgets)--&gt;              --(send)-------(recv)--&gt; </span><br><span class="line">                    TCP客户端                              TCP客户端</span><br><span class="line">屏幕  &lt;--(printf)--             --(recv)-------(send)--&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="利用套接字设计服务器端"><a href="#利用套接字设计服务器端" class="headerlink" title="利用套接字设计服务器端"></a>利用套接字设计服务器端</h3>
+<h3 id="利用套接字设计服务器端"><a href="#利用套接字设计服务器端" class="headerlink" title="利用套接字设计服务器端"></a>利用套接字设计服务器端</h3><h1 id="二、整体结构设计"><a href="#二、整体结构设计" class="headerlink" title="二、整体结构设计"></a>二、整体结构设计</h1><h2 id="1、整体结构"><a href="#1、整体结构" class="headerlink" title="1、整体结构"></a>1、整体结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- src</span><br><span class="line">	- app</span><br><span class="line">		- test</span><br><span class="line">			- main.c</span><br><span class="line">    - net</span><br><span class="line">    	- net</span><br><span class="line">    		- net_err.h  <span class="comment">// net相关的变量定义</span></span><br><span class="line">    		- net.h		 <span class="comment">// tcp/ip协议栈初始化</span></span><br><span class="line">    		- exmsg.h	 <span class="comment">// 核心工作线程初始化，所有tcp/ip相关的事件都交由该线程处理</span></span><br><span class="line">    	- src</span><br><span class="line">    - plat</span><br><span class="line">    	- net_plat.c</span><br><span class="line">    	- sys_plat.c</span><br></pre></td></tr></table></figure>
+
+
+
+<p>整个项目的核心为<strong>工作线程</strong>，对应于<code>src/net/src/exmsg.c</code>模块。这个模块是TCP&#x2F;IP核心线程通信模块，运行了一个核心线程，<strong>所有 TCP&#x2F;IP 中相关的事件都交由该线程处理</strong>。</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 协议栈初始化</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">net_err_t</span> <span class="title function_">net_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    net_plat_init();  <span class="comment">// 初始化硬件资源</span></span><br><span class="line"></span><br><span class="line">    exmsg_init();</span><br><span class="line">    <span class="keyword">return</span> NET_ERR_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么在协议栈初始化时需要先进行硬件资源初始化？是为了适应不同平台吗？</strong></p>
+<p>在编写 TCP&#x2F;IP 协议栈的过程中，在协议栈初始化时首先进行硬件资源初始化是非常重要的一步，原因主要有以下几个方面：</p>
+<ol>
+<li>适应不同平台：不同的平台可能有不同的硬件资源和配置要求。进行硬件资源初始化可以确保协议栈能够适应不同的平台，并能够正确地与底层硬件进行交互。</li>
+<li>确保硬件资源可用：协议栈的运行依赖于底层的网络硬件资源（如网卡、网络接口等）。在协议栈初始化时，首先初始化硬件资源可以确保这些资源是可用的，并且已经准备好进行数据传输。</li>
+<li>设置硬件参数：硬件资源初始化过程通常包括设置硬件参数（如网卡的 MAC 地址、IP 地址、子网掩码等）。这些参数对于协议栈的正确运行至关重要，因为它们决定了如何在网络中进行数据传输。</li>
+<li>注册硬件中断和回调函数：硬件资源初始化过程中通常需要注册硬件中断和回调函数，以便在数据包到达时能够及时通知协议栈进行处理。如果没有进行硬件资源初始化，协议栈将无法及时响应网络事件。</li>
+<li>分配和管理资源：硬件资源初始化过程可能涉及到分配和管理一些必要的资源，如内存缓冲区、DMA 通道等。这些资源对于协议栈的高效运行也是至关重要的。</li>
+<li>错误处理：在硬件资源初始化阶段，可以检测和处理可能的硬件错误。如果硬件资源不可用或者初始化失败，可以在这个阶段进行相应的错误处理，避免后续协议栈运行时出现难以调试的问题。</li>
+</ol>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061944836.png" alt="软件整体流程"></p>
+<h2 id="2、网络结构"><a href="#2、网络结构" class="headerlink" title="2、网络结构"></a>2、网络结构</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png" alt="整体结构设计" style="zoom: 50%;" />
+
+<h2 id="3、协议分层"><a href="#3、协议分层" class="headerlink" title="3、协议分层"></a>3、协议分层</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png" alt="软件层级结构"></p>
+
     </div>
 
     
@@ -442,7 +468,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E5%8C%85%E6%94%B6%E5%8F%91"><span class="nav-text">1、数据包收发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-text">库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80-pcap-%E4%BC%9A%E8%AF%9D"><span class="nav-text">打开 pcap 会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">数据初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">接收数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">发送数据包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">2、多线程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F-%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">结合计数信号量+互斥锁实现多线程环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E7%9A%84%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">线程间的资源访问控制实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%BE%AA%E7%8E%AF%E7%BC%93%E5%AD%98"><span class="nav-text">（1）循环缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8E%A7%E5%88%B6%E8%AF%BB%E9%80%9F%E7%8E%87"><span class="nav-text">（2）控制读速率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8E%A7%E5%88%B6%E5%86%99%E9%80%9F%E7%8E%87"><span class="nav-text">（3）控制写速率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-text">3、网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">利用套接字设计客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="nav-text">利用套接字设计服务器端</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E5%8C%85%E6%94%B6%E5%8F%91"><span class="nav-text">1、数据包收发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-text">库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80-pcap-%E4%BC%9A%E8%AF%9D"><span class="nav-text">打开 pcap 会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">数据初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">接收数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">发送数据包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">2、多线程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F-%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">结合计数信号量+互斥锁实现多线程环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E7%9A%84%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">线程间的资源访问控制实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%BE%AA%E7%8E%AF%E7%BC%93%E5%AD%98"><span class="nav-text">（1）循环缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8E%A7%E5%88%B6%E8%AF%BB%E9%80%9F%E7%8E%87"><span class="nav-text">（2）控制读速率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8E%A7%E5%88%B6%E5%86%99%E9%80%9F%E7%8E%87"><span class="nav-text">（3）控制写速率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-text">3、网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">利用套接字设计客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="nav-text">利用套接字设计服务器端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">二、整体结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-text">1、整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-text">2、网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82"><span class="nav-text">3、协议分层</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -501,12 +527,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">285k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:13</span>
+    <span title="站点阅读时长">17:15</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

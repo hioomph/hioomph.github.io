@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 20:50:19" itemprop="dateModified" datetime="2024-07-05T20:50:19+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-06 20:52:03" itemprop="dateModified" datetime="2024-07-06T20:52:03+08:00">2024-07-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -349,7 +349,30 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">键盘  --(fgets)--&gt;              --(send)-------(recv)--&gt; </span><br><span class="line">                    TCP客户端                              TCP客户端</span><br><span class="line">屏幕  &lt;--(printf)--             --(recv)-------(send)--&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="利用套接字设计服务器端"><a href="#利用套接字设计服务器端" class="headerlink" title="利用套接字设计服务器端"></a>利用套接字设计服务器端</h3>
+<h3 id="利用套接字设计服务器端"><a href="#利用套接字设计服务器端" class="headerlink" title="利用套接字设计服务器端"></a>利用套接字设计服务器端</h3><h1 id="二、整体结构设计"><a href="#二、整体结构设计" class="headerlink" title="二、整体结构设计"></a>二、整体结构设计</h1><h2 id="1、整体结构"><a href="#1、整体结构" class="headerlink" title="1、整体结构"></a>1、整体结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- src</span><br><span class="line">	- app</span><br><span class="line">		- test</span><br><span class="line">			- main.c</span><br><span class="line">    - net</span><br><span class="line">    	- net</span><br><span class="line">    		- net_err.h  <span class="comment">// net相关的变量定义</span></span><br><span class="line">    		- net.h		 <span class="comment">// tcp/ip协议栈初始化</span></span><br><span class="line">    		- exmsg.h	 <span class="comment">// 核心工作线程初始化，所有tcp/ip相关的事件都交由该线程处理</span></span><br><span class="line">    	- src</span><br><span class="line">    - plat</span><br><span class="line">    	- net_plat.c</span><br><span class="line">    	- sys_plat.c</span><br></pre></td></tr></table></figure>
+
+
+
+<p>整个项目的核心为<strong>工作线程</strong>，对应于<code>src/net/src/exmsg.c</code>模块。这个模块是TCP&#x2F;IP核心线程通信模块，运行了一个核心线程，<strong>所有 TCP&#x2F;IP 中相关的事件都交由该线程处理</strong>。</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 协议栈初始化</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">net_err_t</span> <span class="title function_">net_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    net_plat_init();  <span class="comment">// 初始化硬件资源</span></span><br><span class="line"></span><br><span class="line">    exmsg_init();</span><br><span class="line">    <span class="keyword">return</span> NET_ERR_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么在协议栈初始化时需要先进行硬件资源初始化？是为了适应不同平台吗？</strong></p>
+<p>在编写 TCP&#x2F;IP 协议栈的过程中，在协议栈初始化时首先进行硬件资源初始化是非常重要的一步，原因主要有以下几个方面：</p>
+<ol>
+<li>适应不同平台：不同的平台可能有不同的硬件资源和配置要求。进行硬件资源初始化可以确保协议栈能够适应不同的平台，并能够正确地与底层硬件进行交互。</li>
+<li>确保硬件资源可用：协议栈的运行依赖于底层的网络硬件资源（如网卡、网络接口等）。在协议栈初始化时，首先初始化硬件资源可以确保这些资源是可用的，并且已经准备好进行数据传输。</li>
+<li>设置硬件参数：硬件资源初始化过程通常包括设置硬件参数（如网卡的 MAC 地址、IP 地址、子网掩码等）。这些参数对于协议栈的正确运行至关重要，因为它们决定了如何在网络中进行数据传输。</li>
+<li>注册硬件中断和回调函数：硬件资源初始化过程中通常需要注册硬件中断和回调函数，以便在数据包到达时能够及时通知协议栈进行处理。如果没有进行硬件资源初始化，协议栈将无法及时响应网络事件。</li>
+<li>分配和管理资源：硬件资源初始化过程可能涉及到分配和管理一些必要的资源，如内存缓冲区、DMA 通道等。这些资源对于协议栈的高效运行也是至关重要的。</li>
+<li>错误处理：在硬件资源初始化阶段，可以检测和处理可能的硬件错误。如果硬件资源不可用或者初始化失败，可以在这个阶段进行相应的错误处理，避免后续协议栈运行时出现难以调试的问题。</li>
+</ol>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061944836.png" alt="软件整体流程"></p>
+<h2 id="2、网络结构"><a href="#2、网络结构" class="headerlink" title="2、网络结构"></a>2、网络结构</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png" alt="整体结构设计" style="zoom: 50%;" />
+
+<h2 id="3、协议分层"><a href="#3、协议分层" class="headerlink" title="3、协议分层"></a>3、协议分层</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png" alt="软件层级结构"></p>
+
       
     </div>
 
@@ -3889,7 +3912,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-06 09:31:30" itemprop="dateModified" datetime="2024-07-06T09:31:30+08:00">2024-07-06</time>
+                <time title="修改时间：2024-07-06 16:17:51" itemprop="dateModified" datetime="2024-07-06T16:17:51+08:00">2024-07-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -4355,7 +4378,7 @@ add $4, %esp：
 <li><p>另外，操作系统还可以通过配置来限制每个进程能够使用的虚拟内存大小。</p>
 </li>
 </ol>
-<h3 id="42、虚拟内存中分页算法是为了解决什么样的问题？"><a href="#42、虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="42、虚拟内存中分页算法是为了解决什么样的问题？"></a>42、虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
+<h3 id="【-】42、虚拟内存中分页算法是为了解决什么样的问题？"><a href="#【-】42、虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="【*】42、虚拟内存中分页算法是为了解决什么样的问题？"></a>【*】42、虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
 <h3 id="43、虚拟内存的内存模型如何？"><a href="#43、虚拟内存的内存模型如何？" class="headerlink" title="43、虚拟内存的内存模型如何？"></a>43、虚拟内存的内存模型如何？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<code>.text</code>段，<code>.rodata</code>段，<code>.data</code>段，<code>.bss</code>段，堆，内存映射区，栈，内核空间。其中，各项主要内容如下：</p>
 <p>（1）**.text段** ：主要存在程序编译后的机器指令；</p>
 <p>（2）**.rodata段 **：主要存放程序中的各种只读变量；</p>
@@ -7755,12 +7778,12 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">285k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:13</span>
+    <span title="站点阅读时长">17:15</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
