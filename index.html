@@ -3912,7 +3912,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-06 16:17:51" itemprop="dateModified" datetime="2024-07-06T16:17:51+08:00">2024-07-06</time>
+                <time title="修改时间：2024-07-08 16:20:27" itemprop="dateModified" datetime="2024-07-08T16:20:27+08:00">2024-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -3941,7 +3941,7 @@ add $4, %esp：
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:08</span>
+              <span>2:07</span>
             </span>
 
         </div>
@@ -3970,7 +3970,7 @@ add $4, %esp：
 <p>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，<strong>一个进程崩溃后，在保护模式下不会对其它进程产生影响</strong>，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，<strong>一个线程死掉就等于整个进程死掉</strong>，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</p>
 <p>在 Linux 中，<strong>线程不会拥有独立的内存空间。所有线程共享进程的虚拟地址空间，但每个线程拥有自己独立的栈空间和寄存器集合。</strong>共享内存空间使得线程之间的通信比进程间通信更加高效，但也意味着需要通过同步机制（如互斥锁）来保护共享资源，防止竞态条件。</p>
 </blockquote>
-<h3 id="【-】2、线程比进程具有哪些优势？"><a href="#【-】2、线程比进程具有哪些优势？" class="headerlink" title="【*】2、线程比进程具有哪些优势？"></a>【*】2、线程比进程具有哪些优势？</h3><ol>
+<h3 id="2、线程比进程具有哪些优势？"><a href="#2、线程比进程具有哪些优势？" class="headerlink" title="2、线程比进程具有哪些优势？"></a>2、线程比进程具有哪些优势？</h3><ol>
 <li>线程在程序中是独立的，并发的执行流，只是同一进程中的多个线程间的隔离程度较小；</li>
 <li>当操作系统创建⼀个进程时，必须为进程分配独立的内存空间，并分配大量相关资源；但对于同一进程中的多个线程来说，它们共享进程的虚拟地址空间，每个线程只拥有自己独立的栈空间和寄存器集合。</li>
 </ol>
@@ -4002,14 +4002,14 @@ add $4, %esp：
 <li><strong>自旋锁</strong>：当有线程对资源加了自旋锁后，其他线程尝试加锁时将忙等待，而非被阻塞。</li>
 </ol>
 <h3 id="6、什么是死锁？"><a href="#6、什么是死锁？" class="headerlink" title="6、什么是死锁？"></a>6、什么是死锁？</h3><p><strong>死锁</strong>（Deadlock）是指在多线程或多进程的环境中，两个或多个执行单元因为争夺资源而造成的一种相互等待的现象，如果没有外力干涉，这些进程将无法向前推进。</p>
-<h3 id="【-】7、死锁产生的原因"><a href="#【-】7、死锁产生的原因" class="headerlink" title="【*】7、死锁产生的原因"></a>【*】7、死锁产生的原因</h3><p>死锁产生主要有以下几个条件，这些条件<strong>同时满足</strong>时，就可能发生死锁：</p>
+<h3 id="7、死锁产生的原因"><a href="#7、死锁产生的原因" class="headerlink" title="7、死锁产生的原因"></a>7、死锁产生的原因</h3><p>死锁产生主要有以下几个条件，这些条件<strong>同时满足</strong>时，就可能发生死锁：</p>
 <ol>
 <li><strong>互斥条件</strong>：资源不能被多个线程（或进程）共享，只能被一个线程（或进程）所占用。</li>
 <li><strong>请求与保持条件</strong>：线程已经保持至少一个资源，但又提出了新的资源请求，而该资源已被其他线程占有。</li>
 <li><strong>不剥夺条件</strong>：线程所获得的资源在未使用完之前，不能被其他线程强行剥夺。</li>
 <li><strong>循环等待条件</strong>：存在一种线程资源循环等待链，每个线程占有一种资源并等待另一种被下一个线程占有的资源。</li>
 </ol>
-<h3 id="8、如何避免死锁？"><a href="#8、如何避免死锁？" class="headerlink" title="8、如何避免死锁？"></a>8、如何避免死锁？</h3><ol>
+<h3 id="【-】8、如何避免死锁？"><a href="#【-】8、如何避免死锁？" class="headerlink" title="【*】8、如何避免死锁？"></a>【*】8、如何避免死锁？</h3><ol>
 <li>系统对进程发出每一个系统能够满足的资源申请进行动态检查，并根据检查结果决定是否分配资源。如果分配后系统可能发生死锁，则不予分配，否则予以分配。保证系统不进入死锁状态的动态策略。</li>
 <li>在系统设计、进程调度等方面注意如何让这四个必要条件不成立，如何确定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态的情况下占用资源。因此，对资源的分配要给予合理的规划。</li>
 </ol>
@@ -4153,12 +4153,15 @@ add $4, %esp：
 
 </blockquote>
 <h3 id="21、多线程切换，CPU-和内存会做一些什么处理？"><a href="#21、多线程切换，CPU-和内存会做一些什么处理？" class="headerlink" title="21、多线程切换，CPU 和内存会做一些什么处理？"></a>21、多线程切换，CPU 和内存会做一些什么处理？</h3><ol>
-<li><strong>保存当前线程的上下文：</strong> 包括程序计数器（PC）、寄存器状态、栈指针（SP）等，便于在之后恢复线程时能够继续执行。</li>
+<li><strong>保存当前线程的上下文：</strong> 包括程序计数器（PC）、寄存器状态、栈指针（SP）、调度器信息等，便于在之后恢复线程时能够继续执行。</li>
 <li><strong>加载下一个线程的上下文：</strong> CPU 根据调度算法选择下一个需要执行的线程，然后加载其上下文信息到寄存器和其他硬件状态中。</li>
 <li><strong>切换内存空间：</strong> 不同进程的线程可能涉及页表（Page Table）等内存映射表的切换，以确保能访问到正确的内存空间。</li>
 <li><strong>处理器流水线的清空和填充：</strong> 在进行线程切换时，可能存在流水线（Pipeline）中的指令未执行完毕。因此可能需要将流水线清空，以避免对新线程执行的指令产生影响。</li>
 <li><strong>更新调度器信息：</strong>包括线程的状态（就绪、运行、阻塞等），以及相关的时间片（Time Slice）等调度参数。</li>
 </ol>
+<blockquote>
+<p>进程切换的意义在于<strong>实现多任务操作系统的基本功能，使多个进程能够在有限的CPU资源下共享执行时间</strong>。</p>
+</blockquote>
 <h3 id="22、如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"><a href="#22、如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？" class="headerlink" title="22、如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？"></a>22、如果现在有远远多于线程数量的任务在等待处理，要怎么分析这个问题？</h3><p>首先判断这个请求数量远远多于线程是否是常态：</p>
 <ul>
 <li>如果是常态则先要考虑是不是线程数量设置有问题，其次判断机器是否能力不足以处理这些数据；</li>
@@ -4350,7 +4353,7 @@ add $4, %esp：
 <p><strong>SIGSEGV</strong>：非法内存访问信号，通常由无效的指针或越界访问引发。</p>
 <p><strong>SIGINT</strong>：中断信号，通常由用户通过 Ctrl+C 发出，用于中断程序执行。</p>
 <h3 id="36、Ctrl-C-后发生了什么？"><a href="#36、Ctrl-C-后发生了什么？" class="headerlink" title="36、Ctrl+C 后发生了什么？"></a>36、Ctrl+C 后发生了什么？</h3><p>按下 Ctrl+C 后，会向前台运行的进程发送 SIGINT 信号。这个信号通常用于中断和终止正在运行的程序。如果程序捕获并处理了 SIGINT 信号，它可以执行清理操作或选择忽略信号；否则，默认行为是终止程序。</p>
-<h3 id="【-】37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#【-】37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="【*】37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>【*】37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，主要有以下功能：</p>
+<h3 id="37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，主要有以下功能：</p>
 <ol>
 <li><strong>设置信号处理函数</strong>：可以用于指定一个函数，用来处理特定信号发生时的行为。</li>
 <li><strong>指定信号的处理方式</strong>：可以指定信号的处理方式，比如忽略信号、执行默认操作、或者调用指定的处理函数。</li>
@@ -4380,14 +4383,14 @@ add $4, %esp：
 </ol>
 <h3 id="【-】42、虚拟内存中分页算法是为了解决什么样的问题？"><a href="#【-】42、虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="【*】42、虚拟内存中分页算法是为了解决什么样的问题？"></a>【*】42、虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
 <h3 id="43、虚拟内存的内存模型如何？"><a href="#43、虚拟内存的内存模型如何？" class="headerlink" title="43、虚拟内存的内存模型如何？"></a>43、虚拟内存的内存模型如何？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<code>.text</code>段，<code>.rodata</code>段，<code>.data</code>段，<code>.bss</code>段，堆，内存映射区，栈，内核空间。其中，各项主要内容如下：</p>
-<p>（1）**.text段** ：主要存在程序编译后的机器指令；</p>
-<p>（2）**.rodata段 **：主要存放程序中的各种只读变量；</p>
-<p>（3）**.data段**：主要存放指定了初始值的全局变量和静态变量；</p>
-<p>（4）**.bss段**：主要存放没有指定初始值的全局变量和静态变量，这些未初始化的全局变量被加载进内存之后会被初始化为 0 值；</p>
-<p>（5）<strong>堆</strong>：由程序员进行动态分配，如调用 malloc 或 new；</p>
-<p>（6）<strong>文件映射与匿名映射区</strong>：存放动态链接库中的代码段，数据段，BSS 段，以及通过 mmap 系统调用映射的共享内存区；</p>
-<p>（7）<strong>栈</strong>：由编译器自动分配释放，存放调用函数过程中使用到的局部变量和函数参数等；</p>
-<p>（8）<strong>内核空间</strong>：存放操作系统的一些内核数据和代码。</p>
+<p>（1）<code>.text</code>段 ：主要存在程序编译后的机器指令；</p>
+<p>（2）<code>.rodata</code>段 ：主要存放程序中的各种只读变量；</p>
+<p>（3）<code>.data</code>段：主要存放指定了初始值的全局变量和静态变量；</p>
+<p>（4）<code>.bss</code>段：主要存放没有指定初始值的全局变量和静态变量，这些未初始化的全局变量被加载进内存之后会被初始化为 0 值；</p>
+<p>（5）堆：由程序员进行动态分配，如调用 malloc 或 new；</p>
+<p>（6）文件映射与匿名映射区：存放动态链接库中的代码段，数据段，BSS 段，以及通过 mmap 系统调用映射的共享内存区；</p>
+<p>（7）栈：由编译器自动分配释放，存放调用函数过程中使用到的局部变量和函数参数等；</p>
+<p>（8）内核空间：存放操作系统的一些内核数据和代码。</p>
 <img src="https://cdn.xiaolincoding.com//mysql/other/ffb6e1727e2289f142f6a2a6291cd68c.png" alt="image.png" style="zoom: 50%;" />
 
 <img src="https://cdn.xiaolincoding.com//mysql/other/532e6cdf4899588f8b873b6435cba2d8.png" alt="image.png" style="zoom: 33%;" />
@@ -4456,7 +4459,7 @@ add $4, %esp：
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">mem_control_block</span> &#123;</span><br><span class="line">    <span class="type">int</span> is_available;      <span class="comment">// 1表可用，0表不可用</span></span><br><span class="line">    <span class="type">int</span> size;                 <span class="comment">// 总大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="54、mmap-的原理"><a href="#54、mmap-的原理" class="headerlink" title="54、mmap() 的原理"></a>54、mmap() 的原理</h3><p><code>mmap()</code> 是一个系统调用，用于在进程的地址空间中创建一个新的映射区域（mapping）。</p>
+<h3 id="【-】54、mmap-的原理"><a href="#【-】54、mmap-的原理" class="headerlink" title="【*】54、mmap() 的原理"></a>【*】54、mmap() 的原理</h3><p><code>mmap()</code> 是一个系统调用，用于在进程的地址空间中创建一个新的映射区域（mapping）。</p>
 <ol>
 <li><strong>创建映射区域</strong>：<ul>
 <li><code>mmap()</code> 可以将一个文件或者其它对象（如设备内存）映射到调用进程的地址空间中。这个映射区域可以是文件的一部分或者整个文件，也可以是一个设备的内存区域。</li>
@@ -4475,16 +4478,11 @@ add $4, %esp：
 </ol>
 <h3 id="55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"><a href="#55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？" class="headerlink" title="55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"></a>55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？</h3><p>（1）<strong>free(p+50) 是否有效？</strong></p>
 <ul>
-<li><code>malloc(100)</code> 分配了一个可以容纳 100 个字节的内存块，并返回一个指向该内存块起始位置的指针 <code>p</code>。</li>
-<li>表达式 <code>p + 50</code> 实际上是将指针 <code>p</code> 向后移动了 50 个 <code>int</code> 类型大小的位置，因为 <code>p</code> 是指向 <code>int</code> 的指针。</li>
-<li>因此，<code>free(p + 50)</code> 将会尝试释放 <code>p</code> 指向的内存块的中间部分，这不符合内存分配和释放的规范，可能会导致未定义的行为或者程序崩溃。</li>
-<li>正确的做法是只能通过 <code>free(p)</code> 来释放整个内存块，因为 <code>malloc</code> 返回的指针必须是 <code>free</code> 所接受的完整块的起始地址。</li>
+<li><strong>不可以</strong>。<code>free()</code> 函数要求传入的指针必须是由 <code>malloc()</code>、<code>calloc()</code> 或 <code>realloc()</code> 返回的指针的起始地址。如果传入的是偏移后的地址（如 <code>p + 50</code>），会导致未定义行为。这是因为 <code>free()</code> 需要从传入的指针获取内存块的元数据来释放正确的内存区域，而偏移后的指针不包含这些元数据信息。</li>
 </ul>
 <p>（2）<strong>将内存扩充到 200 字节应该如何操作？</strong></p>
 <ul>
-<li><p>在 C 语言中，<code>malloc</code> 分配的内存是固定大小的，一旦分配完成后，大小不能直接更改。要将内存扩充到 200 字节，可以使用 <code>realloc</code> 函数。</p>
-</li>
-<li><p><code>realloc</code> 函数可以重新分配先前通过 <code>malloc</code> 或 <code>calloc</code> 分配的内存块，将其大小调整为新的字节数。</p>
+<li><p>在 C 语言中，<code>malloc</code> 分配的内存是固定大小的，一旦分配完成后，大小不能直接更改。要将内存扩充到 200 字节，可以使用 <code>realloc</code> 函数。<code>realloc</code> 函数可以重新分配先前通过 <code>malloc</code> 或 <code>calloc</code> 分配的内存块，将其大小调整为新的字节数。</p>
 </li>
 <li><p>例如，要将 <code>p</code> 指向的内存块扩充到 200 字节，可以使用以下代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* q = (<span class="type">int</span>*)<span class="built_in">realloc</span>(p, <span class="number">200</span>);</span><br><span class="line"><span class="keyword">if</span> (q != <span class="literal">NULL</span>) &#123;</span><br><span class="line">    p = q; <span class="comment">// 更新 p，因为 realloc 可能会返回新的地址</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 处理内存分配失败的情况</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -4492,30 +4490,30 @@ add $4, %esp：
 <li><p><code>realloc(p, 200)</code> 将尝试将原始分配的内存块大小调整为 200 字节。如果内存块成功扩展，<code>realloc</code> 返回一个指向新分配区域的指针，并且原来的 <code>p</code> 指针仍然有效（或者更新为新的地址）。如果失败，返回 <code>NULL</code>，并且原来的 <code>p</code> 指针仍然有效。</p>
 </li>
 </ul>
-<h3 id="56、malloc、realloc、calloc的区别"><a href="#56、malloc、realloc、calloc的区别" class="headerlink" title="56、malloc、realloc、calloc的区别"></a>56、malloc、realloc、calloc的区别</h3><ol>
-<li>malloc函数</li>
+<h3 id="56、malloc、realloc、calloc-的区别"><a href="#56、malloc、realloc、calloc-的区别" class="headerlink" title="56、malloc、realloc、calloc 的区别"></a>56、malloc、realloc、calloc 的区别</h3><ol>
+<li><code>malloc</code> 函数</li>
 </ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>* <span class="title">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_size)</span></span>;</span><br><span class="line"><span class="type">int</span> *p = <span class="built_in">malloc</span>(<span class="number">20</span>*<span class="built_in">sizeof</span>(<span class="type">int</span>));申请<span class="number">20</span>个<span class="type">int</span>类型的空间；</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>* <span class="title">malloc</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_size)</span></span>;</span><br><span class="line"><span class="type">int</span> *p = <span class="built_in">malloc</span>(<span class="number">20</span>*<span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br></pre></td></tr></table></figure>
 
+<p>申请 20 个 int 类型的空间。</p>
 <ol start="2">
-<li>calloc函数</li>
+<li><code>calloc</code> 函数</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>* <span class="title">calloc</span><span class="params">(<span class="type">size_t</span> n,<span class="type">size_t</span> size)</span></span>;</span><br><span class="line"><span class="type">int</span> *p = <span class="built_in">calloc</span>(<span class="number">20</span>, <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br></pre></td></tr></table></figure>
 
-<p>省去了人为空间计算；malloc申请的空间的值是随机初始化的，calloc申请的空间的值是初始化为0的；</p>
+<p>省去了人为空间计算；malloc 申请的空间的值是随机初始化的，calloc 申请的空间的值是初始化为0的；</p>
 <ol start="3">
-<li>realloc函数</li>
+<li><code>realloc</code> 函数</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">realloc</span><span class="params">(<span class="type">void</span> *p, <span class="type">size_t</span> new_size)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>给动态分配的空间分配额外的空间，用于扩充容量。</p>
 <h3 id="57、对于-malloc-分配的内存，调用-free-后立即释放吗？"><a href="#57、对于-malloc-分配的内存，调用-free-后立即释放吗？" class="headerlink" title="57、对于 malloc() 分配的内存，调用 free() 后立即释放吗？"></a>57、对于 malloc() 分配的内存，调用 free() 后立即释放吗？</h3><p>在使用 <code>brk()</code> 或 <code>sbrk()</code> 分配的情况下，这块内存并不会立即返还给操作系统，而是标记为<strong>可再利用状态</strong>，并被 <code>ptmalloc</code> 使用双链表保存起来。当用户下一次申请内存的时候，会尝试从这些内存中寻找合适的返回。这样就避免了频繁的系统调用，占用过多的系统资源。同时 <code>ptmalloc</code> 也会尝试对小块内存进行合并，避免过多的内存碎片。如果释放的是堆末端的内存，程序的断点可能会被回退，从而实际上将内存返还给操作系统。</p>
 <p>而对于使用 <code>mmap()</code> 分配的较大内存块，在调用 <code>free()</code> 后通常会通过 <code>munmap()</code> 立即返还给操作系统。</p>
-<h3 id="58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现，而是仅仅对于大于-128k-的大块内存才使用-mmap-？"><a href="#58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现，而是仅仅对于大于-128k-的大块内存才使用-mmap-？" class="headerlink" title="58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc() 不全部使用 mmap() 来实现，而是仅仅对于大于 128k 的大块内存才使用 mmap()？"></a>58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc() 不全部使用 mmap() 来实现，而是仅仅对于大于 128k 的大块内存才使用 mmap()？</h3><p>因为向操作系统申请内存，是要通过系统调用的，执行系统调用是要进入内核态的，然后在回到用户态，运行态的切换会耗费不少时间。所以，申请内存的操作应该避免频繁的系统调用，如果都用 mmap 来分配内存，等于每次都要执行系统调用。</p>
-<p>另外，因为 mmap 分配的内存每次释放的时候，都会归还给操作系统，于是每次  mmap 分配的虚拟地址都是缺页状态的，然后在第一次访问该虚拟地址的时候，就会触发缺页中断。也就是说，<strong>频繁通过 mmap 分配的内存话，不仅每次都会发生运行态的切换，还会发生缺页中断（在第一次访问虚拟地址后），这样会导致 CPU 消耗较大</strong>。</p>
-<p>为了改进这两个问题，malloc 通过 brk() 系统调用在堆空间申请内存的时候，由于堆空间是连续的，所以直接预分配更大的内存来作为内存池，当内存释放的时候，就缓存在内存池中。等下次在申请内存的时候，就直接从内存池取出对应的内存块就行了，而且可能这个内存块的虚拟地址与物理地址的映射关系还存在，这样不仅减少了系统调用的次数，也减少了缺页中断的次数，这将大大降低 CPU 的消耗。</p>
+<h3 id="58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现，而是仅仅对于大于-128k-的大块内存才使用-mmap-？"><a href="#58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么-malloc-不全部使用-mmap-来实现，而是仅仅对于大于-128k-的大块内存才使用-mmap-？" class="headerlink" title="58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc() 不全部使用 mmap() 来实现，而是仅仅对于大于 128k 的大块内存才使用 mmap()？"></a>58、既然堆内碎片不能直接释放，导致疑似“内存泄露”问题，为什么 malloc() 不全部使用 mmap() 来实现，而是仅仅对于大于 128k 的大块内存才使用 mmap()？</h3><p>因为向操作系统申请内存，是要通过系统调用的，执行系统调用需要要进入内核态，然后再回到用户态，运行态的切换会耗费不少时间。所以，申请内存的操作应该避免频繁的系统调用，如果都用 mmap 来分配内存，等于每次都要执行系统调用。另外，因为 mmap 分配的内存每次释放的时候，都会归还给操作系统。由于每次  mmap 分配的虚拟地址都是缺页状态的，然后在第一次访问该虚拟地址的时候，就会触发缺页中断。也就是说，<strong>频繁通过 mmap 分配的内存的话，不仅每次都会发生运行态的切换，还会发生缺页中断（在第一次访问虚拟地址后），这样会导致 CPU 消耗较大</strong>。</p>
+<p>为了改进这两个问题，malloc 通过 brk() 系统调用在堆空间申请内存的时候，由于堆空间是连续的，所以直接预分配更大的内存来作为内存池，当内存释放的时候，就缓存在内存池中。等下次再申请内存的时候，就直接从内存池取出对应的内存块，而且可能这个内存块的虚拟地址与物理地址的映射关系还存在，这样不仅减少了系统调用的次数，也减少了缺页中断的次数，这将大大降低 CPU 的消耗。</p>
 <h3 id="59、kmalloc-和用户态的-malloc-有什么区别。"><a href="#59、kmalloc-和用户态的-malloc-有什么区别。" class="headerlink" title="59、kmalloc() 和用户态的 malloc() 有什么区别。"></a>59、kmalloc() 和用户态的 malloc() 有什么区别。</h3><ul>
-<li><code>kmalloc()</code> 是在<strong>内核空间</strong>中使用的内存分配函数，主要用于为内核模块或驱动程序分配内存，直接从操作系统的内核内存池中分配内存，这部分内存通常是预先保留给内核的，不会被用户空间的应用程序直接访问。</li>
+<li><code>kmalloc()</code> 是在<strong>内核空间</strong>中使用的内存分配函数，主要用于为内核模块或驱动程序分配内存，直接从操作系统的<strong>内核内存池</strong>中分配内存，这部分内存通常是预先保留给内核的，不会被用户空间的应用程序直接访问。</li>
 <li><code>malloc()</code> 是在<strong>用户空间</strong>中使用的内存分配函数，用于应用程序分配内存，分配的内存来自于用户空间的堆区，这部分内存是由操作系统管理，供所有用户程序共享使用。</li>
 </ul>
 <h3 id="60、在已申请的内存中构造对象如何实现？"><a href="#60、在已申请的内存中构造对象如何实现？" class="headerlink" title="60、在已申请的内存中构造对象如何实现？"></a>60、在已申请的内存中构造对象如何实现？</h3><p>使用<code>placement new</code>。</p>
@@ -4524,49 +4522,25 @@ add $4, %esp：
 <ul>
 <li><strong>构造和析构</strong>：使用 placement new 构造对象后，必须手动调用该对象的析构函数来确保正确的资源释放。因为普通的 delete 操作符会尝试释放内存，这在使用 placement new 时是不适用的。</li>
 <li><strong>对齐要求</strong>：需要确保传递给 placement new 的内存地址满足对象的对齐要求。</li>
-<li><strong>内存管理</strong>：使用 placement new 的代码需要格外注意内存的管理，以避免内存泄露或重复析构等问题。</li>
 </ul>
-<h3 id="61、new-、operator-new-和-placement-new-区别"><a href="#61、new-、operator-new-和-placement-new-区别" class="headerlink" title="61、new 、operator new 和 placement new 区别"></a>61、new 、operator new 和 placement new 区别</h3><p>（1）<code>new</code>：不能被重载，其行为总是一致的。它先调用 operator new 分配内存，然后调用构造函数初始化那段内存。</p>
-<p>（2）<code>operator new</code>：要实现不同的内存分配行为，应该重载 operator new，而不是 new。</p>
+<h3 id="【-】61、new-、operator-new-和-placement-new-区别"><a href="#【-】61、new-、operator-new-和-placement-new-区别" class="headerlink" title="【*】61、new 、operator new 和 placement new 区别"></a>【*】61、new 、operator new 和 placement new 区别</h3><p>（1）<code>new</code>：<strong>不能被重载</strong>，其行为总是一致的。它<strong>先调用 operator new 分配内存，然后调用构造函数初始化那段内存</strong>。</p>
+<p>（2）<code>operator new</code>：要实现不同的内存分配行为，应该重载 operator new，而不是 new。<strong>如果类中没有重载 operator new，那么调用的就是全局的 ::operator  new 来完成堆的分配。</strong></p>
 <ul>
-<li>operator new 就像 operator + 一样，是可以重载的。<strong>如果类中没有重载 operator new，那么调用的就是全局的 ::operator  new 来完成堆的分配。</strong>同理，operator new[]、operator delete、operator delete[] 也是可以重载的。</li>
+<li>operator new 就像 operator + 一样，是可以重载的。****同理，operator new[]、operator delete、operator delete[] 也是可以重载的。</li>
 <li>重载时，返回类型必须声明为 void*，第一个参数类型必须为表达要求分配空间的大小（字节），类型为 size_t，可以带其它参数。</li>
 </ul>
-<p>（3）<code>placement new</code>：<strong>只是 operator new 重载的一个标准、全局的版本</strong>。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针。因此不能删除它，但需要调用对象的析构函数。placement new 允许在一个已经分配好的内存中（栈或者堆中）构造一个新的对象。原型中 void* p 实际上就是指向一个已经分配好的内存缓冲区的的首地址。</p>
-<h3 id="62、对于-delete-parray，编译器怎么知道-parray-这个指针实际指向的是数组还是单个元素？"><a href="#62、对于-delete-parray，编译器怎么知道-parray-这个指针实际指向的是数组还是单个元素？" class="headerlink" title="62、对于 delete[] parray，编译器怎么知道 parray 这个指针实际指向的是数组还是单个元素？"></a>62、对于 delete[] parray，编译器怎么知道 parray 这个指针实际指向的是数组还是单个元素？</h3><p>对象在分配时分配器会自动写一个日志（即在分配的内存之前有一个结构），用于记录分配的大小，分配内容的 <code>sizeof</code> 等等。直观来说，<code>delete</code>和<code>delete[]</code>都是传入一个<code>void*</code>，因此如果不保存日志就无法知道分配时到底是分配了一个还是多个单元。所以虽然<code>delete</code>和<code>delete[]</code>不同，但是分配器在执行释放过程中都会读取这个日志，从而了解到底应该释放多少内存。</p>
-<p>但是有个前提：对象类型（或其基类）有显式析构函数。换句话说，析构函数是<code>non-virtual</code>的。否则的话，数组前面是没有这个日志的。对于析构函数是<code>virtual</code>的情况，<code>delete[]</code>时无需调用其析构函数，因此此时<code>VC</code>把<code>delete[]</code>当做<code>delete</code>同样处理。</p>
-<h3 id="63、比如有一个-1G-的数据，频繁调用-new-malloc-以及-delete-free，如何优化性能？"><a href="#63、比如有一个-1G-的数据，频繁调用-new-malloc-以及-delete-free，如何优化性能？" class="headerlink" title="63、比如有一个 1G 的数据，频繁调用 new&#x2F;malloc 以及 delete&#x2F;free，如何优化性能？"></a>63、比如有一个 1G 的数据，频繁调用 new&#x2F;malloc 以及 delete&#x2F;free，如何优化性能？</h3><p>频繁调用 <code>new</code>&#x2F;<code>malloc</code> 和 <code>delete</code>&#x2F;<code>free</code> 可能导致内存分配和释放的开销增加，从而影响系统性能。针对这种情况，可以考虑以下优化策略：</p>
+<p>（3）<code>placement new</code>：<strong>只是 operator new 重载的一个标准、全局的版本</strong>。它并不分配内存，只是返回指向已经分配好的某段内存的一个指针。placement new 允许在一个已经分配好的内存中（栈或者堆中）构造一个新的对象。原型中 void* p 实际上就是指向一个已经分配好的内存缓冲区的的首地址。</p>
+<h3 id="【-】62、对于-delete-parray，编译器怎么知道-parray-这个指针实际指向的是数组还是单个元素？"><a href="#【-】62、对于-delete-parray，编译器怎么知道-parray-这个指针实际指向的是数组还是单个元素？" class="headerlink" title="【*】62、对于 delete[] parray，编译器怎么知道 parray 这个指针实际指向的是数组还是单个元素？"></a>【*】62、对于 delete[] parray，编译器怎么知道 parray 这个指针实际指向的是数组还是单个元素？</h3><p><strong>对象在分配时分配器会自动写一个日志，即在分配的内存之前有一个结构，用于记录分配的大小，分配内容的 <code>sizeof</code> 等等。</strong>直观来说，<code>delete</code>和<code>delete[]</code>都是传入一个<code>void*</code>，因此如果不保存日志就无法知道分配时到底是分配了一个还是多个单元。所以虽然<code>delete</code>和<code>delete[]</code>不同，但是分配器在执行释放过程中都会读取这个日志，从而了解到底应该释放多少内存。</p>
+<p>但是有个前提：对象类型（或其基类）有显式析构函数。换句话说，析构函数是<code>non-virtual</code>的。<strong>对于析构函数是 virtual 的情况，delete[] 时无需调用其析构函数，因此此时 VC 把 delete[] 当做 delete 同样处理。</strong></p>
+<h3 id="【-】63、比如有一个-1G-的数据，频繁调用-new-malloc-以及-delete-free，如何优化性能？"><a href="#【-】63、比如有一个-1G-的数据，频繁调用-new-malloc-以及-delete-free，如何优化性能？" class="headerlink" title="【*】63、比如有一个 1G 的数据，频繁调用 new&#x2F;malloc 以及 delete&#x2F;free，如何优化性能？"></a>【*】63、比如有一个 1G 的数据，频繁调用 new&#x2F;malloc 以及 delete&#x2F;free，如何优化性能？</h3><p>频繁调用 <code>new</code>&#x2F;<code>malloc</code> 和 <code>delete</code>&#x2F;<code>free</code> 可能导致内存分配和释放的开销增加，从而影响系统性能。针对这种情况，可以考虑以下优化策略：</p>
 <ol>
-<li><strong>内存池管理</strong>：<ul>
-<li>实现自定义的内存池，预先分配一定大小的内存块，而不是每次调用 <code>new</code>&#x2F;<code>malloc</code> 时都向系统请求内存。这样可以减少系统调用次数和内存碎片化。内存池可以是固定大小的块，也可以是根据需要动态增长或缩减的块。它们可以通过链表或者数组来管理。</li>
-</ul>
-</li>
-<li><strong>对象池技术</strong>：<ul>
-<li>如果频繁创建和销毁对象，可以使用对象池技术。对象池在程序启动时预先创建一定数量的对象，并在需要时从池中获取对象，使用完毕后再放回池中。这样可以避免对象的重复创建和销毁，减少内存分配和释放的开销。</li>
-</ul>
-</li>
-<li><strong>重用机制</strong>：<ul>
-<li>尽可能重用已分配的内存块。在需要释放内存时，不立即释放，而是放入一个空闲链表或者空闲对象池中，以便下次分配时能够快速重用。</li>
-<li>对于频繁分配相同大小的内存，可以采用内存池的方式进行管理，避免反复请求和释放系统内存。</li>
-</ul>
-</li>
-<li><strong>内存分配策略优化</strong>：<ul>
-<li>对于需要频繁分配和释放的小对象，可以考虑使用更高效的分配策略，如 <code>std::allocator</code> 或者专门优化的内存分配器（如 tcmalloc 或 jemalloc）。</li>
-<li>这些分配器通常比标准库的 <code>malloc</code> 和 <code>free</code> 实现更加高效，能够降低内存碎片化和系统调用次数。</li>
-</ul>
-</li>
-<li><strong>避免内存泄漏和悬空指针</strong>：<ul>
-<li>确保每次分配的内存均能在适当的时候释放，避免内存泄漏。</li>
-<li>使用智能指针（如 <code>std::shared_ptr</code>、<code>std::unique_ptr</code>）等 RAII 技术管理资源，可以有效避免悬空指针和内存泄漏问题。</li>
-</ul>
-</li>
-<li><strong>内存分配的时机和位置</strong>：<ul>
-<li>在程序设计阶段，合理规划和设计内存的分配和释放时机，尽量避免频繁的动态内存分配和释放。可以考虑在初始化阶段预分配一部分内存，减少后续的动态内存操作频率。</li>
-</ul>
-</li>
+<li><strong>内存池管理</strong>：实现自定义的内存池，预先分配一定大小的内存块，而不是每次调用 <code>new</code>&#x2F;<code>malloc</code> 时都向系统请求内存。这样可以减少系统调用次数和内存碎片化。内存池可以是固定大小的块，也可以是根据需要动态增长或缩减的块。它们可以通过链表或者数组来管理。</li>
+<li><strong>重用机制</strong>：尽可能重用已分配的内存块。在需要释放内存时，不立即释放，而是放入一个空闲链表或者空闲对象池中，以便下次分配时能够快速重用。对于频繁分配相同大小的内存，可以采用内存池的方式进行管理，避免反复请求和释放系统内存。</li>
+<li><strong>内存分配策略优化</strong>：对于需要频繁分配和释放的小对象，可以考虑使用更高效的分配策略，如 <code>std::allocator</code> 或者专门优化的内存分配器（如 tcmalloc 或 jemalloc）。这些分配器通常比标准库的 <code>malloc</code> 和 <code>free</code> 实现更加高效，能够降低内存碎片化和系统调用次数。</li>
+<li><strong>内存分配的时机和位置</strong>：在程序设计阶段，合理规划和设计内存的分配和释放时机，尽量避免频繁的动态内存分配和释放。可以考虑在初始化阶段预分配一部分内存，减少后续的动态内存操作频率。</li>
 </ol>
 <h3 id="64、内存分配的过程是怎样的？"><a href="#64、内存分配的过程是怎样的？" class="headerlink" title="64、内存分配的过程是怎样的？"></a>64、内存分配的过程是怎样的？</h3><p>应用程序通过 malloc 函数申请内存的时候，实际上申请的是虚拟内存，此时并不会分配物理内存。</p>
-<p>当应用程序读写了这块虚拟内存，CPU 就会去访问这个虚拟内存， 这时会发现这个虚拟内存没有映射到物理内存， CPU 就会产生<strong>缺页中断</strong>，进程会从用户态切换到内核态，并将缺页中断交给内核的 Page Fault Handler （缺页中断函数）处理。缺页中断处理函数会看是否有空闲的物理内存，如果有，就直接分配物理内存，并建立虚拟内存与物理内存之间的映射关系。</p>
+<p>当应用程序第一次读写这块虚拟内存时，CPU在访问时会发现这个虚拟内存没有映射到物理内存， 就会产生<strong>缺页中断</strong>，进程从用户态切换到内核态，通过缺页中断的处理函数将虚拟地址映射到一段空闲的物理内存上。</p>
 <h3 id="65、内存紧张-没有空闲物理内存时有哪些操作？"><a href="#65、内存紧张-没有空闲物理内存时有哪些操作？" class="headerlink" title="65、内存紧张&#x2F;没有空闲物理内存时有哪些操作？"></a>65、内存紧张&#x2F;没有空闲物理内存时有哪些操作？</h3><p>如果没有空闲的物理内存，那么内核就会开始进行<strong>回收内存</strong>的工作，回收的方式主要是两种：直接内存回收和后台内存回收。</p>
 <ul>
 <li><strong>后台内存回收</strong>（kswapd）：在物理内存紧张的时候，会唤醒 kswapd 内核线程来回收内存，这个回收内存的过程<strong>异步</strong>的，不会阻塞进程的执行。</li>
@@ -7778,12 +7752,12 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">285k</span>
+    <span title="站点总字数">284k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
