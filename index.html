@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-06 20:52:03" itemprop="dateModified" datetime="2024-07-06T20:52:03+08:00">2024-07-06</time>
+                <time title="修改时间：2024-07-09 18:05:58" itemprop="dateModified" datetime="2024-07-09T18:05:58+08:00">2024-07-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>4.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>16 分钟</span>
             </span>
 
         </div>
@@ -372,6 +372,176 @@
 <h2 id="2、网络结构"><a href="#2、网络结构" class="headerlink" title="2、网络结构"></a>2、网络结构</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png" alt="整体结构设计" style="zoom: 50%;" />
 
 <h2 id="3、协议分层"><a href="#3、协议分层" class="headerlink" title="3、协议分层"></a>3、协议分层</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png" alt="软件层级结构"></p>
+<h1 id="三、调试信息输出模块"><a href="#三、调试信息输出模块" class="headerlink" title="三、调试信息输出模块"></a>三、调试信息输出模块</h1><p>这个项目的调试信息输出模块主要用于在开发和调试过程中输出各种调试信息，包括错误、警告和一般信息。它包含了一些宏定义、函数和常量，用于控制调试信息的输出格式和级别。下面是对该模块的详细总结：</p>
+<h4 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h4><ol>
+<li><code>dbg.h</code><ul>
+<li>包含宏定义、函数声明和调试信息输出级别的定义。</li>
+</ul>
+</li>
+<li><code>dbg.c</code><ul>
+<li>包含调试信息输出函数的具体实现。</li>
+</ul>
+</li>
+</ol>
+<h4 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h4><ol>
+<li><p><strong>调试信息显示样式设置</strong></p>
+<ul>
+<li><p>通过ANSI转义序列设置不同等级的显示样式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_RESET       <span class="string">&quot;\033[0m&quot;</span>       <span class="comment">// 复位显示</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_ERROR       <span class="string">&quot;\033[31m&quot;</span>      <span class="comment">// 红色显示</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_WARNING     <span class="string">&quot;\033[33m&quot;</span>      <span class="comment">// 黄色显示</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>调试信息输出级别</strong></p>
+<ul>
+<li><p>定义了不同的调试信息输出级别，每个级别对应不同的数值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_NONE           0         <span class="comment">// 不开启任何输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_ERROR          1         <span class="comment">// 只开启错误信息输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_WARNING        2         <span class="comment">// 开启错误和警告信息输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_INFO           3         <span class="comment">// 开启错误、警告、一般信息输出</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>调试信息输出函数</strong></p>
+<ul>
+<li><p><code>dbg_print</code></p>
+<ul>
+<li>根据不同的级别输出调试信息，包括文件名、函数名、行号和具体的调试信息。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dbg_print</span><span class="params">(<span class="type">int</span> m_level, <span class="type">int</span> s_level, <span class="type">const</span> <span class="type">char</span>* file, <span class="type">const</span> <span class="type">char</span>* func, <span class="type">int</span> line, <span class="type">const</span> <span class="type">char</span>* fmt, ...)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>dump_mac</code></p>
+<ul>
+<li>输出MAC地址。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dump_mac</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * msg, <span class="type">const</span> <span class="type">uint8_t</span> * mac)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>dump_ip_buf</code></p>
+<ul>
+<li>输出IP地址。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dump_ip_buf</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* msg, <span class="type">const</span> <span class="type">uint8_t</span>* ip)</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>调试输出宏</strong></p>
+<ul>
+<li><p>提供了便捷的宏用于不同级别的调试信息输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_info(module, fmt, ...)  dbg_print(module, DBG_LEVEL_INFO, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_error(module, fmt, ...)  dbg_print(module, DBG_LEVEL_ERROR, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_warning(module, fmt, ...) dbg_print(module, DBG_LEVEL_WARNING, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>断言宏</strong></p>
+<ul>
+<li><p>提供断言宏用于在调试过程中验证表达式的正确性，如果表达式为假，则输出错误信息并进入无限循环：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_assert(expr, msg)   &#123;\</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (!(expr)) &#123;\</span></span><br><span class="line"><span class="meta">        dbg_print(DBG_LEVEL_ERROR, DBG_LEVEL_ERROR, __FILE__, __FUNCTION__, __LINE__, <span class="string">&quot;assert failed:&quot;</span>#expr<span class="string">&quot;,&quot;</span>msg); \</span></span><br><span class="line"><span class="meta">        while(1);   \</span></span><br><span class="line"><span class="meta">    &#125;   \</span></span><br><span class="line"><span class="meta">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>调试信息输出开关</strong></p>
+<ul>
+<li><p>定义了不同模块的调试信息输出级别：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_MBLOCK           DBG_LEVEL_ERROR         <span class="comment">// 内存块管理器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_QUEUE            DBG_LEVEL_ERROR         <span class="comment">// 定长存储块</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_MSG              DBG_LEVEL_ERROR         <span class="comment">// 消息通信</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_BUF              DBG_LEVEL_ERROR         <span class="comment">// 数据包管理器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_PLAT             DBG_LEVEL_ERROR         <span class="comment">// 系统平台</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_INIT             DBG_LEVEL_ERROR         <span class="comment">// 初始化模块</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_NETIF            DBG_LEVEL_ERROR         <span class="comment">// 网络接口层</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ETHER            DBG_LEVEL_ERROR         <span class="comment">// 以太网协议层</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TOOLS            DBG_LEVEL_ERROR         <span class="comment">// 工具集</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TIMER            DBG_LEVEL_ERROR         <span class="comment">// 定时器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ARP              DBG_LEVEL_ERROR         <span class="comment">// ARP协议</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_IP               DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ICMP             DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_SOCKET           DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_RAW              DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_UDP              DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_DNS              DBG_LEVEL_ERROR         <span class="comment">// DNS调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TCP              DBG_LEVEL_INFO          <span class="comment">// 调试开关</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="具体实现分析"><a href="#具体实现分析" class="headerlink" title="具体实现分析"></a>具体实现分析</h3><h4 id="dbg-print-函数"><a href="#dbg-print-函数" class="headerlink" title="dbg_print 函数"></a><code>dbg_print</code> 函数</h4><p>该函数根据日志等级输出调试信息，具体实现如下：</p>
+<ol>
+<li><p>定义日志等级标题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span>* title[] = &#123;</span><br><span class="line">    [DBG_LEVEL_ERROR] = DBG_STYLE_ERROR<span class="string">&quot;error&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_WARNING] = DBG_STYLE_WARNING<span class="string">&quot;warning&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_INFO] = <span class="string">&quot;info&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_NONE] = <span class="string">&quot;none&quot;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断是否输出日志信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (m_level &gt;= s_level) &#123;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>仅当主日志等级 <code>m_level</code> 大于等于子日志等级 <code>s_level</code> 时，才输出日志信息。</li>
+</ul>
+</li>
+<li><p>提取文件名</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * end = file + plat_strlen(file);</span><br><span class="line"><span class="keyword">while</span> (end &gt;= file) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((*end == <span class="string">&#x27;\\&#x27;</span>) || (*end == <span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    end--;</span><br><span class="line">&#125;</span><br><span class="line">end++;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过遍历字符串，从路径中提取文件名部分。</li>
+</ul>
+</li>
+<li><p>输出日志头部信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plat_printf(<span class="string">&quot;%s(%s-%s-%d):&quot;</span>, title[s_level], end, func, line);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>输出日志级别、文件名、函数名和行号。</li>
+</ul>
+</li>
+<li><p>输出具体日志信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str_buf[<span class="number">128</span>];</span><br><span class="line">va_list args;</span><br><span class="line"></span><br><span class="line">va_start(args, fmt);</span><br><span class="line">plat_vsprintf(str_buf, fmt, args);</span><br><span class="line">plat_printf(<span class="string">&quot;%s\n&quot;</span>DBG_STYLE_RESET, str_buf);</span><br><span class="line">va_end(args);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用可变参数列表处理格式化字符串，输出具体日志信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>假设我们在代码的某处使用这些宏和函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbg_info(DBG_TCP, <span class="string">&quot;TCP connection established&quot;</span>);</span><br><span class="line">dbg_warning(DBG_TCP, <span class="string">&quot;TCP connection may be slow&quot;</span>);</span><br><span class="line">dbg_error(DBG_TCP, <span class="string">&quot;TCP connection failed&quot;</span>);</span><br><span class="line">dbg_assert(ptr != <span class="literal">NULL</span>, <span class="string">&quot;Pointer should not be NULL&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_INFO</code> 时，会输出 “TCP connection established” 信息。</li>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_WARNING</code> 时，会输出 “TCP connection may be slow” 警告。</li>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_ERROR</code> 时，会输出 “TCP connection failed” 错误。</li>
+<li>如果 <code>ptr</code> 为 <code>NULL</code>，则输出断言失败信息并进入无限循环。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>该调试信息输出模块通过定义不同的日志等级和使用可变参数处理，提供了灵活且易用的调试信息输出功能。通过宏定义，开发者可以方便地在代码中插入调试信息输出，帮助快速定位问题，提高开发效率。</p>
+<h1 id="四、定长内存块管理"><a href="#四、定长内存块管理" class="headerlink" title="四、定长内存块管理"></a>四、定长内存块管理</h1><h2 id="1、协议栈中的存储管理"><a href="#1、协议栈中的存储管理" class="headerlink" title="1、协议栈中的存储管理"></a>1、协议栈中的存储管理</h2><p>当应用程序需要请求工作线程去做某事时，需要先申请一个消息结构，即一个内存块，并将这个内存块的指针插入消息队列中。工作线程在接收到这个指针后执行相应的操作，完成后释放该内存块。</p>
+<p>将数据包拆分成大小一致的数据块，如下图所示。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091442502.png" alt="image-20240709144204250" style="zoom: 67%;" />
+
+<p>本协议栈在设计时采用<strong>固定长度</strong>的存储分配，考虑以下两点：</p>
+<p>1、在某些系统上，内核并没有提供动态内存分配函数；– 考虑可移植性。</p>
+<p>2、减少动态分配造成的内存碎片问题。</p>
+<p>在初始化时，将数组中各个数组元素构建成一个<strong>空闲链表</strong>，当需要内存时，从中取出一个内存块用于分配，并且进行<strong>加锁</strong>处理，以适用于多线程场景。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091805403.png" alt="定长存储分配" style="zoom: 67%;" />
+
+<h3 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091701626.png" alt="image-20240709170116444"></p>
+<p>实现了一个存储块管理器（<code>mblock</code>），用于管理内存块的分配和释放。通过使用链表和锁机制，实现了多线程环境下的安全内存管理。下面是对文件的详细分析和总结：</p>
+<h3 id="主要结构和函数"><a href="#主要结构和函数" class="headerlink" title="主要结构和函数"></a>主要结构和函数</h3><h4 id="1-mblock-init"><a href="#1-mblock-init" class="headerlink" title="1. mblock_init"></a>1. <code>mblock_init</code></h4><p><strong>功能</strong>：初始化存储块管理器。</p>
+<ul>
+<li>检查内存块大小是否满足要求（至少要能容纳一个链表节点）。</li>
+<li>将指定内存区域划分成多个相同大小的内存块，并将这些内存块插入到链表中。</li>
+<li>初始化锁，根据锁类型决定是否需要分配信号量。</li>
+</ul>
+<p><strong>代码分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">net_err_t</span> <span class="title function_">mblock_init</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">void</span> *mem, <span class="type">int</span> blk_size, <span class="type">int</span> cnt, <span class="type">nlocker_type_t</span> locker_type)</span> &#123;</span><br><span class="line">    dbg_assert(blk_size &gt;= <span class="keyword">sizeof</span>(<span class="type">nlist_node_t</span>), <span class="string">&quot;size error&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">uint8_t</span> *buf = (<span class="type">uint8_t</span> *)mem;</span><br><span class="line">    nlist_init(&amp;mblock-&gt;free_list);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;cnt; i++, buf+=blk_size) &#123;</span><br><span class="line">        <span class="type">nlist_node_t</span> *block = (<span class="type">nlist_node_t</span> *)buf;</span><br><span class="line">        nlist_node_init(block);</span><br><span class="line">        nlist_insert_last(&amp;mblock-&gt;free_list, block);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nlocker_init(&amp;mblock-&gt;locker, locker_type);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (locker_type != NLOCKER_NONE) &#123;</span><br><span class="line">        mblock-&gt;alloc_sem = sys_sem_create(cnt);</span><br><span class="line">        <span class="keyword">if</span> (mblock-&gt;alloc_sem == SYS_SEM_INVALID) &#123;</span><br><span class="line">            dbg_error(DBG_MBLOCK, <span class="string">&quot;create sem failed.&quot;</span>);</span><br><span class="line">            nlocker_destroy(&amp;mblock-&gt;locker);</span><br><span class="line">            <span class="keyword">return</span> NET_ERR_SYS;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> NET_ERR_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-mblock-alloc"><a href="#2-mblock-alloc" class="headerlink" title="2. mblock_alloc"></a>2. <code>mblock_alloc</code></h4><p><strong>功能</strong>：分配一个空闲的内存块。</p>
+<ul>
+<li>如果不需要等待信号量，则直接分配内存块。</li>
+<li>如果需要等待信号量，则等待信号量通知，然后分配内存块。</li>
+<li>从链表中取出一个内存块，并返回其地址。</li>
+</ul>
+<p><strong>代码分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">mblock_alloc</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">int</span> ms)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ((ms &lt; <span class="number">0</span>) || (mblock-&gt;locker.type == NLOCKER_NONE)) &#123;</span><br><span class="line">        nlocker_lock(&amp;mblock-&gt;locker);</span><br><span class="line">        <span class="type">int</span> cnt = nlist_count(&amp;mblock-&gt;free_list);</span><br><span class="line">        nlocker_unlock(&amp;mblock-&gt;locker);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cnt == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="type">void</span> *)<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mblock-&gt;locker.type != NLOCKER_NONE) &#123;</span><br><span class="line">        sys_sem_wait(mblock-&gt;alloc_sem, ms);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    nlocker_lock(&amp;mblock-&gt;locker);</span><br><span class="line">    <span class="type">nlist_node_t</span> *block = nlist_remove_first(&amp;mblock-&gt;free_list);</span><br><span class="line">    nlocker_unlock(&amp;mblock-&gt;locker);</span><br><span class="line">    <span class="keyword">return</span> block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-mblock-free"><a href="#3-mblock-free" class="headerlink" title="3. mblock_free"></a>3. <code>mblock_free</code></h4><p><strong>功能</strong>：释放一个内存块。</p>
+<ul>
+<li>将内存块插入到空闲链表中。</li>
+<li>如果使用信号量，则通知等待的线程有新的内存块可用。</li>
+</ul>
+<p><strong>代码分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_free</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">void</span> *block)</span> &#123;</span><br><span class="line">    nlocker_lock(&amp;mblock-&gt;locker);</span><br><span class="line">    nlist_insert_last(&amp;mblock-&gt;free_list, (<span class="type">nlist_node_t</span> *)block);</span><br><span class="line">    nlocker_unlock(&amp;mblock-&gt;locker);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mblock-&gt;locker.type != NLOCKER_NONE) &#123;</span><br><span class="line">        sys_sem_notify(mblock-&gt;alloc_sem);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-mblock-free-cnt"><a href="#4-mblock-free-cnt" class="headerlink" title="4. mblock_free_cnt"></a>4. <code>mblock_free_cnt</code></h4><p><strong>功能</strong>：获取空闲内存块的数量。</p>
+<ul>
+<li>锁定链表，获取空闲块数量，然后解锁。</li>
+</ul>
+<p><strong>代码分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mblock_free_cnt</span><span class="params">(<span class="type">mblock_t</span> *mblock)</span> &#123;</span><br><span class="line">    nlocker_lock(&amp;mblock-&gt;locker);</span><br><span class="line">    <span class="type">int</span> cnt = nlist_count(&amp;mblock-&gt;free_list);</span><br><span class="line">    nlocker_unlock(&amp;mblock-&gt;locker);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-mblock-destroy"><a href="#5-mblock-destroy" class="headerlink" title="5. mblock_destroy"></a>5. <code>mblock_destroy</code></h4><p><strong>功能</strong>：销毁存储块管理器。</p>
+<ul>
+<li>释放信号量和锁。</li>
+</ul>
+<p><strong>代码分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_destroy</span><span class="params">(<span class="type">mblock_t</span> *mblock)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (mblock-&gt;locker.type != NLOCKER_NONE) &#123;</span><br><span class="line">        sys_sem_free(mblock-&gt;alloc_sem);</span><br><span class="line">        nlocker_destroy(&amp;mblock-&gt;locker);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>实现了一个存储块管理器，用于管理固定大小内存块的分配和释放。</li>
+<li>通过使用链表管理内存块，并结合锁机制和信号量，实现了多线程环境下的安全内存管理。</li>
+<li>提供了初始化、分配、释放、获取空闲块数量和销毁等功能，确保内存管理的灵活性和安全性。</li>
+<li>需要注意的是，在多线程环境下，正确使用锁和信号量是确保内存管理器正常工作的关键。</li>
+</ul>
+<h2 id="2、mblock-c"><a href="#2、mblock-c" class="headerlink" title="2、mblock.c"></a>2、mblock.c</h2><p>测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_test</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">mblock_t</span> blist;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> buffer[<span class="number">100</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">	<span class="type">void</span> *temp[<span class="number">10</span>];</span><br><span class="line">	mblock_init(&amp;blist, buffer, <span class="number">100</span>, <span class="number">10</span>, NLOCKER_THREAD);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">		temp[i] = mblock_alloc(&amp;blist, <span class="number">0</span>);</span><br><span class="line">        plat_printf(<span class="string">&quot;block: %p, free_count: %d\n&quot;</span>, temp[i], mblock_free_cnt(&amp;blist));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">		mblock_free(&amp;blist, temp[i]);</span><br><span class="line">		plat_printf(<span class="string">&quot;after free, free_count: %d\n&quot;</span>, mblock_free_cnt(&amp;blist));</span><br><span class="line">	&#125;</span><br><span class="line">	mblock_destroy(&amp;blist);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091756328.png" alt="image-20240709175656172"></p>
 
       
     </div>
@@ -3912,7 +4082,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-08 16:20:27" itemprop="dateModified" datetime="2024-07-08T16:20:27+08:00">2024-07-08</time>
+                <time title="修改时间：2024-07-10 12:10:57" itemprop="dateModified" datetime="2024-07-10T12:10:57+08:00">2024-07-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -3934,14 +4104,14 @@ add $4, %esp：
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>35k</span>
+              <span>34k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:07</span>
+              <span>2:05</span>
             </span>
 
         </div>
@@ -4013,11 +4183,14 @@ add $4, %esp：
 <li>系统对进程发出每一个系统能够满足的资源申请进行动态检查，并根据检查结果决定是否分配资源。如果分配后系统可能发生死锁，则不予分配，否则予以分配。保证系统不进入死锁状态的动态策略。</li>
 <li>在系统设计、进程调度等方面注意如何让这四个必要条件不成立，如何确定资源的合理分配算法，避免进程永久占据系统资源。此外，也要防止进程在处于等待状态的情况下占用资源。因此，对资源的分配要给予合理的规划。</li>
 </ol>
-<h3 id="9、如果有两个线程-1、2-去访问同一个资源-C-，并且二者必须同时获取锁-A-和-B-才可以访问-C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？"><a href="#9、如果有两个线程-1、2-去访问同一个资源-C-，并且二者必须同时获取锁-A-和-B-才可以访问-C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？" class="headerlink" title="9、如果有两个线程 1、2 去访问同一个资源 C ，并且二者必须同时获取锁 A 和 B 才可以访问 C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？"></a>9、如果有两个线程 1、2 去访问同一个资源 C ，并且二者必须同时获取锁 A 和 B 才可以访问 C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？</h3><pre><code>  1. 如果两个线程同时去分别获取不同的锁时，会出现死锁，比如线程 1 先获得锁 A 而线程 2 先获得锁 B，然后二者都会等待；
-  2. 正确的获取和释放顺序是：
-        1. **按照固定顺序获取锁**：所有线程都按照相同的顺序获取锁，例如，先获取锁 `A`，然后获取锁 `B`；
-        2. **使用 try-lock 方法**：尝试获取锁，如果获取不到，就放弃所有已持有的锁，稍后重试。
-</code></pre>
+<h3 id="9、如果有两个线程-1、2-去访问同一个资源-C-，并且二者必须同时获取锁-A-和-B-才可以访问-C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？"><a href="#9、如果有两个线程-1、2-去访问同一个资源-C-，并且二者必须同时获取锁-A-和-B-才可以访问-C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？" class="headerlink" title="9、如果有两个线程 1、2 去访问同一个资源 C ，并且二者必须同时获取锁 A 和 B 才可以访问 C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？"></a>9、如果有两个线程 1、2 去访问同一个资源 C ，并且二者必须同时获取锁 A 和 B 才可以访问 C。问什么顺序获取锁会导致死锁，正确的获取和释放顺序是如何？</h3><ol>
+<li>如果两个线程同时去分别获取不同的锁时，会出现死锁，比如线程 1 先获得锁 A 而线程 2 先获得锁 B，然后二者都会等待；</li>
+<li>正确的获取和释放顺序是：<ol>
+<li><strong>按照固定顺序获取锁</strong>：所有线程都按照相同的顺序获取锁，例如，先获取锁 <code>A</code>，然后获取锁 <code>B</code>；</li>
+<li><strong>使用 try-lock 方法</strong>：尝试获取锁，如果获取不到，就放弃所有已持有的锁，稍后重试。</li>
+</ol>
+</li>
+</ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::mutex lockA;</span><br><span class="line">std::mutex lockB;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">thread1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guardA</span><span class="params">(lockA)</span></span>; <span class="comment">// 获取锁A</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">100</span>)); <span class="comment">// 模拟一些工作</span></span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guardB</span><span class="params">(lockB)</span></span>; <span class="comment">// 获取锁B</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Thread 1 has acquired both locks&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">thread2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guardA</span><span class="params">(lockA)</span></span>; <span class="comment">// 获取锁A</span></span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">100</span>)); <span class="comment">// 模拟一些工作</span></span><br><span class="line">    <span class="function">std::lock_guard&lt;std::mutex&gt; <span class="title">guardB</span><span class="params">(lockB)</span></span>; <span class="comment">// 获取锁B</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Thread 2 has acquired both locks&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">std::thread <span class="title">t1</span><span class="params">(thread1)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">t2</span><span class="params">(thread2)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.<span class="built_in">join</span>();</span><br><span class="line">    t2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="10、从锁的粒度来说，有哪些？"><a href="#10、从锁的粒度来说，有哪些？" class="headerlink" title="10、从锁的粒度来说，有哪些？"></a>10、从锁的粒度来说，有哪些？</h3><p>（1）<strong>粗粒度锁</strong>：</p>
@@ -4167,7 +4340,7 @@ add $4, %esp：
 <li>如果是常态则先要考虑是不是线程数量设置有问题，其次判断机器是否能力不足以处理这些数据；</li>
 <li>假如说硬件和软件都没有问题，那么考虑这个问题为什么会产生，是不是<strong>高计算密集型任务</strong>太多了。如果说当前请求任务比较复杂，那么考虑进行分类，将处理的特别慢的请求作为一个特定类，将一些线程固定给他们使用，而不是所有线程都用来处理这种任务，因为既然很慢，那么慢1个和慢10个点区别就没有那么大了，然后将其他线程用来处理能够快速处理完的请求。</li>
 </ul>
-<h3 id="【-】23、线程间的通信包括哪些方式？"><a href="#【-】23、线程间的通信包括哪些方式？" class="headerlink" title="【*】23、线程间的通信包括哪些方式？"></a>【*】23、线程间的通信包括哪些方式？</h3><ol>
+<h3 id="23、线程间的通信包括哪些方式？"><a href="#23、线程间的通信包括哪些方式？" class="headerlink" title="23、线程间的通信包括哪些方式？"></a>23、线程间的通信包括哪些方式？</h3><ol>
 <li><p><strong>互斥锁（Mutex）</strong>：用于控制多个线程对共享资源的访问，保证同一时间只有一个线程可以访问资源。</p>
 </li>
 <li><p><strong>条件变量</strong>：利用线程间共享全局变量进行同步的一种机制。允许一个或多个线程在某些条件下暂停执行并等待，直到另一个线程通知它们条件已经满足，从而避免了线程不断轮询检查该条件是否成立而降低效率的情况。</p>
@@ -4459,26 +4632,9 @@ add $4, %esp：
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">mem_control_block</span> &#123;</span><br><span class="line">    <span class="type">int</span> is_available;      <span class="comment">// 1表可用，0表不可用</span></span><br><span class="line">    <span class="type">int</span> size;                 <span class="comment">// 总大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="【-】54、mmap-的原理"><a href="#【-】54、mmap-的原理" class="headerlink" title="【*】54、mmap() 的原理"></a>【*】54、mmap() 的原理</h3><p><code>mmap()</code> 是一个系统调用，用于在进程的地址空间中创建一个新的映射区域（mapping）。</p>
-<ol>
-<li><strong>创建映射区域</strong>：<ul>
-<li><code>mmap()</code> 可以将一个文件或者其它对象（如设备内存）映射到调用进程的地址空间中。这个映射区域可以是文件的一部分或者整个文件，也可以是一个设备的内存区域。</li>
-<li>映射的区域可以是只读的、可读写的、或者私有的（写时复制）。</li>
-</ul>
-</li>
-<li><strong>映射对象类型</strong>：<ul>
-<li>文件映射：<code>mmap()</code> 可以将一个文件映射到进程的地址空间中，这样可以通过内存操作来读写文件，而不需要使用标准的文件 I&#x2F;O 操作函数（如 <code>read()</code> 和 <code>write()</code>）。</li>
-<li>匿名映射：<code>mmap()</code> 还可以用于创建一个不与文件关联的映射区域，通常用于进程间通信或者动态内存分配。</li>
-</ul>
-</li>
-<li><strong>映射区域的使用</strong>：<ul>
-<li>映射区域创建后，进程可以像访问普通内存一样访问这些区域。读写映射区域的内容会直接影响到原始文件或者设备。</li>
-</ul>
-</li>
-</ol>
-<h3 id="55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"><a href="#55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？" class="headerlink" title="55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"></a>55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？</h3><p>（1）<strong>free(p+50) 是否有效？</strong></p>
+<h3 id="【-】54、mmap-的原理"><a href="#【-】54、mmap-的原理" class="headerlink" title="【*】54、mmap() 的原理"></a>【*】54、mmap() 的原理</h3><h3 id="55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"><a href="#55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？" class="headerlink" title="55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"></a>55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？</h3><p>（1）<strong>free(p+50) 是否有效？</strong></p>
 <ul>
-<li><strong>不可以</strong>。<code>free()</code> 函数要求传入的指针必须是由 <code>malloc()</code>、<code>calloc()</code> 或 <code>realloc()</code> 返回的指针的起始地址。如果传入的是偏移后的地址（如 <code>p + 50</code>），会导致未定义行为。这是因为 <code>free()</code> 需要从传入的指针获取内存块的元数据来释放正确的内存区域，而偏移后的指针不包含这些元数据信息。</li>
+<li><strong>不可以</strong>。<code>free()</code> 函数要求传入的指针必须是由 <code>malloc()</code>、<code>calloc()</code> 或 <code>realloc()</code> 返回的指针的起始地址。如果传入的是偏移后的地址（如 <code>p + 50</code>），会导致未定义行为。<code>malloc()</code> 在分配用户传入大小的内存时，还<strong>额外分配一个用于管理的内存</strong>，大小为 8 字节， <code>free()</code> 需要据此来释放正确的内存区域，而偏移后的指针不包含这些信息。</li>
 </ul>
 <p>（2）<strong>将内存扩充到 200 字节应该如何操作？</strong></p>
 <ul>
@@ -4539,8 +4695,7 @@ add $4, %esp：
 <li><strong>内存分配策略优化</strong>：对于需要频繁分配和释放的小对象，可以考虑使用更高效的分配策略，如 <code>std::allocator</code> 或者专门优化的内存分配器（如 tcmalloc 或 jemalloc）。这些分配器通常比标准库的 <code>malloc</code> 和 <code>free</code> 实现更加高效，能够降低内存碎片化和系统调用次数。</li>
 <li><strong>内存分配的时机和位置</strong>：在程序设计阶段，合理规划和设计内存的分配和释放时机，尽量避免频繁的动态内存分配和释放。可以考虑在初始化阶段预分配一部分内存，减少后续的动态内存操作频率。</li>
 </ol>
-<h3 id="64、内存分配的过程是怎样的？"><a href="#64、内存分配的过程是怎样的？" class="headerlink" title="64、内存分配的过程是怎样的？"></a>64、内存分配的过程是怎样的？</h3><p>应用程序通过 malloc 函数申请内存的时候，实际上申请的是虚拟内存，此时并不会分配物理内存。</p>
-<p>当应用程序第一次读写这块虚拟内存时，CPU在访问时会发现这个虚拟内存没有映射到物理内存， 就会产生<strong>缺页中断</strong>，进程从用户态切换到内核态，通过缺页中断的处理函数将虚拟地址映射到一段空闲的物理内存上。</p>
+<h3 id="64、内存分配的过程是怎样的？"><a href="#64、内存分配的过程是怎样的？" class="headerlink" title="64、内存分配的过程是怎样的？"></a>64、内存分配的过程是怎样的？</h3><p>应用程序通过 malloc 函数申请内存的时候，实际上申请的是虚拟内存，此时并不会分配物理内存。当<strong>应用程序第一次读写这块虚拟内存</strong>时，CPU在访问时会发现这个虚拟内存没有映射到物理内存， 就会产生<strong>缺页中断</strong>，进程从用户态切换到内核态，通过缺页中断的处理函数将虚拟地址映射到一段空闲的物理内存上。</p>
 <h3 id="65、内存紧张-没有空闲物理内存时有哪些操作？"><a href="#65、内存紧张-没有空闲物理内存时有哪些操作？" class="headerlink" title="65、内存紧张&#x2F;没有空闲物理内存时有哪些操作？"></a>65、内存紧张&#x2F;没有空闲物理内存时有哪些操作？</h3><p>如果没有空闲的物理内存，那么内核就会开始进行<strong>回收内存</strong>的工作，回收的方式主要是两种：直接内存回收和后台内存回收。</p>
 <ul>
 <li><strong>后台内存回收</strong>（kswapd）：在物理内存紧张的时候，会唤醒 kswapd 内核线程来回收内存，这个回收内存的过程<strong>异步</strong>的，不会阻塞进程的执行。</li>
@@ -4548,115 +4703,104 @@ add $4, %esp：
 </ul>
 <p>如果直接内存回收后，空闲的物理内存仍然无法满足此次物理内存的申请，内核触发 <strong>OOM （Out of Memory）机制</strong>。OOM Killer 机制会根据算法选择一个占用物理内存较高的进程，然后将其杀死，以便释放内存资源，如果物理内存依然不足，OOM Killer 会继续杀死占用物理内存较高的进程，直到释放足够的内存位置。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406302002710.png" alt="img"></p>
-<h3 id="66、哪些内存可以被回收？"><a href="#66、哪些内存可以被回收？" class="headerlink" title="66、哪些内存可以被回收？"></a>66、哪些内存可以被回收？</h3><p>主要有两类内存可以被回收，而且它们的回收方式也不同。</p>
+<h3 id="66、哪些内存可以被回收？"><a href="#66、哪些内存可以被回收？" class="headerlink" title="66、哪些内存可以被回收？"></a>66、哪些内存可以被回收？</h3><p>主要有<strong>文件页和匿名页</strong>两类内存可以被回收。</p>
 <ul>
-<li><strong>文件页</strong>（File-backed  Page）：内核缓存的磁盘数据（Buffer）和内核缓存的文件数据（Cache）都叫作文件页。大部分文件页，都可以直接释放内存，以后有需要时，再从磁盘重新读取就可以了。而那些被应用程序修改过，并且暂时还没写入磁盘的数据（也就是脏页），就得先写入磁盘，然后才能进行内存释放。所以，<strong>回收干净页的方式是直接释放内存，回收脏页的方式是先写回磁盘后再释放内存</strong>。</li>
+<li><strong>文件页</strong>（File-backed  Page）：内核缓存的磁盘数据（Buffer）和内核缓存的文件数据（Cache）都叫作文件页。根据是否被修改并写入磁盘分为干净页和脏页，<strong>回收干净页的方式是直接释放内存，回收脏页的方式是先写回磁盘后再释放内存</strong>。</li>
 <li><strong>匿名页</strong>（Anonymous Page）：这部分内存没有实际载体，不像文件缓存有硬盘文件这样一个载体，比如堆、栈数据等。这部分内存很可能还要再次被访问，所以不能直接释放内存，它们<strong>回收的方式是通过 Linux 的 Swap 机制</strong>，Swap 会把不常访问的内存先写到磁盘中，然后释放这些内存，给其他更需要的进程使用。再次访问这些内存时，重新从磁盘读入内存就可以了。</li>
 </ul>
-<p>文件页和匿名页的回收都是基于 LRU 算法，也就是优先回收不常访问的内存。LRU 回收算法，实际上维护着 active 和 inactive 两个双向链表，其中：</p>
+<p>文件页和匿名页的回收都是基于 LRU 算法，也就是优先回收不常访问的内存。LRU 回收算法，实际上维护着活跃内存页链表和不活跃内存页链表两个双向链表，越接近链表尾部，就表示内存页越不常访问。这样，在回收内存时，系统就可以根据活跃程度，优先回收不活跃的内存。</p>
+<blockquote>
 <ul>
-<li><strong>active_list</strong> 活跃内存页链表，这里存放的是最近被访问过（活跃）的内存页；</li>
-<li><strong>inactive_list</strong> 不活跃内存页链表，这里存放的是很少被访问（非活跃）的内存页；</li>
+<li><strong>active_list</strong> 是活跃内存页链表，存放最近被访问过（活跃）的内存页；</li>
+<li><strong>inactive_list</strong> 不活跃内存页链表，存放很少被访问（非活跃）的内存页。</li>
 </ul>
-<p>越接近链表尾部，就表示内存页越不常访问。这样，在回收内存时，系统就可以根据活跃程度，优先回收不活跃的内存。</p>
+</blockquote>
 <h3 id="67、针对回收内存页导致的性能影响，有哪些解决方式？"><a href="#67、针对回收内存页导致的性能影响，有哪些解决方式？" class="headerlink" title="67、针对回收内存页导致的性能影响，有哪些解决方式？"></a>67、针对回收内存页导致的性能影响，有哪些解决方式？</h3><ol>
 <li><p><strong>设置 &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;swappiness，调整文件页和匿名页的回收倾向，尽量倾向于回收文件页；</strong></p>
 <p>从文件页和匿名页的回收操作来看，文件页的回收操作对系统的影响相比匿名页的回收操作会少一点，因为文件页对于干净页回收是不会发生磁盘 I&#x2F;O 的，而匿名页的 Swap 换入换出这两个操作都会发生磁盘 I&#x2F;O。</p>
-<p>Linux 提供了一个 <code>/proc/sys/vm/swappiness</code> 选项，用来调整文件页和匿名页的回收倾向。</p>
-<p>swappiness 的范围是 0-100，数值越大，越积极使用 Swap，也就是更倾向于回收匿名页；数值越小，越消极使用 Swap，也就是更倾向于回收文件页。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@xiaolin ~]# cat /proc/sys/vm/swappiness</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<p>一般建议 swappiness 设置为 0（默认值是 60），这样在回收内存的时候，会更倾向于文件页的回收，但是并不代表不会回收匿名页。</p>
-</li>
-<li><p><strong>设置 &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;min_free_kbytes，调整 kswapd 内核线程异步回收内存的时机；</strong></p>
-<p>如果系统时不时发生抖动，并且在抖动的时间段里如果通过 sar -B 观察到 pgscand 数值很大，那大概率是因为「直接内存回收」导致的。针对这个问题，解决的办法就是，可以通过尽早的触发「后台内存回收」来避免应用程序进行直接内存回收。</p>
-<p>kswapd 会定期扫描内存的使用情况，根据剩余内存（pages_free）的情况来进行内存回收的工作。如果剩余内存（pages_free）在页低阈值（pages_low）和页最小阈值（pages_min）之间，说明内存压力比较大，剩余内存不多了。<strong>这时 kswapd0 会执行内存回收，直到剩余内存大于高阈值（pages_high）为止</strong>。虽然会触发内存回收，但是不会阻塞应用程序，因为两者关系是异步的。</p>
-</li>
-<li><p><strong>设置  &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;zone_reclaim_mode，调整 NUMA 架构下内存回收策略，建议设置为  0，这样在回收本地内存之前，会在其他 Node 寻找空闲内存，从而避免在系统还有很多空闲内存的情况下，因本地 Node  的本地内存不足，发生频繁直接内存回收导致性能下降的问题。</strong></p>
+<blockquote>
+<p>Linux 提供了一个 <code>/proc/sys/vm/swappiness</code> 选项，用来调整文件页和匿名页的回收倾向。其数值范围是 0-100，数值越大，越倾向于回收匿名页；数值越小，越倾向于回收文件页。</p>
+</blockquote>
 </li>
 </ol>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@xiaolin ~]<span class="comment"># cat /proc/sys/vm/swappiness</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>一般建议 swappiness 设置为 0（默认值是 60），这样在回收内存的时候，会更倾向于文件页的回收，但是并不代表不会回收匿名页。</p>
+</blockquote>
+<ol start="2">
+<li><p><strong>设置 &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;min_free_kbytes，调整 kswapd 内核线程异步回收内存的时机；</strong></p>
+<blockquote>
+<p>如果系统时不时发生抖动，并且在抖动的时间段里如果通过 sar -B 观察到 pgscand 数值很大，那大概率是因为「直接内存回收」导致的。针对这个问题，解决的办法是通过尽早的触发「后台内存回收」来避免应用程序进行直接内存回收。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>kswapd 会定期扫描内存的使用情况，根据剩余内存（pages_free）的情况来进行内存回收的工作。如果剩余内存（pages_free）在页低阈值（pages_low）和页最小阈值（pages_min）之间，说明内存压力比较大，剩余内存不多了。<strong>这时 kswapd0 会执行内存回收，直到剩余内存大于高阈值（pages_high）为止</strong>。虽然会触发内存回收，但是不会阻塞应用程序，因为两者关系是异步的。</p>
+</blockquote>
+<ol start="3">
+<li><strong>设置  &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;zone_reclaim_mode，调整 NUMA 架构下内存回收策略，建议设置为  0，这样在回收本地内存之前，会在其他 Node 寻找空闲内存，从而避免在系统还有很多空闲内存的情况下，因本地 Node  的本地内存不足，发生频繁直接内存回收导致性能下降的问题。</strong></li>
+</ol>
 <h3 id="68、在-4GB-物理内存的机器上，申请-8GB-内存，会怎么样？"><a href="#68、在-4GB-物理内存的机器上，申请-8GB-内存，会怎么样？" class="headerlink" title="68、在 4GB 物理内存的机器上，申请 8GB 内存，会怎么样？"></a>68、在 4GB 物理内存的机器上，申请 8GB 内存，会怎么样？</h3><ul>
-<li>在 32 位操作系统，因为进程理论上最大能申请 3 GB 大小的虚拟内存，所以直接申请 8G 内存，会申请失败。</li>
-<li>在 64位 位操作系统，因为进程理论上最大能申请 128 TB 大小的虚拟内存，即使物理内存只有 4GB，申请 8G 内存也是没问题，因为申请的内存是虚拟内存。如果这块虚拟内存被访问了，要看系统有没有 Swap 分区：<ul>
-<li>如果没有 Swap 分区，因为物理空间不够，进程会被操作系统杀掉，原因是 OOM（内存溢出）；</li>
-<li>如果有 Swap 分区，即使物理内存只有 4GB，程序也能正常使用 8GB 的内存，进程可以正常运行；</li>
+<li>在 <code>32</code> 位操作系统，因为进程理论上最大能申请 <code>3GB</code> 大小的虚拟内存，所以直接申请 <code>8GB</code> 内存，会申请失败。</li>
+<li>在 <code>64</code> 位操作系统，因为进程理论上最大能申请 <code>128TB</code> 大小的虚拟内存，即使物理内存只有 <code>4GB</code>，申请 <code>8GB</code> 内存也是没问题，因为申请的内存是虚拟内存。<strong>如果这块虚拟内存被访问了</strong>，要看系统有没有 Swap 分区：<ul>
+<li>如果没有 <code>Swap</code> 分区，因为物理空间不够，进程会被操作系统杀掉，原因是 <code>OOM</code>（内存溢出）；</li>
+<li>如果有 <code>Swap</code> 分区，即使物理内存只有 <code>4GB</code>，程序也能正常使用 <code>8GB</code> 的内存，进程可以正常运行；</li>
 </ul>
 </li>
 </ul>
-<h3 id="69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"><a href="#69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？" class="headerlink" title="69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"></a>69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？</h3><p>在一个函数中，调用另外一个函数，往往有以下几个步骤：</p>
-<table>
-<thead>
-<tr>
-<th>汇编指令</th>
-<th>指令归属函数</th>
-<th>SP 变化</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>push arg2</td>
-<td>主函数</td>
-<td>sp-4</td>
-<td></td>
-</tr>
-<tr>
-<td>push arg1</td>
-<td>主函数</td>
-<td>sp-4</td>
-<td></td>
-</tr>
-<tr>
-<td>call function</td>
-<td>主函数</td>
-<td>sp-4</td>
-<td>开始调用子程序，同时保存返回地址</td>
-</tr>
-<tr>
-<td>push ebp</td>
-<td>子函数</td>
-<td>sp-4</td>
-<td></td>
-</tr>
-<tr>
-<td>push ebp, esp</td>
-<td>子函数</td>
-<td>sp-4</td>
-<td>将当前 sp 存入 bp，目的是定位函数参数</td>
-</tr>
-<tr>
-<td>sub sp, #num</td>
-<td>子函数</td>
-<td>sp-num</td>
-<td>为子程序分配栈空间</td>
-</tr>
-<tr>
-<td>…</td>
-<td>子函数</td>
-<td>…</td>
-<td>函数的具体实现逻辑</td>
-</tr>
-<tr>
-<td>pop ebp</td>
-<td>子函数</td>
-<td>sp+4</td>
-<td></td>
-</tr>
-<tr>
-<td>ret</td>
-<td>子函数</td>
-<td>sp+4</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>说明：</p>
+<h3 id="【-】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"><a href="#【-】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？" class="headerlink" title="【*】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"></a>【*】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？</h3><ol>
+<li><p>进栈过程</p>
+<ol>
+<li><p><strong>保存调用者的环境</strong>：</p>
 <ul>
-<li><code>push arg</code> 在调用一个函数之前，通过 push 把传递的参数压栈。每次 push 之后，栈多了一个字长（32 位系统 –&gt; 4 字节），因此栈顶需要往上移动 4 字节，该指令暗含 sub sp, #4</li>
-<li><code>call</code> call 指令用来调用某个函数，该指令有两个操作（1）将返回地址压入栈；（2）同时 sp &#x3D; sp - 4</li>
-<li><code>push ebp</code> <code>push ebp, esp</code> 用于保存上一个函数栈的基址，并更新本函数的基址</li>
-<li><code>ret</code>，即 return，此时 sp 指向 call 指令刚刚压入的返回地址；执行 ret 其实就是（1）将此时栈中的数据弹出，存至 eip 寄存器，eip 存放的是下一条即将执行的指令的地址；（2）同时 sp &#x3D; sp + 4</li>
-<li><code>ret</code> 指令相当于 <code>pop eip; esp = esp + 4</code></li>
-<li><code>call</code> 指令相当于 <code>push eip; esp = esp - 4</code></li>
+<li>将当前函数的返回地址（即调用函数的下一条指令地址）压入栈中。</li>
+<li>将当前函数的栈帧指针（<code>ebp</code>）压入栈中，用于恢复调用者的栈帧。</li>
 </ul>
+</li>
+<li><p><strong>设置被调用函数的栈帧</strong>：</p>
+<ul>
+<li>将栈指针（<code>esp</code>）的值赋给栈帧指针（<code>ebp</code>），形成新的栈帧。</li>
+<li>为被调用函数的局部变量和临时变量预留空间，调整栈指针（<code>esp</code>）。</li>
+</ul>
+</li>
+<li><p><strong>传递实参</strong>：</p>
+<ul>
+<li>将实参按照调用约定的顺序压入栈中。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>执行函数</p>
+</li>
+</ol>
+<ul>
+<li>被调用函数开始执行，其局部变量和临时变量使用新栈帧中的空间。</li>
+<li>函数执行过程中，<code>ebp</code> 用于访问局部变量，<code>esp</code> 随着栈操作不断变化。</li>
+</ul>
+<ol start="3">
+<li><p>退栈过程</p>
+<ol>
+<li><p><strong>清理函数栈帧</strong>：</p>
+<ul>
+<li>函数执行完毕后，将栈指针（<code>esp</code>）恢复到调用函数的栈帧起始位置，通常是通过<code>mov esp, ebp</code>实现。</li>
+<li>将调用者的栈帧指针（<code>ebp</code>）恢复，通常是通过<code>pop ebp</code>实现。</li>
+</ul>
+</li>
+<li><p><strong>返回调用者</strong>：</p>
+<ul>
+<li>从栈中弹出返回地址，通常是通过<code>ret</code>指令实现，<code>ret</code>指令会弹出栈顶的地址到程序计数器（<code>eip</code>），从而跳转回调用函数的下一条指令。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>示例代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> &#123;</span><br><span class="line">    <span class="type">int</span> c = a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    foo(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>汇编代码大致如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">_main:</span><br><span class="line">    push ebp            ; 保存调用者的栈帧指针</span><br><span class="line">    mov ebp, esp        ; 设置新的栈帧指针</span><br><span class="line">    sub esp, 8          ; 为局部变量预留空间</span><br><span class="line">    push 2              ; 将实参2压入栈</span><br><span class="line">    push 1              ; 将实参1压入栈</span><br><span class="line">    call _foo           ; 调用foo函数</span><br><span class="line">    add esp, 8          ; 调用后清理参数空间</span><br><span class="line">    mov esp, ebp        ; 恢复调用者的栈帧指针</span><br><span class="line">    pop ebp             ; 弹出调用者的栈帧指针</span><br><span class="line">    ret                 ; 返回调用者</span><br><span class="line"></span><br><span class="line">_foo:</span><br><span class="line">    push ebp            ; 保存foo函数的栈帧指针</span><br><span class="line">    mov ebp, esp        ; 设置新的栈帧指针</span><br><span class="line">    sub esp, 4          ; 为局部变量预留空间</span><br><span class="line">    mov eax, [ebp+8]    ; 将第一个参数加载到eax</span><br><span class="line">    mov edx, [ebp+12]   ; 将第二个参数加载到edx</span><br><span class="line">    add eax, edx        ; 计算a + b</span><br><span class="line">    mov [ebp-4], eax    ; 将结果保存到局部变量c</span><br><span class="line">    mov esp, ebp        ; 恢复foo函数的栈帧指针</span><br><span class="line">    pop ebp             ; 弹出foo函数的栈帧指针</span><br><span class="line">    ret                 ; 返回调用者</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>主函数调用子函数</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301556491.png" alt="在这里插入图片描述"></p>
@@ -4664,13 +4808,12 @@ add $4, %esp：
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301556054.png" alt="在这里插入图片描述"></p>
 </blockquote>
 <h3 id="70、分段为什么会产生内存碎片的问题？"><a href="#70、分段为什么会产生内存碎片的问题？" class="headerlink" title="70、分段为什么会产生内存碎片的问题？"></a>70、分段为什么会产生内存碎片的问题？</h3><ol>
-<li>当程序动态分配内存时，如果请求的内存大小比当前空闲块大，但分配的内存不是连续的，就会在已有的空闲块中留下未被利用的空间。</li>
-<li>当程序释放内存时，如果释放的内存顺序不是按照申请的顺序释放，会导致内存空闲块的分布变得不连续。这样在后续再次分配内存时，可能无法利用之前释放的碎片空间，从而导致更多的碎片产生。</li>
+<li>当程序动态分配内存时，如果<strong>请求的内存大小比当前空闲块大，但分配的内存不是连续的</strong>，就会在已有的空闲块中留下未被利用的空间。</li>
+<li>当程序释放内存时，如果<strong>释放的内存顺序不是按照申请的顺序释放</strong>，会导致内存空闲块的分布变得不连续。这样在后续再次分配内存时，可能无法利用之前释放的碎片空间，从而导致更多的碎片产生。</li>
 <li>某些内存分配算法（如首次适应、最佳适应）会根据当前的空闲内存块选择最合适的块分配给请求的内存大小。如果空闲块的分布不合理或者已分配的内存块大小和释放的大小不匹配，就容易产生碎片。</li>
 </ol>
-<h3 id="71、分段为什么会导致内存交换效率低的问题？"><a href="#71、分段为什么会导致内存交换效率低的问题？" class="headerlink" title="71、分段为什么会导致内存交换效率低的问题？"></a>71、分段为什么会导致内存交换效率低的问题？</h3><p>对于多进程的系统来说，用分段的方式，外部内存碎片是很容易产生的，产生了外部内存碎片时就不得不重新 <code>Swap</code> 内存区域，这个过程会产生性能瓶颈。</p>
-<p>因为硬盘的访问速度要比内存慢太多了，每一次内存交换，我们都需要把一大段连续的内存数据写到硬盘上。所以，<strong>如果内存交换的时候，交换的是一个占内存空间很大的程序，这样整个机器都会显得卡顿。</strong>为了解决内存分段的「外部内存碎片和内存交换效率低」的问题，就出现了内存分页（<code>Paging</code>）。</p>
-<h3 id="72、Swap-分区"><a href="#72、Swap-分区" class="headerlink" title="72、Swap 分区"></a>72、Swap 分区</h3><p>Swap 就是把一块磁盘空间或者本地文件，当成内存来使用，它包含换出和换入两个过程：</p>
+<h3 id="71、分段为什么会导致内存交换效率低的问题？"><a href="#71、分段为什么会导致内存交换效率低的问题？" class="headerlink" title="71、分段为什么会导致内存交换效率低的问题？"></a>71、分段为什么会导致内存交换效率低的问题？</h3><p>对于多进程的系统来说，用分段的方式，外部内存碎片是很容易产生的，产生了外部内存碎片时就不得不重新 <code>Swap</code> 内存区域，这个过程会产生性能瓶颈。因为硬盘的访问速度要比内存慢太多了，而每一次内存交换，我们都需要把一大段连续的内存数据写到硬盘上。所以，<strong>如果内存交换的时候，交换的是一个占内存空间很大的程序，这样整个机器都会显得卡顿。</strong>为了解决内存分段的「外部内存碎片和内存交换效率低」的问题，就出现了内存分页（<code>Paging</code>）。</p>
+<h3 id="72、Swap-分区"><a href="#72、Swap-分区" class="headerlink" title="72、Swap 分区"></a>72、Swap 分区</h3><p>Swap 就是<strong>把一块磁盘空间或者本地文件当成内存来使用</strong>，它包含<strong>换出和换入</strong>两个过程：</p>
 <ul>
 <li><strong>换出（Swap Out）</strong> ，是把进程暂时不用的内存数据存储到磁盘中，并释放这些数据占用的内存；</li>
 <li><strong>换入（Swap In）</strong>，是在进程再次访问这些内存的时候，把它们从磁盘读到内存中来。</li>
@@ -4678,59 +4821,55 @@ add $4, %esp：
 <p>Linux 中的 Swap 机制会在内存不足和内存闲置的场景下触发：</p>
 <ul>
 <li><strong>内存不足</strong>：当系统需要的内存超过了可用的物理内存时，内核会将内存中不常使用的内存页交换到磁盘上为当前进程让出内存，保证正在执行的进程的可用性，这个内存回收的过程是强制的直接内存回收（Direct Page Reclaim）。直接内存回收是同步的过程，会阻塞当前申请内存的进程。</li>
-<li><strong>内存闲置</strong>：应用程序在启动阶段使用的大量内存在启动后往往都不会使用，通过后台运行的守护进程（kSwapd），我们可以将这部分只使用一次的内存交换到磁盘上为其他内存的申请预留空间。kSwapd 是 Linux 负责页面置换（Page replacement）的守护进程，它也是负责交换闲置内存的主要进程，它会在空闲内存低于一定水位时，回收内存页中的空闲内存保证系统中的其他进程可以尽快获得申请的内存。kSwapd 是后台进程，所以回收内存的过程是异步的，不会阻塞当前申请内存的进程。</li>
+<li><strong>内存闲置</strong>：应用程序在启动阶段使用的大量内存在启动后往往都不会使用，通过后台运行的守护进程（kSwapd），可以将这部分只使用一次的内存交换到磁盘上为其他内存的申请预留空间。kSwapd 是 Linux 负责页面置换（Page replacement）的守护进程，也是负责交换闲置内存的主要进程，它会在空闲内存低于一定水位时，回收内存页中的空闲内存保证系统中的其他进程可以尽快获得申请的内存。kSwapd 是后台进程，所以回收内存的过程是异步的，不会阻塞当前申请内存的进程。</li>
 </ul>
-<h3 id="73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？"><a href="#73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？" class="headerlink" title="73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？"></a>73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？</h3><p>内存分页由于内存空间都是预先划分好的，也就不会像内存分段一样，在段与段之间会产生间隙非常小的内存，这正是分段会产生外部内存碎片的原因。而<strong>采用了分页，页与页之间是紧密排列的，所以不会有外部碎片。</strong></p>
-<p>但是，因为内存分页机制分配内存的最小单位是一页，即使程序不足一页大小，我们最少只能分配一个页，所以页内会出现内存浪费，所以针对<strong>内存分页机制会有内部内存碎片</strong>的现象。</p>
-<p>如果内存空间不够，操作系统会把其他正在运行的进程中的「最近没被使用」的内存页面给释放掉，也就是暂时写在硬盘上，称为<strong>换出</strong>（<em>Swap Out</em>）。一旦需要的时候，再加载进来，称为<strong>换入</strong>（<em>Swap In</em>）。所以，一次性写入磁盘的也只有少数的一个页或者几个页，不会花太多时间，<strong>内存交换的效率就相对比较高。</strong></p>
+<h3 id="73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？"><a href="#73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？" class="headerlink" title="73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？"></a>73、分页是怎么解决分段的「外部内存碎片和内存交换效率低」的问题？</h3><p>分页机制将内存划分为一个个固定大小的页面，彼此间紧密排列，因此和分段机制相比它不会产生外部内存碎片。但要注意由于内存分页机制的最小分配单位是一页，因此即使程序大小不足一页，也会至少分配一个完整的页。因此分页机制会出现内部碎片的现象。</p>
+<p>如果内存空间不够，操作系统会把其他正在运行的进程中的「最近没被使用」的内存页面给释放掉，并暂时写在硬盘上，称为<strong>换出</strong>。一旦需要的时候，再加载进来，称为<strong>换入</strong>。所以，一次性写入磁盘的也只有少数的一个页或者几个页，不会花太多时间，<strong>内存交换的效率就相对比较高。</strong></p>
 <p>更进一步地，分页的方式使得我们在加载程序的时候，不再需要一次性都把程序加载到物理内存中。我们完全可以在进行虚拟内存和物理内存的页之间的映射之后，并不真的把页加载到物理内存里，而是<strong>只有在程序运行中，需要用到对应虚拟内存页里面的指令和数据时，再加载到物理内存里面去。</strong></p>
 <h3 id="74、页表是什么，页多大，为什么是-4KB？"><a href="#74、页表是什么，页多大，为什么是-4KB？" class="headerlink" title="74、页表是什么，页多大，为什么是 4KB？"></a>74、页表是什么，页多大，为什么是 4KB？</h3><p>页表是操作系统中用于实现虚拟内存管理的一种数据结构，它用于将虚拟地址映射到物理地址。这种机制允许计算机的操作系统为每个运行的程序提供一种看似连续的内存地址空间，即使物理内存是分散存储的。</p>
-<p>每个页表条目存储着虚拟页面到物理页面的映射信息，通常包括物理页帧的基地址和一些状态位（如访问权限、是否已加载到物理内存中等）。由于地址空间的扩大，单级页表的大小会非常庞大，因此现代操作系统通常使用多级页表结构来减少内存占用，如x86架构常用的二级或三级页表。</p>
-<p>在多数现代操作系统中，标准的页面大小是4KB（4096字节）。linux 会以页面为单位对内存进行管理。不论是将磁盘中的数据加载到内存中，还是将内存中的数据写回磁盘中，操作系统都会以页面为单位进行操作，这也意味着如果我们只向磁盘中写入一个字节的数据，操作系统也需要将整个页面中的全部数据刷入磁盘中。过小的页面大小会带来较大的页表项增加寻址时 TLB（Translation lookaside buffer）的查找速度和额外开销；过大的页面大小会浪费内存空间，造成内存碎片，降低内存的利用率；上个世纪在设计内存页大小时充分考虑了上述的两个因素，最终选择了 4KB 的内存页作为操作系统最常见的页大小，这个大小也就沿用至今。</p>
-<h3 id="75、分页机制下，虚拟地址和物理地址是如何映射的？"><a href="#75、分页机制下，虚拟地址和物理地址是如何映射的？" class="headerlink" title="75、分页机制下，虚拟地址和物理地址是如何映射的？"></a>75、分页机制下，虚拟地址和物理地址是如何映射的？</h3><p>虚拟地址与物理地址之间通过<strong>页表</strong>来映射，页表是存储在内存里的，<strong>内存管理单元</strong> （MMU）就做将虚拟内存地址转换成物理地址的工作。而当进程访问的虚拟地址在页表中查不到时，系统会产生一个<strong>缺页异常</strong>，进入系统内核空间分配物理内存、更新进程页表，最后再返回用户空间，恢复进程的运行。</p>
-<p>在分页机制下，虚拟地址分为两部分，<strong>页号</strong>和<strong>页内偏移</strong>。页号作为页表的索引，<strong>页表</strong>包含物理页每页所在<strong>物理内存的基地址</strong>，这个基地址与页内偏移的组合就形成了物理内存地址。</p>
+<p>在多数现代操作系统中，标准的页面大小是 <code>4KB</code>（4096字节）。Linux 会以页面为单位对内存进行管理，每次执行内存分配时都至少分配一个页面。<strong>过小的页面大小会带来较大的页表项</strong>，增加寻址时 TLB的查找速度和额外开销；<strong>过大的页面大小会浪费内存空间，造成内部碎片</strong>，降低内存的利用率；上个世纪在设计内存页大小时充分考虑了上述的两个因素，最终选择了 <code>4KB</code> 的内存页作为操作系统最常见的页大小，这个大小也就沿用至今。</p>
+<h3 id="75、分页机制下，虚拟地址和物理地址是如何映射的？"><a href="#75、分页机制下，虚拟地址和物理地址是如何映射的？" class="headerlink" title="75、分页机制下，虚拟地址和物理地址是如何映射的？"></a>75、分页机制下，虚拟地址和物理地址是如何映射的？</h3><p>虚拟地址与物理地址之间通过<strong>页表</strong>来映射，页表是存储在内存里的，<strong>内存管理单元</strong> （MMU）完成<strong>将虚拟地址转换成物理地址</strong>的工作。当进程访问的虚拟地址在页表中查不到时，系统会产生一个<strong>缺页异常</strong>，<strong>进入系统内核空间分配物理内存、更新进程页表，最后再返回用户空间，恢复进程的运行</strong>。</p>
+<p>在分页机制下，虚拟地址分为两部分，<strong>页号</strong>和<strong>页内偏移</strong>。<strong>页号</strong>作为页表的索引，<strong>页表</strong>包含物理页每页所在<strong>物理内存的基地址</strong>，这个基地址与页内偏移的组合就形成了物理内存地址。</p>
 <p>对于一个内存地址转换，其实就是这样三个步骤：</p>
 <ul>
-<li>把虚拟内存地址，切分成页号和偏移量；</li>
-<li>根据页号，从页表里面，查询对应的物理页号；</li>
-<li>直接拿物理页号，加上前面的偏移量，就得到了物理内存地址。</li>
+<li>把虚拟内存地址<strong>切分</strong>成页号和偏移量；</li>
+<li>根据<strong>页号</strong>，从<strong>页表</strong>里面查询对应的<strong>物理页号</strong>；</li>
+<li>用物理页号<strong>加上</strong>前面的偏移量，就得到了物理内存地址。</li>
 </ul>
 <blockquote>
-<p>64 位虚拟地址的格式为：全局页目录项（9位）+ 上层页目录项（9位）+ 中间页目录项（9位）+ 页表项（9位）+ 页内偏移（12位）。共 48 位组成的虚拟内存地址。</p>
-<p>32 位虚拟地址的格式为：页目录项（10位）+ 页表项（10位） + 页内偏移（12位）。共 32 位组成的虚拟内存地址。</p>
+<p><strong>64 位虚拟地址格式</strong>：全局页目录项（9位）+ 上层页目录项（9位）+ 中间页目录项（9位）+ 页表项（9位）+ 页内偏移（12位）。共 48 位。</p>
+<p><strong>32 位虚拟地址格式</strong>：页目录项（10位）+ 页表项（10位） + 页内偏移（12位）。共 32 位。</p>
 </blockquote>
-<h3 id="76、为什么会产生多级页表？"><a href="#76、为什么会产生多级页表？" class="headerlink" title="76、为什么会产生多级页表？"></a>76、为什么会产生多级页表？</h3><p>对于单页表的实现方式，在 32 位和页大小 <code>4KB</code> 的环境下，一个进程的页表需要装下 100 多万个「页表项」，并且每个页表项是占用 4 字节大小的，于是相当于每个页表需占用 4MB 大小的空间。</p>
-<p>我们把这个 100 多万个「页表项」的单级页表再分页，将页表（一级页表）分为 <code>1024</code> 个页表（二级页表），每个表（二级页表）中包含 <code>1024</code> 个「页表项」，形成<strong>二级分页</strong>。</p>
-<p>多级页表虽然解决了空间上的问题，但是虚拟地址到物理地址的转换就多了几道转换的工序，这显然就降低了这俩地址转换的速度，也就是带来了时间上的开销。程序是有局部性的，即在一段时间内，整个程序的执行仅限于程序中的某一部分。相应地，执行所访问的存储空间也局限于某个内存区域。</p>
-<p>利用这一特性，可以把最常访问的几个页表项存储到访问速度更快的硬件，于是在 CPU 芯片中，加入了一个专门存放程序最常访问的页表项的 Cache，这个 Cache 就是 TLB（Translation Lookaside Buffer） ，通常称为页表缓存、转址旁路缓存、快表等。</p>
-<h3 id="77、缺页中断什么时候发生？"><a href="#77、缺页中断什么时候发生？" class="headerlink" title="77、缺页中断什么时候发生？"></a>77、缺页中断什么时候发生？</h3><p>（1）当程序要访问的页面不在物理内存中时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存。</p>
-<p>（2）当程序尝试进行一个违反内存规则的操作时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</p>
-<h3 id="78、常见的缺页中断算法-页面置换算法有哪些？"><a href="#78、常见的缺页中断算法-页面置换算法有哪些？" class="headerlink" title="78、常见的缺页中断算法&#x2F;页面置换算法有哪些？"></a>78、常见的缺页中断算法&#x2F;页面置换算法有哪些？</h3><ul>
-<li><p>最佳页面置换算法（<em>OPT</em>）</p>
-<p>最佳页面置换算法基本思路是，<strong>置换在「未来」最长时间不访问的页面</strong>。</p>
+<h3 id="76、为什么会产生多级页表？"><a href="#76、为什么会产生多级页表？" class="headerlink" title="76、为什么会产生多级页表？"></a>76、为什么会产生多级页表？</h3><p>对于单页表的实现方式，在 32 位和页大小 <code>4KB</code> 的环境下，一个进程的页表需要装下 <strong>100 多万个</strong>「页表项」，并且每个页表项是占用 <strong>4 字节</strong>大小的，于是<strong>相当于每个页表需占用 4MB 大小的空间</strong>。因此把这个 100 多万个「页表项」的单级页表再分页，将页表（一级页表）分为 <code>1024</code> 个页表（二级页表），每个表（二级页表）中包含 <code>1024</code> 个「页表项」，形成<strong>二级分页</strong>。</p>
+<p>多级页表虽然解决了空间上的问题，但是虚拟地址到物理地址的转换就多了几道转换的工序，这显然就降低了地址转换的速度，也就是带来了时间上的开销。程序是有局部性的，即在一段时间内，整个程序的执行仅限于程序中的某一部分。相应地，执行所访问的存储空间也局限于某个内存区域。利用这一特性，可以<strong>把最常访问的几个页表项存储到访问速度更快的硬件</strong>，于是在 CPU 芯片中，加入了一个<strong>专门存放程序最常访问的页表项的 Cache，这个 Cache 就是 TLB</strong>（Translation Lookaside Buffer） ，通常称为页表缓存、转址旁路缓存、快表等。</p>
+<h3 id="77、缺页中断什么时候发生？"><a href="#77、缺页中断什么时候发生？" class="headerlink" title="77、缺页中断什么时候发生？"></a>77、缺页中断什么时候发生？</h3><ol>
+<li>当<strong>程序要访问的页面不在物理内存中</strong>时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存；</li>
+<li>当<strong>程序尝试进行一个违反内存规则的操作</strong>时，也会触发缺页中断。比如，当程序试图对一个只读页面进行写操作，或是访问一个不允许被访问的页面。</li>
+</ol>
+<h3 id="【-】78、常见的缺页中断算法-页面置换算法有哪些？"><a href="#【-】78、常见的缺页中断算法-页面置换算法有哪些？" class="headerlink" title="【*】78、常见的缺页中断算法&#x2F;页面置换算法有哪些？"></a>【*】78、常见的缺页中断算法&#x2F;页面置换算法有哪些？</h3><ol>
+<li><p>最佳页面置换算法（<em>OPT</em>）：最佳页面置换算法基本思路是，<strong>置换在「未来」最长时间不访问的页面</strong>。</p>
 </li>
-<li><p>先进先出置换算法（<em>FIFO</em>）</p>
-<p><strong>选择在内存驻留时间很长的页面进行中置换</strong>，这个就是「先进先出置换」算法的思想。</p>
+<li><p>先进先出置换算法（<em>FIFO</em>）：<strong>选择在内存驻留时间很长的页面进行中置换</strong>，这个就是「先进先出置换」算法的思想。</p>
 </li>
-<li><p>最近最久未使用的置换算法（<em>LRU</em>）</p>
-<p>发生缺页时，<strong>选择最长时间没有被访问的页面进行置换</strong>，也就是说，该算法假设已经很久没有使用的页面很有可能在未来较长的一段时间内仍然不会被使用。</p>
+<li><p>最近最久未使用的置换算法（<em>LRU</em>）：发生缺页时，<strong>选择最长时间没有被访问的页面进行置换</strong>，也就是说，该算法假设已经很久没有使用的页面很有可能在未来较长的一段时间内仍然不会被使用。</p>
 </li>
-<li><p>时钟页面置换算法（<em>Lock</em>）</p>
-<p>该算法的思路是，把所有的页面都保存在一个类似钟面的「环形链表」中，一个表针指向最老的页面。</p>
-<p>当发生缺页中断时，算法首先检查表针指向的页面：</p>
+<li><p>时钟页面置换算法（<em>Lock</em>）：该算法的思路是，把所有的页面都保存在一个类似钟面的「环形链表」中，一个表针指向最老的页面。</p>
+</li>
+<li><p>当发生缺页中断时，算法首先检查表针指向的页面：</p>
 <ul>
-<li>如果它的访问位位是 0 就淘汰该页面，并把新的页面插入这个位置，然后把表针前移一个位置；</li>
-<li>如果访问位是 1 就清除访问位，并把表针前移一个位置，重复这个过程直到找到了一个访问位为 0 的页面为止。</li>
-</ul>
+<li><p>如果它的访问位位是 0 就淘汰该页面，并把新的页面插入这个位置，然后把表针前移一个位置；</p>
 </li>
-<li><p>最不常用置换算法（<em>LFU</em>）</p>
-<p><strong>当发生缺页中断时，选择「访问次数」最少的那个页面，并将其淘汰</strong>。</p>
+<li><p>如果访问位是 1 就清除访问位，并把表针前移一个位置，重复这个过程直到找到了一个访问位为 0 的页面为止。</p>
 </li>
 </ul>
+</li>
+<li><p>最不常用置换算法（<em>LFU</em>）：<strong>当发生缺页中断时，选择「访问次数」最少的那个页面，并将其淘汰</strong>。</p>
+</li>
+</ol>
 <h3 id="79、写时拷贝在操作系统中有哪些应用？"><a href="#79、写时拷贝在操作系统中有哪些应用？" class="headerlink" title="79、写时拷贝在操作系统中有哪些应用？"></a>79、写时拷贝在操作系统中有哪些应用？</h3><ol>
 <li><strong>内存管理</strong>：<ul>
-<li><strong>分页系统</strong>：在许多操作系统中，写时拷贝技术常用于内存管理。当进程执行 fork 操作创建子进程时，操作系统并不立即为子进程复制父进程的整个地址空间。相反，它让父子进程共享同一物理内存页面，只有当其中一个进程尝试修改这些共享页面时，操作系统才会复制这些页面（COW），从而实现了资源的有效利用和快速的进程创建。</li>
-<li><strong>虚拟内存系统</strong>：在虚拟内存系统中，写时拷贝技术可以减少不必要的数据复制，提高内存使用效率，只有在需要写入时才进行物理内存的分配和数据复制。</li>
+<li><strong>分页系统</strong>：在许多操作系统中，写时拷贝技术常用于内存管理。当进程执行 fork 操作创建子进程时，操作系统并不立即为子进程复制父进程的整个地址空间。相反，它让<strong>父子进程共享同一物理内存页面</strong>，<strong>只有当其中一个进程尝试修改这些共享页面时，操作系统才会复制这些页面（COW），从而实现了资源的有效利用和快速的进程创建。</strong></li>
+<li><strong>虚拟内存系统</strong>：在虚拟内存系统中，写时拷贝技术可以减少不必要的数据复制，提高内存使用效率，<strong>只有在需要写入时才进行物理内存的分配和数据复制</strong>。</li>
 </ul>
 </li>
 <li><strong>文件系统</strong>：<ul>
@@ -4738,13 +4877,13 @@ add $4, %esp：
 </ul>
 </li>
 </ol>
-<h2 id="三、编译程序相关"><a href="#三、编译程序相关" class="headerlink" title="三、编译程序相关"></a>三、编译程序相关</h2><h3 id="80、从-C-文件到可执行文件经过了哪几个阶段？具体描述。"><a href="#80、从-C-文件到可执行文件经过了哪几个阶段？具体描述。" class="headerlink" title="80、从 C++ 文件到可执行文件经过了哪几个阶段？具体描述。"></a>80、从 C++ 文件到可执行文件经过了哪几个阶段？具体描述。</h3><blockquote>
-<p>预处理、编译、汇编、链接，最后生成可执行文件。</p>
+<h2 id="三、编译程序相关"><a href="#三、编译程序相关" class="headerlink" title="三、编译程序相关"></a>三、编译程序相关</h2><h3 id="【-】80、从-C-文件到可执行文件经过了哪几个阶段？具体描述。"><a href="#【-】80、从-C-文件到可执行文件经过了哪几个阶段？具体描述。" class="headerlink" title="【*】80、从 C++ 文件到可执行文件经过了哪几个阶段？具体描述。"></a>【*】80、从 C++ 文件到可执行文件经过了哪几个阶段？具体描述。</h3><blockquote>
+<p><strong>预处理、编译、汇编、链接</strong>，最后生成可执行文件。</p>
 </blockquote>
 <ol>
 <li><p><strong>预处理阶段</strong>：对伪指令和特殊符号进行处理，将<code>.c</code>文件转为<code>.i</code>文件；</p>
 <ol>
-<li>处理包含指令 <code>#include</code></li>
+<li>处理包含指令 <code>#include</code>；</li>
 <li>进行宏展开；</li>
 <li>进行条件编译，如 <code>#if</code>、<code>#endif</code>、<code>#ifdef</code> 等；</li>
 <li>处理 <code>#include</code> 预编译指令；</li>
@@ -7752,12 +7891,12 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">286k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:14</span>
+    <span title="站点阅读时长">17:22</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
