@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-11 20:15:40" itemprop="dateModified" datetime="2024-07-11T20:15:40+08:00">2024-07-11</time>
+                <time title="修改时间：2024-07-12 16:56:42" itemprop="dateModified" datetime="2024-07-12T16:56:42+08:00">2024-07-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,7 +242,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6k</span>
+              <span>6.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -561,14 +561,24 @@
 <h1 id="六、网络数据包结构设计"><a href="#六、网络数据包结构设计" class="headerlink" title="六、网络数据包结构设计"></a>六、网络数据包结构设计</h1><h2 id="1、网络数据包的具体设计"><a href="#1、网络数据包的具体设计" class="headerlink" title="1、网络数据包的具体设计"></a>1、网络数据包的具体设计</h2><p>当协议栈连接网络后，将接收到来自网络的各种不同大小的数据包，应用程序也会发送各种不同大小的数据包，长度从几字节到几十 KB 不等。若全部采用定长的数据包来存储，较为死板；而如果采用动态分配的方式，则会产生大量的内部碎片。因此借鉴 FAT32 文件系统的文件管理方式，采用<strong>链式存储</strong>的方式管理数据包。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111625628.png" alt="image-20240711162533261"></p>
 <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="添加包头和移除包头"><a href="#添加包头和移除包头" class="headerlink" title="添加包头和移除包头"></a>添加包头和移除包头</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628778.png" alt="image-20240711162806417"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112011374.png" alt="image-20240711201125051"></p>
-<p>针对这两种不同的建立快链表的方式，选择<strong>头插法</strong>建立链表。这样做<strong>可以给包头预留空间，方便以后直接添加包头</strong>。这样做就不必频繁分配包头的空间，可以直接利用头部的未用空间。</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112014885.png" alt="image-20240711201455593"></p>
 <h4 id="对数据包中的任意位置进行读写"><a href="#对数据包中的任意位置进行读写" class="headerlink" title="对数据包中的任意位置进行读写"></a>对数据包中的任意位置进行读写</h4><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628400.png" alt="image-20240711162830179" style="zoom:50%;" />
 
 <h4 id="调整大小、合并数据包"><a href="#调整大小、合并数据包" class="headerlink" title="调整大小、合并数据包"></a>调整大小、合并数据包</h4><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111629556.png" alt="image-20240711162910344" style="zoom: 33%;" />
 
-<h3 id="数据包整体框图"><a href="#数据包整体框图" class="headerlink" title="数据包整体框图"></a>数据包整体框图</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111721914.png" alt="数据包"></p>
+<h3 id="数据包整体框图"><a href="#数据包整体框图" class="headerlink" title="数据包整体框图"></a>数据包整体框图</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121512637.png" alt="数据包"></p>
+<p>尾插法方式分配块列表：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121521391.png" alt="image-20240712152100299"></p>
+<p>头插法方式分配块列表：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121601312.png" alt="image-20240712160144214"></p>
+<h2 id="2、基本操作1：添加包头和移除包头"><a href="#2、基本操作1：添加包头和移除包头" class="headerlink" title="2、基本操作1：添加包头和移除包头"></a>2、基本操作1：添加包头和移除包头</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112011374.png" alt="image-20240711201125051"></p>
+<p>针对这两种不同的建立快链表的方式，选择<strong>头插法</strong>建立链表。这样做<strong>可以给包头预留空间，方便以后直接添加包头</strong>。这样做就不必频繁分配包头的空间，可以直接利用头部的未用空间。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112014885.png" alt="image-20240711201455593"></p>
+<p>为了便于后续访问，需要保证包头的数据在一片连续的内存空间里。有两种添加包头的方式如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121633164.png" alt="image-20240712163322897" style="zoom: 50%;" />
+
+
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121656466.png" alt="image-20240712165641416"></p>
 
       
     </div>
@@ -7873,7 +7883,7 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:24</span>
+    <span title="站点阅读时长">17:25</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
