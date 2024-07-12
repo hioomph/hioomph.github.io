@@ -4109,7 +4109,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-11 09:40:27" itemprop="dateModified" datetime="2024-07-11T09:40:27+08:00">2024-07-11</time>
+                <time title="修改时间：2024-07-12 10:23:38" itemprop="dateModified" datetime="2024-07-12T10:23:38+08:00">2024-07-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -4138,7 +4138,7 @@ add $4, %esp：
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:04</span>
+              <span>2:03</span>
             </span>
 
         </div>
@@ -4552,7 +4552,7 @@ add $4, %esp：
 <h2 id="二、内存模型-虚拟内存"><a href="#二、内存模型-虚拟内存" class="headerlink" title="二、内存模型&#x2F;虚拟内存"></a>二、内存模型&#x2F;虚拟内存</h2><h3 id="39、什么是虚拟内存？"><a href="#39、什么是虚拟内存？" class="headerlink" title="39、什么是虚拟内存？"></a>39、什么是虚拟内存？</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301943905.png" alt="img" style="zoom: 67%;" />
 
-<h3 id="【-】40、为什么操作系统要使用虚拟内存？"><a href="#【-】40、为什么操作系统要使用虚拟内存？" class="headerlink" title="【*】40、为什么操作系统要使用虚拟内存？"></a>【*】40、为什么操作系统要使用虚拟内存？</h3><ol>
+<h3 id="40、为什么操作系统要使用虚拟内存？"><a href="#40、为什么操作系统要使用虚拟内存？" class="headerlink" title="40、为什么操作系统要使用虚拟内存？"></a>40、为什么操作系统要使用虚拟内存？</h3><ol>
 <li>第一，虚拟内存可以<strong>使得进程的运行内存超过物理内存大小</strong>，因为程序运行符合局部性原理，CPU 访问内存会有很明显的重复访问的倾向性，对于那些没有被经常使用到的内存，我们可以把它换出到物理内存之外，比如硬盘上的 swap 区域。</li>
 <li>第二，由于每个进程都有自己的页表，所以每个进程的虚拟内存空间就是相互独立的。进程也没有办法访问其他进程的页表，所以这些页表是私有的，这就<strong>解决了多进程之间地址冲突的问题</strong>。</li>
 <li>第三，页表里的页表项中除了物理地址之外，还有一些标记属性的比特，比如控制一个页的读写权限，标记该页是否存在等。在内存访问方面，操作系统<strong>提供了更好的安全性</strong>。</li>
@@ -4731,7 +4731,7 @@ add $4, %esp：
 <li><strong>inactive_list</strong> 不活跃内存页链表，存放很少被访问（非活跃）的内存页。</li>
 </ul>
 </blockquote>
-<h3 id="67、针对回收内存页导致的性能影响，有哪些解决方式？"><a href="#67、针对回收内存页导致的性能影响，有哪些解决方式？" class="headerlink" title="67、针对回收内存页导致的性能影响，有哪些解决方式？"></a>67、针对回收内存页导致的性能影响，有哪些解决方式？</h3><ol>
+<h3 id="【-】67、针对回收内存页导致的性能影响，有哪些解决方式？"><a href="#【-】67、针对回收内存页导致的性能影响，有哪些解决方式？" class="headerlink" title="【*】67、针对回收内存页导致的性能影响，有哪些解决方式？"></a>【*】67、针对回收内存页导致的性能影响，有哪些解决方式？</h3><ol>
 <li><p><strong>设置 &#x2F;proc&#x2F;sys&#x2F;vm&#x2F;swappiness，调整文件页和匿名页的回收倾向，尽量倾向于回收文件页；</strong></p>
 <p>从文件页和匿名页的回收操作来看，文件页的回收操作对系统的影响相比匿名页的回收操作会少一点，因为文件页对于干净页回收是不会发生磁盘 I&#x2F;O 的，而匿名页的 Swap 换入换出这两个操作都会发生磁盘 I&#x2F;O。</p>
 <blockquote>
@@ -4766,48 +4766,28 @@ add $4, %esp：
 </li>
 </ul>
 <h3 id="【-】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"><a href="#【-】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？" class="headerlink" title="【*】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？"></a>【*】69、函数进栈退栈原理，esp、ebp、实参怎么传递？怎么退栈之类的过程？</h3><ol>
-<li><p>进栈过程</p>
+<li><p><strong>进栈过程</strong></p>
 <ol>
-<li><p><strong>保存调用者的环境</strong>：</p>
-<ul>
-<li>将当前函数的返回地址（即调用函数的下一条指令地址）压入栈中。</li>
-<li>将当前函数的栈帧指针（<code>ebp</code>）压入栈中，用于恢复调用者的栈帧。</li>
-</ul>
-</li>
-<li><p><strong>设置被调用函数的栈帧</strong>：</p>
-<ul>
-<li>将栈指针（<code>esp</code>）的值赋给栈帧指针（<code>ebp</code>），形成新的栈帧。</li>
+<li>将当前函数的返回地址和栈帧指针 ebp 压入栈中，<strong>保存调用者的环境</strong>；</li>
+<li>将栈指针 esp 的值赋给栈帧指针 ebp，<strong>设置被调用函数的栈帧</strong>；</li>
+<li>将栈指针（<code>esp</code>）的值赋给栈帧指针（<code>ebp</code>），形成新的栈帧；</li>
 <li>为被调用函数的局部变量和临时变量预留空间，调整栈指针（<code>esp</code>）。</li>
-</ul>
-</li>
-<li><p><strong>传递实参</strong>：</p>
-<ul>
 <li>将实参按照调用约定的顺序压入栈中。</li>
-</ul>
-</li>
 </ol>
 </li>
-<li><p>执行函数</p>
-</li>
-</ol>
+<li><p><strong>执行函数</strong></p>
 <ul>
-<li>被调用函数开始执行，其局部变量和临时变量使用新栈帧中的空间。</li>
-<li>函数执行过程中，<code>ebp</code> 用于访问局部变量，<code>esp</code> 随着栈操作不断变化。</li>
+<li><p>被调用函数开始执行，其局部变量和临时变量使用新栈帧中的空间；</p>
+</li>
+<li><p>函数执行过程中，<code>ebp</code> 用于访问局部变量，<code>esp</code> 随着栈操作不断变化。</p>
+</li>
 </ul>
-<ol start="3">
-<li><p>退栈过程</p>
+</li>
+<li><p><strong>退栈过程</strong></p>
 <ol>
-<li><p><strong>清理函数栈帧</strong>：</p>
-<ul>
-<li>函数执行完毕后，将栈指针（<code>esp</code>）恢复到调用函数的栈帧起始位置，通常是通过<code>mov esp, ebp</code>实现。</li>
-<li>将调用者的栈帧指针（<code>ebp</code>）恢复，通常是通过<code>pop ebp</code>实现。</li>
-</ul>
-</li>
-<li><p><strong>返回调用者</strong>：</p>
-<ul>
+<li>函数执行完毕后，将栈指针（<code>esp</code>）恢复到调用函数的栈帧起始位置，通常是通过<code>mov esp, ebp</code>实现；</li>
+<li>将调用者的栈帧指针（<code>ebp</code>）恢复，通常是通过<code>pop ebp</code>实现；</li>
 <li>从栈中弹出返回地址，通常是通过<code>ret</code>指令实现，<code>ret</code>指令会弹出栈顶的地址到程序计数器（<code>eip</code>），从而跳转回调用函数的下一条指令。</li>
-</ul>
-</li>
 </ol>
 </li>
 </ol>
@@ -4944,7 +4924,7 @@ add $4, %esp：
 </ol>
 </li>
 </ol>
-<h3 id="81、在-terminal-输入-main-out-是怎么运行起来的？"><a href="#81、在-terminal-输入-main-out-是怎么运行起来的？" class="headerlink" title="81、在 terminal 输入 .&#x2F;main.out 是怎么运行起来的？"></a>81、在 terminal 输入 .&#x2F;main.out 是怎么运行起来的？</h3><p>在终端输入 <code>./main.out</code> 实际上是在运行名为 <code>main.out</code> 的可执行文件。这个过程涉及了操作系统的执行文件路径解析和进程创建：</p>
+<h3 id="【-】81、在-terminal-输入-main-out-是怎么运行起来的？"><a href="#【-】81、在-terminal-输入-main-out-是怎么运行起来的？" class="headerlink" title="【*】81、在 terminal 输入 .&#x2F;main.out 是怎么运行起来的？"></a>【*】81、在 terminal 输入 .&#x2F;main.out 是怎么运行起来的？</h3><p>在终端输入 <code>./main.out</code> 实际上是在运行名为 <code>main.out</code> 的可执行文件。这个过程涉及了操作系统的执行文件路径解析和进程创建：</p>
 <ol>
 <li><strong>路径解析</strong>: 终端会根据当前工作目录（或者通过绝对路径指定的位置）找到 <code>main.out</code> 可执行文件的位置。</li>
 <li><strong>权限检查</strong>: 操作系统会检查当前用户是否有权限执行这个文件。如果没有权限，会提示权限不足的错误。</li>
@@ -4959,7 +4939,7 @@ add $4, %esp：
 <li><strong>退出</strong>: 程序执行完毕后，操作系统会回收分配给该程序的资源，并返回到终端或者调用者。</li>
 </ol>
 <h3 id="82、为什么需要有链接的过程？"><a href="#82、为什么需要有链接的过程？" class="headerlink" title="82、为什么需要有链接的过程？"></a>82、为什么需要有链接的过程？</h3><p>因为软件开发的规模很大，不可能将它们都放在同一个模块中。因此按照层次化以及模块化的视线方法，将代码分成多个部分，每个部分分别开发。因此就需要在最后将它们组装起来，这就是链接的过程。通过链接，实现<strong>符号解析、地址分配和库依赖管理</strong>等工作。</p>
-<h3 id="83、假设有一个-A-dll-和-B-dll，A-dll-调用了-B-dll-的方法，A-dll-是如何找到-B-dll-中的方法的？"><a href="#83、假设有一个-A-dll-和-B-dll，A-dll-调用了-B-dll-的方法，A-dll-是如何找到-B-dll-中的方法的？" class="headerlink" title="83、假设有一个 A.dll 和 B.dll，A.dll 调用了 B.dll 的方法，A.dll 是如何找到 B.dll 中的方法的？"></a>83、假设有一个 A.dll 和 B.dll，A.dll 调用了 B.dll 的方法，A.dll 是如何找到 B.dll 中的方法的？</h3><p>在使用动态库时，链接器会将<strong>动态库的相关信息</strong>，包括动态库的<strong>名字</strong>、<strong>符号表</strong>以及<strong>可重定位信息</strong>存储到相应的<strong>可执行文件</strong>中。在可执行文件运行时，链接器会根据这些信息找到动态库是否存在、在哪里、符号引用的内存地址是哪里，也就是说找到 A.dll 引用的 B.dll 的相关方法，并通过重定位找到其物理内存地址。</p>
+<h3 id="83、假设有一个-A-dll-和-B-dll，A-dll-调用了-B-dll-的方法，A-dll-是如何找到-B-dll-中的方法的？"><a href="#83、假设有一个-A-dll-和-B-dll，A-dll-调用了-B-dll-的方法，A-dll-是如何找到-B-dll-中的方法的？" class="headerlink" title="83、假设有一个 A.dll 和 B.dll，A.dll 调用了 B.dll 的方法，A.dll 是如何找到 B.dll 中的方法的？"></a>83、假设有一个 A.dll 和 B.dll，A.dll 调用了 B.dll 的方法，A.dll 是如何找到 B.dll 中的方法的？</h3><p>在使用动态库时，链接器会将<strong>动态库的相关信息</strong>，包括动态库的<strong>名字</strong>、<strong>符号表</strong>以及<strong>可重定位信息</strong>存储到相应的<strong>可执行文件</strong>中。在可执行文件运行时，链接器会根据这些信息找到对应的动态库，从而找到 A.dll 引用的 B.dll 的相关方法，并通过重定位找到其物理内存地址。</p>
 <h3 id="84、假设有一个-A-cpp-和-B-cpp，A-cpp-调用了-B-cpp-的方法，A-cpp-是如何找到-B-cpp-中的方法的？"><a href="#84、假设有一个-A-cpp-和-B-cpp，A-cpp-调用了-B-cpp-的方法，A-cpp-是如何找到-B-cpp-中的方法的？" class="headerlink" title="84、假设有一个 A.cpp 和 B.cpp，A.cpp 调用了 B.cpp 的方法，A.cpp 是如何找到 B.cpp 中的方法的？"></a>84、假设有一个 A.cpp 和 B.cpp，A.cpp 调用了 B.cpp 的方法，A.cpp 是如何找到 B.cpp 中的方法的？</h3><p>在汇编后，A.cpp 生成了 A.o 文件，B.cpp 生成了 B.o 的文件，A.o 和 B.o 文件都有着自己的符号表。在链接的过程，链接器会<strong>根据两者的符号表来做符号决议，判断是否能够找到引用的外部的符号，如果找到外部唯一的符号，就会进行重定位操作来修正这一符号的地址，从而完成调用</strong>。</p>
 <h3 id="85、函数调用中堆和栈的变化情况是怎样的？"><a href="#85、函数调用中堆和栈的变化情况是怎样的？" class="headerlink" title="85、函数调用中堆和栈的变化情况是怎样的？"></a>85、函数调用中堆和栈的变化情况是怎样的？</h3><p>函数调用时主要影响的是<strong>栈（stack）</strong>的变化，而不直接影响<strong>堆（heap）</strong>的变化。</p>
 <ul>
@@ -5000,8 +4980,12 @@ add $4, %esp：
 </ol>
 <h3 id="88、程序崩溃产生-core-dump-一般怎么处理？"><a href="#88、程序崩溃产生-core-dump-一般怎么处理？" class="headerlink" title="88、程序崩溃产生 core dump 一般怎么处理？"></a>88、程序崩溃产生 core dump 一般怎么处理？</h3><p>core dump 是程序由于异常在运行时<strong>异常退出或者终止</strong>，在一定的条件下<strong>生成的一个叫做 core 的文件</strong>，这个 core 文件会记录程序在运行时的内存，寄存器状态，内存指针和函数堆栈信息等等。对其进行分析可以定位到程序异常发生时对应的堆栈调用信息。</p>
 <p>一般采用<strong>使用 gdb 命令</strong>对 core 文件进行调试。</p>
-<h3 id="89、当程序运行时，如何将其加载到进程地址空间？"><a href="#89、当程序运行时，如何将其加载到进程地址空间？" class="headerlink" title="89、当程序运行时，如何将其加载到进程地址空间？"></a>89、当程序运行时，如何将其加载到进程地址空间？</h3><p>首先 cpu 找到程序的入口地址，入口地址在 exe 中代码段中保存，接着操作系统将进程的虚拟地址转换成物理地址，然后在内存中运行。运行完后执行代码段的下一条代码，执行过程类似，直至程序结束。</p>
-<h3 id="90、-执行一个系统调用时，OS-发生的过程，越详细越好"><a href="#90、-执行一个系统调用时，OS-发生的过程，越详细越好" class="headerlink" title="90、**执行一个系统调用时，OS **发生的过程，越详细越好"></a>90、**执行一个系统调用时，OS **发生的过程，越详细越好</h3><ol>
+<h3 id="89、当程序运行时，如何将其加载到进程地址空间？"><a href="#89、当程序运行时，如何将其加载到进程地址空间？" class="headerlink" title="89、当程序运行时，如何将其加载到进程地址空间？"></a>89、当程序运行时，如何将其加载到进程地址空间？</h3><ol>
+<li>从可执行文件中的代码段中找到程序的入口地址；</li>
+<li>接着操作系统将虚拟地址转换为对应的物理地址，并在内存中进行执行；</li>
+<li>执行完毕后，切换到下一行代码进行类似的操作，直到程序运行完毕。</li>
+</ol>
+<h3 id="90、执行一个系统调用时，OS-发生的过程，越详细越好"><a href="#90、执行一个系统调用时，OS-发生的过程，越详细越好" class="headerlink" title="90、执行一个系统调用时，OS 发生的过程，越详细越好"></a>90、执行一个系统调用时，OS 发生的过程，越详细越好</h3><ol>
 <li><p>执行用户程序(如: fork)</p>
 </li>
 <li><p>根据 glibc 中的函数实现，取得系统调用号并执行<code>int $0x80</code>产生中断。</p>
@@ -5015,19 +4999,28 @@ add $4, %esp：
 <li><p>执行 RESTORE_ALL 并返回用户模式</p>
 </li>
 </ol>
-<h3 id="91、动态链接和静态链接的区别？"><a href="#91、动态链接和静态链接的区别？" class="headerlink" title="91、动态链接和静态链接的区别？"></a>91、动态链接和静态链接的区别？</h3><p>（1）静态链接</p>
-<p>函数和数据被编译进一个二进制文件。在使用静态库的情况下，在编译链接可执行文件时，链接器从库 中复制这些函数和数据并把它们和应用程序的其它模块组合起来创建最终的可执行文件。</p>
-<p>空间浪费：因为每个可执行程序中对所有需要的目标文件都要有一份副本，所以如果多个程序对同一个 目标文件都有依赖，会出现同一个目标文件都在内存存在多个副本；</p>
-<p>更新困难：每当库函数的代码修改了，这个时候就需要重新进行编译链接形成可执行程序。</p>
-<p>运行速度快：但是静态链接的优点就是，在可执行程序中已经具备了所有执行程序所需要的任何东西， 在执行的时候运行速度快。</p>
+<h3 id="91、动态链接和静态链接的区别？"><a href="#91、动态链接和静态链接的区别？" class="headerlink" title="91、动态链接和静态链接的区别？"></a>91、动态链接和静态链接的区别？</h3><ol>
+<li><p>静态链接</p>
+<ol>
+<li><p>静态链接时指<strong>所有需要的库代码在编译时就被嵌入到可执行文件中，最终生成的可执行文件中包含了所有的库代码</strong>；</p>
+</li>
+<li><p>优点是具有<strong>独立性和版本一致性</strong>，可执行文件不依赖于外部库，且所有使用的库版本都是编译时版本，不会因系统库版本变化而导致问题；</p>
+</li>
+<li><p>缺点是<strong>文件大小过大且更新不便</strong>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o myprogram myprogram.c -static</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>动态链接</p>
+<ol>
+<li>动态链接是指<strong>库代码在运行时被加载，可执行文件中只包含对动态库的引用，库半身是单独的文件</strong>；</li>
+<li>优点是<strong>文件大小小、易于更新，且多个程序可以共享同一个动态库</strong>；</li>
+<li>缺点是<strong>依赖性强，启动时间增长</strong>，可执行文件依赖于外部库，如果这些库在系统中缺失或版本不兼容，可能会造成问题。同时程序启动时需要加载库，可能会增加启动时间。</li>
+</ol>
+</li>
+</ol>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301606610.png" alt="image-20240630160655511"></p>
-<p>（2）动态链接</p>
-<p>动态链接的基本思想是把程序按照模块拆分成各个相对独立部分，在程序运行时才将它们链接在一起形 成一个完整的程序，而不是像静态链接一样把所有程序模块都链接成一个单独的可执行文件。</p>
-<p>共享库：就是即使需要每个程序都依赖同一个库，但是该库不会像静态链接那样在内存中存在多分，副 本，而是这多个程序在执行时共享同一份副本；</p>
-<p>更新方便：更新时只需要替换原来的目标文件，而无需将所有的程序再重新链接一遍。当程序下一次运 行时，新版本的目标文件会被自动加载到内存并且链接起来，程序就完成了升级的目标。</p>
-<p>性能损耗：因为把链接推迟到了程序运行时，所以每次执行程序都需要进行链接，所以性能会有一定损 失。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301607955.png" alt="image-20240630160706843"></p>
-<h2 id="四、Linux相关"><a href="#四、Linux相关" class="headerlink" title="四、Linux相关"></a>四、Linux相关</h2><h3 id="92、Linux-常用命令"><a href="#92、Linux-常用命令" class="headerlink" title="92、Linux 常用命令"></a>92、Linux 常用命令</h3><ol>
+<h2 id="四、Linux相关"><a href="#四、Linux相关" class="headerlink" title="四、Linux相关"></a>四、Linux相关</h2><h3 id="【-】92、Linux-常用命令（1）"><a href="#【-】92、Linux-常用命令（1）" class="headerlink" title="【*】92、Linux 常用命令（1）"></a>【*】92、Linux 常用命令（1）</h3><ol>
 <li><p>切换目录：<code>cd</code></p>
 </li>
 <li><p>查看端口绑定情况：<code>lsof -i : [端口号]</code>或<code>netstat -tuln</code>（列出所有监听端口）</p>
@@ -5054,73 +5047,40 @@ add $4, %esp：
 <li>查找系统命令的位置：<code>which ls</code></li>
 </ol>
 <h3 id="93、0、1、2-的文件描述符是什么含义？指向什么类型的文件？"><a href="#93、0、1、2-的文件描述符是什么含义？指向什么类型的文件？" class="headerlink" title="93、0、1、2 的文件描述符是什么含义？指向什么类型的文件？"></a>93、0、1、2 的文件描述符是什么含义？指向什么类型的文件？</h3><ol>
-<li>文件描述符0（标准输入）：指向标准输入设备，通常是终端（键盘）。</li>
-<li>文件描述符1（标准输出）：指向标准输出设备，通常是终端（屏幕）。</li>
-<li>文件描述符2（标准错误）：指向标准错误设备，通常也是终端（屏幕）。</li>
+<li>文件描述符 0（标准输入）：指向标准输入设备，通常是终端（键盘）。</li>
+<li>文件描述符 1（标准输出）：指向标准输出设备，通常是终端（屏幕）。</li>
+<li>文件描述符 2（标准错误）：指向标准错误设备，通常也是终端（屏幕）。</li>
 </ol>
-<h3 id="94、Linux-系统中的中断为什么分为上下两个部分？"><a href="#94、Linux-系统中的中断为什么分为上下两个部分？" class="headerlink" title="94、Linux 系统中的中断为什么分为上下两个部分？"></a>94、Linux 系统中的中断为什么分为上下两个部分？</h3><p>在 Linux 系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
+<h3 id="【-】94、Linux-系统中的中断为什么分为上下两个部分？"><a href="#【-】94、Linux-系统中的中断为什么分为上下两个部分？" class="headerlink" title="【*】94、Linux 系统中的中断为什么分为上下两个部分？"></a>【*】94、Linux 系统中的中断为什么分为上下两个部分？</h3><p>在 Linux 系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
 <ol>
-<li><strong>上半部</strong>：<ul>
-<li>上半部是中断处理的第一阶段，它在 CPU 接收到中断信号后立即执行。</li>
-<li>在这一阶段中，中断和调度器通常被禁用，以避免在处理中断时发生新的中断，从而保证处理的原子性。</li>
-<li>上半部的代码通常包含处理中断的关键代码，这部分代码的执行时间应尽可能短，以快速释放CPU资源，处理更多的中断或其他任务。</li>
-</ul>
-</li>
-<li><strong>下半部</strong>：<ul>
-<li>下半部处理的是中断处理的后续部分，通常在上半部完成后，通过添加工作项到工作队列中来延后执行。</li>
-<li>在下半部执行时，中断通常是被允许的，这样可以在处理较长时间的任务时不阻塞其他中断的处理。</li>
-<li>下半部负责完成数据处理、复制等操作，这些操作不需要立即完成，可以稍后处理。</li>
-</ul>
-</li>
+<li><strong>上半部</strong>：上半部是<strong>中断处理的第一阶段</strong>，它在 CPU 接收到中断信号后立即执行。<strong>在这一阶段中，中断和调度器通常被禁用，以避免在处理中断时发生新的中断，从而保证处理的原子性</strong>。上半部的代码通常包含<strong>处理中断的关键代码</strong>，这部分代码的执行时间应尽可能短，以快速释放CPU资源，处理更多的中断或其他任务。</li>
+<li><strong>下半部</strong>：下半部处理的是<strong>中断处理的后续部分</strong>，通常在上半部完成后，通过<strong>添加工作项到工作队列中</strong>来延后执行。<strong>在下半部执行时，中断通常是被允许的</strong>，这样可以在处理较长时间的任务时不阻塞其他中断的处理。下半部负责完成<strong>数据处理、复制等</strong>操作，这些操作不需要立即完成，可以稍后处理。</li>
 </ol>
 <p>这种分割方法的主要优点是能够快速响应中断，同时又不会因为长时间的数据处理而阻塞 CPU，影响系统的整体性能。通过这种方式，Linux 系统能够在保证响应速度的同时，也能有效地处理大量的数据。</p>
 <h3 id="95、Linux-用户态如何进入内核态？"><a href="#95、Linux-用户态如何进入内核态？" class="headerlink" title="95、Linux 用户态如何进入内核态？"></a>95、Linux 用户态如何进入内核态？</h3><ol>
-<li><strong>系统调用（System Call）</strong>:<ul>
-<li>系统调用是最常见的从用户态切换到内核态的方式。</li>
-<li>程序在需要执行诸如文件操作、网络通信、进程控制等操作时，会通过系统调用请求操作系统提供服务。</li>
-<li>Linux 提供了大量的系统调用，例如<code>read()</code>, <code>write()</code>, <code>open()</code>, <code>fork()</code>等。</li>
-<li>系统调用通过软件中断（通常是中断指令<code>int 0x80</code>或<code>syscall</code>指令）来实现，这导致处理器从用户态切换到内核态，并跳转到预定义的内核入口点执行相应的内核代码。</li>
-</ul>
-</li>
-<li><strong>异常（Exception）</strong>:<ul>
-<li>当程序执行出现错误时（如除零、访问非法内存等），会触发异常。</li>
-<li>处理器会自动从用户态切换到内核态，并调用相应的异常处理程序。</li>
-<li>异常处理程序在内核中定义，负责处理这些错误并决定如何恢复程序执行或终止出错的程序。</li>
-</ul>
-</li>
-<li><strong>中断（Interrupt）</strong>:<ul>
-<li>当外部设备（如键盘、鼠标、网络接口等）需要处理时，它们会向处理器发送中断信号。</li>
-<li>中断信号会导致当前正在执行的用户态程序被挂起，处理器切换到内核态处理这些外部事件。</li>
-<li>中断处理程序在内核中定义，用于响应和处理这些外部事件。</li>
-</ul>
-</li>
+<li><strong>系统调用（System Call）</strong>：<strong>系统调用</strong>是最常见的从用户态切换到内核态的方式。程序在需要执行诸如文件操作、网络通信、进程控制等操作时，会通过系统调用请求操作系统提供服务。Linux 提供了大量的系统调用，例如<code>read()</code>, <code>write()</code>, <code>open()</code>, <code>fork()</code>等。系统调用通过软件中断（通常是中断指令<code>int 0x80</code>或<code>syscall</code>指令）来实现，此时处理器从用户态切换到内核态，并跳转到预定义的内核入口点执行相应的内核代码。</li>
+<li><strong>异常（Exception）</strong>：当程序执行出现错误时（如除零、访问非法内存等），会触发异常，处理器切换到内核态，调动<strong>异常处理程序</strong>来响应和处理这些错误事件。</li>
+<li><strong>中断（Interrupt）</strong>：当外部设备（如键盘、鼠标、网络接口等）需要处理时，它们会向处理器发送中断信号。此时正在执行的用户程序被挂起，处理器切换到内核态，调动<strong>中断处理函数</strong>来响应和处理这些外部事件。</li>
 </ol>
 <h3 id="96、如何用-gbd-调试发现线程阻塞？"><a href="#96、如何用-gbd-调试发现线程阻塞？" class="headerlink" title="96、如何用 gbd 调试发现线程阻塞？"></a>96、如何用 gbd 调试发现线程阻塞？</h3><ol>
-<li><strong>启动GDB并附加到进程</strong></li>
-</ol>
+<li><p><strong>启动GDB并附加到进程</strong></p>
 <p>从 GDB 启动程序：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb ./your_program</span><br><span class="line">run [arguments]</span><br></pre></td></tr></table></figure>
 
-<p>附加到已经运行的程序：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p [pid]</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>列出所有线程</strong></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info threads</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>切换线程</strong></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">thread [thread-id]</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><strong>检查线程的栈帧</strong></li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backtrace</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li><strong>检查锁的状态。如果怀疑是死锁或资源竞争引起的阻塞，你可以检查锁的状态。这通常需要一些对应用程序逻辑的理解，以及可能需要查看源码来确定哪些锁可能涉及阻塞。</strong></li>
+<p> 附加到已经运行的程序：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p [pid]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>列出所有线程</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info threads</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>切换线程</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">thread [thread-id]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查线程的栈帧</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backtrace</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查锁的状态。</strong>如果怀疑是死锁或资源竞争引起的阻塞，可以检查锁的状态。</p>
+</li>
 </ol>
 <h3 id="97、gdb-查看所有线程线程栈的命令是什么？"><a href="#97、gdb-查看所有线程线程栈的命令是什么？" class="headerlink" title="97、gdb 查看所有线程线程栈的命令是什么？"></a>97、gdb 查看所有线程线程栈的命令是什么？</h3><ol>
 <li>查看所有线程： <code>info threads</code></li>
@@ -5294,7 +5254,7 @@ add $4, %esp：
 <h3 id="118、kill-是怎么实现终止进程的？"><a href="#118、kill-是怎么实现终止进程的？" class="headerlink" title="118、kill 是怎么实现终止进程的？"></a>118、kill 是怎么实现终止进程的？</h3><p>在 Linux 系统中，kill 命令用于向指定进程发送信号，其中包括终止进程的 SIGKILL 信号（信号编号为 9）和其他各种信号。终止进程的实现涉及操作系统内核的功能和进程管理机制。</p>
 <p>当用户使用 kill 命令向某个进程发送 SIGKILL 信号时，操作系统内核会首先验证当前用户是否具有足够的权限来发送信号给目标进程。如果具有足够的权限，则内核会查找目标进程的进程描述符，并向其发送指定的信号。</p>
 <p>接收到信号的进程会根据信号的类型采取不同的行动。对于 SIGKILL 信号，目标进程会被立即终止，无法进行信号处理或者捕获。此外，进程终止时，内核会对其进行一系列清理工作，包括释放该进程所占用的资源、解除与其他进程的关联等。</p>
-<h3 id="119、常见命令合集"><a href="#119、常见命令合集" class="headerlink" title="119、常见命令合集"></a>119、常见命令合集</h3><h4 id="（1）查看哪个进程的内存占用最大？"><a href="#（1）查看哪个进程的内存占用最大？" class="headerlink" title="（1）查看哪个进程的内存占用最大？"></a>（1）查看哪个进程的内存占用最大？</h4><ol>
+<h3 id="119、Linux-常用命令（2）"><a href="#119、Linux-常用命令（2）" class="headerlink" title="119、Linux 常用命令（2）"></a>119、Linux 常用命令（2）</h3><h4 id="（1）查看哪个进程的内存占用最大？"><a href="#（1）查看哪个进程的内存占用最大？" class="headerlink" title="（1）查看哪个进程的内存占用最大？"></a>（1）查看哪个进程的内存占用最大？</h4><ol>
 <li><p><code>top</code>+<code>M</code>键</p>
 </li>
 <li><p><code>ps</code>结合<code>sort</code></p>
@@ -7908,12 +7868,12 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">288k</span>
+    <span title="站点总字数">287k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:26</span>
+    <span title="站点阅读时长">17:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
