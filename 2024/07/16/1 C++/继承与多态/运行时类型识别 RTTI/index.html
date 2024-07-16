@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1、运行时类型识别 RTTIC++ 的 RTTI（Run-Time Type Information）是一种运行时类型信息机制，用于在程序运行时获取对象的类型信息。每个具有多态性的类（包括虚函数或虚基类）都会生成一个类型信息对象（Type Information Object），其中包含了有关该类的类型信息，例如类的名称、继承关系、虚函数表等。这些类型信息对象在编译时生成，并与每个类的对象关联">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运行时类型识别 RTTI">
+<meta property="og:url" content="http://example.com/2024/07/16/1%20C++/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB%20RTTI/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="1、运行时类型识别 RTTIC++ 的 RTTI（Run-Time Type Information）是一种运行时类型信息机制，用于在程序运行时获取对象的类型信息。每个具有多态性的类（包括虚函数或虚基类）都会生成一个类型信息对象（Type Information Object），其中包含了有关该类的类型信息，例如类的名称、继承关系、虚函数表等。这些类型信息对象在编译时生成，并与每个类的对象关联">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407161554569.webp">
+<meta property="article:published_time" content="2024-07-16T07:48:28.885Z">
+<meta property="article:modified_time" content="2024-07-16T08:25:04.706Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407161554569.webp">
+
+<link rel="canonical" href="http://example.com/2024/07/16/1%20C++/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB%20RTTI/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>运行时类型识别 RTTI | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/16/1%20C++/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB%20RTTI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          运行时类型识别 RTTI
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-16 15:48:28 / 修改时间：16:25:04" itemprop="dateCreated datePublished" datetime="2024-07-16T15:48:28+08:00">2024-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" itemprop="url" rel="index"><span itemprop="name">继承与多态</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h2 id="1、运行时类型识别-RTTI"><a href="#1、运行时类型识别-RTTI" class="headerlink" title="1、运行时类型识别 RTTI"></a>1、运行时类型识别 RTTI</h2><p>C++ 的 RTTI（Run-Time Type Information）是一种运行时类型信息机制，用于在程序运行时获取对象的类型信息。每个具有多态性的类（包括虚函数或虚基类）都会生成一个类型信息对象（Type Information Object），其中包含了有关该类的类型信息，例如类的名称、继承关系、虚函数表等。这些类型信息对象在编译时生成，并与每个类的对象关联起来。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407161554569.webp" alt="img"></p>
+<p>RTTI 主要包括两个关键字：typeid 和 dynamic_cast。</p>
+<ul>
+<li>typeid 运算符，用于返回表达式的类型。  </li>
+<li>dynamic_cast 运算符，用于将基类的指针或引用安全地转换成派生类的指针或引用。</li>
+</ul>
+<p>一般来说<strong>动态类型指的是某个基类指针或引用指向一个派生类对象，且基类中有虚函数，此时会绑定对象的动态类型。</strong></p>
+<h2 id="2、dynamic-cast"><a href="#2、dynamic-cast" class="headerlink" title="2、dynamic_cast"></a>2、dynamic_cast</h2><p><code>dynamic_cast</code> 可以将指向基类的指针或引用转换为指向派生类的指针或引用，同时会进行类型检查，确保类型转换的安全性。</p>
+<p>基本用法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dynamic_cast</span>&lt;type*&gt;(e)   <span class="comment">// e必须是有效的指针</span></span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt;type&amp;&gt;(e)   <span class="comment">// e必须是个左值</span></span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt;type&amp;&amp;&gt;(e)  <span class="comment">// e不能是左值</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rtti/dynamic_cast.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> _i) : <span class="built_in">i</span>(_i) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot; i = &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derive</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Derive</span>(<span class="type">int</span> i) : <span class="built_in">Base</span>(i) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 第一种情况，Base指针指向Derive对象，可以将Base指针转为Derive指针</span></span><br><span class="line">    <span class="function">Derive <span class="title">derive</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line">    Base *bp = &amp;derive;</span><br><span class="line">    <span class="keyword">if</span> (Derive *dp = <span class="built_in">dynamic_cast</span>&lt;Derive*&gt;(bp)) &#123; <span class="comment">// 可以成功转型</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast succeed~ &quot;</span>;</span><br><span class="line">        dp-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast failed!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二种情况，Base指针指向Base对象，不能将Base指针转为Derive指针</span></span><br><span class="line">    <span class="function">Base <span class="title">base</span><span class="params">(<span class="number">15</span>)</span></span>;</span><br><span class="line">    bp = &amp;base;</span><br><span class="line">    <span class="keyword">if</span> (Derive *dp = <span class="built_in">dynamic_cast</span>&lt;Derive*&gt;(bp)) &#123; <span class="comment">// 转型失败</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast succeed~ &quot;</span>;</span><br><span class="line">        dp-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast failed!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第三种情况，Derive指针指向Derive对象，可以将Derive指针转为Base指针</span></span><br><span class="line">    Derive *dp = <span class="keyword">new</span> <span class="built_in">Derive</span>(<span class="number">15</span>);</span><br><span class="line">    <span class="keyword">if</span> (Base *bp = <span class="built_in">dynamic_cast</span>&lt;Base*&gt;(dp)) &#123; <span class="comment">// 转型成功</span></span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast succeed~ &quot;</span>;</span><br><span class="line">        bp-&gt;<span class="built_in">print</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;dynamic cast failed!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 以下代码不能运行，不能将Derive指针指向Base对象</span></span><br><span class="line">    <span class="comment">// Derive *dp = new Base(20);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$ g++ dynamic_cast.cpp &amp;&amp; ./a.out</span></span><br><span class="line"><span class="comment">dynamic cast succeed~  i = 10</span></span><br><span class="line"><span class="comment">dynamic cast failed!</span></span><br><span class="line"><span class="comment">dynamic cast succeed~  i = 15</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>小结：</p>
+<ul>
+<li>想通过 dynamic_cast 进行动态的转型，基类必须有虚函数；</li>
+<li>基类指针必须指向派生类对象，才可以将其转为派生类指针；</li>
+<li>指向派生类对象的派生类指针，自然可以转为基类指针； </li>
+<li>不能将派生类指针指向基类对象；</li>
+</ul>
+<blockquote>
+<p><strong>什么情况下应该用 dynamic_cast 替代虚函数？</strong></p>
+<p>如果我们需要在派生类中增加新的成员函数 f，但又无法取得基类的源代码，因而无法在基类中增加相应的虚函数，这时，可以在派生类中增加非虚成员函数。但这样一来，就无法用基类指针调用函数  f。如果在程序中需要通过基类指针（如使用该继承层次的某个类中所包含的指向基类对象的指针数据成员 p）来调用 f，则必须使用  dynamic_cast 将 p 转换为指向派生类的指针，才能调用 f。</p>
+<p><strong>也就是说，如果无法为基类增加虚函数，就可以使用 dynamic_cast 代替虚函数。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;typeinfo&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Base</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived1</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Derived1 show&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived2</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">override</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Derived2 show&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Derived2 specific function f&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">call_f_if_derived2</span><span class="params">(Base* p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Derived2* d2 = <span class="built_in">dynamic_cast</span>&lt;Derived2*&gt;(p)) &#123;</span><br><span class="line">        d2-&gt;<span class="built_in">f</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Not a Derived2 instance&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;std::unique_ptr&lt;Base&gt;&gt; objects;</span><br><span class="line">    objects.<span class="built_in">push_back</span>(std::<span class="built_in">make_unique</span>&lt;Derived1&gt;());</span><br><span class="line">    objects.<span class="built_in">push_back</span>(std::<span class="built_in">make_unique</span>&lt;Derived2&gt;());</span><br><span class="line">    objects.<span class="built_in">push_back</span>(std::<span class="built_in">make_unique</span>&lt;Derived1&gt;());</span><br><span class="line">    objects.<span class="built_in">push_back</span>(std::<span class="built_in">make_unique</span>&lt;Derived2&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; obj : objects) &#123;</span><br><span class="line">        obj-&gt;<span class="built_in">show</span>();</span><br><span class="line">        <span class="built_in">call_f_if_derived2</span>(obj.<span class="built_in">get</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Derived1 show</span></span><br><span class="line"><span class="comment">Not a Derived2 instance</span></span><br><span class="line"><span class="comment">Derived2 show</span></span><br><span class="line"><span class="comment">Derived2 specific function f</span></span><br><span class="line"><span class="comment">Derived1 show</span></span><br><span class="line"><span class="comment">Not a Derived2 instance</span></span><br><span class="line"><span class="comment">Derived2 show</span></span><br><span class="line"><span class="comment">Derived2 specific function f</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="3、typeid-运算符"><a href="#3、typeid-运算符" class="headerlink" title="3、typeid 运算符"></a>3、typeid 运算符</h2><p><code>typeid </code>运算符用于获取表达式的实际类型信息。可以通过 <code>typeid</code> 运算符获取对象的类型信息，也可以获取类型的名称。<code>typeid</code> 运算符返回一个 <code>std::type_info</code> 对象，该对象包含有关类型的信息。可以使用 <code>std::type_info</code> 对象进行类型比较或查询类型的名称。</p>
+<ul>
+<li>e 可以是任意表达式或类类型；</li>
+<li>typeid 返回值是<strong>对一个常量对象的引用</strong>，该对象的类型是标准库类型 type_info 或者 type_info 的公有派生类型；</li>
+<li>e 如果是引用，typeid 会返回该引用所引用的对象类型；</li>
+<li>typeid 作用在数组上时，返回的是数组类型，而不是指针类型；</li>
+<li>运算对象不是类类型，或者不包含虚函数的类，指示的是静态类型；</li>
+<li>如果是定义了一个虚函数的类型，typeid 的结果运行时才会求得。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rtti/typeid.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> _i) : <span class="built_in">i</span>(_i) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot; i = &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derive</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Derive</span>(<span class="type">int</span> i) : <span class="built_in">Base</span>(i) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Derive *dp = <span class="keyword">new</span> <span class="built_in">Derive</span>(<span class="number">10</span>);</span><br><span class="line">    Base *bp = dp; <span class="comment">// 两个指针都指向Derive对象</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">typeid</span>(*bp) == <span class="built_in">typeid</span>(*dp)) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;bp和dp指向同一个类型的对象&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">typeid</span>(*bp) == <span class="built_in">typeid</span>(Derive)) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;bp指向的是Derive对象&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$ g++ rtti2.cpp &amp;&amp; ./a.out</span></span><br><span class="line"><span class="comment">bp和dp指向同一个类型的对象</span></span><br><span class="line"><span class="comment">bp指向的是Derive对象</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>注： </p>
+<ul>
+<li>typeid 应该作用于对象，而不是指针本身，因此需要使用 <code>*bp</code> </li>
+<li>只有当类型有虚函数的时候，编译器才会在运行时对表达式进行求值； </li>
+<li>如果类型没有虚函数，typeid 返回的是静态类型，编译器无须求值也知道表达式的静态类型； </li>
+<li>如果指针 p 指向的类型<strong>没有虚函数</strong>，则计算 <code>typeid(*p)</code> 的时候 <code>*p</code> 可以不是一个有效的对象； </li>
+<li>如果指针 p 指向的类型<strong>有虚函数</strong>， <code>*p</code> 会在运行时求值，如果 p 是一个空指针，会抛出 bad_typeid 的异常。</li>
+</ul>
+<h2 id="4、应用举例"><a href="#4、应用举例" class="headerlink" title="4、应用举例"></a>4、应用举例</h2><p>现有一个基类和一个派生类，我们需要为其实现相等运算符。</p>
+<p>一种考虑的方法是定义一套虚函数，然后各自在判断是否相等。这样的问题是因为虚函数中基类和派生类必须有相同的形参，如果我们想定义一个虚函数 equal，则该函数的形参必须是基类的引用。此时，equal 函数将只能使用基类的成员，而不能比较派生类独有的成员。</p>
+<p>下面是解决方法，<strong>可以利用 typeid 先判断类型是否相同，然后再调用各自版本的 equal 函数</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> Base&amp;, <span class="type">const</span> Base&amp;);</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Base</span>(<span class="type">int</span> _i, <span class="type">int</span> _j) : <span class="built_in">i</span>(_i), <span class="built_in">j</span>(_j) &#123;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">equal</span><span class="params">(<span class="type">const</span> Base&amp;)</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> j;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derive</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Derive</span>(<span class="type">int</span> _i, <span class="type">int</span> _j, <span class="type">int</span> _k) : <span class="built_in">Base</span>(_i, _j), <span class="built_in">k</span>(_k) &#123;&#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">equal</span><span class="params">(<span class="type">const</span> Base&amp;)</span> <span class="type">const</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> Base &amp;lhs, <span class="type">const</span> Base &amp;rhs) &#123;</span><br><span class="line">    <span class="comment">// 如果typeid不相等返回false；否则调用equal()</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">typeid</span>(lhs) == <span class="built_in">typeid</span>(rhs) &amp;&amp; lhs.<span class="built_in">equal</span>(rhs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Derive::equal</span><span class="params">(<span class="type">const</span> Base &amp;rhs)</span> <span class="type">const</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Derive::equal()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 我们清楚这两个类型是相等的，所以转换过程不会抛出异常</span></span><br><span class="line">    Derive r = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> Derive&amp;&gt;(rhs);</span><br><span class="line">    <span class="comment">// 执行比较两个Derive对象的操作并返回</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;i == r.i &amp;&amp; <span class="keyword">this</span>-&gt;j == r.j &amp;&amp; <span class="keyword">this</span>-&gt;k == r.k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">Base::equal</span><span class="params">(<span class="type">const</span> Base &amp;rhs)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Base::equal()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 执行比较Base对象的操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;i == rhs.i &amp;&amp; <span class="keyword">this</span>-&gt;j == rhs.j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 第一种情况：两个基类指针进行判断</span></span><br><span class="line">    Base *b1 = <span class="keyword">new</span> <span class="built_in">Base</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    Base *b2 = <span class="keyword">new</span> <span class="built_in">Base</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> (*b1 == *b2) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;b1和b2相等&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二种情况：一个基类指针和一个派生类指针，都指向派生类对象</span></span><br><span class="line">    Base *b3 = <span class="keyword">new</span> <span class="built_in">Derive</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">    Derive *d1 = <span class="keyword">new</span> <span class="built_in">Derive</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">    <span class="keyword">if</span> (*b3 == *d1) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;b3和d1相等&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;b3和d1不相等&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第三种情况：两个指针分别指向基类对象和派生类对象，他两不能直接判断</span></span><br><span class="line">    Base *b4 = <span class="keyword">new</span> <span class="built_in">Base</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    Derive *d2 = <span class="keyword">new</span> <span class="built_in">Derive</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (*b4 == *d2) &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;b4和d2相等&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;b4和d2不相等&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@iisayhi:~/Documents/Test_for_Use<span class="comment"># ./test</span></span><br><span class="line">Base::equal()</span><br><span class="line">b1和b2相等</span><br><span class="line">Derive::equal()</span><br><span class="line">b3和d1不相等</span><br><span class="line">b4和d2不相等</span><br></pre></td></tr></table></figure>
+
+<p>可以看出:</p>
+<ul>
+<li>相同动态类型在判断的时候会调用各自版本的 equal 函数;</li>
+<li>而类型不相同的 typeid 判断相等直接返回 false。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/16/2%20Linux%E7%BC%96%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E7%BB%88%E6%AD%A2/" rel="prev" title="进程终止">
+      <i class="fa fa-chevron-left"></i> 进程终止
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E8%BF%90%E8%A1%8C%E6%97%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB-RTTI"><span class="nav-text">1、运行时类型识别 RTTI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81dynamic-cast"><span class="nav-text">2、dynamic_cast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81typeid-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">3、typeid 运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="nav-text">4、应用举例</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">290k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:35</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
