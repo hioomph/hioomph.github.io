@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一、基础 1、数据包收发利用 pcap 往网络上收发数据包。 以下为测试代码，主要功能：  在一个无限循环中不断捕获和修改网络数据包，然后将其发送出去，并在每次循环中打印计数器值。  1234567891011121314151617181920212223242526272829303132333435#include &lt;stdio.h&gt;#include &quot;pcap&#x2F;p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目2_diy_tcpip">
+<meta property="og:url" content="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="一、基础 1、数据包收发利用 pcap 往网络上收发数据包。 以下为测试代码，主要功能：  在一个无限循环中不断捕获和修改网络数据包，然后将其发送出去，并在每次循环中打印计数器值。  1234567891011121314151617181920212223242526272829303132333435#include &lt;stdio.h&gt;#include &quot;pcap&#x2F;p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042007671.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042013405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042013776.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051056708.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042003498.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051105206.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051948932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051921443.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051937633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051938284.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051948347.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061944836.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091442502.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091805403.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091701626.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091756328.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111015126.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111625628.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628778.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628400.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111629556.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121512637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121521391.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121601312.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112011374.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112014885.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121633164.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152042855.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121700168.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152054734.png">
+<meta property="article:published_time" content="2024-07-03T08:21:03.815Z">
+<meta property="article:modified_time" content="2024-07-15T12:54:31.420Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042007671.png">
+
+<link rel="canonical" href="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>项目2_diy_tcpip | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          项目2_diy_tcpip
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-03 16:21:03" itemprop="dateCreated datePublished" datetime="2024-07-03T16:21:03+08:00">2024-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-15 20:54:31" itemprop="dateModified" datetime="2024-07-15T20:54:31+08:00">2024-07-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>23 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042007671.png" alt="image-20240704200718437"></p>
+<h2 id="1、数据包收发"><a href="#1、数据包收发" class="headerlink" title="1、数据包收发"></a>1、数据包收发</h2><p>利用 pcap 往网络上收发数据包。</p>
+<p>以下为测试代码，主要功能：</p>
+<ul>
+<li>在一个无限循环中不断捕获和修改网络数据包，然后将其发送出去，并在每次循环中打印计数器值。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;pcap/pcap.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;sys_plat.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">	<span class="type">pcap_t</span> *pcap = pcap_device_open(netdev0_phy_ip, netdev0_hwaddr); </span><br><span class="line">	<span class="keyword">while</span> (pcap) &#123;</span><br><span class="line">		<span class="type">static</span> <span class="type">uint8_t</span> buffer[<span class="number">1024</span>];  	<span class="comment">// 缓存</span></span><br><span class="line">		<span class="type">static</span> <span class="type">int</span> counter = <span class="number">0</span>;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">pcap_pkthdr</span> *<span class="title">pkthdr</span>;</span>  	<span class="comment">// 存储抓取的数据包包头</span></span><br><span class="line">		<span class="type">const</span> <span class="type">uint8_t</span> *pkt_data;  		<span class="comment">// 存储抓取的数据包</span></span><br><span class="line"></span><br><span class="line">		plat_printf(<span class="string">&quot;begin test: %d\n&quot;</span>, counter++);</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">			buffer[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 接收数据包</span></span><br><span class="line">		<span class="keyword">if</span> (pcap_next_ex(pcap, &amp;pkthdr, &amp;pkt_data) == <span class="number">-1</span>) &#123;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> len = pkthdr-&gt;len &gt; <span class="keyword">sizeof</span>(buffer) ? <span class="keyword">sizeof</span>(buffer) : pkthdr-&gt;len;</span><br><span class="line">		plat_memcpy(buffer, pkt_data, len);</span><br><span class="line">		buffer[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">		buffer[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 发送数据包</span></span><br><span class="line">		<span class="keyword">if</span> (pcap_inject(pcap, buffer, len) == <span class="number">-1</span>) &#123;</span><br><span class="line">			plat_printf(<span class="string">&quot;pcap send: send packet failed %s \n&quot;</span>, pcap_geterr(pcap));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello, world&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="库文件"><a href="#库文件" class="headerlink" title="库文件"></a>库文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;pcap/pcap.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;sys_plat.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>#include &lt;stdio.h&gt;</code>：包含标准输入输出库，用于打印信息。</p>
+<p><code>#include &quot;pcap/pcap.h&quot;</code>：包含 <code>pcap</code> 库的头文件，用于网络数据包捕获和发送。</p>
+<p><code>#include &quot;sys_plat.h&quot;</code>：包含自定义平台相关的头文件，假设其中定义了 <code>plat_printf</code> 和 <code>plat_memcpy</code> 函数，以及网络设备相关的信息。</p>
+<h3 id="打开-pcap-会话"><a href="#打开-pcap-会话" class="headerlink" title="打开 pcap 会话"></a>打开 pcap 会话</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">pcap_t</span> *pcap = pcap_device_open(netdev0_phy_ip, netdev0_hwaddr); </span><br></pre></td></tr></table></figure>
+
+<h3 id="数据初始化"><a href="#数据初始化" class="headerlink" title="数据初始化"></a>数据初始化</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">uint8_t</span> buffer[<span class="number">1024</span>];  	<span class="comment">// 静态缓存</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> counter = <span class="number">0</span>;			<span class="comment">// 计数器</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pcap_pkthdr</span> *<span class="title">pkthdr</span>;</span>  	<span class="comment">// 存储抓取的数据包包头</span></span><br><span class="line"><span class="type">const</span> <span class="type">uint8_t</span> *pkt_data;  		<span class="comment">// 存储抓取的数据包</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="接收数据包"><a href="#接收数据包" class="headerlink" title="接收数据包"></a>接收数据包</h3><p>接收一个数据包，如果接收失败，继续下一个循环。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收数据包</span></span><br><span class="line"><span class="keyword">if</span> (pcap_next_ex(pcap, &amp;pkthdr, &amp;pkt_data) == <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>确定要拷贝的数据包长度，不能超过定义的 buffer 的长度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> len = pkthdr-&gt;len &gt; <span class="keyword">sizeof</span>(buffer) ? <span class="keyword">sizeof</span>(buffer) : pkthdr-&gt;len;</span><br></pre></td></tr></table></figure>
+
+<p>将数据包数据拷贝到缓存 buffer 中，并在此处做简单的修改，将缓存 buffer 的前两个字节设为 1 和 2，以用于区别该数据包是接收还是发送。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plat_memcpy(buffer, pkt_data, len);</span><br><span class="line">buffer[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">buffer[<span class="number">1</span>] = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送数据包"><a href="#发送数据包" class="headerlink" title="发送数据包"></a>发送数据包</h3><p>发送修改后的数据包。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发送数据包</span></span><br><span class="line"><span class="keyword">if</span> (pcap_inject(pcap, buffer, len) == <span class="number">-1</span>) &#123;</span><br><span class="line">	plat_printf(<span class="string">&quot;pcap send: send packet failed %s \n&quot;</span>, pcap_geterr(pcap));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 wireshark 中抓取相应的数据包如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042013405.png" alt="1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042013776.png" alt="2"></p>
+<h2 id="2、多线程环境"><a href="#2、多线程环境" class="headerlink" title="2、多线程环境"></a>2、多线程环境</h2><h3 id="结合计数信号量-互斥锁实现多线程环境"><a href="#结合计数信号量-互斥锁实现多线程环境" class="headerlink" title="结合计数信号量+互斥锁实现多线程环境"></a>结合计数信号量+互斥锁实现多线程环境</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051056708.png" alt="image-20240705105613396"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;pcap/pcap.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;sys_plat.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">sys_sem_t</span> sem;</span><br><span class="line"><span class="type">static</span> <span class="type">sys_mutex_t</span> mutex;</span><br><span class="line"><span class="type">static</span> <span class="type">int</span> count;  <span class="comment">// 共享资源</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread1_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">1000000</span>; i++) &#123;</span><br><span class="line">		sys_mutex_lock(mutex);</span><br><span class="line">		count++;</span><br><span class="line">		sys_mutex_unlock(mutex);</span><br><span class="line">	&#125;</span><br><span class="line">	plat_printf(<span class="string">&quot;thread1: count = %d\n&quot;</span>, count);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">		plat_printf(<span class="string">&quot;this is thread1: %s\n&quot;</span>, (<span class="type">char</span> *)arg);</span><br><span class="line">		sys_sleep(<span class="number">1000</span>);</span><br><span class="line">		sys_sem_notify(sem);</span><br><span class="line">		sys_sleep(<span class="number">1000</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread2_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">1000000</span>; i++) &#123;</span><br><span class="line">		sys_mutex_lock(mutex);</span><br><span class="line">		count--;</span><br><span class="line">		sys_mutex_unlock(mutex);</span><br><span class="line">	&#125;</span><br><span class="line">	plat_printf(<span class="string">&quot;thread2: count = %d\n&quot;</span>, count);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">		sys_sem_wait(sem, <span class="number">0</span>);</span><br><span class="line">		plat_printf(<span class="string">&quot;this is thread2: %s\n&quot;</span>, (<span class="type">char</span> *)arg);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	sem = sys_sem_create(<span class="number">0</span>);  <span class="comment">// 初始化信号量</span></span><br><span class="line">	mutex = sys_mutex_create();  <span class="comment">// 初始化互斥锁</span></span><br><span class="line"></span><br><span class="line">	sys_thread_create(thread1_entry, <span class="string">&quot;1_test_thread1&quot;</span>);</span><br><span class="line">	sys_thread_create(thread2_entry, <span class="string">&quot;2_test_thread2&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">pcap_t</span> *pcap = pcap_device_open(netdev0_phy_ip, netdev0_hwaddr); </span><br><span class="line">	<span class="keyword">while</span> (pcap) &#123;</span><br><span class="line">		<span class="comment">// 接收数据包</span></span><br><span class="line">		...</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 发送数据包</span></span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407042003498.png" alt="image-20240704200358198"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051105206.png" alt="image-20240705110539162"></p>
+<h3 id="线程间的资源访问控制实例"><a href="#线程间的资源访问控制实例" class="headerlink" title="线程间的资源访问控制实例"></a>线程间的资源访问控制实例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产者线程 --(生产)--&gt; 数据 --(消费)--&gt; 消费者线程</span><br></pre></td></tr></table></figure>
+
+<h4 id="（1）循环缓存"><a href="#（1）循环缓存" class="headerlink" title="（1）循环缓存"></a>（1）循环缓存</h4><p>当生产者线程的生产速率和消费者线程的消费速率不匹配时，就需要缓存来不及消耗的产品。</p>
+<p>使用环形缓存区的方式来实现。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051948932.png" alt="image-20240705194807866"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">生产者线程 --(生产)--&gt; [数据缓存] --(消费)--&gt; 消费者线程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> buffer[<span class="number">100</span>];  <span class="comment">// 环形数据缓冲区</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> write_idx, read_idx;  <span class="comment">// 写索引和读索引</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread1_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 消费者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		<span class="type">char</span> data = buffer[read_idx++];</span><br><span class="line">		<span class="keyword">if</span> (read_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			read_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		plat_printf(<span class="string">&quot;thread1: read data = %d\n&quot;</span>, data);</span><br><span class="line">		sys_sleep(<span class="number">200</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread2_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 生产者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		buffer[write_idx++] = i;</span><br><span class="line">		<span class="keyword">if</span> (write_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			write_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		plat_printf(<span class="string">&quot;thread2: write data = %d\n&quot;</span>, i);</span><br><span class="line">		sys_sleep(<span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>此处并未控制读&#x2F;写速率，可以看出先执行读数据操作，再执行写数据操作，实际上是不正确的。</li>
+<li>观察读&#x2F;写的频次，可以看出写数据的速率较快，大约为读速率的两倍。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051921443.png" alt="image-20240705192122236"></p>
+<h4 id="（2）控制读速率"><a href="#（2）控制读速率" class="headerlink" title="（2）控制读速率"></a>（2）控制读速率</h4><blockquote>
+<p><strong>消费者线程必须在缓存中有数据的情况下才能读，否则应该等待。因此对于读速率需要进行控制。</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> buffer[<span class="number">100</span>];  <span class="comment">// 环形数据缓冲区</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> write_idx, read_idx;  <span class="comment">// 写索引和读索引</span></span><br><span class="line"><span class="type">static</span> <span class="type">sys_sem_t</span> read_sem;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread1_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 消费者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		sys_sem_wait(read_sem, <span class="number">0</span>);</span><br><span class="line">		<span class="type">char</span> data = buffer[read_idx++];</span><br><span class="line">		<span class="keyword">if</span> (read_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			read_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		plat_printf(<span class="string">&quot;thread1: read data = %d\n&quot;</span>, data);</span><br><span class="line">		sys_sleep(<span class="number">200</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread2_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 生产者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		buffer[write_idx++] = i;</span><br><span class="line">		<span class="keyword">if</span> (write_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			write_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		plat_printf(<span class="string">&quot;thread2: write data = %d\n&quot;</span>, i);</span><br><span class="line">		sys_sem_notify(read_sem);</span><br><span class="line">		sys_sleep(<span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">	read_sem = sys_sem_create(<span class="number">0</span>);</span><br><span class="line">	sys_thread_create(thread1_entry, <span class="string">&quot;1_test_thread1&quot;</span>);</span><br><span class="line">	sys_thread_create(thread2_entry, <span class="string">&quot;2_test_thread2&quot;</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051937633.png" alt="image-20240705193710559"></p>
+<h4 id="（3）控制写速率"><a href="#（3）控制写速率" class="headerlink" title="（3）控制写速率"></a>（3）控制写速率</h4><p>如果设置<strong>读数据的速率大于写数据的速率</strong>，则会产生以下效果，可以发现生产者写一个数据，消费者读一个数据：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051938284.png" alt="image-20240705193854205"></p>
+<blockquote>
+<p><strong>此外，生产者线程必须在缓存中有空闲单元的情况下才能往里面写数据，否则应该等待。因此对于写速率也需要进行控制。</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">char</span> buffer[<span class="number">100</span>];  <span class="comment">// 环形数据缓冲区</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> write_idx, read_idx;  <span class="comment">// 写索引和读索引</span></span><br><span class="line"><span class="type">static</span> <span class="type">sys_sem_t</span> read_sem;</span><br><span class="line"><span class="type">static</span> <span class="type">sys_sem_t</span> write_sem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread1_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 消费者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		sys_sem_wait(read_sem, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		<span class="type">char</span> data = buffer[read_idx++];</span><br><span class="line">		<span class="keyword">if</span> (read_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			read_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		plat_printf(<span class="string">&quot;thread1: read data = %d\n&quot;</span>, data);</span><br><span class="line">		</span><br><span class="line">		sys_sem_notify(write_sem);</span><br><span class="line">		sys_sleep(<span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">thread2_entry</span><span class="params">(<span class="type">void</span> *arg)</span> &#123;</span><br><span class="line">	<span class="comment">// 生产者线程</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * <span class="keyword">sizeof</span>(buffer); i++) &#123;</span><br><span class="line">		sys_sem_wait(write_sem, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		buffer[write_idx++] = i;</span><br><span class="line">		<span class="keyword">if</span> (write_idx &gt;= <span class="keyword">sizeof</span>(buffer)) &#123;</span><br><span class="line">			write_idx = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		plat_printf(<span class="string">&quot;thread2: write data = %d\n&quot;</span>, i);</span><br><span class="line"></span><br><span class="line">		sys_sem_notify(read_sem);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">	read_sem = sys_sem_create(<span class="number">0</span>);</span><br><span class="line">	write_sem = sys_sem_create(<span class="keyword">sizeof</span>(buffer));</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行上述程序后，出现下列现象：</p>
+<ol>
+<li><p>生产者线程进行大量写操作，<strong>迅速将缓存区占满</strong>（体现为write data &#x3D; 99）;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sys_sem_wait(write_sem, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+<p>程序开始运行时，write_sem 初始值为 100，即缓存区大小，因此此时生产者的写入不受限制，可以一直往缓存区中写入数据，直到缓存区占满。</p>
+</li>
+<li><p>当缓存区满后，写速率大幅度减慢，受到读速率的影响，此时读一个数据后再写一个数据。</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407051948347.png" alt="image-20240705194831290"></p>
+<h2 id="3、网络编程"><a href="#3、网络编程" class="headerlink" title="3、网络编程"></a>3、网络编程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">客户端             2.启动并发起请求         4.处理相应，关闭连接</span><br><span class="line">                         |                        |</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">                   |                    |                  |</span><br><span class="line">服务器端    1.启动并等待请求     3.接受请求，并发回响应       5.关闭</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端   // 服务器端</span></span><br><span class="line"></span><br><span class="line">			   socket()  </span><br><span class="line">	              |</span><br><span class="line">socket()        bind()</span><br><span class="line">   |              |</span><br><span class="line">connect() --&gt;  listen() --&gt; accept()</span><br><span class="line">   |              |</span><br><span class="line"> send()   --&gt;   recv()</span><br><span class="line">   |              |</span><br><span class="line"> recv()   &lt;--   send()</span><br><span class="line">   |              |</span><br><span class="line"> close()        close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用套接字设计客户端"><a href="#利用套接字设计客户端" class="headerlink" title="利用套接字设计客户端"></a>利用套接字设计客户端</h3><p>创建一个基于 TCP 协议的 echo 客户端：</p>
+<ol>
+<li>读取键盘输入的字符串并发送给服务器；</li>
+<li>接收服务器发回来的回应，并显示在屏幕上。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">键盘  --(fgets)--&gt;              --(send)-------(recv)--&gt; </span><br><span class="line">                    TCP客户端                              TCP客户端</span><br><span class="line">屏幕  &lt;--(printf)--             --(recv)-------(send)--&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用套接字设计服务器端"><a href="#利用套接字设计服务器端" class="headerlink" title="利用套接字设计服务器端"></a>利用套接字设计服务器端</h3><h1 id="二、整体结构设计"><a href="#二、整体结构设计" class="headerlink" title="二、整体结构设计"></a>二、整体结构设计</h1><h2 id="1、整体结构"><a href="#1、整体结构" class="headerlink" title="1、整体结构"></a>1、整体结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- src</span><br><span class="line">	- app</span><br><span class="line">		- test</span><br><span class="line">			- main.c</span><br><span class="line">    - net</span><br><span class="line">    	- net</span><br><span class="line">    		- net_err.h  <span class="comment">// net相关的变量定义</span></span><br><span class="line">    		- net.h		 <span class="comment">// tcp/ip协议栈初始化</span></span><br><span class="line">    		- exmsg.h	 <span class="comment">// 核心工作线程初始化，所有tcp/ip相关的事件都交由该线程处理</span></span><br><span class="line">    	- src</span><br><span class="line">    - plat</span><br><span class="line">    	- net_plat.c</span><br><span class="line">    	- sys_plat.c</span><br></pre></td></tr></table></figure>
+
+
+
+<p>整个项目的核心为<strong>工作线程</strong>，对应于<code>src/net/src/exmsg.c</code>模块。这个模块是TCP&#x2F;IP核心线程通信模块，运行了一个核心线程，<strong>所有 TCP&#x2F;IP 中相关的事件都交由该线程处理</strong>。</p>
+<blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 协议栈初始化</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">net_err_t</span> <span class="title function_">net_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    net_plat_init();  <span class="comment">// 初始化硬件资源</span></span><br><span class="line"></span><br><span class="line">    exmsg_init();</span><br><span class="line">    <span class="keyword">return</span> NET_ERR_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么在协议栈初始化时需要先进行硬件资源初始化？是为了适应不同平台吗？</strong></p>
+<p>在编写 TCP&#x2F;IP 协议栈的过程中，在协议栈初始化时首先进行硬件资源初始化是非常重要的一步，原因主要有以下几个方面：</p>
+<ol>
+<li>适应不同平台：不同的平台可能有不同的硬件资源和配置要求。进行硬件资源初始化可以确保协议栈能够适应不同的平台，并能够正确地与底层硬件进行交互。</li>
+<li>确保硬件资源可用：协议栈的运行依赖于底层的网络硬件资源（如网卡、网络接口等）。在协议栈初始化时，首先初始化硬件资源可以确保这些资源是可用的，并且已经准备好进行数据传输。</li>
+<li>设置硬件参数：硬件资源初始化过程通常包括设置硬件参数（如网卡的 MAC 地址、IP 地址、子网掩码等）。这些参数对于协议栈的正确运行至关重要，因为它们决定了如何在网络中进行数据传输。</li>
+<li>注册硬件中断和回调函数：硬件资源初始化过程中通常需要注册硬件中断和回调函数，以便在数据包到达时能够及时通知协议栈进行处理。如果没有进行硬件资源初始化，协议栈将无法及时响应网络事件。</li>
+<li>分配和管理资源：硬件资源初始化过程可能涉及到分配和管理一些必要的资源，如内存缓冲区、DMA 通道等。这些资源对于协议栈的高效运行也是至关重要的。</li>
+<li>错误处理：在硬件资源初始化阶段，可以检测和处理可能的硬件错误。如果硬件资源不可用或者初始化失败，可以在这个阶段进行相应的错误处理，避免后续协议栈运行时出现难以调试的问题。</li>
+</ol>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061944836.png" alt="软件整体流程"></p>
+<h2 id="2、网络结构"><a href="#2、网络结构" class="headerlink" title="2、网络结构"></a>2、网络结构</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739436.png" alt="整体结构设计" style="zoom: 33%;" />
+
+<h2 id="3、协议分层"><a href="#3、协议分层" class="headerlink" title="3、协议分层"></a>3、协议分层</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407061739339.png" alt="软件层级结构"></p>
+<h1 id="三、调试信息输出模块"><a href="#三、调试信息输出模块" class="headerlink" title="三、调试信息输出模块"></a>三、调试信息输出模块</h1><p>这个项目的调试信息输出模块主要用于在开发和调试过程中输出各种调试信息，包括错误、警告和一般信息。它包含了一些宏定义、函数和常量，用于控制调试信息的输出格式和级别。下面是对该模块的详细总结：</p>
+<h2 id="1、dbg-c"><a href="#1、dbg-c" class="headerlink" title="1、dbg.c"></a>1、dbg.c</h2><ol>
+<li><p><strong>调试信息显示样式设置</strong>：通过 ANSI 转义序列设置不同等级的显示样式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_RESET       <span class="string">&quot;\033[0m&quot;</span>       <span class="comment">// 复位显示</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_ERROR       <span class="string">&quot;\033[31m&quot;</span>      <span class="comment">// 红色显示</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_STYLE_WARNING     <span class="string">&quot;\033[33m&quot;</span>      <span class="comment">// 黄色显示</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>调试信息输出级别</strong>：定义了不同的调试信息输出级别，每个级别对应不同的数值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_NONE           0         <span class="comment">// 不开启任何输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_ERROR          1         <span class="comment">// 只开启错误信息输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_WARNING        2         <span class="comment">// 开启错误和警告信息输出</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_LEVEL_INFO           3         <span class="comment">// 开启错误、警告、一般信息输出</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>调试信息输出函数</strong></p>
+<ul>
+<li><p><code>dbg_print</code>：根据不同的级别输出调试信息，包括文件名、函数名、行号和具体的调试信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dbg_print</span><span class="params">(<span class="type">int</span> m_level, <span class="type">int</span> s_level, <span class="type">const</span> <span class="type">char</span>* file, <span class="type">const</span> <span class="type">char</span>* func, <span class="type">int</span> line, <span class="type">const</span> <span class="type">char</span>* fmt, ...)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>dump_mac</code>：输出MAC地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dump_mac</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * msg, <span class="type">const</span> <span class="type">uint8_t</span> * mac)</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>dump_ip_buf</code>：输出IP地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">dump_ip_buf</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* msg, <span class="type">const</span> <span class="type">uint8_t</span>* ip)</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>调试输出宏</strong>：提供了便捷的宏用于不同级别的调试信息输出：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_info(module, fmt, ...)  dbg_print(module, DBG_LEVEL_INFO, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_error(module, fmt, ...)  dbg_print(module, DBG_LEVEL_ERROR, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_warning(module, fmt, ...) dbg_print(module, DBG_LEVEL_WARNING, __FILE__, __FUNCTION__, __LINE__, fmt, ##__VA_ARGS__)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>断言宏</strong>：提供断言宏用于在调试过程中验证表达式的正确性，如果表达式为假，则输出错误信息并进入无限循环：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> dbg_assert(expr, msg)   &#123;\</span></span><br><span class="line"><span class="meta">    <span class="keyword">if</span> (!(expr)) &#123;\</span></span><br><span class="line"><span class="meta">        dbg_print(DBG_LEVEL_ERROR, DBG_LEVEL_ERROR, __FILE__, __FUNCTION__, __LINE__, <span class="string">&quot;assert failed:&quot;</span>#expr<span class="string">&quot;,&quot;</span>msg); \</span></span><br><span class="line"><span class="meta">        while(1);   \</span></span><br><span class="line"><span class="meta">    &#125;   \</span></span><br><span class="line"><span class="meta">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>调试信息输出开关</strong>：定义了不同模块的调试信息输出级别：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_MBLOCK           DBG_LEVEL_ERROR         <span class="comment">// 内存块管理器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_QUEUE            DBG_LEVEL_ERROR         <span class="comment">// 定长存储块</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_MSG              DBG_LEVEL_ERROR         <span class="comment">// 消息通信</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_BUF              DBG_LEVEL_ERROR         <span class="comment">// 数据包管理器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_PLAT             DBG_LEVEL_ERROR         <span class="comment">// 系统平台</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_INIT             DBG_LEVEL_ERROR         <span class="comment">// 初始化模块</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_NETIF            DBG_LEVEL_ERROR         <span class="comment">// 网络接口层</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ETHER            DBG_LEVEL_ERROR         <span class="comment">// 以太网协议层</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TOOLS            DBG_LEVEL_ERROR         <span class="comment">// 工具集</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TIMER            DBG_LEVEL_ERROR         <span class="comment">// 定时器</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ARP              DBG_LEVEL_ERROR         <span class="comment">// ARP协议</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_IP               DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_ICMP             DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_SOCKET           DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_RAW              DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_UDP              DBG_LEVEL_ERROR         <span class="comment">// 调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_DNS              DBG_LEVEL_ERROR         <span class="comment">// DNS调试开关</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DBG_TCP              DBG_LEVEL_INFO          <span class="comment">// 调试开关</span></span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="具体实现分析"><a href="#具体实现分析" class="headerlink" title="具体实现分析"></a>具体实现分析</h3><h4 id="dbg-print-函数"><a href="#dbg-print-函数" class="headerlink" title="dbg_print 函数"></a><code>dbg_print</code> 函数</h4><p>该函数根据日志等级输出调试信息，具体实现如下：</p>
+<ol>
+<li><p>定义日志等级标题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span>* title[] = &#123;</span><br><span class="line">    [DBG_LEVEL_ERROR] = DBG_STYLE_ERROR<span class="string">&quot;error&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_WARNING] = DBG_STYLE_WARNING<span class="string">&quot;warning&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_INFO] = <span class="string">&quot;info&quot;</span>,</span><br><span class="line">    [DBG_LEVEL_NONE] = <span class="string">&quot;none&quot;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断是否输出日志信息：仅当主日志等级 <code>m_level</code> 大于等于子日志等级 <code>s_level</code> 时，才输出日志信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (m_level &gt;= s_level) &#123;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提取文件名：通过遍历字符串，从路径中提取文件名部分。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * end = file + plat_strlen(file);</span><br><span class="line"><span class="keyword">while</span> (end &gt;= file) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((*end == <span class="string">&#x27;\\&#x27;</span>) || (*end == <span class="string">&#x27;/&#x27;</span>)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    end--;</span><br><span class="line">&#125;</span><br><span class="line">end++;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出日志头部信息：输出日志级别、文件名、函数名和行号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plat_printf(<span class="string">&quot;%s(%s-%s-%d):&quot;</span>, title[s_level], end, func, line);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出具体日志信息：使用可变参数列表处理格式化字符串，输出具体日志信息。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str_buf[<span class="number">128</span>];</span><br><span class="line">va_list args;</span><br><span class="line"></span><br><span class="line">va_start(args, fmt);</span><br><span class="line">plat_vsprintf(str_buf, fmt, args);</span><br><span class="line">plat_printf(<span class="string">&quot;%s\n&quot;</span>DBG_STYLE_RESET, str_buf);</span><br><span class="line">va_end(args);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>假设在代码的某处使用这些宏和函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dbg_info(DBG_TCP, <span class="string">&quot;TCP connection established&quot;</span>);</span><br><span class="line">dbg_warning(DBG_TCP, <span class="string">&quot;TCP connection may be slow&quot;</span>);</span><br><span class="line">dbg_error(DBG_TCP, <span class="string">&quot;TCP connection failed&quot;</span>);</span><br><span class="line">dbg_assert(ptr != <span class="literal">NULL</span>, <span class="string">&quot;Pointer should not be NULL&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_INFO</code> 时，会输出 “TCP connection established” 信息。</li>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_WARNING</code> 时，会输出 “TCP connection may be slow” 警告。</li>
+<li>当 <code>DBG_TCP</code> 的日志等级大于等于 <code>DBG_LEVEL_ERROR</code> 时，会输出 “TCP connection failed” 错误。</li>
+<li>如果 <code>ptr</code> 为 <code>NULL</code>，则输出断言失败信息并进入无限循环。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>该调试信息输出模块通过定义不同的日志等级和使用可变参数处理，提供了灵活且易用的调试信息输出功能。通过宏定义，开发者可以方便地在代码中插入调试信息输出，帮助快速定位问题，提高开发效率。</p>
+<h1 id="四、定长内存块管理"><a href="#四、定长内存块管理" class="headerlink" title="四、定长内存块管理"></a>四、定长内存块管理</h1><h2 id="1、协议栈中的存储管理"><a href="#1、协议栈中的存储管理" class="headerlink" title="1、协议栈中的存储管理"></a>1、协议栈中的存储管理</h2><p>当应用程序需要请求工作线程去做某事时，需要先申请一个消息结构，即一个内存块，并将这个内存块的指针插入消息队列中。工作线程在接收到这个指针后执行相应的操作，完成后释放该内存块。</p>
+<p>将数据包拆分成大小一致的数据块，如下图所示。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091442502.png" alt="image-20240709144204250" style="zoom: 67%;" />
+
+<p>本协议栈在设计时采用<strong>固定长度</strong>的存储分配，考虑以下两点：</p>
+<p>1、在某些系统上，内核并没有提供动态内存分配函数；– 考虑可移植性。</p>
+<p>2、减少动态分配造成的内存碎片问题。</p>
+<p>在初始化时，将数组中各个数组元素构建成一个<strong>空闲链表</strong>，当需要内存时，从中取出一个内存块用于分配，并且进行<strong>加锁</strong>处理，以适用于多线程场景。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091805403.png" alt="定长存储分配" style="zoom: 67%;" />
+
+<h3 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091701626.png" alt="image-20240709170116444"></p>
+<p>实现了一个存储块管理器（<code>mblock</code>），用于管理内存块的分配和释放。通过使用链表和锁机制，实现了多线程环境下的安全内存管理。下面是对文件的详细分析和总结：</p>
+<h2 id="2、mblock-c"><a href="#2、mblock-c" class="headerlink" title="2、mblock.c"></a>2、mblock.c</h2><p>定长内存块管理器（Fixed-size Memory Block Manager）通过将一个连续的内存区域分割成固定大小的块，然后使用链表管理这些块，实现了高效的内存分配和释放。以下是该模块的详细分析：</p>
+<h3 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">mblock_t</span> &#123;</span></span><br><span class="line">    <span class="type">nlist_t</span> free_list;      <span class="comment">// 空闲块链表</span></span><br><span class="line">    <span class="type">void</span> *start;            <span class="comment">// 内存块起始地址（未使用）</span></span><br><span class="line">    <span class="type">nlocker_t</span> locker;       <span class="comment">// 锁，用于多线程同步</span></span><br><span class="line">    <span class="type">sys_sem_t</span> alloc_sem;    <span class="comment">// 分配信号量，用于控制分配时的等待</span></span><br><span class="line">&#125; <span class="type">mblock_t</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>free_list</code>: 空闲块链表，用于存储空闲内存块。</li>
+<li><code>start</code>: 内存块起始地址，目前未使用。</li>
+<li><code>locker</code>: 互斥锁 <code>nlocker_t</code>，用于保护对 <code>free_list</code> 的访问，确保线程安全性。</li>
+<li><code>alloc_sem</code>: 分配信号量 <code>sys_sem_t</code>，用于控制在没有空闲块时的等待。</li>
+</ul>
+<h3 id="初始化函数-mblock-init"><a href="#初始化函数-mblock-init" class="headerlink" title="初始化函数 mblock_init"></a>初始化函数 <code>mblock_init</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">net_err_t</span> <span class="title function_">mblock_init</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">void</span> *mem, <span class="type">int</span> blk_size, <span class="type">int</span> cnt, <span class="type">nlocker_type_t</span> locker_type)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于初始化定长内存块管理器：</p>
+<ol>
+<li>将传入的内存区域 <code>mem</code> 按照 <code>blk_size</code> 划分为 <code>cnt</code> 个固定大小的内存块，并将这些块使用链表 <code>free_list</code> 连接起来。</li>
+<li>初始化互斥锁 <code>locker</code>，用于保护对 <code>free_list</code> 的并发访问。</li>
+<li>如果 <code>locker_type</code> 表示需要多线程支持，就创建分配信号量 <code>alloc_sem</code>，用于在没有空闲块时的等待。</li>
+</ol>
+<h3 id="分配函数-mblock-alloc"><a href="#分配函数-mblock-alloc" class="headerlink" title="分配函数 mblock_alloc"></a>分配函数 <code>mblock_alloc</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">mblock_alloc</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">int</span> ms)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于从管理的内存块中分配一个空闲块：</p>
+<ol>
+<li>如果 <code>ms &lt; 0</code> 或者管理器未使用锁（即 <code>locker.type == NLOCKER_NONE</code>），则直接查询空闲块数量。</li>
+<li>如果有等待信号量，使用 <code>sys_sem_wait</code> 等待空闲块的释放。</li>
+<li>使用互斥锁保护对 <code>free_list</code> 的访问，从链表头部取出一个空闲块。</li>
+<li>返回分配的空闲块地址。</li>
+</ol>
+<h3 id="空闲块数量查询函数-mblock-free-cnt"><a href="#空闲块数量查询函数-mblock-free-cnt" class="headerlink" title="空闲块数量查询函数 mblock_free_cnt"></a>空闲块数量查询函数 <code>mblock_free_cnt</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mblock_free_cnt</span><span class="params">(<span class="type">mblock_t</span> *mblock)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于获取当前空闲块的数量：</p>
+<ol>
+<li>使用互斥锁保护对 <code>free_list</code> 的访问，获取链表中当前空闲块的数量。</li>
+<li>返回空闲块数量。</li>
+</ol>
+<h3 id="释放函数-mblock-free"><a href="#释放函数-mblock-free" class="headerlink" title="释放函数 mblock_free"></a>释放函数 <code>mblock_free</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_free</span><span class="params">(<span class="type">mblock_t</span> *mblock, <span class="type">void</span> *block)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于释放先前分配的空闲块：</p>
+<ol>
+<li>使用互斥锁保护对 <code>free_list</code> 的访问，将要释放的空闲块插入到链表的尾部。</li>
+<li>如果存在等待信号量，使用 <code>sys_sem_notify</code> 通知等待的线程有新的空闲块可用。</li>
+</ol>
+<h3 id="销毁函数-mblock-destroy"><a href="#销毁函数-mblock-destroy" class="headerlink" title="销毁函数 mblock_destroy"></a>销毁函数 <code>mblock_destroy</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_destroy</span><span class="params">(<span class="type">mblock_t</span> *mblock)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于销毁内存块管理器：</p>
+<ol>
+<li>如果存在分配信号量 <code>alloc_sem</code>，释放该信号量。</li>
+<li>销毁互斥锁 <code>locker</code>。</li>
+<li>注意：该函数不会释放内存块本身，需要调用者负责管理 <code>mem</code> 的释放。</li>
+</ol>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p>定长内存块管理器通过互斥锁和信号量保证了在多线程环境下的安全操作，有效地管理和利用固定大小的内存块，避免了内存碎片和资源竞争问题。每个操作都经过严格的同步控制，确保了对内存块的分配和释放的正确性和高效性。</p>
+<h2 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h2><p>测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">mblock_test</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="type">mblock_t</span> blist;</span><br><span class="line">	<span class="type">static</span> <span class="type">uint8_t</span> buffer[<span class="number">100</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">	<span class="type">void</span> *temp[<span class="number">10</span>];</span><br><span class="line">	mblock_init(&amp;blist, buffer, <span class="number">100</span>, <span class="number">10</span>, NLOCKER_THREAD);</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">		temp[i] = mblock_alloc(&amp;blist, <span class="number">0</span>);</span><br><span class="line">        plat_printf(<span class="string">&quot;block: %p, free_count: %d\n&quot;</span>, temp[i], mblock_free_cnt(&amp;blist));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">		mblock_free(&amp;blist, temp[i]);</span><br><span class="line">		plat_printf(<span class="string">&quot;after free, free_count: %d\n&quot;</span>, mblock_free_cnt(&amp;blist));</span><br><span class="line">	&#125;</span><br><span class="line">	mblock_destroy(&amp;blist);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407091756328.png" alt="image-20240709175656172"></p>
+<h1 id="五、定长消息队列的实现"><a href="#五、定长消息队列的实现" class="headerlink" title="五、定长消息队列的实现"></a>五、定长消息队列的实现</h1><h2 id="1、协议栈中涉及定长消息队列的部分"><a href="#1、协议栈中涉及定长消息队列的部分" class="headerlink" title="1、协议栈中涉及定长消息队列的部分"></a>1、协议栈中涉及定长消息队列的部分</h2><p>消息队列主要用在两个地方：</p>
+<ol>
+<li>工作线程，接收来自应用程序或网卡的消息；</li>
+<li>网卡部分，涉及输入队列和输出队列，放置需要发送的数据包。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111015126.png" alt="image-20240711101556780" style="zoom: 50%;" />
+
+<h2 id="2、fixq-c"><a href="#2、fixq-c" class="headerlink" title="2、fixq.c"></a>2、fixq.c</h2><p>定长消息队列的实现在多线程环境中非常关键，它能有效地管理有限的资源，避免资源耗尽和竞争条件。让我们来分析一下定长消息队列的具体实现：</p>
+<h3 id="结构体定义-1"><a href="#结构体定义-1" class="headerlink" title="结构体定义"></a>结构体定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">fixq_t</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> size;               <span class="comment">// 消息队列空闲单元长度</span></span><br><span class="line">    <span class="type">int</span> in, out;            <span class="comment">// 写入/读取时的索引位置</span></span><br><span class="line">    <span class="type">int</span> cnt;                <span class="comment">// 消息队列的当前消息个数</span></span><br><span class="line"></span><br><span class="line">    <span class="type">void</span> **buf;             <span class="comment">// 消息结构数组</span></span><br><span class="line"></span><br><span class="line">    <span class="type">nlocker_t</span> locker;       <span class="comment">// 互斥锁</span></span><br><span class="line">    <span class="type">sys_sem_t</span> recv_sem;     <span class="comment">// 读信号量</span></span><br><span class="line">    <span class="type">sys_sem_t</span> send_sem;     <span class="comment">// 写信号量</span></span><br><span class="line">&#125; <span class="type">fixq_t</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>size</code>: 消息队列的大小，即可以容纳的消息数量。</li>
+<li><code>in</code>, <code>out</code>: 写入和读取消息的索引位置，循环使用以节约空间。</li>
+<li><code>cnt</code>: 当前消息队列中的消息个数。</li>
+<li><code>buf</code>: 指向存储消息的数组。</li>
+<li><code>locker</code>: 用于保护消息队列的互斥锁。</li>
+<li><code>recv_sem</code>, <code>send_sem</code>: 分别用于控制读和写的信号量。</li>
+</ul>
+<h3 id="初始化函数-fixq-init"><a href="#初始化函数-fixq-init" class="headerlink" title="初始化函数 fixq_init"></a>初始化函数 <code>fixq_init</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">net_err_t</span> <span class="title function_">fixq_init</span><span class="params">(<span class="type">fixq_t</span> *q, <span class="type">void</span> **buf, <span class="type">int</span> size, <span class="type">nlocker_type_t</span> type)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于初始化定长消息队列：</p>
+<ol>
+<li>初始化互斥锁 <code>locker</code>，确保在多线程环境下对队列操作的原子性和互斥性。</li>
+<li>创建两个信号量 <code>recv_sem</code> 和 <code>send_sem</code>，用于控制读和写操作的同步，确保队列空间和消息的正确使用。</li>
+<li>将外部传入的消息缓冲区 <code>buf</code> 和队列大小 <code>size</code> 赋值给消息队列结构体。</li>
+</ol>
+<h3 id="发送函数-fixq-send"><a href="#发送函数-fixq-send" class="headerlink" title="发送函数 fixq_send"></a>发送函数 <code>fixq_send</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">net_err_t</span> <span class="title function_">fixq_send</span><span class="params">(<span class="type">fixq_t</span> *q, <span class="type">void</span> *msg, <span class="type">int</span> tmo)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于向消息队列中发送消息 <code>msg</code>：</p>
+<ol>
+<li>首先通过互斥锁 <code>locker</code> 确保对队列操作的互斥性。</li>
+<li>判断消息队列是否已满，如果满且超时参数 <code>tmo</code> 小于 0，则返回 <code>NET_ERR_FULL</code> 表示队列已满且不等待。</li>
+<li>使用写信号量 <code>send_sem</code> 等待有空闲单元可以写入。</li>
+<li>通过互斥锁再次确认队列未满，将消息写入队列，并更新索引和计数器。</li>
+<li>发送完毕后，通过读信号量 <code>recv_sem</code> 通知其他线程有新消息可读取。</li>
+</ol>
+<h3 id="接收函数-fixq-recv"><a href="#接收函数-fixq-recv" class="headerlink" title="接收函数 fixq_recv"></a>接收函数 <code>fixq_recv</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">fixq_recv</span><span class="params">(<span class="type">fixq_t</span> *q, <span class="type">int</span> tmo)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于从消息队列中接收消息：</p>
+<ol>
+<li>首先通过互斥锁 <code>locker</code> 确保对队列操作的互斥性。</li>
+<li>如果队列为空且超时参数 <code>tmo</code> 小于 0，则立即返回 <code>NULL</code> 表示超时或队列为空。</li>
+<li>使用读信号量 <code>recv_sem</code> 等待有消息可读。</li>
+<li>通过互斥锁再次确认队列非空，从队列中读取消息，并更新索引和计数器。</li>
+<li>接收完毕后，通过写信号量 <code>send_sem</code> 通知其他线程有空闲空间可以写入新消息。</li>
+</ol>
+<h3 id="销毁函数-fixq-destroy"><a href="#销毁函数-fixq-destroy" class="headerlink" title="销毁函数 fixq_destroy"></a>销毁函数 <code>fixq_destroy</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">fixq_destroy</span><span class="params">(<span class="type">fixq_t</span> *q)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于销毁消息队列：</p>
+<ol>
+<li>销毁互斥锁 <code>locker</code>。</li>
+<li>释放读信号量 <code>recv_sem</code> 和写信号量 <code>send_sem</code>。</li>
+<li>不会释放消息缓冲区 <code>buf</code>，因为它是外部传入的，由外部管理。</li>
+</ol>
+<h3 id="计数函数-fixq-count"><a href="#计数函数-fixq-count" class="headerlink" title="计数函数 fixq_count"></a>计数函数 <code>fixq_count</code></h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fixq_count</span><span class="params">(<span class="type">fixq_t</span> *q)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于获取当前消息队列中的消息个数：</p>
+<ol>
+<li>使用互斥锁 <code>locker</code> 锁定，获取 <code>cnt</code> 计数器的值。</li>
+<li>返回当前消息个数。</li>
+</ol>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><p>定长消息队列通过互斥锁和信号量确保了多线程环境下对队列操作的安全性和同步性，避免了竞争条件和资源冲突。每个操作函数都在操作前后使用互斥锁进行保护，并利用信号量进行同步控制，保证了队列的正确操作顺序和状态。</p>
+<blockquote>
+<p>定长消息队列依赖定长内存块来管理消息的存储。每当需要<strong>发送一个消息</strong>时，消息队列会向内存块管理器申请一个空闲的内存块来存储该消息。当<strong>消息处理完毕后</strong>，消息队列会将该内存块释放回内存块管理器，以便再次利用。</p>
+</blockquote>
+<h1 id="六、网络数据包结构设计"><a href="#六、网络数据包结构设计" class="headerlink" title="六、网络数据包结构设计"></a>六、网络数据包结构设计</h1><h2 id="1、网络数据包的具体设计"><a href="#1、网络数据包的具体设计" class="headerlink" title="1、网络数据包的具体设计"></a>1、网络数据包的具体设计</h2><p>当协议栈连接网络后，将接收到来自网络的各种不同大小的数据包，应用程序也会发送各种不同大小的数据包，长度从几字节到几十 KB 不等。若全部采用定长的数据包来存储，较为死板；而如果采用动态分配的方式，则会产生大量的内部碎片。因此借鉴 FAT32 文件系统的文件管理方式，采用<strong>链式存储</strong>的方式管理数据包。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111625628.png" alt="image-20240711162533261"></p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="添加包头和移除包头"><a href="#添加包头和移除包头" class="headerlink" title="添加包头和移除包头"></a>添加包头和移除包头</h4><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628778.png" alt="image-20240711162806417"></p>
+<h4 id="对数据包中的任意位置进行读写"><a href="#对数据包中的任意位置进行读写" class="headerlink" title="对数据包中的任意位置进行读写"></a>对数据包中的任意位置进行读写</h4><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111628400.png" alt="image-20240711162830179" style="zoom:50%;" />
+
+<h4 id="调整大小、合并数据包"><a href="#调整大小、合并数据包" class="headerlink" title="调整大小、合并数据包"></a>调整大小、合并数据包</h4><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407111629556.png" alt="image-20240711162910344" style="zoom: 33%;" />
+
+<h3 id="数据包整体框图"><a href="#数据包整体框图" class="headerlink" title="数据包整体框图"></a>数据包整体框图</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121512637.png" alt="数据包"></p>
+<p>尾插法方式分配块列表：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121521391.png" alt="image-20240712152100299"></p>
+<p>头插法方式分配块列表：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121601312.png" alt="image-20240712160144214"></p>
+<h2 id="2、基本操作1：添加包头和移除包头"><a href="#2、基本操作1：添加包头和移除包头" class="headerlink" title="2、基本操作1：添加包头和移除包头"></a>2、基本操作1：添加包头和移除包头</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112011374.png" alt="image-20240711201125051"></p>
+<p>针对这两种不同的建立快链表的方式，选择<strong>头插法</strong>建立链表。这样做<strong>可以给包头预留空间，方便以后直接添加包头</strong>。这样做就不必频繁分配包头的空间，可以直接利用头部的未用空间。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407112014885.png" alt="image-20240711201455593"></p>
+<p>为了便于后续访问，需要保证包头的数据在一片连续的内存空间里。有两种添加包头的方式如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121633164.png" alt="image-20240712163322897" style="zoom: 50%;" />
+
+<p>有两种移除包头的方式如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152042855.png" alt="image-20240715204230597" style="zoom:50%;" />
+
+<h3 id="2-2-测试"><a href="#2-2-测试" class="headerlink" title="2.2 测试"></a>2.2 测试</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pktbuf_test</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">pktbuf_t</span> *buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    pktbuf_free(buf);</span><br><span class="line"></span><br><span class="line">    buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        pktbuf_add_header(buf, <span class="number">33</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        pktbuf_remove_header(buf, <span class="number">33</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 16 次分配结束，最后的结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121700168.png" alt="image-20240712170041116"></p>
+<p>再经过 16 次移除操作后，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152054734.png" alt="image-20240715205416671"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE3_C++%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="项目2_C++高性能服务器">
+      <i class="fa fa-chevron-left"></i> 项目2_C++高性能服务器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E5%8C%85%E6%94%B6%E5%8F%91"><span class="nav-text">1、数据包收发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E6%96%87%E4%BB%B6"><span class="nav-text">库文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80-pcap-%E4%BC%9A%E8%AF%9D"><span class="nav-text">打开 pcap 会话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-text">数据初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">接收数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">发送数据包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">2、多线程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E5%90%88%E8%AE%A1%E6%95%B0%E4%BF%A1%E5%8F%B7%E9%87%8F-%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%8E%AF%E5%A2%83"><span class="nav-text">结合计数信号量+互斥锁实现多线程环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E9%97%B4%E7%9A%84%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BE%8B"><span class="nav-text">线程间的资源访问控制实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%BE%AA%E7%8E%AF%E7%BC%93%E5%AD%98"><span class="nav-text">（1）循环缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8E%A7%E5%88%B6%E8%AF%BB%E9%80%9F%E7%8E%87"><span class="nav-text">（2）控制读速率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8E%A7%E5%88%B6%E5%86%99%E9%80%9F%E7%8E%87"><span class="nav-text">（3）控制写速率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="nav-text">3、网络编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">利用套接字设计客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E5%A5%97%E6%8E%A5%E5%AD%97%E8%AE%BE%E8%AE%A1%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF"><span class="nav-text">利用套接字设计服务器端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">二、整体结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-text">1、整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-text">2、网络结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82"><span class="nav-text">3、协议分层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%B0%83%E8%AF%95%E4%BF%A1%E6%81%AF%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97"><span class="nav-text">三、调试信息输出模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81dbg-c"><span class="nav-text">1、dbg.c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E5%88%86%E6%9E%90"><span class="nav-text">具体实现分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dbg-print-%E5%87%BD%E6%95%B0"><span class="nav-text">dbg_print 函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">使用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9A%E9%95%BF%E5%86%85%E5%AD%98%E5%9D%97%E7%AE%A1%E7%90%86"><span class="nav-text">四、定长内存块管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%8D%8F%E8%AE%AE%E6%A0%88%E4%B8%AD%E7%9A%84%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86"><span class="nav-text">1、协议栈中的存储管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="nav-text">整体流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81mblock-c"><span class="nav-text">2、mblock.c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="nav-text">结构体定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%87%BD%E6%95%B0-mblock-init"><span class="nav-text">初始化函数 mblock_init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E5%87%BD%E6%95%B0-mblock-alloc"><span class="nav-text">分配函数 mblock_alloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E9%97%B2%E5%9D%97%E6%95%B0%E9%87%8F%E6%9F%A5%E8%AF%A2%E5%87%BD%E6%95%B0-mblock-free-cnt"><span class="nav-text">空闲块数量查询函数 mblock_free_cnt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8A%E6%94%BE%E5%87%BD%E6%95%B0-mblock-free"><span class="nav-text">释放函数 mblock_free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%80%E6%AF%81%E5%87%BD%E6%95%B0-mblock-destroy"><span class="nav-text">销毁函数 mblock_destroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95"><span class="nav-text">3、测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%AE%9A%E9%95%BF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">五、定长消息队列的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%8D%8F%E8%AE%AE%E6%A0%88%E4%B8%AD%E6%B6%89%E5%8F%8A%E5%AE%9A%E9%95%BF%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-text">1、协议栈中涉及定长消息队列的部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81fixq-c"><span class="nav-text">2、fixq.c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89-1"><span class="nav-text">结构体定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%87%BD%E6%95%B0-fixq-init"><span class="nav-text">初始化函数 fixq_init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E5%87%BD%E6%95%B0-fixq-send"><span class="nav-text">发送函数 fixq_send</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E6%94%B6%E5%87%BD%E6%95%B0-fixq-recv"><span class="nav-text">接收函数 fixq_recv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%80%E6%AF%81%E5%87%BD%E6%95%B0-fixq-destroy"><span class="nav-text">销毁函数 fixq_destroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E6%95%B0%E5%87%BD%E6%95%B0-fixq-count"><span class="nav-text">计数函数 fixq_count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-2"><span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E5%8C%85%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-text">六、网络数据包结构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E5%85%B7%E4%BD%93%E8%AE%BE%E8%AE%A1"><span class="nav-text">1、网络数据包的具体设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8C%85%E5%A4%B4%E5%92%8C%E7%A7%BB%E9%99%A4%E5%8C%85%E5%A4%B4"><span class="nav-text">添加包头和移除包头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%8C%85%E4%B8%AD%E7%9A%84%E4%BB%BB%E6%84%8F%E4%BD%8D%E7%BD%AE%E8%BF%9B%E8%A1%8C%E8%AF%BB%E5%86%99"><span class="nav-text">对数据包中的任意位置进行读写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E5%A4%A7%E5%B0%8F%E3%80%81%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-text">调整大小、合并数据包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8C%85%E6%95%B4%E4%BD%93%E6%A1%86%E5%9B%BE"><span class="nav-text">数据包整体框图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C1%EF%BC%9A%E6%B7%BB%E5%8A%A0%E5%8C%85%E5%A4%B4%E5%92%8C%E7%A7%BB%E9%99%A4%E5%8C%85%E5%A4%B4"><span class="nav-text">2、基本操作1：添加包头和移除包头</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%B5%8B%E8%AF%95"><span class="nav-text">2.2 测试</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">287k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch_cat_logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site_cat-32%C3%9732.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site_cat-16%C3%9716.png">
+  <link rel="mask-icon" href="/images/cat_logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-bounce.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="序列式容器std::vector1、基本用法123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &lt;iostream&gt;#include &lt;vector&gt;using">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用STL容器">
+<meta property="og:url" content="http://example.com/2024/06/11/1%20C++/STL/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/index.html">
+<meta property="og:site_name" content="MIDORII&#39;S JOURNEY">
+<meta property="og:description" content="序列式容器std::vector1、基本用法123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include &lt;iostream&gt;#include &lt;vector&gt;using">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111938752.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111939776.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947980.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947476.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4f12d834bac147ee9bcba58e5521a961.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5qOu5piO5biu5aSn5LqO6buR6JmO5biu,size_13,color_FFFFFF,t_70,g_se,x_16">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111952632.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720123.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720621.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404242029774.png">
+<meta property="article:published_time" content="2024-06-11T07:54:29.864Z">
+<meta property="article:modified_time" content="2024-07-16T03:12:12.167Z">
+<meta property="article:author" content="midorii">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111938752.png">
+
+<link rel="canonical" href="http://example.com/2024/06/11/1%20C++/STL/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>常用STL容器 | MIDORII'S JOURNEY</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta custom-logo">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MIDORII'S JOURNEY</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">a little bit sweet</p>
+      <a>
+        <img class="custom-logo-image" src="/images/cat.jpeg" alt="MIDORII'S JOURNEY">
+      </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/1%20C++/STL/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用STL容器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-06-11 15:54:29" itemprop="dateCreated datePublished" datetime="2024-06-11T15:54:29+08:00">2024-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-16 11:12:12" itemprop="dateModified" datetime="2024-07-16T11:12:12+08:00">2024-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/STL/" itemprop="url" rel="index"><span itemprop="name">STL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>20 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <span id="more"></span>
+
+<h1 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h1><h2 id="std-vector"><a href="#std-vector" class="headerlink" title="std::vector"></a>std::vector</h2><h3 id="1、基本用法"><a href="#1、基本用法" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; a;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">double</span>&gt; b;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">char</span>&gt; c;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; d;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">e</span><span class="params">(n, <span class="number">10</span>)</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; f&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr[] = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> m = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">g</span><span class="params">(arr, arr+m)</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">h</span><span class="params">(g.begin(), g.end())</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    <span class="comment">// 1. 下标访问</span></span><br><span class="line">    a.push_back(<span class="number">1</span>);</span><br><span class="line">    <span class="type">int</span> tmp = a[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 迭代器访问</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;::iterator s;</span><br><span class="line">    s = a.begin();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;a.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, *(s+i));  <span class="comment">// 常用STL容器中，仅vector和string支持a.begin()+i这种写法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (s=a.begin(); s!=a.end(); s++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, *s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 常用内置函数</span></span><br><span class="line">    a.reverse(<span class="number">100</span>);		<span class="comment">// 预分配100个元素的内存，注意reserve操作只是预分配内存，并不会改变Vector的大小</span></span><br><span class="line">    a.push_back(<span class="number">4</span>);		<span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.emplace_back(<span class="number">1</span>);  <span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.pop_back();		<span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line"></span><br><span class="line">    <span class="type">size_t</span> size = a.size();             <span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.resize(<span class="number">3</span>);</span><br><span class="line">    a.resize(<span class="number">5</span>, <span class="number">10</span>);  <span class="comment">// 扩容，且新增元素初始化为10</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> first = a.front();</span><br><span class="line">    <span class="type">int</span> last = a.back();</span><br><span class="line"></span><br><span class="line">    a.insert(a.begin(), <span class="number">0</span>);   			<span class="comment">// 时间复杂度为O(N)</span></span><br><span class="line">    a.erase(a.begin());          		<span class="comment">// erase()有两种方法，时间复杂度都为O(N)</span></span><br><span class="line">    a.erase(a.begin(), a.end()<span class="number">-1</span>);  	<span class="comment">// erase(first,last)删除[first, last)内的所有元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">bool</span> is_empty = a.empty();</span><br><span class="line">    a.clear();        <span class="comment">// 时间复杂度为O(N)</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// algorithm常用函数</span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">    sort(a.begin(),a.end());  				<span class="comment">// 对[a.begin(), a.end())进行从大到小排序</span></span><br><span class="line">    reverse(a.begin(),a.end());  			<span class="comment">// 对[a.begin(), a.end())进行倒置，但不排序</span></span><br><span class="line">    copy(a.begin(),a.end(),b.begin()+<span class="number">1</span>); 	<span class="comment">// 把[a.begin(), a.end())的元素复制到b中</span></span><br><span class="line">    find(a.begin(),a.end(),<span class="number">10</span>);  			<span class="comment">// 在[a.begin(), a.end())的元素中查找10。并返回其位置（迭代器）</span></span><br><span class="line">    count(a.begin(), a.end(),<span class="number">10</span>);    		<span class="comment">// 在[a.begin(), a.end())的元素中查找10的个数，并返回</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现"><a href="#2、内部实现" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p>vector 的底层是一个动态数组，包含三个迭代器：start、finish 和 end_of_storage。</p>
+<ul>
+<li>start 和 finish 之间是已经被使用的空间范围；</li>
+<li>end_of_storage 是整块连续空间（包括备用空间）的尾部。</li>
+</ul>
+<p>当<code>push_banck()</code>时发现空间容量不够，会自动申请另一片更大的空间（1.5或2倍），然后把原来的数据拷贝到新的内存空间，接着释放原来的那片空间【3、vector的扩容机制】。当释放或者删除（<code>vec.clear()</code>）里面的数据时，其存储空间不释放，仅仅是清空了里面的数据。因此，对vector的任何操作一旦引起了空间的重新配置，指向原 vector 的所有迭代器会都失效了。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111938752.png" alt="在这里插入图片描述"></p>
+<p>vector 维护的是一个连续的线性空间，所以不论其元素类型为何，普通指针都可以作为 vector 的迭代器而满足所以必要条件，如 operator*，operator-&gt;，operator++，operator–，普通指针天生就具备。vector 支持随机存取，而普通指针正有这样的能力。所以底层直接将指针封装成了 iterator。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111939776.png" alt="在这里插入图片描述"></p>
+<h3 id="3、vector-的扩容机制"><a href="#3、vector-的扩容机制" class="headerlink" title="3、vector 的扩容机制"></a>3、vector 的扩容机制</h3><h4 id="（1）扩容机制原理"><a href="#（1）扩容机制原理" class="headerlink" title="（1）扩容机制原理"></a>（1）扩容机制原理</h4><p>当向 vector 中插入元素时，如果元素有效个数 size 与空间容量 capacity 相等时，vector 内部会触发扩容机制：</p>
+<ol>
+<li>开辟新空间；</li>
+<li>拷贝元素；</li>
+<li>释放旧空间。</li>
+</ol>
+<h4 id="（2）如何避免动态扩容，导致效率降低"><a href="#（2）如何避免动态扩容，导致效率降低" class="headerlink" title="（2）如何避免动态扩容，导致效率降低"></a>（2）如何避免动态扩容，导致效率降低</h4><p>如果要避免扩容而导致程序效率过低问题，其实非常简单：<strong>如果在插入之前，可以预估vector存储元素的个数，提前将底层容量开辟好即可。</strong>如果插入之前进行 reserve，只要空间给足，则插入时不会扩容，如果没有 reserve，则会边插入边扩容，效率极其低下。</p>
+<h4 id="（3）为什么选择1-5倍或者2倍方式扩容，而不是3倍、4倍"><a href="#（3）为什么选择1-5倍或者2倍方式扩容，而不是3倍、4倍" class="headerlink" title="（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍"></a>（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍</h4><p>扩容原理为：申请新空间，拷贝元素，释放旧空间。<strong>理想的分配方案是在第N次扩容时能复用之前N-1次释放的空间。</strong>如果按照2倍方式扩容，第i次扩容空间大小如下：<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947980.png" alt="在这里插入图片描述"><br>可以看到，每次扩容时，前面释放的空间都不能使用。比如：第4次扩容时，前2次空间已经释放，第3次空间还没有释放(开辟新空间、拷贝元素、释放旧空间)，即前面释放的空间只有1 + 2 &#x3D; 3，假设第3次空间已经释放才只有1+2+4&#x3D;7，而第四次需要8个空间，因此无法使用之前已释放的空间，但是<strong>按照小于2倍方式扩容，多次扩容之后就可以复用之前释放的空间了</strong>。<strong>如果倍数超过2倍(包含2倍)方式扩容会存在以下问题</strong>：</p>
+<ul>
+<li>空间浪费可能会比较高，比如：扩容后申请了64个空间，但只存了33个元素，有接近一半的空间没有使用；</li>
+<li>无法使用到前面已释放的内存。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947476.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>使用2倍（k&#x3D;2）扩容机制扩容时，每次扩容后的新内存大小必定大于前面的总和；</li>
+<li>而使用1.5倍（k&#x3D;1.5）扩容时，在几次扩展以后，可以重用之前的内存空间了。</li>
+</ul>
+<p>因为 STL 标准并没有严格说明需要按何种方式进行扩容，因此不同的实现厂商都是按照自己的方式扩容的，即：<strong>Linux 下是按照2倍的方式扩容的，而 vs 下是按照1.5倍的方式扩容的</strong>。</p>
+<h4 id="（4）Windows-和-Linux-的扩容底层原理"><a href="#（4）Windows-和-Linux-的扩容底层原理" class="headerlink" title="（4）Windows 和 Linux 的扩容底层原理"></a>（4）Windows 和 Linux 的扩容底层原理</h4><ol>
+<li><p>Windows 扩容底层</p>
+<p>Windows 中堆管理系统会对释放的堆块进行合并，因此 vs 下的 vector 扩容机制选择使用1.5倍的方式扩容，这样多次扩容之后就可以使用之前已经释放的空间。</p>
+</li>
+<li><p>Linux 的扩容底层</p>
+</li>
+</ol>
+<img src="https://img-blog.csdnimg.cn/4f12d834bac147ee9bcba58e5521a961.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5qOu5piO5biu5aSn5LqO6buR6JmO5biu,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<ul>
+<li>Linux 下主要使用 glibc 的 ptmalloc 来进行用户空间申请的<ul>
+<li>如果 malloc 的空间小于<code>128KB</code>，其内部通过<code>brk()</code>来扩张；</li>
+<li>如果大于<code>128KB</code>且<code>arena</code>中没有足够的空间时，通过<code>mmap()</code>将内存映射到进程地址空间。</li>
+</ul>
+</li>
+<li>Linux 中引入<strong>伙伴系统</strong>（所谓的伙伴系统就是 STL 中通过链表来实现的内存池）为内核提供了一种用于分配连续页的高效的分配策略，实现对固定分区和动态分区方式的折中：固定分区存在内部碎片；动态分区存在外部碎片，而且动态分区回收时的合并以及分配时的切片是比较耗时的。<ul>
+<li>伙伴系统是将整个内存区域构建成基本大小<code>basicSize</code>的1倍、2倍、4倍、8倍、16倍等，即要求内存空间分区链均对应2的整次幂倍大小的空间；</li>
+<li>在分配和释放空间时，可以通过<code>log2(request/basicSize)</code>向上取整的哈希算法快速找到对应内存块。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111952632.png" alt="img"></p>
+<h2 id="std-list"><a href="#std-list" class="headerlink" title="std::list"></a>std::list</h2><h3 id="1、基本用法-1"><a href="#1、基本用法-1" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span> <span class="comment">// for std::accumulate</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    std::list&lt;<span class="type">int</span>&gt; list1;</span><br><span class="line">    std::list&lt;<span class="type">int</span>&gt; list2 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="function">std::list&lt;<span class="type">int</span>&gt; <span class="title">list3</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>; <span class="comment">// 5个10</span></span><br><span class="line">    <span class="function">std::list&lt;<span class="type">int</span>&gt; <span class="title">list4</span><span class="params">(list2.begin(), list2.end())</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;list2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : list2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加元素</span></span><br><span class="line">    list1.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">    list1.<span class="built_in">push_front</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    list1.<span class="built_in">pop_back</span>();</span><br><span class="line">    list1.<span class="built_in">pop_front</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入和删除特定位置的元素</span></span><br><span class="line">    <span class="keyword">auto</span> it = list2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 移动迭代器到第三个位置</span></span><br><span class="line">    list2.<span class="built_in">insert</span>(it, <span class="number">10</span>); <span class="comment">// 在第三个位置插入10</span></span><br><span class="line">    it = list2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 再次移动迭代器到第三个位置</span></span><br><span class="line">    list2.<span class="built_in">erase</span>(it); <span class="comment">// 删除第三个位置的元素</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    list2.<span class="built_in">reverse</span>();	<span class="comment">// 反转列表</span></span><br><span class="line">    list2.<span class="built_in">sort</span>();		<span class="comment">// 排序列表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// algorithm</span></span><br><span class="line">    it = std::<span class="built_in">find</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">4</span>);  <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="type">int</span> sum = std::<span class="built_in">accumulate</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">0</span>);  <span class="comment">// 求和</span></span><br><span class="line">    std::for_each(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), [](<span class="type">int</span> x) &#123;  <span class="comment">// 遍历</span></span><br><span class="line">        std::cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="type">int</span> count = std::<span class="built_in">count</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">10</span>);  <span class="comment">// 计算元素个数</span></span><br><span class="line">    list2.<span class="built_in">remove</span>(<span class="number">10</span>); <span class="comment">// 删除所有值为10的元素</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论基础"><a href="#2、理论基础" class="headerlink" title="2、理论基础"></a>2、理论基础</h3><p>由于 list 拥有一片不连续的内存空间，且 STL list 是一个双向链表，因此其提供的迭代器是 Bidirectional Iterators。对于 list 来说，其插入操作和接合操作不会使得原迭代器失效。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">__list_node</span> &#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">void</span>* void_pointer;</span><br><span class="line">	void_pointer prev;</span><br><span class="line">	void_pointer next;</span><br><span class="line">	T data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span> = alloc&gt;  <span class="comment">// 缺省使用 alloc 作为空间配置器</span></span><br><span class="line"><span class="keyword">class</span> list &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">typedef</span> __list_node&lt;T&gt;* list_type;</span><br><span class="line">    <span class="keyword">typedef</span> __list_node&lt;T&gt; list_node;</span><br><span class="line">    <span class="keyword">typedef</span> simple_alloc&lt;list_node, Alloc&gt; list_node_allocator;  <span class="comment">// 专属空间配置器，每次配置一个节点大小</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> list_node* link_type;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    link_type node;</span><br><span class="line">    </span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="std-deque"><a href="#std-deque" class="headerlink" title="std::deque"></a>std::deque</h2><h3 id="1、基本用法-2"><a href="#1、基本用法-2" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span> <span class="comment">// for std::accumulate</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化方式1：默认构造</span></span><br><span class="line">    std::deque&lt;<span class="type">int</span>&gt; deque1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式2：用元素初始化</span></span><br><span class="line">    std::deque&lt;<span class="type">int</span>&gt; deque2 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式3：使用fill构造</span></span><br><span class="line">    <span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">deque3</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>; <span class="comment">// 5个10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式4：使用范围构造</span></span><br><span class="line">    <span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">deque4</span><span class="params">(deque2.begin(), deque2.end())</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : deque2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加元素</span></span><br><span class="line">    deque1.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">    deque1.<span class="built_in">push_front</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    deque1.<span class="built_in">pop_back</span>();</span><br><span class="line">    deque1.<span class="built_in">pop_front</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入和删除特定位置的元素</span></span><br><span class="line">    <span class="keyword">auto</span> it = deque2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 移动迭代器到第三个位置</span></span><br><span class="line">    deque2.<span class="built_in">insert</span>(it, <span class="number">10</span>); <span class="comment">// 在第三个位置插入10</span></span><br><span class="line">    it = deque2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 再次移动迭代器到第三个位置</span></span><br><span class="line">    deque2.<span class="built_in">erase</span>(it); <span class="comment">// 删除第三个位置的元素</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 反转双端队列</span></span><br><span class="line">    std::<span class="built_in">reverse</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 排序双端队列</span></span><br><span class="line">    std::<span class="built_in">sort</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用算法函数</span></span><br><span class="line">    <span class="comment">// std::find</span></span><br><span class="line">    it = std::<span class="built_in">find</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (it != deque2.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;找到元素 4&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;未找到元素 4&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::accumulate</span></span><br><span class="line">    <span class="type">int</span> sum = std::<span class="built_in">accumulate</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">0</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素的和：&quot;</span> &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::for_each</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素：&quot;</span>;</span><br><span class="line">    std::for_each(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), [](<span class="type">int</span> x) &#123;</span><br><span class="line">        std::cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::count</span></span><br><span class="line">    <span class="type">int</span> count = std::<span class="built_in">count</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">10</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2中包含10的个数：&quot;</span> &lt;&lt; count &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::remove</span></span><br><span class="line">    <span class="keyword">auto</span> new_end = std::<span class="built_in">remove</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">10</span>); <span class="comment">// 删除所有值为10的元素</span></span><br><span class="line">    deque2.<span class="built_in">erase</span>(new_end, deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最终的deque2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : deque2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论基础-1"><a href="#2、理论基础-1" class="headerlink" title="2、理论基础"></a>2、理论基础</h3><p>deque 是双向开口的连续线性空间。</p>
+<blockquote>
+<p>deque 和 vector 的差别：</p>
+<ol>
+<li>deque 允许于常数时间内对起头端进行元素的插入或移除操作；</li>
+<li>deque 没有所谓容量（capacity）的概念，因为它是<strong>动态地以分段连续空间组合而成</strong>，随时可以增加一段新的空间并链接起来。</li>
+<li>deque 虽然也提供 RamdomAccessIterator，但其迭代器并非普通指针，复杂度较高，因此除非必要，应尽量使用 vector 而非 deque。对 deque 进行的排序操作，可以先将 deque 完成复制到一个 vector 中，排序后再复制回 deque。</li>
+</ol>
+</blockquote>
+<p>deque 的迭代器包含两个任务：</p>
+<ol>
+<li><p>指出分段连续空间（即缓冲区）在哪里；</p>
+</li>
+<li><p>判断自己是否已经处于所在缓冲区的边缘，若是，则一旦前进或后退时就必须跳跃至下一个或上一个缓冲区:</p>
+<ol>
+<li><p><strong>最后一个缓冲区只剩下一个备用空间</strong>，则调用 <code>push_back_aux()</code>新建并跳跃至下一个缓冲区；</p>
+</li>
+<li><p><strong>第一个缓冲区没有备用空间</strong>，则调用 <code>push_front_aux()</code>新建并跳跃至上一个缓冲区。</p>
+<blockquote>
+<p>由于前端插入操作涉及到现有缓冲区前面的空间，因此需要确保当前缓冲区完全没有空间时，再进行新的缓冲区分配和跳跃操作。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<p>deque 采用一个 “map”（并非 STL 中的 map 容器）来指向其分段连续空间（缓冲区）。map 中的每一个元素 node 为一个指针，指向其对应的缓冲区。对于 deque 来说，主要维护 3 个指针：</p>
+<ol>
+<li>指向 map 的指针；</li>
+<li>start：指向第一缓冲区的第一个元素；</li>
+<li>finish：指向最后缓冲区的最后一个元素。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720123.png" alt="image-20240620172003136" style="zoom: 25%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720621.png" alt="image-20240620172045147" style="zoom: 25%;" />
+
+<h2 id="std-stack"><a href="#std-stack" class="headerlink" title="std::stack"></a>std::stack</h2><h3 id="1、基本用法-3"><a href="#1、基本用法-3" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line">st.<span class="built_in">empty</span>();			<span class="comment">// 栈为空时返回1，非空返回0</span></span><br><span class="line">st.<span class="built_in">size</span>();			<span class="comment">// 返回栈中元素数量，size_type size() const;</span></span><br><span class="line">st.<span class="built_in">top</span>();			<span class="comment">// 返回栈顶元素，value_type&amp; top();</span></span><br><span class="line">st.<span class="built_in">push</span>(value);		<span class="comment">// 在栈顶插入一个元素，void push( const value_tyoe&amp; val );</span></span><br><span class="line">st.<span class="built_in">emplace</span>(value);	<span class="comment">// 在栈顶增加一个元素，void emplace( args&amp;&amp; args );</span></span><br><span class="line">st.<span class="built_in">pop</span>();			<span class="comment">// 栈顶元素出栈，即删除栈顶元素，void pop(); </span></span><br><span class="line"></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; st2;</span><br><span class="line">st1.<span class="built_in">swap</span>( st2 );	<span class="comment">// 交换两个栈中的内容，void swap( stack&amp; x );</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 与vector一样，重载了运算符：== != &lt; &lt;= &gt; &gt;=</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论相关"><a href="#2、理论相关" class="headerlink" title="2、理论相关"></a>2、理论相关</h3><p>STL 中 stack 往往不被归类为容器，而被归类为容器适配器（container adapter）。因为<strong>栈是以底层容器完成其所有的工作，对外提供统一的接口，底层容器是可插拔的（也就是说我们可以控制使用哪种容器来实现栈的功能）。</strong></p>
+<p>栈的底层实现可以是 vector、deque或list 等， 主要就是数组和链表的底层实现。常用的 SGI STL ，如果没有指定底层实现的话，<strong>默认是以 deque 为缺省情况下栈的底层结构</strong>。此外，SGI STL 中队列一样是以 deque 为缺省情况下的底部结构。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::stack&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt; &gt; third;  <span class="comment">// 使用vector为底层容器的栈</span></span><br><span class="line">std::queue&lt;<span class="type">int</span>, std::list&lt;<span class="type">int</span>&gt;&gt; third; <span class="comment">// 定义以list为底层容器的队列</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404242029774.png" alt="栈与队列理论3" style="zoom:50%;" />
+
+<blockquote>
+<p>三个最为普遍的 STL 版本：</p>
+<ol>
+<li>HP STL 其他版本的 C++ STL，一般是以 HP STL 为蓝本实现出来的，HP STL 是 C++ STL 的第一个实现版本，而且开放源代码。</li>
+<li>P.J.Plauger STL 由 P.J.Plauger 参照 HP STL 实现出来的，被 Visual C++ 编译器所采用，不是开源的。</li>
+<li>SGI STL 由 Silicon Graphics Computer Systems 公司参照HP STL 实现，被 Linux 的 C++ 编译器 GCC 所采用，SGI STL 是开源软件，源码可读性甚高。</li>
+</ol>
+</blockquote>
+<h2 id="std-queue"><a href="#std-queue" class="headerlink" title="std::queue"></a>std::queue</h2><h3 id="1、基本用法-4"><a href="#1、基本用法-4" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">queue&lt;<span class="type">double</span>&gt; d;</span><br><span class="line">queue&lt;node&gt; n;  <span class="comment">// node是一个结构体</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">size</span>();		<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();		<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);		<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();		<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">front</span>();		<span class="comment">// 返回q的第一个元素</span></span><br><span class="line">q.<span class="built_in">back</span>();		<span class="comment">// 返回q的末尾元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="std-priority-queue"><a href="#std-priority-queue" class="headerlink" title="std::priority_queue"></a>std::priority_queue</h2><h3 id="1、基本用法-5"><a href="#1、基本用法-5" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><h4 id="（1）声明"><a href="#（1）声明" class="headerlink" title="（1）声明"></a>（1）声明</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Container</span> = vector&lt;T&gt;, <span class="keyword">class</span> Compare = less&lt;<span class="keyword">typename</span> Container::value_type&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> priority_queue;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>T</code>：优先队列中的元素类型；</li>
+<li><code>Container</code>：底层容器的类型；</li>
+<li><code>Compare</code>：比较函数对象，决定了优先队列的排序方式。</li>
+</ul>
+<h4 id="（2）基本操作"><a href="#（2）基本操作" class="headerlink" title="（2）基本操作"></a>（2）基本操作</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">top</span>();	<span class="comment">// 返回q的第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）排序实现"><a href="#（3）排序实现" class="headerlink" title="（3）排序实现"></a>（3）排序实现</h4><ol>
+<li><p><code>less</code>和<code>greater</code>优先队列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt; p;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">// less&lt;int&gt;:14 12 10 8 6（大顶堆）</span></span><br><span class="line"><span class="comment">// greater&lt;int&gt;:6 8 10 12 14（小顶堆）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义仿函数如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义仿函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareByAge</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.age &gt; p2.age;  <span class="comment">// 按照年龄从小到大排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="2、理论相关-1"><a href="#2、理论相关-1" class="headerlink" title="2、理论相关"></a>2、理论相关</h3><h4 id="（1）概念"><a href="#（1）概念" class="headerlink" title="（1）概念"></a>（1）概念</h4><p>优先级队列（<code>priority_queue</code>）是C++标准库中的一个<strong>容器适配器（container adapter）</strong>，其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆<strong>（heap）</strong>数据结构。</p>
+<p>定义在<code>&lt;queue&gt;</code>头文件中。</p>
+<p>默认情况下，<code>priority_queue</code>使用<code>std::less</code>作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+<h4 id="（2）特点"><a href="#（2）特点" class="headerlink" title="（2）特点"></a>（2）特点</h4><ul>
+<li><strong>优先级排序</strong>：priority_queue中的元素按照一定的优先级进行排序。默认情况下，元素的优先级按照从大到小的顺序排列，也可以通过自定义的比较函数来指定不同的排序方式。</li>
+<li><strong>自动排序</strong>：在插入元素时，priority_queue会根据元素的优先级自动进行排序。每次插入新元素时，都会将新元素放置在正确的位置上。</li>
+<li><strong>取出优先级最高元素</strong>：priority_queue提供了一种方便的方式来取出优先级最高的元素。使用top()函数可以访问优先级最高的元素，而使用pop()函数可以将该元素从队列中移除。</li>
+<li><strong>底层实现采用堆</strong>：priority_queue通常使用堆（heap）数据结构来实现。堆是一种具有特定性质的二叉树，可以高效地插入新元素和取出优先级最高的元素。</li>
+<li><strong>动态大小</strong>：priority_queue的大小可以根据需要进行动态调整。可以随时插入新元素和删除已有元素，并在必要时自动重新排序。</li>
+</ul>
+<h1 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h1><h2 id="std-unordered-set"><a href="#std-unordered-set" class="headerlink" title="std::unordered_set"></a>std::unordered_set</h2><h3 id="1、基本用法-6"><a href="#1、基本用法-6" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unordered_set&lt;<span class="type">int</span>&gt; mySet;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Before add elements......&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 获取或设置允许的最大装载因子</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Max load facotr: &quot;</span> &lt;&lt; mySet.<span class="built_in">max_load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 返回当前装载因子</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Load factor: &quot;</span> &lt;&lt; mySet.<span class="built_in">load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 返回当前bucket的数量</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Bucket count: &quot;</span> &lt;&lt; mySet.<span class="built_in">bucket_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">2</span>); <span class="comment">// 重复插入，不会有任何效果</span></span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Is the set empty ? &quot;</span> &lt;&lt; mySet.<span class="built_in">empty</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="keyword">if</span> (mySet.<span class="built_in">find</span>(<span class="number">2</span>) != mySet.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Found 2 in the set.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历集合</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Elements in mySet: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> element : mySet) &#123;</span><br><span class="line">        std::cout &lt;&lt; element &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    mySet.<span class="built_in">erase</span>(<span class="number">2</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;After erasing 2, size of mySet: &quot;</span> &lt;&lt; mySet.<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;After add elements......&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Max load facotr: &quot;</span> &lt;&lt; mySet.<span class="built_in">max_load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Load factor: &quot;</span> &lt;&lt; mySet.<span class="built_in">load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Bucket count: &quot;</span> &lt;&lt; mySet.<span class="built_in">bucket_count</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    mySet.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Before add elements......</span><br><span class="line">Max load facotr: 1</span><br><span class="line">Load <span class="built_in">factor</span>: 0</span><br><span class="line">Bucket count: 1</span><br><span class="line"></span><br><span class="line">Is the <span class="built_in">set</span> empty ? 0</span><br><span class="line">Found 2 <span class="keyword">in</span> the <span class="built_in">set</span>.</span><br><span class="line">Elements <span class="keyword">in</span> mySet: 3 2 1 </span><br><span class="line">After erasing 2, size of mySet: 2</span><br><span class="line"></span><br><span class="line">After add elements......</span><br><span class="line">Max load facotr: 1</span><br><span class="line">Load <span class="built_in">factor</span>: 0.153846</span><br><span class="line">Bucket count: 13</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现-1"><a href="#2、内部实现-1" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p><code>std::unordered_set</code> 的内部实现基于哈希表，哈希表是一个数组，数组的每个元素称为一个 <code>bucket</code>。这点和 <code>std::unordered_map</code> 是一样的。</p>
+<p>同样的，每个 <code>bucket</code> 维护一个链表（或其他容器，例如小型向量），用于解决哈希冲突（即不同元素的哈希值相同的情况）。</p>
+<ul>
+<li>哈希函数：<code>std::unordered_set</code>通过哈希函数将元素映射到一个 <code>bucket</code>。哈希函数的质量决定了元素在哈希表中的分布，影响容器的性能。</li>
+<li>哈希冲突：当两个元素的哈希值相同时，它们会被存储在同一个 <code>bucket</code> 的链表中，这种情况称为哈希冲突。<code>std::unordered_set</code>通过链地址法来解决哈希冲突。</li>
+<li>装载因子和重哈希：装载因子是<code>元素数量 / bucket数量</code>。当装载因子超过某个阈值时（默认为<code>1.0</code>），<code>std::unordered_set</code>会进行重哈希操作，即增加 <code>bucket</code> 数量并重新分配所有元素，以保持操作的高效性。</li>
+</ul>
+<p>适用场景</p>
+<ul>
+<li>需要快速查找的场景：当需要存储一组唯一元素，并且频繁地进行查找操作时；</li>
+<li>不关心元素顺序：<code>std::unordered_set</code>不保证元素的顺序；</li>
+<li>大量数据的去重：当需要从大量数据中去除重复项时。</li>
+</ul>
+<h2 id="std-unordered-map"><a href="#std-unordered-map" class="headerlink" title="std::unordered_map"></a>std::unordered_map</h2><h3 id="1、基本用法-7"><a href="#1、基本用法-7" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unordered_map&lt;std::string, <span class="type">int</span>&gt; map;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    map.<span class="built_in">insert</span>(&#123;<span class="string">&quot;apple&quot;</span>, <span class="number">5</span>&#125;);</span><br><span class="line">    map[<span class="string">&quot;banana&quot;</span>] = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 访问元素</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;apple has &quot;</span> &lt;&lt; map[<span class="string">&quot;apple&quot;</span>] &lt;&lt; <span class="string">&quot; units.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用find查找元素</span></span><br><span class="line">    <span class="keyword">auto</span> search = map.<span class="built_in">find</span>(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (search != map.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Found banana, count = &quot;</span> &lt;&lt; search-&gt;second &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Banana not found.\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : map) &#123;</span><br><span class="line">        std::cout &lt;&lt; pair.first &lt;&lt; <span class="string">&quot; has &quot;</span> &lt;&lt; pair.second &lt;&lt; <span class="string">&quot; units.\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    map.<span class="built_in">erase</span>(<span class="string">&quot;apple&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查大小</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;The map has &quot;</span> &lt;&lt; map.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot; elements.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    map.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apple has 5 units.</span><br><span class="line">Found banana, count = 3</span><br><span class="line">banana has 3 units.</span><br><span class="line">apple has 5 units.</span><br><span class="line">The map has 1 elements.</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现-2"><a href="#2、内部实现-2" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p><code>std::unordered_map</code>内部使用哈希表实现，因此它支持平均常数时间复杂度的查找、插入和删除操作，而<code>std::map</code>使用红黑树实现，提供对数时间复杂度的操作。</p>
+<p><code>std::unordered_map</code>内部主要是通过一个动态数组（通常称为 <code>bucket</code> 数组）来维护元素，每个数组元素（或称为 <code>bucket</code>）包含一个指向链表（或其他形式的容器，如小型向量）的指针。</p>
+<p>这些链表用于存储具有相同哈希值的元素（键值对）。当发生哈希冲突时（即不同的键产生相同的哈希值），<code>std::unordered_map</code>会将具有相同哈希值的元素存储在同一个 <code>bucket</code> 的链表中。</p>
+<ul>
+<li>哈希函数：<code>std::unordered_map</code>使用一个哈希函数将键映射到 bucket 的索引。哈希函数的质量直接影响到容器的性能，理想情况下，哈希函数应该将键均匀分布到所有的 <code>buckets</code> 上，以减少哈希冲突。</li>
+<li>哈希表：内部数据结构，通常是一个动态数组，其中的每个元素指向一个链表（或其他容器），用于解决哈希冲突。</li>
+<li>键值对：存储在链表中的元素，每个元素包含一个键和一个值。</li>
+<li>装载因子：<code>std::unordered_map</code>的装载因子是一个浮点数，定义为<code>元素个数 / bucket数量</code>。当装载因子超过特定阈值（默认为<code>1.0</code>）时，哈希表会进行重新哈希（<code>rehashing</code>），即增加 <code>bucket</code> 数量并重新分配所有元素，以保持操作的效率。</li>
+</ul>
+<p>适用场景</p>
+<ul>
+<li><p><strong>需要快速查找的场景；</strong></p>
+</li>
+<li><p><strong>不关心元素顺序的场景；</strong></p>
+</li>
+<li><p><strong>键值对存储。</strong></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/06/11/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="prev" title="时间&空间复杂度">
+      <i class="fa fa-chevron-left"></i> 时间&空间复杂度
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/06/12/1%20C++/%E5%86%85%E5%AD%98/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" rel="next" title="智能指针">
+      智能指针 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="nav-text">序列式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#std-vector"><span class="nav-text">std::vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0"><span class="nav-text">2、内部实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81vector-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6"><span class="nav-text">3、vector 的扩容机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86"><span class="nav-text">（1）扩容机制原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%95%88%E7%8E%87%E9%99%8D%E4%BD%8E"><span class="nav-text">（2）如何避免动态扩容，导致效率降低</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A91-5%E5%80%8D%E6%88%96%E8%80%852%E5%80%8D%E6%96%B9%E5%BC%8F%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF3%E5%80%8D%E3%80%814%E5%80%8D"><span class="nav-text">（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Windows-%E5%92%8C-Linux-%E7%9A%84%E6%89%A9%E5%AE%B9%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">（4）Windows 和 Linux 的扩容底层原理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-list"><span class="nav-text">std::list</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-1"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-text">2、理论基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-deque"><span class="nav-text">std::deque</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-2"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-1"><span class="nav-text">2、理论基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-stack"><span class="nav-text">std::stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-3"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E7%9B%B8%E5%85%B3"><span class="nav-text">2、理论相关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-queue"><span class="nav-text">std::queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-4"><span class="nav-text">1、基本用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-priority-queue"><span class="nav-text">std::priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-5"><span class="nav-text">1、基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%A3%B0%E6%98%8E"><span class="nav-text">（1）声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">（2）基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8E%92%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-text">（3）排序实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%90%86%E8%AE%BA%E7%9B%B8%E5%85%B3-1"><span class="nav-text">2、理论相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="nav-text">（1）概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%89%B9%E7%82%B9"><span class="nav-text">（2）特点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E5%BC%8F%E5%AE%B9%E5%99%A8"><span class="nav-text">关联式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#std-unordered-set"><span class="nav-text">std::unordered_set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-6"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">2、内部实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-unordered-map"><span class="nav-text">std::unordered_map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-7"><span class="nav-text">1、基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0-2"><span class="nav-text">2、内部实现</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="midorii"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">midorii</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">midorii</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">287k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

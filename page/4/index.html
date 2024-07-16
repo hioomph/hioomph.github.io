@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,7 +203,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Ch6 存储器层次结构</a>
+            <a href="/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Ch6 存储器层次结构</a>
         </h2>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-30 10:36:43" itemprop="dateModified" datetime="2024-05-30T10:36:43+08:00">2024-05-30</time>
+                <time title="修改时间：2024-07-16 11:16:35" itemprop="dateModified" datetime="2024-07-16T11:16:35+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,11 +228,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
                 </span>
             </span>
 
@@ -261,15 +257,171 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/03/Computer/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h1 id="Ch6-存储器层次结构"><a href="#Ch6-存储器层次结构" class="headerlink" title="Ch6 存储器层次结构"></a>Ch6 存储器层次结构</h1><h2 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h2><h3 id="（1）随机访问存储器（RAM）"><a href="#（1）随机访问存储器（RAM）" class="headerlink" title="（1）随机访问存储器（RAM）"></a>（1）随机访问存储器（RAM）</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021437441.png" alt="image-20240402143708229"></p>
+<ul>
+<li><p>静态RAM（SRAM）</p>
+<ul>
+<li>将每个bit位的信息存储在一个双稳态的存储器单元内，每个存储体单元由6个晶体管实现</li>
+</ul>
+</li>
+<li><p>动态RAM（DRAM）</p>
+<ul>
+<li><p>电容充电，将每个bit位的存储对应1个电容和1个晶体管</p>
+</li>
+<li><p>存在缺陷：漏电时在10-100毫秒失去电荷，内存系统需要不断读出数据并重写，通过刷新来保存数据</p>
+</li>
+<li><p>举例：</p>
+<ul>
+<li>16：超单元（即supercell，DRAM的单个存储单元）个数</li>
+<li>8：每个超单元存储8比特数据</li>
+<li>下图分行、列两次发送地址，虽然增加了访问时间，原因<strong>DRAM存储结构为二位阵列而非一维数组，可以减少地址引脚数量</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021444685.png" alt="image-20240402144425635"></p>
+</li>
+<li><p>DRAM0-DRAM7以此存储低八位字节至最高八位字节，当处理器向内存控制器发起读取数据的请求时，内存控制器将地址转换为超单元地址，内存模块将i和j广播给每个DRAM，从而找到对应的数据，最终返回一个64bit的数据：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021450063.png" alt="image-20240402145000491"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）机械磁盘"><a href="#（2）机械磁盘" class="headerlink" title="（2）机械磁盘"></a>（2）机械磁盘</h3><p>依靠盘片存储数据，表面涂有磁性记录材料。如下图共3个盘片，即6个盘面存储数据。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021453039.png" alt="image-20240402145348856" style="zoom: 50%;" />
+
+<p>盘片表面由一圈圈的磁道组成。每一圈磁盘划分为多个扇区（通常存储512字节），扇区间存在间隙用于存储扇区的标识信息。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021457089.png" alt="image-20240402145714941" style="zoom:33%;" />
+
+<p>每个盘片有独立的读&#x2F;写头，所有读&#x2F;写头连接在一个<strong>传动臂</strong>上，只能在半径方向上移动来读写数据，称为<strong>寻道</strong>。所有的读&#x2F;写头必须垂直排列、一致行动。读&#x2F;写头距离表盘的距离约0.1微米。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021458391.png" alt="image-20240402145841146" style="zoom: 33%;" />
+
+<p>磁盘访问数据花费时间：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021513461.png" alt="image-20240402151318110" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515859.png" alt="image-20240402151514499" style="zoom:50%;" />
+
+<h3 id="（3）固态硬盘"><a href="#（3）固态硬盘" class="headerlink" title="（3）固态硬盘"></a>（3）固态硬盘</h3><p>固态磁盘由一个或多个闪存芯片组成，使用闪存芯片替代传动臂加盘片这种机械工作方式。</p>
+<p>Flash translation layer：FTL，闪存转换层，将操作系统对逻辑块的请求翻译成对底层物理设备的访问。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021515854.png" alt="image-20240402151543579"></p>
+<ul>
+<li><p>闪存芯片（falsh chip）</p>
+<ul>
+<li><p>基于Nand Flash实现，下图的block与逻辑块无关。</p>
+</li>
+<li><p>包含读、写和擦除三个操作。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021521937.png" alt="image-20240402152128719"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（4）程序的局部性"><a href="#（4）程序的局部性" class="headerlink" title="（4）程序的局部性"></a>（4）程序的局部性</h3><ul>
+<li>时间局部性<ul>
+<li>若被引用过的内存位置很可能在不远的将来还会被多次引用，则具有较好的时间局部性；</li>
+</ul>
+</li>
+<li>空间局部性<ul>
+<li>若一个内存位置被引用一次后，程序在不远的将来引用其附近的一个内存位置，则具有较好的时间局部性；</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、存储器层次结构"><a href="#2、存储器层次结构" class="headerlink" title="2、存储器层次结构"></a>2、存储器层次结构</h2><p>结构如下图所示，基本思想是上层存储设备作为下层存储设备的缓存。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021433966.png" alt="image-20240402143353405"></p>
+<h3 id="（1）cache"><a href="#（1）cache" class="headerlink" title="（1）cache"></a>（1）cache</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021603503.png" alt="image-20240402160342276"></p>
+<ul>
+<li><p>缓存命中（cache Hit）</p>
+<ul>
+<li>当程序需要第k+1层的某个数据对象d时，它首先从第k层的数据块中检索是否包含目标数据d的副本。若第k层包含目标数据d，称为缓存明中，否则称之为缓存不命中（cache Miss）</li>
+<li>当发生不命中时，第k层的缓存要从第k+1层取出包含目标数据的块；若第k层缓存已满，会覆盖已有的块，被替换的块称为牺牲块。</li>
+<li>步骤分三步：<ul>
+<li>set selection（组选择）</li>
+<li>line matching（行匹配）</li>
+<li>word extraction（字抽取）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>内部结构</p>
+<ul>
+<li><p>划分为S个Set，每个Set包含E行cache Line，地址为m位。</p>
+</li>
+<li><p>每行cache Line包含valid（数据是否有效）、Tag（目标数据是否存在在当前cache Line中）和大小为B的数据副本</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021607690.png" alt="image-20240402160725448" style="zoom: 50%;" />
+</li>
+<li><p>cache通过下面的方式知道自己是否包含目标数据的副本</p>
+<ul>
+<li>假设目标数据的地址A长度为m位，该地址会被S和B分为3个字段，如下图所示。<ul>
+<li><strong>Set index确定目标数据存储在哪个set中</strong></li>
+<li><strong>Tag确定目标数据在set的哪一行（此时valid必须为1）</strong></li>
+<li><strong>Block index指示块偏移量，确定目标数据的确切数据</strong></li>
+</ul>
+</li>
+<li>cache用中间的位作为Set索引，是为了避免使用高位作为索引时造成映射到相同的区域。</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021609317.png" alt="image-20240402160935274" style="zoom: 50%;" />
+</li>
+<li><p>Issues With Writes</p>
+<ul>
+<li>写命中（Write Hit）<ul>
+<li>写穿透（write-through）：写入cache的同时写回内存（更低一级cache），这样cache在替换可以直接丢掉旧的</li>
+<li>写回（write-back）：只写入cache，在cache需要替换时才写回内存</li>
+</ul>
+</li>
+<li>写不命中（Write Miss）<ul>
+<li>写分配（write-allocate）：先把目标数据所在的块从内存（更低一级cache）加载到cache中，然后再往cache中写</li>
+<li>写不分配（no-write-allocate）：绕开cache，直接把要写的内容写到内存里</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）直接映射高速缓存"><a href="#（2）直接映射高速缓存" class="headerlink" title="（2）直接映射高速缓存"></a>（2）直接映射高速缓存</h3><ul>
+<li><p>直接映射：每个Set只包含1行cache line</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021611962.png" alt="image-20240402161142799" style="zoom:50%;" />
+</li>
+<li><p>举例说明：假设存在一个cache，大小为(4, 1, 2, 4)，则整个地址空间可以由0-15标记，而标记位Tag和索引位Index连起来可以唯一的标识每一个内存块。</p>
+<ul>
+<li><p><strong>s1、组选择</strong>：根据Set index进行选择</p>
+</li>
+<li><p><strong>s2、行匹配</strong>：</p>
+<ul>
+<li>1、valid是否为1？</li>
+<li>2、对比cache Line中的Tag与地址中的Tag是否一致</li>
+</ul>
+</li>
+<li><p><strong>s3、字抽取</strong></p>
+<ul>
+<li>若一致，根据Block offset找到确切的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021620864.png" alt="image-20240402162006768" style="zoom: 50%;" />
+
+<ul>
+<li><p>举例说明：假设有一个cache如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021640771.png" alt="image-20240402164025528" style="zoom: 50%;" />
+
+<ul>
+<li>当地址是4位时，整个地址空间用编号0-15表示</li>
+<li>地址中的Tag和Index二者结合标识唯一的内存块（即右侧的Block number）。由于<strong>每个内存块由两个字节组成</strong>，因此整个内存空间被分成8个块</li>
+<li>由于cache中仅包含4个Set，因此会出现两个内存块映射到同一个Set的情况</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021636016.png" alt="image-20240402163600762"></p>
+</li>
+<li><p><strong>冲突不命中</strong>：内存中的不同块映射到cache的同一个Set中，此时不同块之间交替引用，即使cache中还存在空闲的块，也依旧造成不命中。</p>
+</li>
+</ul>
+<h3 id="（3）组相联-全相联高速缓存"><a href="#（3）组相联-全相联高速缓存" class="headerlink" title="（3）组相联&#x2F;全相联高速缓存"></a>（3）组相联&#x2F;全相联高速缓存</h3><ul>
+<li><p>组相联cache的每个set包含多个cache line，下图是一个2路组相联，其中C为cache的容量。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021659281.png" alt="image-20240402165930042" style="zoom:50%;" />
+</li>
+<li><p>全相联cache只有一个set</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021859412.png" alt="image-20240402185940143" style="zoom:50%;" /></li>
+</ul>
+
       
     </div>
 
@@ -288,7 +440,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/Computer/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -302,7 +454,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/03/Computer/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/" class="post-title-link" itemprop="url">Ch5 优化程序性能</a>
+            <a href="/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/" class="post-title-link" itemprop="url">Ch5 优化程序性能</a>
         </h2>
 
         <div class="post-meta">
@@ -319,7 +471,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-30 10:36:35" itemprop="dateModified" datetime="2024-05-30T10:36:35+08:00">2024-05-30</time>
+                <time title="修改时间：2024-07-16 11:16:32" itemprop="dateModified" datetime="2024-07-16T11:16:32+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,11 +479,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
                 </span>
             </span>
 
@@ -341,7 +489,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>996</span>
+              <span>995</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -360,15 +508,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/03/Computer/CSAPP/CSAPP_Ch5%20%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+
+
+<h1 id="Ch5-优化程序性能"><a href="#Ch5-优化程序性能" class="headerlink" title="Ch5 优化程序性能"></a>Ch5 优化程序性能</h1><h2 id="1、优化程序性能"><a href="#1、优化程序性能" class="headerlink" title="1、优化程序性能"></a>1、优化程序性能</h2><h3 id="（1）局限性"><a href="#（1）局限性" class="headerlink" title="（1）局限性"></a>（1）局限性</h3><ul>
+<li><strong>如果编译器无法确定两个指针是否指向同一个位置，那么编译器会假设所有情况都有可能发生，反而限制了优化策略。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134539.png" alt="image-20240401213441380" style="zoom:33%;" />
+
+<p>当编译器在优化代码时，会假设xp和yp有可能指向同一个内存位置，如下图所示，此时add1 res&#x3D;4x，add2 res&#x3D;3x，因此不能将add2用于优化add1。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012134793.png" alt="image-20240401213457648" style="zoom:33%;" />
+
+<ul>
+<li><strong>函数调用影响优化策略</strong></li>
+</ul>
+<p>如下图所示，大多数编译器不会把func1优化为func2（注意func2返回0是因为counter为后++，先返回再++）。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021006812.png" alt="image-20240402100639099" style="zoom:33%;" />
+
+<h3 id="（2）优化方式"><a href="#（2）优化方式" class="headerlink" title="（2）优化方式"></a>（2）优化方式</h3><ul>
+<li><p>1）代码移动</p>
+<ul>
+<li>循环不变式外提，比如在执行for循环前先计算出数组长度；</li>
+</ul>
+</li>
+<li><p>2）优化函数调用</p>
+<ul>
+<li><p>举例：在循环中将函数get_vec_element变为直接数组访问，这样反而降低了效率，这是因为每次操作数组时需要两次读内存和一次写内存：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022591.png" alt="image-20240402102218521"></p>
+</li>
+<li><p>基于此再进行优化，设置临时变量，直到循环结束再写入，此时只需要一次读内存，性能得到了很大的提升：</p>
+<ul>
+<li><strong>这里的acc是临时变量， 通常情况下，临时变量会被保存在栈帧（栈帧是用来存储函数调用期间的局部变量和其他临时数据的一块内存区域）中， 由于 acc 在循环中频繁使用，并且在每次迭代中都需要更新，将其保存在寄存器中可以提高访问速度，避免了频繁的内存访问操作。寄存器的访问速度比内存更快，因此可以加快循环的执行速度；</strong></li>
+<li><strong>由于循环中的代码会被频繁执行，对循环内的变量进行优化以提高性能尤为重要。将累加器保存在寄存器中可以减少内存访问次数，从而提高代码的执行效率。</strong></li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021022289.png" alt="image-20240402102255146" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="2、现代处理器"><a href="#2、现代处理器" class="headerlink" title="2、现代处理器"></a>2、现代处理器</h2><p>在1的基础上，考虑利用处理器的微体系结构进行优化。现代处理器可以实现多指令并行。</p>
+<h3 id="（1）功能单元"><a href="#（1）功能单元" class="headerlink" title="（1）功能单元"></a>（1）功能单元</h3><ul>
+<li>指令控制单元（Instruction Control Unit，ICU）<ul>
+<li>从内存中读取指令序列并译码，之后进行一系列操作</li>
+<li>退役单元，控制着寄存器文件<ul>
+<li>若指令执行完毕，相应更新寄存器文件；</li>
+<li>若不该执行该条指令，则丢弃所有运算结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>执行单元（Execution Unit，EU）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021039315.png" alt="image-20240402103925031"></p>
+<h3 id="（2）功能单元的性能衡量指标"><a href="#（2）功能单元的性能衡量指标" class="headerlink" title="（2）功能单元的性能衡量指标"></a>（2）功能单元的性能衡量指标</h3><ul>
+<li>延迟（Latency）：完成运算需要的总时间</li>
+<li>发射（Isuue）：两次运算间间隔的最小周期数</li>
+<li>容量（Capacity）：执行该运算的功能单元的数量</li>
+</ul>
+<p>CPE&#x2F;Clocks Per Instruction，每条指令所需的时钟周期数，衡量计算机指令执行效率的一个指标。</p>
+<p>延迟界限和吞吐量界限的CPE值</p>
+<ul>
+<li>延迟界限：在给定的工作负载下，系统性能受到的主要限制是每个任务或指令的执行时间（延迟）的上限<ul>
+<li>对于任何必须严格按照顺序执行的合并运算，延迟界限给出了所需要的最小的CPE值</li>
+</ul>
+</li>
+</ul>
+<p>吞吐量界限：在给定的工作负载下，系统性能受到的主要限制是系统的总体吞吐量（Throughput）的上限</p>
+<ul>
+<li>吞吐量是指单位时间内完成的任务数或指令数，它反映了系统的处理能力和效率</li>
+<li>吞吐量界限通常与系统资源的利用率相关联，包括处理器的吞吐量、内存带宽、缓存命中率等因素</li>
+</ul>
+
       
     </div>
 
@@ -387,7 +597,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Computer/CSAPP/CSAPP_Ch4%20%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch4%20%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -401,7 +611,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/04/01/Computer/CSAPP/CSAPP_Ch4%20%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Ch4 处理器体系结构</a>
+            <a href="/2024/04/01/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch4%20%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">Ch4 处理器体系结构</a>
         </h2>
 
         <div class="post-meta">
@@ -418,7 +628,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-30 10:36:23" itemprop="dateModified" datetime="2024-05-30T10:36:23+08:00">2024-05-30</time>
+                <time title="修改时间：2024-07-16 11:16:29" itemprop="dateModified" datetime="2024-07-16T11:16:29+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,11 +636,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/CSAPP/" itemprop="url" rel="index"><span itemprop="name">CSAPP</span></a>
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
                 </span>
             </span>
 
@@ -459,15 +665,215 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/04/01/Computer/CSAPP/CSAPP_Ch4%20%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h1 id="Ch4-处理器体系结构"><a href="#Ch4-处理器体系结构" class="headerlink" title="Ch4 处理器体系结构"></a>Ch4 处理器体系结构</h1><p>CSAPP自定义了一个Y86-64</p>
+<h2 id="1、指令系统结构"><a href="#1、指令系统结构" class="headerlink" title="1、指令系统结构"></a>1、指令系统结构</h2><h3 id="（1）Programmer-Visible-State"><a href="#（1）Programmer-Visible-State" class="headerlink" title="（1）Programmer-Visible State"></a>（1）Programmer-Visible State</h3><p>可见状态：每条指令都会去读取或修改处理器某些部分，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011539557.png" alt="image-20240401153926464" style="zoom:33%;" />
+
+<h3 id="（2）指令编码"><a href="#（2）指令编码" class="headerlink" title="（2）指令编码"></a>（2）指令编码</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011540371.png" alt="image-20240401154030167" style="zoom:33%;" />
+
+<p>如上图最后一条：</p>
+<ul>
+<li><p>5 指令代码</p>
+</li>
+<li><p>0 指令功能</p>
+</li>
+<li><p>rA&#x2F;rB 寄存器指示符字节</p>
+<ul>
+<li><p>对寄存器编码，用16进制数<strong>0~0xE</strong>表示</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011531970.png" alt="image-20240401153138807" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<p>举例：（小端法存储）</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011536946.png" alt="image-20240401153606853" style="zoom:33%;" />
+
+<h3 id="（3）处理异常"><a href="#（3）处理异常" class="headerlink" title="（3）处理异常"></a>（3）处理异常</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011540188.png" alt="image-20240401154055033" style="zoom:33%;" />
+
+<h2 id="2、数字电路与处理器设计"><a href="#2、数字电路与处理器设计" class="headerlink" title="2、数字电路与处理器设计"></a>2、数字电路与处理器设计</h2><p>Register File 寄存器文件（寄存器堆）输出端口与ALU的输入端口串联。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011545861.png" alt="image-20240401154517784" style="zoom:33%;" />
+
+<ul>
+<li>读写操作共用地址线；</li>
+<li>定义15个寄存器，因此地址线设计成4为即可；</li>
+<li>we_（写使能信号）&#x2F;reeset（复位信号）</li>
+</ul>
+<p>下图为Register File的内部结构：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011547329.png" alt="image-20240401154700867" style="zoom: 50%;" />
+
+<p>逻辑门，这些门结构可通过P管和N管（CMOS管）组合表现。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011548500.png" alt="image-20240401154803404" style="zoom: 33%;" />
+
+<h2 id="3、Y86-64的顺序实现"><a href="#3、Y86-64的顺序实现" class="headerlink" title="3、Y86-64的顺序实现"></a>3、Y86-64的顺序实现</h2><p>举例：sum程序对应的汇编代码和二进制指令：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011554476.png" alt="image-20240401155427243" style="zoom: 50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011554403.png" alt="image-20240401155410294" style="zoom:50%;" />
+
+<h3 id="（1）处理器六大阶段"><a href="#（1）处理器六大阶段" class="headerlink" title="（1）处理器六大阶段"></a>（1）处理器六大阶段</h3><ul>
+<li><p>取指：分析指令；</p>
+</li>
+<li><p>译码：读寄存器文件；</p>
+</li>
+<li><p>执行：ALU执行 1)算术逻辑运算； 2)计算内存引用的有效地址； 3)执行push和pop指令；</p>
+</li>
+<li><p>访存：针对内存的读写操作；</p>
+</li>
+<li><p>写回：写寄存器文件；</p>
+</li>
+<li><p>更新PC：将PC的内容设置为下一条指令的地址。</p>
+</li>
+</ul>
+<h3 id="（2）各阶段的硬件结构"><a href="#（2）各阶段的硬件结构" class="headerlink" title="（2）各阶段的硬件结构"></a>（2）各阶段的硬件结构</h3><p>总体结构（<strong>其中从valP到Data的橙色线错误，应该为从valC到Data！</strong>），对于顺序操作，这6个阶段在一个时钟周期内完成。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011906322.png" alt="image-20240401190602950"></p>
+<ul>
+<li><p>取指</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011619659.png" alt="image-20240401161926457" style="zoom: 33%;" />
+</li>
+<li><p>译码</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011621480.png" alt="image-20240401162105328" style="zoom: 33%;" />
+</li>
+<li><p>执行</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011622684.png" alt="image-20240401162222519" style="zoom: 33%;" />
+</li>
+<li><p>访存</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011622546.png" alt="image-20240401162255349" style="zoom: 33%;" />
+</li>
+<li><p>写回</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011623806.png" alt="image-20240401162342626" style="zoom: 33%;" />
+</li>
+<li><p>更新PC</p>
+<ol>
+<li>call指令常数字段；</li>
+<li>在访存阶段从内存（栈）中读出的返回地址；</li>
+<li>跳转指令的常数字段；</li>
+<li>当前PC+当前指令长度。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011624170.png" alt="image-20240401162430019" style="zoom: 33%;" /></li>
+</ul>
+<h3 id="（3）举例"><a href="#（3）举例" class="headerlink" title="（3）举例"></a>（3）举例</h3><p>举例1：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011600331.png" alt="image-20240401160018132" style="zoom: 33%;" />
+
+<p>举例2：（下图中的<strong>valE&#x3D;0+8</strong>是因为寄存器文件的写入端与ALU的输出端相连）</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011605541.png" alt="image-20240401160504446" style="zoom:33%;" />
+
+<p>举例3：</p>
+<p>该指令为<strong>将寄存器 <code>%rsp</code> 中的值存储到以 <code>%rbx</code> 寄存器的值为基地址偏移100个字节的内存单元中</strong>，因此不涉及写寄存器操作。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011608224.png" alt="image-20240401160808121" style="zoom:33%;" />
+
+<p>举例4：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011612305.png" alt="image-20240401161239187" style="zoom:33%;" />
+
+<p>举例5：跳转指令</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011613911.png" alt="image-20240401161359730" style="zoom:33%;" />
+
+<h2 id="4、流水线"><a href="#4、流水线" class="headerlink" title="4、流水线"></a>4、流水线</h2><h3 id="（1）属性及原理"><a href="#（1）属性及原理" class="headerlink" title="（1）属性及原理"></a>（1）属性及原理</h3><p>假设有一个非流水线设计，如下图所示，该系统的吞吐量约为<strong>3.12GIPS</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011659177.png" alt="image-20240401165925089" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011659832.png" alt="image-20240401165943770" style="zoom:33%;" />
+
+<p>若采用流水线设计，将组合逻辑单元阶段分为三个阶段，每个阶段120ps，此时吞吐量为<strong>8.33GIPS</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011701350.png" alt="image-20240401170120155" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011702592.png" alt="image-20240401170206480" style="zoom:33%;" />
+
+<ul>
+<li>流水线的局限性：此时各个阶段的延迟可能都是不等的，此时时钟的速率受最慢阶段的限制（木桶效应）：</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011706596.png" alt="image-20240401170631392" style="zoom:33%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011836974.png" alt="image-20240401183610851" style="zoom:33%;" />
+
+<ul>
+<li>此外，过深的流水线会导致系统性能的下降。实际中的指令间存在数据依赖，以及指令控制流造成的控制依赖。</li>
+</ul>
+<h3 id="（2）硬件结构"><a href="#（2）硬件结构" class="headerlink" title="（2）硬件结构"></a>（2）硬件结构</h3><p>在顺序实现的硬件结构中，取指发生在时钟周期刚开始时，而更新PC发生在时钟快要结束时，如下图所示（<strong>橙色线需勘误</strong>）。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011906322.png" alt="image-20240401190602950"></p>
+<p>为了实现流水线的硬件结构，将更新PC的操作从时钟周期快要结束时移动到时钟刚开始执行时（即最左侧新增的寄存器）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011910589.png" alt="image-20240401191048453"></p>
+<p>从宏观上来说，也就是在各个阶段前加入流水线寄存器。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011911529.png" alt="image-20240401191145449"></p>
+<p>其展开后的整体逻辑如下：</p>
+<ul>
+<li>寄存器F保存PC的预测值；</li>
+<li>寄存器D保存刚取出的指令信息；</li>
+<li>寄存器E保存最新译码指令的状态以及从寄存器文件中读出的数值；</li>
+<li>寄存器M保存最新执行指令的结果，包含ALU处理的那三类；</li>
+<li>寄存器W保存访存执行的结果，而反馈路径将结果写回寄存器文件。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011924576.png" alt="image-20240401192450295"></p>
+<h3 id="（3）数据冒险"><a href="#（3）数据冒险" class="headerlink" title="（3）数据冒险"></a>（3）数据冒险</h3><p>在下图的时钟周期4中，读取到的值并非所期望的10和3，而是默认值0，这是因为此时指令1处于访存阶段，10仍未写回%rdx中；而指令2处于执行阶段，3也未写回%rax。这种情况称为<strong>冒险&#x2F;冲突</strong>。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011937082.png" alt="image-20240401193745913" style="zoom:50%;" />
+
+<p>解决方法：</p>
+<ul>
+<li><p>暂停技术</p>
+<ul>
+<li><p>在D阶段读取寄存器的ID值，分别于执行阶段、访存阶段及写回阶段所执行指令的目的寄存器ID比较，若相等，则存在数据相关，需要在译码阶段等待；</p>
+</li>
+<li><p>方式为插入气泡：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011941588.png" alt="image-20240401194157407"></p>
+</li>
+</ul>
+</li>
+<li><p>数据转发&#x2F;旁路</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404011943090.png" alt="image-20240401194351754"></p>
+</li>
+</ul>
+<h3 id="（4）控制冒险"><a href="#（4）控制冒险" class="headerlink" title="（4）控制冒险"></a>（4）控制冒险</h3><p>控制冒险的情况例举如下：</p>
+<ul>
+<li>若取出的是ret指令，下一条指令的地址需要等到访存结束后才能从栈中取出；  —— 解决：暂停处理新指令</li>
+<li>若取出的是分支条件指令，需要经过执行阶段后才能确定是否跳转。—— 解决：分支预测（预测其总是跳转或总是不跳转）</li>
+</ul>
+<p>暂停和插入气泡是如何实现的？</p>
+<p>流水线寄存器是通过时钟的上升沿来改变输出的值，遇到上升沿时，加载其输入作为新的输出。因此，给每个流水线寄存器引入stall信号和bubble信号，<strong>当需要暂停时</strong>，将halt信号设为1，寄存器保存原状态；<strong>当需要插入气泡时</strong>，将bubble信号设为1，寄存器的状态设置成某个固定的复位配置，等效于nop。</p>
+<h2 id="5、Y86-64的流水线实现"><a href="#5、Y86-64的流水线实现" class="headerlink" title="5、Y86-64的流水线实现"></a>5、Y86-64的流水线实现</h2><h3 id="（1）取指阶段"><a href="#（1）取指阶段" class="headerlink" title="（1）取指阶段"></a>（1）取指阶段</h3><ul>
+<li><p>顺序执行：valP &#x3D; 当前PC + 指令长度</p>
+</li>
+<li><p>跳转执行：valP &#x3D; （指令中的常数字段）valC</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012055519.png" alt="image-20240401205520162" style="zoom:50%;" />
+</li>
+<li><p>为了应对出错的情况，设置<strong>select PC部件</strong>纠错：</p>
+<ul>
+<li><p>若取到<strong>ret</strong>，需要等到译码、执行和访存后，才能从内存中读到正确的返回地址，此时的改正方法为：<strong>将流水线寄存器W中的访存结果（W_valM）作为下一条指令的地址；</strong></p>
+</li>
+<li><p>若取到<strong>条件分支指令</strong>，需要等到译码、执行后才能判断是否跳转，此时的改正方法为：<strong>根据Cnd信号判断是否跳转，若不跳转，则从流水线寄存器M读取（M_valA）下一条指令的地址</strong>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012104691.png" alt="image-20240401210442459"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）译码阶段"><a href="#（2）译码阶段" class="headerlink" title="（2）译码阶段"></a>（2）译码阶段</h3><ul>
+<li><p>需要判断是1）<strong>直接使用转发的数据</strong>；还是2）<strong>从寄存器文件中读取数据</strong>。</p>
+</li>
+<li><p>哪些数据需要转发？</p>
+<ul>
+<li><strong>ALU的输出结果</strong><ul>
+<li>正常需要经访存和写回后，才能完成寄存器的数据更新；</li>
+<li>采用转发设计时，ALU的输出结果可以马上作为译码阶段的结果。</li>
+</ul>
+</li>
+<li><strong>内存的输出数据</strong><ul>
+<li>和ALU类似</li>
+</ul>
+</li>
+<li><strong>访存阶段时，寄存器写入端口E还没有写入的数据</strong></li>
+<li><strong>写回阶段时，寄存器写入端口M还没有写入的数据</strong></li>
+<li><strong>写回阶段时，寄存器写入端口E还没有写入的数据</strong></li>
+</ul>
+</li>
+<li><p>每个转发源包括：1）<strong>寄存器的ID值</strong>；2）<strong>转发数据</strong>。</p>
+</li>
+<li><p>Sel+Fwd A与Fwd B相比，<strong>多了一个valP输入</strong>。这里将valA与valP合并，可以合并的原因是只有函数调用指令和跳转指令在后面的阶段才需要用到valP，而这两类指令并不需要从A端口读取数据（见3(3).举例5.跳转指令）</p>
+<ul>
+<li>valP是顺序执行时下一条指令的地址，而跳转执行指令在译码阶段不需要valP；</li>
+<li>根据icode判断是否为这两类指令，如果是则可以进行合并。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404012117651.png" alt="image-20240401211720521"></p>
+</li>
+</ul>
+<p>其他阶段和顺序设计相差不大，不再赘述。</p>
+<h2 id="6、流水线的控制逻辑"><a href="#6、流水线的控制逻辑" class="headerlink" title="6、流水线的控制逻辑"></a>6、流水线的控制逻辑</h2><h3 id="（1）加载-使用冒险"><a href="#（1）加载-使用冒险" class="headerlink" title="（1）加载&#x2F;使用冒险"></a>（1）加载&#x2F;使用冒险</h3><h3 id="（2）分支预测发生错误"><a href="#（2）分支预测发生错误" class="headerlink" title="（2）分支预测发生错误"></a>（2）分支预测发生错误</h3><h3 id="（3）返回阶段的处理"><a href="#（3）返回阶段的处理" class="headerlink" title="（3）返回阶段的处理"></a>（3）返回阶段的处理</h3>
       
     </div>
 
@@ -486,7 +892,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/27/Computer/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/27/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -500,7 +906,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/03/27/Computer/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Project 2 (Spring 2023)</a>
+            <a href="/2024/03/27/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Project 2 (Spring 2023)</a>
         </h2>
 
         <div class="post-meta">
@@ -517,7 +923,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:42:59" itemprop="dateModified" datetime="2024-07-05T10:42:59+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:14:29" itemprop="dateModified" datetime="2024-07-16T11:14:29+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -525,11 +931,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
                 </span>
             </span>
 
@@ -566,7 +972,7 @@
 <p>Project2的实现依赖于Project1的buffer pool和page guards。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/03/27/Computer/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/#more" rel="contents">
+              <a class="btn" href="/2024/03/27/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%202%20(Spring%202023)/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -590,7 +996,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/02/Computer/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/02/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -604,7 +1010,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/03/02/Computer/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Course Related (Spring 2023)</a>
+            <a href="/2024/03/02/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Course Related (Spring 2023)</a>
         </h2>
 
         <div class="post-meta">
@@ -621,7 +1027,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:43:17" itemprop="dateModified" datetime="2024-07-05T10:43:17+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:14:12" itemprop="dateModified" datetime="2024-07-16T11:14:12+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -629,11 +1035,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
                 </span>
             </span>
 
@@ -702,7 +1108,7 @@
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/03/02/Computer/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/#more" rel="contents">
+              <a class="btn" href="/2024/03/02/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Course%20Related%20(Spring%202023)/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -726,7 +1132,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/02/Computer/cmu15-445/cmu15-445%20Project%201%20(Spring%202023)/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/02/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%201%20(Spring%202023)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -740,7 +1146,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/03/02/Computer/cmu15-445/cmu15-445%20Project%201%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Project 1 (Spring 2023)</a>
+            <a href="/2024/03/02/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%201%20(Spring%202023)/" class="post-title-link" itemprop="url">cmu15-445 Project 1 (Spring 2023)</a>
         </h2>
 
         <div class="post-meta">
@@ -757,7 +1163,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:43:03" itemprop="dateModified" datetime="2024-07-05T10:43:03+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:14:27" itemprop="dateModified" datetime="2024-07-16T11:14:27+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -765,11 +1171,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
                 </span>
             </span>
 
@@ -957,7 +1363,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/Computer/cmu15-445/cmu15-445%20Project%200%20(Spring%202023)%20%20/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%200%20(Spring%202023)%20%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -971,7 +1377,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/02/28/Computer/cmu15-445/cmu15-445%20Project%200%20(Spring%202023)%20%20/" class="post-title-link" itemprop="url">cmu15-445 Project 0 (Spring 2023)</a>
+            <a href="/2024/02/28/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Project%200%20(Spring%202023)%20%20/" class="post-title-link" itemprop="url">cmu15-445 Project 0 (Spring 2023)</a>
         </h2>
 
         <div class="post-meta">
@@ -988,7 +1394,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:43:12" itemprop="dateModified" datetime="2024-07-05T10:43:12+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:14:25" itemprop="dateModified" datetime="2024-07-16T11:14:25+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -996,11 +1402,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
                 </span>
             </span>
 
@@ -1147,7 +1553,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Homework1_SQL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1161,7 +1567,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/" class="post-title-link" itemprop="url">cmu15-445 Homework1_SQL (Spring 2023)</a>
+            <a href="/2024/02/28/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Homework1_SQL/" class="post-title-link" itemprop="url">cmu15-445 Homework1_SQL (Spring 2023)</a>
         </h2>
 
         <div class="post-meta">
@@ -1178,7 +1584,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:42:51" itemprop="dateModified" datetime="2024-07-05T10:42:51+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:14:24" itemprop="dateModified" datetime="2024-07-16T11:14:24+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1186,11 +1592,11 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
+                  <a href="/categories/%E9%A1%B9%E7%9B%AE/cmu15-445/" itemprop="url" rel="index"><span itemprop="name">cmu15-445</span></a>
                 </span>
             </span>
 
@@ -1222,7 +1628,7 @@
           <h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sqlite<span class="operator">&gt;</span> <span class="keyword">SELECT</span> CategoryName <span class="keyword">FROM</span> Category <span class="keyword">ORDER</span> <span class="keyword">BY</span> CategoryName;</span><br><span class="line"></span><br><span class="line">Beverages</span><br><span class="line">Condiments</span><br><span class="line">Confections</span><br><span class="line">Dairy Products</span><br><span class="line">Grains<span class="operator">/</span>Cereals</span><br><span class="line">Meat<span class="operator">/</span>Poultry</span><br><span class="line">Produce</span><br><span class="line">Seafood</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2024/02/28/Computer/cmu15-445/cmu15-445%20Homework1_SQL/#more" rel="contents">
+              <a class="btn" href="/2024/02/28/6%20%E9%A1%B9%E7%9B%AE/cmu15-445/cmu15-445%20Homework1_SQL/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1246,7 +1652,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/7%20%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1260,7 +1666,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">OpenPose原理及编译</a>
+            <a href="/2023/12/25/7%20%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">OpenPose原理及编译</a>
         </h2>
 
         <div class="post-meta">
@@ -1277,7 +1683,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-05-30 10:34:14" itemprop="dateModified" datetime="2024-05-30T10:34:14+08:00">2024-05-30</time>
+                <time title="修改时间：2024-07-16 11:15:56" itemprop="dateModified" datetime="2024-07-16T11:15:56+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1295,7 +1701,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>1.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1314,15 +1720,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/25/%E7%A7%91%E7%A0%94/OpenPose%E5%8E%9F%E7%90%86%E5%8F%8A%E7%BC%96%E8%AF%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h2 id="1-前提思考"><a href="#1-前提思考" class="headerlink" title="1 前提思考"></a>1 前提思考</h2><p>1、姿态估计中的关键任务是什么？</p>
+<p>识别人体骨干躯干的关键点，并进行定位与拼接。</p>
+<p>2、姿态估计中的难点是什么？</p>
+<p><strong>（1）遮挡；（2）匹配。</strong></p>
+<p>3、COCO数据集的关键点有几个，分别是？</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524168.png" alt="COCO数据集关键点" style="zoom: 50%;" />
+
+<p>数据集中是<code>17</code>个点，实际上训练时候还要加上<code>1</code>个脖子的点，共<code>18</code>个点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Joint index:</span></span><br><span class="line"><span class="comment"># &#123;0,  &quot;Nose&quot;&#125;</span></span><br><span class="line"><span class="comment"># &#123;1,  &quot;Neck&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;2,  &quot;RShoulder&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;3,  &quot;RElbow&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;4,  &quot;RWrist&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;5,  &quot;LShoulder&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;6,  &quot;LElbow&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;7,  &quot;LWrist&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;8,  &quot;RHip&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;9,  &quot;RKnee&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;10, &quot;RAnkle&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;11, &quot;LHip&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;12, &quot;LKnee&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;13, &quot;LAnkle&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;14, &quot;REye&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;15, &quot;LEye&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;16, &quot;REar&quot;&#125;,</span></span><br><span class="line"><span class="comment"># &#123;17, &quot;LEar&quot;&#125;,</span></span><br></pre></td></tr></table></figure>
+
+<p>4、姿态估计方法分为几个大类？</p>
+<p>（1）<code>Top-down</code>（自顶向下）：先检测所有的人，再对每个框的人进行姿态估计输出结果</p>
+<p>优点：准确率高，点的回归率高；</p>
+<p>缺点：算法性能依赖检测效果，复杂度较高，实时性比较差。</p>
+<p>主要用于一些离线的项目，对实时性没要求。</p>
+<p>（2）<code>bottom-up</code>（自底向上）：先检测所有关键点，再进行匹配连接</p>
+<p>优点：计算量较小，可以达到实时性的效果；</p>
+<p>缺点：精度较差，匹配策略比较复杂。</p>
+<h2 id="2-论文解读"><a href="#2-论文解读" class="headerlink" title="2 论文解读"></a>2 论文解读</h2><p>论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1611.08050.pdf">https://arxiv.org/pdf/1611.08050.pdf</a></p>
+<h3 id="1、网络框架"><a href="#1、网络框架" class="headerlink" title="1、网络框架"></a>1、网络框架</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251524273.png" alt="网络整体流程图">	<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251532476.jpg" alt="网络框架1"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312251534898.png" alt="网络框架2"></p>
+<p>其中的重点：</p>
+<p>（1）关键点的<code>heatmap</code>标注生成，采用高斯热度图的方式；</p>
+<p>（2）<code>PAF</code>：部分亲和域。这也是论文中的重点和难点；</p>
+<p>（3）匹配策略：匈牙利匹配。</p>
+<h3 id="2、数据制作"><a href="#2、数据制作" class="headerlink" title="2、数据制作"></a>2、数据制作</h3><p>采用的数据集为<code>COCO</code>数据集，其中人体骨骼点的标注信息为<code>[x, y, label]</code>。</p>
+<p><code>label</code>取值为<code>0</code>、<code>1</code>、<code>2</code>，分别表示不存在、遮挡、正常，其中不存在的关键点是需要去除的。</p>
+<p>（1）关键点高斯热力图实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putGaussianMaps</span>(<span class="params">center, accumulate_confid_map, sigma, grid_y, grid_x, stride</span>):</span><br><span class="line"></span><br><span class="line">    start = stride / <span class="number">2.0</span> - <span class="number">0.5</span></span><br><span class="line">    y_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_y))]</span><br><span class="line">    x_range = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">int</span>(grid_x))]</span><br><span class="line">    xx, yy = np.meshgrid(x_range, y_range)      <span class="comment"># 构建棋盘</span></span><br><span class="line">    xx = xx * stride + start                    <span class="comment"># 每个点在原始图像上的位置</span></span><br><span class="line">    yy = yy * stride + start</span><br><span class="line">    d2 = (xx - center[<span class="number">0</span>]) ** <span class="number">2</span> + (yy - center[<span class="number">1</span>]) ** <span class="number">2</span>  <span class="comment"># 计算每个点和GT点的距离</span></span><br><span class="line">    exponent = d2 / <span class="number">2.0</span> / sigma / sigma                 <span class="comment"># 这里在做一个高斯计算</span></span><br><span class="line">    mask = exponent &lt;= <span class="number">4.6052</span>                           <span class="comment"># 将在这个阈值范围内的点用True记录</span></span><br><span class="line">    cofid_map = np.exp(-exponent)                       <span class="comment"># 这里做一个标准化</span></span><br><span class="line">    cofid_map = np.multiply(mask, cofid_map)            <span class="comment"># 取出对应关系为True的点</span></span><br><span class="line">    accumulate_confid_map += cofid_map                  <span class="comment"># 将每个点计算的结果都累加到上一次的特征中</span></span><br><span class="line">    accumulate_confid_map[accumulate_confid_map &gt; <span class="number">1.0</span>] = <span class="number">1.0</span>      <span class="comment"># 对结果大于1的值，只取1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> accumulate_confid_map    <span class="comment"># 返回热力图（heatmap）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（2）PAF数据计算的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">putVecMaps</span>(<span class="params">centerA, centerB, accumulate_vec_map, count, grid_y, grid_x, stride</span>):</span><br><span class="line">    centerA = centerA.astype(<span class="built_in">float</span>)</span><br><span class="line">    centerB = centerB.astype(<span class="built_in">float</span>)</span><br><span class="line"></span><br><span class="line">    thre = <span class="number">1</span>  <span class="comment"># 表示宽度，也就是一个设定好的参数</span></span><br><span class="line">    centerB = centerB / stride  <span class="comment"># 缩放比例特定到特征图中</span></span><br><span class="line">    centerA = centerA / stride</span><br><span class="line"></span><br><span class="line">    limb_vec = centerB - centerA  <span class="comment"># 求出两个点的向量</span></span><br><span class="line">    norm = np.linalg.norm(limb_vec)  <span class="comment"># 是需要求单位向量，所以先计算范数，也就是向量模长</span></span><br><span class="line">    <span class="keyword">if</span> (norm == <span class="number">0.0</span>):  <span class="comment"># 这里表示两个点基本重合了</span></span><br><span class="line">        <span class="comment"># print &#x27;limb is too short, ignore it...&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line">    limb_vec_unit = limb_vec / norm  <span class="comment"># 向量除以模长，得到单位向量</span></span><br><span class="line">    <span class="comment"># print &#x27;limb unit vector: &#123;&#125;&#x27;.format(limb_vec_unit)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># To make sure not beyond the border of this two points</span></span><br><span class="line">    <span class="comment"># 得到所有可能存在方向的区域(这里就用到了之前的超参数阈值)</span></span><br><span class="line">    min_x = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_x = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">0</span>], centerB[<span class="number">0</span>]) + thre)), grid_x)</span><br><span class="line">    min_y = <span class="built_in">max</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) - thre)), <span class="number">0</span>)</span><br><span class="line">    max_y = <span class="built_in">min</span>(<span class="built_in">int</span>(<span class="built_in">round</span>(<span class="built_in">max</span>(centerA[<span class="number">1</span>], centerB[<span class="number">1</span>]) + thre)), grid_y)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到一个可能存在向量的矩形框</span></span><br><span class="line">    range_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_x), <span class="built_in">int</span>(max_x), <span class="number">1</span>))</span><br><span class="line">    range_y = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">int</span>(min_y), <span class="built_in">int</span>(max_y), <span class="number">1</span>))</span><br><span class="line">    xx, yy = np.meshgrid(range_x, range_y)  <span class="comment"># 制作一个网格</span></span><br><span class="line">    ba_x = xx - centerA[<span class="number">0</span>]  <span class="comment"># the vector from (x,y) to centerA 根据位置判断是否在该区域上（分别得到X和Y方向的）</span></span><br><span class="line">    ba_y = yy - centerA[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 向量叉乘根据阈值选择赋值区域，任何向量与单位向量的叉乘即为四边形的面积</span></span><br><span class="line">    <span class="comment"># 这里是重点步骤，也就是论文中的公式，表示计算出两个向量组成四边形的面积</span></span><br><span class="line">    limb_width = np.<span class="built_in">abs</span>(ba_x * limb_vec_unit[<span class="number">1</span>] - ba_y * limb_vec_unit[<span class="number">0</span>])</span><br><span class="line">    mask = limb_width &lt; thre  <span class="comment"># mask is 2D （小于阈值的表示在该区域上）</span></span><br><span class="line"></span><br><span class="line">    vec_map = np.copy(accumulate_vec_map) * <span class="number">0.0</span>  <span class="comment"># 构建一个全为0的矩阵</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这行代码主要作用是将mask扩展一个维度并且赋值给vec_map数组</span></span><br><span class="line">    vec_map[yy, xx] = np.repeat(mask[:, :, np.newaxis], <span class="number">2</span>, axis=<span class="number">2</span>)</span><br><span class="line">    <span class="comment"># 在该区域上的都用对应的方向向量表示（根据mask结果表示是否在，通过乘法的方式）</span></span><br><span class="line">    vec_map[yy, xx] *= limb_vec_unit[np.newaxis, np.newaxis, :]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># #在特征图中（46*46）中 哪些区域是该躯干所在区域，判断x或者y向量都不为0</span></span><br><span class="line">    mask = np.logical_or.reduce(</span><br><span class="line">        (np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">0</span>]) &gt; <span class="number">0</span>, np.<span class="built_in">abs</span>(vec_map[:, :, <span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每次返回的accumulate_vec_map都是平均值，现在还原成实际值</span></span><br><span class="line">    accumulate_vec_map = np.multiply(</span><br><span class="line">        accumulate_vec_map, count[:, :, np.newaxis])</span><br><span class="line">    accumulate_vec_map += vec_map  <span class="comment"># 加上当前关键点位置形成的向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] += <span class="number">1</span>  <span class="comment"># 该区域计算次数都+1</span></span><br><span class="line"></span><br><span class="line">    mask = count == <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">1</span>  <span class="comment"># 没有被计算过的地方就等于自身（因为一会要除法）</span></span><br><span class="line"></span><br><span class="line">    accumulate_vec_map = np.divide(accumulate_vec_map, count[:, :, np.newaxis])  <span class="comment"># 算平均向量</span></span><br><span class="line">    count[mask == <span class="literal">True</span>] = <span class="number">0</span>  <span class="comment"># 还原回去</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> accumulate_vec_map, count</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这两个函数是最重要的两个部分，也就是对训练数据的处理，生成出需要的训练数据。</p>
+<h3 id="3、预测推理"><a href="#3、预测推理" class="headerlink" title="3、预测推理"></a>3、预测推理</h3><p>预测模型这里，在官方源码中是将<code>paf</code>的处理封装在一个<code>cpp</code>库中，<strong>通过编译得到静态库，代码中可以调用</strong>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swig -python -c++ pafprocess.i</span><br><span class="line">python3 setup.py build_ext --inplace</span><br></pre></td></tr></table></figure>
+
+<p>这里PAF的处理主要是采用积分计算的方式，也就是对于连线的点的方向选择，采用积分的方式计算最佳连线策略。</p>
+<h2 id="3-OpenPose-Windows-cpu-only-编译"><a href="#3-OpenPose-Windows-cpu-only-编译" class="headerlink" title="3 OpenPose_Windows_cpu_only 编译"></a>3 OpenPose_Windows_cpu_only 编译</h2><p>主要步骤参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_51209492/article/details/124185106?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%AE%89%E8%A3%85openpose%E5%B9%B6%E4%BD%BF%E7%94%A8python%E8%B0%83%E7%94%A8&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-1-124185106.142%5Ev96%5Epc_search_result_base7&spm=1018.2226.3001.4187">CSDN——win10环境下下载安装openpose(only cpu)并在pycharm中运行代码（超详细）</a></p>
+<p>基本按照这上面来走就可以正确编译，但其中要注意以下几点：</p>
+<p><strong>1、<code>bat</code>批处理命令运行时给的网站我根本无法访问，一直<code>retry</code></strong></p>
+<p>最后选择用迅雷下载，然后放进<code>\openpose\3rdparty\windows</code>文件夹下。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272200864.png" alt="image-20231227220003816"></p>
+<p>同时这里面的<code>caffe_cpu</code>不是用这4个<code>bat</code>文件下载的，但是由于网址同样进不去，也选择先用迅雷下载好后放进去。</p>
+<p>我这里的4个<code>zip</code>文件大小显示为<code>0kb</code>似乎是<code>cmake</code>编译后自己更改的，不用去管。</p>
+<p><strong>2、用迅雷提前下载好<code>\openpose\models</code>后，<code>cmake</code>编译依然会重新下载模型。</strong></p>
+<p>这里我参考了<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/446981890">OpenPose-CPU版本安装</a>的方法：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272207425.png" alt="image-20231227220706339"></p>
+<p>修改<code>CmakeLists.txt</code>文件后就不会再重新下载模型了。</p>
+<p><strong>3、用<code>CMAKE</code>编译<code>openpose</code>项目时，一定要在第一次<code>configure</code>之前，点击<code>Add Entry</code>选择<code>Python</code>版本。</strong></p>
+<p>如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202312272202637.png" alt="在这里插入图片描述"></p>
+<p>实际上这一步就是要确保在<code>cmake</code>编译时访问的<code>python</code>解释器和最后在<code>pycharm</code>中运行时选择的python解释器一致，否则可能会在<code>pycharm</code>中报错<code>No module named pyopenpose</code>。</p>
+<p>我第一次在这里就是因为没有关注这个细节，导致<code>cmake</code>选择的是<code>python 3.6.5</code>的编译器，而<code>pycharm</code>选择的是<code>3.7.6</code>的编译器，出现错误。</p>
+<p><strong>4、最好采用本地<code>python</code>解释器，不要用<code>anaconda</code>虚拟环境。</strong></p>
+<p>我也不知道为什么虚拟环境会报错，可能还是路径的问题吧。</p>
+
       
     </div>
 
@@ -1341,7 +1798,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/Computer/DataStruct/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%A5%E8%94%9A%E6%95%8F%EF%BC%89%E3%80%8B_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -1355,7 +1812,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/12/05/Computer/DataStruct/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+            <a href="/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%A5%E8%94%9A%E6%95%8F%EF%BC%89%E3%80%8B_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/" class="post-title-link" itemprop="url">《数据结构（严蔚敏）》_b站鲍松山</a>
         </h2>
 
         <div class="post-meta">
@@ -1372,7 +1829,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:40:50" itemprop="dateModified" datetime="2024-07-05T10:40:50+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:05:27" itemprop="dateModified" datetime="2024-07-16T11:05:27+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1380,11 +1837,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/DataStruct/" itemprop="url" rel="index"><span itemprop="name">DataStruct</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
                 </span>
             </span>
 
@@ -1416,7 +1869,7 @@
           <p>《数据结构（严蔚敏）》_b站鲍松山</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/12/05/Computer/DataStruct/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more" rel="contents">
+              <a class="btn" href="/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%B8%A5%E8%94%9A%E6%95%8F%EF%BC%89%E3%80%8B_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1514,7 +1967,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1555,7 +2008,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:25</span>
+    <span title="站点阅读时长">17:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

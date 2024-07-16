@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,7 +203,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/" class="post-title-link" itemprop="url">项目2_diy_tcpip</a>
+            <a href="/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE2_diy_tcpip/" class="post-title-link" itemprop="url">项目2_diy_tcpip</a>
         </h2>
 
         <div class="post-meta">
@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-12 17:01:04" itemprop="dateModified" datetime="2024-07-12T17:01:04+08:00">2024-07-12</time>
+                <time title="修改时间：2024-07-15 20:54:31" itemprop="dateModified" datetime="2024-07-15T20:54:31+08:00">2024-07-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +249,7 @@
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>22 分钟</span>
+              <span>23 分钟</span>
             </span>
 
         </div>
@@ -576,16 +576,15 @@
 <p>为了便于后续访问，需要保证包头的数据在一片连续的内存空间里。有两种添加包头的方式如下：</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121633164.png" alt="image-20240712163322897" style="zoom: 50%;" />
 
-<h3 id="2-2-测试"><a href="#2-2-测试" class="headerlink" title="2.2 测试"></a>2.2 测试</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pktbuf_test</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">pktbuf_t</span> *buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    pktbuf_free(buf);</span><br><span class="line"></span><br><span class="line">    buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        pkybuf_add_header(buf, <span class="number">33</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有两种移除包头的方式如下：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152042855.png" alt="image-20240715204230597" style="zoom:50%;" />
 
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121658896.png" alt="image-20240712165851854"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121659577.png" alt="image-20240712165911505"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121659478.png" alt="image-20240712165920430"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121659111.png" alt="image-20240712165932061"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121659904.png" alt="image-20240712165950857"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121700405.png" alt="image-20240712170003359"></p>
+<h3 id="2-2-测试"><a href="#2-2-测试" class="headerlink" title="2.2 测试"></a>2.2 测试</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pktbuf_test</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">pktbuf_t</span> *buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    pktbuf_free(buf);</span><br><span class="line"></span><br><span class="line">    buf = pktbuf_alloc(<span class="number">2000</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        pktbuf_add_header(buf, <span class="number">33</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">16</span>; i++) &#123;</span><br><span class="line">        pktbuf_remove_header(buf, <span class="number">33</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>当 16 次分配结束，最后的结果如下：</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407121700168.png" alt="image-20240712170041116"></p>
+<p>再经过 16 次移除操作后，结果如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407152054734.png" alt="image-20240715205416671"></p>
 
       
     </div>
@@ -605,7 +604,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE3_C++%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE3_C++%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -619,7 +618,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE3_C++%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">项目2_C++高性能服务器</a>
+            <a href="/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE3_C++%E9%AB%98%E6%80%A7%E8%83%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="post-title-link" itemprop="url">项目2_C++高性能服务器</a>
         </h2>
 
         <div class="post-meta">
@@ -707,7 +706,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE1_diy_x86os/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE1_diy_x86os/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -721,7 +720,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/07/03/%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE1_diy_x86os/" class="post-title-link" itemprop="url">项目1_diyx86os</a>
+            <a href="/2024/07/03/0%20%E9%9D%A2%E8%AF%95/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AE1_diy_x86os/" class="post-title-link" itemprop="url">项目1_diyx86os</a>
         </h2>
 
         <div class="post-meta">
@@ -4002,7 +4001,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/13/Computer/C++/%E5%AF%B9%E5%90%AB%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E8%BF%9B%E8%A1%8Csizeof/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/13/1%20C++/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E5%AF%B9%E5%90%AB%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E8%BF%9B%E8%A1%8Csizeof/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -4016,7 +4015,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/13/Computer/C++/%E5%AF%B9%E5%90%AB%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E8%BF%9B%E8%A1%8Csizeof/" class="post-title-link" itemprop="url">对含有虚函数的类进行sizeof</a>
+            <a href="/2024/06/13/1%20C++/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/%E5%AF%B9%E5%90%AB%E6%9C%89%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E7%B1%BB%E8%BF%9B%E8%A1%8Csizeof/" class="post-title-link" itemprop="url">对含有虚函数的类进行sizeof</a>
         </h2>
 
         <div class="post-meta">
@@ -4033,7 +4032,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:41:33" itemprop="dateModified" datetime="2024-07-05T10:41:33+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:12:47" itemprop="dateModified" datetime="2024-07-16T11:12:47+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -4045,7 +4044,7 @@ add $4, %esp：
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/Computer/%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%A4%9A%E6%80%81/" itemprop="url" rel="index"><span itemprop="name">继承与多态</span></a>
                 </span>
             </span>
 
@@ -4095,7 +4094,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/0%20%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -4109,7 +4108,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/12/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">操作系统</a>
+            <a href="/2024/06/12/0%20%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">操作系统</a>
         </h2>
 
         <div class="post-meta">
@@ -4126,7 +4125,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-12 10:23:38" itemprop="dateModified" datetime="2024-07-12T10:23:38+08:00">2024-07-12</time>
+                <time title="修改时间：2024-07-16 11:02:06" itemprop="dateModified" datetime="2024-07-16T11:02:06+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -4155,7 +4154,7 @@ add $4, %esp：
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:03</span>
+              <span>2:02</span>
             </span>
 
         </div>
@@ -4586,7 +4585,7 @@ add $4, %esp：
 <li><p>另外，操作系统还可以通过配置来限制每个进程能够使用的虚拟内存大小。</p>
 </li>
 </ol>
-<h3 id="【-】42、虚拟内存中分页算法是为了解决什么样的问题？"><a href="#【-】42、虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="【*】42、虚拟内存中分页算法是为了解决什么样的问题？"></a>【*】42、虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
+<h3 id="42、虚拟内存中分页算法是为了解决什么样的问题？"><a href="#42、虚拟内存中分页算法是为了解决什么样的问题？" class="headerlink" title="42、虚拟内存中分页算法是为了解决什么样的问题？"></a>42、虚拟内存中分页算法是为了解决什么样的问题？</h3><p>虚拟内存中的分页算法是为了解决<strong>连续长内存分配时物理内存不足</strong>的问题。它通过<strong>将内存分成固定大小的页面（page），并将页面映射到物理内存或者存储在磁盘上的页面文件</strong>中，来提供更大的地址空间。</p>
 <h3 id="43、虚拟内存的内存模型如何？"><a href="#43、虚拟内存的内存模型如何？" class="headerlink" title="43、虚拟内存的内存模型如何？"></a>43、虚拟内存的内存模型如何？</h3><p>其内存分布或内存模型实际上就是虚拟内存。主要分为以下几个部分，分别是：<code>.text</code>段，<code>.rodata</code>段，<code>.data</code>段，<code>.bss</code>段，堆，内存映射区，栈，内核空间。其中，各项主要内容如下：</p>
 <p>（1）<code>.text</code>段 ：主要存在程序编译后的机器指令；</p>
 <p>（2）<code>.rodata</code>段 ：主要存放程序中的各种只读变量；</p>
@@ -4619,7 +4618,7 @@ add $4, %esp：
 <li><p><code>栈</code>上的对象由编译器进行分配，当<strong>离开作用域范围时被编译器销毁</strong>。</p>
 </li>
 </ol>
-<h3 id="48、如何让对象只能存在于栈-堆中？"><a href="#48、如何让对象只能存在于栈-堆中？" class="headerlink" title="48、如何让对象只能存在于栈&#x2F;堆中？"></a>48、如何让对象只能存在于栈&#x2F;堆中？</h3><ol>
+<h3 id="48、如何-让对象只能存在于栈-堆中？"><a href="#48、如何-让对象只能存在于栈-堆中？" class="headerlink" title="48、如何 让对象只能存在于栈&#x2F;堆中？"></a>48、如何 让对象只能存在于栈&#x2F;堆中？</h3><ol>
 <li>如果<strong>将<code>operator new</code>设置为私有的</strong>，此时尝试在堆上分配内存失败，对象就会<strong>存在于栈中</strong>。</li>
 <li>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果<strong>将析构函数设置为私有的</strong>，在栈上分配内存失败，对象就会<strong>存在于堆中</strong>。</li>
 </ol>
@@ -4841,7 +4840,7 @@ add $4, %esp：
 <p>更进一步地，分页的方式使得我们在加载程序的时候，不再需要一次性都把程序加载到物理内存中。我们完全可以在进行虚拟内存和物理内存的页之间的映射之后，并不真的把页加载到物理内存里，而是<strong>只有在程序运行中，需要用到对应虚拟内存页里面的指令和数据时，再加载到物理内存里面去。</strong></p>
 <h3 id="74、页表是什么，页多大，为什么是-4KB？"><a href="#74、页表是什么，页多大，为什么是-4KB？" class="headerlink" title="74、页表是什么，页多大，为什么是 4KB？"></a>74、页表是什么，页多大，为什么是 4KB？</h3><p>页表是操作系统中用于实现虚拟内存管理的一种数据结构，它用于将虚拟地址映射到物理地址。这种机制允许计算机的操作系统为每个运行的程序提供一种看似连续的内存地址空间，即使物理内存是分散存储的。</p>
 <p>在多数现代操作系统中，标准的页面大小是 <code>4KB</code>（4096字节）。Linux 会以页面为单位对内存进行管理，每次执行内存分配时都至少分配一个页面。<strong>过小的页面大小会带来较大的页表项</strong>，增加寻址时 TLB的查找速度和额外开销；<strong>过大的页面大小会浪费内存空间，造成内部碎片</strong>，降低内存的利用率；上个世纪在设计内存页大小时充分考虑了上述的两个因素，最终选择了 <code>4KB</code> 的内存页作为操作系统最常见的页大小，这个大小也就沿用至今。</p>
-<h3 id="75、分页机制下，虚拟地址和物理地址是如何映射的？"><a href="#75、分页机制下，虚拟地址和物理地址是如何映射的？" class="headerlink" title="75、分页机制下，虚拟地址和物理地址是如何映射的？"></a>75、分页机制下，虚拟地址和物理地址是如何映射的？</h3><p>虚拟地址与物理地址之间通过<strong>页表</strong>来映射，页表是存储在内存里的，<strong>内存管理单元</strong> （MMU）完成<strong>将虚拟地址转换成物理地址</strong>的工作。当进程访问的虚拟地址在页表中查不到时，系统会产生一个<strong>缺页异常</strong>，<strong>进入系统内核空间分配物理内存、更新进程页表，最后再返回用户空间，恢复进程的运行</strong>。</p>
+<h3 id="【-】75、分页机制下，虚拟地址和物理地址是如何映射的？"><a href="#【-】75、分页机制下，虚拟地址和物理地址是如何映射的？" class="headerlink" title="【*】75、分页机制下，虚拟地址和物理地址是如何映射的？"></a>【*】75、分页机制下，虚拟地址和物理地址是如何映射的？</h3><p>虚拟地址与物理地址之间通过<strong>页表</strong>来映射，页表是存储在内存里的，<strong>内存管理单元</strong> （MMU）完成<strong>将虚拟地址转换成物理地址</strong>的工作。当进程访问的虚拟地址在页表中查不到时，系统会产生一个<strong>缺页异常</strong>，<strong>进入系统内核空间分配物理内存、更新进程页表，最后再返回用户空间，恢复进程的运行</strong>。</p>
 <p>对于一个内存地址转换，包含以下 3 个步骤：</p>
 <ul>
 <li>把虚拟内存地址<strong>切分</strong>成页号和偏移量；</li>
@@ -4852,7 +4851,7 @@ add $4, %esp：
 <p><strong>64 位虚拟地址格式</strong>：全局页目录项（9位）+ 上层页目录项（9位）+ 中间页目录项（9位）+ 页表项（9位）+ 页内偏移（12位）。共 48 位。</p>
 <p><strong>32 位虚拟地址格式</strong>：页目录项（10位）+ 页表项（10位） + 页内偏移（12位）。共 32 位。</p>
 </blockquote>
-<h3 id="76、为什么会产生多级页表？"><a href="#76、为什么会产生多级页表？" class="headerlink" title="76、为什么会产生多级页表？"></a>76、为什么会产生多级页表？</h3><p>对于单页表的实现方式，在 32 位和页大小 <code>4KB</code> 的环境下，一个进程的页表需要装下 <strong>100 多万个</strong>「页表项」，并且每个页表项是占用 <strong>4 字节</strong>大小的，于是<strong>相当于每个页表需占用 4MB 大小的空间</strong>。因此把这个 100 多万个「页表项」的单级页表再分页，将页表（一级页表）分为 <code>1024</code> 个页表（二级页表），每个表（二级页表）中包含 <code>1024</code> 个「页表项」，形成<strong>二级分页</strong>。</p>
+<h3 id="【-】76、为什么会产生多级页表？"><a href="#【-】76、为什么会产生多级页表？" class="headerlink" title="【*】76、为什么会产生多级页表？"></a>【*】76、为什么会产生多级页表？</h3><p>对于单页表的实现方式，在 32 位和页大小 <code>4KB</code> 的环境下，一个进程的页表需要装下 <strong>100 多万个</strong>「页表项」，并且每个页表项是占用 <strong>4 字节</strong>大小的，于是<strong>相当于每个页表需占用 4MB 大小的空间</strong>。因此把这个 100 多万个「页表项」的单级页表再分页，将页表（一级页表）分为 <code>1024</code> 个页表（二级页表），每个表（二级页表）中包含 <code>1024</code> 个「页表项」，形成<strong>二级分页</strong>。</p>
 <p>多级页表虽然解决了空间上的问题，但是虚拟地址到物理地址的转换就多了几道转换的工序，这显然就降低了地址转换的速度，也就是带来了时间上的开销。程序是有局部性的，即在一段时间内，整个程序的执行仅限于程序中的某一部分。相应地，执行所访问的存储空间也局限于某个内存区域。利用这一特性，可以<strong>把最常访问的几个页表项存储到访问速度更快的硬件</strong>，于是在 CPU 芯片中，加入了一个<strong>专门存放程序最常访问的页表项的 Cache，这个 Cache 就是 TLB</strong>（Translation Lookaside Buffer） ，通常称为页表缓存、转址旁路缓存、快表等。</p>
 <h3 id="77、缺页中断什么时候发生？"><a href="#77、缺页中断什么时候发生？" class="headerlink" title="77、缺页中断什么时候发生？"></a>77、缺页中断什么时候发生？</h3><ol>
 <li>当<strong>程序要访问的页面不在物理内存中</strong>时，会触发缺页中断。这通常发生在虚拟内存中，即当前只有部分的页面写入了物理内存；</li>
@@ -4878,7 +4877,7 @@ add $4, %esp：
 <li><p>最不常用置换算法（<em>LFU</em>）：<strong>当发生缺页中断时，选择「访问次数」最少的那个页面，并将其淘汰</strong>。</p>
 </li>
 </ol>
-<h3 id="【-】79、写时拷贝在操作系统中有哪些应用？"><a href="#【-】79、写时拷贝在操作系统中有哪些应用？" class="headerlink" title="【*】79、写时拷贝在操作系统中有哪些应用？"></a>【*】79、写时拷贝在操作系统中有哪些应用？</h3><ol>
+<h3 id="79、写时拷贝在操作系统中有哪些应用？"><a href="#79、写时拷贝在操作系统中有哪些应用？" class="headerlink" title="79、写时拷贝在操作系统中有哪些应用？"></a>79、写时拷贝在操作系统中有哪些应用？</h3><ol>
 <li><strong>内存管理</strong>：<ul>
 <li><strong>分页系统</strong>：在许多操作系统中，写时拷贝技术常用于内存管理。当进程执行 fork 操作创建子进程时，操作系统并不立即为子进程复制父进程的整个地址空间。相反，它让<strong>父子进程共享同一物理内存页面</strong>，<strong>只有当其中一个进程尝试修改这些共享页面时，操作系统才会复制这些页面（COW），从而实现了资源的有效利用和快速的进程创建。</strong></li>
 <li><strong>虚拟内存系统</strong>：在虚拟内存系统中，写时拷贝技术可以减少不必要的数据复制，提高内存使用效率，<strong>只有在需要写入时才进行物理内存的分配和数据复制</strong>。</li>
@@ -5002,7 +5001,7 @@ add $4, %esp：
 <li>接着操作系统将虚拟地址转换为对应的物理地址，并在内存中进行执行；</li>
 <li>执行完毕后，切换到下一行代码进行类似的操作，直到程序运行完毕。</li>
 </ol>
-<h3 id="90、执行一个系统调用时，OS-发生的过程，越详细越好"><a href="#90、执行一个系统调用时，OS-发生的过程，越详细越好" class="headerlink" title="90、执行一个系统调用时，OS 发生的过程，越详细越好"></a>90、执行一个系统调用时，OS 发生的过程，越详细越好</h3><ol>
+<h3 id="【-】90、执行一个系统调用时，OS-发生的过程，越详细越好"><a href="#【-】90、执行一个系统调用时，OS-发生的过程，越详细越好" class="headerlink" title="【*】90、执行一个系统调用时，OS 发生的过程，越详细越好"></a>【*】90、执行一个系统调用时，OS 发生的过程，越详细越好</h3><ol>
 <li><p>执行用户程序(如: fork)</p>
 </li>
 <li><p>根据 glibc 中的函数实现，取得系统调用号并执行<code>int $0x80</code>产生中断。</p>
@@ -5016,7 +5015,7 @@ add $4, %esp：
 <li><p>执行 RESTORE_ALL 并返回用户模式</p>
 </li>
 </ol>
-<h3 id="91、动态链接和静态链接的区别？"><a href="#91、动态链接和静态链接的区别？" class="headerlink" title="91、动态链接和静态链接的区别？"></a>91、动态链接和静态链接的区别？</h3><ol>
+<h3 id="【-】91、动态链接和静态链接的区别？"><a href="#【-】91、动态链接和静态链接的区别？" class="headerlink" title="【*】91、动态链接和静态链接的区别？"></a>【*】91、动态链接和静态链接的区别？</h3><ol>
 <li><p>静态链接</p>
 <ol>
 <li><p>静态链接时指<strong>所有需要的库代码在编译时就被嵌入到可执行文件中，最终生成的可执行文件中包含了所有的库代码</strong>；</p>
@@ -5029,7 +5028,7 @@ add $4, %esp：
 </li>
 <li><p>动态链接</p>
 <ol>
-<li>动态链接是指<strong>库代码在运行时被加载，可执行文件中只包含对动态库的引用，库半身是单独的文件</strong>；</li>
+<li>动态链接是指<strong>库代码在运行时被加载，可执行文件中只包含对动态库的引用，库本身是单独的文件</strong>；</li>
 <li>优点是<strong>文件大小小、易于更新，且多个程序可以共享同一个动态库</strong>；</li>
 <li>缺点是<strong>依赖性强，启动时间增长</strong>，可执行文件依赖于外部库，如果这些库在系统中缺失或版本不兼容，可能会造成问题。同时程序启动时需要加载库，可能会增加启动时间。</li>
 </ol>
@@ -5068,13 +5067,13 @@ add $4, %esp：
 <li>文件描述符 1（标准输出）：指向标准输出设备，通常是终端（屏幕）。</li>
 <li>文件描述符 2（标准错误）：指向标准错误设备，通常也是终端（屏幕）。</li>
 </ol>
-<h3 id="【-】94、Linux-系统中的中断为什么分为上下两个部分？"><a href="#【-】94、Linux-系统中的中断为什么分为上下两个部分？" class="headerlink" title="【*】94、Linux 系统中的中断为什么分为上下两个部分？"></a>【*】94、Linux 系统中的中断为什么分为上下两个部分？</h3><p>在 Linux 系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
+<h3 id="94、Linux-系统中的中断为什么分为上下两个部分？"><a href="#94、Linux-系统中的中断为什么分为上下两个部分？" class="headerlink" title="94、Linux 系统中的中断为什么分为上下两个部分？"></a>94、Linux 系统中的中断为什么分为上下两个部分？</h3><p>在 Linux 系统中，中断处理通常被分为上半部（Top Half）和下半部（Bottom Half）：</p>
 <ol>
 <li><strong>上半部</strong>：上半部是<strong>中断处理的第一阶段</strong>，它在 CPU 接收到中断信号后立即执行。<strong>在这一阶段中，中断和调度器通常被禁用，以避免在处理中断时发生新的中断，从而保证处理的原子性</strong>。上半部的代码通常包含<strong>处理中断的关键代码</strong>，这部分代码的执行时间应尽可能短，以快速释放CPU资源，处理更多的中断或其他任务。</li>
 <li><strong>下半部</strong>：下半部处理的是<strong>中断处理的后续部分</strong>，通常在上半部完成后，通过<strong>添加工作项到工作队列中</strong>来延后执行。<strong>在下半部执行时，中断通常是被允许的</strong>，这样可以在处理较长时间的任务时不阻塞其他中断的处理。下半部负责完成<strong>数据处理、复制等</strong>操作，这些操作不需要立即完成，可以稍后处理。</li>
 </ol>
 <p>这种分割方法的主要优点是能够快速响应中断，同时又不会因为长时间的数据处理而阻塞 CPU，影响系统的整体性能。通过这种方式，Linux 系统能够在保证响应速度的同时，也能有效地处理大量的数据。</p>
-<h3 id="95、Linux-用户态如何进入内核态？"><a href="#95、Linux-用户态如何进入内核态？" class="headerlink" title="95、Linux 用户态如何进入内核态？"></a>95、Linux 用户态如何进入内核态？</h3><ol>
+<h3 id="【-】95、Linux-用户态如何进入内核态？"><a href="#【-】95、Linux-用户态如何进入内核态？" class="headerlink" title="【*】95、Linux 用户态如何进入内核态？"></a>【*】95、Linux 用户态如何进入内核态？</h3><ol>
 <li><strong>系统调用（System Call）</strong>：<strong>系统调用</strong>是最常见的从用户态切换到内核态的方式。程序在需要执行诸如文件操作、网络通信、进程控制等操作时，会通过系统调用请求操作系统提供服务。Linux 提供了大量的系统调用，例如<code>read()</code>, <code>write()</code>, <code>open()</code>, <code>fork()</code>等。系统调用通过软件中断（通常是中断指令<code>int 0x80</code>或<code>syscall</code>指令）来实现，此时处理器从用户态切换到内核态，并跳转到预定义的内核入口点执行相应的内核代码。</li>
 <li><strong>异常（Exception）</strong>：当程序执行出现错误时（如除零、访问非法内存等），会触发异常，处理器切换到内核态，调动<strong>异常处理程序</strong>来响应和处理这些错误事件。</li>
 <li><strong>中断（Interrupt）</strong>：当外部设备（如键盘、鼠标、网络接口等）需要处理时，它们会向处理器发送中断信号。此时正在执行的用户程序被挂起，处理器切换到内核态，调动<strong>中断处理函数</strong>来响应和处理这些外部事件。</li>
@@ -5109,7 +5108,7 @@ add $4, %esp：
 <li><code>F</code> 表示显示格式，例如 <code>x</code>（十六进制）、<code>d</code>（十进制）、<code>u</code>（无符号十进制）、<code>t</code>（二进制）、<code>a</code>（地址）、<code>i</code>（机器指令）、<code>c</code>（字符）等。</li>
 <li><code>U</code> 表示单位大小，例如 <code>b</code>（字节）、<code>h</code>（半字，2字节）、<code>w</code>（字，4字节）、<code>g</code>（双字，8字节）。</li>
 </ul>
-<h2 id="处理器相关"><a href="#处理器相关" class="headerlink" title="处理器相关"></a>处理器相关</h2><h3 id="99、浮点数在计算机中怎么存储？"><a href="#99、浮点数在计算机中怎么存储？" class="headerlink" title="99、浮点数在计算机中怎么存储？"></a>99、浮点数在计算机中怎么存储？</h3><p>浮点数在计算机中的存储通常采用IEEE 754标准，这是一种广泛使用的浮点数表示方法，具体如下：</p>
+<h2 id="五、处理器相关"><a href="#五、处理器相关" class="headerlink" title="五、处理器相关"></a>五、处理器相关</h2><h3 id="【-】99、浮点数在计算机中怎么存储？"><a href="#【-】99、浮点数在计算机中怎么存储？" class="headerlink" title="【*】99、浮点数在计算机中怎么存储？"></a>【*】99、浮点数在计算机中怎么存储？</h3><p>浮点数在计算机中的存储通常采用IEEE 754标准，这是一种广泛使用的浮点数表示方法，具体如下：</p>
 <ol>
 <li><strong>符号位（Sign）</strong>：用一个位来表示数值的正负，0表示正数，1表示负数。</li>
 <li><strong>指数位（Exponent）</strong>：用来表示数值的指数部分，以二进制补码表示。指数部分确定了浮点数的大小范围。</li>
@@ -5120,13 +5119,6 @@ add $4, %esp：
 <li><strong>单精度浮点数（float）</strong>：由32位组成，其中1位符号位，8位指数位，23位尾数位。</li>
 <li><strong>双精度浮点数（double）</strong>：由64位组成，其中1位符号位，11位指数位，52位尾数位。</li>
 </ul>
-<p>浮点数的存储过程如下：</p>
-<ul>
-<li><strong>规格化（Normalization）</strong>：尾数部分总是以某个基数（通常为2）的形式表示，例如1.xxxxxx形式。尾数的最高位总是1，且不存储在浮点数中，称为隐含位。</li>
-<li><strong>指数偏移（Exponent Biasing）</strong>：指数部分采用偏移值来表示，这个偏移值是为了能够表示负数指数和正数指数，避免使用纯粹的补码表示。</li>
-<li><strong>特殊值和溢出（Special Values and Overflow）</strong>：IEEE 754定义了一些特殊的浮点数值，如正无穷大、负无穷大、NaN（Not a Number）等，以及处理溢出情况。</li>
-</ul>
-<p>浮点数的存储和计算是通过这些位字段来实现的，具体的运算和精度受到硬件支持和IEEE 754标准的限制。</p>
 <h3 id="100、怎么判断两个浮点数是否相等？"><a href="#100、怎么判断两个浮点数是否相等？" class="headerlink" title="100、怎么判断两个浮点数是否相等？"></a>100、怎么判断两个浮点数是否相等？</h3><p>相减，并与预先设定的精度进行比较。不能采用 <code>==</code> 来判断。</p>
 <h3 id="101、什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？"><a href="#101、什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？" class="headerlink" title="101、什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？"></a>101、什么是大小端？如何区分？有几种方法？网络通信一般是什么字节序？</h3><ol>
 <li><p>大端字节序是指高位字节存储在内存的低地址端，低位字节存储在内存的高地址端；小端字节序则与之相反。</p>
@@ -5135,21 +5127,18 @@ add $4, %esp：
 <p>（1）通过检查整数的首个字节来确定字节序</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> x = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="type">char</span> *c = (<span class="type">char</span>*)&amp;x;</span><br><span class="line">    <span class="keyword">if</span> (*c == <span class="number">0x78</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Little Endian\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Big Endian\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>（2）<code>htons()</code>和<code>ntohs()</code></p>
-<ul>
-<li><code>htons(host_port)</code>：将端口号从主机字节序转换为网络字节序</li>
-<li><code>ntohs(net_port)</code>：将端口号从网络字节序转换回主机字节序</li>
-</ul>
+<p>（2）C++20 中提供了一个标准库函数进行检查</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bit&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">check_endianness</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (std::endian::native == std::endian::big) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Big-endian&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (std::endian::native == std::endian::little) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Little-endian&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Unknown endianness&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">check_endianness</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>网络通信一般是大端字节序，即无论发送和接收的系统是大端还是小端，数据在通过网络传输时都必须转换为网络字节序。</p>
 </li>
 </ol>
-<h3 id="102、什么是-qps-和-tps-，如何计算？"><a href="#102、什么是-qps-和-tps-，如何计算？" class="headerlink" title="102、什么是 qps 和 tps ，如何计算？"></a>102、什么是 qps 和 tps ，如何计算？</h3><p>（1）<strong>QPS（Queries Per Second）</strong>：每秒查询率，是衡量每秒能处理多少个查询请求的指标。它通常用于评估搜索引擎、数据库服务器和 Web 服务器的性能。QPS 可以通过将总查询数除以时间（秒）来计算。</p>
-<p>（2）<strong>TPS（Transactions Per Second）</strong>：每秒事务数，是衡量系统每秒能处理多少个事务的指标。一个事务是指一个完整的业务操作，可能包含多个查询和更新。TPS 是数据库操作和商业应用（如在线支付平台）的常用性能指标。TPS 的计算方法与 QPS 类似，将总事务数除以时间（秒）。</p>
-<h3 id="103、CPU-利用率拉满的时候在线程池中增加线程是否能提高-qps？"><a href="#103、CPU-利用率拉满的时候在线程池中增加线程是否能提高-qps？" class="headerlink" title="103、CPU 利用率拉满的时候在线程池中增加线程是否能提高 qps？"></a>103、CPU 利用率拉满的时候在线程池中增加线程是否能提高 qps？</h3><p>（1）对于 CPU 密集型应用，CPU 是性能瓶颈。如果 CPU 利用率已经达到 100%，这意味着 CPU 资源已经被完全使用。在这种情况下，增加更多的线程实际上会导致线程之间的竞争更加激烈，因为更多的线程需要共享有限的 CPU 资源。这可能导致上下文切换增加，反而降低了程序的效率和 QPS。</p>
-<p>（2）对于 IO 密集型应用，主要的瓶颈在于 IO 操作，如磁盘读写或网络通信等。即使 CPU 利用率很高，增加线程数仍然可能提高 QPS，因为当一部分线程在等待 IO 操作完成时，其他线程可以继续执行，从而提高整体的吞吐量。在这种情况下，增加线程数可以有效利用 CPU 在等待 IO 时的空闲周期，提高 QPS。</p>
+<h3 id="102、什么是-qps-和-tps-，如何计算？"><a href="#102、什么是-qps-和-tps-，如何计算？" class="headerlink" title="102、什么是 qps 和 tps ，如何计算？"></a>102、什么是 qps 和 tps ，如何计算？</h3><p>（1）<strong>QPS（Queries Per Second）</strong>：每秒查询率，是衡量每秒能处理多少个查询请求的指标。它通常用于评估搜索引擎、数据库服务器和 Web 服务器的性能。QPS 可以通过<strong>将总查询数除以时间（秒）</strong>来计算。</p>
+<p>（2）<strong>TPS（Transactions Per Second）</strong>：每秒事务数，是衡量系统每秒能处理多少个事务的指标。<strong>一个事务是指一个完整的业务操作，可能包含多个查询和更新</strong>。TPS 是数据库操作和商业应用（如在线支付平台）的常用性能指标。TPS 的计算方法与 QPS 类似，<strong>将总事务数除以时间（秒）</strong>。</p>
+<h3 id="103、CPU-利用率拉满的时候在线程池中增加线程是否能提高-qps？"><a href="#103、CPU-利用率拉满的时候在线程池中增加线程是否能提高-qps？" class="headerlink" title="103、CPU 利用率拉满的时候在线程池中增加线程是否能提高 qps？"></a>103、CPU 利用率拉满的时候在线程池中增加线程是否能提高 qps？</h3><p>（1）<strong>对于 CPU 密集型应用</strong>，CPU 是性能瓶颈。如果 CPU 利用率已经达到 100%，这意味着 CPU 资源已经被完全使用。在这种情况下，增加更多的线程实际上会导致线程之间的竞争更加激烈，因为更多的线程需要共享有限的 CPU 资源。这可能导致上下文切换增加，反而降低了程序的效率和 QPS。</p>
+<p>（2）<strong>对于 IO 密集型应用</strong>，主要的瓶颈在于 IO 操作，<strong>如磁盘读写或网络通信等</strong>。即使 CPU 利用率很高，增加线程数仍然可能提高 QPS，因为当一部分线程在等待 IO 操作完成时，其他线程可以继续执行，从而提高整体的吞吐量。在这种情况下，增加线程数可以有效利用 CPU 在等待 IO 时的空闲周期，提高 QPS。</p>
 <p>（3）混合型应用同时包含 CPU 密集型和 IO 密集型的操作。在这种情况下，是否增加线程以提高 QPS 取决于应用中 CPU 密集型和 IO 密集型操作的比例。如果 IO 操作占主导，增加线程可能有助于提高 QPS；但如果 CPU 密集型操作占主导，增加线程可能不会带来预期的效果，甚至可能因为线程竞争导致性能下降。</p>
-<h3 id="104、什么是-CPU-密集型应用和-I-O-密集型应用？"><a href="#104、什么是-CPU-密集型应用和-I-O-密集型应用？" class="headerlink" title="104、什么是 CPU 密集型应用和 I&#x2F;O 密集型应用？"></a>104、什么是 CPU 密集型应用和 I&#x2F;O 密集型应用？</h3><p>（1）CPU 密集型应用是指那些需要进行大量计算，消耗大量 CPU 资源的应用。这类应用的特点是 CPU 使用率很高，因为它们主要进行数学计算、逻辑判断或者数据处理等操作，这些操作需要大量的 CPU 周期来完成。CPU 密集型应用的性能很大程度上依赖于 CPU 的处理能力。</p>
+<h3 id="104、什么是-CPU-密集型应用和-I-O-密集型应用？"><a href="#104、什么是-CPU-密集型应用和-I-O-密集型应用？" class="headerlink" title="104、什么是 CPU 密集型应用和 I&#x2F;O 密集型应用？"></a>104、什么是 CPU 密集型应用和 I&#x2F;O 密集型应用？</h3><p>（1）CPU 密集型应用是指那些<strong>需要进行大量计算，消耗大量 CPU 资源的应用</strong>。这类应用的特点是 CPU 使用率很高，因为它们主要进行数学计算、逻辑判断或者数据处理等操作，这些操作需要大量的 CPU 周期来完成。CPU 密集型应用的性能很大程度上依赖于 CPU 的处理能力。</p>
 <p><strong>示例</strong>：</p>
 <ul>
 <li>科学计算软件</li>
@@ -5158,7 +5147,7 @@ add $4, %esp：
 <li>游戏服务器的游戏逻辑处理</li>
 <li>加密和解密操作</li>
 </ul>
-<p>（2）IO 密集型应用是指那些主要时间花费在输入输出操作上，而不是 CPU 计算上的应用。这类应用的特点是频繁地进行磁盘操作或网络通信，CPU 使用率不高，但是需要等待 IO 操作的完成，因此对 IO 性能的依赖很高。</p>
+<p>（2）IO 密集型应用是指那些<strong>主要时间花费在输入输出操作上</strong>，而不是 CPU 计算上的应用。这类应用的特点是频繁地进行磁盘操作或网络通信，CPU 使用率不高，但是需要等待 IO 操作的完成，因此对 IO 性能的依赖很高。</p>
 <p><strong>示例</strong>：</p>
 <ul>
 <li>Web 服务器</li>
@@ -5380,7 +5369,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/Computer/C++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/1%20C++/%E5%86%85%E5%AD%98/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -5394,7 +5383,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/12/Computer/C++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">智能指针</a>
+            <a href="/2024/06/12/1%20C++/%E5%86%85%E5%AD%98/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/" class="post-title-link" itemprop="url">智能指针</a>
         </h2>
 
         <div class="post-meta">
@@ -5411,7 +5400,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:41:47" itemprop="dateModified" datetime="2024-07-05T10:41:47+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:17:01" itemprop="dateModified" datetime="2024-07-16T11:17:01+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -5419,11 +5408,11 @@ add $4, %esp：
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/C/%E5%86%85%E5%AD%98/" itemprop="url" rel="index"><span itemprop="name">内存</span></a>
                 </span>
             </span>
 
@@ -5452,15 +5441,111 @@ add $4, %esp：
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/12/Computer/C++/%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h1 id="一、shared-ptr-weak-ptr"><a href="#一、shared-ptr-weak-ptr" class="headerlink" title="一、shared_ptr &amp; weak_ptr"></a>一、shared_ptr &amp; weak_ptr</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ithiker/article/details/51532484">C++ 智能指针（shared_ptr&#x2F;weak_ptr）源码分析</a></p>
+<h2 id="1、类关系图"><a href="#1、类关系图" class="headerlink" title="1、类关系图"></a>1、类关系图</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121430079.png" alt="img"></p>
+<p>shared_ptr内部包含：</p>
+<ul>
+<li>1）指向被管理对象(managed object)T的指针</li>
+<li>2）__shared_count对象，其内部包含：<ul>
+<li>a. 指向管理对象(manager object)的基类指针。</li>
+</ul>
+</li>
+</ul>
+<p>管理对象(manager object)内部包含：</p>
+<ul>
+<li>1）具有原子属性(_Atomic_word)的use_count&#x2F;weak_count</li>
+<li>2）指向被管理对象(managed object)T的指针</li>
+<li>3）用来销毁被管理对象的deleter</li>
+</ul>
+<p>被管理对象和管理对象的划分如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121436387.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121436029.png" alt="img"></p>
+<p>可以看出，shared_ptr与weak_ptr的差异主要是由__shared_ptr与__weak_ptr体现出来的，而__shared_ptr与__weak_ptr的差异则主要是由__shared_count与__weak_count体现出来。</p>
+<h2 id="2、详细分析"><a href="#2、详细分析" class="headerlink" title="2、详细分析"></a>2、详细分析</h2><h3 id="（1）shared-ptr的构造函数"><a href="#（1）shared-ptr的构造函数" class="headerlink" title="（1）shared_ptr的构造函数"></a>（1）shared_ptr的构造函数</h3><p>在创建一个<code>shared_ptr</code>的时候需要通过被管理对象的地址来初始化<code>shared_ptr</code>, <code>shared_ptr</code>在内部会构建一个<code>__shared_count</code>对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp1&gt; <span class="keyword">explicit</span> __shared_ptr(_Tp1* __p)</span><br><span class="line">: _M_ptr(__p), _M_refcount(__p) &#123;</span><br><span class="line">    <span class="comment">// 静态断言，确保 _Tp1* 可以转换为 _Tp*，用于类型安全检查</span></span><br><span class="line">    __glibcxx_function_requires(_ConvertibleConcept&lt;_Tp1*, _Tp*&gt;)</span><br><span class="line">    <span class="comment">// 确保 _Tp1 类型是完整的</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">int</span> _IsComplete[<span class="built_in">sizeof</span>(_Tp1)];</span><br><span class="line">    <span class="comment">// 启用 shared_from_this 的辅助功能，允许被管理对象在不知道其自身被管理的情况下创建其他 shared_ptr 实例</span></span><br><span class="line">    __enable_shared_from_this_helper(_M_refcount, __p, __p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>explicit __shared_ptr(_Tp1* __p)</code>：显式构造函数，接受一个 <code>_Tp1*</code> 类型的指针 <code>__p</code>，该指针通常是通过 <code>new</code> 操作符分配的。</li>
+<li><code>: _M_ptr(__p), _M_refcount(__p)</code>：初始化列表，负责初始化 <code>__shared_ptr</code> 的成员变量。<ul>
+<li><code>_M_ptr</code> 是一个<strong>指向被管理对象的指针</strong>，初始化为 <code>__p</code>。</li>
+<li><code>_M_refcount</code> 是一个<strong>引用计数控制块</strong>，通常包含引用计数和自定义删除器等信息，也被初始化为 <code>__p</code>。</li>
+</ul>
+</li>
+</ul>
+<p>由<code>__shared_count</code>对象的构造函数可知，创建<code>shared_ptr</code>的时候也动态的创建了一个管理对象<code>_Sp_counted_base_impl</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Ptr&gt;</span><br><span class="line">__shared_count(_Ptr __p) : _M_pi(<span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">    __try</span><br><span class="line">   &#123;</span><br><span class="line">	  <span class="keyword">typedef</span> <span class="keyword">typename</span> std::tr1::remove_pointer&lt;_Ptr&gt;::type _Tp;</span><br><span class="line">	  _M_pi = <span class="keyword">new</span> _Sp_counted_base_impl&lt;_Ptr, _Sp_deleter&lt;_Tp&gt;, _Lp&gt;(__p, _Sp_deleter&lt;_Tp&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">    __catch(...)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> __p;</span><br><span class="line">	__throw_exception_again;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>shared_ptr</code>内部包含一个指向被管理对象的指针<code>_M_ptr</code>， <code>_Sp_counted_base_impl</code>内部也含有一个指向被管理对象的指针<code>_M_ptr</code>， 它们是不是重复多余了呢？</p>
+</blockquote>
+<p>实际上不多余，它们有各自的功能。首先给出结论：</p>
+<blockquote>
+<p><code>__shared_ptr</code>直接包含的裸指针是为了实现一般指针的<code>-&gt;</code>和<code>*</code>等操作；通过<code>__shared_count</code>间接包含的指针是为了管理对象的生命周期，回收相关资源。</p>
+<p>换句话说，<code>__shared_count</code>内部的<code>use_count</code>主要用来标记被管理对象的生命周期，<code>weak_count</code>主要用来标记管理对象的生命周期。</p>
+<p>当一个<code>shared_ptr</code>超出作用域被销毁时，它会调用其<code>_share_count</code>的<code>_M_release()</code>对<code>use_count</code>和<code>weak_count</code>进行自减并判断是否需要释放管理对象和被管理对象，这是<code>RAII</code>原理的核心体现。</p>
+</blockquote>
+<p>这首先要从<code>shared_ptr</code>的拷贝构造或者赋值构造说起。当一个<code>shared_ptr</code>对象<code>sp2</code>是由<code>sp1</code>拷贝构造或者赋值构造得来的时候，实际上<strong>构造完成后<code>sp1</code>内部的<code>__shared_count</code>对象包含的指向管理对象的指针与<code>sp2</code>内部的<code>__shared_count</code>对象包含的指向管理对象的指针是相等的</strong>，也就是说当多个<code>shared_ptr</code>对象来管理同一个对象时，它们共同使用同一个动态分配的管理对象。</p>
+<p>这可以从下面的<code>__share_ptr</code>的构造函数和<code>__shared_count</code>的构造函数清楚地看出。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp1&gt;</span><br><span class="line"> __shared_ptr(<span class="type">const</span> __shared_ptr&lt;_Tp1, _Lp&gt;&amp; __r)</span><br><span class="line"> : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount) <span class="comment">// never throws</span></span><br><span class="line">&#123; __glibcxx_function_requires(_ConvertibleConcept&lt;_Tp1*, _Tp*&gt;) &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">__shared_count&amp;</span><br><span class="line">    <span class="keyword">operator</span>=(<span class="type">const</span> __shared_count&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != _M_pi)  <span class="comment">// 避免自我赋值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">            __tmp-&gt;_M_add_ref_copy();  <span class="comment">// 增加目标控制块的引用计数</span></span><br><span class="line">        <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)  </span><br><span class="line">            _M_pi-&gt;_M_release();  <span class="comment">// 减少当前控制块的引用计数</span></span><br><span class="line">        _M_pi = __tmp;   <span class="comment">// 更新当前实例的控制块指针 _M_pi，使其指向目标控制块</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>针对<code>if (_M_pi != 0)</code>，考虑以下两种情况：</p>
+<ul>
+<li><pre><code class="c++">std::shared_ptr&lt;int&gt; sp1(new int(10));
+std::shared_ptr&lt;int&gt; sp2;
+
+// sp2 此时未初始化，_M_pi == 0
+sp2 = sp1;  // 调用赋值运算符
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">+ ```c++</span><br><span class="line">  std::shared_ptr&lt;int&gt; sp1(new int(10));  // sp1指向new int(10)，其引用计数为1</span><br><span class="line">  std::shared_ptr&lt;int&gt; sp2(new int(11));  // sp2指向new int(11)，其引用计数为1</span><br><span class="line">  </span><br><span class="line">  // sp2已初始化，_M_pi != 0</span><br><span class="line">  sp2 = sp1;  // 调用赋值运算符，注意此处sp2指向的new int(11)引用计数减1，因此sp2和其指向的对象均被析构</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>针对<code>_M_add_ref_copy()</code>和<code>_M_release()</code>做进一步分析：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//************_Sp_counted_base*****************//</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line">_M_add_ref_copy()</span><br><span class="line">&#123; __gnu_cxx::__atomic_add_dispatch(&amp;_M_use_count, <span class="number">1</span>); &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//************_Sp_counted_base*****************//</span></span><br><span class="line"><span class="type">void</span> _M_release() <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Be race-detector-friendly.  For more info see bits/c++config.</span></span><br><span class="line">    <span class="comment">// 用于告知数据竞赛检测工具（如 ThreadSanitizer），在这行代码之前发生了内存同步事件</span></span><br><span class="line">    <span class="comment">// 确保线程间正确通信</span></span><br><span class="line">    _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&amp;_M_use_count);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 减少引用计数，并检查是否是最后一个引用</span></span><br><span class="line">    <span class="keyword">if</span> (__gnu_cxx::__exchange_and_add_dispatch(&amp;_M_use_count, <span class="number">-1</span>) == <span class="number">1</span>)  <span class="comment">// 减少引用计数 _M_use_count，并返回减少前的值</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 另一个内存同步事件，通知数据竞赛检测工具此时的引用计数减少操作已经完成</span></span><br><span class="line">        _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&amp;_M_use_count);</span><br><span class="line">      </span><br><span class="line">        _M_dispose();  <span class="comment">// 释放对象资源</span></span><br><span class="line">        <span class="comment">// There must be a memory barrier between dispose() and destroy()</span></span><br><span class="line">        <span class="comment">// to ensure that the effects of dispose() are observed in the</span></span><br><span class="line">        <span class="comment">// thread that runs destroy().</span></span><br><span class="line">        <span class="comment">// See http://gcc.gnu.org/ml/libstdc++/2005-11/msg00136.html</span></span><br><span class="line">        <span class="comment">// 确保在 _M_dispose() 和 _M_destroy() 之间有一个内存屏障，</span></span><br><span class="line">        <span class="comment">// 以确保所有 _M_dispose() 的效果对调用 _M_destroy() 的线程可见</span></span><br><span class="line">        <span class="keyword">if</span> (_Mutex_base&lt;_Lp&gt;::_S_need_barriers)</span><br><span class="line">        &#123;</span><br><span class="line">            __atomic_thread_fence (__ATOMIC_ACQ_REL);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Be race-detector-friendly.  For more info see bits/c++config.</span></span><br><span class="line">        <span class="comment">// 通知数据竞赛检测工具弱引用计数的操作即将开始</span></span><br><span class="line">        _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&amp;_M_weak_count);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 减少弱引用计数，并检查是否是最后一个弱引用</span></span><br><span class="line">        <span class="keyword">if</span> (__gnu_cxx::__exchange_and_add_dispatch(&amp;_M_weak_count, <span class="number">-1</span>) == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 另一个内存同步事件，通知数据竞赛检测工具此时的弱引用计数减少操作已经完成</span></span><br><span class="line">            _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&amp;_M_weak_count);</span><br><span class="line">                        </span><br><span class="line">            _M_destroy();  <span class="comment">// 释放控制块</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//************_Sp_counted_base*****************//</span></span><br><span class="line"><span class="comment">// Called when _M_use_count drops to zero, to release the resources</span></span><br><span class="line"><span class="comment">// managed by *this.</span></span><br><span class="line"><span class="keyword">virtual</span> <span class="type">void</span></span><br><span class="line">_M_dispose() = <span class="number">0</span>; <span class="comment">// nothrow</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// Called when _M_weak_count drops to zero.</span></span><br><span class="line"><span class="keyword">virtual</span> <span class="type">void</span></span><br><span class="line">_M_destroy() <span class="comment">// nothrow</span></span><br><span class="line">&#123; <span class="keyword">delete</span> <span class="keyword">this</span>; &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//************_Sp_counted_base_impl*************//</span></span><br><span class="line"><span class="keyword">virtual</span> <span class="type">void</span></span><br><span class="line">_M_dispose() <span class="comment">// nothrow</span></span><br><span class="line">&#123; _M_del(_M_ptr); &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）weak-ptr对应的-weak-count的拷贝构造函数"><a href="#（2）weak-ptr对应的-weak-count的拷贝构造函数" class="headerlink" title="（2）weak_ptr对应的__weak_count的拷贝构造函数"></a>（2）weak_ptr对应的__weak_count的拷贝构造函数</h3><ul>
+<li><code>__weak_count</code>相关的赋值拷贝以及析构函数均只会影响到<code>weak_count</code>的值，对<code>use_count</code>没有影响；当<code>weak_count</code>为0时，释放管理对象。也就是说<code>__weak_ptr</code>不影响被管理对象的生命周期。同时由于<code>__weak_ptr</code>没有像<code>__shared_ptr</code>那样实现<code>*</code>，<code>-&gt;</code>等常见指针相关操作符，<code>__weak_ptr</code>不能直接操作被管理对象；</li>
+<li><code>__weak_count</code>自身间的赋值以及<code>__shared_count</code>对<code>__weak_count</code>的赋值时，它们都具有同样的指向管理对象的指针；也就是说当多个<code>__weak_ptr</code>和<code>__shared_ptr</code>指向同一个被管理对象时，它们共享同一个管理对象，这就保证了可以通过<code>__weak_ptr</code>可以判断<code>__shared_ptr</code>指向的被管理对象是否存在以及获取到被管理对象的指针。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//************_Sp_counted_base*****************//</span></span><br><span class="line"> <span class="type">void</span></span><br><span class="line"> _M_weak_add_ref() <span class="comment">// nothrow</span></span><br><span class="line">&#123; __gnu_cxx::__atomic_add_dispatch(&amp;_M_weak_count, <span class="number">1</span>); &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//************_Sp_counted_base*****************//</span></span><br><span class="line"><span class="type">void</span></span><br><span class="line">_M_weak_release() <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Be race-detector-friendly. For more info see bits/c++config.</span></span><br><span class="line">    _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&amp;_M_weak_count);</span><br><span class="line">    <span class="keyword">if</span> (__gnu_cxx::__exchange_and_add_dispatch(&amp;_M_weak_count, <span class="number">-1</span>) == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&amp;_M_weak_count);</span><br><span class="line">	<span class="keyword">if</span> (_Mutex_base&lt;_Lp&gt;::_S_need_barriers)</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="comment">// See _M_release(),</span></span><br><span class="line">	    <span class="comment">// destroy() must observe results of dispose()</span></span><br><span class="line">            __atomic_thread_fence (__ATOMIC_ACQ_REL);</span><br><span class="line">	&#125;</span><br><span class="line">	_M_destroy();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">__weak_count&lt;_Lp&gt;&amp;</span><br><span class="line">operator=(<span class="type">const</span> __shared_count&lt;_Lp&gt;&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">        __tmp-&gt;_M_weak_add_ref();</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)</span><br><span class="line">        _M_pi-&gt;_M_weak_release();</span><br><span class="line">  </span><br><span class="line">    _M_pi = __tmp;  </span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> *this;</span><br><span class="line">&#125;</span><br><span class="line">      </span><br><span class="line">__weak_count&lt;_Lp&gt;&amp;</span><br><span class="line">operator=(<span class="type">const</span> __weak_count&lt;_Lp&gt;&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">        __tmp-&gt;_M_weak_add_ref();</span><br><span class="line">    <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)</span><br><span class="line">        _M_pi-&gt;_M_weak_release();</span><br><span class="line">    _M_pi = __tmp;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> *this;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">__weak_count&lt;_Lp&gt;&amp;</span><br><span class="line">operator=(<span class="type">const</span> __shared_count&lt;_Lp&gt;&amp; __r) <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    _Sp_counted_base&lt;_Lp&gt;* __tmp = __r._M_pi;</span><br><span class="line">    <span class="keyword">if</span> (__tmp != <span class="number">0</span>)</span><br><span class="line">      __tmp-&gt;_M_weak_add_ref();</span><br><span class="line">    <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)</span><br><span class="line">      _M_pi-&gt;_M_weak_release();</span><br><span class="line">    _M_pi = __tmp;  </span><br><span class="line">    <span class="keyword">return</span> *this;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">~__weak_count() <span class="comment">// nothrow</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_M_pi != <span class="number">0</span>)</span><br><span class="line">        _M_pi-&gt;_M_weak_release();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）-shared-ptr与-weak-ptr管理同一对象"><a href="#（3）-shared-ptr与-weak-ptr管理同一对象" class="headerlink" title="（3）__shared_ptr与__weak_ptr管理同一对象"></a>（3）__shared_ptr与__weak_ptr管理同一对象</h3><p>关系图如下所示：</p>
+<p>其中<code>weak_ptr</code>不能直接操作被管理对象，但其仍然持有指向被管理对象的指针（用来初始化内部的<code>__weak_count</code>对象），<code>weak_ptr</code>与被管理对象用虚线联接。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406121521900.png" alt="img"></p>
+<h3 id="（4）shared-ptr的两个“大坑”"><a href="#（4）shared-ptr的两个“大坑”" class="headerlink" title="（4）shared_ptr的两个“大坑”"></a>（4）shared_ptr的两个“大坑”</h3><h4 id="A-当一个对象M创建后，如果一个函数f（另一个类的成员函数或是其它自由函数）的形参为M类型的智能指针，如何在对象M内部将对象M的指针作为实参传递给该函数f"><a href="#A-当一个对象M创建后，如果一个函数f（另一个类的成员函数或是其它自由函数）的形参为M类型的智能指针，如何在对象M内部将对象M的指针作为实参传递给该函数f" class="headerlink" title="A. 当一个对象M创建后，如果一个函数f（另一个类的成员函数或是其它自由函数）的形参为M类型的智能指针，如何在对象M内部将对象M的指针作为实参传递给该函数f ?"></a>A. 当一个对象M创建后，如果一个函数f（另一个类的成员函数或是其它自由函数）的形参为M类型的智能指针，如何在对象M内部将对象M的指针作为实参传递给该函数f ?</h4><blockquote>
+<p><code>shared_ptr</code>能够管理对象的生命周期，负责对象资源释放，其前提条件是所有<code>shared_ptr</code>共用同一个管理对象。如果<strong>多个<code>shared_ptr</code>使用多个管理对象来管理同一个被管理对象</strong>，这些管理对象在<code>use_count</code>为<code>0</code>时均会释放被管理对象，将会造成多个管理对象多次释放被管理对象，造成<code>twice delete</code>的堆错误。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Thing</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">defrangulate</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transmogrify</span><span class="params">(Thing *)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Thing * t1 = <span class="keyword">new</span> Thing;</span><br><span class="line">	t1-&gt;<span class="built_in">foo</span>();</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">delete</span> t1; <span class="comment">// done with the object</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Thing::foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// we need to transmogrify this object</span></span><br><span class="line">	<span class="built_in">transmogrify</span>(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transmogrify</span><span class="params">(Thing * ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ptr-&gt;<span class="built_in">defrangulate</span>();</span><br><span class="line">	<span class="comment">/* etc. */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//***** Use shared_ptr***************************//</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Thing</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">defrangulate</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transmogrify</span><span class="params">(shared_ptr&lt;Thing&gt;)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function">shared_ptr&lt;Thing&gt; <span class="title">t1</span><span class="params">(<span class="keyword">new</span> Thing)</span></span>; <span class="comment">// create manager object A for the Thing</span></span><br><span class="line">	t1-&gt;<span class="built_in">foo</span>();</span><br><span class="line">	...</span><br><span class="line">	<span class="comment">// Thing is supposed to get deleted when t1 goes out of scope</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Thing::foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// we need to transmogrify this object</span></span><br><span class="line">	<span class="function">shared_ptr&lt;Thing&gt; <span class="title">sp_for_this</span><span class="params">(<span class="keyword">this</span>)</span></span>; <span class="comment">//  create manager object B for the Thing</span></span><br><span class="line">	<span class="built_in">transmogrify</span>(sp_for_this);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// Thing is supposed to get deleted when sp_for_this and other shared_ptr goes out of scope</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transmogrify</span><span class="params">(shared_ptr&lt;Thing&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ptr-&gt;<span class="built_in">defrangulate</span>();</span><br><span class="line">	<span class="comment">/* etc. */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C++引入了<code>enable_shared_from_this</code>，利用<code>weak_ptr</code>的特性解决了这一问题。</p>
+<p>其基本思想是：通过<code>M</code>继承模板类<code>enable_shared_from_this</code>，这样对象<code>M</code>内部将会有一个<code>__weak_ptr</code>指针<code>_M_weak_this</code>，在第一次创建指向<code>M</code>的<code>shared_ptr</code>时，通过模板特化，将会初始化<code>_M_weak_this</code>。这样<code>M</code>内部也会产生一个指向自身的<code>weak_ptr</code>，并且该<code>weak_ptr</code>内部的管理对象与Pt的管理对象是相同的（这可以从<code>weak_ptr</code>内部的<code>_M_assign</code>函数看出）。</p>
+<p>这样，在<code>M</code>内部，当需要传递指向<code>M</code>的智能指针时，可以通过继承而来的<code>shared_from_this</code>方法获取到指向<code>M</code>的智能指针而不会发生内存泄漏。上面示例中改写后的正确代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Thing</span> : <span class="keyword">public</span> enable_shared_from_this&lt;Thing&gt; &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">defrangulate</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// The following starts a manager object for the Thing and also</span></span><br><span class="line">	<span class="comment">// initializes the weak_ptr member that is now part of the Thing and share same manager object.</span></span><br><span class="line">	<span class="function">shared_ptr&lt;Thing&gt; <span class="title">t1</span><span class="params">(<span class="keyword">new</span> Thing)</span></span>;</span><br><span class="line">	t1-&gt;<span class="built_in">foo</span>();</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Thing::foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// get a shared_ptr from the weak_ptr in this object</span></span><br><span class="line">	shared_ptr&lt;Thing&gt; sp_this = <span class="built_in">shared_from_this</span>();</span><br><span class="line">	<span class="built_in">transmogrify</span>(sp_this);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transmogrify</span><span class="params">(shared_ptr&lt;Thing&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ptr-&gt;<span class="built_in">defrangulate</span>();</span><br><span class="line">	<span class="comment">/* etc. */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="B-在采用shared-ptr-p-new-M-形式创建p来管理M时，这中间有两次的动态内存分配：一次为创建被管理对象M，一次为创建管理对象；而内存分配通常是比较昂贵的操作"><a href="#B-在采用shared-ptr-p-new-M-形式创建p来管理M时，这中间有两次的动态内存分配：一次为创建被管理对象M，一次为创建管理对象；而内存分配通常是比较昂贵的操作" class="headerlink" title="B. 在采用shared_ptr&lt;M&gt; p(new M)形式创建p来管理M时，这中间有两次的动态内存分配：一次为创建被管理对象M，一次为创建管理对象；而内存分配通常是比较昂贵的操作"></a>B. 在采用<code>shared_ptr&lt;M&gt; p(new M)</code>形式创建p来管理M时，这中间有两次的动态内存分配：一次为创建被管理对象M，一次为创建管理对象；而内存分配通常是比较昂贵的操作</h4><p>如果频繁的需要创建指向多个不同对象的智能指针，可以采用<code>shared_ptr&lt;M&gt; p(make_shared&lt;M&gt;)</code>的方式，采用这种方式<strong>系统将会分配一大块内存同时存放管理对象和被管理对象</strong>，这就避免了上面所说的二次内存分配的问题，同时程序中也不会出现<code>new</code>操作符，符合<code>&quot;no naked new!&quot;</code>的编程倡导。</p>
+<p>当然这也有缺点，如果所有指向该对象的智能指针都销毁了，尽管对象的析构函数会被调用，析构被管理对象，但是<strong>如果还有<code>weak_ptr</code>指向该块对象所在的内存，存放管理对象的部分内存仍将不会被释放</strong>，因而导致在所有其他<code>weak_ptr</code>销毁前整块内存（尽管被管理对象已经析构了）将不会进入系统的内存池循环使用。</p>
+<h1 id="二、unique-ptr"><a href="#二、unique-ptr" class="headerlink" title="二、unique_ptr"></a>二、unique_ptr</h1><p><code>unique_ptr</code>是智能指针的一种，他<strong>只可移动不可复制</strong>，即一个指针的所有权只能由一个智能指针所占有。</p>
+<p><code>unique_ptr</code>内部靠一个<code>tuple</code>来维护<code>raw pointer</code>和<code>deleter</code>。<code>unique_ptr</code>相当于一个对<code>RAII</code>的封装，他在栈上有一个指针，指针指向堆中实际分配的内存，当栈上指针生命周期结束时，自动调用<code>deleter</code>去释放堆上内存。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// _Tp为管理对象的类型，_Dp为析构器的类型</span></span><br><span class="line"><span class="comment">// default_delete是默认析构器，默认析构器中使用delete运算符实现对象的析构</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Tp, <span class="keyword">typename</span> _Dp = default_delete&lt;_Tp&gt;&gt;</span><br><span class="line"><span class="keyword">class</span> unique_ptr</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 使用__uniq_ptr_impl管理要管理的heap对象</span></span><br><span class="line">    <span class="comment">// _Tp为管理对象类型，_Dp为析构器</span></span><br><span class="line">    __uniq_ptr_impl&lt;_Tp, _Dp&gt; _M_t;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">using</span> pointer    = <span class="keyword">typename</span> __uniq_ptr_impl&lt;_Tp, _Dp&gt;::pointer;</span><br><span class="line">    <span class="keyword">using</span> element_type  = _Tp;</span><br><span class="line">    <span class="keyword">using</span> deleter_type  = _Dp;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、-uniq-ptr-impl"><a href="#1、-uniq-ptr-impl" class="headerlink" title="1、__uniq_ptr_impl"></a>1、__uniq_ptr_impl</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// _Tp为管理对象的类型，_Dp为析构器的类型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Tp, <span class="keyword">typename</span> _Dp&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">__uniq_ptr_impl</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Up, <span class="keyword">typename</span> _Ep, <span class="keyword">typename</span> = <span class="type">void</span>&gt;</span><br><span class="line">    <span class="keyword">struct</span> _Ptr</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">using</span> type = _Up*;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// pointer实际上就是_Tp*</span></span><br><span class="line">    <span class="keyword">using</span> pointer = <span class="keyword">typename</span> _Ptr&lt;_Tp, _Dp&gt;::type;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 使用tuple管理指针和析构器，通过get&lt;0&gt;获取_Tp*，get&lt;1&gt;获取析构器</span></span><br><span class="line">    tuple&lt;pointer, _Dp&gt; _M_t;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    __uniq_ptr_impl() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="comment">// 先通过_M_t()获取指针，再赋值</span></span><br><span class="line">    __uniq_ptr_impl(pointer __p) : _M_t() &#123; _M_ptr() = __p; &#125;</span><br><span class="line">    <span class="comment">// 自定义析构器</span></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Del&gt;</span><br><span class="line">    __uniq_ptr_impl(pointer __p, _Del&amp;&amp; __d) : _M_t(__p, std::forward&lt;_Del&gt;(__d)) &#123; &#125;</span><br><span class="line">    <span class="comment">// 获取所管理的对象</span></span><br><span class="line">    pointer&amp;   _M_ptr() &#123; <span class="keyword">return</span> std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(_M_t); &#125;</span><br><span class="line">    <span class="comment">// 获取析构器</span></span><br><span class="line">    _Dp&amp;       _M_deleter() &#123; <span class="keyword">return</span> std::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(_M_t); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、构造函数和析构函数"><a href="#2、构造函数和析构函数" class="headerlink" title="2、构造函数和析构函数"></a>2、构造函数和析构函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 默认构造函数，显式创建一个空的unique_ptr对象</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Up = _Dp, <span class="keyword">typename</span> = _DeleterConstraint&lt;_Up&gt;&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="built_in">unique_ptr</span>() <span class="keyword">noexcept</span> : _M_t() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用指针__p构造一个unique_ptr对象</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Up = _Dp, <span class="keyword">typename</span> = _DeleterConstraint&lt;_Up&gt;&gt;</span><br><span class="line"><span class="keyword">explicit</span> <span class="built_in">unique_ptr</span>(pointer __p) <span class="keyword">noexcept</span> : _M_t(__p) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用指针__p和自定义析构器__d构造一个unique_ptr对象</span></span><br><span class="line"><span class="built_in">unique_ptr</span>(pointer __p,</span><br><span class="line">    <span class="keyword">typename</span> conditional&lt;is_reference&lt;deleter_type&gt;::value,</span><br><span class="line">      deleter_type, <span class="type">const</span> deleter_type&amp;&gt;::type __d) <span class="keyword">noexcept</span></span><br><span class="line">: _M_t(__p, __d) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Disable copy from lvalue.不允许复制，体现专属所有权语义</span></span><br><span class="line"><span class="comment">// 使用了C++11特性delete</span></span><br><span class="line"><span class="built_in">unique_ptr</span>(<span class="type">const</span> unique_ptr&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">unique_ptr&amp; <span class="keyword">operator</span>=(<span class="type">const</span> unique_ptr&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Move constructor.体现专属所有权语义和只移型别</span></span><br><span class="line"><span class="comment">// 只允许使用移动拷贝构造函数</span></span><br><span class="line"><span class="comment">// 如果复制一个unique_ptr对象，会将源unique_ptr对象管理的资源release掉</span></span><br><span class="line"><span class="built_in">unique_ptr</span>(unique_ptr&amp;&amp; __u) <span class="keyword">noexcept</span></span><br><span class="line">: _M_t(__u.<span class="built_in">release</span>(), std::forward&lt;deleter_type&gt;(__u.<span class="built_in">get_deleter</span>())) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个也是移动拷贝构造函数</span></span><br><span class="line"><span class="comment">// 只是使用的类型是可以隐式转换的其他unique_ptr对象</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Up, <span class="keyword">typename</span> _Ep, <span class="keyword">typename</span> = _Require&lt;</span><br><span class="line">         __safe_conversion_up&lt;_Up, _Ep&gt;,</span><br><span class="line">   <span class="keyword">typename</span> conditional&lt;is_reference&lt;_Dp&gt;::value,</span><br><span class="line">      is_same&lt;_Ep, _Dp&gt;,</span><br><span class="line">      is_convertible&lt;_Ep, _Dp&gt;&gt;::type&gt;&gt;</span><br><span class="line"><span class="built_in">unique_ptr</span>(unique_ptr&lt;_Up, _Ep&gt;&amp;&amp; __u) <span class="keyword">noexcept</span></span><br><span class="line">: _M_t(__u.<span class="built_in">release</span>(), std::forward&lt;_Ep&gt;(__u.<span class="built_in">get_deleter</span>()))</span><br><span class="line">&#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Assignment，也可以说明是专属所有权语义和只移型别</span></span><br><span class="line">unique_ptr&amp; <span class="keyword">operator</span>=(unique_ptr&amp;&amp; __u) <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// __u.release()释放并返回源unique_ptr对象管理的资源</span></span><br><span class="line">    <span class="comment">// reset是将__u.release()返回的资源赋给目标（当前）unique_ptr对象</span></span><br><span class="line">    <span class="built_in">reset</span>(__u.<span class="built_in">release</span>());</span><br><span class="line">    <span class="built_in">get_deleter</span>() = std::forward&lt;deleter_type&gt;(__u.<span class="built_in">get_deleter</span>());</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 析构函数，调用析构器析构掉管理的资源，并将__ptr指向nullptr</span></span><br><span class="line">~<span class="built_in">unique_ptr</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">auto</span>&amp; __ptr = _M_t._M_ptr();</span><br><span class="line">    <span class="keyword">if</span> (__ptr != <span class="literal">nullptr</span>)</span><br><span class="line">        <span class="built_in">get_deleter</span>()(__ptr);</span><br><span class="line">    __ptr = <span class="built_in">pointer</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get_deleter()(__ptr);的解读</span></span><br><span class="line"><span class="comment">// get_deleter()返回的是析构器，默认的析构器为struct default_delete&lt;_Tp&gt;</span></span><br><span class="line"><span class="comment">// struct default_delete&lt;_Tp&gt;有一个operator()操作符</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(_Tp* __ptr)</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> __ptr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 所以get_deleter()(__ptr);实际上就是delete __ptr;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、成员函数"><a href="#3、成员函数" class="headerlink" title="3、成员函数"></a>3、成员函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以像raw pointer一样，解引用</span></span><br><span class="line"><span class="keyword">typename</span> add_lvalue_reference&lt;element_type&gt;::type <span class="keyword">operator</span>*() <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    __glibcxx_assert(<span class="built_in">get</span>() != <span class="built_in">pointer</span>());</span><br><span class="line">    <span class="keyword">return</span> *<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 像raw pointer一样获取保存的指针，调用get方法</span></span><br><span class="line">pointer <span class="keyword">operator</span>-&gt;() <span class="type">const</span> <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line">    _GLIBCXX_DEBUG_PEDASSERT(<span class="built_in">get</span>() != <span class="built_in">pointer</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">pointer <span class="title">get</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">return</span> _M_t._M_ptr(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 释放对所管理资源的所有权</span></span><br><span class="line"><span class="function">pointer <span class="title">release</span><span class="params">()</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    pointer __p = <span class="built_in">get</span>();</span><br><span class="line">    _M_t._M_ptr() = <span class="built_in">pointer</span>();</span><br><span class="line">    <span class="keyword">return</span> __p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重置所管理的资源</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">reset</span><span class="params">(pointer __p = pointer())</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> std::swap;</span><br><span class="line">    <span class="built_in">swap</span>(_M_t._M_ptr(), __p);</span><br><span class="line">    <span class="keyword">if</span> (__p != <span class="built_in">pointer</span>() <span class="built_in">get_deleter</span>()(__p);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、unique-ptr的使用"><a href="#4、unique-ptr的使用" class="headerlink" title="4、unique_ptr的使用"></a>4、unique_ptr的使用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Investment</span> &#123;&#125;; <span class="comment">// 待管理对象</span></span><br><span class="line"><span class="comment">// 默认的析构器struct default_delete&lt;_Tp&gt;实际上是一个仿函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们就可以定义一个lambd作为析构器</span></span><br><span class="line"><span class="keyword">auto</span> delInvmt = [](Investment* pInvestment)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">makeLogEntry</span>(pInvestment); <span class="comment">// 做一些删除前的工作</span></span><br><span class="line">                    <span class="keyword">delete</span> pInvestment;</span><br><span class="line">                &#125;;</span><br><span class="line"><span class="comment">// 使用decltype推到出自定义析构器的类型</span></span><br><span class="line"><span class="function">unique_ptr&lt;Investment, <span class="title">decltype</span><span class="params">(delInvmt)</span>&gt; <span class="title">pInv</span><span class="params">((<span class="keyword">new</span> Investment), delInvmt)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>如果要自定义析构器，就必须使用构造函数，而无法通过C++14提供的make_unique函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Investment</span></span><br><span class="line">&#123;</span><br><span class="line">  ~<span class="built_in">Investment</span>()</span><br><span class="line">  &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;called ~Investment()...&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">auto</span> ivmt = [](Investment* pInvestment)</span><br><span class="line">        &#123;</span><br><span class="line">          cout &lt;&lt; <span class="string">&quot;user-defined delete...&quot;</span> &lt;&lt; endl;</span><br><span class="line">          <span class="keyword">delete</span> pInvestment;</span><br><span class="line">        &#125;;</span><br><span class="line">  <span class="comment">// 包在括号中，方便观察结果</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="function">unique_ptr&lt;Investment, <span class="title">decltype</span><span class="params">(ivmt)</span>&gt; <span class="title">pInvestment</span><span class="params">((<span class="keyword">new</span> Investment), ivmt)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果</span></span><br><span class="line">user-defined <span class="keyword">delete</span>...</span><br><span class="line">called ~<span class="built_in">Investment</span>()...</span><br></pre></td></tr></table></figure>
+
+<p>另外<code>unique_ptr</code>不允许以赋值语法将一个<code>raw pointer</code>当作初值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unipue_ptr&lt;<span class="type">int</span>&gt; pInt = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">2</span>); <span class="comment">// error</span></span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">pInt</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">2</span>))</span></span>;  <span class="comment">// OK</span></span><br></pre></td></tr></table></figure>
+
+<p>不能使用普通的拷贝或者赋值：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">pInt1</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">2</span>))</span></span>; <span class="comment">// pInt1现在为左值</span></span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">pInt2</span><span class="params">(pInt1)</span></span>;      <span class="comment">// error</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要使用移动语义，使用move将左值转为右值</span></span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">pInt2</span><span class="params">(std::move(pInt1))</span></span>;</span><br><span class="line"></span><br><span class="line">unique_ptr&lt;<span class="type">int</span>&gt; pInt2;</span><br><span class="line">pInt2 = pInt1; <span class="comment">// error</span></span><br><span class="line">pInt2 = std::<span class="built_in">move</span>(pInt1);</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -5479,7 +5564,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/Computer/C++/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/1%20C++/STL/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -5493,7 +5578,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/11/Computer/C++/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/" class="post-title-link" itemprop="url">常用STL容器</a>
+            <a href="/2024/06/11/1%20C++/STL/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/" class="post-title-link" itemprop="url">常用STL容器</a>
         </h2>
 
         <div class="post-meta">
@@ -5510,7 +5595,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:41:55" itemprop="dateModified" datetime="2024-07-05T10:41:55+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:12:12" itemprop="dateModified" datetime="2024-07-16T11:12:12+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -5518,11 +5603,11 @@ add $4, %esp：
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/C/STL/" itemprop="url" rel="index"><span itemprop="name">STL</span></a>
                 </span>
             </span>
 
@@ -5551,15 +5636,185 @@ add $4, %esp：
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/11/Computer/C++/%E5%B8%B8%E7%94%A8STL%E5%AE%B9%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h1 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h1><h2 id="std-vector"><a href="#std-vector" class="headerlink" title="std::vector"></a>std::vector</h2><h3 id="1、基本用法"><a href="#1、基本用法" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; a;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">double</span>&gt; b;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">char</span>&gt; c;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; d;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">e</span><span class="params">(n, <span class="number">10</span>)</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; f&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> arr[] = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> m = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">g</span><span class="params">(arr, arr+m)</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; <span class="title function_">h</span><span class="params">(g.begin(), g.end())</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    <span class="comment">// 1. 下标访问</span></span><br><span class="line">    a.push_back(<span class="number">1</span>);</span><br><span class="line">    <span class="type">int</span> tmp = a[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 迭代器访问</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;::iterator s;</span><br><span class="line">    s = a.begin();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;a.size(); i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, *(s+i));  <span class="comment">// 常用STL容器中，仅vector和string支持a.begin()+i这种写法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (s=a.begin(); s!=a.end(); s++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, *s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 常用内置函数</span></span><br><span class="line">    a.reverse(<span class="number">100</span>);		<span class="comment">// 预分配100个元素的内存，注意reserve操作只是预分配内存，并不会改变Vector的大小</span></span><br><span class="line">    a.push_back(<span class="number">4</span>);		<span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.emplace_back(<span class="number">1</span>);  <span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.pop_back();		<span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line"></span><br><span class="line">    <span class="type">size_t</span> size = a.size();             <span class="comment">// 时间复杂度为O(1)</span></span><br><span class="line">    a.resize(<span class="number">3</span>);</span><br><span class="line">    a.resize(<span class="number">5</span>, <span class="number">10</span>);  <span class="comment">// 扩容，且新增元素初始化为10</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> first = a.front();</span><br><span class="line">    <span class="type">int</span> last = a.back();</span><br><span class="line"></span><br><span class="line">    a.insert(a.begin(), <span class="number">0</span>);   			<span class="comment">// 时间复杂度为O(N)</span></span><br><span class="line">    a.erase(a.begin());          		<span class="comment">// erase()有两种方法，时间复杂度都为O(N)</span></span><br><span class="line">    a.erase(a.begin(), a.end()<span class="number">-1</span>);  	<span class="comment">// erase(first,last)删除[first, last)内的所有元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">bool</span> is_empty = a.empty();</span><br><span class="line">    a.clear();        <span class="comment">// 时间复杂度为O(N)</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// algorithm常用函数</span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line">    sort(a.begin(),a.end());  				<span class="comment">// 对[a.begin(), a.end())进行从大到小排序</span></span><br><span class="line">    reverse(a.begin(),a.end());  			<span class="comment">// 对[a.begin(), a.end())进行倒置，但不排序</span></span><br><span class="line">    copy(a.begin(),a.end(),b.begin()+<span class="number">1</span>); 	<span class="comment">// 把[a.begin(), a.end())的元素复制到b中</span></span><br><span class="line">    find(a.begin(),a.end(),<span class="number">10</span>);  			<span class="comment">// 在[a.begin(), a.end())的元素中查找10。并返回其位置（迭代器）</span></span><br><span class="line">    count(a.begin(), a.end(),<span class="number">10</span>);    		<span class="comment">// 在[a.begin(), a.end())的元素中查找10的个数，并返回</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现"><a href="#2、内部实现" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p>vector 的底层是一个动态数组，包含三个迭代器：start、finish 和 end_of_storage。</p>
+<ul>
+<li>start 和 finish 之间是已经被使用的空间范围；</li>
+<li>end_of_storage 是整块连续空间（包括备用空间）的尾部。</li>
+</ul>
+<p>当<code>push_banck()</code>时发现空间容量不够，会自动申请另一片更大的空间（1.5或2倍），然后把原来的数据拷贝到新的内存空间，接着释放原来的那片空间【3、vector的扩容机制】。当释放或者删除（<code>vec.clear()</code>）里面的数据时，其存储空间不释放，仅仅是清空了里面的数据。因此，对vector的任何操作一旦引起了空间的重新配置，指向原 vector 的所有迭代器会都失效了。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111938752.png" alt="在这里插入图片描述"></p>
+<p>vector 维护的是一个连续的线性空间，所以不论其元素类型为何，普通指针都可以作为 vector 的迭代器而满足所以必要条件，如 operator*，operator-&gt;，operator++，operator–，普通指针天生就具备。vector 支持随机存取，而普通指针正有这样的能力。所以底层直接将指针封装成了 iterator。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111939776.png" alt="在这里插入图片描述"></p>
+<h3 id="3、vector-的扩容机制"><a href="#3、vector-的扩容机制" class="headerlink" title="3、vector 的扩容机制"></a>3、vector 的扩容机制</h3><h4 id="（1）扩容机制原理"><a href="#（1）扩容机制原理" class="headerlink" title="（1）扩容机制原理"></a>（1）扩容机制原理</h4><p>当向 vector 中插入元素时，如果元素有效个数 size 与空间容量 capacity 相等时，vector 内部会触发扩容机制：</p>
+<ol>
+<li>开辟新空间；</li>
+<li>拷贝元素；</li>
+<li>释放旧空间。</li>
+</ol>
+<h4 id="（2）如何避免动态扩容，导致效率降低"><a href="#（2）如何避免动态扩容，导致效率降低" class="headerlink" title="（2）如何避免动态扩容，导致效率降低"></a>（2）如何避免动态扩容，导致效率降低</h4><p>如果要避免扩容而导致程序效率过低问题，其实非常简单：<strong>如果在插入之前，可以预估vector存储元素的个数，提前将底层容量开辟好即可。</strong>如果插入之前进行 reserve，只要空间给足，则插入时不会扩容，如果没有 reserve，则会边插入边扩容，效率极其低下。</p>
+<h4 id="（3）为什么选择1-5倍或者2倍方式扩容，而不是3倍、4倍"><a href="#（3）为什么选择1-5倍或者2倍方式扩容，而不是3倍、4倍" class="headerlink" title="（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍"></a>（3）为什么选择1.5倍或者2倍方式扩容，而不是3倍、4倍</h4><p>扩容原理为：申请新空间，拷贝元素，释放旧空间。<strong>理想的分配方案是在第N次扩容时能复用之前N-1次释放的空间。</strong>如果按照2倍方式扩容，第i次扩容空间大小如下：<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947980.png" alt="在这里插入图片描述"><br>可以看到，每次扩容时，前面释放的空间都不能使用。比如：第4次扩容时，前2次空间已经释放，第3次空间还没有释放(开辟新空间、拷贝元素、释放旧空间)，即前面释放的空间只有1 + 2 &#x3D; 3，假设第3次空间已经释放才只有1+2+4&#x3D;7，而第四次需要8个空间，因此无法使用之前已释放的空间，但是<strong>按照小于2倍方式扩容，多次扩容之后就可以复用之前释放的空间了</strong>。<strong>如果倍数超过2倍(包含2倍)方式扩容会存在以下问题</strong>：</p>
+<ul>
+<li>空间浪费可能会比较高，比如：扩容后申请了64个空间，但只存了33个元素，有接近一半的空间没有使用；</li>
+<li>无法使用到前面已释放的内存。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111947476.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>使用2倍（k&#x3D;2）扩容机制扩容时，每次扩容后的新内存大小必定大于前面的总和；</li>
+<li>而使用1.5倍（k&#x3D;1.5）扩容时，在几次扩展以后，可以重用之前的内存空间了。</li>
+</ul>
+<p>因为 STL 标准并没有严格说明需要按何种方式进行扩容，因此不同的实现厂商都是按照自己的方式扩容的，即：<strong>Linux 下是按照2倍的方式扩容的，而 vs 下是按照1.5倍的方式扩容的</strong>。</p>
+<h4 id="（4）Windows-和-Linux-的扩容底层原理"><a href="#（4）Windows-和-Linux-的扩容底层原理" class="headerlink" title="（4）Windows 和 Linux 的扩容底层原理"></a>（4）Windows 和 Linux 的扩容底层原理</h4><ol>
+<li><p>Windows 扩容底层</p>
+<p>Windows 中堆管理系统会对释放的堆块进行合并，因此 vs 下的 vector 扩容机制选择使用1.5倍的方式扩容，这样多次扩容之后就可以使用之前已经释放的空间。</p>
+</li>
+<li><p>Linux 的扩容底层</p>
+</li>
+</ol>
+<img src="https://img-blog.csdnimg.cn/4f12d834bac147ee9bcba58e5521a961.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5qOu5piO5biu5aSn5LqO6buR6JmO5biu,size_13,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<ul>
+<li>Linux 下主要使用 glibc 的 ptmalloc 来进行用户空间申请的<ul>
+<li>如果 malloc 的空间小于<code>128KB</code>，其内部通过<code>brk()</code>来扩张；</li>
+<li>如果大于<code>128KB</code>且<code>arena</code>中没有足够的空间时，通过<code>mmap()</code>将内存映射到进程地址空间。</li>
+</ul>
+</li>
+<li>Linux 中引入<strong>伙伴系统</strong>（所谓的伙伴系统就是 STL 中通过链表来实现的内存池）为内核提供了一种用于分配连续页的高效的分配策略，实现对固定分区和动态分区方式的折中：固定分区存在内部碎片；动态分区存在外部碎片，而且动态分区回收时的合并以及分配时的切片是比较耗时的。<ul>
+<li>伙伴系统是将整个内存区域构建成基本大小<code>basicSize</code>的1倍、2倍、4倍、8倍、16倍等，即要求内存空间分区链均对应2的整次幂倍大小的空间；</li>
+<li>在分配和释放空间时，可以通过<code>log2(request/basicSize)</code>向上取整的哈希算法快速找到对应内存块。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111952632.png" alt="img"></p>
+<h2 id="std-list"><a href="#std-list" class="headerlink" title="std::list"></a>std::list</h2><h3 id="1、基本用法-1"><a href="#1、基本用法-1" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span> <span class="comment">// for std::accumulate</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    std::list&lt;<span class="type">int</span>&gt; list1;</span><br><span class="line">    std::list&lt;<span class="type">int</span>&gt; list2 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="function">std::list&lt;<span class="type">int</span>&gt; <span class="title">list3</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>; <span class="comment">// 5个10</span></span><br><span class="line">    <span class="function">std::list&lt;<span class="type">int</span>&gt; <span class="title">list4</span><span class="params">(list2.begin(), list2.end())</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;list2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : list2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加元素</span></span><br><span class="line">    list1.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">    list1.<span class="built_in">push_front</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    list1.<span class="built_in">pop_back</span>();</span><br><span class="line">    list1.<span class="built_in">pop_front</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入和删除特定位置的元素</span></span><br><span class="line">    <span class="keyword">auto</span> it = list2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 移动迭代器到第三个位置</span></span><br><span class="line">    list2.<span class="built_in">insert</span>(it, <span class="number">10</span>); <span class="comment">// 在第三个位置插入10</span></span><br><span class="line">    it = list2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 再次移动迭代器到第三个位置</span></span><br><span class="line">    list2.<span class="built_in">erase</span>(it); <span class="comment">// 删除第三个位置的元素</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    list2.<span class="built_in">reverse</span>();	<span class="comment">// 反转列表</span></span><br><span class="line">    list2.<span class="built_in">sort</span>();		<span class="comment">// 排序列表</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// algorithm</span></span><br><span class="line">    it = std::<span class="built_in">find</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">4</span>);  <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="type">int</span> sum = std::<span class="built_in">accumulate</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">0</span>);  <span class="comment">// 求和</span></span><br><span class="line">    std::for_each(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), [](<span class="type">int</span> x) &#123;  <span class="comment">// 遍历</span></span><br><span class="line">        std::cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="type">int</span> count = std::<span class="built_in">count</span>(list2.<span class="built_in">begin</span>(), list2.<span class="built_in">end</span>(), <span class="number">10</span>);  <span class="comment">// 计算元素个数</span></span><br><span class="line">    list2.<span class="built_in">remove</span>(<span class="number">10</span>); <span class="comment">// 删除所有值为10的元素</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论基础"><a href="#2、理论基础" class="headerlink" title="2、理论基础"></a>2、理论基础</h3><p>由于 list 拥有一片不连续的内存空间，且 STL list 是一个双向链表，因此其提供的迭代器是 Bidirectional Iterators。对于 list 来说，其插入操作和接合操作不会使得原迭代器失效。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">__list_node</span> &#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="type">void</span>* void_pointer;</span><br><span class="line">	void_pointer prev;</span><br><span class="line">	void_pointer next;</span><br><span class="line">	T data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Alloc</span> = alloc&gt;  <span class="comment">// 缺省使用 alloc 作为空间配置器</span></span><br><span class="line"><span class="keyword">class</span> list &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">typedef</span> __list_node&lt;T&gt;* list_type;</span><br><span class="line">    <span class="keyword">typedef</span> __list_node&lt;T&gt; list_node;</span><br><span class="line">    <span class="keyword">typedef</span> simple_alloc&lt;list_node, Alloc&gt; list_node_allocator;  <span class="comment">// 专属空间配置器，每次配置一个节点大小</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> list_node* link_type;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    link_type node;</span><br><span class="line">    </span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="std-deque"><a href="#std-deque" class="headerlink" title="std::deque"></a>std::deque</h2><h3 id="1、基本用法-2"><a href="#1、基本用法-2" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;numeric&gt;</span> <span class="comment">// for std::accumulate</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化方式1：默认构造</span></span><br><span class="line">    std::deque&lt;<span class="type">int</span>&gt; deque1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式2：用元素初始化</span></span><br><span class="line">    std::deque&lt;<span class="type">int</span>&gt; deque2 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式3：使用fill构造</span></span><br><span class="line">    <span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">deque3</span><span class="params">(<span class="number">5</span>, <span class="number">10</span>)</span></span>; <span class="comment">// 5个10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化方式4：使用范围构造</span></span><br><span class="line">    <span class="function">std::deque&lt;<span class="type">int</span>&gt; <span class="title">deque4</span><span class="params">(deque2.begin(), deque2.end())</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 元素访问</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : deque2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加元素</span></span><br><span class="line">    deque1.<span class="built_in">push_back</span>(<span class="number">6</span>);</span><br><span class="line">    deque1.<span class="built_in">push_front</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    deque1.<span class="built_in">pop_back</span>();</span><br><span class="line">    deque1.<span class="built_in">pop_front</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入和删除特定位置的元素</span></span><br><span class="line">    <span class="keyword">auto</span> it = deque2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 移动迭代器到第三个位置</span></span><br><span class="line">    deque2.<span class="built_in">insert</span>(it, <span class="number">10</span>); <span class="comment">// 在第三个位置插入10</span></span><br><span class="line">    it = deque2.<span class="built_in">begin</span>();</span><br><span class="line">    std::<span class="built_in">advance</span>(it, <span class="number">2</span>); <span class="comment">// 再次移动迭代器到第三个位置</span></span><br><span class="line">    deque2.<span class="built_in">erase</span>(it); <span class="comment">// 删除第三个位置的元素</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 反转双端队列</span></span><br><span class="line">    std::<span class="built_in">reverse</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 排序双端队列</span></span><br><span class="line">    std::<span class="built_in">sort</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用算法函数</span></span><br><span class="line">    <span class="comment">// std::find</span></span><br><span class="line">    it = std::<span class="built_in">find</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">if</span> (it != deque2.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;找到元素 4&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;未找到元素 4&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::accumulate</span></span><br><span class="line">    <span class="type">int</span> sum = std::<span class="built_in">accumulate</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">0</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素的和：&quot;</span> &lt;&lt; sum &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::for_each</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2元素：&quot;</span>;</span><br><span class="line">    std::for_each(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), [](<span class="type">int</span> x) &#123;</span><br><span class="line">        std::cout &lt;&lt; x &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::count</span></span><br><span class="line">    <span class="type">int</span> count = std::<span class="built_in">count</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">10</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;deque2中包含10的个数：&quot;</span> &lt;&lt; count &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// std::remove</span></span><br><span class="line">    <span class="keyword">auto</span> new_end = std::<span class="built_in">remove</span>(deque2.<span class="built_in">begin</span>(), deque2.<span class="built_in">end</span>(), <span class="number">10</span>); <span class="comment">// 删除所有值为10的元素</span></span><br><span class="line">    deque2.<span class="built_in">erase</span>(new_end, deque2.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;最终的deque2元素：&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; elem : deque2) &#123;</span><br><span class="line">        std::cout &lt;&lt; elem &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论基础-1"><a href="#2、理论基础-1" class="headerlink" title="2、理论基础"></a>2、理论基础</h3><p>deque 是双向开口的连续线性空间。</p>
+<blockquote>
+<p>deque 和 vector 的差别：</p>
+<ol>
+<li>deque 允许于常数时间内对起头端进行元素的插入或移除操作；</li>
+<li>deque 没有所谓容量（capacity）的概念，因为它是<strong>动态地以分段连续空间组合而成</strong>，随时可以增加一段新的空间并链接起来。</li>
+<li>deque 虽然也提供 RamdomAccessIterator，但其迭代器并非普通指针，复杂度较高，因此除非必要，应尽量使用 vector 而非 deque。对 deque 进行的排序操作，可以先将 deque 完成复制到一个 vector 中，排序后再复制回 deque。</li>
+</ol>
+</blockquote>
+<p>deque 的迭代器包含两个任务：</p>
+<ol>
+<li><p>指出分段连续空间（即缓冲区）在哪里；</p>
+</li>
+<li><p>判断自己是否已经处于所在缓冲区的边缘，若是，则一旦前进或后退时就必须跳跃至下一个或上一个缓冲区:</p>
+<ol>
+<li><p><strong>最后一个缓冲区只剩下一个备用空间</strong>，则调用 <code>push_back_aux()</code>新建并跳跃至下一个缓冲区；</p>
+</li>
+<li><p><strong>第一个缓冲区没有备用空间</strong>，则调用 <code>push_front_aux()</code>新建并跳跃至上一个缓冲区。</p>
+<blockquote>
+<p>由于前端插入操作涉及到现有缓冲区前面的空间，因此需要确保当前缓冲区完全没有空间时，再进行新的缓冲区分配和跳跃操作。</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<p>deque 采用一个 “map”（并非 STL 中的 map 容器）来指向其分段连续空间（缓冲区）。map 中的每一个元素 node 为一个指针，指向其对应的缓冲区。对于 deque 来说，主要维护 3 个指针：</p>
+<ol>
+<li>指向 map 的指针；</li>
+<li>start：指向第一缓冲区的第一个元素；</li>
+<li>finish：指向最后缓冲区的最后一个元素。</li>
+</ol>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720123.png" alt="image-20240620172003136" style="zoom: 25%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406201720621.png" alt="image-20240620172045147" style="zoom: 25%;" />
+
+<h2 id="std-stack"><a href="#std-stack" class="headerlink" title="std::stack"></a>std::stack</h2><h3 id="1、基本用法-3"><a href="#1、基本用法-3" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stack&lt;<span class="type">int</span>&gt; st;</span><br><span class="line">st.<span class="built_in">empty</span>();			<span class="comment">// 栈为空时返回1，非空返回0</span></span><br><span class="line">st.<span class="built_in">size</span>();			<span class="comment">// 返回栈中元素数量，size_type size() const;</span></span><br><span class="line">st.<span class="built_in">top</span>();			<span class="comment">// 返回栈顶元素，value_type&amp; top();</span></span><br><span class="line">st.<span class="built_in">push</span>(value);		<span class="comment">// 在栈顶插入一个元素，void push( const value_tyoe&amp; val );</span></span><br><span class="line">st.<span class="built_in">emplace</span>(value);	<span class="comment">// 在栈顶增加一个元素，void emplace( args&amp;&amp; args );</span></span><br><span class="line">st.<span class="built_in">pop</span>();			<span class="comment">// 栈顶元素出栈，即删除栈顶元素，void pop(); </span></span><br><span class="line"></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; st2;</span><br><span class="line">st1.<span class="built_in">swap</span>( st2 );	<span class="comment">// 交换两个栈中的内容，void swap( stack&amp; x );</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 与vector一样，重载了运算符：== != &lt; &lt;= &gt; &gt;=</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、理论相关"><a href="#2、理论相关" class="headerlink" title="2、理论相关"></a>2、理论相关</h3><p>STL 中 stack 往往不被归类为容器，而被归类为容器适配器（container adapter）。因为<strong>栈是以底层容器完成其所有的工作，对外提供统一的接口，底层容器是可插拔的（也就是说我们可以控制使用哪种容器来实现栈的功能）。</strong></p>
+<p>栈的底层实现可以是 vector、deque或list 等， 主要就是数组和链表的底层实现。常用的 SGI STL ，如果没有指定底层实现的话，<strong>默认是以 deque 为缺省情况下栈的底层结构</strong>。此外，SGI STL 中队列一样是以 deque 为缺省情况下的底部结构。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">std::stack&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt; &gt; third;  <span class="comment">// 使用vector为底层容器的栈</span></span><br><span class="line">std::queue&lt;<span class="type">int</span>, std::list&lt;<span class="type">int</span>&gt;&gt; third; <span class="comment">// 定义以list为底层容器的队列</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404242029774.png" alt="栈与队列理论3" style="zoom:50%;" />
+
+<blockquote>
+<p>三个最为普遍的 STL 版本：</p>
+<ol>
+<li>HP STL 其他版本的 C++ STL，一般是以 HP STL 为蓝本实现出来的，HP STL 是 C++ STL 的第一个实现版本，而且开放源代码。</li>
+<li>P.J.Plauger STL 由 P.J.Plauger 参照 HP STL 实现出来的，被 Visual C++ 编译器所采用，不是开源的。</li>
+<li>SGI STL 由 Silicon Graphics Computer Systems 公司参照HP STL 实现，被 Linux 的 C++ 编译器 GCC 所采用，SGI STL 是开源软件，源码可读性甚高。</li>
+</ol>
+</blockquote>
+<h2 id="std-queue"><a href="#std-queue" class="headerlink" title="std::queue"></a>std::queue</h2><h3 id="1、基本用法-4"><a href="#1、基本用法-4" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">queue&lt;<span class="type">double</span>&gt; d;</span><br><span class="line">queue&lt;node&gt; n;  <span class="comment">// node是一个结构体</span></span><br><span class="line"></span><br><span class="line">q.<span class="built_in">size</span>();		<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();		<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);		<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();		<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">front</span>();		<span class="comment">// 返回q的第一个元素</span></span><br><span class="line">q.<span class="built_in">back</span>();		<span class="comment">// 返回q的末尾元素</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="std-priority-queue"><a href="#std-priority-queue" class="headerlink" title="std::priority_queue"></a>std::priority_queue</h2><h3 id="1、基本用法-5"><a href="#1、基本用法-5" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><h4 id="（1）声明"><a href="#（1）声明" class="headerlink" title="（1）声明"></a>（1）声明</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">Container</span> = vector&lt;T&gt;, <span class="keyword">class</span> Compare = less&lt;<span class="keyword">typename</span> Container::value_type&gt; &gt;</span><br><span class="line"><span class="keyword">class</span> priority_queue;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>T</code>：优先队列中的元素类型；</li>
+<li><code>Container</code>：底层容器的类型；</li>
+<li><code>Compare</code>：比较函数对象，决定了优先队列的排序方式。</li>
+</ul>
+<h4 id="（2）基本操作"><a href="#（2）基本操作" class="headerlink" title="（2）基本操作"></a>（2）基本操作</h4>   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">size</span>();	<span class="comment">// 返回q里元素个数</span></span><br><span class="line">q.<span class="built_in">empty</span>();	<span class="comment">// 返回q是否为空，空则返回1，否则返回0</span></span><br><span class="line">q.<span class="built_in">push</span>(k);	<span class="comment">// 在q的末尾插入k</span></span><br><span class="line">q.<span class="built_in">pop</span>();	<span class="comment">// 删掉q的第一个元素</span></span><br><span class="line">q.<span class="built_in">top</span>();	<span class="comment">// 返回q的第一个元素</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）排序实现"><a href="#（3）排序实现" class="headerlink" title="（3）排序实现"></a>（3）排序实现</h4><ol>
+<li><p><code>less</code>和<code>greater</code>优先队列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,less&lt;<span class="type">int</span>&gt; &gt; p;</span><br><span class="line">priority_queue &lt;<span class="type">int</span>,vector&lt;<span class="type">int</span>&gt;,greater&lt;<span class="type">int</span>&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="comment">// less&lt;int&gt;:14 12 10 8 6（大顶堆）</span></span><br><span class="line"><span class="comment">// greater&lt;int&gt;:6 8 10 12 14（小顶堆）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义仿函数如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义仿函数</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CompareByAge</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> Person&amp; p1, <span class="type">const</span> Person&amp; p2)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> p1.age &gt; p2.age;  <span class="comment">// 按照年龄从小到大排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="2、理论相关-1"><a href="#2、理论相关-1" class="headerlink" title="2、理论相关"></a>2、理论相关</h3><h4 id="（1）概念"><a href="#（1）概念" class="headerlink" title="（1）概念"></a>（1）概念</h4><p>优先级队列（<code>priority_queue</code>）是C++标准库中的一个<strong>容器适配器（container adapter）</strong>，其中的元素按照一定的优先级进行排序，每次取出的元素都是优先级最高的。其底层实现通常使用堆<strong>（heap）</strong>数据结构。</p>
+<p>定义在<code>&lt;queue&gt;</code>头文件中。</p>
+<p>默认情况下，<code>priority_queue</code>使用<code>std::less</code>作为比较函数，即元素的优先级按照从大到小的顺序排列。</p>
+<h4 id="（2）特点"><a href="#（2）特点" class="headerlink" title="（2）特点"></a>（2）特点</h4><ul>
+<li><strong>优先级排序</strong>：priority_queue中的元素按照一定的优先级进行排序。默认情况下，元素的优先级按照从大到小的顺序排列，也可以通过自定义的比较函数来指定不同的排序方式。</li>
+<li><strong>自动排序</strong>：在插入元素时，priority_queue会根据元素的优先级自动进行排序。每次插入新元素时，都会将新元素放置在正确的位置上。</li>
+<li><strong>取出优先级最高元素</strong>：priority_queue提供了一种方便的方式来取出优先级最高的元素。使用top()函数可以访问优先级最高的元素，而使用pop()函数可以将该元素从队列中移除。</li>
+<li><strong>底层实现采用堆</strong>：priority_queue通常使用堆（heap）数据结构来实现。堆是一种具有特定性质的二叉树，可以高效地插入新元素和取出优先级最高的元素。</li>
+<li><strong>动态大小</strong>：priority_queue的大小可以根据需要进行动态调整。可以随时插入新元素和删除已有元素，并在必要时自动重新排序。</li>
+</ul>
+<h1 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h1><h2 id="std-unordered-set"><a href="#std-unordered-set" class="headerlink" title="std::unordered_set"></a>std::unordered_set</h2><h3 id="1、基本用法-6"><a href="#1、基本用法-6" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unordered_set&lt;<span class="type">int</span>&gt; mySet;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Before add elements......&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 获取或设置允许的最大装载因子</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Max load facotr: &quot;</span> &lt;&lt; mySet.<span class="built_in">max_load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 返回当前装载因子</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Load factor: &quot;</span> &lt;&lt; mySet.<span class="built_in">load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    <span class="comment">// 返回当前bucket的数量</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Bucket count: &quot;</span> &lt;&lt; mySet.<span class="built_in">bucket_count</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">2</span>); <span class="comment">// 重复插入，不会有任何效果</span></span><br><span class="line">    mySet.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Is the set empty ? &quot;</span> &lt;&lt; mySet.<span class="built_in">empty</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找元素</span></span><br><span class="line">    <span class="keyword">if</span> (mySet.<span class="built_in">find</span>(<span class="number">2</span>) != mySet.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Found 2 in the set.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历集合</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Elements in mySet: &quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> element : mySet) &#123;</span><br><span class="line">        std::cout &lt;&lt; element &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    mySet.<span class="built_in">erase</span>(<span class="number">2</span>);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;After erasing 2, size of mySet: &quot;</span> &lt;&lt; mySet.<span class="built_in">size</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    std::cout &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;After add elements......&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Max load facotr: &quot;</span> &lt;&lt; mySet.<span class="built_in">max_load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Load factor: &quot;</span> &lt;&lt; mySet.<span class="built_in">load_factor</span>() &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Bucket count: &quot;</span> &lt;&lt; mySet.<span class="built_in">bucket_count</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    mySet.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Before add elements......</span><br><span class="line">Max load facotr: 1</span><br><span class="line">Load <span class="built_in">factor</span>: 0</span><br><span class="line">Bucket count: 1</span><br><span class="line"></span><br><span class="line">Is the <span class="built_in">set</span> empty ? 0</span><br><span class="line">Found 2 <span class="keyword">in</span> the <span class="built_in">set</span>.</span><br><span class="line">Elements <span class="keyword">in</span> mySet: 3 2 1 </span><br><span class="line">After erasing 2, size of mySet: 2</span><br><span class="line"></span><br><span class="line">After add elements......</span><br><span class="line">Max load facotr: 1</span><br><span class="line">Load <span class="built_in">factor</span>: 0.153846</span><br><span class="line">Bucket count: 13</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现-1"><a href="#2、内部实现-1" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p><code>std::unordered_set</code> 的内部实现基于哈希表，哈希表是一个数组，数组的每个元素称为一个 <code>bucket</code>。这点和 <code>std::unordered_map</code> 是一样的。</p>
+<p>同样的，每个 <code>bucket</code> 维护一个链表（或其他容器，例如小型向量），用于解决哈希冲突（即不同元素的哈希值相同的情况）。</p>
+<ul>
+<li>哈希函数：<code>std::unordered_set</code>通过哈希函数将元素映射到一个 <code>bucket</code>。哈希函数的质量决定了元素在哈希表中的分布，影响容器的性能。</li>
+<li>哈希冲突：当两个元素的哈希值相同时，它们会被存储在同一个 <code>bucket</code> 的链表中，这种情况称为哈希冲突。<code>std::unordered_set</code>通过链地址法来解决哈希冲突。</li>
+<li>装载因子和重哈希：装载因子是<code>元素数量 / bucket数量</code>。当装载因子超过某个阈值时（默认为<code>1.0</code>），<code>std::unordered_set</code>会进行重哈希操作，即增加 <code>bucket</code> 数量并重新分配所有元素，以保持操作的高效性。</li>
+</ul>
+<p>适用场景</p>
+<ul>
+<li>需要快速查找的场景：当需要存储一组唯一元素，并且频繁地进行查找操作时；</li>
+<li>不关心元素顺序：<code>std::unordered_set</code>不保证元素的顺序；</li>
+<li>大量数据的去重：当需要从大量数据中去除重复项时。</li>
+</ul>
+<h2 id="std-unordered-map"><a href="#std-unordered-map" class="headerlink" title="std::unordered_map"></a>std::unordered_map</h2><h3 id="1、基本用法-7"><a href="#1、基本用法-7" class="headerlink" title="1、基本用法"></a>1、基本用法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unordered_map&lt;std::string, <span class="type">int</span>&gt; map;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入元素</span></span><br><span class="line">    map.<span class="built_in">insert</span>(&#123;<span class="string">&quot;apple&quot;</span>, <span class="number">5</span>&#125;);</span><br><span class="line">    map[<span class="string">&quot;banana&quot;</span>] = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 访问元素</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;apple has &quot;</span> &lt;&lt; map[<span class="string">&quot;apple&quot;</span>] &lt;&lt; <span class="string">&quot; units.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用find查找元素</span></span><br><span class="line">    <span class="keyword">auto</span> search = map.<span class="built_in">find</span>(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (search != map.<span class="built_in">end</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Found banana, count = &quot;</span> &lt;&lt; search-&gt;second &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Banana not found.\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 遍历元素</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; pair : map) &#123;</span><br><span class="line">        std::cout &lt;&lt; pair.first &lt;&lt; <span class="string">&quot; has &quot;</span> &lt;&lt; pair.second &lt;&lt; <span class="string">&quot; units.\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除元素</span></span><br><span class="line">    map.<span class="built_in">erase</span>(<span class="string">&quot;apple&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查大小</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;The map has &quot;</span> &lt;&lt; map.<span class="built_in">size</span>() &lt;&lt; <span class="string">&quot; elements.\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    map.<span class="built_in">clear</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apple has 5 units.</span><br><span class="line">Found banana, count = 3</span><br><span class="line">banana has 3 units.</span><br><span class="line">apple has 5 units.</span><br><span class="line">The map has 1 elements.</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内部实现-2"><a href="#2、内部实现-2" class="headerlink" title="2、内部实现"></a>2、内部实现</h3><p><code>std::unordered_map</code>内部使用哈希表实现，因此它支持平均常数时间复杂度的查找、插入和删除操作，而<code>std::map</code>使用红黑树实现，提供对数时间复杂度的操作。</p>
+<p><code>std::unordered_map</code>内部主要是通过一个动态数组（通常称为 <code>bucket</code> 数组）来维护元素，每个数组元素（或称为 <code>bucket</code>）包含一个指向链表（或其他形式的容器，如小型向量）的指针。</p>
+<p>这些链表用于存储具有相同哈希值的元素（键值对）。当发生哈希冲突时（即不同的键产生相同的哈希值），<code>std::unordered_map</code>会将具有相同哈希值的元素存储在同一个 <code>bucket</code> 的链表中。</p>
+<ul>
+<li>哈希函数：<code>std::unordered_map</code>使用一个哈希函数将键映射到 bucket 的索引。哈希函数的质量直接影响到容器的性能，理想情况下，哈希函数应该将键均匀分布到所有的 <code>buckets</code> 上，以减少哈希冲突。</li>
+<li>哈希表：内部数据结构，通常是一个动态数组，其中的每个元素指向一个链表（或其他容器），用于解决哈希冲突。</li>
+<li>键值对：存储在链表中的元素，每个元素包含一个键和一个值。</li>
+<li>装载因子：<code>std::unordered_map</code>的装载因子是一个浮点数，定义为<code>元素个数 / bucket数量</code>。当装载因子超过特定阈值（默认为<code>1.0</code>）时，哈希表会进行重新哈希（<code>rehashing</code>），即增加 <code>bucket</code> 数量并重新分配所有元素，以保持操作的效率。</li>
+</ul>
+<p>适用场景</p>
+<ul>
+<li><p><strong>需要快速查找的场景；</strong></p>
+</li>
+<li><p><strong>不关心元素顺序的场景；</strong></p>
+</li>
+<li><p><strong>键值对存储。</strong></p>
+</li>
+</ul>
+
       
     </div>
 
@@ -5578,7 +5833,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/Computer/DataStruct/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -5592,7 +5847,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/06/11/Computer/DataStruct/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">时间&空间复杂度</a>
+            <a href="/2024/06/11/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">时间&空间复杂度</a>
         </h2>
 
         <div class="post-meta">
@@ -5609,7 +5864,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:40:55" itemprop="dateModified" datetime="2024-07-05T10:40:55+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:16:09" itemprop="dateModified" datetime="2024-07-16T11:16:09+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -5617,11 +5872,7 @@ add $4, %esp：
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/DataStruct/" itemprop="url" rel="index"><span itemprop="name">DataStruct</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
                 </span>
             </span>
 
@@ -5631,7 +5882,7 @@ add $4, %esp：
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>884</span>
+              <span>883</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -5650,15 +5901,82 @@ add $4, %esp：
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[toc]</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/11/Computer/DataStruct/%E6%97%B6%E9%97%B4&%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <span id="more"></span>
+
+<h1 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h1><h2 id="1、时间复杂度"><a href="#1、时间复杂度" class="headerlink" title="1、时间复杂度"></a>1、时间复杂度</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;     <span class="comment">// for循环语句执行 n+1 次</span></span><br><span class="line">  x++;                         <span class="comment">// x++;语句执行 n 次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面这段代码，总执行次数是<code>2n+1</code>，因此取其最大阶，其时间复杂度就是<code>O(n)</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>; j&lt;=n; j++) &#123;   <span class="comment">// 该for循环语句执行 n*(n+1) 次</span></span><br><span class="line">    x++;                       <span class="comment">// 该x++;语句执行 n*n 次</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面这段代码，总执行次数是<code>n+1+n*(n+1)+n*n</code>，因此取其最大阶，其时间复杂度就是<code>O(n^2)</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=<span class="number">1</span>; j&lt;=i; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k=<span class="number">1</span>; k&lt;=j; k++) &#123;</span><br><span class="line">            x++;                     <span class="comment">// 该x++;语句执行 A 次（见下方注释）</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面这段代码，取其最大阶，其时间复杂度就是<code>O(n^3)</code>。</p>
+<blockquote>
+<p>A</p>
+<p>对于这三个<code>for</code>循环语句，从下往上分析：</p>
+<ul>
+<li><pre><code class="c++">
+</code></pre>
+</li>
+</ul>
+<p> for (int k&#x3D;1; k&lt;&#x3D;j; k++) {<br>     x++;<br>  }<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> 执行`j`次；</span><br><span class="line"></span><br><span class="line">&gt;+ ```c++</span><br><span class="line"> for (int j=1; j&lt;=i; j++) &#123; </span><br><span class="line">     for (int k=1; k&lt;=j; k++) &#123; </span><br><span class="line">         x++; </span><br><span class="line">     &#125; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p> 执行<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111459800.png" alt="image-20240611145906766" style="zoom:67%;" />次；</p>
+<ul>
+<li><pre><code class="c++">
+</code></pre>
+</li>
+</ul>
+<p> for (int i&#x3D;1; i&lt;&#x3D;n; i++) {<br>     for (int j&#x3D;1; j&lt;&#x3D;i; j++) {<br>         for (int k&#x3D;1; k&lt;&#x3D;j; k++) {<br>             x++;<br>         }<br>     }<br>  }</p>
+<p>执行<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111500830.png" alt="image-20240611150038794" style="zoom: 67%;" />次。</p>
+<p>综上所述，<code>x++;</code>语句执行的次数如下所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111457129.png" alt="image-20240611145732091" style="zoom:67%;" />
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i=i*<span class="number">2</span>) &#123;</span><br><span class="line">    x++;                         <span class="comment">// 该x++;语句执行 B 次（见下方注释）</span></span><br><span class="line">    s = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面这段代码，取其最大阶，其时间复杂度就是<code>O(log2n)</code>。</p>
+<blockquote>
+<p>B</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111455603.png" alt="image-20240611145554310" style="zoom: 67%;" />
+
+<p>所以，对于<code>for</code>循环语句来说，其执行了<code>k+1</code>次；但对于<code>x++;</code>语句来说，只执行了<code>k</code>次。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111527560.png" alt="image-20240611152735504" style="zoom:67%;" />
+</blockquote>
+<h2 id="2、空间复杂度"><a href="#2、空间复杂度" class="headerlink" title="2、空间复杂度"></a>2、空间复杂度</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111529670.png" alt="image-20240611152906551"></p>
+<h1 id="二、数组"><a href="#二、数组" class="headerlink" title="二、数组"></a>二、数组</h1><h2 id="1、二分查找"><a href="#1、二分查找" class="headerlink" title="1、二分查找"></a>1、二分查找</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">search</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> left = <span class="number">0</span>, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">		<span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">			left = mid + <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">			right = mid - <span class="number">1</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（1）时间复杂度</p>
+<p><code>int left = 0, right = nums.size() - 1;</code>的时间复杂度为<code>O(1)</code>。</p>
+<p>接下来看<code>while (left &lt;= right)</code>这个while循环最多会执行几次。</p>
+<p>由于<code>int mid = left + (right - left) / 2;</code>，因此每一次会将搜索空间（<code>S</code>）折半，如下所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111544858.png" alt="image-20240611154411802" style="zoom: 80%;" />
+
+<p>（2）空间复杂度</p>
+<p>空间复杂度主要看算法使用的额外空间量（不包括输入数据本身）。</p>
+<ol>
+<li><strong>变量声明</strong>：<ul>
+<li><code>int left</code>, <code>int right</code>, <code>int mid</code> 都是常数空间<code>O(1)</code>。</li>
+</ul>
+</li>
+<li><strong>没有递归或额外的数据结构</strong>：<ul>
+<li>算法不需要额外的数组、栈或队列等辅助数据结构。</li>
+</ul>
+</li>
+</ol>
+<p>综上，整个算法的空间复杂度是 <code>O(1)</code>。</p>
+<h2 id="2、滑动窗口"><a href="#2、滑动窗口" class="headerlink" title="2、滑动窗口"></a>2、滑动窗口</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">minSubArrayLen</span><span class="params">(<span class="type">int</span> target, vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> l = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> res = INT_MAX;</span><br><span class="line">    <span class="keyword">while</span> (r &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        sum += nums[r++];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (sum &gt;= target) &#123;</span></span><br><span class="line">        <span class="keyword">while</span> (sum &gt;= target) &#123;</span><br><span class="line">            res = <span class="built_in">min</span>(res, r - l);</span><br><span class="line">            sum -= nums[l++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res == INT_MAX ? <span class="number">0</span> : res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<blockquote>
+<p>注意此处的时间复杂度不是O(n^2)！分析如下：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (r &lt; nums.<span class="built_in">size</span>()) &#123;</span><br><span class="line">    sum += nums[r++]; <span class="comment">// 这个操作会执行 n 次</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (sum &gt;= target) &#123;</span><br><span class="line">        res = <span class="built_in">min</span>(res, r - l);</span><br><span class="line">        sum -= nums[l++]; <span class="comment">// 最坏情况下，内层 while 循环会执行 n 次</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然嵌套了两层循环，但是由于整个过程中，<code>nums</code>中的每个元素最多会被<code>l</code>和<code>r</code>各访问一次，也即被操作两次，因此时间复杂度是<code>2n</code>，也即<code>O(n)</code>。</p>
+
       
     </div>
 
@@ -5677,7 +5995,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/28/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/28/0%20%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -5691,7 +6009,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/28/%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">计算机网络</a>
+            <a href="/2024/05/28/0%20%E9%9D%A2%E8%AF%95/%E5%85%AB%E8%82%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">计算机网络</a>
         </h2>
 
         <div class="post-meta">
@@ -7566,7 +7884,7 @@ add $4, %esp：
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/06/Computer/C++/C++%20Allocator/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/06/1%20C++/STL/C++%20Allocator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -7580,7 +7898,7 @@ add $4, %esp：
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2024/05/06/Computer/C++/C++%20Allocator/" class="post-title-link" itemprop="url">C++ Allocator</a>
+            <a href="/2024/05/06/1%20C++/STL/C++%20Allocator/" class="post-title-link" itemprop="url">C++ Allocator</a>
         </h2>
 
         <div class="post-meta">
@@ -7597,7 +7915,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-05 10:39:34" itemprop="dateModified" datetime="2024-07-05T10:39:34+08:00">2024-07-05</time>
+                <time title="修改时间：2024-07-16 11:13:32" itemprop="dateModified" datetime="2024-07-16T11:13:32+08:00">2024-07-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -7605,11 +7923,11 @@ add $4, %esp：
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/" itemprop="url" rel="index"><span itemprop="name">Computer</span></a>
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                  <a href="/categories/C/STL/" itemprop="url" rel="index"><span itemprop="name">STL</span></a>
                 </span>
             </span>
 
@@ -7849,7 +8167,7 @@ add $4, %esp：
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -7890,7 +8208,7 @@ add $4, %esp：
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:25</span>
+    <span title="站点阅读时长">17:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
