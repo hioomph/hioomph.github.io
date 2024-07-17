@@ -847,7 +847,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-16 10:27:18" itemprop="dateModified" datetime="2024-07-16T10:27:18+08:00">2024-07-16</time>
+                <time title="修改时间：2024-07-17 10:19:32" itemprop="dateModified" datetime="2024-07-17T10:19:32+08:00">2024-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1230,9 +1230,8 @@
 <li>右值引用是指向右值的引用，用两个&amp;&amp;表示。右值引用主要用于移动语义。通过移动语义，可以避免不必要的拷贝操作，从而提升性能。</li>
 </ul>
 <h3 id="53、右值引用是如何提高性能的？"><a href="#53、右值引用是如何提高性能的？" class="headerlink" title="53、右值引用是如何提高性能的？"></a>53、右值引用是如何提高性能的？</h3><p>右值引用主要是通过避免不必要的拷贝操作来提升性能的。</p>
-<p>举两个例子：</p>
+<p>举个例子：</p>
 <ol>
-<li>当使用右值引用接收函数返回的局部变量时，可以延长该局部变量的声明周期，使得右值引用直接利用该局部变量的内存，而不是创建一个临时对象，从而避免了不必要的开销。</li>
 <li>当使用一个临时对象来创建一个新对象时，可以使用移动构造函数，直接将资源从一个对象复制到另一个对象上，避免了不必要的复制操作。</li>
 </ol>
 <h3 id="54、指针和引用的区别？"><a href="#54、指针和引用的区别？" class="headerlink" title="54、指针和引用的区别？"></a>54、指针和引用的区别？</h3><p>指针和引用都是⼀种内存地址的概念，区别在于指针是⼀个实体，而引用只是⼀个别名。</p>
@@ -1476,7 +1475,7 @@
 <li>列表初始化是给数据成员分配内存空间时就进行初始化，也就是说分配一个数据成员时，只要冒号后有此数据成员的赋值表达式，那么在进入函数体之前就会给该数据成员赋值；</li>
 <li>列表初始化快于赋值初始化，因为 C++ 的赋值操作是会产生临时对象的。临时对象的出现会降低程序的效率。</li>
 </ol>
-<h3 id="【-】82、有哪些情况必须用到成员列表初始化？作用是什么？"><a href="#【-】82、有哪些情况必须用到成员列表初始化？作用是什么？" class="headerlink" title="【*】82、有哪些情况必须用到成员列表初始化？作用是什么？"></a>【*】82、有哪些情况必须用到成员列表初始化？作用是什么？</h3><ol>
+<h3 id="82、有哪些情况必须用到成员列表初始化？作用是什么？"><a href="#82、有哪些情况必须用到成员列表初始化？作用是什么？" class="headerlink" title="82、有哪些情况必须用到成员列表初始化？作用是什么？"></a>82、有哪些情况必须用到成员列表初始化？作用是什么？</h3><ol>
 <li>必须使用成员初始化的四种情况：</li>
 </ol>
 <p>① 当初始化一个<strong>引用成员</strong>时；</p>
@@ -1488,9 +1487,9 @@
 </ol>
 <p>① 编译器以适当的顺序在构造函数之内安插初始化操作；</p>
 <p>② 列表中各数据成员的初始化顺序是由其成员声明顺序决定的，不是由初始化列表的顺序决定的。</p>
-<h3 id="【-】83、定义一个-class-的object-时，编译器对其构造函数的扩充操作如何？"><a href="#【-】83、定义一个-class-的object-时，编译器对其构造函数的扩充操作如何？" class="headerlink" title="【*】83、定义一个 class 的object 时，编译器对其构造函数的扩充操作如何？"></a>【*】83、定义一个 class 的object 时，编译器对其构造函数的扩充操作如何？</h3><p>按照顺序，依次进行如下扩充：</p>
+<h3 id="83、定义一个-class-的object-时，编译器对其构造函数的扩充操作如何？"><a href="#83、定义一个-class-的object-时，编译器对其构造函数的扩充操作如何？" class="headerlink" title="83、定义一个 class 的object 时，编译器对其构造函数的扩充操作如何？"></a>83、定义一个 class 的object 时，编译器对其构造函数的扩充操作如何？</h3><p>按照顺序，依次进行如下扩充：</p>
 <ol>
-<li>所有<strong>虚拟基类构造函数</strong>被调用；</li>
+<li>所有<strong>虚基类构造函数</strong>被调用；</li>
 <li>所有<strong>上一层的基类构造函数</strong>被调用；</li>
 <li>为<strong>虚表指针设定初值</strong>，指向适当的虚表；</li>
 <li>调用<strong>类成员的构造函数</strong>；</li>
@@ -1522,7 +1521,7 @@
 <li><strong>虚函数</strong>是一种<strong>在基类中声明</strong>的函数，它可以在派生类中被重写。虚函数<strong>可以有自己的实现</strong>，也就是说，即使派生类没有重写该函数，也有一个默认的行为可供执行。</li>
 <li><strong>纯虚函数</strong>是一种<strong>在基类中声明但不实现</strong>的虚函数。通过在函数声明的末尾加上<code>= 0</code>，可以将函数声明为纯虚函数。一个包含纯虚函数的类称为抽象类，这意味着它不能被实例化。纯虚函数的主要目的是强制派生类提供自己的函数实现。</li>
 </ol>
-<h3 id="【-】87、什么样的函数适合声明成虚函数？"><a href="#【-】87、什么样的函数适合声明成虚函数？" class="headerlink" title="【*】87、什么样的函数适合声明成虚函数？"></a>【*】87、什么样的函数适合声明成虚函数？</h3><ul>
+<h3 id="87、什么样的函数适合声明成虚函数？"><a href="#87、什么样的函数适合声明成虚函数？" class="headerlink" title="87、什么样的函数适合声明成虚函数？"></a>87、什么样的函数适合声明成虚函数？</h3><ul>
 <li><strong>基类中的函数</strong>：如果函数在基类中定义，并且子类可能需要重写该函数以提供特定实现，那么该函数通常应该声明为虚函数。这样，在运行时可以根据对象的实际类型来调用适当的函数版本。</li>
 <li><strong>用于多态行为</strong>：虚函数为多态提供了支持。当通过基类指针或引用调用虚函数时，实际上调用的是相应派生类的重写版本。这种多态行为使得代码更加灵活和可扩展。</li>
 <li><strong>用于接口定义</strong>：在设计接口时，通常将接口中的函数声明为虚函数。这样，派生类可以根据自己的需求来实现这些接口函数，同时保持统一的接口定义。</li>
@@ -1602,7 +1601,7 @@
 <p>一般的实现方法如下所述。class 如果内含一个或多个虚基类子对象(virtual base class subobject)，将被分割为两部分：一个<strong>不变区域</strong>和一个<strong>共享区域</strong>。不变区域中的数据，不管后继如何衍化，总是拥有固定的 offset，所以这一部分数据可以被直接存储；<strong>至于共享区域，所表现的就是 virtual base class subobject，其位置会因为派生的操作而变化，所以只能间接存取</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> A &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span> : <span class="keyword">public</span> <span class="keyword">virtual</span> A &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">D</span> : <span class="keyword">public</span> B， <span class="keyword">public</span> C &#123;</span><br><span class="line">    <span class="comment">// D中只有一份A的成员data</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="101、说一下重载，覆盖和隐藏的区别？"><a href="#101、说一下重载，覆盖和隐藏的区别？" class="headerlink" title="101、说一下重载，覆盖和隐藏的区别？"></a>101、说一下重载，覆盖和隐藏的区别？</h3><p>(1)<strong>重载(Overloading)<strong>发生</strong>在同一个作用域内</strong>，当两个或更多具有相同名称但参数列表不同的函数共存时，这些函数被称为重载函数。</p>
+<h3 id="【-】101、说一下重载，覆盖和隐藏的区别？"><a href="#【-】101、说一下重载，覆盖和隐藏的区别？" class="headerlink" title="【*】101、说一下重载，覆盖和隐藏的区别？"></a>【*】101、说一下重载，覆盖和隐藏的区别？</h3><p>(1)<strong>重载(Overloading)<strong>发生</strong>在同一个作用域内</strong>，当两个或更多具有相同名称但参数列表不同的函数共存时，这些函数被称为重载函数。</p>
 <p>(2)<strong>覆盖&#x2F;重写(Overriding)<strong>是指</strong>在派生类中重新定义基类中的虚函数</strong>。它允许派生类提供基类函数的特定实现。重写需要使用相同的函数签名，包括返回类型、函数名和参数列表。</p>
 <p>(3)<strong>隐藏(Hiding)<strong>是指</strong>派生类中的函数或变量隐藏了基类中同名的函数或变量</strong>。发生在非虚函数的情况下，或者当函数签名（返回类型、函数名和参数列表）不同于基类中的函数时。</p>
 <h3 id="102、函数重载在编译期间的实现原理-？"><a href="#102、函数重载在编译期间的实现原理-？" class="headerlink" title="102、函数重载在编译期间的实现原理 ？"></a>102、函数重载在编译期间的实现原理 ？</h3><p>函数重载在编译期间的实现原理主要依靠“名称改编”（name mangling）。具体过程如下：</p>
@@ -1611,11 +1610,15 @@
 <li><strong>符号表</strong>：编译器在符号表中记录这些唯一标识符。当调用函数时，编译器根据参数类型查找匹配的标识符。</li>
 <li><strong>类型检查</strong>：编译器在调用函数时，会检查传递的参数类型与符号表中的记录，以确保调用正确的函数版本。</li>
 </ol>
-<h3 id="103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？"><a href="#103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？" class="headerlink" title="103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？"></a>103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？</h3><p>在多继承中，如果有公共父类并调用函数时产生二义性，可以通过以下方法解决：</p>
+<h3 id="【-】103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？"><a href="#【-】103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？" class="headerlink" title="【*】103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？"></a>【*】103、多继承问题，如果有公共父类时调用函数产生二义性的情况下，怎么办？</h3><p>在多继承中，如果有公共父类并调用函数时产生二义性，可以通过以下方法解决：</p>
 <ol>
 <li><strong>作用域解析运算符</strong>：使用类名和作用域解析运算符 (<code>::</code>) 指定调用哪个父类的函数。例如，<code>Base1::function()</code>。</li>
 <li><strong>虚继承</strong>：使用虚继承（<code>virtual</code> 关键字）来确保公共父类只在派生类中存在一个实例，避免二义性。</li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Base::show()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived1</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Derived1::show()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived2</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Derived2::show()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived3</span> : <span class="keyword">public</span> Derived1, <span class="keyword">public</span> Derived2 &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Derived3::show()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Derived3 d3;</span><br><span class="line">    <span class="comment">// d3.show(); // 二义性错误</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用作用域解析运算符指定调用哪个基类的函数</span></span><br><span class="line">    d3.Derived1::<span class="built_in">show</span>();</span><br><span class="line">    d3.Derived2::<span class="built_in">show</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Base::show()&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived1</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Base &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived2</span> : <span class="keyword">virtual</span> <span class="keyword">public</span> Base &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived3</span> : <span class="keyword">public</span> Derived1, <span class="keyword">public</span> Derived2 &#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Derived3 d3;</span><br><span class="line">    d3.<span class="built_in">show</span>(); <span class="comment">// 调用的是Base::show()</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="【-】104、多重继承下的内存分布如何？"><a href="#【-】104、多重继承下的内存分布如何？" class="headerlink" title="【*】104、多重继承下的内存分布如何？"></a>【*】104、多重继承下的内存分布如何？</h3><p>对于一个多重派生对象：</p>
 <ol>
 <li>将其地址指定给<strong>第一个 base class</strong> 的指针，情况将和单一继承时相同，因为二者都指向相同的起始地址。</li>
@@ -1623,8 +1626,8 @@
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 考虑将 vptr 放在 class object 的起始处</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point2d</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 包含virtual接口，因此Point2的对象中包含vptr</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point3d</span> : <span class="keyword">public</span> Point2d &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Vertex</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 包含virtual接口，因此Vertex的对象中包含vptr</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Vertex3d</span> : <span class="keyword">public</span> Point3d， <span class="keyword">public</span> Vertex &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Vertex3d v3d;</span><br><span class="line">    Vertex *pv;     </span><br><span class="line">    Point2d *p2d;   </span><br><span class="line">    Point3d *p3d;   </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1</span></span><br><span class="line">    pv = &amp;v3d;      <span class="comment">// 内部转化：pv = (Vertex*)(((char*)&amp;v3d) + sizeof(Point3d));</span></span><br><span class="line">    p2d = &amp;v3d;     <span class="comment">// 无需内部转化</span></span><br><span class="line">    p3d = &amp;v3d;     <span class="comment">// 无需内部转化</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    Vertex3d *pv3d;</span><br><span class="line">    Vertex *pv1;</span><br><span class="line"></span><br><span class="line">    pv1 = pv3d;     <span class="comment">// 内部转化：pv1 = pv3d ? (Vertex*)(((char*)&amp;pv3d) + sizeof(Point3d)) : 0;</span></span><br><span class="line">                    <span class="comment">// 对于指针，内部需要有一个条件测试</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？"><a href="#105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？" class="headerlink" title="105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？"></a>105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？</h3><p><strong>只有当一个完整的 class object 被定义出来时，虚基类的构造函数才会被调用；如果 object 只是某个完整 object 的一个 subobject，就不会被调用(即相当于下方例子中 A 的构造函数不会在B 和 C 的实例化过程中被重复调用)。</strong></p>
-<p>虚基类的构造函数仅在创建最派生类(即最终实例化的类)对象时才会被调用，而不会在创建其间接派生类对象时重复调用。</p>
+<h3 id="105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？"><a href="#105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？" class="headerlink" title="105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？"></a>105、多重继承下，如果其中有继承一个虚基类，构造函数的调用情况如何？</h3><p><strong>只有当一个完整的 class object 被定义出来时，虚基类的构造函数才会被调用；如果 object 只是某个完整 object 的一个子对象，就不会被调用。</strong>即相当于下方例子中 A 的构造函数不会在B 和 C 的实例化过程中被重复调用。</p>
+<p><strong>虚基类的构造函数仅在创建最派生类(即最终实例化的类)对象时才会被调用，而不会在创建其间接派生类对象时重复调用。</strong></p>
 <ul>
 <li>完整对象(Complete Object)：指一个通过某个类直接实例化出来的对象。</li>
 <li>子对象(Subobject)：指一个对象中的组成部分，可能是一个基类子对象或者是一个成员对象。</li>
@@ -1698,24 +1701,28 @@
 <li><strong>配接器：</strong>⼀种用来修饰容器或者仿函数或迭代器接口的东⻄。</li>
 <li><strong>配置器：</strong>负责空间配置与管理，从实现的角度讲，配置器是⼀个实现了动态空间配置、空间管理，空间释放的类模板。</li>
 </ul>
-<h3 id="109、STL-中序列式容器的实现"><a href="#109、STL-中序列式容器的实现" class="headerlink" title="109、STL 中序列式容器的实现"></a>109、<strong>STL</strong> <strong>中序列式容器的实现</strong></h3><p>(1)<strong>vector</strong>是动态空间，随着元素的加⼊，它的内部机制会⾃行扩充空间以容纳新元素。vector 维护的是⼀个连续的线性空间，而且普通指针就可以满⾜要求作为 vector 的迭代器(RandomAccessIterator)。vector 的数据结构中其实就是三个迭代器构成的，<strong>⼀个指向目前使用空间头的 iterator，⼀个指向目前使用空间尾的 iterator，⼀个指向目前可用空间尾的 iterator</strong>。当有新的元素插⼊时，如果目前容量够用则直接插⼊，如果容量不够，则容量扩充至两倍，如果两倍容量不⾜， 就扩张至⾜够大的容量。扩充的过程并不是直接在原有空间后⾯追加容量，而是重新申请⼀块连续空间，将原有的数据拷贝到新空间中，再释放原有空间，完成⼀次扩充。需要注意的是，每次扩充是重新开辟的空间，所以扩充后，原有的迭代器将会失效。</p>
-<p>(2)<strong>list</strong>，与 vector 相比，list 的好处就是每次插⼊或删除⼀个元素，就配置或释放⼀个空间，而且原有的迭代器也不会失效。STL list 是⼀个双向链表，普通指针已经不能满⾜ list 迭代器的需求，因为 list 的存储空间是不连续的。list 的迭代器必需具备前移和后退功能，所以 list 提供的是 BidirectionalIterator。list 的数据结构中只要⼀个指向 node 节点的指针就可以了。</p>
-<p>(3)<strong>deque</strong>，vector 是单向开口的连续线性空间，deque 则是⼀种双向开口的连续线性空间。所谓双向开口，就是说 deque ⽀持从头尾两端进行元素的插⼊和删除操作。相比于 vector 的扩充空间的方式，deque 实际上更加贴切的实现了动态空间的概念。deque 没有容量的概念，因为它是动态地以分段连续空间组合而成，随时可以增加⼀段新的空间并连接起来。由于要维护这种整体连续的假象，并提供随机存取的接口(即也提供 RandomAccessIterator)，避开了“重新配置，复制，释放”的轮回，代价是复杂的迭代器结构。也就是说除⾮必要，我们应该尽可能的使用 vector，而不是 deque。</p>
-<p>(4)<strong>stack</strong>是⼀种先进后出的数据结构，只有⼀个出口，stack 允许从最顶端新增元素，移除最顶端元素，取得最顶端元素。deque 是双向开口的数据结构，所以使用 deque 作为底部结构并封闭其头端开口，就形成了⼀个 stack。</p>
-<p>(5)<strong>queue</strong>是⼀种先进先出的数据结构，有两个出口，允许从最底端加⼊元素，取得最顶端元素，从最底端新增元素，从最顶端移除元素。deque 是双向开口的数据结构，若以 deque 为底部结构并封闭其底端的出口，和头端的⼊口，就形成了⼀个 queue。(其实 list 也可以实现 deque)</p>
-<p>(6)<strong>heap</strong>，堆并不属于 STL 容器组件，它是个幕后英雄，扮演 priority_queue 的助⼿，priority_queue 允许用户以任何次序将任何元素推⼊容器内，但取出时⼀定是从优先权最⾼(数值最⾼)的元素开始取。大根堆(binary max heap)正具有这样的性质，适合作为 priority_queue 的底层机制。</p>
-<h3 id="110、vector-使用的注意点及其原因，频繁对-vector-调用-push-back-性能影响"><a href="#110、vector-使用的注意点及其原因，频繁对-vector-调用-push-back-性能影响" class="headerlink" title="110、vector **使用的注意点及其原因，频繁对 **vector 调用 push_back() 性能影响"></a>110、vector **使用的注意点及其原因，频繁对 **vector 调用 push_back() 性能影响</h3><p><strong>（1）使用注意点：</strong></p>
-<p>注意插⼊和删除元素后迭代器失效的问题；</p>
-<p>清空 vector 数据时，如果保存的数据项是指针类型，需要逐项 delete，否则会造成内存泄漏。</p>
+<h3 id="【】109、-STL-中序列式容器的实现"><a href="#【】109、-STL-中序列式容器的实现" class="headerlink" title="【】109、*STL 中序列式容器的实现"></a>【<em>】109、*<em>STL</em></em> <strong>中序列式容器的实现</strong></h3><p>(1) <strong>vector</strong>是动态空间，随着元素的加⼊，它的内部机制会⾃行扩充空间以容纳新元素。vector 维护的是⼀个连续的线性空间，而且普通指针就可以满⾜要求作为 vector 的迭代器(RandomAccessIterator)。vector 的数据结构中其实就是三个迭代器构成的，<strong>⼀个指向目前使用空间头的 iterator，⼀个指向目前使用空间尾的 iterator，⼀个指向目前可用空间尾的 iterator</strong>。当有新的元素插⼊时，如果目前容量够用则直接插⼊，如果容量不够，则容量扩充至两倍，如果两倍容量不⾜， 就扩张至⾜够大的容量。扩充的过程并不是直接在原有空间后⾯追加容量，而是重新申请⼀块连续空间，将原有的数据拷贝到新空间中，再释放原有空间，完成⼀次扩充。需要注意的是，每次扩充是重新开辟的空间，所以扩充后，原有的迭代器将会失效。</p>
+<p>(2) <strong>list</strong>，与 vector 相比，list 的好处就是每次插⼊或删除⼀个元素，就配置或释放⼀个空间，而且原有的迭代器也不会失效。STL list 是⼀个双向链表，普通指针已经不能满⾜ list 迭代器的需求，因为 list 的存储空间是不连续的。list 的迭代器必需具备前移和后退功能，所以 list 提供的是 BidirectionalIterator。list 的数据结构中只要⼀个指向 node 节点的指针就可以了。</p>
+<p>(3) <strong>deque</strong>，vector 是单向开口的连续线性空间，deque 则是⼀种双向开口的连续线性空间。所谓双向开口，就是说 deque ⽀持从头尾两端进行元素的插⼊和删除操作。相比于 vector 的扩充空间的方式，deque 实际上更加贴切的实现了动态空间的概念。deque 没有容量的概念，因为它是动态地以分段连续空间组合而成，随时可以增加⼀段新的空间并连接起来。由于要维护这种整体连续的假象，并提供随机存取的接口(即也提供 RandomAccessIterator)，避开了“重新配置，复制，释放”的轮回，代价是复杂的迭代器结构。也就是说除⾮必要，我们应该尽可能的使用 vector，而不是 deque。</p>
+<p>(4) <strong>stack</strong>是⼀种先进后出的数据结构，只有⼀个出口，stack 允许从最顶端新增元素，移除最顶端元素，取得最顶端元素。deque 是双向开口的数据结构，所以使用 deque 作为底部结构并封闭其头端开口，就形成了⼀个 stack。</p>
+<p>(5) <strong>queue</strong>是⼀种先进先出的数据结构，有两个出口，允许从最底端加⼊元素，取得最顶端元素，从最底端新增元素，从最顶端移除元素。deque 是双向开口的数据结构，若以 deque 为底部结构并封闭其底端的出口，和头端的⼊口，就形成了⼀个 queue。(其实 list 也可以实现 deque)</p>
+<p>(6) <strong>heap</strong>，堆并不属于 STL 容器组件，它是个幕后英雄，扮演 priority_queue 的助⼿，priority_queue 允许用户以任何次序将任何元素推⼊容器内，但取出时⼀定是从优先权最⾼(数值最⾼)的元素开始取。大根堆(binary max heap)正具有这样的性质，适合作为 priority_queue 的底层机制。</p>
+<h3 id="110、vector-使用的注意点及其原因、频繁对-vector-调用-push-back-性能影响"><a href="#110、vector-使用的注意点及其原因、频繁对-vector-调用-push-back-性能影响" class="headerlink" title="110、vector 使用的注意点及其原因、频繁对 vector 调用 push_back() 性能影响"></a>110、vector 使用的注意点及其原因、频繁对 vector 调用 push_back() 性能影响</h3><p><strong>（1）使用注意点：</strong></p>
+<ul>
+<li>注意插⼊和删除元素后<strong>迭代器失效</strong>的问题；</li>
+<li>清空 vector 数据时，<strong>如果保存的数据项是指针类型，需要逐项 delet</strong>e，否则会造成内存泄漏。</li>
+</ul>
 <p><strong>（2）频繁调用 push_back() 的影响：</strong></p>
-<p>向 vector 的尾部添加元素，很有可能引起整个对象 存储空间的重新分配，重新分配更大的内存，再将原数据拷贝到新空间中，再释 放原有内存，这个过程是耗时耗⼒的，频繁对 vector 调用 push_back()会导致性能的下降。</p>
+<p>向 vector 的尾部添加元素，很有可能<strong>引起整个对象存储空间的重新分配</strong>，重新分配更大的内存，再将原数据拷贝到新空间中，再释放原有内存，这个过程是耗时耗⼒的，<strong>频繁对 vector 调用 push_back()会导致性能的下降。</strong></p>
 <p>在 C++11 之后， vector 容器中添加了新的方法： emplace_back() ，和 push_back() ⼀样的是都是在容器末尾添加⼀个新的元素进去，不同的是 emplace_back() 在效率上相比较于 push_back() 有了⼀定的提升。</p>
-<p>emplace_back() 函数在原理上比 push_back() 有了⼀定的改进，包括在内存优化方⾯和运行效率方⾯。内存优化主要体现在使用了<strong>就地构造(直接在容器内构造对象，不用拷贝⼀个复制品再使用)+ 强制类型转换</strong>的方法来实现，在运行效率方⾯，由于省去了拷贝构造过程，因此也有⼀定的提升。</p>
+<p>emplace_back() 函数在原理上比 push_back() 有了⼀定的改进，包括在内存优化方⾯和运行效率方⾯。内存优化主要体现在使用了<strong>直接在容器内构造对象，不用拷贝⼀个复制品再使用 + 强制类型转换</strong>的方法来实现，在运行效率方⾯，由于省去了拷贝构造过程，因此也有⼀定的提升。</p>
 <h3 id="111、map-和-set-有什么区别，分别又是怎么实现的？"><a href="#111、map-和-set-有什么区别，分别又是怎么实现的？" class="headerlink" title="111、map 和 set 有什么区别，分别又是怎么实现的？"></a><strong>111、map</strong> <strong>和</strong> <strong>set</strong> <strong>有什么区别，分别又是怎么实现的？</strong></h3><p>map 和 set 都是 C++ 的关联容器，其底层实现都是红⿊树(RB-Tree)。由于 map 和 set 所开放的各种操作接口，RB-tree 也都提供了，所以几乎所有的 map 和 set 的操作行为，都只是转调 RB-tree 的操作行为。</p>
 <p>map 和 set 区别在于：</p>
-<p>(1)map 中的元素是 key-value(关键字—值)对：关键字起到索引的作用，值则表示与索引相关联的数据；Set与之相对就是关键字的简单集合，set 中每个元素只包含⼀个关键字。</p>
-<p>(2)set 的迭代器是 const 的，不允许修改元素的值；map允许修改value，但不允许修改key。其原因是因为map和set是根据关键字排序来保证其有序性的，如果允许修改key的话，那么⾸先需要删除该键，然后调节平衡，再插⼊修改后的键值，调节平衡，如此⼀来，严重破坏了map和set的结构，导致iterator失效，不知道应该指向改变前的位置，还是指向改变后的位置。所以STL中将set的迭代器设置成const，不允许修改迭代器的值；而map的迭代器则不允许修改key值，允许修改value值。</p>
-<p>(3)map⽀持下标操作，set不⽀持下标操作。map可以用key做下标，map的下标运算符[ ]将关键码作为下标去执行查找，如果关键码不存在，则插⼊⼀个具有该关键码和mapped_type类型默认值的元素至map中，因此下标运算符[ ]在map应用中需要慎用，const_map不能用，只希望确定某⼀个关键值是否存在而不希望插⼊元素时也不应该使用，mapped_type类型没有默认值也不应该使用。如果find能解决需要，尽可能用find。</p>
+<ol>
+<li><strong>map 中的元素是 key-value 对</strong>：关键字起到索引的作用，值则表示与索引相关联的数据；<strong>而 set 是关键字的简单集合</strong>，set 中每个元素只包含⼀个关键字。</li>
+<li><strong>set 的迭代器是 const 的，不允许修改元素的值；map允许修改 value，但不允许修改 key。</strong>其原因是因为 map 和 set 是根据关键字排序来保证其有序性的，如果允许修改 key 的话，那么⾸先需要删除该键，然后调节平衡，再插⼊修改后的键值，调节平衡，如此⼀来，严重破坏了 map 和 set 的结构，导致 iterator 失效，不知道应该指向改变前的位置，还是指向改变后的位置。所以 STL 中将 set 的迭代器设置成 const，不允许修改迭代器的值；而 map 的迭代器则不允许修改 key 值，允许修改 value 值。</li>
+<li>查找，如果关键码不存在，则插⼊⼀个具有该关键码和 mapped_type 类型默认值的元素至 map 中，<strong>因此下标运算符 [ ] 在 map 中需要慎用，const_map 不能用，只希望确定某⼀个关键值是否存在而不希望插⼊元素时也不应该使用，mapped_type 类型没有默认值也不应该使用。如果 find 能解决需要，尽可能用 find。</strong></li>
+</ol>
 <h3 id="112、STL-中迭代器失效的情况有哪些？"><a href="#112、STL-中迭代器失效的情况有哪些？" class="headerlink" title="112、STL 中迭代器失效的情况有哪些？"></a>112、STL 中迭代器失效的情况有哪些？</h3><p>以 vector 为例：</p>
 <p><strong>插入元素：</strong></p>
 <p>1、尾后插入：</p>
@@ -3122,12 +3129,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">290k</span>
+    <span title="站点总字数">291k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:35</span>
+    <span title="站点阅读时长">17:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
