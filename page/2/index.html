@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-03 22:09:48" itemprop="dateModified" datetime="2024-07-03T22:09:48+08:00">2024-07-03</time>
+                <time title="修改时间：2024-07-19 10:31:51" itemprop="dateModified" datetime="2024-07-19T10:31:51+08:00">2024-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -242,14 +242,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>48k</span>
+              <span>47k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:54</span>
+              <span>2:49</span>
             </span>
 
         </div>
@@ -263,24 +263,21 @@
       
           <span id="more"></span>
 
-<h1 id="一、基础篇"><a href="#一、基础篇" class="headerlink" title="一、基础篇"></a>一、基础篇</h1><h2 id="1、为什么要有TCP-IP网络模型？"><a href="#1、为什么要有TCP-IP网络模型？" class="headerlink" title="1、为什么要有TCP&#x2F;IP网络模型？"></a>1、为什么要有TCP&#x2F;IP网络模型？</h2><p>为了实现不同设备间的通信，需要网络通信。又由于需要兼容多样性的设备，因此需要一套通用的网络协议。</p>
-<h2 id="2、TCP-IP网络模型概述"><a href="#2、TCP-IP网络模型概述" class="headerlink" title="2、TCP&#x2F;IP网络模型概述"></a>2、TCP&#x2F;IP网络模型概述</h2><p><strong>1、应用层</strong></p>
-<p>应用层工作在操作系统的用户态，不关心数据如何传输，只需要为用户提供应用功能，如 HTTP、FTP、Telent、DNS 和 SMTP 等。</p>
+<h1 id="一、基础篇"><a href="#一、基础篇" class="headerlink" title="一、基础篇"></a>一、基础篇</h1><h2 id="1、TCP-IP网络模型概述"><a href="#1、TCP-IP网络模型概述" class="headerlink" title="1、TCP&#x2F;IP网络模型概述"></a>1、TCP&#x2F;IP网络模型概述</h2><p><strong>1、应用层</strong></p>
+<p>应用层工作在操作系统的<strong>用户态</strong>，<strong>不关心数据如何传输，只需要为用户提供应用功能</strong>，如 HTTP、FTP、Telent、DNS 和 SMTP 等。</p>
 <p><strong>2、传输层</strong></p>
-<p>传输层为应用层提供网络支持，包含两个传输协议，TCP（可靠）和UDP（不可靠）。由于应用需要传输的数据可能会非常大，因此当传输层的数据包超过 MSS（TCP 最大报文段长度）时 ，就要将数据包分块（即TCP段）。当设备作为接收方时，传输层则要负责把数据包传给应用，根据传输层报文中携带的端口号，应用层识别出该报文发送给哪个应用。</p>
+<p>传输层<strong>为应用层提供网络支持，只负责作为应用间数据传输的媒介</strong>，包含两个传输协议，TCP（可靠）和UDP（不可靠）。由于应用需要传输的数据可能会非常大，因此当传输层的数据包超过 MSS（TCP 最大报文段长度）时 ，就要将数据包分块（即TCP段）。当设备作为接收方时，传输层则要负责把数据包传给应用，根据传输层报文中携带的端口号，应用层识别出该报文发送给哪个应用。</p>
 <p><strong>3、网络层</strong></p>
-<p>网络层负责将数据从一个设备传输到另一个设备（与此相比，传输层只负责作为应用间数据传输的媒介）。网络层最常使用的是 IP 协议（Internet Protocol），IP 协议会将传输层的报文作为数据部分，再加上 IP 包头组装成 IP 报文，如果 IP 报文大小超过 MTU（以太网中一般为 1500 字节）就会<strong>再次进行分片</strong>，得到一个即将发送到网络的 IP 报文。</p>
-<p>路由器寻址工作中，就是要找到目标地址的子网，找到后进而把数据包转发给对应的网络内。除了<strong>寻址能力</strong>， IP 协议还有另一个重要的能力就是<strong>路由</strong>。实际场景中，两台设备并不是用一条网线连接起来的，而是通过很多网关、路由器、交换机等众多网络设备连接起来的，那么就会形成很多条网络的路径，因此当数据包到达一个网络节点，就需要通过路由算法决定下一步走哪条路径。</p>
-<p>所以，<strong>IP 协议的寻址作用是告诉我们去往下一个目的地该朝哪个方向走，路由则是根据「下一个目的地」选择路径。寻址更像在导航，路由更像在操作方向盘</strong>。</p>
+<p>网络层<strong>负责将数据从一个设备传输到另一个设备</strong>。网络层最常使用的是 IP 协议（Internet Protocol），IP 协议会将传输层的报文作为数据部分，再加上 IP 包头组装成 IP 报文，如果 IP 报文大小超过 MTU（以太网中一般为 1500 字节）就会<strong>再次进行分片</strong>，得到一个即将发送到网络的 IP 报文。包含<strong>寻址</strong>和<strong>路由</strong>两个重要能力。</p>
 <p><strong>4、网络接口层</strong></p>
-<p>网络接口层主要为网络层提供链路级别传输的服务，负责在以太网、WiFi 这样的底层网络上发送原始数据包，工作在网卡这个层次，使用 MAC 地址来标识网络上的设备。以太网在判断网络包目的地时必须采用相匹配的方式才能在以太网中将包发往目的地，MAC 头部是以太网使用的头部，它包含了接收方和发送方的 MAC 地址等信息，我们可以通过 ARP 协议获取对方的 MAC 地址。</p>
+<p>网络接口层<strong>主要为网络层提供链路级别传输的服务</strong>，负责在以太网、WiFi 这样的底层网络上发送原始数据包，工作在网卡这个层次，使用 MAC 地址来标识网络上的设备，可以通过 ARP 协议获取对方的 MAC 地址。</p>
 <p><strong>5、总结</strong></p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/tcpip%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B.drawio.png" alt="img" style="zoom: 50%;" />
 
 <p>每一层的封装格式：</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%B5%AE%E7%82%B9/%E5%B0%81%E8%A3%85.png" alt="img" style="zoom: 50%;" />
 
-<h2 id="3、键入网址到网页显示，期间发生了什么？"><a href="#3、键入网址到网页显示，期间发生了什么？" class="headerlink" title="3、键入网址到网页显示，期间发生了什么？"></a>3、键入网址到网页显示，期间发生了什么？</h2><blockquote>
+<h2 id="2、键入网址到网页显示，期间发生了什么？"><a href="#2、键入网址到网页显示，期间发生了什么？" class="headerlink" title="2、键入网址到网页显示，期间发生了什么？"></a>2、键入网址到网页显示，期间发生了什么？</h2><blockquote>
 <p><strong>第一步</strong>，浏览器对 URL 进行解析，确定 Web 服务器和文件名；</p>
 <p><strong>第二步</strong>，生成发送给 Web 服务器的 HTTP 请求信息；</p>
 <p><strong>第三步</strong>，通过 DNS 查询与服务器域名对应的 IP 地址；</p>
@@ -350,7 +347,7 @@
 <p>在发送数据包时，如果目标主机不是本地局域网，填入的MAC地址是路由器，也就是把数据包转发给路由器，路由器一直转发下一个路由器，直到转发到目标主机的路由器，发现 IP 地址是自己局域网内的主机，就会 ARP 请求获取目标主机的 MAC 地址，从而转发到这个服务器主机。</p>
 <p>转发的过程中，源IP地址和目标IP地址是不会变的（前提：没有使用 NAT 网络的），源 MAC 地址和目标 MAC 地址是会变化的。</p>
 </blockquote>
-<h2 id="4、Linux接收网络包的流程"><a href="#4、Linux接收网络包的流程" class="headerlink" title="4、Linux接收网络包的流程"></a>4、Linux接收网络包的流程</h2><blockquote>
+<h2 id="3、Linux接收网络包的流程"><a href="#3、Linux接收网络包的流程" class="headerlink" title="3、Linux接收网络包的流程"></a>3、Linux接收网络包的流程</h2><blockquote>
 <p>当网卡接收到网络包后，通过 DMA 将网络包写入 Ring Buffer 中，并通过中断和轮询的方式告诉操作系统该网络包已到达。</p>
 <p>操作系统首先调用<strong>硬中断</strong>处理函数表示已经知道内存中有数据了，告诉网卡下次再收到数据包直接写内存就可以，不需要再通知 CPU 了，接着发起<strong>软中断</strong>，恢复刚才屏蔽的中断。软中断则从 Ring Buffer 中获取一个数据帧，即<code>sk_buff</code>，作为网络包交给网络协议栈进行逐层处理。</p>
 <p>逐层处理的过程是（1）先进入网络接口层，检查报文的合法性，并并找出上层协议的类型；（2）交给网络层，取出 IP 包，判断是要转发出去还是交给本机上层处理；（3）传输层取出 TCP&#x2F;UDP 头，根据四元组「源 IP、源端口、目的 IP、目的端口」 作为标识，找出对应的 Socket，将数据放入 Socket 对应的接收缓冲区；（4）最后，应用进程调用 Socket 接口，将内核的 Socket 接收缓冲区的数据「拷贝」到应用层的缓冲区，然后唤醒用户进程。</p>
@@ -392,11 +389,11 @@
 <li>最后，应用层程序调用 Socket 接口，将内核的 Socket 接收缓冲区的数据「拷贝」到应用层的缓冲区，然后唤醒用户进程。</li>
 </ul>
 <p>至此，一个网络包的接收过程就已经结束了。</p>
-<h2 id="5、Linux发送网络包的流程"><a href="#5、Linux发送网络包的流程" class="headerlink" title="5、Linux发送网络包的流程"></a>5、Linux发送网络包的流程</h2><blockquote>
+<h2 id="4、Linux发送网络包的流程"><a href="#4、Linux发送网络包的流程" class="headerlink" title="4、Linux发送网络包的流程"></a>4、Linux发送网络包的流程</h2><blockquote>
 <p>首先，应用进程调用Socket发送数据的接口，从用户态进入内核态，内核申请一个<code>sk_buff</code>内存，将用户待发送的数据拷贝到<code>sk_buff</code>内存，并将其加入到发送缓冲区。</p>
 <p>其次，网络协议栈从Socket发送缓冲区取出<code>sk_buff</code>，<code>sk_buff</code>通过调整其data的指针，可以表示各个层的数据包。因此按照TCP&#x2F;IP协议栈从上到下逐层处理，最终将<code>sk_buff</code>放到网卡的发送队列中。注意如果使用的是 TCP 传输协议发送数据，需要先拷贝一个新的 <code>sk_buff</code> 副本。</p>
 <p>此时，会触发「软中断」告诉网卡驱动程序有新的网络包需要发送。驱动程序从发送队列中读取<code>sk_buff</code>并挂到<code>Ring Buffer</code>中，并将<code>sk_buff</code>的数据映射到网卡可访问的内存DMA区域，并触发真实的发送。</p>
-<p>当数据发送完成后，网卡设备会触发硬中断释放内存，主要是释放<code>sk_buff</code> 内存和清理<code>Ring Buffer</code>内存。并且，当收到这个 TCP 报文的 ACK 应答时，传输层会释放原始的<code>sk_buff</code>。</p>
+<p>当数据发送完成后，网卡设备会触发「硬中断」释放内存，主要是释放<code>sk_buff</code> 内存和清理<code>Ring Buffer</code>内存。并且，当收到这个 TCP 报文的 ACK 应答时，传输层会释放原始的<code>sk_buff</code>。</p>
 </blockquote>
 <p>（1）首先，应用程序会调用 Socket 发送数据包的接口，由于这个是系统调用，所以会从用户态陷入到内核态中的 Socket 层，内核会申请一个内核态的 <code>sk_buff</code>内存，<strong>将用户待发送的数据拷贝到 <code>sk_buff</code> 内存，并将其加入到发送缓冲区</strong>。</p>
 <p>（2）接下来，网络协议栈从 Socket 发送缓冲区中取出<code>sk_buff</code>，并按照 TCP&#x2F;IP 协议栈从上到下逐层处理。</p>
@@ -453,16 +450,16 @@
 <p>中断是一种异步的事件处理机制，用来提高系统的并发处理能力。中断事件发生，会触发执行中断处理程序，而中断处理程序被分为上半部和下半部这两个部分。上半部对应硬中断，用来快速处理中断；下半部对应软中断，用来异步处理上半部未完成的工作。Linux 中的软中断包括网络收发、定时、调度、RCU 锁等各种类型，我们可以查看 proc 文件系统中的 <code>/proc/softirqs</code>  ，观察软中断的运行情况。在 Linux 中，每个 CPU 都对应一个软中断内核线程，名字是 <code>ksoftirqd/CPU </code>编号。当软中断事件的频率过高时，内核线程也会因为 CPU 使用率过高而导致软中断处理不及时，进而引发网络收发延迟、调度缓慢等性能问题。</p>
 <h4 id="（3）NAPI机制分析"><a href="#（3）NAPI机制分析" class="headerlink" title="（3）NAPI机制分析"></a>（3）NAPI机制分析</h4><h1 id="二、HTTP篇"><a href="#二、HTTP篇" class="headerlink" title="二、HTTP篇"></a>二、HTTP篇</h1><blockquote>
 <p>HTTP 是一个用于在<strong>服务器和服务器之间</strong>，或<strong>服务器和本地浏览器之间</strong>传输文字、图片、音频和视频等超文本数据的规范和约定。</p>
-</blockquote>
-<h2 id="6、HTTP是什么？"><a href="#6、HTTP是什么？" class="headerlink" title="6、HTTP是什么？"></a>6、HTTP是什么？</h2><p>HTTP是超文本传输协议，也就是<code>HyperText Transfer Protocol</code>。</p>
+<p>HTTP是超文本传输协议，也就是<code>HyperText Transfer Protocol</code>。</p>
 <p>「超文本」：文字、图片和视频等的混合体。其本身只是纯文字文件，但内部用很多标签定义了图片、视频等的链接，再经过浏览器的解释，呈现出来的就是一个有文字、有画面的网页了。</p>
-<h2 id="7、HTTP的常见状态码有哪些？"><a href="#7、HTTP的常见状态码有哪些？" class="headerlink" title="7、HTTP的常见状态码有哪些？"></a>7、HTTP的常见状态码有哪些？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291014235.png" alt="HTTP常见状态码"></p>
-<h2 id="8、HTTP的常见字段有哪些？"><a href="#8、HTTP的常见字段有哪些？" class="headerlink" title="8、HTTP的常见字段有哪些？"></a>8、HTTP的常见字段有哪些？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291021674.png" alt="HTTP常见字段"></p>
-<h2 id="9、Get-与-Post"><a href="#9、Get-与-Post" class="headerlink" title="9、Get 与 Post"></a>9、Get 与 Post</h2><p><strong>GET 的语义是从服务器获取指定的资源</strong>。GET 请求的参数位置一般是写在 URL 中，URL 规定只能支持 ASCII，所以 GET 请求的参数只允许 ASCII 字符 ，而且浏览器会对 URL 的长度有限制（HTTP协议本身对 URL长度并没有做任何规定）。GET 方法是安全、幂等、可被缓存的。</p>
+</blockquote>
+<h2 id="5、HTTP的常见状态码有哪些？"><a href="#5、HTTP的常见状态码有哪些？" class="headerlink" title="5、HTTP的常见状态码有哪些？"></a>5、HTTP的常见状态码有哪些？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291014235.png" alt="HTTP常见状态码"></p>
+<h2 id="6、HTTP的常见字段有哪些？"><a href="#6、HTTP的常见字段有哪些？" class="headerlink" title="6、HTTP的常见字段有哪些？"></a>6、HTTP的常见字段有哪些？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291021674.png" alt="HTTP常见字段"></p>
+<h2 id="7、Get-与-Post"><a href="#7、Get-与-Post" class="headerlink" title="7、Get 与 Post"></a>7、Get 与 Post</h2><p><strong>GET 的语义是从服务器获取指定的资源</strong>。GET 请求的参数位置一般是写在 URL 中，URL 规定只能支持 ASCII，所以 GET 请求的参数只允许 ASCII 字符 ，而且浏览器会对 URL 的长度有限制（HTTP协议本身对 URL长度并没有做任何规定）。GET 方法是安全、幂等、可被缓存的。</p>
 <p><strong>POST 的语义是根据请求负荷（报文body）对指定的资源做出处理</strong>。POST 请求携带数据的位置一般是写在报文 body 中，body 中的数据可以是任意格式的数据，只要客户端与服务端协商好即可，而且浏览器不会对 body 大小做限制。POST 不安全，不幂等，（大部分实现）不可缓存。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291431547.png" alt="GET 请求"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291431269.png" alt="POST 请求"></p>
-<h2 id="10、HTTP缓存技术"><a href="#10、HTTP缓存技术" class="headerlink" title="10、HTTP缓存技术"></a>10、HTTP缓存技术</h2><blockquote>
+<h2 id="8、HTTP缓存技术"><a href="#8、HTTP缓存技术" class="headerlink" title="8、HTTP缓存技术"></a>8、HTTP缓存技术</h2><blockquote>
 <p>HTTP 缓存有两种实现方式，分别是<strong>强制缓存和协商缓存</strong>。</p>
 <p>强制缓存指的是只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存。决定是否使用缓存的主动性在于浏览器这边。基于两个HTTP响应头部字段实现：Cache-Control和Expires。</p>
 <p>协商缓存指的是与服务端协商之后，通过协商结果来判断是否使用本地缓存。涉及304状态码。基于两种头部来实现，一种是请求头部中的 <code>If-Modified-Since</code> 字段与响应头部中的 <code>Last-Modified</code> 字段，另一种是请求头部中的 <code>If-None-Match</code> 字段与响应头部中的 <code>ETag</code> 字段。注意，<strong>协商缓存这两个字段都需要配合强制缓存中 Cache-Control 字段来使用，只有在未能命中强制缓存的时候，才能发起带有协商缓存字段的请求</strong>。</p>
@@ -511,7 +508,7 @@
 <li><p>如果浏览器收到 304 的请求响应状态码，则会从本地缓存中加载资源，否则更新资源。</p>
 </li>
 </ul>
-<h2 id="11、HTTP-与-HTTPS-有哪些区别？"><a href="#11、HTTP-与-HTTPS-有哪些区别？" class="headerlink" title="11、HTTP 与 HTTPS 有哪些区别？"></a>11、HTTP 与 HTTPS 有哪些区别？</h2><blockquote>
+<h2 id="9、HTTP-与-HTTPS-有哪些区别？"><a href="#9、HTTP-与-HTTPS-有哪些区别？" class="headerlink" title="9、HTTP 与 HTTPS 有哪些区别？"></a>9、HTTP 与 HTTPS 有哪些区别？</h2><blockquote>
 <ul>
 <li>TTP 是超文本传输协议，信息是明文传输，存在安全风险的问题。HTTPS 则解决 HTTP 不安全的缺陷，在 TCP 和 HTTP 网络层之间加入了 SSL&#x2F;TLS 安全协议，使得报文能够加密传输。</li>
 <li>HTTP 连接建立相对简单， TCP 三次握手之后便可进行 HTTP 的报文传输。而 HTTPS 在 TCP 三次握手之后，还需进行 SSL&#x2F;TLS 的握手过程，才可进入加密报文传输。</li>
@@ -519,7 +516,7 @@
 <li>HTTPS 协议需要向 CA（证书权威机构）申请数字证书，来保证服务器的身份是可信的。</li>
 </ul>
 </blockquote>
-<h2 id="12、HTTPS-解决了-HTTP-的哪些问题？"><a href="#12、HTTPS-解决了-HTTP-的哪些问题？" class="headerlink" title="12、HTTPS 解决了 HTTP 的哪些问题？"></a>12、HTTPS 解决了 HTTP 的哪些问题？</h2><blockquote>
+<h2 id="10、HTTPS-解决了-HTTP-的哪些问题？"><a href="#10、HTTPS-解决了-HTTP-的哪些问题？" class="headerlink" title="10、HTTPS 解决了 HTTP 的哪些问题？"></a>10、HTTPS 解决了 HTTP 的哪些问题？</h2><blockquote>
 <p>HTTP 存在三个风险：1）窃听风险；2）篡改风险；3）冒充风险。</p>
 <p>HTTPS 通过在 HTTP 与 TCP 之间加入<code>SLL/TLS</code>协议，解决上述风险，具体实现如下：</p>
 <p>1、<strong>混合加密</strong>的方式实现信息的<strong>机密性</strong>，解决了窃听的风险。</p>
@@ -580,7 +577,7 @@
 </blockquote>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/22-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt="数子证书工作流程" style="zoom: 80%;" />
 
-<h2 id="13、HTTPS-是如何建立连接的？其间交互了什么？"><a href="#13、HTTPS-是如何建立连接的？其间交互了什么？" class="headerlink" title="13、HTTPS  是如何建立连接的？其间交互了什么？"></a>13、HTTPS  是如何建立连接的？其间交互了什么？</h2><p>SSL&#x2F;TLS协议基本流程：</p>
+<h2 id="11、HTTPS-是如何建立连接的？其间交互了什么？"><a href="#11、HTTPS-是如何建立连接的？其间交互了什么？" class="headerlink" title="11、HTTPS  是如何建立连接的？其间交互了什么？"></a>11、HTTPS  是如何建立连接的？其间交互了什么？</h2><p>SSL&#x2F;TLS协议基本流程：</p>
 <ol>
 <li><p>TLS 的「握手阶段」（根据不同的密钥算法，有不同的握手流程）</p>
 <ul>
@@ -600,7 +597,7 @@
 <p>以<code>RSA</code>算法为例，展示TLS握手流程（<strong>四次握手</strong>）：</p>
 <p>注意：<strong>服务器和客户端通过三个随机数（Client Random、Server Random、pre-master key），以及双方协商的加密算法，<em>各自</em>生成本次通信的「会话秘钥」</strong>。</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405301058385.jpeg" alt="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/HTTP/23-HTTPS%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png"></p>
-<h2 id="14、HTTPS-一定安全可靠吗？"><a href="#14、HTTPS-一定安全可靠吗？" class="headerlink" title="14、HTTPS 一定安全可靠吗？"></a>14、HTTPS 一定安全可靠吗？</h2><h4 id="（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"><a href="#（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？" class="headerlink" title="（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"></a>（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？</h4><blockquote>
+<h2 id="12、HTTPS-一定安全可靠吗？"><a href="#12、HTTPS-一定安全可靠吗？" class="headerlink" title="12、HTTPS 一定安全可靠吗？"></a>12、HTTPS 一定安全可靠吗？</h2><h4 id="（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"><a href="#（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？" class="headerlink" title="（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？"></a>（1）HTTPS一定安全可靠吗，如果有假基站获取了转发全部信息的作用，这样是不是假基站就获取到了全部信息，从而造成信息泄露？</h4><blockquote>
 <p>HTTPS 协议本身到目前为止还是没有任何漏洞的，即使你成功进行中间人攻击，本质上是利用了客户端的漏洞（用户点击继续访问或者被恶意导入伪造的根证书），并不是 HTTPS 不够安全。</p>
 </blockquote>
 <p>这个问题的场景是这样的：客户端通过浏览器向服务端发起 HTTPS 请求时，被「假基站」转发到了一个「中间人服务器」，于是客户端是和「中间人服务器」完成了 TLS 握手，然后这个「中间人服务器」再与真正的服务端完成 TLS 握手。</p>
@@ -636,7 +633,7 @@
 <p>我们要保证自己电脑的安全，不要被病毒乘虚而入，而且也不要点击任何证书非法的网站，这样 HTTPS 数据就不会被中间人截取到了。</p>
 <p>当然，我们还可以通过 <strong>HTTPS 双向认证</strong>来避免这种问题。一般我们的 HTTPS 是单向认证，客户端只会验证了服务端的身份，但是服务端并不会验证客户端的身份。<strong>如果用了双向认证方式，不仅客户端会验证服务端的身份，而且服务端也会验证客户端的身份。服务端一旦验证到请求自己的客户端为不可信任的，服务端就拒绝继续通信，客户端如果发现服务端为不可信任的，那么也中止通信。</strong></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291145819.png" alt="img"></p>
-<h2 id="15、HTTP-1-1"><a href="#15、HTTP-1-1" class="headerlink" title="15、HTTP&#x2F;1.1"></a>15、HTTP&#x2F;1.1</h2><blockquote>
+<h2 id="14、HTTP-1-1"><a href="#14、HTTP-1-1" class="headerlink" title="14、HTTP&#x2F;1.1"></a>14、HTTP&#x2F;1.1</h2><blockquote>
 <p>优点：</p>
 <ol>
 <li>简单</li>
@@ -702,7 +699,7 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291447597.png" alt="队头阻塞"></p>
 </li>
 </ol>
-<h2 id="16、HTTP-2"><a href="#16、HTTP-2" class="headerlink" title="16、HTTP&#x2F;2"></a>16、HTTP&#x2F;2</h2><blockquote>
+<h2 id="15、HTTP-2"><a href="#15、HTTP-2" class="headerlink" title="15、HTTP&#x2F;2"></a>15、HTTP&#x2F;2</h2><blockquote>
 <p>HTTP&#x2F;2 相比 HTTP&#x2F;1.1 性能上的改进：</p>
 <ol>
 <li>头部压缩</li>
@@ -747,7 +744,7 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291455330.gif" alt="img"></p>
 </li>
 </ol>
-<h2 id="17、HTTP-3"><a href="#17、HTTP-3" class="headerlink" title="17、HTTP&#x2F;3"></a>17、HTTP&#x2F;3</h2><blockquote>
+<h2 id="16、HTTP-3"><a href="#16、HTTP-3" class="headerlink" title="16、HTTP&#x2F;3"></a>16、HTTP&#x2F;3</h2><blockquote>
 <p>为了解决HTTP&#x2F;2的队头阻塞问题，HTTP&#x2F;3将下层的TCP协议修改成了UDP协议。</p>
 </blockquote>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405291456442.jpeg" alt="HTTP/1 ~ HTTP/3"></p>
@@ -775,7 +772,7 @@
 <p>而 QUIC 协议没有用四元组的方式来“绑定”连接，而是通过<strong>连接 ID</strong> 来标记通信的两个端点，客户端和服务器可以各自选择一组 ID 来标记自己，因此即使移动设备的网络变化后，导致 IP 地址变化了，只要仍保有上下文信息（比如连接 ID、TLS 密钥等），就可以“无缝”地复用原连接，消除重连的成本，没有丝毫卡顿感，达到了<strong>连接迁移</strong>的功能。</p>
 <p><strong>所以， QUIC 是一个在 UDP 之上的伪 TCP + TLS + HTTP&#x2F;2 的多路复用的协议。</strong></p>
 <p>QUIC 是新协议，对于很多网络设备，根本不知道什么是 QUIC，只会当做 UDP，这样会出现新的问题，因为有的网络设备是会丢掉 UDP 包的，而  QUIC 是基于 UDP 实现的，那么如果网络设备无法识别这个是 QUIC 包，那么就会当作 UDP包，然后被丢弃。HTTP&#x2F;3 现在普及的进度非常的缓慢，不知道未来 UDP 是否能够逆袭 TCP。</p>
-<h2 id="18、HTTP-1-1-该如何优化？"><a href="#18、HTTP-1-1-该如何优化？" class="headerlink" title="18、HTTP&#x2F;1.1 该如何优化？"></a>18、HTTP&#x2F;1.1 该如何优化？</h2><blockquote>
+<h2 id="17、HTTP-1-1-该如何优化？"><a href="#17、HTTP-1-1-该如何优化？" class="headerlink" title="17、HTTP&#x2F;1.1 该如何优化？"></a>17、HTTP&#x2F;1.1 该如何优化？</h2><blockquote>
 <p><strong>HTTP&#x2F;1.1 如何优化&#x2F;大量网络请求如何优化？</strong></p>
 <p>第一个思路是，通过缓存技术来避免具有重复性的 HTTP 请求。客户端收到第一个请求的响应后，可以将其缓存在本地磁盘，下次请求的时候，如果缓存没过期，就直接读取本地缓存的响应数据。如果缓存过期，客户端发送请求的时候带上响应数据的摘要，服务器比对后发现资源没有变化，就发出不带资源的 304 响应，告诉客户端缓存的响应仍然有效。</p>
 <p>第二个思路是，减少 HTTP 请求的次数，有以下方法：</p>
@@ -836,7 +833,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="19、HTTPS-RSA-握手解析"><a href="#19、HTTPS-RSA-握手解析" class="headerlink" title="19、HTTPS RSA 握手解析"></a>19、HTTPS RSA 握手解析</h2><blockquote>
+<h2 id="【-】、HTTPS-RSA-握手解析"><a href="#【-】、HTTPS-RSA-握手解析" class="headerlink" title="【-】、HTTPS RSA 握手解析"></a>【-】、HTTPS RSA 握手解析</h2><blockquote>
 <p>传统的TLS握手采用RSA算法实现密钥交换。在将TLS证书部署服务器端时，证书文件其实就是服务器端的公钥，会在TLS握手阶段传递给客户端。而服务器端的私钥则一直留在服务器端，并确保其不被窃取。</p>
 <p>在RSA密钥协商算法中，客户端会生成随机密钥，并使用服务器端的公钥加密后传给服务器端。根据非对称加密算法，公钥加密的信息仅能通过similarity解密，这样服务器端解密后，双方就得到了相同的密钥，再用这个密钥来加密应用信息。</p>
 <p><strong>使用 RSA 密钥协商算法的最大问题是不支持前向保密</strong>。因为客户端传递随机数（用于生成对称加密密钥的条件之一）给服务端时使用的是公钥加密的，服务端收到后，会用私钥解密得到随机数。所以一旦服务端的私钥泄漏了，过去被第三方截获的所有 TLS 通讯密文都会被破解。为了解决这个问题，后面就出现了 ECDHE 密钥协商算法。</p>
@@ -933,7 +930,7 @@
 </ul>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/https/tls%E6%8F%A1%E6%89%8B.png" alt="img" style="zoom: 67%;" />
 
-<h2 id="20、HTTPS-ECDHE-握手解析"><a href="#20、HTTPS-ECDHE-握手解析" class="headerlink" title="20、HTTPS ECDHE 握手解析"></a>20、HTTPS ECDHE 握手解析</h2><blockquote>
+<h2 id="【-】、HTTPS-ECDHE-握手解析"><a href="#【-】、HTTPS-ECDHE-握手解析" class="headerlink" title="【-】、HTTPS ECDHE 握手解析"></a>【-】、HTTPS ECDHE 握手解析</h2><blockquote>
 <p>算法演进：DH -&gt; DHE -&gt; DCDHE</p>
 </blockquote>
 <p>（1）DH算法</p>
@@ -983,7 +980,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="21、HTTPS-如何优化？"><a href="#21、HTTPS-如何优化？" class="headerlink" title="21、HTTPS 如何优化？"></a>21、HTTPS 如何优化？</h2><blockquote>
+<h2 id="18、HTTPS-如何优化？"><a href="#18、HTTPS-如何优化？" class="headerlink" title="18、HTTPS 如何优化？"></a>18、HTTPS 如何优化？</h2><blockquote>
 <p>产生性能消耗的两个环节：</p>
 <ul>
 <li>第一个环节， TLS 协议握手过程；</li>
@@ -1021,7 +1018,7 @@
 </ul>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/https%E4%BC%98%E5%8C%96/tls%E6%80%A7%E8%83%BD%E6%8D%9F%E8%80%97.png" alt="img" style="zoom:67%;" />
 
-<h1 id="三、TCP篇"><a href="#三、TCP篇" class="headerlink" title="三、TCP篇"></a>三、TCP篇</h1><h2 id="3-1-TCP头格式"><a href="#3-1-TCP头格式" class="headerlink" title="3.1 TCP头格式"></a>3.1 TCP头格式</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101258417.png" alt="TCP 头格式" style="zoom:50%;" />
+<h1 id="三、TCP篇"><a href="#三、TCP篇" class="headerlink" title="三、TCP篇"></a>三、TCP篇</h1><h2 id="19、TCP头格式"><a href="#19、TCP头格式" class="headerlink" title="19、TCP头格式"></a>19、TCP头格式</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101258417.png" alt="TCP 头格式" style="zoom:50%;" />
 
 <p><strong>序列号</strong>：在建立连接时由计算机生成的随机数作为其初始值，通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。<strong>用来解决网络包乱序问题。</strong></p>
 <p><strong>确认应答号</strong>：指下一次「期望」收到的数据的序列号，发送端收到这个确认应答以后可以认为在这个序号以前的数据都已经被正常接收。<strong>用来解决丢包的问题。</strong></p>
@@ -1032,13 +1029,13 @@
 <li><em>SYN</em>：该位为 <code>1</code> 时，表示希望建立连接，并在其「序列号」的字段进行序列号初始值的设定。</li>
 <li><em>FIN</em>：该位为 <code>1</code> 时，表示今后不会再有数据发送，希望断开连接。当通信结束希望断开连接时，通信双方的主机之间就可以相互交换 <code>FIN</code> 位为 1 的 TCP 段。</li>
 </ul>
-<h2 id="3-2-什么是-TCP-？"><a href="#3-2-什么是-TCP-？" class="headerlink" title="3.2 什么是 TCP ？"></a>3.2 什么是 TCP ？</h2><p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议。</p>
+<h2 id="20、什么是-TCP-？"><a href="#20、什么是-TCP-？" class="headerlink" title="20、什么是 TCP ？"></a>20、什么是 TCP ？</h2><p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议。</p>
 <ul>
 <li><strong>面向连接</strong>：一定是「一对一」才能连接，不能像 UDP 协议可以一个主机同时向多个主机发送消息，也就是一对多是无法做到的；</li>
 <li><strong>可靠的</strong>：无论的网络链路中出现了怎样的链路变化，TCP 都可以保证一个报文一定能够到达接收端；</li>
 <li><strong>字节流</strong>：用户消息通过 TCP 协议传输时，消息可能会被操作系统「分组」成多个的 TCP  报文，如果接收方的程序如果不知道「消息的边界」，是无法读出一个有效的用户消息的。并且 TCP 报文是「有序的」，当「前一个」TCP  报文没有收到的时候，即使它先收到了后面的 TCP 报文，那么也不能扔给应用层去处理，同时对「重复」的 TCP 报文会自动丢弃。</li>
 </ul>
-<h2 id="3-3-如何唯一确定一个TCP连接？"><a href="#3-3-如何唯一确定一个TCP连接？" class="headerlink" title="3.3 如何唯一确定一个TCP连接？"></a>3.3 如何唯一确定一个TCP连接？</h2><p>通过TCP四元组确定：源地址、源端口、目的地址和目的端口。</p>
+<h2 id="21、如何唯一确定一个TCP连接？"><a href="#21、如何唯一确定一个TCP连接？" class="headerlink" title="21、如何唯一确定一个TCP连接？"></a>21、如何唯一确定一个TCP连接？</h2><p>通过TCP四元组确定：源地址、源端口、目的地址和目的端口。</p>
 <blockquote>
 <p>有一个 IP 的服务端监听了一个端口，它的 TCP 的最大连接数是多少？</p>
 </blockquote>
@@ -1056,7 +1053,7 @@
 </li>
 <li><strong>内存限制</strong>，每个 TCP 连接都要占用一定内存，操作系统的内存是有限的，如果内存资源被占满后，会发生 OOM。</li>
 </ul>
-<h2 id="3-4-TCP和UDP的区别，分别的应用场景？"><a href="#3-4-TCP和UDP的区别，分别的应用场景？" class="headerlink" title="3.4 TCP和UDP的区别，分别的应用场景？"></a>3.4 TCP和UDP的区别，分别的应用场景？</h2><h3 id="1、TCP-和-UDP-区别"><a href="#1、TCP-和-UDP-区别" class="headerlink" title="1、TCP 和 UDP 区别"></a>1、TCP 和 UDP 区别</h3><p><em><strong>1. 连接</strong></em></p>
+<h2 id="22、TCP和UDP的区别，分别的应用场景？"><a href="#22、TCP和UDP的区别，分别的应用场景？" class="headerlink" title="22、TCP和UDP的区别，分别的应用场景？"></a>22、TCP和UDP的区别，分别的应用场景？</h2><h3 id="1、TCP-和-UDP-区别"><a href="#1、TCP-和-UDP-区别" class="headerlink" title="1、TCP 和 UDP 区别"></a>1、TCP 和 UDP 区别</h3><p><em><strong>1. 连接</strong></em></p>
 <ul>
 <li>TCP 是面向连接的传输层协议，传输数据前先要建立连接。</li>
 <li>UDP 是不需要连接，即刻传输数据。</li>
@@ -1120,7 +1117,7 @@
 <li>第一种说法：因为为了网络设备硬件设计和处理方便，首部长度需要是 <code>4</code> 字节的整数倍。如果去掉 UDP 的「包长度」字段，那 UDP 首部长度就不是 <code>4</code> 字节的整数倍了，所以我觉得这可能是为了补全 UDP 首部长度是  <code>4</code> 字节的整数倍，才补充了「包长度」字段。</li>
 <li>第二种说法：如今的 UDP 协议是基于 IP 协议发展的，而当年可能并非如此，依赖的可能是别的不提供自身报文长度或首部长度的网络层协议，因此 UDP 报文首部需要有长度字段以供计算。</li>
 </ul>
-<h2 id="3-5-三次握手相关"><a href="#3-5-三次握手相关" class="headerlink" title="3.5 三次握手相关"></a>3.5 三次握手相关</h2><h3 id="1、详细说明三次握手"><a href="#1、详细说明三次握手" class="headerlink" title="1、详细说明三次握手"></a>1、详细说明三次握手</h3><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4/%E7%BD%91%E7%BB%9C/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.drawio.png" alt="TCP 三次握手" style="zoom:50%;" />
+<h2 id="23、详细说明三次握手"><a href="#23、详细说明三次握手" class="headerlink" title="23、详细说明三次握手"></a>23、详细说明三次握手</h2><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4/%E7%BD%91%E7%BB%9C/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.drawio.png" alt="TCP 三次握手" style="zoom:50%;" />
 
 <ol>
 <li>服务端主动监听某个端口，处于 <code>LISTEN</code> 状态，等待客户端的连接请求；</li>
@@ -1135,7 +1132,7 @@
 <p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/tcp/%E7%9B%B8%E5%90%8Cack.png" alt="img"></p>
 <p>所以，服务端收到这个数据报文，是可以正常建立连接的，然后就可以正常接收这个数据包了。</p>
 </blockquote>
-<h3 id="2、为什么是三次握手？不是两次、四次？"><a href="#2、为什么是三次握手？不是两次、四次？" class="headerlink" title="2、为什么是三次握手？不是两次、四次？"></a>2、为什么是三次握手？不是两次、四次？</h3><blockquote>
+<h2 id="24、为什么是三次握手？不是两次、四次？"><a href="#24、为什么是三次握手？不是两次、四次？" class="headerlink" title="24、为什么是三次握手？不是两次、四次？"></a>24、为什么是三次握手？不是两次、四次？</h2><blockquote>
 <p>不使用「两次握手」和「四次握手」的原因：</p>
 <ul>
 <li>「两次握手」：无法防止历史连接的建立，会造成双方资源的浪费，也无法可靠的同步双方序列号；</li>
@@ -1162,7 +1159,7 @@
 </ul>
 <p>可见，序列号在 TCP 连接中占据着非常重要的作用，所以当客户端发送携带「初始序列号」的 <code>SYN</code> 报文的时候，需要服务端回一个 <code>ACK</code> 应答报文，表示客户端的 SYN 报文已被服务端成功接收，那当服务端发送「初始序列号」给客户端的时候，依然也要得到客户端的应答回应，<strong>这样一来一回，才能确保双方的初始序列号能被可靠的同步。</strong></p>
 <p>四次握手其实也能够可靠的同步双方的初始化序号，但由于<strong>第二步和第三步可以优化成一步</strong>，所以就成了「三次握手」。而两次握手只保证了一方的初始序列号能被对方成功接收，没办法保证双方的初始序列号都能被确认接收。</p>
-<h3 id="3、为什么每次建立-TCP-连接时，初始化的序列号都要求不一样呢？"><a href="#3、为什么每次建立-TCP-连接时，初始化的序列号都要求不一样呢？" class="headerlink" title="3、为什么每次建立 TCP 连接时，初始化的序列号都要求不一样呢？"></a>3、为什么每次建立 TCP 连接时，初始化的序列号都要求不一样呢？</h3><blockquote>
+<h2 id="25、为什么每次建立-TCP-连接时，初始化的序列号都要求不一样呢？"><a href="#25、为什么每次建立-TCP-连接时，初始化的序列号都要求不一样呢？" class="headerlink" title="25、为什么每次建立 TCP 连接时，初始化的序列号都要求不一样呢？"></a>25、为什么每次建立 TCP 连接时，初始化的序列号都要求不一样呢？</h2><blockquote>
 <p>主要原因有两个方面：</p>
 <ul>
 <li>为了防止历史报文被下一个相同四元组的连接接收（主要方面）；</li>
@@ -1172,14 +1169,14 @@
 <p><strong>详述方面一：为了防止历史报文被下一个相同四元组的连接接收</strong></p>
 <p>如果每次建立连接客户端和服务端的初始化序列号都「不一样」，就有大概率因为历史报文的序列号「不在」对方接收窗口，从而很大程度上避免了历史报文，相反，如果每次建立连接客户端和服务端的初始化序列号都「一样」，就有大概率遇到历史报文的序列号刚「好在」对方的接收窗口内，从而导致历史报文被新连接成功接收。</p>
 <p>所以，每次初始化序列号不一样很大程度上能够避免历史报文被下一个相同四元组的连接接收，注意是很大程度上，并不是完全避免了，<strong>因为序列号和初始化序列号并不是无限递增的，会发生回绕为初始值的情况，这意味着无法根据序列号来判断新老数据</strong>，所以需要用时间戳的机制来判断历史报文。</p>
-<h3 id="4、初始序列号-ISN-是如何随机产生的？"><a href="#4、初始序列号-ISN-是如何随机产生的？" class="headerlink" title="4、初始序列号 ISN 是如何随机产生的？"></a>4、初始序列号 ISN 是如何随机产生的？</h3><p>起始 <code>ISN</code> 是基于时钟的，每 4 微秒 + 1，转一圈要 4.55 个小时。</p>
+<h2 id="26、初始序列号-ISN-是如何随机产生的？"><a href="#26、初始序列号-ISN-是如何随机产生的？" class="headerlink" title="26、初始序列号 ISN 是如何随机产生的？"></a>26、初始序列号 ISN 是如何随机产生的？</h2><p>起始 <code>ISN</code> 是基于时钟的，每 4 微秒 + 1，转一圈要 4.55 个小时。</p>
 <p>RFC793 提到初始化序列号 ISN 随机生成算法：ISN &#x3D; M + F(localhost, localport, remotehost, remoteport)。</p>
 <ul>
 <li><code>M</code> 是一个计时器，这个计时器每隔 4 微秒加 1。</li>
 <li><code>F</code> 是一个 Hash 算法，根据源 IP、目的 IP、源端口、目的端口生成一个随机数值。要保证 Hash 算法不能被外部轻易推算得出，用 MD5 算法是一个比较好的选择。</li>
 </ul>
 <p>可以看到，随机数是会基于时钟计时器递增的，基本不可能会随机成一样的初始化序列号。</p>
-<h3 id="5、既然-IP-层会分片，为什么-TCP-层还需要-MSS-呢？"><a href="#5、既然-IP-层会分片，为什么-TCP-层还需要-MSS-呢？" class="headerlink" title="5、既然 IP 层会分片，为什么 TCP 层还需要 MSS 呢？"></a>5、既然 IP 层会分片，为什么 TCP 层还需要 MSS 呢？</h3><blockquote>
+<h2 id="27、既然-IP-层会分片，为什么-TCP-层还需要-MSS-呢？"><a href="#27、既然-IP-层会分片，为什么-TCP-层还需要-MSS-呢？" class="headerlink" title="27、既然 IP 层会分片，为什么 TCP 层还需要 MSS 呢？"></a>27、既然 IP 层会分片，为什么 TCP 层还需要 MSS 呢？</h2><blockquote>
 <p>如果在 TCP 的整个报文（头部 + 数据）交给 IP 层进行分片，此时，<strong>如果一个 IP 分片丢失，整个 IP 报文的所有分片都得重传</strong>。因为 IP 层本身没有超时重传机制，它由传输层的 TCP 来负责超时和重传。当某一个 IP 分片丢失后，接收方的 IP 层就无法组装成一个完整的 TCP 报文（头部 + 数据），也就无法将数据报文送到 TCP  层，所以接收方不会响应 ACK 给发送方，因为发送方迟迟收不到 ACK 确认报文，所以会触发超时重传，就会重发「整个 TCP 报文（头部 +  数据）」。</p>
 <p>所以，为了达到最佳的传输效能 TCP 协议在<strong>建立连接的时候通常要协商双方的 MSS 值</strong>，当 TCP 层发现数据超过 MSS 时，则就先会进行分片，当然由它形成的 IP 包的长度也就不会大于 MTU ，自然也就不用 IP 分片了。经过 TCP 层分片后，如果一个 TCP 分片丢失后，<strong>进行重发时也是以 MSS 为单位</strong>，而不用重传所有的分片，大大增加了重传的效率。</p>
 </blockquote>
@@ -1195,7 +1192,7 @@
 <p>所以，为了达到最佳的传输效能 TCP 协议在<strong>建立连接的时候通常要协商双方的 MSS 值</strong>，当 TCP 层发现数据超过 MSS 时，则就先会进行分片，当然由它形成的 IP 包的长度也就不会大于 MTU ，自然也就不用 IP 分片了。</p>
 <p><img src="https://cdn.xiaolincoding.com//mysql/other/format,png-20230309230628926.png" alt="握手阶段协商 MSS"></p>
 <p>经过 TCP 层分片后，如果一个 TCP 分片丢失后，<strong>进行重发时也是以 MSS 为单位</strong>，而不用重传所有的分片，大大增加了重传的效率。</p>
-<h3 id="6、第一次握手丢失了，会发生什么？"><a href="#6、第一次握手丢失了，会发生什么？" class="headerlink" title="6、第一次握手丢失了，会发生什么？"></a>6、第一次握手丢失了，会发生什么？</h3><blockquote>
+<h2 id="28、第一次握手丢失了，会发生什么？"><a href="#28、第一次握手丢失了，会发生什么？" class="headerlink" title="28、第一次握手丢失了，会发生什么？"></a>28、第一次握手丢失了，会发生什么？</h2><blockquote>
 <p>当第一次握手丢失了（SYN 丢失），客户端会重传 SYN 报文。</p>
 <p>若重传 SYN 报文达到最大重传次数，还是没能收到服务端的第二次握手（SYN-ACK 报文），那么客户端就会断开连接。</p>
 </blockquote>
@@ -1203,7 +1200,7 @@
 <p>若第一次握手丢失，导致客户端迟迟收不到服务端的 SYN-ACK 报文（第二次握手），就会触发「超时重传」机制，重传 SYN 报文，而且<strong>重传的 SYN 报文的序列号都是一样的</strong>。</p>
 <p>根据不同内核的设定，超时时间也有所不同。当客户端在超时时间后依旧没收到服务端的 SYN-ACK 报文时，客户端就会重发 SYN 报文N次，在 Linux 里，客户端的 SYN 报文最大重传次数N由 <code>tcp_syn_retries</code>内核参数控制，这个参数是可以自定义的，默认值一般是 5。</p>
 <p>若重发N次后还是没能收到服务端的第二次握手（SYN-ACK 报文），那么客户端就会断开连接。</p>
-<h3 id="7、第二次握手丢失了，会发生什么？"><a href="#7、第二次握手丢失了，会发生什么？" class="headerlink" title="7、第二次握手丢失了，会发生什么？"></a>7、第二次握手丢失了，会发生什么？</h3><blockquote>
+<h2 id="29、第二次握手丢失了，会发生什么？"><a href="#29、第二次握手丢失了，会发生什么？" class="headerlink" title="29、第二次握手丢失了，会发生什么？"></a>29、第二次握手丢失了，会发生什么？</h2><blockquote>
 <p>当第二次握手丢失了（SYN, ACK 报文丢失），客户端和服务端都会重传：</p>
 <ul>
 <li>客户端会重传 SYN 报文，也就是第一次握手，最大重传次数由 <code>tcp_syn_retries</code>内核参数决定；</li>
@@ -1220,15 +1217,15 @@
 </ul>
 <p>因为第二次握手报文里是包含对客户端的第一次握手的 ACK 确认报文，所以，如果客户端迟迟没有收到第二次握手，那么客户端就觉得可能自己的 SYN 报文（第一次握手）丢失了，于是<strong>客户端就会触发超时重传机制，重传 SYN 报文</strong>。</p>
 <p>然后，因为第二次握手中包含服务端的 SYN 报文，所以当客户端收到后，需要给服务端发送 ACK 确认报文（第三次握手），服务端才会认为该 SYN 报文被客户端收到了。如果第二次握手丢失了，服务端就收不到第三次握手，于是<strong>服务端这边会触发超时重传机制，重传 SYN-ACK 报文</strong>。</p>
-<h3 id="8、第三次握手丢失了，会发生什么？"><a href="#8、第三次握手丢失了，会发生什么？" class="headerlink" title="8、第三次握手丢失了，会发生什么？"></a>8、第三次握手丢失了，会发生什么？</h3><blockquote>
+<h2 id="30、第三次握手丢失了，会发生什么？"><a href="#30、第三次握手丢失了，会发生什么？" class="headerlink" title="30、第三次握手丢失了，会发生什么？"></a>30、第三次握手丢失了，会发生什么？</h2><blockquote>
 <p>当第三次握手丢失了（ACK 报文丢失），服务器端会重传 SYN-ACK 报文。</p>
 <p>当服务端超时重传 SYN-ACK 报文达到最大重传次数时，再等待一段时间（时间为上一次超时时间的 2 倍），如果还是没能收到客户端的第三次握手（ACK 报文），那么服务端就会断开连接</p>
 </blockquote>
 <p>客户端收到服务端的 SYN-ACK 报文后，就会给服务端回一个 ACK 报文，也就是第三次握手，此时客户端状态进入到 <code>ESTABLISH</code> 状态。</p>
 <p>因为这个第三次握手的 ACK 是对第二次握手的 SYN 的确认报文，所以当第三次握手丢失了，如果服务端那一方迟迟收不到这个确认报文，就会触发超时重传机制，重传 SYN-ACK 报文，直到收到第三次握手，或者达到最大重传次数。注意，<strong>ACK 报文是不会有重传的，当 ACK 丢失了，就由对方重传对应的报文</strong>。</p>
-<h3 id="9、为什么ACK信号是SYN信号值-1？"><a href="#9、为什么ACK信号是SYN信号值-1？" class="headerlink" title="9、为什么ACK信号是SYN信号值+1？"></a>9、为什么ACK信号是SYN信号值+1？</h3><p>TCP（传输控制协议）的三次握手过程是建立一个可靠的连接会话的关键步骤。在这个过程中，ACK（确认）信号的值为SYN（同步）信号的值加1的原因主要是为了确认双方的接收能力和确保序列号的同步。</p>
-<h3 id="10、三次握手的过程中可以携带数据吗"><a href="#10、三次握手的过程中可以携带数据吗" class="headerlink" title="10、三次握手的过程中可以携带数据吗"></a>10、三次握手的过程中可以携带数据吗</h3><p>第三次握手的时候可以携带数据，第一次和第二次握手不可以。</p>
-<h3 id="11、什么是-SYN-攻击？如何避免-SYN-攻击？"><a href="#11、什么是-SYN-攻击？如何避免-SYN-攻击？" class="headerlink" title="11、什么是 SYN 攻击？如何避免 SYN 攻击？"></a>11、什么是 SYN 攻击？如何避免 SYN 攻击？</h3><p><strong>（1）什么是SYN攻击？</strong></p>
+<h2 id="31、为什么ACK信号是SYN信号值-1？"><a href="#31、为什么ACK信号是SYN信号值-1？" class="headerlink" title="31、为什么ACK信号是SYN信号值+1？"></a>31、为什么ACK信号是SYN信号值+1？</h2><p>TCP（传输控制协议）的三次握手过程是建立一个可靠的连接会话的关键步骤。在这个过程中，ACK（确认）信号的值为SYN（同步）信号的值加1的原因主要是为了确认双方的接收能力和确保序列号的同步。</p>
+<h2 id="32、三次握手的过程中可以携带数据吗"><a href="#32、三次握手的过程中可以携带数据吗" class="headerlink" title="32、三次握手的过程中可以携带数据吗"></a>32、三次握手的过程中可以携带数据吗</h2><p>第三次握手的时候可以携带数据，第一次和第二次握手不可以。</p>
+<h2 id="33、什么是-SYN-攻击？如何避免-SYN-攻击？"><a href="#33、什么是-SYN-攻击？如何避免-SYN-攻击？" class="headerlink" title="33、什么是 SYN 攻击？如何避免 SYN 攻击？"></a>33、什么是 SYN 攻击？如何避免 SYN 攻击？</h2><p><strong>（1）什么是SYN攻击？</strong></p>
 <p><strong>什么是 TCP 半连接和全连接队列。</strong></p>
 <p>在 TCP 三次握手的时候，Linux 内核会维护两个队列，分别是：</p>
 <ul>
@@ -1259,7 +1256,7 @@
 <li>减少 SYN+ACK 重传次数</li>
 </ul>
 </blockquote>
-<h2 id="3-6-四次挥手相关"><a href="#3-6-四次挥手相关" class="headerlink" title="3.6 四次挥手相关"></a>3.6 四次挥手相关</h2><h3 id="1、详细说明四次挥手"><a href="#1、详细说明四次挥手" class="headerlink" title="1、详细说明四次挥手"></a>1、详细说明四次挥手</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101556792.png" alt="客户端主动关闭连接 —— TCP 四次挥手" style="zoom: 67%;" />
+<h2 id="34、详细说明四次挥手"><a href="#34、详细说明四次挥手" class="headerlink" title="34、详细说明四次挥手"></a>34、详细说明四次挥手</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101556792.png" alt="客户端主动关闭连接 —— TCP 四次挥手" style="zoom: 67%;" />
 
 <ul>
 <li>客户端打算关闭连接，此时会发送一个 TCP 首部 <code>FIN</code> 标志位被置为 <code>1</code> 的报文，也即 <code>FIN</code> 报文，之后客户端进入 <code>FIN_WAIT_1</code> 状态。</li>
@@ -1271,18 +1268,18 @@
 <li>客户端在经过 <code>2MSL</code> 一段时间后，自动进入 <code>CLOSE</code> 状态，至此客户端也完成连接的关闭。</li>
 </ul>
 <p>可以看到，每个方向都需要<strong>一个 FIN 和一个 ACK</strong>，因此通常被称为<strong>四次挥手</strong>。这里一点需要注意是：<strong>主动关闭连接的，才有 TIME_WAIT 状态。</strong></p>
-<h3 id="2、为什么挥手需要四次？"><a href="#2、为什么挥手需要四次？" class="headerlink" title="2、为什么挥手需要四次？"></a>2、为什么挥手需要四次？</h3><p>再来回顾下四次挥手双方发 <code>FIN</code> 包的过程，就能理解为什么需要四次了。</p>
+<h2 id="35、为什么挥手需要四次？"><a href="#35、为什么挥手需要四次？" class="headerlink" title="35、为什么挥手需要四次？"></a>35、为什么挥手需要四次？</h2><p>再来回顾下四次挥手双方发 <code>FIN</code> 包的过程，就能理解为什么需要四次了。</p>
 <ul>
 <li>关闭连接时，客户端向服务端发送 <code>FIN</code> 时，仅仅表示客户端不再发送数据了但是还能接收数据。</li>
 <li>服务端收到客户端的 <code>FIN</code> 报文时，先回一个 <code>ACK</code> 应答报文，而服务端可能还有数据需要处理和发送，等服务端不再发送数据时，才发送 <code>FIN</code> 报文给客户端来表示同意现在关闭连接。</li>
 </ul>
 <p>从上面过程可知，服务端通常需要等待完成数据的发送和处理，所以服务端的 <code>ACK</code> 和 <code>FIN</code> 一般都会分开发送，因此是需要四次挥手。</p>
-<h3 id="3、第一次挥手丢失了，会发生什么？"><a href="#3、第一次挥手丢失了，会发生什么？" class="headerlink" title="3、第一次挥手丢失了，会发生什么？"></a>3、第一次挥手丢失了，会发生什么？</h3><p>当客户端（主动关闭方）调用 close 函数后，就会向服务端发送 FIN 报文，试图与服务端断开连接，此时客户端的连接进入到 <code>FIN_WAIT_1</code> 状态。</p>
+<h2 id="36、第一次挥手丢失了，会发生什么？"><a href="#36、第一次挥手丢失了，会发生什么？" class="headerlink" title="36、第一次挥手丢失了，会发生什么？"></a>36、第一次挥手丢失了，会发生什么？</h2><p>当客户端（主动关闭方）调用 close 函数后，就会向服务端发送 FIN 报文，试图与服务端断开连接，此时客户端的连接进入到 <code>FIN_WAIT_1</code> 状态。</p>
 <p>正常情况下，如果能及时收到服务端（被动关闭方）的 ACK，则会很快变为 <code>FIN_WAIT2</code>状态。如果第一次挥手丢失了，那么客户端迟迟收不到被动方的 ACK 的话，也就会触发超时重传机制，重传 FIN 报文，重发次数由 <code>tcp_orphan_retries</code> 参数控制。</p>
 <p>当客户端重传 FIN 报文的次数超过 <code>tcp_orphan_retries</code> 后，就不再发送 FIN 报文，则会在等待一段时间（时间为上一次超时时间的 2 倍），如果还是没能收到第二次挥手，那么直接进入到 <code>close</code> 状态。</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/tcp/%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%8C%A5%E6%89%8B%E4%B8%A2%E5%A4%B1.png" alt="img" style="zoom:50%;" />
 
-<h3 id="4、第二次挥手丢失了，会发生什么？"><a href="#4、第二次挥手丢失了，会发生什么？" class="headerlink" title="4、第二次挥手丢失了，会发生什么？"></a>4、第二次挥手丢失了，会发生什么？</h3><p>当服务端收到客户端的第一次挥手后，就会先回一个 ACK 确认报文，此时服务端的连接进入到 <code>CLOSE_WAIT</code> 状态。</p>
+<h2 id="37、第二次挥手丢失了，会发生什么？"><a href="#37、第二次挥手丢失了，会发生什么？" class="headerlink" title="37、第二次挥手丢失了，会发生什么？"></a>37、第二次挥手丢失了，会发生什么？</h2><p>当服务端收到客户端的第一次挥手后，就会先回一个 ACK 确认报文，此时服务端的连接进入到 <code>CLOSE_WAIT</code> 状态。</p>
 <p>在前面我们也提了，<strong>ACK 报文是不会重传的</strong>，所以如果服务端的第二次挥手丢失了，<strong>客户端就会触发超时重传机制，重传 FIN 报文</strong>，直到收到服务端的第二次挥手，或者达到最大的重传次数。</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/tcp/%E7%AC%AC%E4%BA%8C%E6%AC%A1%E6%8C%A5%E6%89%8B%E4%B8%A2%E5%A4%B1.png" alt="img" style="zoom:50%;" />
 
@@ -1293,16 +1290,16 @@
 <p>但是注意，如果主动关闭方使用 <strong>shutdown 函数</strong>关闭连接，指定了只关闭发送方向，而接收方向并没有关闭，那么意味着主动关闭方还是可以接收数据的。此时，如果主动关闭方一直没收到第三次挥手，那么主动关闭方的连接将会一直处于 <code>FIN_WAIT2</code> 状态（<code>tcp_fin_timeout</code> 无法控制 shutdown 关闭的连接）。</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/tcp/fin_wait_2%E6%AD%BB%E7%AD%89.drawio.png" alt="img" style="zoom:50%;" />
 
-<h3 id="5、第三次挥手丢失了，会发生什么？"><a href="#5、第三次挥手丢失了，会发生什么？" class="headerlink" title="5、第三次挥手丢失了，会发生什么？"></a>5、第三次挥手丢失了，会发生什么？</h3><p>当服务端（被动关闭方）收到客户端（主动关闭方）的 FIN 报文后，内核会自动回复 ACK，同时连接处于 <code>CLOSE_WAIT</code> 状态，顾名思义，它表示等待应用进程调用 close 函数关闭连接。</p>
+<h2 id="38、第三次挥手丢失了，会发生什么？"><a href="#38、第三次挥手丢失了，会发生什么？" class="headerlink" title="38、第三次挥手丢失了，会发生什么？"></a>38、第三次挥手丢失了，会发生什么？</h2><p>当服务端（被动关闭方）收到客户端（主动关闭方）的 FIN 报文后，内核会自动回复 ACK，同时连接处于 <code>CLOSE_WAIT</code> 状态，顾名思义，它表示等待应用进程调用 close 函数关闭连接。</p>
 <p>此时，内核是没有权利替代进程关闭连接，必须由进程主动调用 close 函数来触发服务端发送 FIN 报文。服务端处于 CLOSE_WAIT 状态时，调用了 close 函数，内核就会发出 FIN 报文，同时连接进入 LAST_ACK 状态，等待客户端返回 ACK 来确认连接关闭。如果迟迟收不到这个 ACK，服务端就会重发 FIN 报文，重发次数仍然由 <code>tcp_orphan_retries</code> 参数控制，这与客户端重发 FIN 报文的重传次数控制方式是一样的。</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101604609.png" alt="img" style="zoom:50%;" />
 
-<h3 id="6、第四次挥手丢失了，会发生什么？"><a href="#6、第四次挥手丢失了，会发生什么？" class="headerlink" title="6、第四次挥手丢失了，会发生什么？"></a>6、第四次挥手丢失了，会发生什么？</h3><p>当客户端收到服务端的第三次挥手的 FIN 报文后，就会回 ACK 报文，也就是第四次挥手，此时客户端连接进入 <code>TIME_WAIT</code> 状态。</p>
+<h2 id="39、第四次挥手丢失了，会发生什么？"><a href="#39、第四次挥手丢失了，会发生什么？" class="headerlink" title="39、第四次挥手丢失了，会发生什么？"></a>39、第四次挥手丢失了，会发生什么？</h2><p>当客户端收到服务端的第三次挥手的 FIN 报文后，就会回 ACK 报文，也就是第四次挥手，此时客户端连接进入 <code>TIME_WAIT</code> 状态。</p>
 <p>在 Linux 系统，TIME_WAIT 状态会持续 2MSL 后才会进入关闭状态。然后，服务端（被动关闭方）没有收到 ACK 报文前，还是处于 LAST_ACK 状态。如果第四次挥手的 ACK 报文没有到达服务端，服务端就会重发 FIN 报文，重发次数仍然由前面介绍过的 <code>tcp_orphan_retries</code> 参数控制。</p>
 <p>举个例子，假设 tcp_orphan_retries 为 2，当第四次挥手一直丢失时，发生的过程如下：</p>
 <img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406101603186.png" alt="img" style="zoom:50%;" />
 
-<h3 id="7、为什么-TIME-WAIT-等待的时间是-2MSL？"><a href="#7、为什么-TIME-WAIT-等待的时间是-2MSL？" class="headerlink" title="7、为什么 TIME_WAIT 等待的时间是 2MSL？"></a>7、为什么 TIME_WAIT 等待的时间是 2MSL？</h3><p><code>MSL</code> 是 Maximum Segment Lifetime，<strong>报文最大生存时间</strong>，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为 TCP 报文基于是 IP 协议的，而 IP 头中有一个 <code>TTL</code> 字段，是 IP 数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减 1，当此值为 0 则数据报将被丢弃，同时发送 ICMP 报文通知源主机。</p>
+<h2 id="40、为什么-TIME-WAIT-等待的时间是-2MSL？"><a href="#40、为什么-TIME-WAIT-等待的时间是-2MSL？" class="headerlink" title="40、为什么 TIME_WAIT 等待的时间是 2MSL？"></a>40、为什么 TIME_WAIT 等待的时间是 2MSL？</h2><p><code>MSL</code> 是 Maximum Segment Lifetime，<strong>报文最大生存时间</strong>，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为 TCP 报文基于是 IP 协议的，而 IP 头中有一个 <code>TTL</code> 字段，是 IP 数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减 1，当此值为 0 则数据报将被丢弃，同时发送 ICMP 报文通知源主机。</p>
 <p>MSL 与 TTL 的区别： MSL 的单位是时间，而 TTL 是经过路由跳数。所以 <strong>MSL 应该要大于等于 TTL 消耗为 0 的时间</strong>，以确保报文已被自然消亡。<strong>TTL 的值一般是 64，Linux 将 MSL 设置为 30 秒，意味着 Linux 认为数据报文经过 64 个路由器的时间不会超过 30 秒，如果超过了，就认为报文已经消失在网络中了</strong>。</p>
 <p>TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是： 网络中可能存在来自发送方的数据包，当这些发送方的数据包被接收方处理后又会向对方发送响应，所以<strong>一来一回需要等待 2 倍的时间</strong>。</p>
 <p>比如，如果被动关闭方没有收到断开连接的最后的 ACK 报文，就会触发超时重发 <code>FIN</code> 报文，另一方接收到 FIN 后，会重发 ACK 给被动关闭方， 一来一去正好 2 个 MSL。可以看到 <strong>2MSL时长</strong> 这其实是相当于<strong>至少允许报文丢失一次</strong>。比如，若 ACK 在一个 MSL 内丢失，这样被动方重发的 FIN 会在第 2 个 MSL 内到达，TIME_WAIT 状态的连接可以应对。<code>2MSL</code> 的时间是从<strong>客户端接收到 FIN 后发送 ACK 开始计时的</strong>。如果在 TIME-WAIT 时间内，因为客户端的 ACK 没有传输到服务端，客户端又接收到了服务端重发的 FIN 报文，那么 <strong>2MSL 时间将重新计时</strong>。</p>
@@ -1310,7 +1307,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> TCP_TIMEWAIT_LEN (60*HZ) <span class="comment">/* how long to wait to destroy TIME-WAIT </span></span></span><br><span class="line"><span class="comment"><span class="meta">                                    state, about 60 seconds  */</span></span></span><br></pre></td></tr></table></figure>
 
 <p>如果要修改 TIME_WAIT 的时间长度，只能修改 Linux 内核代码里 TCP_TIMEWAIT_LEN 的值，并重新编译 Linux 内核。</p>
-<h3 id="8、为什么需要-TIME-WAIT-状态？"><a href="#8、为什么需要-TIME-WAIT-状态？" class="headerlink" title="8、为什么需要 TIME_WAIT 状态？"></a>8、为什么需要 TIME_WAIT 状态？</h3><blockquote>
+<h2 id="41、为什么需要-TIME-WAIT-状态？"><a href="#41、为什么需要-TIME-WAIT-状态？" class="headerlink" title="41、为什么需要 TIME_WAIT 状态？"></a>41、为什么需要 TIME_WAIT 状态？</h2><blockquote>
 <p>主动发起关闭连接的一方，才会有 <code>TIME-WAIT</code> 状态。</p>
 <p>需要 TIME-WAIT 状态，主要是两个原因：</p>
 <ul>
@@ -1328,7 +1325,7 @@
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4/%E7%BD%91%E7%BB%9C/TIME-WAIT%E8%BF%9E%E6%8E%A5%E6%AD%A3%E5%B8%B8%E5%85%B3%E9%97%AD.drawio.png" alt="TIME-WAIT 时间正常，确保了连接正常关闭" style="zoom:50%;" />
 
 <p>客户端在收到服务端重传的 FIN 报文时，TIME_WAIT 状态的等待时间，会重置回 2MSL。</p>
-<h3 id="9、TIME-WAIT-过多有什么危害？"><a href="#9、TIME-WAIT-过多有什么危害？" class="headerlink" title="9、TIME_WAIT 过多有什么危害？"></a>9、TIME_WAIT 过多有什么危害？</h3><p>过多的 TIME-WAIT 状态主要的危害有两种：</p>
+<h2 id="42、TIME-WAIT-过多有什么危害？"><a href="#42、TIME-WAIT-过多有什么危害？" class="headerlink" title="42、TIME_WAIT 过多有什么危害？"></a>42、TIME_WAIT 过多有什么危害？</h2><p>过多的 TIME-WAIT 状态主要的危害有两种：</p>
 <ul>
 <li>第一是占用系统资源，比如文件描述符、内存资源、CPU 资源、线程资源等；</li>
 <li>第二是占用端口资源，端口资源也是有限的，一般可以开启的端口为 <code>32768～61000</code>，也可以通过 <code>net.ipv4.ip_local_port_range</code>参数指定范围。</li>
@@ -1336,7 +1333,7 @@
 <p>客户端和服务端 TIME_WAIT 过多，造成的影响是不同的。</p>
 <p><strong>如果客户端（主动发起关闭连接方）的 TIME_WAIT 状态过多</strong>，占满了所有端口资源，那么就无法对「目的 IP+ 目的 PORT」都一样的服务端发起连接了，但是被使用的端口，还是可以继续对另外一个服务端发起连接的。因此，客户端（发起连接方）都是和「目的 IP+ 目的 PORT 」都一样的服务端建立连接的话，当客户端的 TIME_WAIT  状态连接过多的话，就会受端口资源限制，如果占满了所有端口资源，那么就无法再跟「目的 IP+ 目的 PORT」都一样的服务端建立连接了。不过，即使是在这种场景下，只要连接的是不同的服务端，端口是可以重复使用的，所以客户端还是可以向其他服务端发起连接的，这是因为内核在定位一个连接的时候，是通过四元组（源IP、源端口、目的IP、目的端口）信息来定位的，并不会因为客户端的端口一样，而导致连接冲突。</p>
 <p><strong>如果服务端（主动发起关闭连接方）的 TIME_WAIT 状态过多</strong>，并不会导致端口资源受限，因为服务端只监听一个端口，而且由于一个四元组唯一确定一个 TCP 连接，因此理论上服务端可以建立很多连接，但是 TCP 连接过多，会占用系统资源，比如文件描述符、内存资源、CPU 资源、线程资源等。</p>
-<h3 id="10、如何优化-TIME-WAIT？"><a href="#10、如何优化-TIME-WAIT？" class="headerlink" title="10、如何优化 TIME_WAIT？"></a>10、如何优化 TIME_WAIT？</h3><blockquote>
+<h2 id="43、如何优化-TIME-WAIT？"><a href="#43、如何优化-TIME-WAIT？" class="headerlink" title="43、如何优化 TIME_WAIT？"></a>43、如何优化 TIME_WAIT？</h2><blockquote>
 <p>这里给出优化 TIME-WAIT 的几个方式，都是有利有弊：</p>
 <ul>
 <li>打开 net.ipv4.tcp_tw_reuse 和 net.ipv4.tcp_timestamps 选项；</li>
@@ -1344,7 +1341,7 @@
 <li>程序中使用 SO_LINGER ，应用强制使用 RST 关闭。</li>
 </ul>
 </blockquote>
-<h3 id="11、服务器出现大量-TIME-WAIT-状态的原因有哪些？"><a href="#11、服务器出现大量-TIME-WAIT-状态的原因有哪些？" class="headerlink" title="11、服务器出现大量 TIME_WAIT 状态的原因有哪些？"></a>11、服务器出现大量 TIME_WAIT 状态的原因有哪些？</h3><blockquote>
+<h2 id="44、服务器出现大量-TIME-WAIT-状态的原因有哪些？"><a href="#44、服务器出现大量-TIME-WAIT-状态的原因有哪些？" class="headerlink" title="44、服务器出现大量 TIME_WAIT 状态的原因有哪些？"></a>44、服务器出现大量 TIME_WAIT 状态的原因有哪些？</h2><blockquote>
 <p>首先要知道 TIME_WAIT 状态是主动关闭连接方才会出现的状态，所以<strong>如果服务器出现大量的 TIME_WAIT 状态的 TCP 连接，就是说明服务器主动断开了很多 TCP 连接</strong>。</p>
 <p>问题来了，<strong>什么场景下服务端会主动断开连接呢？</strong></p>
 <ul>
@@ -1376,7 +1373,7 @@
 <p>keepalive_requests 参数的默认值是 100 ，意味着每个 HTTP 长连接最多只能跑 100  次请求，这个参数往往被大多数人忽略，因为当 QPS (每秒请求数) 不是很高时，默认值 100 凑合够用。</p>
 <p>但是，<strong>对于一些 QPS 比较高的场景，比如超过 10000 QPS，甚至达到 30000 , 50000 甚至更高，如果 keepalive_requests 参数值是 100，这时候就 nginx 就会很频繁地关闭连接，那么此时服务端上就会出大量的 TIME_WAIT 状态</strong>。</p>
 <p>针对这个场景下，解决的方式也很简单，调大 nginx 的 keepalive_requests 参数就行。</p>
-<h3 id="12、服务器出现大量-CLOSE-WAIT-状态的原因有哪些？"><a href="#12、服务器出现大量-CLOSE-WAIT-状态的原因有哪些？" class="headerlink" title="12、服务器出现大量 CLOSE_WAIT 状态的原因有哪些？"></a>12、服务器出现大量 CLOSE_WAIT 状态的原因有哪些？</h3><p>CLOSE_WAIT 状态是「被动关闭方」才会有的状态，而且如果「被动关闭方」没有调用 close 函数关闭连接，那么就无法发出 FIN 报文，从而无法使得 CLOSE_WAIT 状态的连接转变为 LAST_ACK 状态。</p>
+<h2 id="45、服务器出现大量-CLOSE-WAIT-状态的原因有哪些？"><a href="#45、服务器出现大量-CLOSE-WAIT-状态的原因有哪些？" class="headerlink" title="45、服务器出现大量 CLOSE_WAIT 状态的原因有哪些？"></a>45、服务器出现大量 CLOSE_WAIT 状态的原因有哪些？</h2><p>CLOSE_WAIT 状态是「被动关闭方」才会有的状态，而且如果「被动关闭方」没有调用 close 函数关闭连接，那么就无法发出 FIN 报文，从而无法使得 CLOSE_WAIT 状态的连接转变为 LAST_ACK 状态。</p>
 <p>所以，<strong>当服务端出现大量 CLOSE_WAIT 状态的连接的时候，说明服务端的程序没有调用 close 函数关闭连接</strong>。</p>
 <p>那什么情况会导致服务端的程序没有调用 close 函数关闭连接？这时候通常需要排查代码。</p>
 <p>我们先来分析一个普通的 TCP 服务端的流程：</p>
@@ -1396,14 +1393,14 @@
 <p><strong>第三个原因</strong>：第 4 步没有做，通过 accpet 获取已连接的 socket 后，没有将其注册到 epoll，导致后续收到 FIN 报文的时候，服务端没办法感知这个事件，那服务端就没机会调用 close 函数了。发生这种情况可能是因为服务端在将已连接的 socket 注册到 epoll 之前，代码卡在某一个逻辑或者提前抛出了异常。</p>
 <p><strong>第四个原因</strong>：第 6 步没有做，当发现客户端关闭连接后，服务端没有执行 close 函数，可能是因为代码漏处理，或者是在执行 close 函数之前，代码卡在某一个逻辑，比如发生死锁等等。</p>
 <p>可以发现，<strong>当服务端出现大量 CLOSE_WAIT 状态的连接的时候，通常都是代码的问题，这时候我们需要针对具体的代码一步一步的进行排查和定位，主要分析的方向就是服务端为什么没有调用 close</strong>。</p>
-<h3 id="13、如果已经建立了连接，但是客户端突然出现故障了怎么办？"><a href="#13、如果已经建立了连接，但是客户端突然出现故障了怎么办？" class="headerlink" title="13、如果已经建立了连接，但是客户端突然出现故障了怎么办？"></a>13、如果已经建立了连接，但是客户端突然出现故障了怎么办？</h3><p>客户端出现故障指的是客户端的主机发生了宕机，或者断电的场景。发生这种情况的时候，如果服务端一直不会发送数据给客户端，那么服务端是永远无法感知到客户端宕机这个事件的，也就是服务端的 TCP 连接将一直处于   <code>ESTABLISH</code> 状态，占用着系统资源。</p>
+<h2 id="46、如果已经建立了连接，但是客户端突然出现故障了怎么办？"><a href="#46、如果已经建立了连接，但是客户端突然出现故障了怎么办？" class="headerlink" title="46、如果已经建立了连接，但是客户端突然出现故障了怎么办？"></a>46、如果已经建立了连接，但是客户端突然出现故障了怎么办？</h2><p>客户端出现故障指的是客户端的主机发生了宕机，或者断电的场景。发生这种情况的时候，如果服务端一直不会发送数据给客户端，那么服务端是永远无法感知到客户端宕机这个事件的，也就是服务端的 TCP 连接将一直处于   <code>ESTABLISH</code> 状态，占用着系统资源。</p>
 <p>为了避免这种情况，TCP 设置了<strong>保活机制</strong>。这个机制的原理是这样的：</p>
 <p>定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测报文，该探测报文包含的数据非常少，如果连续几个探测报文都没有得到响应，则认为当前的 TCP  连接已经死亡，系统内核将错误信息通知给上层应用程序。</p>
-<h3 id="14、如果已经建立了连接，但是服务端的进程崩溃会发生什么？"><a href="#14、如果已经建立了连接，但是服务端的进程崩溃会发生什么？" class="headerlink" title="14、如果已经建立了连接，但是服务端的进程崩溃会发生什么？"></a>14、如果已经建立了连接，但是服务端的进程崩溃会发生什么？</h3><p>TCP 的连接信息是由内核维护的，所以当服务端的进程崩溃后，内核需要回收该进程的所有 TCP 连接资源，于是内核会发送第一次挥手 FIN  报文，后续的挥手过程也都是在内核完成，并不需要进程的参与，所以即使服务端的进程退出了，还是能与客户端完成 TCP 四次挥手的过程。</p>
+<h2 id="47、如果已经建立了连接，但是服务端的进程崩溃会发生什么？"><a href="#47、如果已经建立了连接，但是服务端的进程崩溃会发生什么？" class="headerlink" title="47、如果已经建立了连接，但是服务端的进程崩溃会发生什么？"></a>47、如果已经建立了连接，但是服务端的进程崩溃会发生什么？</h2><p>TCP 的连接信息是由内核维护的，所以当服务端的进程崩溃后，内核需要回收该进程的所有 TCP 连接资源，于是内核会发送第一次挥手 FIN  报文，后续的挥手过程也都是在内核完成，并不需要进程的参与，所以即使服务端的进程退出了，还是能与客户端完成 TCP 四次挥手的过程。</p>
 <blockquote>
 <p>我自己做了个实验，使用 kill -9 来模拟进程崩溃的情况，发现<strong>在 kill 掉进程后，服务端会发送 FIN 报文，与客户端进行四次挥手</strong>。</p>
 </blockquote>
-<h2 id="3-7-Socket编程"><a href="#3-7-Socket编程" class="headerlink" title="3.7 Socket编程"></a>3.7 Socket编程</h2><h3 id="1、针对-TCP-应该如何-Socket-编程？"><a href="#1、针对-TCP-应该如何-Socket-编程？" class="headerlink" title="1、针对 TCP 应该如何 Socket 编程？"></a>1、针对 TCP 应该如何 Socket 编程？</h3><p><img src="https://cdn.xiaolincoding.com//mysql/other/format,png-20230309230545997.png" alt="基于 TCP 协议的客户端和服务端工作"></p>
+<h2 id="48、针对-TCP-应该如何-Socket-编程？"><a href="#48、针对-TCP-应该如何-Socket-编程？" class="headerlink" title="48、针对 TCP 应该如何 Socket 编程？"></a>48、针对 TCP 应该如何 Socket 编程？</h2><p><img src="https://cdn.xiaolincoding.com//mysql/other/format,png-20230309230545997.png" alt="基于 TCP 协议的客户端和服务端工作"></p>
 <ul>
 <li>服务端和客户端初始化 <code>socket</code>，得到文件描述符；</li>
 <li>服务端调用 <code>bind</code>，将 socket 绑定在指定的 IP 地址和端口;</li>
@@ -1417,7 +1414,7 @@
 <p>这里需要注意的是，服务端调用 <code>accept</code> 时，连接成功了会返回一个已完成连接的 socket，后续用来传输数据。</p>
 <p>所以，监听的 socket 和真正用来传送数据的 socket，是「两个」 socket，一个叫作<strong>监听 socket</strong>，一个叫作<strong>已完成连接 socket</strong>。</p>
 <p>成功连接建立之后，双方开始通过 read 和 write 函数来读写数据，就像往一个文件流里面写东西一样。</p>
-<h3 id="2、accept-发生在三次握手的哪一步？"><a href="#2、accept-发生在三次握手的哪一步？" class="headerlink" title="2、accept 发生在三次握手的哪一步？"></a>2、accept 发生在三次握手的哪一步？</h3><p>我们先看看客户端连接服务端时，发送了什么？</p>
+<h2 id="49、accept-发生在三次握手的哪一步？"><a href="#49、accept-发生在三次握手的哪一步？" class="headerlink" title="49、accept 发生在三次握手的哪一步？"></a>49、accept 发生在三次握手的哪一步？</h2><p>我们先看看客户端连接服务端时，发送了什么？</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4/%E7%BD%91%E7%BB%9C/socket%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.drawio.png" alt="socket 三次握手" style="zoom:50%;" />
 
 <ul>
@@ -1427,7 +1424,7 @@
 <li>ACK 应答包到达服务端后，服务端的 TCP 连接进入 ESTABLISHED 状态，同时服务端协议栈使得 <code>accept</code> 阻塞调用返回，这个时候服务端到客户端的单向连接也建立成功。至此，客户端与服务端两个方向的连接都建立成功。</li>
 </ul>
 <p>从上面的描述过程，我们可以得知<strong>客户端 connect 成功返回是在第二次握手，服务端 accept 成功返回是在三次握手成功之后。</strong></p>
-<h2 id="3-8-TCP可靠性相关"><a href="#3-8-TCP可靠性相关" class="headerlink" title="3.8 TCP可靠性相关"></a>3.8 TCP可靠性相关</h2><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/3.jpg?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" alt="img" style="zoom:50%;" />
+<h2 id="49、TCP可靠性相关"><a href="#49、TCP可靠性相关" class="headerlink" title="49、TCP可靠性相关"></a>49、TCP可靠性相关</h2><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP-%E5%8F%AF%E9%9D%A0%E7%89%B9%E6%80%A7/3.jpg?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" alt="img" style="zoom:50%;" />
 
 <h3 id="1、重传机制"><a href="#1、重传机制" class="headerlink" title="1、重传机制"></a>1、重传机制</h3><blockquote>
 <p>TCP 实现可靠传输的方式之一，是通过序列号与确认应答。在 TCP 中，当发送端的数据到达接收主机时，接收端主机会返回一个确认应答消息，表示已收到消息。针对数据包丢失的情况，会用<strong>重传机制</strong>解决。</p>
@@ -1551,7 +1548,7 @@
 <li>拥塞发生</li>
 <li>快速恢复</li>
 </ul>
-<h2 id="3-9-如何理解是-TCP-面向字节流协议？"><a href="#3-9-如何理解是-TCP-面向字节流协议？" class="headerlink" title="3.9 如何理解是 TCP 面向字节流协议？"></a>3.9 如何理解是 TCP 面向字节流协议？</h2><p>之所以会说 TCP 是面向字节流的协议，UDP 是面向报文的协议，是因为操作系统对 TCP 和 UDP 协议的<strong>发送方的机制不同</strong>，也就是问题原因在发送方。</p>
+<h2 id="50、如何理解是-TCP-面向字节流协议？"><a href="#50、如何理解是-TCP-面向字节流协议？" class="headerlink" title="50、如何理解是 TCP 面向字节流协议？"></a>50、如何理解是 TCP 面向字节流协议？</h2><p>之所以会说 TCP 是面向字节流的协议，UDP 是面向报文的协议，是因为操作系统对 TCP 和 UDP 协议的<strong>发送方的机制不同</strong>，也就是问题原因在发送方。</p>
 <blockquote>
 <p>先来说说为什么 UDP 是面向报文的协议？</p>
 </blockquote>
@@ -1577,7 +1574,7 @@
 <img src="https://cdn.xiaolincoding.com//mysql/other/68080e783d7acc842fa254e4f9ec5630.png" alt="图片" style="zoom:67%;" />
 
 <p>类似的情况还能举例很多种，因此，<strong>我们不能认为一个用户消息对应一个 TCP 报文，正因为这样，所以 TCP 是面向字节流的协议</strong>。当两个消息的某个部分内容被分到同一个 TCP 报文时，就是我们常说的 TCP 粘包问题，这时接收方不知道消息的边界的话，是无法读出有效的消息。要解决这个问题，要交给<strong>应用程序</strong>。</p>
-<h2 id="3-10-如何解决粘包？"><a href="#3-10-如何解决粘包？" class="headerlink" title="3.10 如何解决粘包？"></a>3.10 如何解决粘包？</h2><blockquote>
+<h2 id="51、如何解决粘包？"><a href="#51、如何解决粘包？" class="headerlink" title="51、如何解决粘包？"></a>51、如何解决粘包？</h2><blockquote>
 <p>粘包的问题出现是因为不知道一个用户消息的边界在哪，如果知道了边界在哪，接收方就可以通过边界来划分出有效的用户消息。</p>
 <p>一般有三种方式分包的方式：</p>
 <ul>
@@ -1600,7 +1597,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span> </span><br><span class="line">    <span class="type">u_int32_t</span> message_length; </span><br><span class="line">    <span class="type">char</span> message_data[]; </span><br><span class="line">&#125; message;</span><br></pre></td></tr></table></figure>
 
 <p>当接收方接收到包头的大小（比如 4 个字节）后，就解析包头的内容，于是就可以知道数据的长度，然后接下来就继续读取数据，直到读满数据的长度，就可以组装成一个完整到用户消息来处理了。</p>
-<h2 id="3-11-已建立连接的TCP，收到SYN会发生什么？"><a href="#3-11-已建立连接的TCP，收到SYN会发生什么？" class="headerlink" title="3.11 已建立连接的TCP，收到SYN会发生什么？"></a>3.11 已建立连接的TCP，收到SYN会发生什么？</h2><p><strong>1. 客户端的 SYN 报文里的端口号与历史连接不相同</strong></p>
+<h2 id="52、已建立连接的TCP，收到SYN会发生什么？"><a href="#52、已建立连接的TCP，收到SYN会发生什么？" class="headerlink" title="52、已建立连接的TCP，收到SYN会发生什么？"></a>52、已建立连接的TCP，收到SYN会发生什么？</h2><p><strong>1. 客户端的 SYN 报文里的端口号与历史连接不相同</strong></p>
 <p>如果客户端恢复后发送的 SYN 报文中的源端口号跟上一次连接的源端口号不一样，此时服务端会认为是新的连接要建立，于是就会通过三次握手来建立新的连接。</p>
 <p>那旧连接里处于 Established 状态的服务端最后会怎么样呢？</p>
 <ul>
@@ -1613,14 +1610,14 @@
 <p><strong>接着，客户端收到这个 Challenge ACK，发现确认号（ack num）并不是自己期望收到的，于是就会回 RST 报文，服务端收到后，就会释放掉该连接。</strong></p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost4@main/%E7%BD%91%E7%BB%9C/est_syn.png" alt="img" style="zoom:50%;" />
 
-<h2 id="3-12-四次挥手中收到乱序的-FIN-包会如何处理？"><a href="#3-12-四次挥手中收到乱序的-FIN-包会如何处理？" class="headerlink" title="3.12 四次挥手中收到乱序的 FIN 包会如何处理？"></a>3.12 四次挥手中收到乱序的 FIN 包会如何处理？</h2><blockquote>
+<h2 id="53、四次挥手中收到乱序的-FIN-包会如何处理？"><a href="#53、四次挥手中收到乱序的-FIN-包会如何处理？" class="headerlink" title="53、四次挥手中收到乱序的 FIN 包会如何处理？"></a>53、四次挥手中收到乱序的 FIN 包会如何处理？</h2><blockquote>
 <p><strong>在 FIN_WAIT_2 状态下，是如何处理收到的乱序到 FIN 报文，然后 TCP 连接又是什么时候才进入到 TIME_WAIT 状态?</strong></p>
 </blockquote>
 <p><strong>在 FIN_WAIT_2 状态时，如果收到乱序的 FIN 报文，那么就被会加入到「乱序队列」，并不会进入到 TIME_WAIT 状态。</strong></p>
 <p><strong>等再次收到前面被网络延迟的数据包时，会判断乱序队列有没有数据，然后会检测乱序队列中是否有可用的数据，如果能在乱序队列中找到与当前报文的序列号保持的顺序的报文，就会看该报文是否有 FIN 标志，如果发现有 FIN 标志，这时才会进入 TIME_WAIT 状态。</strong></p>
 <img src="https://cdn.xiaolincoding.com//mysql/other/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP5p6XY29kaW5n,size_20,color_FFFFFF,t_70,g_se,x_16-20230309230147654.png" alt="img" style="zoom: 67%;" />
 
-<h2 id="3-13-在-TIME-WAIT-状态的-TCP-连接，收到-SYN-后会发生什么？"><a href="#3-13-在-TIME-WAIT-状态的-TCP-连接，收到-SYN-后会发生什么？" class="headerlink" title="3.13 在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？"></a>3.13 在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？</h2><blockquote>
+<h2 id="54、在-TIME-WAIT-状态的-TCP-连接，收到-SYN-后会发生什么？"><a href="#54、在-TIME-WAIT-状态的-TCP-连接，收到-SYN-后会发生什么？" class="headerlink" title="54、在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？"></a>54、在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？</h2><blockquote>
 <p><strong>1、收到合法 SYN</strong></p>
 <p>如果处于 TIME_WAIT 状态的连接收到「合法的 SYN 」后，<strong>就会重用此四元组连接，跳过 2MSL 而转变为 SYN_RECV 状态，接着就能进行建立连接过程</strong>。</p>
 <p><strong>2、收到非法的 SYN</strong></p>
@@ -1638,13 +1635,13 @@
 <li><strong>合法 SYN</strong>：客户端的  SYN 的「序列号」比服务端「期望下一个收到的序列号」要<strong>大</strong>。</li>
 <li><strong>非法 SYN</strong>：客户端的  SYN 的「序列号」比服务端「期望下一个收到的序列号」要<strong>小</strong>。</li>
 </ul>
-<h2 id="3-14-在-TIME-WAIT-状态，收到-RST-会断开连接吗？"><a href="#3-14-在-TIME-WAIT-状态，收到-RST-会断开连接吗？" class="headerlink" title="3.14 在 TIME_WAIT 状态，收到 RST 会断开连接吗？"></a>3.14 在 TIME_WAIT 状态，收到 RST 会断开连接吗？</h2><p>在前面我留了一个疑问，处于 TIME_WAIT 状态的连接，收到 RST 会断开连接吗？</p>
+<h2 id="55、在-TIME-WAIT-状态，收到-RST-会断开连接吗？"><a href="#55、在-TIME-WAIT-状态，收到-RST-会断开连接吗？" class="headerlink" title="55、在 TIME_WAIT 状态，收到 RST 会断开连接吗？"></a>55、在 TIME_WAIT 状态，收到 RST 会断开连接吗？</h2><p>在前面我留了一个疑问，处于 TIME_WAIT 状态的连接，收到 RST 会断开连接吗？</p>
 <p>会不会断开，关键看 <code>net.ipv4.tcp_rfc1337</code> 这个内核参数（默认情况是为 0）：</p>
 <ul>
 <li>如果这个参数设置为 0， 收到 RST 报文会提前结束 TIME_WAIT 状态，释放连接。</li>
 <li>如果这个参数设置为 1， 就会丢掉 RST 报文。</li>
 </ul>
-<h2 id="3-15-针对某个TCP-连接，一端断电和进程崩溃有什么区别？"><a href="#3-15-针对某个TCP-连接，一端断电和进程崩溃有什么区别？" class="headerlink" title="3.15  针对某个TCP 连接，一端断电和进程崩溃有什么区别？"></a>3.15  针对某个TCP 连接，一端断电和进程崩溃有什么区别？</h2><blockquote>
+<h2 id="56、针对某个TCP-连接，一端断电和进程崩溃有什么区别？"><a href="#56、针对某个TCP-连接，一端断电和进程崩溃有什么区别？" class="headerlink" title="56、针对某个TCP 连接，一端断电和进程崩溃有什么区别？"></a>56、针对某个TCP 连接，一端断电和进程崩溃有什么区别？</h2><blockquote>
 <p>如果是「<strong>客户端进程崩溃</strong>」，那么内核会发送 FIN 报文，与服务端进行四次挥手。</p>
 <p>但是，「<strong>客户端主机宕机</strong>」，后续还要看服务端会不会发送数据：</p>
 <ul>
@@ -1697,7 +1694,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> TCP_RTO_MAX ((unsigned)(120*HZ))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TCP_RTO_MIN ((unsigned)(HZ/5))</span></span><br></pre></td></tr></table></figure>
 
 <p>Linux 2.6+ 使用 1000 毫秒的 HZ，因此<code>TCP_RTO_MIN</code>约为 200 毫秒，<code>TCP_RTO_MAX</code>约为 120 秒。</p>
-<h2 id="3-16-拔掉网线后，-原本的-TCP-连接还存在吗？"><a href="#3-16-拔掉网线后，-原本的-TCP-连接还存在吗？" class="headerlink" title="3.16 拔掉网线后， 原本的 TCP 连接还存在吗？"></a>3.16 拔掉网线后， 原本的 TCP 连接还存在吗？</h2><p>实际上，TCP 连接在 Linux 内核中是一个名为 <code>struct socket</code> 的结构体，该结构体的内容包含 TCP 连接的状态等信息。当拔掉网线的时候，操作系统并不会变更该结构体的任何内容，所以 TCP 连接的状态也不会发生改变。</p>
+<h2 id="57、拔掉网线后，-原本的-TCP-连接还存在吗？"><a href="#57、拔掉网线后，-原本的-TCP-连接还存在吗？" class="headerlink" title="57、拔掉网线后， 原本的 TCP 连接还存在吗？"></a>57、拔掉网线后， 原本的 TCP 连接还存在吗？</h2><p>实际上，TCP 连接在 Linux 内核中是一个名为 <code>struct socket</code> 的结构体，该结构体的内容包含 TCP 连接的状态等信息。当拔掉网线的时候，操作系统并不会变更该结构体的任何内容，所以 TCP 连接的状态也不会发生改变。</p>
 <p><strong>因此，拔掉网线这个动作并不会影响 TCP 连接的状态。</strong>接下来，要看拔掉网线后，双方做了什么动作，此问题需要分场景来讨论：</p>
 <ul>
 <li>拔掉网线后，有数据传输；</li>
@@ -1727,7 +1724,7 @@
 <p>所以，TCP 保活机制可以在双方没有数据交互的情况，通过探测报文，来确定对方的 TCP 连接是否存活。</p>
 </li>
 </ul>
-<h2 id="3-17-tcp-tw-reuse-为什么默认是关闭的？"><a href="#3-17-tcp-tw-reuse-为什么默认是关闭的？" class="headerlink" title="3.17 tcp_tw_reuse 为什么默认是关闭的？"></a>3.17 tcp_tw_reuse 为什么默认是关闭的？</h2><blockquote>
+<h2 id="58、tcp-tw-reuse-为什么默认是关闭的？"><a href="#58、tcp-tw-reuse-为什么默认是关闭的？" class="headerlink" title="58、tcp_tw_reuse 为什么默认是关闭的？"></a>58、tcp_tw_reuse 为什么默认是关闭的？</h2><blockquote>
 <p>其实这题在变相问「<strong>如果 TIME_WAIT 状态持续时间过短或者没有，会有什么问题？</strong>」因为开启 tcp_tw_reuse 参数可以快速复用处于 TIME_WAIT 状态的 TCP 连接时，相当于缩短了 TIME_WAIT 状态的持续时间。</p>
 </blockquote>
 <blockquote>
@@ -1769,9 +1766,9 @@
 
 
 
-<h2 id="3-18-TCP-Keepalive-和-HTTP-Keep-Alive-是一个东西吗？"><a href="#3-18-TCP-Keepalive-和-HTTP-Keep-Alive-是一个东西吗？" class="headerlink" title="3.18 TCP Keepalive 和 HTTP Keep-Alive 是一个东西吗？"></a>3.18 TCP Keepalive 和 HTTP Keep-Alive 是一个东西吗？</h2><p>HTTP 的 Keep-Alive 也叫 HTTP 长连接，该功能是由「应用程序」实现的，可以使得用同一个 TCP 连接来发送和接收多个 HTTP 请求&#x2F;应答，减少了 HTTP 短连接带来的多次 TCP 连接建立和释放的开销。</p>
+<h2 id="59、TCP-Keepalive-和-HTTP-Keep-Alive-是一个东西吗？"><a href="#59、TCP-Keepalive-和-HTTP-Keep-Alive-是一个东西吗？" class="headerlink" title="59、TCP Keepalive 和 HTTP Keep-Alive 是一个东西吗？"></a>59、TCP Keepalive 和 HTTP Keep-Alive 是一个东西吗？</h2><p>HTTP 的 Keep-Alive 也叫 HTTP 长连接，该功能是由「应用程序」实现的，可以使得用同一个 TCP 连接来发送和接收多个 HTTP 请求&#x2F;应答，减少了 HTTP 短连接带来的多次 TCP 连接建立和释放的开销。</p>
 <p>TCP 的 Keepalive 也叫 TCP 保活机制，该功能是由「内核」实现的，当客户端和服务端长达一定时间没有进行数据交互时，内核为了确保该连接是否还有效，就会发送探测报文，来检测对方是否还在线，然后来决定是否要关闭该连接。</p>
-<h2 id="3-19-端口复用问题"><a href="#3-19-端口复用问题" class="headerlink" title="3.19 端口复用问题"></a>3.19 端口复用问题</h2><h3 id="1、TCP-和-UDP-可以同时绑定相同的端口吗？"><a href="#1、TCP-和-UDP-可以同时绑定相同的端口吗？" class="headerlink" title="1、TCP 和 UDP 可以同时绑定相同的端口吗？"></a>1、TCP 和 UDP 可以同时绑定相同的端口吗？</h3><p>TCP 和 UDP 服务端网络相似的一个地方，就是会调用 bind 绑定端口。</p>
+<h2 id="60、TCP-和-UDP-可以同时绑定相同的端口吗？"><a href="#60、TCP-和-UDP-可以同时绑定相同的端口吗？" class="headerlink" title="60、TCP 和 UDP 可以同时绑定相同的端口吗？"></a>60、TCP 和 UDP 可以同时绑定相同的端口吗？</h2><p>TCP 和 UDP 服务端网络相似的一个地方，就是会调用 bind 绑定端口。</p>
 <p>TCP 网络编程如下，服务端执行 listen() 系统调用就是监听端口的动作。</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/port/tcp%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.png" alt="img" style="zoom: 67%;" />
 
@@ -1788,7 +1785,7 @@
 <p>当主机收到数据包后，可以在 IP 包头的「协议号」字段知道该数据包是 TCP&#x2F;UDP，所以可以根据这个信息确定送给哪个模块（TCP&#x2F;UDP）处理，送给 TCP&#x2F;UDP 模块的报文根据「端口号」确定送给哪个应用程序处理。因此， TCP&#x2F;UDP 各自的端口号也相互独立，如 TCP 有一个 80 号端口，UDP 也可以有一个 80 号端口，二者并不冲突。</p>
 <img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/port/tcp%E5%92%8Cudp%E6%A8%A1%E5%9D%97.jpeg" alt="img" style="zoom:50%;" />
 
-<h3 id="2、多个-TCP-服务进程可以绑定同一个端口吗？"><a href="#2、多个-TCP-服务进程可以绑定同一个端口吗？" class="headerlink" title="2、多个 TCP 服务进程可以绑定同一个端口吗？"></a>2、多个 TCP 服务进程可以绑定同一个端口吗？</h3><blockquote>
+<h2 id="61、多个-TCP-服务进程可以绑定同一个端口吗？"><a href="#61、多个-TCP-服务进程可以绑定同一个端口吗？" class="headerlink" title="61、多个 TCP 服务进程可以绑定同一个端口吗？"></a>61、多个 TCP 服务进程可以绑定同一个端口吗？</h2><blockquote>
 <p>默认情况下，<strong>如果两个 TCP 服务进程同时绑定的 IP 地址和端口都相同，那么执行 bind() 时候就会出错，错误是“Address already in use”</strong>。</p>
 <p>如果想多个进程绑定相同的 IP 地址和端口，也是有办法的，就是对 socket 设置 SO_REUSEPORT 属性。SO_REUSEADDR 作用是：<strong>如果当前启动进程绑定的 IP+PORT 与处于TIME_WAIT 状态的连接占用的 IP+PORT 存在冲突，但是新启动的进程使用了 SO_REUSEADDR 选项，那么该进程就可以绑定成功</strong>。</p>
 </blockquote>
@@ -1820,7 +1817,7 @@
 <p>因此，在所有 TCP 服务器程序中，调用 bind 之前最好对 socket 设置 SO_REUSEADDR 属性，这不会产生危害，相反，它会帮助我们在很快时间内重启服务端程序。‍</p>
 <p><strong>前面我提到过这个问题</strong>：如果 TCP 服务进程 A 绑定的地址是  0.0.0.0 和端口 8888，而如果 TCP 服务进程 B 绑定的地址是 192.168.1.100 地址（或者其他地址）和端口 8888，那么执行 bind() 时候也会出错。</p>
 <p>这个问题也可以由 SO_REUSEADDR 解决，因为它的<strong>另外一个作用</strong>：绑定的 IP地址 + 端口时，只要 IP 地址不是正好(exactly)相同，那么允许绑定。比如，0.0.0.0:8888 和192.168.1.100:8888，虽然逻辑意义上前者包含了后者，但是 0.0.0.0 泛指所有本地 IP，而 192.168.1.100 特指某一IP，两者并不是完全相同，所以在对 socket 设置 SO_REUSEADDR 属性后，那么执行 bind() 时候就会绑定成功。</p>
-<h3 id="3、客户端的端口可以重复使用吗？"><a href="#3、客户端的端口可以重复使用吗？" class="headerlink" title="3、客户端的端口可以重复使用吗？"></a>3、客户端的端口可以重复使用吗？</h3><p>TCP 连接是由四元组（源IP地址，源端口，目的IP地址，目的端口）唯一确认的，那么只要四元组中其中一个元素发生了变化，那么就表示不同的 TCP  连接的。所以如果客户端已使用端口 64992 与服务端 A 建立了连接，那么客户端要与服务端 B 建立连接，还是可以使用端口 64992  的，因为内核是通过四元祖信息来定位一个 TCP 连接的，并不会因为客户端的端口号相同，而导致连接冲突的问题。</p>
+<h2 id="62、客户端的端口可以重复使用吗？"><a href="#62、客户端的端口可以重复使用吗？" class="headerlink" title="62、客户端的端口可以重复使用吗？"></a>62、客户端的端口可以重复使用吗？</h2><p>TCP 连接是由四元组（源IP地址，源端口，目的IP地址，目的端口）唯一确认的，那么只要四元组中其中一个元素发生了变化，那么就表示不同的 TCP  连接的。所以如果客户端已使用端口 64992 与服务端 A 建立了连接，那么客户端要与服务端 B 建立连接，还是可以使用端口 64992  的，因为内核是通过四元祖信息来定位一个 TCP 连接的，并不会因为客户端的端口号相同，而导致连接冲突的问题。</p>
 <blockquote>
 <p>客户端 TCP 连接 TIME_WAIT 状态过多，会导致端口资源耗尽而无法建立新的连接吗？</p>
 </blockquote>
@@ -1840,43 +1837,7 @@
 </blockquote>
 <p>至此，我们已经把客户端在执行 connect 函数时，内核选择端口的情况大致说了一遍，为了让大家更明白客户端端口的选择过程，我画了一流程图。</p>
 <p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/network/port/%E7%AB%AF%E5%8F%A3%E9%80%89%E6%8B%A9.jpg" alt="img"></p>
-<h3 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、<strong>总结</strong></h3><blockquote>
-<p>TCP 和 UDP 可以同时绑定相同的端口吗？</p>
-</blockquote>
-<p>可以的。</p>
-<p>TCP 和 UDP 传输协议，在内核中是由两个完全独立的软件模块实现的。</p>
-<p>当主机收到数据包后，可以在 IP 包头的「协议号」字段知道该数据包是 TCP&#x2F;UDP，所以可以根据这个信息确定送给哪个模块（TCP&#x2F;UDP）处理，送给 TCP&#x2F;UDP 模块的报文根据「端口号」确定送给哪个应用程序处理。</p>
-<p>因此， TCP&#x2F;UDP 各自的端口号也相互独立，互不影响。</p>
-<blockquote>
-<p>多个 TCP 服务进程可以同时绑定同一个端口吗？</p>
-</blockquote>
-<p>如果两个 TCP 服务进程同时绑定的 IP 地址和端口都相同，那么执行 bind() 时候就会出错，错误是“Address already in use”。</p>
-<p>如果两个 TCP 服务进程绑定的端口都相同，而 IP 地址不同，那么执行 bind() 不会出错。</p>
-<blockquote>
-<p>如何解决服务端重启时，报错“Address already in use”的问题？</p>
-</blockquote>
-<p>当我们重启 TCP 服务进程的时候，意味着通过服务器端发起了关闭连接操作，于是就会经过四次挥手，而对于主动关闭方，会在 TIME_WAIT 这个状态里停留一段时间，这个时间大约为 2MSL。</p>
-<p>当 TCP 服务进程重启时，服务端会出现 TIME_WAIT 状态的连接，TIME_WAIT 状态的连接使用的 IP+PORT  仍然被认为是一个有效的 IP+PORT 组合，相同机器上不能够在该 IP+PORT 组合上进行绑定，那么执行 bind()  函数的时候，就会返回了 Address already in use 的错误。</p>
-<p>要解决这个问题，我们可以对 socket 设置 SO_REUSEADDR 属性。</p>
-<p>这样即使存在一个和绑定 IP+PORT 一样的 TIME_WAIT 状态的连接，依然可以正常绑定成功，因此可以正常重启成功。</p>
-<blockquote>
-<p>客户端的端口可以重复使用吗？</p>
-</blockquote>
-<p>在客户端执行 connect 函数的时候，只要客户端连接的服务器不是同一个，内核允许端口重复使用。</p>
-<p>TCP 连接是由四元组（源IP地址，源端口，目的IP地址，目的端口）唯一确认的，那么只要四元组中其中一个元素发生了变化，那么就表示不同的 TCP 连接的。</p>
-<p>所以，如果客户端已使用端口 64992 与服务端 A 建立了连接，那么客户端要与服务端 B 建立连接，还是可以使用端口 64992 的，因为内核是通过四元祖信息来定位一个 TCP 连接的，并不会因为客户端的端口号相同，而导致连接冲突的问题。</p>
-<blockquote>
-<p>客户端 TCP 连接 TIME_WAIT 状态过多，会导致端口资源耗尽而无法建立新的连接吗？</p>
-</blockquote>
-<p>要看客户端是否都是与同一个服务器（目标地址和目标端口一样）建立连接。</p>
-<p>如果客户端都是与同一个服务器（目标地址和目标端口一样）建立连接，那么如果客户端 TIME_WAIT  状态的连接过多，当端口资源被耗尽，就无法与这个服务器再建立连接了。即使在这种状态下，还是可以与其他服务器建立连接的，只要客户端连接的服务器不是同一个，那么端口是重复使用的。</p>
-<blockquote>
-<p>如何解决客户端 TCP 连接 TIME_WAIT 过多，导致无法与同一个服务器建立连接的问题？</p>
-</blockquote>
-<p>打开 net.ipv4.tcp_tw_reuse  这个内核参数。</p>
-<p>因为开启了这个内核参数后，客户端调用 connect  函数时，如果选择到的端口，已经被相同四元组的连接占用的时候，就会判断该连接是否处于  TIME_WAIT 状态。</p>
-<p>如果该连接处于 TIME_WAIT 状态并且 TIME_WAIT 状态持续的时间超过了 1 秒，那么就会重用这个连接，然后就可以正常使用该端口了。</p>
-<h2 id="3-20-服务端没有-listen，客户端发起连接建立，会发生什么？"><a href="#3-20-服务端没有-listen，客户端发起连接建立，会发生什么？" class="headerlink" title="3.20 服务端没有 listen，客户端发起连接建立，会发生什么？"></a>3.20 服务端没有 listen，客户端发起连接建立，会发生什么？</h2><blockquote>
+<h2 id="63、服务端没有-listen，客户端发起连接建立，会发生什么？"><a href="#63、服务端没有-listen，客户端发起连接建立，会发生什么？" class="headerlink" title="63、服务端没有 listen，客户端发起连接建立，会发生什么？"></a>63、服务端没有 listen，客户端发起连接建立，会发生什么？</h2><blockquote>
 <p>服务端如果只 bind了 ip 和端口，但是没有调用 listen 让这个 socket 监听连接，这时候如果客户端朝这个服务端 socket 发数据，会发生啥？</p>
 </blockquote>
 <p>服务端如果只 bind 了 IP 地址和端口，而没有调用 listen 的话，此时客户端对服务端发起连接建立，服务端会回 RST 报文。</p>
@@ -1889,7 +1850,7 @@
 <p><img src="https://cdn.xiaolincoding.com//mysql/other/54ee363e149ee3dfba30efb1a542ef5c.png" alt="图片"></p>
 <p>在这个错误处理中，只要收到的报文（skb）的「校验和」没问题的话，内核就会调用 tcp_v4_send_reset 发送 RST 中止这个连接。</p>
 <p>至此，整个源码流程就解析完。</p>
-<h2 id="3-21-没有-listen，能建立-TCP-连接吗？"><a href="#3-21-没有-listen，能建立-TCP-连接吗？" class="headerlink" title="3.21 没有 listen，能建立 TCP 连接吗？"></a>3.21 没有 listen，能建立 TCP 连接吗？</h2><blockquote>
+<h2 id="64、没有-listen，能建立-TCP-连接吗？"><a href="#64、没有-listen，能建立-TCP-连接吗？" class="headerlink" title="64、没有 listen，能建立 TCP 连接吗？"></a>64、没有 listen，能建立 TCP 连接吗？</h2><blockquote>
 <p>不使用 listen ，可以建立 TCP 连接吗？</p>
 </blockquote>
 <p>答案，<strong>是可以的，客户端是可以自己连自己的形成连接（TCP自连接），也可以两个客户端同时向对方发出请求建立连接（TCP同时打开），这两个情况都有个共同点，就是没有服务端参与，也就是没有listen，就能建立连接</strong>。</p>
@@ -1903,7 +1864,7 @@
 <p>显然没有，因为客户端没有执行listen，而半连接队列和全连接队列都是在执行 listen 方法时，内核自动创建的。但内核还有个全局 hash 表，可以用于存放 sock 连接的信息。这个全局 hash 表其实还细分为 ehash，bhash和listen_hash等，但因为过于细节，大家理解成有一个全局 hash 就够了，</p>
 <p><strong>在 TCP 自连接的情况中，客户端在 connect 方法时，最后会将自己的连接信息放入到这个全局 hash  表中，然后将信息发出，消息在经过回环地址重新回到 TCP 传输层的时候，就会根据 IP + 端口信息，再一次从这个全局 hash  中取出信息。于是握手包一来一回，最后成功建立连接</strong>。</p>
 <p>TCP 同时打开的情况也类似，只不过从一个客户端变成了两个客户端而已。</p>
-<h2 id="3-22-TCP-四次挥手，可以变成三次吗？"><a href="#3-22-TCP-四次挥手，可以变成三次吗？" class="headerlink" title="3.22 TCP 四次挥手，可以变成三次吗？"></a>3.22 TCP 四次挥手，可以变成三次吗？</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406102122868.png" alt="在这里插入图片描述" style="zoom: 80%;" />
+<h2 id="65、TCP-四次挥手，可以变成三次吗？"><a href="#65、TCP-四次挥手，可以变成三次吗？" class="headerlink" title="65、TCP 四次挥手，可以变成三次吗？"></a>65、TCP 四次挥手，可以变成三次吗？</h2><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406102122868.png" alt="在这里插入图片描述" style="zoom: 80%;" />
 
 <blockquote>
 <p>当被动关闭方在 TCP 挥手过程中，<strong>如果「没有数据要发送」，同时「没有开启 TCP_QUICKACK（默认情况就是没有开启，没有开启  TCP_QUICKACK，等于就是在使用 TCP 延迟确认机制）」</strong>，那么第二和第三次挥手就会合并传输，这样就出现了三次挥手。</p>
@@ -1920,7 +1881,7 @@
 </ul>
 <img src="https://cdn.xiaolincoding.com//mysql/other/33f3d2d54a924b0a80f565038327e0e4.png" alt="img" style="zoom: 67%;" />
 
-<h2 id="3-23-TCP-序列号和确认号是如何变化的？"><a href="#3-23-TCP-序列号和确认号是如何变化的？" class="headerlink" title="3.23 TCP 序列号和确认号是如何变化的？"></a>3.23 TCP 序列号和确认号是如何变化的？</h2><ul>
+<h2 id="66、TCP-序列号和确认号是如何变化的？"><a href="#66、TCP-序列号和确认号是如何变化的？" class="headerlink" title="66、TCP 序列号和确认号是如何变化的？"></a>66、TCP 序列号和确认号是如何变化的？</h2><ul>
 <li>三次握手中 TCP 序列号和确认号的变化</li>
 <li>数据传输中 TCP 序列号和确认号的变化</li>
 <li>四次挥手中 TCP 序列号和确认号的变化</li>
@@ -1966,7 +1927,7 @@
 <p>数据传输阶段结束后，客户端发起了 FIN 报文，请求服务端端开该 TCP 连接，此时就进入了 TCP 四次挥手阶段，如下图。</p>
 <img src="https://cdn.xiaolincoding.com//mysql/other/ae18cbf6071c47b98014a68d05c37d16.png" alt="在这里插入图片描述" style="zoom:50%;" />
 
-<h2 id="3-24-TCP快速打开（TFO）"><a href="#3-24-TCP快速打开（TFO）" class="headerlink" title="3.24 TCP快速打开（TFO）"></a>3.24 TCP快速打开（TFO）</h2><h2 id="3-25-TCP报文中的时间戳有什么作用？"><a href="#3-25-TCP报文中的时间戳有什么作用？" class="headerlink" title="3.25 TCP报文中的时间戳有什么作用？"></a>3.25 TCP报文中的时间戳有什么作用？</h2><p>TCP Timestamps Option 由四部分构成：</p>
+<h2 id="67、TCP报文中的时间戳有什么作用？"><a href="#67、TCP报文中的时间戳有什么作用？" class="headerlink" title="67、TCP报文中的时间戳有什么作用？"></a>67、TCP报文中的时间戳有什么作用？</h2><p>TCP Timestamps Option 由四部分构成：</p>
 <p>类别（kind）、长度（Length）、发送⽅时间戳（TS value）、回显时间戳（TS Echo Reply）。</p>
 <p>TCP 的时间戳主要解决两⼤问题：</p>
 <ul>
@@ -1979,7 +1940,7 @@
 <p>窗⼝缩放可以最⾼到 1GB（2^30)，在⾼速⽹络中，序列号在很短的时间内就会被重复使⽤。</p>
 </li>
 </ul>
-<h2 id="3-26-TCP场景问题"><a href="#3-26-TCP场景问题" class="headerlink" title="3.26 TCP场景问题"></a>3.26 TCP场景问题</h2><h3 id="1、收到-IP-数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP-或-TCP）？"><a href="#1、收到-IP-数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP-或-TCP）？" class="headerlink" title="1、收到 IP 数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP 或 TCP）？"></a>1、收到 IP 数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP 或 TCP）？</h3><p>通过查看 IP 头部中的 “协议字段”（Protocol field）来实现的。</p>
+<h2 id="68、收到-IP-数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP-或-TCP）？"><a href="#68、收到-IP-数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP-或-TCP）？" class="headerlink" title="68、收到 IP 数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP 或 TCP）？"></a>68、收到 IP 数据包解析以后，怎么知道这个分组应该投递到上层的哪一个协议（UDP 或 TCP）？</h2><p>通过查看 IP 头部中的 “协议字段”（Protocol field）来实现的。</p>
 <ol>
 <li><strong>接收 IP 数据包</strong>： 当一个 IP 数据包到达时，首先由网络层（即 IP 协议栈）进行处理。此时，系统会解析 IP 头部以提取相关信息。</li>
 <li><strong>解析 IP 头部</strong>： IP 头部包含了很多重要的信息，其中包括源地址、目的地址、总长度、标识、片偏移、TTL（生存时间）、协议字段等。我们关心的是其中的协议字段。</li>
@@ -1996,8 +1957,8 @@
 </ul>
 </li>
 </ol>
-<h3 id="2、TCP-提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？"><a href="#2、TCP-提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？" class="headerlink" title="2、TCP 提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？"></a>2、TCP 提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？</h3><p>应⽤程序使⽤⾃⼰约定的规则来表示消息的边界，⽐如有⼀些使⽤回⻋+换⾏（”\r\n”），⽐如 Redis的通信协议（RESP protocol）。</p>
-<h2 id="3-27-telnet的用法"><a href="#3-27-telnet的用法" class="headerlink" title="3.27 telnet的用法"></a>3.27 telnet的用法</h2><p>Telnet 是一个网络协议和程序，允许用户通过命令行接口登录到远程计算机或网络设备。它使用 TCP 端口 23，提供一个简单的、未加密的通信方式，适用于访问和管理远程设备。</p>
+<h2 id="69、TCP-提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？"><a href="#69、TCP-提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？" class="headerlink" title="69、TCP 提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？"></a>69、TCP 提供了一种字节流服务，而收发双方都不保持记录的边界，应用程序应该如何提供他们自己的记录标识呢？</h2><p>应⽤程序使⽤⾃⼰约定的规则来表示消息的边界，⽐如有⼀些使⽤回⻋+换⾏（”\r\n”），⽐如 Redis的通信协议（RESP protocol）。</p>
+<h2 id="70、telnet的用法"><a href="#70、telnet的用法" class="headerlink" title="70、telnet的用法"></a>70、telnet的用法</h2><p>Telnet 是一个网络协议和程序，允许用户通过命令行接口登录到远程计算机或网络设备。它使用 TCP 端口 23，提供一个简单的、未加密的通信方式，适用于访问和管理远程设备。</p>
 <h3 id="1、连接到远程主机"><a href="#1、连接到远程主机" class="headerlink" title="1、连接到远程主机"></a>1、连接到远程主机</h3><p>要使用 Telnet 连接到远程主机，可以在命令行输入以下命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet [hostname] [port]</span><br></pre></td></tr></table></figure>
 
@@ -2021,7 +1982,7 @@
 <p>将上述内容保存为 <code>telnet_script.exp</code>，然后运行：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expect telnet_script.exp</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-28-netstat的⽤法"><a href="#3-28-netstat的⽤法" class="headerlink" title="3.28 netstat的⽤法"></a>3.28 netstat的⽤法</h2><p>netstat 命令⽤于显示各种⽹络相关信息。</p>
+<h2 id="71、netstat的⽤法"><a href="#71、netstat的⽤法" class="headerlink" title="71、netstat的⽤法"></a>71、netstat的⽤法</h2><p>netstat 命令⽤于显示各种⽹络相关信息。</p>
 <p>常⻅参数</p>
 <blockquote>
 <p>-a (all)显示所有选项，默认不显示LISTEN相关</p>
@@ -2035,7 +1996,7 @@
 <p>-s 按各个协议进⾏统计</p>
 <p>-c 每隔⼀个固定时间，执⾏该netstat命令</p>
 </blockquote>
-<h2 id="3-29-tcpdump"><a href="#3-29-tcpdump" class="headerlink" title="3.29 tcpdump"></a>3.29 tcpdump</h2><h2 id="3-30-wireshark"><a href="#3-30-wireshark" class="headerlink" title="3.30 wireshark"></a>3.30 wireshark</h2><h2 id="3-31-如果要设计一个QQ，在网络协议上如何设计？"><a href="#3-31-如果要设计一个QQ，在网络协议上如何设计？" class="headerlink" title="3.31 如果要设计一个QQ，在网络协议上如何设计？"></a>3.31 如果要设计一个QQ，在网络协议上如何设计？</h2><p>登陆采用TCP协议和HTTP协议，你和好友之间发送消息，主要采用UDP协议，内⽹传⽂件采用了P2P技术。</p>
+<h2 id="72、如果要设计一个QQ，在网络协议上如何设计？"><a href="#72、如果要设计一个QQ，在网络协议上如何设计？" class="headerlink" title="72、如果要设计一个QQ，在网络协议上如何设计？"></a>72、如果要设计一个QQ，在网络协议上如何设计？</h2><p>登陆采用TCP协议和HTTP协议，你和好友之间发送消息，主要采用UDP协议，内⽹传⽂件采用了P2P技术。</p>
 <p>总的来说：</p>
 <ol>
 <li><p>登陆过程，客户端client 采用TCP协议向服务器server发送信息，HTTP协议下载信息。登陆之后，会有⼀个TCP连接来保持在线状态。</p>
@@ -2045,7 +2006,7 @@
 <li><p>如果是在内网里面的两个客户端传⽂件，QQ采用的是P2P技术，不需要服务器中转。</p>
 </li>
 </ol>
-<h2 id="3-32-用了TCP协议，一定不会丢包吗？"><a href="#3-32-用了TCP协议，一定不会丢包吗？" class="headerlink" title="3.32 用了TCP协议，一定不会丢包吗？"></a>3.32 用了TCP协议，一定不会丢包吗？</h2><h3 id="1、数据包的发送流程"><a href="#1、数据包的发送流程" class="headerlink" title="1、数据包的发送流程"></a>1、数据包的发送流程</h3><ol>
+<h2 id="73、用了TCP协议，一定不会丢包吗？"><a href="#73、用了TCP协议，一定不会丢包吗？" class="headerlink" title="73、用了TCP协议，一定不会丢包吗？"></a>73、用了TCP协议，一定不会丢包吗？</h2><h3 id="1、数据包的发送流程"><a href="#1、数据包的发送流程" class="headerlink" title="1、数据包的发送流程"></a>1、数据包的发送流程</h3><ol>
 <li>把消息从用户空间拷贝到内核空间的发送缓冲区(send_buffer)；</li>
 <li>顺着传输层、网络层，通过 Qdisc(排队规则) 进行流控进入到数据链路层；</li>
 <li>通过 RingBuffer 发送到物理层的网卡；</li>
@@ -2054,11 +2015,11 @@
 </ol>
 <h3 id="2、几个丢包的可能性"><a href="#2、几个丢包的可能性" class="headerlink" title="2、几个丢包的可能性"></a>2、几个丢包的可能性</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111917261.png" alt="image-20240611191756056" style="zoom: 67%;" />
 
-<h2 id="3-33-如何基于UDP实现可靠传输？"><a href="#3-33-如何基于UDP实现可靠传输？" class="headerlink" title="3.33 如何基于UDP实现可靠传输？"></a>3.33 如何基于UDP实现可靠传输？</h2><h3 id="1、QUIC如何实现可靠传输？"><a href="#1、QUIC如何实现可靠传输？" class="headerlink" title="1、QUIC如何实现可靠传输？"></a>1、QUIC如何实现可靠传输？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111919871.png" alt="image-20240611191943734"></p>
-<h3 id="2、QUIC如何解决TCP队头阻塞问题？"><a href="#2、QUIC如何解决TCP队头阻塞问题？" class="headerlink" title="2、QUIC如何解决TCP队头阻塞问题？"></a>2、QUIC如何解决TCP队头阻塞问题？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111919210.png" alt="image-20240611191958139"></p>
-<h3 id="3、QUIC如何做流量控制？"><a href="#3、QUIC如何做流量控制？" class="headerlink" title="3、QUIC如何做流量控制？"></a>3、QUIC如何做流量控制？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920242.png" alt="image-20240611192007166"></p>
-<h3 id="4、QUIC更快的连接建立"><a href="#4、QUIC更快的连接建立" class="headerlink" title="4、QUIC更快的连接建立"></a>4、QUIC更快的连接建立</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920442.png" alt="image-20240611192013378"></p>
-<h3 id="5、QUIC如何迁移连接？"><a href="#5、QUIC如何迁移连接？" class="headerlink" title="5、QUIC如何迁移连接？"></a>5、QUIC如何迁移连接？</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920900.png" alt="image-20240611192018839"></p>
+<h2 id="74、QUIC如何实现可靠传输？"><a href="#74、QUIC如何实现可靠传输？" class="headerlink" title="74、QUIC如何实现可靠传输？"></a>74、QUIC如何实现可靠传输？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111919871.png" alt="image-20240611191943734"></p>
+<h2 id="75、QUIC如何解决TCP队头阻塞问题？"><a href="#75、QUIC如何解决TCP队头阻塞问题？" class="headerlink" title="75、QUIC如何解决TCP队头阻塞问题？"></a>75、QUIC如何解决TCP队头阻塞问题？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111919210.png" alt="image-20240611191958139"></p>
+<h2 id="76、QUIC如何做流量控制？"><a href="#76、QUIC如何做流量控制？" class="headerlink" title="76、QUIC如何做流量控制？"></a>76、QUIC如何做流量控制？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920242.png" alt="image-20240611192007166"></p>
+<h2 id="77、QUIC更快的连接建立"><a href="#77、QUIC更快的连接建立" class="headerlink" title="77、QUIC更快的连接建立"></a>77、QUIC更快的连接建立</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920442.png" alt="image-20240611192013378"></p>
+<h2 id="78、QUIC如何迁移连接？"><a href="#78、QUIC如何迁移连接？" class="headerlink" title="78、QUIC如何迁移连接？"></a>78、QUIC如何迁移连接？</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406111920900.png" alt="image-20240611192018839"></p>
 
       
     </div>
@@ -5321,7 +5282,7 @@ mode_t
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -5364,12 +5325,12 @@ mode_t
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">291k</span>
+    <span title="站点总字数">288k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:38</span>
+    <span title="站点阅读时长">17:27</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
