@@ -455,7 +455,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-22 21:27:41" itemprop="dateModified" datetime="2024-07-22T21:27:41+08:00">2024-07-22</time>
+                <time title="修改时间：2024-07-23 20:49:56" itemprop="dateModified" datetime="2024-07-23T20:49:56+08:00">2024-07-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -477,14 +477,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.3k</span>
+              <span>9.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>34 分钟</span>
+              <span>36 分钟</span>
             </span>
 
         </div>
@@ -933,6 +933,23 @@
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407222043515.png" alt="image-20240722204345297"></p>
 <p>大小端字节序转换：</p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407222118707.png" alt="image-20240722211804431"></p>
+<p>虚拟机执行 <code>ping 192.168.74.255</code>，协议栈接收到的信息如下：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407231552801.png" alt="image-20240723155203318"></p>
+<h2 id="4、exmsg-c"><a href="#4、exmsg-c" class="headerlink" title="4、exmsg.c"></a>4、exmsg.c</h2><h2 id="5、netif-pcap-c"><a href="#5、netif-pcap-c" class="headerlink" title="5、netif_pcap.c"></a>5、netif_pcap.c</h2><h2 id="6、netif-c"><a href="#6、netif-c" class="headerlink" title="6、netif.c"></a>6、netif.c</h2><h2 id="7、ether-c"><a href="#7、ether-c" class="headerlink" title="7、ether.c"></a>7、ether.c</h2><h1 id="九、定时器"><a href="#九、定时器" class="headerlink" title="九、定时器"></a>九、定时器</h1><p>在协议栈中，有很多地方需要用到定时器，用于完成<strong>各种超时事件</strong>的处理，比如用于 ARP 包，TCP 超时重传等。</p>
+<p>具体的定时器包括：</p>
+<ol>
+<li>周期性执行的定时器</li>
+<li>一次性执行的定时器</li>
+</ol>
+<h2 id="1、实现细节"><a href="#1、实现细节" class="headerlink" title="1、实现细节"></a>1、实现细节</h2><p>在系统中存在多个定时器，采用链表进行组织，且按照定时递增的方式组织排列。</p>
+<p>在定时器内部存在一个 cur 用于计数当前计时值，定时器有两种排列方式：一种是 cur 分别存储 100ms、100、150和 500。现在我们不按 cur 的原值来存储，而是<strong>存储当前定时器及之前的所有定时器超时值之和</strong>，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407232026553.png" alt="image-20240723202634814"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体的实现</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief 将结点按超时时间从小到大插入进链表中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">insert_timer</span><span class="params">(<span class="type">net_timer_t</span> * insert_timer)</span> &#123;</span><br><span class="line">    <span class="type">nlist_node_t</span>* node;</span><br><span class="line">    <span class="type">nlist_node_t</span> *pre = (<span class="type">nlist_node_t</span> *)<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    nlist_for_each(node, &amp;timer_list) &#123;</span><br><span class="line">        <span class="type">net_timer_t</span> * cur_timer = nlist_entry(node, <span class="type">net_timer_t</span>, node);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入定时器的超时值大于当前定时器，因此要往后继续遍历</span></span><br><span class="line">        <span class="comment">// 因此，先将插入定时器的超时值减一下，然后继续往后遍历</span></span><br><span class="line">        <span class="keyword">if</span> (insert_timer-&gt;curr &gt; cur_timer-&gt;curr) &#123;</span><br><span class="line">            insert_timer-&gt;curr -= cur_timer-&gt;curr;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (insert_timer-&gt;curr == cur_timer-&gt;curr) &#123;</span><br><span class="line">            <span class="comment">// 二者的超时值相等，此时插入到其之后，并将超时值调整为0，即超时相等</span></span><br><span class="line">            insert_timer-&gt;curr = <span class="number">0</span>;</span><br><span class="line">            nlist_insert_after(&amp;timer_list, node, &amp;insert_timer-&gt;node);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 插入定时器的超时值小于当前定时器，因此要往前插入</span></span><br><span class="line">            <span class="comment">// 当前定时器的超时值要减去插入定时器的超时值</span></span><br><span class="line">            cur_timer-&gt;curr -= insert_timer-&gt;curr;</span><br><span class="line">            <span class="keyword">if</span> (pre) &#123;</span><br><span class="line">                nlist_insert_after(&amp;timer_list, pre, &amp;insert_timer-&gt;node);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nlist_insert_first(&amp;timer_list, &amp;insert_timer-&gt;node);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        pre = node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找不到合适的位置，即超时值大于当前所有定时器，因此插入到最后</span></span><br><span class="line">    nlist_insert_last(&amp;timer_list, &amp;insert_timer-&gt;node);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按照这样的方式组织之后，移除定时器时就需要考虑对其他定时器的影响：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407232042482.png" alt="image-20240723204222709"></p>
+<p>去掉第三个定时器后，对第四个定时器的超时值加 50ms，因此在完成移除操作时，只需要对被移除定时器的下一个定时器进行修改即可：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202407232048485.png" alt="image-20240723204804204"></p>
 
       
     </div>
@@ -4473,7 +4490,7 @@ add $4, %esp：
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-22 10:34:03" itemprop="dateModified" datetime="2024-07-22T10:34:03+08:00">2024-07-22</time>
+                <time title="修改时间：2024-07-25 20:31:18" itemprop="dateModified" datetime="2024-07-25T20:31:18+08:00">2024-07-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -4502,7 +4519,7 @@ add $4, %esp：
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:01</span>
+              <span>1:59</span>
             </span>
 
         </div>
@@ -4849,12 +4866,12 @@ add $4, %esp：
 <li><strong>使用互斥锁</strong>：如果使用互斥锁，需要<strong>配合条件变量</strong>来实现这种顺序控制。<strong>互斥锁本身只能保证互斥，不能控制线程之间的执行顺序</strong>。父线程需要在条件变量上等待一个特定条件（通常由子线程设置）。</li>
 <li><strong>使用信号量</strong>：信号量可以更直接地控制执行顺序。父线程等待子线程释放某个信号后才能继续执行，这样就控制了对资源的访问顺序。</li>
 </ul>
-<h3 id="34、windows-下-thread-create-会有什么问题？"><a href="#34、windows-下-thread-create-会有什么问题？" class="headerlink" title="34、windows 下 thread_create 会有什么问题？"></a>34、windows 下 thread_create 会有什么问题？</h3><p>？</p>
+<h3 id="【-】34、windows-下-thread-create-会有什么问题？"><a href="#【-】34、windows-下-thread-create-会有什么问题？" class="headerlink" title="【-】34、windows 下 thread_create 会有什么问题？"></a>【-】34、windows 下 thread_create 会有什么问题？</h3><p>？</p>
 <h3 id="35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT"><a href="#35、知道哪些信号的含义？SIGALRM-SIGSEGV-SIGINT" class="headerlink" title="35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?"></a>35、知道哪些信号的含义？SIGALRM, SIGSEGV, SIGINT?</h3><p><strong>SIGALRM</strong>：时钟定时器超时信号，通常用于定时操作。</p>
 <p><strong>SIGSEGV</strong>：非法内存访问信号，通常由无效的指针或越界访问引发。</p>
 <p><strong>SIGINT</strong>：中断信号，通常由用户通过 Ctrl+C 发出，用于中断程序执行。</p>
-<h3 id="36、Ctrl-C-后发生了什么？"><a href="#36、Ctrl-C-后发生了什么？" class="headerlink" title="36、Ctrl+C 后发生了什么？"></a>36、Ctrl+C 后发生了什么？</h3><p>按下 Ctrl+C 后，会向前台运行的进程发送 SIGINT 信号。这个信号通常用于中断和终止正在运行的程序。如果程序捕获并处理了 SIGINT 信号，它可以执行清理操作或选择忽略信号；否则，默认行为是终止程序。</p>
-<h3 id="37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，主要有以下功能：</p>
+<h3 id="36、Ctrl-C-后发生了什么？"><a href="#36、Ctrl-C-后发生了什么？" class="headerlink" title="36、Ctrl+C 后发生了什么？"></a>36、Ctrl+C 后发生了什么？</h3><p>按下 Ctrl+C 后，会<strong>向前台运行的进程发送 SIGINT 信号</strong>。这个信号通常用于<strong>中断和终止正在运行的程序</strong>。如果程序捕获并处理了 SIGINT 信号，它可以执行清理操作或选择忽略信号；否则，默认行为是终止程序。</p>
+<h3 id="【-】37、sigaction-可以干哪些事情？解释一下屏蔽集？"><a href="#【-】37、sigaction-可以干哪些事情？解释一下屏蔽集？" class="headerlink" title="【*】37、sigaction 可以干哪些事情？解释一下屏蔽集？"></a>【*】37、sigaction 可以干哪些事情？解释一下屏蔽集？</h3><p><code>sigaction</code> 是一个用于设置和检测信号处理方式的系统调用，主要有以下功能：</p>
 <ol>
 <li><strong>设置信号处理函数</strong>：可以用于指定一个函数，用来处理特定信号发生时的行为。</li>
 <li><strong>指定信号的处理方式</strong>：可以指定信号的处理方式，比如忽略信号、执行默认操作、或者调用指定的处理函数。</li>
@@ -4915,7 +4932,7 @@ add $4, %esp：
 <li><p><code>栈</code>上的对象由编译器进行分配，当<strong>离开作用域范围时被编译器销毁</strong>。</p>
 </li>
 </ol>
-<h3 id="48、如何-让对象只能存在于栈-堆中？"><a href="#48、如何-让对象只能存在于栈-堆中？" class="headerlink" title="48、如何 让对象只能存在于栈&#x2F;堆中？"></a>48、如何 让对象只能存在于栈&#x2F;堆中？</h3><ol>
+<h3 id="48、如何让对象只能存在于栈-堆中？"><a href="#48、如何让对象只能存在于栈-堆中？" class="headerlink" title="48、如何让对象只能存在于栈&#x2F;堆中？"></a>48、如何让对象只能存在于栈&#x2F;堆中？</h3><ol>
 <li>如果<strong>将<code>operator new</code>设置为私有的</strong>，此时尝试在堆上分配内存失败，对象就会<strong>存在于栈中</strong>。</li>
 <li>由于编译器在栈上分配内存时会自动调用其构造函数和析构函数，因此如果<strong>将析构函数设置为私有的</strong>，在栈上分配内存失败，对象就会<strong>存在于堆中</strong>。</li>
 </ol>
@@ -4963,7 +4980,7 @@ add $4, %esp：
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">mem_control_block</span> &#123;</span><br><span class="line">    <span class="type">int</span> is_available;      <span class="comment">// 1表可用，0表不可用</span></span><br><span class="line">    <span class="type">int</span> size;                 <span class="comment">// 总大小</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="【-】54、mmap-的原理"><a href="#【-】54、mmap-的原理" class="headerlink" title="【*】54、mmap() 的原理"></a>【*】54、mmap() 的原理</h3><h3 id="55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"><a href="#55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？" class="headerlink" title="55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"></a>55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？</h3><p>（1）<strong>free(p+50) 是否有效？</strong></p>
+<h3 id="【-还没学习-】54、mmap-的原理"><a href="#【-还没学习-】54、mmap-的原理" class="headerlink" title="【&#x3D;还没学习&#x3D;】54、mmap() 的原理"></a>【&#x3D;还没学习&#x3D;】54、mmap() 的原理</h3><h3 id="55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"><a href="#55、假设分配一块内存-int-p-int-malloc-100-那么-free-p-50-可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？" class="headerlink" title="55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？"></a>55、假设分配一块内存 int* p &#x3D; (int*)malloc(100); 那么 free(p+50) 可不可以，为什么；如果想把这块内存扩充到200字节，应该怎么做？</h3><p>（1）<strong>free(p+50) 是否有效？</strong></p>
 <ul>
 <li><strong>不可以</strong>。<code>free()</code> 函数要求传入的指针必须是由 <code>malloc()</code>、<code>calloc()</code> 或 <code>realloc()</code> 返回的指针的起始地址。如果传入的是偏移后的地址（如 <code>p + 50</code>），会导致未定义行为。<code>malloc()</code> 在分配用户传入大小的内存时，还<strong>额外分配一个用于管理的内存</strong>，大小为 8 字节， <code>free()</code> 需要据此来释放正确的内存区域，而偏移后的指针不包含这些信息。</li>
 </ul>
@@ -5290,7 +5307,7 @@ add $4, %esp：
 </ol>
 <h3 id="88、程序崩溃产生-core-dump-一般怎么处理？"><a href="#88、程序崩溃产生-core-dump-一般怎么处理？" class="headerlink" title="88、程序崩溃产生 core dump 一般怎么处理？"></a>88、程序崩溃产生 core dump 一般怎么处理？</h3><p>core dump 是程序由于异常在运行时<strong>异常退出或者终止</strong>，在一定的条件下<strong>生成的一个叫做 core 的文件</strong>，这个 core 文件会记录程序在运行时的内存，寄存器状态，内存指针和函数堆栈信息等等。对其进行分析可以定位到程序异常发生时对应的堆栈调用信息。</p>
 <p>一般采用<strong>使用 gdb 命令</strong>对 core 文件进行调试。</p>
-<h3 id="【-】89、当程序运行时，如何将其加载到进程地址空间？"><a href="#【-】89、当程序运行时，如何将其加载到进程地址空间？" class="headerlink" title="【*】89、当程序运行时，如何将其加载到进程地址空间？"></a>【*】89、当程序运行时，如何将其加载到进程地址空间？</h3><ol>
+<h3 id="89、当程序运行时，如何将其加载到进程地址空间？"><a href="#89、当程序运行时，如何将其加载到进程地址空间？" class="headerlink" title="89、当程序运行时，如何将其加载到进程地址空间？"></a>89、当程序运行时，如何将其加载到进程地址空间？</h3><ol>
 <li>从可执行文件中的代码段中找到程序的入口地址；</li>
 <li>接着操作系统将虚拟地址转换为对应的物理地址，并在内存中进行执行；</li>
 <li>执行完毕后，切换到下一行代码进行类似的操作，直到程序运行完毕。</li>
@@ -5301,13 +5318,13 @@ add $4, %esp：
 
 <p>系统调用的流程：</p>
 <ol>
-<li><p>触发中断：将系统调用号存入寄存器 <code>eax</code>，并执行 <code>int $0x80</code>产生中断；</p>
+<li><p><strong>触发中断</strong>：将系统调用号存入寄存器 <code>eax</code>，并执行 <code>int $0x80</code>产生中断；</p>
 </li>
-<li><p>切换堆栈：从用户态切换到内核态；</p>
+<li><p><strong>切换堆栈</strong>：从用户态切换到内核态；</p>
 </li>
-<li><p>执行中断程序：根据中断号 <code>0x80</code> 找到中断处理程序 <code>system_call</code>；再从 <code>eax</code> 中取出系统调用号，找到对应的处理函数；</p>
+<li><p><strong>执行系统调用</strong>：根据中断号 <code>0x80</code> 找到中断处理程序 <code>system_call</code>；再从 <code>eax</code> 中取出系统调用号，在系统调用表中找到对应的处理函数；</p>
 </li>
-<li><p>从中断程序中返回：通过 <code>iret</code> 将返回值返回，并从内核态返回到用户态。</p>
+<li><p><strong>返回</strong>：通过 <code>iret</code> 将返回值返回，并从内核态返回到用户态。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1.	系统调用号 -&gt; eax</span><br><span class="line">	int 0x80（注意所用的中断都复用一个中断号）</span><br><span class="line"></span><br><span class="line">2.	用户态切换到内核态</span><br><span class="line"></span><br><span class="line">3.	0x80 -&gt; system_call</span><br><span class="line">	eax -&gt; 系统调用号（根据不同的系统调用号来找到对应的系统调用实现） -&gt; 系统调用表 -&gt; 处理函数</span><br><span class="line"></span><br><span class="line">4.	iret 返回值返回</span><br><span class="line">	从内核态返回用户态</span><br></pre></td></tr></table></figure></li>
 </ol>
 <blockquote>
@@ -5317,7 +5334,7 @@ add $4, %esp：
 <li>保存当前运行现场，将 CPU 中存储的用户态指令保存到 *stack 中，并加载内核态的指令。</li>
 </ol>
 </blockquote>
-<h3 id="91、动态链接和静态链接的区别？"><a href="#91、动态链接和静态链接的区别？" class="headerlink" title="91、动态链接和静态链接的区别？"></a>91、动态链接和静态链接的区别？</h3><ol>
+<h3 id="【-】91、动态链接和静态链接的区别？"><a href="#【-】91、动态链接和静态链接的区别？" class="headerlink" title="【*】91、动态链接和静态链接的区别？"></a>【*】91、动态链接和静态链接的区别？</h3><ol>
 <li><p>静态链接</p>
 <ol>
 <li><p>静态链接时指<strong>所有需要的库代码在编译时就被嵌入到可执行文件中，最终生成的可执行文件中包含了所有的库代码</strong>；</p>
@@ -5339,40 +5356,9 @@ add $4, %esp：
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301606610.png" alt="image-20240630160655511"></p>
 <p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202406301607955.png" alt="image-20240630160706843"></p>
 <h2 id="四、Linux相关"><a href="#四、Linux相关" class="headerlink" title="四、Linux相关"></a>四、Linux相关</h2><h3 id="【-】92、Linux-常用命令（1）"><a href="#【-】92、Linux-常用命令（1）" class="headerlink" title="【*】92、Linux 常用命令（1）"></a>【*】92、Linux 常用命令（1）</h3><ol>
-<li><p>切换目录：<code>cd</code></p>
-</li>
-<li><p>查看端口绑定情况：<code>lsof -i : [端口号]</code>或<code>netstat -tuln</code>（列出所有监听端口）</p>
-</li>
-<li><p>查看CPU利用率：<code>top</code>或<code>htop</code></p>
-</li>
-<li><p>查看进程状态：<code>ps</code>，其中进程的状态码如下：</p>
-<ul>
-<li><p>**R (Running)**：进程正在运行或在运行队列中等待</p>
-</li>
-<li><p>**S (Sleeping)**：进程处于睡眠状态，等待某个事件或资源。</p>
-</li>
-<li><p>**D (Uninterruptible Sleep)**：进程处于不可中断的睡眠状态，通常是在等待I&#x2F;O操作</p>
-</li>
-<li><p>**T (Stopped)**：进程已停止运行，通常是因为它正在被调试或已经收到停止信号</p>
-</li>
-<li><p>**Z (Zombie)**：进程已完成执行，但仍在进程表中等待父进程读取其退出状态</p>
-</li>
-<li><p>**I (Idle)**：这是一个空闲的内核线程，这个状态在某些版本的ps输出中可能不会显示</p>
-</li>
-</ul>
-</li>
-<li><p>查询网络状态：<code>ifconfig</code>、<code>netstat -r # 显示路由表</code></p>
-</li>
-<li><p>查看磁盘：<code>df -h</code>、<code>lsblk</code></p>
-</li>
-<li><p>查看是哪个进程的内存占用最大：<code>top</code>+<code>M</code>键、<code>ps aux --sort=-%mem | head -10</code></p>
-</li>
-<li><p>查找文件：<code>find</code>、<code>locate</code></p>
-</li>
-<li><p>查找文件内容：<code>grep -r &quot;hello&quot; /path/to/directory</code></p>
-</li>
-<li><p>查找系统命令的位置：<code>which ls</code></p>
-</li>
+<li>切换目录：<code>cd</code>；</li>
+<li>查找文件内容：<code>grep -r &quot;hello&quot; /path/to/directory</code>；</li>
+<li>查找系统命令的位置：<code>which ls</code></li>
 </ol>
 <h3 id="93、0、1、2-的文件描述符是什么含义？指向什么类型的文件？"><a href="#93、0、1、2-的文件描述符是什么含义？指向什么类型的文件？" class="headerlink" title="93、0、1、2 的文件描述符是什么含义？指向什么类型的文件？"></a>93、0、1、2 的文件描述符是什么含义？指向什么类型的文件？</h3><ol>
 <li><strong>文件描述符 0（标准输入）</strong>：指向标准输入设备，通常是终端（键盘）。</li>
@@ -5434,7 +5420,7 @@ add $4, %esp：
 <h3 id="100、怎么判断两个浮点数是否相等？"><a href="#100、怎么判断两个浮点数是否相等？" class="headerlink" title="100、怎么判断两个浮点数是否相等？"></a>100、怎么判断两个浮点数是否相等？</h3><p>相减，并与预先设定的精度进行比较。不能采用 <code>==</code> 来判断。</p>
 <p><strong>-为什么？</strong></p>
 <p>因为浮点数在计算机内部是以<strong>近似值</strong>存储的，可能会因为舍入误差等问题导致两个理论上相等的浮点数在实际存储时并不完全相等。</p>
-<h3 id="101、什么是大小端？如何区分？网络通信一般是什么字节序？"><a href="#101、什么是大小端？如何区分？网络通信一般是什么字节序？" class="headerlink" title="101、什么是大小端？如何区分？网络通信一般是什么字节序？"></a>101、什么是大小端？如何区分？网络通信一般是什么字节序？</h3><ol>
+<h3 id="【-有一节视频课-】101、什么是大小端？如何区分？网络通信一般是什么字节序？"><a href="#【-有一节视频课-】101、什么是大小端？如何区分？网络通信一般是什么字节序？" class="headerlink" title="【&#x3D;有一节视频课&#x3D;】101、什么是大小端？如何区分？网络通信一般是什么字节序？"></a>【&#x3D;有一节视频课&#x3D;】101、什么是大小端？如何区分？网络通信一般是什么字节序？</h3><ol>
 <li><p>大端字节序是指高位字节存储在内存的低地址端，低位字节存储在内存的高地址端；小端字节序则与之相反。</p>
 </li>
 <li><p>区分的方法如下：</p>
@@ -5472,10 +5458,10 @@ add $4, %esp：
 </ul>
 <h3 id="105、I-O-密集型任务把-I-O-和业务逻辑分离有什么好处？"><a href="#105、I-O-密集型任务把-I-O-和业务逻辑分离有什么好处？" class="headerlink" title="105、I&#x2F;O 密集型任务把 I&#x2F;O 和业务逻辑分离有什么好处？"></a>105、I&#x2F;O 密集型任务把 I&#x2F;O 和业务逻辑分离有什么好处？</h3><p>（1）在 IO 密集型应用中，IO 操作（如文件读写、网络数据传输等）往往是性能瓶颈。<strong>通过异步 IO 或使用专门的线程&#x2F;进程处理 IO 操作，主业务逻辑不需要等待 IO 操作的完成，从而减少等待时间，提高整体应用的响应速度和吞吐量</strong>。</p>
 <p>（2）当 IO 操作与业务逻辑分开后，<strong>更易于对系统进行扩展</strong>。例如，可以根据需要增加处理 IO 的线程或进程，或者改用更高效的 IO 处理模式（如使用更高级的异步 IO 库），而不需要重大修改应用的业务逻辑部分。</p>
-<p>（4）分离 IO 和业务逻辑可以<strong>使测试变得更加简单。可以独立地对 IO 部分和业务逻辑部分进行测试</strong>，例如使用模拟的 IO 操作来测试业务逻辑，确保业务逻辑的正确性而不受 IO 影响。</p>
+<p>（3）分离 IO 和业务逻辑可以<strong>使测试变得更加简单。可以独立地对 IO 部分和业务逻辑部分进行测试</strong>，例如使用模拟的 IO 操作来测试业务逻辑，确保业务逻辑的正确性而不受 IO 影响。</p>
 <h3 id="106、CPU-流水线技术是什么？"><a href="#106、CPU-流水线技术是什么？" class="headerlink" title="106、CPU 流水线技术是什么？"></a>106、CPU 流水线技术是什么？</h3><p>CPU 流水线技术是一种将指令<strong>分解为多步骤</strong>并<strong>让这些步骤并行执行</strong>的技术，从而提高 CPU 的执行效率。<strong>流水线技术通过将指令执行过程分解为取指令、译码、执行、访存和写回等阶段</strong>，每个阶段由不同的硬件单元处理，使得<strong>多条指令能够重叠执行</strong>，提高了处理速度。</p>
-<h3 id="107、流水线技术中的分支预测的实现和意义？"><a href="#107、流水线技术中的分支预测的实现和意义？" class="headerlink" title="107、流水线技术中的分支预测的实现和意义？"></a>107、流水线技术中的分支预测的实现和意义？</h3><p>分支预测是流水线技术中用来<strong>处理指令跳转（如条件分支）带来的中断问题，从而提高程序执行的效率</strong>。现代 CPU 使用复杂的算法来预测程序中的分支跳转是否会发生，以及跳转到哪里。常见的分支预测技术包括<strong>静态分支预测</strong>（如始终预测跳转或不跳转）和<strong>动态分支预测</strong>（如基于历史信息的预测）。</p>
-<h3 id="【-】108、内核和应用进行数据交互的方法有哪些？"><a href="#【-】108、内核和应用进行数据交互的方法有哪些？" class="headerlink" title="【*】108、内核和应用进行数据交互的方法有哪些？"></a>【*】108、内核和应用进行数据交互的方法有哪些？</h3><ol>
+<h3 id="【-】107、流水线技术中的分支预测的实现和意义？"><a href="#【-】107、流水线技术中的分支预测的实现和意义？" class="headerlink" title="【*】107、流水线技术中的分支预测的实现和意义？"></a>【*】107、流水线技术中的分支预测的实现和意义？</h3><p>分支预测是流水线技术中用来<strong>处理指令跳转（如条件分支）带来的中断问题，从而提高程序执行的效率</strong>。现代 CPU 使用复杂的算法来预测程序中的分支跳转是否会发生，以及跳转到哪里。常见的分支预测技术包括<strong>静态分支预测</strong>（如始终预测跳转或不跳转）和<strong>动态分支预测</strong>（如基于历史信息的预测）。</p>
+<h3 id="108、内核和应用进行数据交互的方法有哪些？"><a href="#108、内核和应用进行数据交互的方法有哪些？" class="headerlink" title="108、内核和应用进行数据交互的方法有哪些？"></a>108、内核和应用进行数据交互的方法有哪些？</h3><ol>
 <li><strong>系统调用</strong> (System Calls):<ul>
 <li>系统调用是应用程序与操作系统内核之间进行交互的主要方式。应用程序通过系统调用请求内核提供服务，如文件操作、进程控制、网络通信等。系统调用提供了一种安全的机制来执行硬件操作或访问内核级资源。</li>
 </ul>
@@ -5486,7 +5472,7 @@ add $4, %esp：
 </ul>
 </li>
 </ol>
-<h3 id="109、系统调用是否会引起进程或线程的切换呢？"><a href="#109、系统调用是否会引起进程或线程的切换呢？" class="headerlink" title="109、系统调用是否会引起进程或线程的切换呢？"></a>109、系统调用是否会引起进程或线程的切换呢？</h3><p>不一定。</p>
+<h3 id="【-】109、系统调用是否会引起进程或线程的切换呢？"><a href="#【-】109、系统调用是否会引起进程或线程的切换呢？" class="headerlink" title="【*】109、系统调用是否会引起进程或线程的切换呢？"></a>【*】109、系统调用是否会引起进程或线程的切换呢？</h3><p>不一定。</p>
 <ol>
 <li><p>如果使用<strong>阻塞的 I&#x2F;O 且 I&#x2F;O 未就绪</strong>，将进行线程或进程的切换，会从运行态进入阻塞态；</p>
 </li>
@@ -5496,18 +5482,18 @@ add $4, %esp：
 <blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcntl(fd, O_NONBLOCK);  <span class="comment">// 设置I/O非阻塞</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<h3 id="110、内核的调度方式是什么？"><a href="#110、内核的调度方式是什么？" class="headerlink" title="110、内核的调度方式是什么？"></a>110、内核的调度方式是什么？</h3><p>在 Linux 操作系统中，内核的调度方式是指如何管理和调度系统中的进程和线程，以优化性能和响应时间。Linux 内核使用多种调度策略和算法，主要包括以下几种：</p>
+<h3 id="【-】110、内核的调度方式是什么？"><a href="#【-】110、内核的调度方式是什么？" class="headerlink" title="【*】110、内核的调度方式是什么？"></a>【*】110、内核的调度方式是什么？</h3><p>在 Linux 操作系统中，内核的调度方式是指如何管理和调度系统中的进程和线程，以优化性能和响应时间。Linux 内核使用多种调度策略和算法，主要包括以下几种：</p>
 <ol>
 <li><strong>完全公平调度器（Completely Fair Scheduler, CFS）</strong></li>
 <li><strong>实时调度器</strong>，Linux 提供了两种实时调度策略：<code>SCHED_FIFO</code>（先进先出）和 <code>SCHED_RR</code>（时间片轮转）。</li>
 <li><strong>Deadline 调度器（SCHED_DEADLINE）</strong>，这是一种较新的调度策略，用于确保任务在指定的截止时间之前完成。</li>
 <li><strong>Cgroups 和任务组</strong>，Linux 还支持通过控制组（cgroups）对进程进行分组管理，这允许系统管理员根据需要对不同组的资源使用进行限制和监控。</li>
 </ol>
-<h3 id="【-】111、为什么要设计用户态和内核态两种状态？"><a href="#【-】111、为什么要设计用户态和内核态两种状态？" class="headerlink" title="【*】111、为什么要设计用户态和内核态两种状态？"></a>【*】111、为什么要设计用户态和内核态两种状态？</h3><p>这样做是为了<strong>保护操作系统的核心部分不被用户程序直接访问和修改</strong>，从而增加系统的稳定性和安全性。</p>
+<h3 id="111、为什么要设计用户态和内核态两种状态？"><a href="#111、为什么要设计用户态和内核态两种状态？" class="headerlink" title="111、为什么要设计用户态和内核态两种状态？"></a>111、为什么要设计用户态和内核态两种状态？</h3><p>这样做是为了<strong>保护操作系统的核心部分不被用户程序直接访问和修改</strong>，从而增加系统的稳定性和安全性。</p>
 <p>（1）内核态主要允许操作系统访问<strong>受保护的硬件资源和内存区域</strong>，而用户态的控制程序则限制执行一些会影响系统稳定性和安全性的操作。</p>
 <p>（2）如果用户态程序崩溃，它通常不会影响运行在内核态的系统核心部分，因此整个操作系统可以继续稳定运行。</p>
 <p>（3）同时用户态程序也可能因为一些错误而尝试执行非法操作，此时操作系统可以拦截这些操作，避免对核心部分造成影响。</p>
-<h3 id="112、单片机启动程序，在执行-main-之前的是什么"><a href="#112、单片机启动程序，在执行-main-之前的是什么" class="headerlink" title="112、单片机启动程序，在执行 main 之前的是什么"></a>112、单片机启动程序，在执行 main 之前的是什么</h3><p>在单片机启动程序中，执行main函数之前的过程主要包括以下几个步骤：</p>
+<h3 id="【-】112、单片机启动程序，在执行-main-之前的是什么"><a href="#【-】112、单片机启动程序，在执行-main-之前的是什么" class="headerlink" title="【*】112、单片机启动程序，在执行 main 之前的是什么"></a>【*】112、单片机启动程序，在执行 main 之前的是什么</h3><p>在单片机启动程序中，执行main函数之前的过程主要包括以下几个步骤：</p>
 <ol>
 <li><strong>硬件设置</strong>：单片机上电后，首先进行的是硬件的初始化，包括设置堆栈指针（SP）和程序计数器（PC）。</li>
 <li><strong>启动文件执行</strong>：接下来，单片机会执行启动文件，通常是名为 <code>startup_xxxxx.s</code> 的汇编语言文件。这个文件负责设置单片机的初始环境和配置，为 main 函数的执行做准备。</li>
@@ -5637,7 +5623,7 @@ add $4, %esp：
 <li><strong>图形用户界面 GUI</strong>；</li>
 <li><strong>应用程序</strong>。</li>
 </ol>
-<h3 id="121、操作系统包含哪些部分？"><a href="#121、操作系统包含哪些部分？" class="headerlink" title="121、操作系统包含哪些部分？"></a>121、操作系统包含哪些部分？</h3><ol>
+<h3 id="【-】121、操作系统包含哪些部分？"><a href="#【-】121、操作系统包含哪些部分？" class="headerlink" title="【*】121、操作系统包含哪些部分？"></a>【*】121、操作系统包含哪些部分？</h3><ol>
 <li><strong>内核（Kernel）</strong>：操作系统的核心部分，负责管理计算机的硬件资源，包括处理器、内存、设备驱动程序等。内核提供了系统调用接口，允许用户程序与硬件交互；</li>
 <li><strong>文件系统（File System）</strong>：用于组织和管理计算机存储设备上的文件和目录。文件系统提供了文件的创建、读取、写入、删除等操作，以及对文件和目录的权限管理；</li>
 <li><strong>进程管理（Process Management）</strong>：负责创建、调度和管理进程。进程是程序的执行实例，进程管理器控制着进程的创建、调度、终止等操作，并提供了进程间通信的机制；</li>
@@ -5646,7 +5632,7 @@ add $4, %esp：
 <li><strong>用户界面（User Interface）</strong>：提供用户与操作系统交互的界面，包括命令行界面（CLI）和图形用户界面（GUI）。用户界面使用户能够通过输入命令或使用图形化界面来操作计算机；</li>
 <li><strong>网络管理（Networking）</strong>：管理计算机与网络之间的通信和连接。网络管理器负责配置网络参数、管理网络接口、处理数据传输等操作，以确保计算机能够与其他设备进行通信。</li>
 </ol>
-<h2 id="七、文件系统"><a href="#七、文件系统" class="headerlink" title="七、文件系统"></a>七、文件系统</h2><h3 id="122、文件系统的基本组成"><a href="#122、文件系统的基本组成" class="headerlink" title="122、文件系统的基本组成"></a>122、文件系统的基本组成</h3><p>文件系统的基本组成包括以下几个部分：</p>
+<h2 id="七、文件系统"><a href="#七、文件系统" class="headerlink" title="七、文件系统"></a>七、文件系统</h2><h3 id="【-】122、文件系统的基本组成"><a href="#【-】122、文件系统的基本组成" class="headerlink" title="【*】122、文件系统的基本组成"></a>【*】122、文件系统的基本组成</h3><p>文件系统的基本组成包括以下几个部分：</p>
 <ol>
 <li><strong>文件和目录</strong>：用于组织和存储数据。</li>
 <li><strong>超级块（Superblock）</strong>：存储文件系统的整体信息，如文件系统大小、块大小、空闲块数量等。</li>
@@ -5662,14 +5648,14 @@ add $4, %esp：
 <li><strong>文件描述符管理</strong>：跟踪每个进程打开的文件。</li>
 <li><strong>路径解析</strong>：解析文件路径并将其映射到相应的文件系统。</li>
 </ol>
-<h3 id="【-】124、文件的存储"><a href="#【-】124、文件的存储" class="headerlink" title="【*】124、文件的存储"></a>【*】124、文件的存储</h3><p>文件的存储涉及将文件数据保存在物理存储设备上的过程，通常包括以下几个步骤：</p>
+<h3 id="124、文件的存储"><a href="#124、文件的存储" class="headerlink" title="124、文件的存储"></a>124、文件的存储</h3><p>文件的存储涉及将文件数据保存在物理存储设备上的过程，通常包括以下几个步骤：</p>
 <ol>
 <li><strong>分配 inode</strong>：为新文件分配一个 inode，以存储文件的元数据。</li>
 <li><strong>分配数据块</strong>：为文件的数据分配数据块。</li>
 <li><strong>更新 inode</strong>：在 inode 中记录数据块的指针。</li>
 <li><strong>写入数据</strong>：将文件数据写入分配的数据块。</li>
 </ol>
-<h3 id="【-】125、空闲空间管理"><a href="#【-】125、空闲空间管理" class="headerlink" title="【*】125、空闲空间管理"></a>【*】125、空闲空间管理</h3><p>空闲空间管理涉及跟踪文件系统中未使用的空间，常用的方法有：</p>
+<h3 id="125、空闲空间管理"><a href="#125、空闲空间管理" class="headerlink" title="125、空闲空间管理"></a>125、空闲空间管理</h3><p>空闲空间管理涉及跟踪文件系统中未使用的空间，常用的方法有：</p>
 <ol>
 <li><strong>位图（Bitmap）</strong>：使用位图来表示每个块的使用情况（0表示空闲，1表示已用）。</li>
 <li><strong>链表（Free List）</strong>：使用链表来管理空闲块，每个块包含一个指向下一个空闲块的指针。</li>
@@ -5719,7 +5705,7 @@ add $4, %esp：
 </ul>
 </li>
 </ol>
-<h3 id="129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？"><a href="#129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？" class="headerlink" title="129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？"></a>129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？</h3><ol>
+<h3 id="【-】129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？"><a href="#【-】129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？" class="headerlink" title="【*】129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？"></a>【*】129、进程写文件时，进程发生了崩溃，已写入的数据会丢失吗？</h3><ol>
 <li>若此时还未调用 fflush()，即还没有调用 write() 接口，此时数据<strong>一定丢失</strong>；</li>
 <li>若已调用了 write()，只要系统不重启或关闭，数据<strong>不会丢失</strong>，因为数据已经到达内核区；</li>
 <li>假设进程崩溃的同时系统也关闭了：<ol>
@@ -6494,12 +6480,12 @@ sp2 = sp1;  // 调用赋值运算符
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">256k</span>
+    <span title="站点总字数">258k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:32</span>
+    <span title="站点阅读时长">15:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
