@@ -189,6 +189,344 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch7%20%E9%93%BE%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch7%20%E9%93%BE%E6%8E%A5/" class="post-title-link" itemprop="url">Ch7 链接</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-03 11:18:37" itemprop="dateCreated datePublished" datetime="2024-04-03T11:18:37+08:00">2024-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-16 11:16:37" itemprop="dateModified" datetime="2024-07-16T11:16:37+08:00">2024-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h1 id="Ch7-链接"><a href="#Ch7-链接" class="headerlink" title="Ch7 链接"></a>Ch7 链接</h1><h2 id="1、编译器驱动程序"><a href="#1、编译器驱动程序" class="headerlink" title="1、编译器驱动程序"></a>1、编译器驱动程序</h2><p>链接（Linking）：<strong>将可重定位目标文件以及必要的系统文件组合起来，生成一个可执行文件</strong>，并加载到内存执行。</p>
+<ul>
+<li>构造大型程序时，容易遇到<strong>缺少库文件或库文件的版权不兼容导致连接错误</strong>的问题，因此需要理解链接器是如何用库文件来解析引用的；</li>
+<li>遇到一些危险的编译错误；</li>
+<li>理解语言的作用域如何实现；</li>
+<li>理解其他重要的系统概念；</li>
+<li>更好地利用共享库。</li>
+</ul>
+<p>编译系统四步：</p>
+<ul>
+<li><p>预处理</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021919552.png" alt="image-20240402191932454" style="zoom: 33%;" />
+</li>
+<li><p>编译</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021920420.png" alt="image-20240402192004172" style="zoom:33%;" />
+</li>
+<li><p>汇编</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021920745.png" alt="image-20240402192028410" style="zoom:33%;" />
+</li>
+<li><p>链接</p>
+<ul>
+<li><p>crt  –  c runtime</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021920762.png" alt="image-20240402192057662" style="zoom:33%;" />
+</li>
+<li><p>ld  –  链接器</p>
+</li>
+<li><p>-static – 静态链接</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021921378.png" alt="image-20240402192107260" style="zoom:33%;" /></li>
+</ul>
+</li>
+</ul>
+<h2 id="2、可重定位目标文件"><a href="#2、可重定位目标文件" class="headerlink" title="2、可重定位目标文件"></a>2、可重定位目标文件</h2><p>可重定位文件的组成：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021927625.png" alt="image-20240402192742394" style="zoom: 50%;" />
+
+<p>本节举例用到的程序：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022023749.png" alt="image-20240402202308661" style="zoom:33%;" />
+
+<h3 id="（1）ELF-header"><a href="#（1）ELF-header" class="headerlink" title="（1）ELF header"></a>（1）ELF header</h3><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021928876.png" alt="image-20240402192847629" style="zoom:50%;" />
+
+<ul>
+<li><p>Magic（魔数），用于确定文件类型，操作系统在加载可执行文件时会确认魔数是否正确。</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021930868.png" alt="image-20240402193033694" style="zoom:33%;" />
+</li>
+<li><p>start of section headers：为section header table的起始地址</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404021936802.png" alt="image-20240402193640661" style="zoom:33%;" /></li>
+</ul>
+<h3 id="（2）Section-header-table"><a href="#（2）Section-header-table" class="headerlink" title="（2）Section header table"></a>（2）Section header table</h3><p>查看表的全部内容：<code>readelf -S main.o</code></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022030317.png" alt="image-20240402203056995" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022020376.png" alt="image-20240402202016269" style="zoom:50%;" />
+
+<ul>
+<li><p><strong><code>.text</code> Section：</strong>存放<strong>已经编译好的机器代码</strong>，使用<code>objdump -s -d main.o</code>查看</p>
+</li>
+<li><p><strong><code>.data</code> Section：</strong>存放<strong>已初始化的全局变量和静态变量</strong>的值</p>
+</li>
+<li><p><strong><code>.bss</code> Section：</strong>存放<strong>未初始化的全局变量和静态变量</strong>的值</p>
+<ul>
+<li>实际上bss section并不占据实际的空间，它仅仅只是一个占位符</li>
+<li>区分已初始化和未初始化的变量是为了节省空间<ul>
+<li><strong>节省空间</strong>的含义：在可执行文件中不存储未初始化的全局变量和静态变量的实际初始值，而是延迟到程序运行时动态分配内存并初始化为零，从而减小可执行文件的体积。</li>
+</ul>
+</li>
+<li><strong>和COMMON的区别</strong><ul>
+<li>COMMON：未初始化的全局变量</li>
+<li>.bss：未初始化的静态变量，初始化为0的全局或静态变量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>.rodata</code> Section：ro-read only，如printf语句中的格式串和switch语句中的跳转表</p>
+</li>
+<li><p><strong>其余Section：</strong></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022020768.png" alt="image-20240402202046576" style="zoom: 50%;" />
+</li>
+<li><p><strong><code>.symtab</code> Section</strong></p>
+<ul>
+<li><p>使用<code>readelf -s main.o</code>命令查看符号表的内容</p>
+<ul>
+<li>ndx 字段则用于指示该 section 在 section header table 中的索引</li>
+<li>由于printf只是在main.c中被引用，并非定义在main.c中，因此其Ndx为UND(Undefine)类型</li>
+<li>OBJECT类型表示符号为数据对象</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022030660.png" alt="image-20240402203002144"></p>
+</li>
+<li><p><strong>有三种类型的符号</strong></p>
+<ul>
+<li>全局符号：由<strong>该模块</strong>定义，同时能被其他模块引用</li>
+<li>外部符号：由<strong>其他模块</strong>定义，同时能被其他模块引用</li>
+<li>局部符号：由<strong>该模块</strong>定义，不能被其他模块引用<ul>
+<li>任何带有<code>static</code>属性声明的全局变量或函数都是模块私有的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>强符号与弱符号</strong></p>
+<ul>
+<li>强符号：函数和已初始化的全局变量</li>
+<li>弱符号：未初始化的全局变量</li>
+</ul>
+</li>
+<li><p><strong>符号解析</strong></p>
+<ul>
+<li><p><strong>当编译器遇到一个不是在当前模块中定义的符号时，会假设该符号是在其他模块中定义的。此时仅执行编译和汇编，而不执行链接的话是没有问题的</strong></p>
+</li>
+<li><p>找不到符号定义时的报错：</p>
+<p><img src="C:/Users/86135/AppData/Roaming/Typora/typora-user-images/image-20240402204455103.png" alt="image-20240402204455103"></p>
+</li>
+<li><p>多个可重定位文件中定义了同名的全局符号，有以下三种情况：</p>
+<ul>
+<li><p><strong>多个同名强符号一起出现——不允许</strong></p>
+</li>
+<li><p>一个强符号和多个同名弱符号——允许</p>
+</li>
+<li><p>多个同名弱符号——允许</p>
+<ul>
+<li><p>但容易发生不易发现的错误，如下图所示：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022103873.png" alt="image-20240402210359483" style="zoom: 33%;" /></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（3）静态库"><a href="#（3）静态库" class="headerlink" title="（3）静态库"></a>（3）静态库</h3><ul>
+<li><p>定义：在Linux系统中，静态库以一种称为archive的特殊文件格式存放在磁盘上，如<code>libc.a</code>。<strong>archive文件是一组可重定位目标文件的集合。</strong></p>
+</li>
+<li><p>举例：如何构造一个静态库文件<code>libvector.a</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022111482.png" alt="image-20240402211100296"></p>
+<p>​	之后就可以在链接时使用该静态库文件：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022111559.png" alt="image-20240402211151493" style="zoom:50%;" />
+</li>
+<li><p><strong>静态库的链接过程</strong></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022113150.png" alt="image-20240402211346051" style="zoom:50%;" />
+</li>
+<li><p><strong>静态库的解析过程</strong></p>
+<ul>
+<li><p>链接器<strong>从左到右</strong>按命令行中出现的顺序来扫描可重定位文件和静态库文件（libc.a可以不用显式写出）</p>
+<ul>
+<li><p>由于是按从左到右的顺序扫描，因此命令行中各文件的输入顺序十分重要，遵循<strong>调用者在前</strong>的顺序</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404022125679.png" alt="image-20240402212530449" style="zoom:50%;" /></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linux&gt; gcc -<span class="type">static</span> -o prog main.o ./libvector.a [libc.a]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>处理三个集合，直至集合U和D不再发生变化，<strong>仅当集合U为空时才会链接正确</strong></p>
+<ul>
+<li>集合E：扫描中发现的可重定位目标文件</li>
+<li>集合U：引用了但尚未定义的符号（也即是在其他模块中定义的符号）<ul>
+<li>放入目标文件的符号表中未定义，仅引用的符号</li>
+<li><strong>而尝试会用扫描到的静态库文件解析集合U中未定义的符号，找到其相关定义后转移到集合D中</strong></li>
+</ul>
+</li>
+<li>集合D：已经定义了的符号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>重定位（Relocation）</strong></p>
+<ul>
+<li><p>链接器合并输入模块，并为每个符号分配运行时地址</p>
+</li>
+<li><p>步骤</p>
+<ul>
+<li><p>重定位section和符号定义</p>
+<ul>
+<li>将所有可重定位目标文件中<strong>相同类型的section合并为一个新的section</strong></li>
+</ul>
+</li>
+<li><p>重定位section中的符号引用，使其指向正确的运行地址</p>
+<ul>
+<li><p>依赖于可重定位条目的数据结构</p>
+</li>
+<li><p>由于汇编器在生成可重定位目标文件时，并不知道数据和代码在内存的什么位置，同时也不知道该模块所引用的外部定义的函数以及全局变量的位置。因此，<strong>当遇到最终位置不确定的符号引用时，就产生一个可重定位条目，告诉链接器在合成可执行文件时应该如何修改这个引用</strong></p>
+<ul>
+<li><p>关于代码的重定位条目放在<code>.rel.text</code>；已初始化数据的重定位条目放在<code>.rel.data</code></p>
+</li>
+<li><p>重定位条目的结构体定义</p>
+<ul>
+<li>offset：被修改的引用的section偏移量</li>
+<li>type：重定位条目的类型，此处仅关心图中两种类型</li>
+<li>symbol：表示被修改的引用时是哪一个符号</li>
+<li>addend：常数，用于对某些类型的重定位条目进行偏移调整</li>
+</ul>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031016083.png" alt="image-20240403101650663" style="zoom:80%;" /></li>
+</ul>
+</li>
+<li><p>举例说明：此处ref_addr为运行时的地址；而*ref_ptr相当于计算的是当前PC要加上多少才能跳转到sum函数的地址处</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031022768.png" alt="image-20240403102210671" style="zoom: 80%;" /></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>举例：</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031034256.png" alt="image-20240403103405171" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031034682.png" alt="image-20240403103432537" style="zoom:50%;" />
+
+<h3 id="（4）可执行目标文件"><a href="#（4）可执行目标文件" class="headerlink" title="（4）可执行目标文件"></a>（4）可执行目标文件</h3><ul>
+<li><strong>总体概述</strong></li>
+</ul>
+<p>下图左侧为可执行（目标）文件，右图为可重定位目标文件</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031035608.png" alt="image-20240403103531280"></p>
+<p>具体来说，<strong>代码段和数据段会在执行时加入内存，而剩余的如符号表、调试信息等不会加入内存。</strong></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031036213.png" alt="image-20240403103641109" style="zoom:50%;" />
+
+<ul>
+<li><p><strong>段头部表（Segment header table）</strong></p>
+<ul>
+<li><p>描述代码段、数据段与内存的映射关系</p>
+</li>
+<li><p>末尾的<code>r-x/rw-</code>表示是否可读、可写以及可执行；</p>
+</li>
+<li><p><code>off</code>表示这个段在可执行文件中的偏移量</p>
+</li>
+<li><p><code>vaddr/paddr</code>表示该段在内存中的开始地址</p>
+</li>
+<li><p><code>filesz</code>表示该段的大小</p>
+</li>
+<li><p><code>memsz</code>表示运行时该段在内存中的大小，包括ELF header、程序头部表以及.init、.text和.rodata section的内容。<strong>注意：数据段中memsz比filesz多8个字节，是为了存储.bss的数据（仅运行时分配内存）</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031044703.png" alt="image-20240403104441234"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>程序的加载过程（大致）</strong></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031049727.png" alt="image-20240403104941601"></p>
+</li>
+</ul>
+<h3 id="（5）动态链接共享库"><a href="#（5）动态链接共享库" class="headerlink" title="（5）动态链接共享库"></a>（5）动态链接共享库</h3><p>Linux中的<code>.so</code>文件和Windows中的<code>.dll</code>文件。</p>
+<ul>
+<li><p><strong>如何构造共享库</strong></p>
+<ul>
+<li><p>-shared</p>
+</li>
+<li><p>-fpic：位置无关选项，这样共享库才能被加载到任意的内存位置</p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031113305.png" alt="image-20240403111355228" style="zoom:50%;" />
+
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031114886.png" alt="image-20240403111421652" style="zoom:50%;" /></li>
+</ul>
+</li>
+<li><p><strong>动态链接过程</strong></p>
+<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031115921.png" alt="image-20240403111521660" style="zoom: 50%;" /></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404032057373.png" alt="image-20240403205722302"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch6%20%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1794,101 +2132,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="midorii">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MIDORII'S JOURNEY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/" class="post-title-link" itemprop="url">数据结构_b站鲍松山</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-05 13:57:25" itemprop="dateCreated datePublished" datetime="2023-12-05T13:57:25+08:00">2023-12-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-18 10:54:28" itemprop="dateModified" datetime="2024-07-18T10:54:28+08:00">2024-07-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>13k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>46 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参考教材：《数据结构（严蔚敏）》</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/05/5%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_b%E7%AB%99%E9%B2%8D%E6%9D%BE%E5%B1%B1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1960,7 +2203,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2003,12 +2246,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">258k</span>
+    <span title="站点总字数">289k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:38</span>
+    <span title="站点阅读时长">17:32</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
