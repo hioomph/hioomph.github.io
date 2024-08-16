@@ -189,6 +189,1058 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/30/1%20C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/30/1%20C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">内存管理机制</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-30 13:07:46" itemprop="dateCreated datePublished" datetime="2024-04-30T13:07:46+08:00">2024-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-16 15:49:33" itemprop="dateModified" datetime="2024-07-16T15:49:33+08:00">2024-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E4%BE%AF%E6%8D%B7C-%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">侯捷C++系列</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1:01</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+
+<h1 id="第一讲-Primitives"><a href="#第一讲-Primitives" class="headerlink" title="第一讲 Primitives"></a>第一讲 Primitives</h1><h2 id="2-内存分配的每一层面"><a href="#2-内存分配的每一层面" class="headerlink" title="2 内存分配的每一层面"></a>2 内存分配的每一层面</h2><blockquote>
+<ul>
+<li>C++内存分配的深度一般是有五个层面，它们分别是<ul>
+<li>C++ application 常见：vector等容器</li>
+<li>C++ allocator 常见：vector自带的allocator分配器</li>
+<li>C++ primitives 常见：new delete</li>
+<li>CRT 常见：malloc free</li>
+<li>OS API 常见：heapalloc等等</li>
+</ul>
+</li>
+</ul>
+<p>一般情况下，为了保证可移植性质，一般最底层就到了malloc free，如果调用OS API就基本上丧失了可移植性质。每一个层面的对应的基本上都会依次向下调用，然后进行内存的分配。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404301822840.png" alt="4_内存管理_01"></p>
+<p>C++ memory primitives</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302008310.png" alt="4_内存管理_02"></p>
+<h2 id="3-四个层面的基本用法"><a href="#3-四个层面的基本用法" class="headerlink" title="3 四个层面的基本用法"></a>3 四个层面的基本用法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span>				 <span class="comment">//std::allocator  </span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ext\pool_allocator.h&gt;</span>	 <span class="comment">//欲使用 std::allocator 以外的 allocator, 就得自行 #include &lt;ext/...&gt; </span></span></span><br><span class="line"><span class="keyword">namespace</span> jj01</span><br><span class="line">&#123;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_primitives</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;\ntest_primitives().......... \n&quot;</span>;</span><br><span class="line">	</span><br><span class="line">    <span class="type">void</span>* p1 = <span class="built_in">malloc</span>(<span class="number">512</span>);	<span class="comment">//512 bytes</span></span><br><span class="line">    <span class="built_in">free</span>(p1);</span><br><span class="line"></span><br><span class="line">    complex&lt;<span class="type">int</span>&gt;* p2 = <span class="keyword">new</span> complex&lt;<span class="type">int</span>&gt;; <span class="comment">//one object</span></span><br><span class="line">    <span class="keyword">delete</span> p2;             </span><br><span class="line"></span><br><span class="line">    <span class="type">void</span>* p3 = ::<span class="keyword">operator</span> <span class="built_in">new</span>(<span class="number">512</span>); <span class="comment">//512 bytes</span></span><br><span class="line">    ::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(p3)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以下使用 C++ 標準庫提供的 allocators。</span></span><br><span class="line"><span class="comment">//其接口雖有標準規格，但實現廠商並未完全遵守；下面三者形式略異。</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> _MSC_VER</span></span><br><span class="line">    <span class="comment">//以下兩函數都是 non-static，定要通過 object 調用。以下分配 3 個 ints.</span></span><br><span class="line">    <span class="type">int</span>* p4 = <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">allocate</span>(<span class="number">3</span>, (<span class="type">int</span>*)<span class="number">0</span>); </span><br><span class="line">    <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">deallocate</span>(p4,<span class="number">3</span>);           </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __BORLANDC__</span></span><br><span class="line">    <span class="comment">//以下兩函數都是 non-static，定要通過 object 調用。以下分配 5 個 ints.</span></span><br><span class="line">    <span class="type">int</span>* p4 = <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">allocate</span>(<span class="number">5</span>);  </span><br><span class="line">    <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">deallocate</span>(p4,<span class="number">5</span>);       </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __GNUC__</span></span><br><span class="line">    <span class="comment">//以下兩函數都是 static，可通過全名調用之。以下分配 512 bytes.(GNUC 2.9)</span></span><br><span class="line">    <span class="comment">//void* p4 = alloc::allocate(512); </span></span><br><span class="line">    <span class="comment">//alloc::deallocate(p4,512);   </span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//以下兩函數都是 non-static，定要通過 object 調用。以下分配 7 個 ints.(GNUC 4.9) </span></span><br><span class="line">	<span class="type">void</span>* p4 = <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">allocate</span>(<span class="number">7</span>); </span><br><span class="line">    <span class="built_in">allocator</span>&lt;<span class="type">int</span>&gt;().<span class="built_in">deallocate</span>((<span class="type">int</span>*)p4,<span class="number">7</span>);     </span><br><span class="line">	</span><br><span class="line">    <span class="comment">//以下兩函數都是 non-static，定要通過 object 調用。以下分配 9 個 ints.(GNUC 4.9) 	</span></span><br><span class="line">	<span class="type">void</span>* p5 = __gnu_cxx::__pool_alloc&lt;<span class="type">int</span>&gt;().<span class="built_in">allocate</span>(<span class="number">9</span>); </span><br><span class="line">    __gnu_cxx::__pool_alloc&lt;<span class="type">int</span>&gt;().<span class="built_in">deallocate</span>((<span class="type">int</span>*)p5,<span class="number">9</span>);	</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;	</span><br><span class="line">&#125; <span class="comment">//namespace</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-基本构件之一new-delete-expression上"><a href="#4-基本构件之一new-delete-expression上" class="headerlink" title="4 基本构件之一new delete expression上"></a>4 基本构件之一new delete expression上</h2><ul>
+<li>new expression（即new operator）（详见<a target="_blank" rel="noopener" href="https://hioomph.github.io/2024/04/24/Computer/C++/new%E4%B8%8Eoperator%20new/">new与operator new</a>）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302012729.png" alt="https://hioomph.github.io/2024/04/24/Computer/C++/new%E4%B8%8Eoperator%20new/"></p>
+<ul>
+<li><p>右上角的operator new的实现（VC98版）</p>
+<ol>
+<li>调用malloc函数；</li>
+<li>若malloc无法分配内存，就一直在while循环中：调用_callnewh，即一个new handler，用于处理内存分配失败的情况。</li>
+</ol>
+<blockquote>
+<p>_callnewh 不是 C++ 标准中的函数，而是可能是用户定义的一个函数。通常情况下，这类函数的名字以 _new_handler 结尾，用于处理内存分配失败的情况。</p>
+<p>在 C++ 中，当 new 表达式无法分配所需的内存时，会调用用户指定的 new_handler 函数。new_handler 是一个函数指针，指向一个用户定义的函数，其原型通常为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*new_handler)</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数可以尝试释放内存、扩大内存池，或者执行其他操作来尝试解决内存不足的问题。如果 new_handler 能够成功处理内存不足的情况，它返回；如果不能处理，它可以选择抛出异常或者终止程序。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="5-基本构件之一new-delete-expression中"><a href="#5-基本构件之一new-delete-expression中" class="headerlink" title="5 基本构件之一new delete expression中"></a>5 基本构件之一new delete expression中</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302021318.png" alt="4_内存管理_06"></p>
+<h2 id="6-基本构件之一new-delete-expression下"><a href="#6-基本构件之一new-delete-expression下" class="headerlink" title="6 基本构件之一new delete expression下"></a>6 基本构件之一new delete expression下</h2><p>下面显示不能直接调用构造函数，而只有编译器会进行隐式调用。调用时在vc6编译通过，在GCC中编译失败。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">A* pA = <span class="keyword">new</span> <span class="built_in">A</span>(<span class="number">1</span>);         	<span class="comment">//ctor. this=000307A8 id=1</span></span><br><span class="line">cout &lt;&lt; pA-&gt;id &lt;&lt; endl;   	<span class="comment">//1</span></span><br><span class="line"><span class="comment">//!	pA-&gt;A::A(3);                //in VC6 : ctor. this=000307A8 id=3</span></span><br><span class="line">  								<span class="comment">//in GCC : [Error] cannot call constructor &#x27;jj02::A::A&#x27; directly</span></span><br><span class="line">  								</span><br><span class="line"><span class="comment">//!	A::A(5);	  				//in VC6 : ctor. this=0013FF60 id=5</span></span><br><span class="line">                      			<span class="comment">//         dtor. this=0013FF60  	</span></span><br><span class="line">  								<span class="comment">//in GCC : [Error] cannot call constructor &#x27;jj02::A::A&#x27; directly</span></span><br><span class="line">  								<span class="comment">//         [Note] for a function-style cast, remove the redundant &#x27;::A&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-Array-new"><a href="#7-Array-new" class="headerlink" title="7 Array new"></a>7 Array new</h2><p>（1）array new和array delete的搭配使用</p>
+<p>如果<code>new[]</code>不搭配<code>delete[]</code>的话，实际上是针对<code>class with pointer member</code>的情况造成内存泄漏。<strong>此时若调用<code>delete</code>，带有<code>cookie</code>的动态数组部分实际上仍然会被回收，发生错误的地方是需要调用3次析构函数（如下图右边），但实际上只调用了1次，因此造成内存泄漏</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Complex* pca = <span class="keyword">new</span> Complex[<span class="number">3</span>];  <span class="comment">// 调用三次构造函数</span></span><br><span class="line"><span class="keyword">delete</span>[] pca;  <span class="comment">// 唤起三次析构函数， 这是正确的</span></span><br><span class="line"></span><br><span class="line">string* psa = <span class="keyword">new</span> string[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">delete</span> psa;  <span class="comment">// 唤起一次析构函数，这是错误的</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302024595.png" alt="4_内存管理_08"></p>
+<p>（2）array size in memory size</p>
+<ul>
+<li>右侧的图是new int[10]的内存布局，其中：<strong>灰色</strong>表示具体数据，<strong>橙色</strong>表示debug模式下添加的内存，最上面和最下面的两个0x61(61H)是cookie，记录整体内存分配的大小；<strong>浅蓝色</strong>的pad表示补齐，填补到16的倍数。<ul>
+<li>61H实际上是60H，表示内存分配的大小，后面1H意思是占用最后一位，表示内存分配出去</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302027115.png" alt="4_内存管理_10"></p>
+<h2 id="8-placement-new"><a href="#8-placement-new" class="headerlink" title="8 placement new"></a>8 placement new</h2><p>palcement new允许我们将object建构于allocated memory中。<strong>没有所谓的placement new，因为placement new根本没分配memory。</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;new&gt;</span></span></span><br><span class="line"><span class="type">char</span>* buf = <span class="keyword">new</span> <span class="type">char</span>[<span class="built_in">sizeof</span>(Complex) * <span class="number">3</span>]; <span class="comment">// 已经分配了内存</span></span><br><span class="line">Complex* pc = <span class="built_in">new</span>(buf)<span class="built_in">Complex</span>(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 把上面分配的内存位置传进来</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span>[] buf;</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>Complex* pc = new(buf)Complex(1, 2);</code>这句话会被编译器转换为下图中的1，2，3三行，分别调用operator new（和上文看到的不同，这里需要第二个参数，表示位置，这个函数只是传回这个位置，不再分配内存），指针转型，调用构造函数。</p>
+<p>这种用法被称为 “placement new”，它允许程序员在指定的内存位置上创建对象。这通常用于特殊的内存管理场景，例如在预分配的内存池中创建对象。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302031495.png" alt="4_内存管理_12"></p>
+<h2 id="9-重载"><a href="#9-重载" class="headerlink" title="9 重载"></a>9 重载</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302031922.png" alt="4_内存管理_13"></p>
+<p>（1）C++容器分配内存的途径</p>
+<p>容器会走分配器，分配器会调用::operator new和::operator delete，底层也是调用malloc和free。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302033606.png" alt="4_内存管理_14"></p>
+<p>在 C++ 中，容器使用分配器（Allocator）来进行内存分配和释放。分配器是负责管理容器内部元素内存的组件。下面是容器分配内存的一般途径：</p>
+<ol>
+<li><p>容器使用分配器：<br>C++ 容器（如 std::vector、std::list、std::map 等）通常使用分配器来分配和释放内存。分配器是容器的一部分，负责处理元素的内存分配和释放操作。</p>
+</li>
+<li><p>分配器调用 ::operator new 和 ::operator delete：<br>分配器的实现通常会调用全局作用域下的 ::operator new 来分配内存，并在需要释放内存时调用 ::operator delete。<br>::operator new 和 ::operator delete 是 C++ 中的全局内存分配和释放函数。它们底层可能调用标准库的 malloc 和 free。</p>
+</li>
+<li><p>底层可能调用 malloc 和 free：<br>malloc 和 free 是 C 标准库中的内存分配和释放函数，用于分配和释放原始的、未构造的内存块。C++ 的 ::operator new 和 ::operator delete 可能在底层调用这些函数。</p>
+</li>
+</ol>
+<p>总体来说，C++ 容器使用分配器来管理内存，而分配器可能在其实现中调用 ::operator new 和 ::operator delete，从而涉及到底层的内存分配函数 malloc 和 free。这种设计允许用户自定义容器的内存管理行为，以适应不同的需求。用户可以通过提供自定义分配器来实现特定的内存分配策略。</p>
+<p>（2）重载全局的::operator new 和::operator delete</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302034363.png" alt="4_内存管理_15"></p>
+<p>（3）重载operator new和operator delete</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302034714.png" alt="4_内存管理_16"></p>
+<p>（3）重载operator new[]和operator delete[]</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302035382.png" alt="4_内存管理_17"></p>
+<h2 id="10-重载示例（上）"><a href="#10-重载示例（上）" class="headerlink" title="10 重载示例（上）"></a>10 重载示例（上）</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036272.png" alt="4_内存管理_18"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036230.png" alt="4_内存管理_19"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036668.png" alt="4_内存管理_20"></p>
+<h2 id="11-重载示例（下）"><a href="#11-重载示例（下）" class="headerlink" title="11 重载示例（下）"></a>11 重载示例（下）</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302036617.png" alt="4_内存管理_21"></p>
+<p>placement new的重载第一参数必须是size_t类型，对于如何区分operator new和placement new，要看调用的时候怎么用。在调用时，编译器会根据传递给new表达式的参数来匹配适当的重载版本。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038221.png" alt="4_内存管理_22"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038657.png" alt="4_内存管理_23"></p>
+<p>basic_string使用new(extra)扩充申请量</p>
+<p>重载了operator new，其实是placement new。因为用法为<code>new(extra) Rep;</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302038299.png" alt="4_内存管理_24"></p>
+<h2 id="12-Per-class-allocator"><a href="#12-Per-class-allocator" class="headerlink" title="12 Per class allocator"></a>12 Per class allocator</h2><p>（1）内存池</p>
+<p>内存池是一种用于管理和分配内存的机制，它可以提高内存分配的效率，减少内存碎片，并降低动态内存分配的开销。在 C++ 中，内存池通常通过重载 operator new 和 operator delete 来实现。</p>
+<p>下面简要描述一下内存池的概念，并提供一个简单的示意图：</p>
+<ol>
+<li><p>内存池概念：</p>
+<ul>
+<li>内存池是一块预先分配的内存区域，它被划分为多个小块，每个小块可以被分配给程序使用；</li>
+<li>内存池通常由一个或多个链表、堆栈或其他数据结构来管理，以追踪哪些内存块是空闲的，哪些是已分配的；</li>
+<li>内存池的目的是减少因频繁的内存分配和释放而引起的性能开销。</li>
+</ul>
+</li>
+<li><p>示意图：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------------------------------------+</span><br><span class="line">|            Memory Pool             |</span><br><span class="line">+------------------------------------+</span><br><span class="line">|   Free Block <span class="number">1</span>   |   Free Block <span class="number">2</span>  |</span><br><span class="line">+------------------+-----------------+</span><br><span class="line">|   Allocated Block <span class="number">1</span>                |</span><br><span class="line">+------------------------------------+</span><br><span class="line">|   Free Block <span class="number">3</span>   |   Free Block <span class="number">4</span>  |</span><br><span class="line">+------------------+-----------------+</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>上面的示意图展示了一个简单的内存池，其中包含多个内存块，有一些是空闲的，有一些是已经分配给程序使用的；</li>
+<li>每个内存块的大小可能不同，取决于内存池的设计；</li>
+<li>空闲的内存块可以通过链表或其他数据结构连接在一起，以便快速分配。</li>
+</ul>
+</li>
+<li><p>内存池的操作：</p>
+<ul>
+<li>当程序需要分配内存时，内存池会从空闲块中选择一个合适的块分配给程序；</li>
+<li>当程序释放内存时，将相应的内存块标记为空闲，并重新加入空闲块链表，以便下次分配使用。</li>
+</ul>
+</li>
+<li><p>自定义内存池的示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MemoryPool</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Block</span> &#123;</span><br><span class="line">        <span class="type">size_t</span> size;</span><br><span class="line">        Block* next;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Block* freeList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">MemoryPool</span>(<span class="type">size_t</span> poolSize) &#123;</span><br><span class="line">        <span class="comment">// 初始化内存池</span></span><br><span class="line">        <span class="type">void</span>* memory = ::<span class="keyword">operator</span> <span class="built_in">new</span>(poolSize);</span><br><span class="line">        freeList = <span class="built_in">static_cast</span>&lt;Block*&gt;(memory);</span><br><span class="line">        freeList-&gt;size = poolSize;</span><br><span class="line">        freeList-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span>* <span class="title">allocate</span><span class="params">(<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 从内存池中分配内存</span></span><br><span class="line">        <span class="keyword">if</span> (!freeList || freeList-&gt;size &lt; size) &#123;</span><br><span class="line">            <span class="comment">// 内存不足，或者没有空闲块，可以根据实际情况扩展内存池</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Block* allocatedBlock = freeList;</span><br><span class="line">        freeList = freeList-&gt;next;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;<span class="type">void</span>*&gt;(allocatedBlock);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deallocate</span><span class="params">(<span class="type">void</span>* ptr)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 释放内存到内存池</span></span><br><span class="line">        Block* block = <span class="built_in">static_cast</span>&lt;Block*&gt;(ptr);</span><br><span class="line">        block-&gt;next = freeList;</span><br><span class="line">        freeList = block;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 上述示例为了简洁，省略了一些内存池的管理细节</span></span><br><span class="line"><span class="comment">// 实际的内存池实现可能需要更复杂的数据结构和算法。</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>引入内存池的考量：</p>
+<p>当需要多次调用new来分配内存时，为了减少malloc分配内存的数量，以及减少cookie的用量，可以选择用malloc分配一大块内存（即内存池），然后将这块内存池分成小块，在实际的分配时直接取用其中的一小块，从而减少malloc的调用次数。</p>
+</blockquote>
+<p>（2）对类Screen进行内存设置的示例（设计类的内存分配器_版本1）</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302045487.png" alt="4_内存管理_25"></p>
+<p>如下图右侧所示：</p>
+<ul>
+<li>左边间隔8，表示每个Screen对象内存分配的大小为8B，说明每个Screen分配的时候没有cookie；</li>
+<li>右边间隔16，表示每个Screen对象内存分配的大小为16B，这是因为对象分配的时候上下加了cookie，最上面和最下面的cookie大小共为8B。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302046008.png" alt="4_内存管理_26"></p>
+<h2 id="13-Per-class-allocator-2"><a href="#13-Per-class-allocator-2" class="headerlink" title="13 Per class allocator 2"></a>13 Per class allocator 2</h2><p>（1）设计类的内存分配器_版本2</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302047081.png" alt="4_内存管理_27"></p>
+<p>这里和第一版本的最大不同是设计上采用union。</p>
+<p>在C++中，union 是一种特殊的数据结构，允许在相同的内存位置存储不同类型的对象。它的每个成员共享相同的内存空间，只能同时使用一个成员。union 提供了一种有效利用内存的方式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">AirplaneRep</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">long</span> miles;  <span class="comment">// 4B</span></span><br><span class="line">	<span class="type">char</span> type;  <span class="comment">// 1B</span></span><br><span class="line">    <span class="comment">// 由于对齐，这5B会变成8B</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">union</span> &#123;</span><br><span class="line">	AirplaneRep rep;</span><br><span class="line">	Airplane* next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302047903.png" alt="4_内存管理_28"></p>
+<h2 id="14-Static-allocator"><a href="#14-Static-allocator" class="headerlink" title="14 Static allocator"></a>14 Static allocator</h2><p>（1）设计类的内存分配器_版本3</p>
+<p>下面是内存分配的第三版本。</p>
+<p>从软件工程的角度看，上面的operator new和operator delete对于不同 类都要重载，明显不是一个好的解法，下面是将allocator抽象成一个类。</p>
+<p>allocator类中定义allocate和deallocate函数，用于分配和回收。</p>
+<p>下图中右侧是具体的实现。这里每次分配CHUNK个大小的一大块，然后切割成小块，并用链表串起来。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049167.png" alt="4_内存管理_29"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049165.png" alt="4_内存管理_30"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302049639.png" alt="4_内存管理_31"></p>
+<h2 id="15-Macro-for-static-allocator"><a href="#15-Macro-for-static-allocator" class="headerlink" title="15 Macro for static allocator"></a>15 Macro for static allocator</h2><p>（1）设计类的内存分配器_版本4</p>
+<p>把allocator的部分拿出来用宏来定义。</p>
+<p>在C++中，宏（macro）是一种预处理指令，用于在编译过程中执行文本替换。宏通常通过 #define 关键字定义，并在代码中通过宏名称来调用。它们是一种简单的文本替换机制，可以用于创建常量、函数替代、条件编译等。</p>
+<p>在宏定义的末尾使用反斜杠是为了告诉编译器该宏定义将在下一行继续。如果在宏定义的最后一行没有使用反斜杠，那么编译器会认为宏定义结束了。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302050403.png" alt="4_内存管理_32"></p>
+<p>（2）标准库中的allocator</p>
+<p>其中一种分配器有16条自由链表，来应对不同大小的块分配，不同的大小的类对象，分配到不同的链表中。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302050613.png" alt="4_内存管理_34"></p>
+<h2 id="16-New-Handler"><a href="#16-New-Handler" class="headerlink" title="16 New Handler"></a>16 New Handler</h2><p>new handler</p>
+<p>new handler 是一个与 C++ 内存分配和 new 操作符相关的概念。它是一个函数指针，指向一个用户定义的函数，该函数负责处理 new 操作符无法满足内存分配请求时的情况。</p>
+<p>当 new 操作符无法分配所需的内存时，它会调用与之关联的 new handler。new handler 可以执行一些操作，例如释放一些已分配的内存、尝试扩展堆的大小、选择性地抛出异常，或者执行其他用户定义的操作。</p>
+<p>使用 set_new_handler 函数设置 new handler：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;new&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">customNewHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cerr &lt;&lt; <span class="string">&quot;Memory allocation failed! Custom new handler called.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::<span class="built_in">terminate</span>();  <span class="comment">// 终止程序或者执行其他处理</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::<span class="built_in">set_new_handler</span>(customNewHandler);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 尝试分配大块内存</span></span><br><span class="line">    <span class="type">int</span>* arr = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">1000000000000</span>];  <span class="comment">// 如果分配失败，会调用 customNewHandler</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中，通过 set_new_handler 函数设置了一个自定义的 new handler，即 customNewHandler。当 new 操作符在尝试分配非常大的内存块时失败，会调用这个自定义的 new handler。</p>
+<p>注意事项：</p>
+<ul>
+<li>new handler 是全局的，一旦设置，会在程序的生命周期内一直有效，直到被其他<code>set_new_handler</code>覆盖。</li>
+<li>如果 new handler 返回，new 操作符会再次尝试分配内存，如果还失败，则再次调用 new handler。这个过程会一直重复，直到 new handler 抛出异常或者不返回（例如调用 <code>std::terminate()</code>）。</li>
+<li>在 C++11 及以后的版本中，可以使用 std::get_new_handler 获取当前的 new handler，以便在需要时进行保存和恢复。</li>
+</ul>
+<p>使用 new handler 可以提供一些灵活性，允许程序员在内存分配失败的情况下采取定制的操作，而不是默认的行为（即抛出 std::bad_alloc 异常）。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302052495.png" alt="4_内存管理_35"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404302052411.png" alt="4_内存管理_36"></p>
+<h1 id="第二讲-std-allocator"><a href="#第二讲-std-allocator" class="headerlink" title="第二讲 std::allocator"></a>第二讲 std::allocator</h1><h2 id="17-VC6-malloc"><a href="#17-VC6-malloc" class="headerlink" title="17 VC6 malloc"></a>17 VC6 malloc</h2><p>VC6下的malloc内存块布局：从上往下分别是cookie，debug header, 实际数据的block, debug tail, pad, cookie，对应于下图。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062002434.png" alt="在这里插入图片描述"></p>
+<p>在VC6（Visual C++ 6.0）下，malloc 函数分配的内存块的布局包含以下部分：</p>
+<ul>
+<li><p>Cookie（饼干）：<br>Cookie 是一小段额外的标识信息，用于在边界检查中检测缓冲区溢出。它通常是一个特殊的值，放置在分配的内存块的开始位置。记录内存分配出去的大小。</p>
+</li>
+<li><p>Debug Header（调试头部）：<br>Debug Header 包含一些调试信息，例如分配的文件名、行号等。这些信息用于调试和跟踪内存分配的源。</p>
+</li>
+<li><p>实际数据的 Block：<br>这是分配的实际数据块，用于存储程序员请求的数据。</p>
+</li>
+<li><p>Debug Tail（调试尾部）：<br>Debug Tail 包含与调试信息相关的尾部数据。类似于 Debug Header，它包含一些额外的调试信息。</p>
+</li>
+<li><p>Pad（填充）：<br>填充是为了确保分配的内存块满足特定的对齐要求。它可能包含一些额外的字节，使得整个内存块的大小满足特定的对齐条件。</p>
+</li>
+<li><p>Cookie（饼干）：<br>与开头的 Cookie 相对应，是分配的内存块的结束位置。</p>
+</li>
+</ul>
+<p>这样的内存布局在 VC6 中用于调试和检测内存溢出等问题。Cookie 和调试信息是为了帮助调试过程，检测潜在的内存错误。在实际的发布版本中，这些额外的调试信息通常会被省略，以减小内存开销。 VC6 是相对较老的版本，现代的 Visual C++ 版本可能采用了更高效和精简的内存分配方案。</p>
+<h2 id="18-VC6标准分配器之实现"><a href="#18-VC6标准分配器之实现" class="headerlink" title="18 VC6标准分配器之实现"></a>18 VC6标准分配器之实现</h2><p>VC6标准分配器allocator的实现，里面的allocate和deallocate的实现只是调用<code>::operator new </code>和<code>::operator delete</code>, 没有任何特殊设计。我们知道它们底层是malloc和free，所以具体分配的时候是带有cookie的，存在内存浪费的现象。</p>
+<p>这里分配的单位是具体的类型，比如<code>allocator&lt;int&gt;().allocate(512,(int*)0);</code>分配的就是512个int类型的大小。而后面讲到的一个分配器是以字节为单位，不是以具体类型的大小为单位。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062004430.png" alt="在这里插入图片描述"></p>
+<h2 id="19-BC5标准分配器之实现"><a href="#19-BC5标准分配器之实现" class="headerlink" title="19 BC5标准分配器之实现"></a>19 BC5标准分配器之实现</h2><p>Borland5 编译器的allocator的实现，里面的allocate和deallocate的实现只是调用<code>::operator new</code> 和<code>::operator delete</code>, 没有任何特殊设计。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062004019.png" alt="在这里插入图片描述"></p>
+<h2 id="20-G2-9标准分配器之实现"><a href="#20-G2-9标准分配器之实现" class="headerlink" title="20 G2.9标准分配器之实现"></a>20 G2.9标准分配器之实现</h2><p>GNU C++2.9标准分配器std::allocator的实现，里面的allocate和deallocate的实现只是调用<code>::operator new </code>和<code>::operator delete</code>, 没有任何特殊设计。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062005939.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>GNU C++2.9容器使用的分配器，不是std::allocator,而是std::alloc</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span>* p = alloc::<span class="built_in">allocate</span>(<span class="number">512</span>); <span class="comment">// 分配512bytes，不是512个int或者512个double类型等等</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062006939.png" alt="在这里插入图片描述"></p>
+<h2 id="21-G2-9-std-alloc-VS-G4-9-pull-alloc"><a href="#21-G2-9-std-alloc-VS-G4-9-pull-alloc" class="headerlink" title="21 G2.9 std::alloc VS G4.9 __pull_alloc"></a>21 G2.9 std::alloc VS G4.9 __pull_alloc</h2><blockquote>
+<p>G2.9 std::alloc在G4.9中是 __pull_alloc。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062006172.png" alt="在这里插入图片描述"></p>
+<p>G4.9版本中标准分配器std::allocator的实现，里面的allocate和deallocate的实现只是调用::operator new 和::operator delete, 没有任何特殊设计。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062006067.png" alt="在这里插入图片描述"></p>
+<h2 id="22-G4-9-pull-alloc用例"><a href="#22-G4-9-pull-alloc用例" class="headerlink" title="22 G4.9 __pull_alloc用例"></a>22 G4.9 __pull_alloc用例</h2><p>这里的alloc（G2.9的叫法, G4.9叫做__pull_alloc）用法, 它在__gnu_cxx这个命名空间内。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>, __gnu_cxx::__pool_alloc&lt;<span class="type">int</span>&gt;&gt; vecPool;</span><br></pre></td></tr></table></figure>
+
+<p>这个分配器是去除了cookie（一个元素带有上下两个cookie，共8B），可以省很多的内存空间。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062007981.png" alt="在这里插入图片描述"></p>
+<h2 id="23-G2-9-std-alloc"><a href="#23-G2-9-std-alloc" class="headerlink" title="23 G2.9 std::alloc"></a>23 G2.9 std::alloc</h2><p>（1）alloc的运作模式</p>
+<p>第一讲中介绍的Per class allocator类，每个类里面重载了 operator new和operator delete，每个类都单独维护一个链表。如下图所示，<code>std::alloc</code>为所有的类维护16个链表，每个链表负责不同大小的区块分配，从小到大分别为：<code>8B, 16B, 24B, 32B, …, 128B</code>，按8的倍数增长。<strong>当大小不为8的倍数的时候，分配器会自动将其对齐到8的倍数。当大小超过128B时，就交给malloc来单独处理。</strong></p>
+<blockquote>
+<p>这里可以联系到面经中的问答：malloc函数的底层实现是什么？及相关问题。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011019232.png" alt="4_内存管理_51"></p>
+<p><strong>举例：</strong>对于<code>#3</code>链表，每次将分配一大块内存给它（负责32B区块的分配，里面有20个小块，每个都是32B，但是实际分配的时候是20块的两倍大小，剩余的部分可能分配给其他的<code>#x</code>链表）。当一个vector里面存储一个32B的stone类型的对象，会在<code>#3</code>链表里指定一小块给该对象。</p>
+<p>（2）embedded pointers</p>
+<blockquote>
+<p>嵌入式指针工作原理：借用A对象所占用的内存空间中的前4个字节，这4个字节用来 链住这些空闲的内存块；<br>但是，一旦某一块被分配出去，那么这个块的 前4个字节 就不再需要，此时这4个字节可以被正常使用；</p>
+<p>参考:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42604176/article/details/113871565">https://blog.csdn.net/qq_42604176/article/details/113871565</a></p>
+<p>内存的使用方法是,使用的时候看成对象实例,空闲的时候会看成next指针.</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/KinWaiYuen/KinWaiYuen.github.io/blob/master/c%2B%2B/%E4%BE%AF%E6%8D%B7%E5%86%85%E5%AD%98.md">https://github.com/KinWaiYuen/KinWaiYuen.github.io/blob/master/c%2B%2B/%E4%BE%AF%E6%8D%B7%E5%86%85%E5%AD%98.md</a></p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011041526.png" alt="4_内存管理_52"></p>
+<h2 id="24-G2-9-std-alloc运行一瞥01-05"><a href="#24-G2-9-std-alloc运行一瞥01-05" class="headerlink" title="24 G2.9 std::alloc运行一瞥01-05"></a>24 G2.9 std::alloc运行一瞥01-05</h2><p>（1）源码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> &#123;__ALIGN = <span class="number">8</span>&#125;;                        <span class="comment">//小區塊的上調邊界</span></span><br><span class="line"><span class="keyword">enum</span> &#123;__MAX_BYTES = <span class="number">128</span>&#125;;                  <span class="comment">//小區塊的上限</span></span><br><span class="line"><span class="keyword">enum</span> &#123;__NFREELISTS = __MAX_BYTES/__ALIGN&#125;; <span class="comment">//free-lists 個數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// union obj &#123;                   //G291[o],CB5[x],VC6[x]</span></span><br><span class="line"><span class="comment">//   union obj* free_list_link;  //這麼寫在 VC6 和 CB5 中也可以，</span></span><br><span class="line"><span class="comment">// &#125;;                            //但以後就得使用 &quot;union obj&quot; 而不能只寫 &quot;obj&quot;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">__obj</span> &#123;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">__obj</span>* free_list_link;</span><br><span class="line">&#125; obj;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span>*   start_free = <span class="number">0</span>;</span><br><span class="line"><span class="type">char</span>*   end_free = <span class="number">0</span>;</span><br><span class="line"><span class="type">size_t</span>  heap_size = <span class="number">0</span>;</span><br><span class="line">obj* free_list[__NFREELISTS]</span><br><span class="line">     = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line"><span class="meta"># enum &#123;__ALIGN = 8&#125;;  </span></span><br><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">ROUND_UP</span><span class="params">(<span class="type">size_t</span> bytes)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (((bytes) + __ALIGN<span class="number">-1</span>) &amp; ~(__ALIGN - <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码定义了一个常量<code>__ALIGN</code>，它表示内存分配时的对齐边界，设定为8字节。然后，定义了一个函数 <code>ROUND_UP</code>，该函数接受一个大小（<code>bytes</code>）作为参数，然后将其上调到对齐边界。</p>
+<p>具体来说，<code>ROUND_UP</code>函数的作用是将传入的大小（<code>bytes</code>）上调到<code>__ALIGN</code>的倍数。这是通过以下步骤实现的：</p>
+<ul>
+<li>将<code>bytes</code>加上<code> __ALIGN-1</code>，即<code> bytes + 7</code>；</li>
+<li>对结果进行按位与操作，通过<code>&amp; ~(__ALIGN - 1)</code>将最低的3位清零，确保结果是<code>__ALIGN</code>的倍数。</li>
+</ul>
+<blockquote>
+<p>这样做的目的是为了满足内存对齐的要求。在一些硬件体系结构中，访问未对齐的内存可能会导致性能问题或者错误，因此内存分配时通常需要对齐到某个特定的边界。这个函数就提供了一种简单的方法来确保分配的内存大小是对齐的。</p>
+</blockquote>
+<p>（2）std::alloc运行01-05</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011053088.png" alt="4_内存管理_53"></p>
+<ol start="2">
+<li>当一个容器里面存储的元素大小是<code>32B</code>时，它的运作过程如下：</li>
+</ol>
+<ul>
+<li><p>挂在<code>32 / 8 - 1 = #3</code>号链表；</p>
+</li>
+<li><p>刚开始的时候pool为空，此时要分配<code>32 * 20 *2 + RoundUp(0 &gt;&gt; 4)= 1280B</code>大小的空间为pool，然后从pool里面切割20个小块（共640B）挂在<code>#3</code>链表上。第1个给容器，剩下的19个挂在<code>#3</code>链表；</p>
+</li>
+<li><p>此时pool的余量为<code>640B</code>。RoundUp是追加量，里面的大小是把上次的累计申请量右移4位(除以16)，由于这里是刚开始，没有累计申请量，故为0&gt;&gt;4。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011053848.png" alt="4_内存管理_54"></p>
+</li>
+</ul>
+<ol start="3">
+<li>此时，又创建了新的容器，它里面的元素大小为<code>64B</code></li>
+</ol>
+<ul>
+<li>对应#7链表；</li>
+<li>此时链表为空。由于上页的pool里面还剩<code>640B</code>，现在将其切分为<code>640/64 = 10</code>个区块，第1个给容器，剩下的9个挂在<code>#7</code>链表；</li>
+<li>此时pool的余量为<code>0B</code>，因为被切分挂到链表上了。<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011053984.png" alt="4_内存管理_55"></li>
+</ul>
+<ol start="4">
+<li>在上面的基础上，现在新建容器，它的元素大小为<code>96B</code></li>
+</ol>
+<ul>
+<li>对应<code>96 / 8 - 1 = #11</code>链表；</li>
+<li>先检查pool是否有余量，由于pool为空，此时调用malloc分配一大块作为pool，总共大小为<code>96x 20 x 2 + RoundUp(1280 &gt;&gt; 4) = 3840 + 80 = 3920B</code>，切割20个区块拿出来用，第1个给容器，另外19个挂在<code>#11</code>链表上；</li>
+<li>此时pool的余量为<code>3920−(96×20)=3920−1920=2000 B</code>。累计申请量是1280 + 3920 &#x3D; 5200B。<img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011053482.png" alt="4_内存管理_56"></li>
+</ul>
+<ol start="5">
+<li>再次新建容器，里面元素大小是<code>88B</code></li>
+</ol>
+<ul>
+<li><p>挂在<code>88 / 8 - 1 = #10</code>号链表；</p>
+</li>
+<li><p>现在pool中的余量为<code>2000B</code>，将2000B切分为20个区块（每个区块88B），第1个给容器，剩下的19个挂在<code>#10</code>链表上；</p>
+</li>
+<li><p>此时pool的余量为<code>2000 - 88 x 20 = 240B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405011053390.png" alt="4_内存管理_57"></p>
+</li>
+</ul>
+<h2 id="25-G2-9-std-alloc运行一瞥06-10"><a href="#25-G2-9-std-alloc运行一瞥06-10" class="headerlink" title="25 G2.9 std::alloc运行一瞥06-10"></a>25 G2.9 std::alloc运行一瞥06-10</h2><ol start="6">
+<li>下面这张图表示容器**连续申请3次<code>88B</code>**大小的空间</li>
+</ol>
+<ul>
+<li><p>由于上面已经在<code>#10</code>链表上挂了19个大小为<code>88B</code>的区块，这时候直接从该链表上拿下来3个区块返回给容器即可；</p>
+</li>
+<li><p>此时pool的余量为<code>240B</code>没变。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021045105.png" alt="4_内存管理_58"></p>
+</li>
+</ul>
+<ol start="7">
+<li>又来新的容器，它的元素大小为8B</li>
+</ol>
+<ul>
+<li><p>挂在<code>8 / 8 - 1 = #0</code>号链表；</p>
+</li>
+<li><p>根据06，pool容量为<code>240B</code>，从pool里面切分出20个区块，共<code>8B x 20 = 160B</code>大小，第1个返回给容器，其余19个区块挂在<code>#0</code>链表上；</p>
+</li>
+<li><p>此时pool的余量为<code>240 - 160 = 80B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021045366.png" alt="4_内存管理_59"></p>
+</li>
+</ul>
+<ol start="8">
+<li>又来新的容器，它的元素大小为<code>104B</code></li>
+</ol>
+<ul>
+<li><p>挂在<code>104 / 8 - 1 = #12</code>链表；</p>
+</li>
+<li><p>由于此时pool余量为<code>80B</code>，一个大小为<code>104B</code>的区块都切分不了。此时这个<code>80B</code>大小的空间就是碎片，需要将其挂在<code>80 / 8 - 1 = #9</code>链表上。碎片处理完之后， 再来应付现在的需求：<code>104B</code>的分配；</p>
+</li>
+<li><p>现在再调用<code>malloc</code>分配一大块，大小为<code>104 x 20 x 2 + RoundUp(5200 &gt;&gt; 4) = 4160 + RoundUp(325) = 4160 + 328 = 4488</code>；把第1个分配给容器，切出的19个挂在<code>#12</code>链表上。累计申请量为<code>5200 + 4488 = 9688B</code>；</p>
+</li>
+<li><p>此时pool的余量为<code>4488 - 104 x 20 = 2408B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021045618.png" alt="4_内存管理_60"></p>
+</li>
+</ul>
+<ol start="9">
+<li>现在申请<code>112B</code></li>
+</ol>
+<ul>
+<li><p>挂在<code>112 / 8 - 1 = #13</code>链表上；</p>
+</li>
+<li><p>根据08，pool容量为<code>2408B</code>，从里面取出<code>112 * 20 = 2240B</code>，第1个返回给容器，留下19个挂在<code>#13</code>链表上；</p>
+</li>
+<li><p>此时pool的余量为<code>2408 - 2240 = 168B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021045344.png" alt="4_内存管理_61"></p>
+</li>
+</ul>
+<ol start="10">
+<li>现在的新需求是申请<code>48B</code></li>
+</ol>
+<ul>
+<li>挂在<code>48 / 8 - 1 = #5</code>链表上；</li>
+<li>根据09，pool余量是<code>168B</code>，可以分配<code>168 / 48 = 3</code>个区块，第1个返回给容器，剩下2个挂在<code>#5</code>链表上；</li>
+<li>此时pool的余量为<code>24B</code>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021046301.png" alt="4_内存管理_62"></p>
+<h2 id="26-G2-9-std-alloc运行一瞥11-13"><a href="#26-G2-9-std-alloc运行一瞥11-13" class="headerlink" title="26 G2.9 std::alloc运行一瞥11-13"></a>26 G2.9 std::alloc运行一瞥11-13</h2><p>下面看一下内存分配失败的动作。</p>
+<ol start="11">
+<li>新的容器请求<code>72B</code>的大小</li>
+</ol>
+<ul>
+<li><p>挂在<code>72 / 8 - 1 = #8</code>链表；</p>
+</li>
+<li><p>pool容量为<code>24B</code>，不足以分配一个大小为<code>72B</code>的区块，于是这个大小为<code>24B</code>的pool就成为碎片，需要先挂在<code>24 / 8 - 1 = #2</code>链表，所以把这个pool余量挂在#2链表, 然后调用malloc分配<code>72 x 20 x 2 + RoundUP(9688 &gt;&gt; 4) = 3488B</code>。在实验过程中把系统heap大小设置为<code>10000B</code>，前面已经累计分配了<code>9688B</code>，因此无法满足本次内存分配。</p>
+</li>
+<li><p>此时，alloc从手中资源取最接近<code>72B</code>的大小回填pool，这里最接近的是<code>80B</code>(即在<code>#9</code>链表有1个空的区块可用)，然后从其<code>80B</code>中切<code>72B</code>给容器，此时pool的余量为<code>80 - 72 = 8B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021131569.png" alt="4_内存管理_63"></p>
+</li>
+</ul>
+<ol start="12">
+<li>容器再申请<code>72B</code></li>
+</ol>
+<ul>
+<li><p><code>#8</code>链表没有区块可用，而pool余量为<code>8B</code>，不足以供应1个区块。因此先将pool余量挂在<code>#0</code>链表上，然后想要调用malloc分配<code>72 x 20 x 2 + RoundUP(9688 &gt;&gt; 4) = 3488B</code>的空间，此时依然无法满足分配；</p>
+</li>
+<li><p>于是alloc从手中资源取最接近<code>72B</code>的<code>88B</code>（#10链表）回填pool。因为上面的<code>80B</code>（<code>#9</code>链表）已经用完了，从<code>88B</code>中切出<code>72B</code>返回给容器；</p>
+</li>
+<li><p>此时pool余量为<code>88 - 72 = 16B</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021133827.png" alt="4_内存管理_64"></p>
+</li>
+</ul>
+<ol start="13">
+<li>新的容器申请<code>120B</code></li>
+</ol>
+<ul>
+<li><p>挂在<code>120 / 8 - 1 = #14</code>链表；</p>
+</li>
+<li><p>同样的，pool供应不足，先将上面的<code>16B</code>挂在<code>#1</code>链表上，再想要malloc分配一大块也分配不出，无法满足需求；</p>
+</li>
+<li><p>于是，alloc从手中资源中取最接近<code>120B</code>的区块回填pool，但是<code>#14</code>链表和<code>#15</code>链表都是空的，于是无法分配。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021135087.png" alt="4_内存管理_65"></p>
+</li>
+</ul>
+<ol start="14">
+<li>检讨</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405021135931.png" alt="4_内存管理_66"></p>
+<h2 id="27-G2-9-std-alloc源码剖析（上）"><a href="#27-G2-9-std-alloc源码剖析（上）" class="headerlink" title="27 G2.9 std::alloc源码剖析（上）"></a>27 G2.9 std::alloc源码剖析（上）</h2><p>GNU C++2.9 分配器的设计：分为两级分配器，分别是第一级分配器和第二级分配器.</p>
+<ol>
+<li>第一级分配器</li>
+</ol>
+<p>其中<strong>第一级分配器不重要</strong>，主要模拟new handler的作用，处理一下内存分配的情况。下列图片是第一级分配器的代码。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041115341.png" alt="4_内存管理_67"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041115436.png" alt="4_内存管理_68"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041116564.png" alt="4_内存管理_69"></p>
+<ol start="2">
+<li>第二级分配器</li>
+</ol>
+<p>（1）定义</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041140479.png" alt="4_内存管理_70"></p>
+<ul>
+<li><p>ROUND_UP：将分配的大小变成8的倍数；</p>
+</li>
+<li><p>FREELIST_INDEX：根据bytes的大小指定分配到哪个链表；</p>
+</li>
+<li><p>几个变量的作用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>*   start_free = <span class="number">0</span>; <span class="comment">// 指向战备池pool的头</span></span><br><span class="line"><span class="type">char</span>*   end_free = <span class="number">0</span>;   <span class="comment">// 指向战备池pool的尾</span></span><br><span class="line"><span class="type">size_t</span>  heap_size = <span class="number">0</span>;  <span class="comment">// 累计分配大小</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>（2）最重要的两个函数：allocate和deallocate</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041141570.png" alt="4_内存管理_71"></p>
+<ul>
+<li><p><code>allocate</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span>* <span class="title">allocate</span><span class="params">(<span class="type">size_t</span> n)</span>  <span class="comment">//n must be &gt; 0</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  obj* <span class="keyword">volatile</span> *my_free_list;    <span class="comment">//obj** my_free_list;</span></span><br><span class="line">  obj* result;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (n &gt; (<span class="type">size_t</span>)__MAX_BYTES) &#123; <span class="comment">// 大于128B，交给第一级分配器来分配</span></span><br><span class="line">      <span class="keyword">return</span>(<span class="built_in">malloc_allocate</span>(n));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  my_free_list = free_list + <span class="built_in">FREELIST_INDEX</span>(n);  <span class="comment">// 定位到几号链表</span></span><br><span class="line">  result = *my_free_list;</span><br><span class="line">  <span class="keyword">if</span> (result == <span class="number">0</span>) &#123;  <span class="comment">// 该链表为空</span></span><br><span class="line">      <span class="type">void</span>* r = <span class="built_in">refill</span>(<span class="built_in">ROUND_UP</span>(n));  <span class="comment">// 链表充值，从pool中去拿区块，链表有了可用区块</span></span><br><span class="line">      <span class="keyword">return</span> r;</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">// 指针指向下一个可用区块</span></span><br><span class="line">  *my_free_list = result-&gt;free_list_link;</span><br><span class="line">  <span class="keyword">return</span> (result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041143025.png" alt="4_内存管理_72"></p>
+</li>
+<li><p><code>deallocate</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">deallocate</span><span class="params">(<span class="type">void</span> *p, <span class="type">size_t</span> n)</span>  <span class="comment">//p may not be 0</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  obj* q = (obj*)p;</span><br><span class="line">  obj* <span class="keyword">volatile</span> *my_free_list;  <span class="comment">//obj** my_free_list;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (n &gt; (<span class="type">size_t</span>) __MAX_BYTES) &#123;  <span class="comment">// 大于128B，改用第一级分配器进行回收</span></span><br><span class="line">      <span class="built_in">malloc_deallocate</span>(p, n);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 回收过来的p指针指向的区块，挂在单向链表的头</span></span><br><span class="line">  my_free_list = free_list + <span class="built_in">FREELIST_INDEX</span>(n);  <span class="comment">// 指向16个链表中的一个，比如list #6,如下图所示</span></span><br><span class="line">  q-&gt;free_list_link = *my_free_list;  <span class="comment">// q的next指向单向链表的头，就是list #6指向的具体区块的单向链表（free_list_link即next指针）</span></span><br><span class="line">  *my_free_list = q;  <span class="comment">// my_free_list重新指向新的单向链表q，因为头指针被换成新的了</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041143591.png" alt="4_内存管理_73"></p>
+</li>
+</ul>
+<h2 id="28-G2-9-std-alloc源码剖析（中）"><a href="#28-G2-9-std-alloc源码剖析（中）" class="headerlink" title="28 G2.9 std::alloc源码剖析（中）"></a>28 G2.9 std::alloc源码剖析（中）</h2><ul>
+<li><code>refill</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041150983.png" alt="4_内存管理_75"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//----------------------------------------------</span></span><br><span class="line"><span class="comment">// Returns an object of size n, and optionally adds</span></span><br><span class="line"><span class="comment">// to size n free list. We assume that n is properly aligned.</span></span><br><span class="line"><span class="comment">// We hold the allocation lock.</span></span><br><span class="line"><span class="comment">//----------------------------------------------</span></span><br><span class="line"><span class="function"><span class="type">void</span>* <span class="title">refill</span><span class="params">(<span class="type">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> nobjs = <span class="number">20</span>;</span><br><span class="line">    <span class="type">char</span>* chunk = <span class="built_in">chunk_alloc</span>(n,&amp;nobjs);</span><br><span class="line">    obj* <span class="keyword">volatile</span> *my_free_list;   <span class="comment">//obj** my_free_list;</span></span><br><span class="line">    obj* result;</span><br><span class="line">    obj* current_obj;</span><br><span class="line">    obj* next_obj;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1</span> == nobjs) <span class="keyword">return</span>(chunk);</span><br><span class="line">    my_free_list = free_list + <span class="built_in">FREELIST_INDEX</span>(n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Build free list in chunk</span></span><br><span class="line">    result = (obj*)chunk;</span><br><span class="line">    *my_free_list = next_obj = (obj*)(chunk + n);</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;  ; ++i) &#123;</span><br><span class="line">      current_obj = next_obj;</span><br><span class="line">      next_obj = (obj*)((<span class="type">char</span>*)next_obj + n);</span><br><span class="line">      <span class="keyword">if</span> (nobjs<span class="number">-1</span> == i) &#123;</span><br><span class="line">          current_obj-&gt;free_list_link = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          current_obj-&gt;free_list_link = next_obj;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这段代码中，next_obj 的计算是为了在内存块（chunk）上构建一个链表，以形成一个自由链表（free list）。这个链表将被用于分配对象。让我们解释一下这行代码的目的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">next_obj = (obj*)((<span class="type">char</span>*)next_obj + n);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>next_obj</code>是一个指向当前空闲块的指针，它一开始指向<code>chunk + n</code>，即第一个可用的内存块；</li>
+<li><code>(char*)next_obj</code>将<code>next_obj</code>强制类型转换为<code>char*</code>类型，这是因为我们希望按字节递增，而不是按对象递增；</li>
+<li><code>((char*)next_obj + n)</code>表示将指针移动到下一个内存块的起始位置，即当前内存块的末尾加上一个对象的大小<code>n</code>；</li>
+<li><code>(obj*)((char*)next_obj + n)</code>将移动后的指针重新转换为<code>obj*</code>类型，以便正确指向下一个空闲块的起始位置。</li>
+</ul>
+<p>这样，通过不断地按对象大小 n 的步长在内存块上移动，构建了一个包含多个空闲块的链表。这个链表可以有效地用于分配对象。这种处理方式是为了确保链表中相邻的空闲块之间的间隔是 n 字节，从而满足对象的对齐需求。</p>
+<p>在上述代码中，for 循环的第二个条件 ; 是一个空语句，表示没有额外的条件来控制循环的执行。这意味着 for 循环会一直执行，直到执行到 break 语句为止。</p>
+<p>在这个具体的代码中，循环的目的是为了在内存块上构建一个链表，将多个空闲块连接在一起。循环体中的 if 语句用于判断是否已经遍历了 nobjs-1 个空闲块。如果是，则最后一个空闲块的 free_list_link 设置为 0，表示链表的结束。此时，break 语句被执行，跳出循环。</p>
+<p>因此，循环终止的条件是遍历了 nobjs-1 个空闲块，确保链表的正确构建，并在最后一个空闲块处设置了结束标志。循环的终止是由 break 语句触发的，而不是由循环条件控制的。</p>
+<ul>
+<li><code>chunk_alloc</code></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041210910.png" alt="4_内存管理_74"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041210501.png" alt="4_内存管理_75"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//----------------------------------------------</span></span><br><span class="line"><span class="comment">// We allocate memory in large chunks in order to</span></span><br><span class="line"><span class="comment">// avoid fragmentingthe malloc heap too much.</span></span><br><span class="line"><span class="comment">// We assume that size is properly aligned.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Allocates a chunk for nobjs of size &quot;size&quot;.</span></span><br><span class="line"><span class="comment">// nobjs may be reduced if it is inconvenient to</span></span><br><span class="line"><span class="comment">// allocate the requested number.</span></span><br><span class="line"><span class="comment">//----------------------------------------------</span></span><br><span class="line"><span class="comment">//char* chunk_alloc(size_t size, int&amp; nobjs)  //G291[o],VC6[x],CB5[x]</span></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">chunk_alloc</span><span class="params">(<span class="type">size_t</span> size, <span class="type">int</span>* nobjs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span>* result;</span><br><span class="line">  <span class="comment">// 调用chunk_alloc的时候，nobjs为20，所以默认total_bytes为20个区块的大小</span></span><br><span class="line">  <span class="type">size_t</span> total_bytes = size * (*nobjs);   <span class="comment">// 原nobjs改為 (*nobjs)</span></span><br><span class="line">  <span class="type">size_t</span> bytes_left = end_free - start_free; <span class="comment">// pool中剩余的字节个数</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 1. pool空间足以满足20块需求</span></span><br><span class="line">  <span class="keyword">if</span> (bytes_left &gt;= total_bytes) &#123;  </span><br><span class="line">      result = start_free;  <span class="comment">// 将原来的start_free作为结果传回去</span></span><br><span class="line">      start_free += total_bytes;  <span class="comment">// 调整pool水位，下降，战备池pool变小</span></span><br><span class="line">      <span class="keyword">return</span>(result);</span><br><span class="line">  <span class="comment">// 2. pool空间只能满足1个及以上区块的需求，但不足20块</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (bytes_left &gt;= size) &#123; </span><br><span class="line">      *nobjs = bytes_left / size;     <span class="comment">//原nobjs改為 (*nobjs)，改变需求数，看看可以切成几个区块</span></span><br><span class="line">      total_bytes = size * (*nobjs);  <span class="comment">//原nobjs改為 (*nobjs)，改变需求总量</span></span><br><span class="line">      result = start_free;</span><br><span class="line">      start_free += total_bytes;</span><br><span class="line">      <span class="keyword">return</span>(result);</span><br><span class="line">  <span class="comment">// 3. pool空间不足以满足1块需求，pool空间可能是碎片，也可能表示pool大小为0</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">      <span class="type">size_t</span> bytes_to_get =  </span><br><span class="line">                 <span class="number">2</span> * total_bytes + <span class="built_in">ROUND_UP</span>(heap_size &gt;&gt; <span class="number">4</span>);  <span class="comment">// 需要请求的一大块的大小</span></span><br><span class="line">      <span class="comment">// Try to make use of the left-over piece.</span></span><br><span class="line">      <span class="comment">// 先将pool池的碎片挂到对应大小的链表上</span></span><br><span class="line">      <span class="keyword">if</span> (bytes_left &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          obj* <span class="keyword">volatile</span> *my_free_list =  <span class="comment">// 找出应转移到第#号链表</span></span><br><span class="line">                 free_list + <span class="built_in">FREELIST_INDEX</span>(bytes_left);</span><br><span class="line">		  <span class="comment">// 将pool空间编入第#号链表，next指针指向链表的头节点，编入链表的第一个节点</span></span><br><span class="line">          ((obj*)start_free)-&gt;free_list_link = *my_free_list;</span><br><span class="line">          *my_free_list = (obj*)start_free;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 上面处理完pool的碎片，pool为空，开始用malloc为pool分配内存</span></span><br><span class="line">      start_free = (<span class="type">char</span>*)<span class="built_in">malloc</span>(bytes_to_get); <span class="comment">// pool的起点</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="number">0</span> == start_free) &#123;  <span class="comment">// 分配失败，从free list中找区块（向右边更大的区块去找）</span></span><br><span class="line">          <span class="type">int</span> i;</span><br><span class="line">          obj* <span class="keyword">volatile</span> *my_free_list, *p;</span><br><span class="line"></span><br><span class="line">          <span class="comment">//Try to make do with what we have. That can&#x27;t</span></span><br><span class="line">          <span class="comment">//hurt. We do not try smaller requests, since that tends</span></span><br><span class="line">          <span class="comment">//to result in disaster on multi-process machines.</span></span><br><span class="line">          <span class="keyword">for</span> (i = size; i &lt;= __MAX_BYTES; i += __ALIGN) &#123; <span class="comment">// 向右侧的链表去找区块，例如88B，96B，104B， 112B等等</span></span><br><span class="line">              my_free_list = free_list + <span class="built_in">FREELIST_INDEX</span>(i);</span><br><span class="line">              p = *my_free_list;</span><br><span class="line">              <span class="keyword">if</span> (<span class="number">0</span> != p) &#123; <span class="comment">// 找到右边的list中的可用区块，只释放一块给pool</span></span><br><span class="line">                  *my_free_list = p -&gt; free_list_link;</span><br><span class="line">                  <span class="comment">// start_free 和 end_free是战备池pool的头尾指针，指向这一块空间</span></span><br><span class="line">                  start_free = (<span class="type">char</span>*)p;  </span><br><span class="line">                  end_free = start_free + i;</span><br><span class="line">                  <span class="keyword">return</span>(<span class="built_in">chunk_alloc</span>(size, nobjs)); <span class="comment">// 递归再试一次</span></span><br><span class="line">                  <span class="comment">//Any leftover piece will eventually make it to the</span></span><br><span class="line">                  <span class="comment">//right free list.</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          end_free = <span class="number">0</span>;       <span class="comment">//In case of exception.</span></span><br><span class="line">          start_free = (<span class="type">char</span>*)<span class="built_in">malloc_allocate</span>(bytes_to_get);</span><br><span class="line">          <span class="comment">//This should either throw an exception or</span></span><br><span class="line">          <span class="comment">//remedy the situation. Thus we assume it</span></span><br><span class="line">          <span class="comment">//succeeded.</span></span><br><span class="line">      &#125; <span class="comment">// if结束</span></span><br><span class="line">      </span><br><span class="line">      heap_size += bytes_to_get;  <span class="comment">// 累计总分配量</span></span><br><span class="line">      end_free = start_free + bytes_to_get;  <span class="comment">// 调整pool水位，pool空间变大，pool的终点</span></span><br><span class="line">      <span class="keyword">return</span>(<span class="built_in">chunk_alloc</span>(size, nobjs));  <span class="comment">// 递归再调用一次</span></span><br><span class="line">      <span class="comment">// 不论是58/59行还是72/73行，都是先将空闲放入战备池中，然后再递归调用chunk_aclloc，就可以达到重新分配内存的效果</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="29-G2-9-std-alloc源码剖析（下）"><a href="#29-G2-9-std-alloc源码剖析（下）" class="headerlink" title="29 G2.9 std::alloc源码剖析（下）"></a>29 G2.9 std::alloc源码剖析（下）</h2><p>分析chunk_alloc函数在G2.9 std::alloc源码剖析（中）进行。</p>
+<p>具体一些数据的初始定义：</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041212367.png" alt="在这里插入图片描述"></p>
+<h2 id="30-G2-9-std-alloc观念大整理"><a href="#30-G2-9-std-alloc观念大整理" class="headerlink" title="30 G2.9 std::alloc观念大整理"></a>30 G2.9 std::alloc观念大整理</h2><p>（1）观念整理</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041233313.png" alt="4_内存管理_78"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">list&lt;Foo&gt; c;</span><br><span class="line">c.<span class="built_in">push_back</span>(<span class="built_in">Foo</span>(<span class="number">1</span>)); <span class="comment">// Foo(1)临时对象，创建在栈stack中</span></span><br><span class="line"><span class="comment">//容器c使用alloc分配空间，看16条链表中哪一条可以提供区块，分配给它。所以它不带cookie</span></span><br><span class="line"></span><br><span class="line">Foo* p = <span class="keyword">new</span> <span class="built_in">Foo</span>(<span class="number">2</span>); <span class="comment">// 采用new，创建在heap中</span></span><br><span class="line"><span class="comment">// new是调用operator new，底层是调用malloc，它带有cookie</span></span><br><span class="line">c.<span class="built_in">push_back</span>(*p); <span class="comment">// 容器c push_back的时候不带cookie</span></span><br><span class="line"><span class="keyword">delete</span> p; </span><br></pre></td></tr></table></figure>
+
+<p>（2）“批斗”大会</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041234181.png" alt="4_内存管理_79"></p>
+<ul>
+<li><p>需要学习的地方：比较判断的时候把具体的值写在前面，防止出现将&#x3D;&#x3D;写成&#x3D;赋值的情况。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">0</span> == start_free)</span><br><span class="line"><span class="keyword">if</span>(<span class="number">0</span> != p)</span><br><span class="line"><span class="keyword">if</span>(<span class="number">1</span> == nobjs)        </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不好的地方</p>
+<ul>
+<li><p>变量定义的地方不要和使用的地方间隔太远，尤其是指针的使用；</p>
+</li>
+<li><p>第一级分配器使用的一个函数：炫技，没有人看得懂；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> (*<span class="built_in">set_malloc_handler</span>(<span class="built_in">void</span> (*f)()))()</span><br><span class="line">&#123; <span class="comment">//類似 C++ 的 set_new_handler().</span></span><br><span class="line">  <span class="built_in">void</span> (*old)() = oom_handler;</span><br><span class="line">  oom_handler = f;</span><br><span class="line">  <span class="keyword">return</span>(old);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价于 //</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*H)</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">H <span class="title">set_malloc_handler</span><span class="params">(H f)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>还有deallocate的时候并没有free掉，这是由设计的先天缺陷造成的。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="31-G4-9-pull-allocator运行观察"><a href="#31-G4-9-pull-allocator运行观察" class="headerlink" title="31 G4.9 pull allocator运行观察"></a>31 G4.9 pull allocator运行观察</h2><p>在GNU C++4.9版本下的测试，由于2.9版本分配内存都是调用malloc，无法重载，即无法接管到我们用户手中，无法记录总分配量和总释放量。而在4.9版本中，它的内存分配动作是调用operator new，这样我们就可以接管operator new，对其进行重载。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041240025.png" alt="4_内存管理_80"></p>
+<p>下面测试两个分配器使用情况，分别对list容器进行100万次分配。</p>
+<p>由于GNU C++4.9版本标准分配器是allocator，并不是2.9版本alloc，所以容器（客户）分配内存的时候每个元素（100万个）都带cookie（每个cookie占8B）。这个如下图右侧所示。</p>
+<p>下图左侧使用4.9版本好的分配器__pool_alloc，这个是2.9版本的alloc，显示分配的次数timesNew为122次（调用malloc的次数），这比右侧标准分配器好上不少。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405041240699.png" alt="4_内存管理_81"></p>
+<h1 id="第三讲-malloc-free"><a href="#第三讲-malloc-free" class="headerlink" title="第三讲 malloc&#x2F;free"></a>第三讲 malloc&#x2F;free</h1><h2 id="32-VC6和VC10的malloc比较"><a href="#32-VC6和VC10的malloc比较" class="headerlink" title="32 VC6和VC10的malloc比较"></a>32 VC6和VC10的malloc比较</h2><blockquote>
+<p> SBH：Small Block Heap</p>
+</blockquote>
+<p>（1）VC6内存分配</p>
+<p>下图为<code>call stack</code>，即调用栈，需要从下往上看。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061116653.png" alt="4_内存管理_86"></p>
+<p><code>mainCRTStartup</code>函数是<code>CRT</code>（C Run Time，C标准库）提供的入口点函数，调用一系列函数，后面才是调用<code>main</code>函数。其中，在<code>_heap_alloc_base</code>函数中：</p>
+<ul>
+<li>当size小于阈值<code>_sbh_thrshold</code>时调用<code>__sbh_alloc_block</code>函数；</li>
+<li>否则调用<code>HeapAlloc</code>函数，即操作系统提供的内存分配函数。</li>
+</ul>
+<blockquote>
+<p>在 VC6（Visual C++ 6.0）的内存分配机制中，SBH（Small Block Heap）是用于管理小块内存的一部分。这是一个专门用于分配和释放相对较小内存块的堆管理机制，通常用于提高小对象的内存分配效率。</p>
+<p>在调用栈中，从下往上看，mainCRTStartup 函数是 CRT（C Runtime）提供的入口点函数。CRT 是 C++ 程序运行时环境的一部分，负责初始化和管理程序的运行时状态。mainCRTStartup 函数会执行一系列的初始化操作，包括初始化全局变量、调用构造函数等。在这个过程中，可能会涉及到内存分配操作，其中就包括 SBH 的管理。</p>
+<p>在 VC6 中，SBH 通常使用一些数据结构（例如内存池、free list 等）来管理小块内存。这有助于减少内存碎片，并提高小对象的分配和释放效率。</p>
+<p>整个调用栈的过程可能是这样的：</p>
+<ul>
+<li>mainCRTStartup 函数初始化 CRT 环境。</li>
+<li>在初始化过程中，可能会涉及到 SBH 的初始化或使用。</li>
+<li>然后执行 main 函数，开始程序的主要逻辑。</li>
+</ul>
+<p>总的来说，VC6 的内存分配机制在运行时可能会使用 SBH 等机制来管理小块内存，以提高性能和效率。这些机制通常是底层的、对开发者透明的，但在整个程序运行的过程中发挥着重要的作用。</p>
+</blockquote>
+<p>（2）VC10内存分配</p>
+<p>下图中黑色覆盖的函数表示VC10不再使用，对于<code>_heap_alloc_base</code>函数，它里面直接调用<code>HeapAlloc</code>函数，不再对小块内存进行管理，统统交给操作系统来做。对于VC10版本，它的SHB等小块内存的管理都被包装到<code>HeapAlloc</code>里面来了。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061120640.png" alt="4_内存管理_87"></p>
+<p>（3）SBH之始</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061124139.png" alt="4_内存管理_88"></p>
+<p><code>_heap_init</code></p>
+<ul>
+<li><p>调用<code>HeapCreate</code>来分配一块大小为<code>4096</code>的堆空间，命名为<code>_crtheap</code>，后面<code>CRT</code>的动作都要从这一块内存中来拿；</p>
+</li>
+<li><p>调用<code>__sbh_heap_init</code>，里面是<code>HeapAlloc</code>，从<code>_crtheap</code>中拿内存，准备好<code>16个header</code>。</p>
+<ul>
+<li><p>header的结构：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> BITVEC;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagHeader</span></span><br><span class="line">&#123;</span><br><span class="line">    BITVEC bitvEntryHi; <span class="comment">// 32位</span></span><br><span class="line">    BITVEC bitbEntryLo;  <span class="comment">// 32位</span></span><br><span class="line">    BITVEC bitvCommit;  <span class="comment">// 32位</span></span><br><span class="line">    <span class="type">void</span>* pHeapData;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">tagRegion</span>* pRegion;</span><br><span class="line">&#125;</span><br><span class="line">HEADER, *PHEADER;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061123323.png" alt="4_内存管理_89"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="33-VC6内存分配（1）"><a href="#33-VC6内存分配（1）" class="headerlink" title="33 VC6内存分配（1）"></a>33 VC6内存分配（1）</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061126561.png" alt="4_内存管理_90"></p>
+<h3 id="（1）ioinit"><a href="#（1）ioinit" class="headerlink" title="（1）ioinit()"></a>（1）ioinit()</h3><ul>
+<li><p>和<code>I/O</code>相关的初始化，其中调用<code>_malloc_crt</code>进行内存分配，这是<code>CRT</code>进行的第一次内存分配，大小为<code>32×8=256B</code>，所有的程序一进来都是分配<code>256B</code>。256在十六进制下是0x100，或者写成<code>100H</code>。</p>
+</li>
+<li><p>调用了<code>_malloc_dbg</code>，和<code>malloc</code>稍微有所不同，是与调试相关的内存分配函数，</p>
+<ul>
+<li><p>是 Microsoft Visual C++ 提供的一种扩展版本，用于在调试模式下进行内存分配，并提供额外的调试信息。与标准的<code>malloc</code>函数相比，<code>_malloc_dbg</code>主要用于在调试期间更容易跟踪内存分配和释放的情况。</p>
+</li>
+<li><p>示例用法</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;crtdbg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* ptr = _malloc_dbg(size, _NORMAL_BLOCK, __FILE__, __LINE__);</span><br><span class="line"></span><br><span class="line"><span class="comment">// _malloc_dbg 用于分配带有调试信息的内存块</span></span><br><span class="line"><span class="comment">// _NORMAL_BLOCK 表示内存块的类型</span></span><br><span class="line"><span class="comment">// __FILE__ 和 __LINE__ 分别表示调用该函数的源文件和行号</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）-heap-alloc-dbg"><a href="#（2）-heap-alloc-dbg" class="headerlink" title="（2）_heap_alloc_dbg()"></a>（2）_heap_alloc_dbg()</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061130993.png" alt="4_内存管理_91"></p>
+<ul>
+<li><code>_CrtMemBlockHeader</code>是一个结构体，可称为<code>debug header</code>；<code>nSize</code>就是上文提到的<code>256B</code>；<code>nNoManLandSize</code>为4；</li>
+<li>右侧的图显示了<strong>debug模式下申请nsize&#x3D;256B大小内存</strong>，额外附加了一些东西，debug header和NoMansLand，这是为调试器设计的；</li>
+<li><strong>blockSize计算完毕之后，开始调用_heap_alloc_base分配内存空间</strong></li>
+<li><strong>所需内存的nSize部分加上调试所加的部分，这个整体称为block，由灰色、深绿色、浅绿色共同构成</strong>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061132445.png" alt="4_内存管理_92"></p>
+<ul>
+<li><code>_pFirstBlock</code>和<code>_pLastBlock</code>两根指针指向block链表的头尾，<code>malloc</code>分配的内存块都用链表串起来；</li>
+<li>右下角的<code>memset</code>是给特定地方填入特定的值。</li>
+</ul>
+<h2 id="34-VC6内存分配（2）"><a href="#34-VC6内存分配（2）" class="headerlink" title="34 VC6内存分配（2）"></a>34 VC6内存分配（2）</h2><h3 id="（3）-heap-alloc-base"><a href="#（3）-heap-alloc-base" class="headerlink" title="（3）_heap_alloc_base()"></a>（3）_heap_alloc_base()</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061135466.png" alt="4_内存管理_93"></p>
+<ul>
+<li>调用<code>_heap_alloc_base</code>分配内存，小于阈值的内存交给sbh服务，大于阈值的内存交给操作系统HeapAlloc来服务；</li>
+<li>这里<code>_Sbh_threshold</code>的值是<code>1016B</code>，这是因为还没有加cookie（大小为8），两者加起来是<code>1024B</code>。</li>
+</ul>
+<h3 id="（4）-sbh-alloc-block"><a href="#（4）-sbh-alloc-block" class="headerlink" title="（4）_sbh_alloc_block()"></a>（4）_sbh_alloc_block()</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061136305.png" alt="4_内存管理_94"></p>
+<p>在前面<code>block</code>的基础上，上下添加<code>cookie</code>（体现在2*sizeof(int)，以及下图右侧上下两块红色的地方0x131），后面涉及到的(BYTE_PER_PARA-1) 是进行向上调整ROUND_UP，调整到16的倍数。</p>
+<ul>
+<li><strong>cookie的计算</strong>：<ul>
+<li>首先是<code>_ioinit</code>首次需要的内存<code>256B</code>（0x100，浅绿色的部分）;</li>
+<li>然后是调试器加的<code>debug header</code>，大小为<code>9 x 4 = 36B</code>（0x24，灰色部分和深绿色部分(4个0xfd)），再加上下两个cookie大小<code>4 x 2 = 8B</code>（0x8），所有的加起来：0x100 + 0x24 + 0x8 &#x3D; 0x12C，<strong>向上调整到16的倍数</strong>，变成<code>0x130</code>；</li>
+<li>最后，末位为<code>1</code>表示这块内存分配出去，如果末位为0则表示这块内存还在<code>sbh</code>手上。这里是分配出去的内存，所以<code>cookie</code>里面填的值是<code>0x131</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="35-VC6内存分配（3）"><a href="#35-VC6内存分配（3）" class="headerlink" title="35 VC6内存分配（3）"></a>35 VC6内存分配（3）</h2><p>上述函数的作用都是确定该分配内存的大小，接下来真正进行内存分配的任务。</p>
+<h3 id="（5）-sbh-alloc-new-region"><a href="#（5）-sbh-alloc-new-region" class="headerlink" title="（5）_sbh_alloc_new_region()"></a>（5）_sbh_alloc_new_region()</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061139061.png" alt="4_内存管理_95"></p>
+<p>共<code>16</code>个<code>header</code>，每个<code>header</code>负责<code>1MB</code>的内存。</p>
+<p><code>header</code>有两个指针：</p>
+<ul>
+<li>一个指向<strong>真正的内存</strong>；</li>
+<li>另一个指向<strong>管理中心（region）</strong>，上图中橙色框圈出来的就是<code>new region</code>，具体细节如下：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagRegion</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> indGroupUse;                  <span class="comment">// 一个整数</span></span><br><span class="line">	<span class="type">char</span> cntRegionSize[<span class="number">64</span>];           <span class="comment">// 64个char</span></span><br><span class="line">    <span class="comment">// 下面两者合并，共有32组，每组64bits，用来管理区块在链表中存在与否等细节</span></span><br><span class="line">	BITVEC bitvGroupHi[<span class="number">32</span>];           <span class="comment">// unsigned int</span></span><br><span class="line">	BITVEC bitvGroupLo[<span class="number">32</span>];</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">tagGroup</span> grpHeadList[<span class="number">32</span>];  <span class="comment">// 32个group</span></span><br><span class="line">&#125;</span><br><span class="line">REGION, *REGION;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每一个<code>group</code>是<code>64</code>个<code>ListHead</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagGroup</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> cntEntries;                   <span class="comment">// 记录累计分配出去的区块</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">tagListHead</span> listHead[<span class="number">64</span>];  <span class="comment">// 64个ListHead</span></span><br><span class="line">&#125;</span><br><span class="line">GROUP, *PGROUP;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>ListHead</code>里面有两个指针，双向链表</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagListHead</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">tagEntry</span>* pEntryNext;</span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">tagEntry</span>* pEntryPrev;</span><br><span class="line">&#125;</span><br><span class="line">LISTHEAD, *PLISTHEAD;	</span><br></pre></td></tr></table></figure>
+
+<p>一个<code>region</code>的大小大概有<code>16K</code>左右。管理右侧的虚拟地址空间的成本即为<code>region</code>的大小，<code>16K</code>。</p>
+<h2 id="36-VC6内存分配（4）"><a href="#36-VC6内存分配（4）" class="headerlink" title="36 VC6内存分配（4）"></a>36 VC6内存分配（4）</h2><p>接下来就是如何从<code>1MB</code>内存中切出一块。</p>
+<h3 id="（6）-sbh-alloc-new-group"><a href="#（6）-sbh-alloc-new-group" class="headerlink" title="（6）_sbh_alloc_new_group()"></a>（6）_sbh_alloc_new_group()</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061241209.png" alt="4_内存管理_96"></p>
+<p>将右侧的虚拟内存空间（大小为<code>1MB</code>），分成<code>32</code>块，每个<code>group</code>管理<code>1</code>块，每一块大小为<code>1MB / 32 = 32KB</code>。然后再将每一块细分为<code>8</code>个<code>page</code>，每个<code>page</code>大小为<code>32KB / 8 = 4KB</code>，如上图<code>page1, page2, …, page8</code>所示。</p>
+<p>第<code>1</code>块由<code>group0</code>进行管理。<code>group0</code>里面有<code>64</code>条链表。<code>SBH</code>中用链表把第<code>1</code>块的<code>8</code>个<code>page</code>串起来，挂在<code>group0</code>里面<code>64</code>条链表的最后一条上。</p>
+<p>当<code>_ioinit</code>第一次来要内存的时候，就从<code>group0</code>的<code>page1</code>挖一块给它。后面又有要内存的时候，就一直往后挖，如果<code>page1</code>到<code>page8</code>都被分配出去了，之后还是要内存，就到<code>group1</code>中去处理。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061241234.png" alt="4_内存管理_97"></p>
+<ul>
+<li><p><strong>黄色部分</strong>：这<code>32KB</code>（8个page）是一次性从操作系统分配过来的。每一个<code>page</code>的偏移值地方设置为<code>0xffffffff</code>，也就是<code>-1</code>（上图中黄色的部分），设置为<code>-1</code>的作用是合并的时候做分隔符（栅栏），分隔符（栅栏）之内的合并在一起。</p>
+</li>
+<li><p><strong>红色部分</strong>：有三个小块，下面两个红色的小块是两个指针，将8个page串起来，上面的一个红色小块是记录可用空间的大小，这里是<code>4080</code>（由4KB &#x3D; 4096B，4096减去两个黄色的部分（栅栏，分隔符）8B，剩下4088B，但是要下调到16的倍数，变成4080B，剩余的放到保留区），这上下两块<code>4080</code>是cookie，记录自己这一块的大小。</p>
+</li>
+</ul>
+<p>64条链表负责不同大小的区块，分别是<code>16B， 32B， 64B,…, </code>每次增加16B，一直到最后一条链表，最后一条应该负责<code>64 x 16 = 1024B</code>的区块分配。<strong>另外最后一根链表还有一个任务，就是所有大于1024B的区块都由它负责</strong>。当切分完之后如果剩下的空间小于1024B，就要挂载到对应区块大小的那根链表上。</p>
+<p>这64条链表上面还有一个整数<code>cntEntries</code>，表示分配的累积量，分配出去一个区块就<code>+1</code>，回收回来一个区块就<code>-1</code>。</p>
+<h2 id="37-VC6内存分配（5）"><a href="#37-VC6内存分配（5）" class="headerlink" title="37 VC6内存分配（5）"></a>37 VC6内存分配（5）</h2><p>下面分析第一个<code>page</code>怎么切分。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061248201.png" alt="4_内存管理_98"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4080 = 0xff0</span><br></pre></td></tr></table></figure>
+
+<p>上面<code>_ioinit</code>第一次要的内存是<code>256B</code>（0x110），然后加上各种<code>debug header</code>和其他，总共是<code>0x130</code>，所以给出去的内存是<code>0x130</code>，<code>cookie</code>记录的值是<code>0x131</code>。</p>
+<p>剩下的大小为<code>0xff0 - 0x130 = 0xec0</code>。</p>
+<ul>
+<li><p>上图左侧<strong>红色的地址0x007d0ed0</strong>是传出去的指针，<strong>指向的是客户要的<code>0x130</code>大小（加上各种debug header等）的内存</strong>。<strong>然后0x130内部还要调整指针，指向实际要的大小0x100大小的位置，就是图中的纯绿色（fill 0xcd）位置。这就是_ioinit获得的空间的位置。</strong></p>
+</li>
+<li><p>上图右侧的<code>_NORMAL_BLOCK </code>和<code>_CRT_BLOCK</code>指的是不同类型的<code>block</code></p>
+<ul>
+<li><p><code>_NORMAL_BLOCK</code>是<code>main</code>函数里面具体用的<code>block</code>，它在<code>main</code>函数结束的时候应该全部被归还，否则就是内存泄漏；</p>
+</li>
+<li><p><code>_CRT_BLOCK</code>在<code>main</code>函数运行结束之后还会存在，它会由<code>CRT</code>进行释放。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="38-SBH行为分析-分配-释放之连续动作图解（1）"><a href="#38-SBH行为分析-分配-释放之连续动作图解（1）" class="headerlink" title="38 SBH行为分析 分配+释放之连续动作图解（1）"></a>38 SBH行为分析 分配+释放之连续动作图解（1）</h2><p>（1）首次需求</p>
+<p><strong>首次需求</strong>是由<code>ioinit.c</code>第<code>81</code>行代码发出，申请<code>100H</code>的空间，加上各种<code>debug header</code>，它的区块大小变成<code>130H</code>（十进制是304），应该由<code>64</code>条链表中的第<code>304 / 16 - 1 = 18</code>号链表进行供应（不同链表区块大小是16的倍数）。<strong>但是前63条链表都为空，只有最后一条（#63）有空间。下面就是以最后一条链表（#63）来讲解。</strong></p>
+<p><code>SBH</code>面对这样的需求，它在初始化的时候已经有<code>16</code>个<code>header</code>，现在<code>0</code>号<code>header</code>来进行处理。</p>
+<ol>
+<li>它首先分配<code>1MB</code>的地址空间，这个动作是由<code>VirtualAlloc</code>去拿到的</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p = <span class="built_in">VirtualAlloc</span>(<span class="number">0</span>, <span class="number">1</span>MB, MEM_RESERVE, ...)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码使用了<code>VirtualAlloc</code>函数，该函数是 Windows API 提供的用于虚拟内存操作的函数之一。在这里，<code>VirtualAlloc</code>用于分配 1MB 的地址空间，并且使用<code>MEM_RESERVE</code>标志表示要保留这个地址空间，而不分配物理内存。</p>
+<ul>
+<li>0：表示欲分配或保留的内存区域的起始地址。在这里，设置为 0，表示让系统决定分配的地址。</li>
+<li>1MB：表示要分配或保留的内存区域的大小，这里是 1MB。</li>
+<li>MEM_RESERVE：表示要保留而不是分配物理内存。这样做可以预留地址空间，但只有在访问这些地址空间时才会分配物理内存。</li>
+<li>…：其他参数，这里没有提供具体的细节。</li>
+</ul>
+<p><strong>所以，这个调用的目的是在虚拟地址空间中保留 1MB 的地址区域，但实际上并没有分配物理内存。这样的操作通常用于预留地址空间，以便在需要时再分配实际的物理内存。</strong></p>
+<ol start="2">
+<li>其次，<code>header0</code>有另外一根指针分配出<code>region</code>，这个动作是由<code>HeapAlloc</code>进行</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">HeapAlloc</span>(_crtheap, <span class="built_in">sizeof</span>(REGION));</span><br></pre></td></tr></table></figure>
+
+<p>这个<code>region</code>里面就是上文介绍的，里面有一些<code>bit</code>，还有<code>32</code>个<code>group</code>，每个<code>group</code>有<code>64</code>条链表。</p>
+<p>上述动作准备好之后，要从虚拟地址空间中分配<code>32KB</code>（被分成8个page，每个page大小为4KB），8个page由指针串起来，这次内存分配是用<code>VirtualAlloc</code>进行的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">VirtualAlloc</span>(addr, <span class="number">32</span>KB, MEM_COMMIT, ...)  <span class="comment">// MEM_COMMIT表示真的分配内存</span></span><br></pre></td></tr></table></figure>
+
+<p>万事俱备，开始在page1上分配刚开始的需求：申请的<code>100h</code>，区块大小<code>130h</code>，十进制大小<code>4080</code>。剩下的大小为<code>0xff0 - 0x130 = 0xec0</code>，这部分还在<code>SBH</code>控制之中，<code>130h</code>被分配出去，所以cookie记为<code>131h</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061255241.png" alt="4_内存管理_99"></p>
+<p>下面红色方框中是32组64bits，64bits分别对应64根链表的状态，哪一条链表有挂区块，对应的bit就设置为1。32组表示的是32个group</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061255415.png" alt="在这里插入图片描述"></p>
+<p>（2）第二次需求</p>
+<p><strong>第二次需求，这个需求是<code>CRT</code>里面谁发出来的需求呢？是上面讲的<code>call stack</code>中的<code>__crtGetEnvironmentStringsA()</code>发出的。</strong></p>
+<p>这次需求是且分出<code>240H</code>的大小（包含各种debug header，调整16的边界等之后的大小），这个240h的区块应该由哪条链表提供服务呢？240h &#x3D; 576d（d表示十进制）,576 &#x2F; 16 -1 &#x3D; 35, 所以由#35号链表提供服务。然后去检查64bits中35号对应的bit，看看是否挂有区块，这里的情况是#35链表是空的。 然后退而求其次逐渐遍历更大容量的链表，这里只能找到最大的那条链表，这里最后一条是#63（从0开始编号）。</p>
+<p>和前面一样，检查#63链表发现它有8个page，page1还有空间可用。从这里切出<code>240h</code>的大小，经过两次切割之后，<code>page1</code>还剩<code>c80h</code>大小，<code>ec0h - 240h = c80h</code></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061256770.png" alt="4_内存管理_100"></p>
+<p>（3）第三次需求</p>
+<p><strong>第三次需求分配<code>70h</code>的大小。</strong>首先先检查应该是几号链表服务刚刚好？这里是<code>70h = 112D</code>, <code>112 / 16 - 1 = 6</code>, 应该由6号链表服务，但是它是空的，往上寻找只发现最后一个链表有区块。</p>
+<p><code>page1</code>继续分配空间，这次分配之后还剩下<code>c80h - 70h = c10h</code>。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061256560.png" alt="4_内存管理_101"></p>
+<h2 id="39-SBH行为分析-分配-释放之连续动作图解（2）"><a href="#39-SBH行为分析-分配-释放之连续动作图解（2）" class="headerlink" title="39 SBH行为分析 分配+释放之连续动作图解（2）"></a>39 SBH行为分析 分配+释放之连续动作图解（2）</h2><p>上面是分析内存分配的情况，下面分析一下内存回收的阶段。</p>
+<p>下图是第<code>15</code>次的动作，它前面有<code>14</code>次内存分配，这次是内存释放（回收），右上角可以看到<code>cntEntries</code>由<code>14</code>变成<code>13</code>，内存释放会<code>-1</code>.</p>
+<p>这次释放的是大小为<code>240h</code>的区块，这一块应该回收到<code>64</code>条链表中的哪一条呢？<code>240h = 576D， 576 / 16 - 1 = 35</code>，所以应该还到<code>#35</code>号链表。由于分配出去的<code>cookie</code>为<code>241h</code>，现在将其变为<code>240h</code>，就表示回收回来，在<code>SBH</code>的掌控之下。然后<code>64bits</code>中<strong>第35号bit需要由0变成1</strong>。</p>
+<blockquote>
+<p>切割实际上只是cookie的调整。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061257419.png" alt="4_内存管理_102"></p>
+<h2 id="40-SBH行为分析-分配-释放之连续动作图解（3）"><a href="#40-SBH行为分析-分配-释放之连续动作图解（3）" class="headerlink" title="40 SBH行为分析 分配+释放之连续动作图解（3）"></a>40 SBH行为分析 分配+释放之连续动作图解（3）</h2><p>下图是第<code>16</code>次的动作，还是内存分配的动作</p>
+<p>这次分配的是<code>b0h</code>，应该由哪条链表来服务呢？<code>b0h = 176D， 176 / 16 - 1 = 10</code>，所以应该由<code>#10</code>号链表服务，但是它是空的。此时需要向右寻求拥有更大区块的链表的帮助，这里从<code>#10</code>号往右逐个查找，发现上次回收了回来第<code>#35</code>号链表，它是可用的，所以这次应该由#35号链表提供服务。</p>
+<p>上次刚回收回来<code>240h</code>，分配出去<code>b0h</code>，这块空间还剩多大？<code>240h - b0h = 190h</code>。</p>
+<p>这里的<code>190h</code>，应该挂到哪条链表呢？ <code>190h = 400D, 400 / 16 - 1= 24</code>，所以应该挂到<code>#24</code>号链表。此时<code>64bits</code>中的<code>24号bit</code>需要变成<code>1</code>，表示该号链表有区块可分配。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061257265.png" alt="4_内存管理_103"></p>
+<p>一直进行下去，不断的进行内存分配和回收。</p>
+<p><code>group1</code>共有<code>32KB</code>，下面的第一行表示的就是<code>group1</code>的<code>64</code>条链表的使用情况：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">02000014</span> <span class="number">00000000</span>H  <span class="comment">// 共64bits，表示的是第几号链表时候有区块</span></span><br></pre></td></tr></table></figure>
+
+<p>展开成二进制，发现有3个链表挂有区块，有可用空间供分配。</p>
+<p>现在要分配的大小为<code>230h</code>，上面的<code>group1</code>中的可用链表都不能满足它的需求</p>
+<p>现在用的是<code>group2</code>，对于<code>group2</code>中，<code>230h</code>应该由几号链表来服务呢？ <code>230h = 560D， 560 / 16 - 1 = 34</code>，理想的状况是由<code>34</code>号链表服务，它检查下面的表示链表状态的64bits，</p>
+<p>这里第二行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00000000</span> <span class="number">00000001</span>H  <span class="comment">// 表示只有最后一条链表有可用空间供分配</span></span><br></pre></td></tr></table></figure>
+
+<p>表示只有最后一条链表有可用空间供分配，最后一条链表的编号为<code>#63</code>， 每个大小<code>page</code>还是<code>4080D = ff0H</code>。</p>
+<p>现在<code>ff0H</code>分配出去<code>230H</code>，还剩<code>ff0h - 230h = dc0h</code>，<code>dc0h</code>应该挂在哪个链表上呢？<code>dc0h = 3520D</code>，表示空间大小为<code>3520B</code>，比前<code>63</code>条链表的区块（小于<code>1024B</code>）还要大，它只能还挂在<code>#63</code>号链表上。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061258561.png" alt="4_内存管理_104"></p>
+<h2 id="41-SBH行为分析-分配-释放之连续动作图解（4）"><a href="#41-SBH行为分析-分配-释放之连续动作图解（4）" class="headerlink" title="41 SBH行为分析 分配+释放之连续动作图解（4）"></a>41 SBH行为分析 分配+释放之连续动作图解（4）</h2><p><strong>VC6内存管理：区块的合并</strong></p>
+<p>如果回收的是相邻的空间，则应该合并。这里的上cookie表示的是上面的cookie，下cookie表示的是下面的cookie。下图左侧第一张图中灰色部分表示待收回的区块300h，它的上下两部分为白色，表示已经回收过来的区块，可以合并。</p>
+<p>（1）首先往下看，怎么往下看呢？</p>
+<p>指针找到自己的cookie大小，这里是300h，指针移动300h，就到了下面一个区块的cookie位置，看最后1bit是否是为0，如果为0，表示可以和下面的区块合并。</p>
+<p>现在发现，下方区块为free，也为300h，合并之，合并为600h，如第二张图中间灰色部分所示。</p>
+<p>总之，往下合并，用的就是上cookie，根据上cookie的大小，指针移动cookie个大小，就可以找到下一个区块的位置。</p>
+<p>（2）其次往上看，怎么往上看呢？</p>
+<p>指针还在自己cookie的位置，往上移动4字节，就找到上方区块的下cookie，判断最后1bit是否为0，若为0，就表示可以和上面的区块合并。</p>
+<p>现在发现，上方区块也为free，大小也为300h，合并之。</p>
+<p>总之，往上合并，用的是上面区块的下cookie，根据这个值，往上跳cookie个大小，找到上面区块的起始位置。如果没有下cookie，就不能往上合并。</p>
+<p>（3）三个300h合并大小为900h，然后去找900h应该挂在几号链表上，900h &#x3D; 2304D， 2304大于1024，所以它应该挂在最后一个链表#63上，它用来处理大于1024B的区块。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061258046.png" alt="4_内存管理_105"></p>
+<h2 id="42-VC6内存管理free（p）"><a href="#42-VC6内存管理free（p）" class="headerlink" title="42 VC6内存管理free（p）"></a>42 VC6内存管理free（p）</h2><p><code>free</code>回收，<code>SBH</code>要确定落在哪个<code>header</code>（共16个header）指定的<code>1MB</code>空间中，然后确定是这个<code>header</code>中的哪个<code>group</code>，然后确定这个<code>group</code>中的<code>64</code>条链表中的哪个链表。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061258074.png" alt="4_内存管理_106"></p>
+<h2 id="43-VC6内存管理总结（上）"><a href="#43-VC6内存管理总结（上）" class="headerlink" title="43 VC6内存管理总结（上）"></a>43 VC6内存管理总结（上）</h2><p>分成<code>16</code>个<code>header</code>，每个<code>header</code>管理<code>1MB</code>的虚拟空间，这个虚拟空间分成<code>32</code>个<code>group</code>（每个<code>group</code>管理大小为32KB的空间），每个<code>group</code>里有<code>64</code>个链表。</p>
+<p>这里的管理是分段管理（一段是<code>32KB</code>），分段的时候便于一段全部回收，然后还给操作系统。</p>
+<p><strong>如何判断全回收？</strong></p>
+<p>因为每个<code>group</code>中都有一个<code>cntEntries</code>，统计分配和回收的区块数量，当它为<code>0</code>的时候，意味着这个<code>group</code>全回收，这一段<code>32KB</code>就可以还给操作系统。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">tagGroup</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> cntEntries; <span class="comment">// 记录累计分配出去的区块</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">tagListHead</span> listHead[<span class="number">64</span>];  <span class="comment">// 64个ListHead</span></span><br><span class="line">&#125;</span><br><span class="line">GROUP, *PGROUP;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061259550.png" alt="4_内存管理_107"></p>
+<p><code>cntEntries = 0</code>的时候，这些区块是什么样子呢？它们已经进行了合并，合并到初始状态，即<code>8</code>个<code>page</code>分别挂载<code>4080B</code>那个状态，如下图所示，然后挂在<code>#63</code>号链表上。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061259316.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>不急着还给操作系统，有一个<code>defering</code>，延缓归还的操作。</p>
+<p>有一个全回收的<code>group</code>时，先暂存，当有第二个全回收的<code>group</code>时，才释放前面那个<code>group</code>。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061300668.png" alt="4_内存管理_108"></p>
+<h2 id="44-VC6内存管理总结（下）"><a href="#44-VC6内存管理总结（下）" class="headerlink" title="44 VC6内存管理总结（下）"></a>44 VC6内存管理总结（下）</h2><p>释放所有的内存块，SBH系统的面貌就是初始状态，如前面所述。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061300128.png" alt="4_内存管理_109"></p>
+<blockquote>
+<p>第二讲讲的是GNU C++的分配器，这里的第三讲涉及的是VC的malloc函数，可以把它们混在一起吗？其实GNU C++的malloc实现差不多。</p>
+<p>这里再系统化一遍。</p>
+<p>allocator要内存，底部还是向malloc要内存。</p>
+<p>allocator设计成16个链表的目的不是提升分配的速度，而是为了去除malloc的cookie开销，减少malloc的次数，每一次malloc要一大块内存，然后切分成相等的区块，这样就可以去除每一小块的cookie。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061301504.png" alt="4_内存管理_111"></p>
+<p><strong>从操作系统的API(这里是windows系统，比如HeapAlloc， VirtualAlloc)，到CRT的malloc设计，再到std::allocator的底部实现，都有类似的链表管理结构。</strong><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061301013.png" alt="4_内存管理_112"></p>
+<h1 id="第四讲-loki-allocator"><a href="#第四讲-loki-allocator" class="headerlink" title="第四讲 loki::allocator"></a>第四讲 loki::allocator</h1><h2 id="45-上中下三个classes分析"><a href="#45-上中下三个classes分析" class="headerlink" title="45 上中下三个classes分析"></a>45 上中下三个classes分析</h2><p>Loki 是 C++ 中一个开源的库，其中包含一组通用的 C++ 组件。在 Loki 库中，有一个称为 Loki::Allocator 的组件，它是一个用于内存分配的工具。讲这个分配器是为了和GNU C++中的alloc分配器作比较，alloc分配器最后的内存并没有还给操作系统。</p>
+<p>Loki allocator的三个类，从低阶到高阶分别为：<code>Chunk, FixedAllocator, SmallObjAllocator</code>。<br><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061930580.png" alt="4_内存管理_117"></p>
+<ul>
+<li>Chunk</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pData_: <span class="type">unsigned</span> <span class="type">char</span>* <span class="comment">// 指针，指向分配的一个chunk</span></span><br><span class="line">firstAvailableBlock_：<span class="type">unsigned</span> <span class="type">char</span> <span class="comment">// 第一个可用区块</span></span><br><span class="line">blocksAvailable_: <span class="type">unsigned</span> <span class="type">char</span> <span class="comment">// 目前还可以供应几个区块</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>FixedAllocator</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chunks_: vector&lt;Chunk&gt; <span class="comment">// vector里面放了很多chunk</span></span><br><span class="line"><span class="comment">// 两个指针，指向某两个Chunk</span></span><br><span class="line">allocChunk_: Chunk* </span><br><span class="line">deallocChunk_: Chunk*</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>SmallObjectAllocator</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pool_: vector&lt;FixedAllocator&gt;  <span class="comment">// 里面放了很多FixedAllocator</span></span><br><span class="line"><span class="comment">// 两个指针，指向某两个FixedAllocator</span></span><br><span class="line">pLastAlloc: FixedAllocator*</span><br><span class="line">pLastDealloc: FixedAllocator*</span><br><span class="line">chunkSize: <span class="type">size_t</span></span><br><span class="line">maxObjectSize: <span class="type">size_t</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="46-Class-Chunk分析"><a href="#46-Class-Chunk分析" class="headerlink" title="46 Class Chunk分析"></a>46 Class Chunk分析</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061935095.png" alt="4_内存管理_125"></p>
+<ul>
+<li><code>Init()</code><ul>
+<li>动态分配一大块Chunk；</li>
+<li>调用<code>Reset()</code><ul>
+<li>上图中可用的block个数为64，第一个可用的block编号为0；</li>
+<li>for循环把每个block的第一个字节当作索引index使用（类似于嵌入式指针）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Release()</code><ul>
+<li>调用<code>delete[]</code>释放空间，归还操作系统。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061936225.png" alt="4_内存管理_126"></p>
+<ul>
+<li><code>Allocate()</code><ul>
+<li>分配一个可用区块，并赋予其最高优先权；</li>
+<li><code>firstAvailableBlock_</code>对应指向下一个可用区块，比如这里可用区块的索引从左边的4变成了右边的3，剩余区块个数也相应调整。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061938608.png" alt="4_内存管理_127"></p>
+<ul>
+<li><code>Deallocate()</code><ul>
+<li>用p指针减去头指针然后除以每个block的大小，得到该释放的block的索引（即该block为第几个block）；</li>
+<li>这个释放回收的block赋予最高优先权，成为<code>firstAvailableBlock_</code>;</li>
+<li>最后，可利用的block个数<code>+1</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="47-class-FixedAllocator分析（上）"><a href="#47-class-FixedAllocator分析（上）" class="headerlink" title="47 class FixedAllocator分析（上）"></a>47 class FixedAllocator分析（上）</h2><p>FixedAllocator</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chunks_: vector&lt;Chunk&gt;  <span class="comment">// vector里面放了很多chunk</span></span><br><span class="line">allocChunk_: Chunk* 	<span class="comment">// 指向最近一次满足分配动作的chunk</span></span><br><span class="line">deallocChunk_: Chunk*	<span class="comment">// 指向最近一次回收的chunk</span></span><br><span class="line"><span class="comment">// 这两个chunk的指定符合数据的局部性原理</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// Allocate的逻辑如下图所示：如果有最近的allocChunk_，那么直接取区块，</span></span><br><span class="line"><span class="comment">// 否则就要for循环从头开始遍历每个chunk，直到找到有可用空间的chunk。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061940593.png" alt="4_内存管理_128"></p>
+<h2 id="48-class-FixedAllocator分析（下）"><a href="#48-class-FixedAllocator分析（下）" class="headerlink" title="48 class FixedAllocator分析（下）"></a>48 class FixedAllocator分析（下）</h2><ul>
+<li>第二级FixedAllocator类的Deallocate函数，调用VicinityFind函数查找还回来的指针p落在哪个chunk，找到之后交给第一级Chunk类的Deallocate来处理。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061942795.png" alt="4_内存管理_129"></p>
+<ul>
+<li>VicinityFind()（临近搜寻）<ul>
+<li>chunkLength是chunk的大小；lo是上次还回来的chunk，hi是下一个chunk；loBound和hiBound是vector的头跟尾</li>
+<li>整体思路是：兵分两路，一路往上查找，一路往下查找。<ul>
+<li>在lo里面找，找不到的话就往上面的chunk去查找，一直往上，一个接一个的chunk去找。</li>
+<li>然后在hi里面找，找不到就往下面的chunk去查找，一直往下，一个接一个的chunk去找。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061943323.png" alt="4_内存管理_130"></p>
+<ul>
+<li>调用Deallocate()进行回收时，进行分情况处理。注意全回收时，需要确认有2个chunk，才会回收其中一个，也就是上文提到的<strong>deferring延缓回收</strong>。</li>
+</ul>
+<h2 id="49-Loki-allocator总结"><a href="#49-Loki-allocator总结" class="headerlink" title="49 Loki::allocator总结"></a>49 Loki::allocator总结</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061943975.png" alt="4_内存管理_131"></p>
+<h1 id="第五讲-other-issues"><a href="#第五讲-other-issues" class="headerlink" title="第五讲 other issues"></a>第五讲 other issues</h1><h2 id="50-GNU-C-对allocators的描述"><a href="#50-GNU-C-对allocators的描述" class="headerlink" title="50 GNU C++对allocators的描述"></a>50 GNU C++对allocators的描述</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061944785.png" alt="4_内存管理_138"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061944147.png" alt="4_内存管理_139"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061944623.png" alt="4_内存管理_140"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061944227.png" alt="4_内存管理_141"></p>
+<p><img src="C:/Users/86135/Desktop/内存管理/4_内存管理_142.png" alt="4_内存管理_142"></p>
+<h2 id="51-VS2013标准分配器-G4-9标准分配器与new-allocator以及G4-9malloc"><a href="#51-VS2013标准分配器-G4-9标准分配器与new-allocator以及G4-9malloc" class="headerlink" title="51 VS2013标准分配器&amp;G4.9标准分配器与new_allocator以及G4.9malloc"></a>51 VS2013标准分配器&amp;G4.9标准分配器与new_allocator以及G4.9malloc</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061945904.png" alt="4_内存管理_143"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061945669.png" alt="4_内存管理_144"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061946198.png" alt="4_内存管理_145"></p>
+<h2 id="52-G4-9-array-allocator"><a href="#52-G4-9-array-allocator" class="headerlink" title="52 G4.9 array_allocator"></a>52 G4.9 array_allocator</h2><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061947049.png" alt="4_内存管理_146"></p>
+<ul>
+<li>指针<code>_M_array</code>指向一个C++数组，静态数组不需要释放与归还</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061947075.png" alt="4_内存管理_148"></p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061948852.png" alt="4_内存管理_147"></p>
+<h2 id="53-G4-9-debug-allocator"><a href="#53-G4-9-debug-allocator" class="headerlink" title="53 G4.9 debug_allocator"></a>53 G4.9 debug_allocator</h2><p><code>debug_allocator</code>是一个包装器，把另一个分配器包装进来，这里是<code>_Alloc</code>分配器，定义为<code>_M_allocator</code>，实际分配的时候就是调用这个分配器的<code>allocate</code>，分配<code>n + extra</code>个大小的空间。</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061948633.png" alt="4_内存管理_149"></p>
+<h2 id="54-bitmap-allocator（上）"><a href="#54-bitmap-allocator（上）" class="headerlink" title="54 bitmap_allocator（上）"></a>54 bitmap_allocator（上）</h2><p>（1）介绍bitmap_allocator</p>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061949227.png" alt="4_内存管理_153"></p>
+<ul>
+<li><code>_M_allocate_single_object</code>和<code>_M_deallocate_single_object</code>：所有的<code>allocator</code>都是供给容器使用的，容器每次请求的都是一个元素的内存分配，所以这里就是<strong>单独处理一个<code>object</code>的请求</strong>。<strong>当不是一个object的时候，就会退化到operator new和operator delete</strong>，但是这种情况一般遇不到。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061950407.png" alt="4_内存管理_154"></p>
+<p>当使用容器时，容器中一个元素的内存空间就是<code>block</code>，如果是<code>std::list</code>的时候，这个<code>block</code>还包括<code>node</code>里面的指针。上图中的<code>64blocks</code>指的是一次性挖<code>64个blocks</code>开始供应，注意这里是两倍成长，下次挖<code>128</code>个，再是<code>256</code>个，…。<strong>挖的这些blocks，加上前面的bitmap，还有前面的数值，一起称为super block。</strong></p>
+<ul>
+<li><code>bitmap</code>中是<code>64bits</code>（对应于blocks的数量），每个<code>bit</code>表示单个<code>block</code>的状态，<code>bitmap</code>是<code>unsigned int</code>，一个<code>bitmap</code>是<code>32</code>位，只能记录<code>32</code>个blocks的情况。这里是<code>64</code>个<code>blocks</code>，需要<code>2</code>个<code>bitmap</code>来记录。</li>
+<li>前面还有一个整数<code>use count</code>，记录有几个block被分配。</li>
+<li>最前面还有一个整数，记录<code>super block</code>的大小。</li>
+<li>有一个<code>mini vector</code>（模拟标准库中的vector写出来的）来操纵<code>super block</code>，里面的<code>start</code>指针和<code>finish</code>指针分别指向<code>super block</code>的头和尾。</li>
+</ul>
+<p>（2）示例分析</p>
+<ol>
+<li>现在客户需要分配内存，此时深灰色这个block被分配出去：<ul>
+<li>use count &#x3D; 1；</li>
+<li>bitmap[0]最后一位变成0，表示已经分配出去</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061955406.png" alt="4_内存管理_155"></p>
+<ol start="2">
+<li>然后请求分配第二个block，下面两个灰色的block表示被分配出去：<ul>
+<li>use count &#x3D; 2；</li>
+<li>bitmap[0]后两位变成0，表示这两个block被分配出去。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061955242.png" alt="4_内存管理_156"></p>
+<ol start="3">
+<li>后面一直分配block出去，下图表示已经分配出去63个block：<ul>
+<li>对应的use count &#x3D; 63；</li>
+<li>bitmap[1]和bitmap[0]变成80000000H和00000000H，只有最后一个block对应的bitmap中的bit才为1,表示未被分配出去。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061957215.png" alt="4_内存管理_157"></p>
+<ol start="4">
+<li>下面客户归还其中一个block：<ul>
+<li>对应的bitmap要变成1，表示未分配（回收回来）；</li>
+<li>use count由63变成62。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061957438.png" alt="4_内存管理_158"></p>
+<ol start="5">
+<li>当一个super block(有64个blocks)用完后，开始启用第二号super block，<strong>这时候super block中的block块数由64扩大两倍变成128个</strong>，由4个bitmap整数表示。而且mini vector中由一个单元变成两个单元，每个单元指向一个super block。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061957540.png" alt="4_内存管理_159"></p>
+<ol start="6">
+<li>第二个super block用完（前面已经用完第一个super block，其含有64个blocks，第二个super block包含128个blocks，也已经用完），<strong>启用第三个super bloc，其包含的blocks为128 x 2 &#x3D; 256个</strong>。mini vector中也有第三个单元来控制这个super block。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061958956.png" alt="4_内存管理_160"></p>
+<h2 id="55-bitmap-allocator（下）"><a href="#55-bitmap-allocator（下）" class="headerlink" title="55 bitmap_allocator（下）"></a>55 bitmap_allocator（下）</h2><p>上面谈的是bitmap_allocator的分配，下面谈它的回收（容器归还元素空间）机制。</p>
+<ol>
+<li><p>第一个super block全回收，用另一个mini vector（称为free list）中的entry指针指向这个super block，表示已经回收。<strong>如果下次新分配一个super block，它其中blocks的数量要减半</strong>。</p>
+<p>如下图所示，前三个superblocks大小分别为64个，128个，256个，由于第一个superblock被回收，那么下次分配的superblock大小由已经分配的最大值256变成一半，为128个blocks。原来的mini vector里面的指向回收的这个superblock头和尾的entry被删除。</p>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405061959663.png" alt="4_内存管理_161"></p>
+<ol start="2">
+<li>第二个super block也全回收，则free list里的entry加一个，指向这个super block。原来的mini vector里面指向这个superblock头尾的entry被删除。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062000036.png" alt="4_内存管理_162"></p>
+<ol start="3">
+<li>第三个super block被全回收，被free list的指针指向。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202405062000522.png" alt="4_内存管理_163"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/29/1%20C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/STL%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="midorii">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIDORII'S JOURNEY">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/04/29/1%20C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/STL%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">STL标准库与泛型编程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-29 19:16:16" itemprop="dateCreated datePublished" datetime="2024-04-29T19:16:16+08:00">2024-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-16 11:07:33" itemprop="dateModified" datetime="2024-07-16T11:07:33+08:00">2024-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/%E4%BE%AF%E6%8D%B7C-%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">侯捷C++系列</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>491</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://lishizheng.blog.csdn.net/article/details/135440545">STL标准库与泛型编程（侯捷）笔记1</a></p>
+<p>3 容器之分类与各种测试（一）：array<br>4 容器之分类与各种测试（二）：vector<br>5 容器之分类与各种测试（三）list, deque,stack, queue<br>6 容器之分类与各种测试（四）：set和unordered_set等<br>7 分配器之测试</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/29/1%20C++/%E4%BE%AF%E6%8D%B7C++%E7%B3%BB%E5%88%97/STL%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E6%B3%9B%E5%9E%8B%E7%BC%96%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/26/1%20C++/%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2598,270 +3650,6 @@ mode_t
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="midorii">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MIDORII'S JOURNEY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch1%20%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8/" class="post-title-link" itemprop="url">Ch1 计算机系统漫游</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-04-03 11:23:22" itemprop="dateCreated datePublished" datetime="2024-04-03T11:23:22+08:00">2024-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-16 11:16:18" itemprop="dateModified" datetime="2024-07-16T11:16:18+08:00">2024-07-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h1 id="Ch1-计算机系统漫游"><a href="#Ch1-计算机系统漫游" class="headerlink" title="Ch1 计算机系统漫游"></a>Ch1 计算机系统漫游</h1><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031123622.png" alt="CSAPP Ch1-Ch3_00"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404031124622.png" alt="CSAPP Ch1-Ch3_01"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="midorii">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MIDORII'S JOURNEY">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/04/03/3%20%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CSAPP/CSAPP_Ch10%20%E7%B3%BB%E7%BB%9F%E7%BA%A7IO/" class="post-title-link" itemprop="url">Ch10 系统级I/O</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-04-03 11:20:45" itemprop="dateCreated datePublished" datetime="2024-04-03T11:20:45+08:00">2024-04-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-07-16 11:16:45" itemprop="dateModified" datetime="2024-07-16T11:16:45+08:00">2024-07-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>680</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <span id="more"></span>
-
-<h1 id="Ch10-系统级I-O"><a href="#Ch10-系统级I-O" class="headerlink" title="Ch10 系统级I&#x2F;O"></a>Ch10 系统级I&#x2F;O</h1><p><strong>I-Input&#x2F;O-Output：外设和内存之间进行数据交互的过程</strong></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052201601.png" alt="image-20240405220142526"></p>
-<h2 id="1、系统级I-O"><a href="#1、系统级I-O" class="headerlink" title="1、系统级I&#x2F;O"></a>1、系统级I&#x2F;O</h2><h3 id="（1）Unix-I-O"><a href="#（1）Unix-I-O" class="headerlink" title="（1）Unix I&#x2F;O"></a>（1）Unix I&#x2F;O</h3><ul>
-<li>Opening files——返回文件描述符（file discripitor，fd）<ul>
-<li>standard unput</li>
-<li>standard output</li>
-<li>standard err</li>
-</ul>
-</li>
-<li>Changing the current file（改变当前文件的位置）</li>
-<li>Reading and Writing files</li>
-<li>Closing files</li>
-</ul>
-<h3 id="（2）Files"><a href="#（2）Files" class="headerlink" title="（2）Files"></a>（2）Files</h3><ul>
-<li><p><strong>Regular file</strong>（普通文件）</p>
-</li>
-<li><p><strong>Directory</strong>（目录文件）</p>
-<ul>
-<li>相当于文件夹，是一个<strong>存储链接信息</strong>的数组，即<strong>文件和文件名的映射</strong></li>
-</ul>
-</li>
-<li><p><strong>Socket</strong>（套接字）</p>
-</li>
-<li><p><strong>named pipe</strong>（命名管道），<strong>symbolic link</strong>（符号链接），<strong>character and block device</strong>（字符和块设备）</p>
-<ul>
-<li>如键盘、鼠标等为字符设备；硬盘为块设备</li>
-</ul>
-</li>
-<li><p><strong>usr</strong>——Unix Software Resources的缩写</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052220580.png" alt="image-20240405222033196"></p>
-<h3 id="（3）Opening-and-Closing-Files"><a href="#（3）Opening-and-Closing-Files" class="headerlink" title="（3）Opening and Closing Files"></a>（3）Opening and Closing Files</h3><ul>
-<li><p>打开文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052222286.png" alt="image-20240405222257203"></p>
-</li>
-<li><p>关闭文件</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052223245.png" alt="image-20240405222318176"></p>
-</li>
-</ul>
-<h3 id="（4）File-Permission"><a href="#（4）File-Permission" class="headerlink" title="（4）File Permission"></a>（4）File Permission</h3><ul>
-<li><p>User（文件拥有者）</p>
-</li>
-<li><p>Group（群组）</p>
-</li>
-<li><p>Others（其他人）</p>
-</li>
-<li><p>观察下图，可以看出：</p>
-<ul>
-<li>普通文件由<code>-</code>开头；目录文件由<code>d</code>开头</li>
-<li><code>rwx</code>：<ul>
-<li><code>r</code>：read</li>
-<li><code>w</code>：write</li>
-<li><code>x</code>：execute</li>
-</ul>
-</li>
-<li>一共有三组，如hello.c：<code>-rw-rw-r--</code>，可以看作是：<code>-|rw-|rw-|r--</code>，分别对应User、Group和Others的权限</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052227053.png" alt="image-20240405222704994"></p>
-<h3 id="（5）Reading-and-Writing-Files"><a href="#（5）Reading-and-Writing-Files" class="headerlink" title="（5）Reading and Writing Files"></a>（5）Reading and Writing Files</h3><ul>
-<li><code>EOF</code>：End of File</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052233018.png" alt="image-20240405223313949"></p>
-<h3 id="（6）Reading-File-Metadata"><a href="#（6）Reading-File-Metadata" class="headerlink" title="（6）Reading File Metadata"></a>（6）Reading File Metadata</h3><p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235910.png" alt="image-20240405223528846"></p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052235669.png" alt="image-20240405223540586"></p>
-<h2 id="2、Robust-I-O"><a href="#2、Robust-I-O" class="headerlink" title="2、Robust I&#x2F;O"></a>2、Robust I&#x2F;O</h2><p><strong>Robust I&#x2F;O主要用于网络中。</strong></p>
-<blockquote>
-<p>Robust I&#x2F;O（健壮的I&#x2F;O）是一种设计模式，旨在提高程序对输入输出（I&#x2F;O）操作的稳健性和可靠性。具体来说，Robust I&#x2F;O 的作用包括以下几个方面：</p>
-<ol>
-<li><strong>错误处理：</strong> Robust I&#x2F;O 强调对I&#x2F;O操作的错误处理。它会在发生错误时进行适当的处理，例如捕获异常、返回错误码或者记录日志，从而确保程序在出现异常情况时能够做出合适的应对，而不会导致程序崩溃或者数据丢失。</li>
-<li><strong>超时处理：</strong> Robust I&#x2F;O 考虑到可能发生的网络超时、设备故障等情况，会设置适当的超时时间，并在超时发生时进行处理，例如重新尝试连接或者报告错误，以保证程序能够及时响应并继续执行。</li>
-<li><strong>资源释放：</strong> Robust I&#x2F;O 确保在完成I&#x2F;O操作后及时释放资源，避免资源泄露和内存溢出等问题，提高程序的稳定性和性能。</li>
-<li><strong>容错机制：</strong> Robust I&#x2F;O 通过实现容错机制，可以在遇到部分错误或异常情况时，仍然保持程序的正常运行，尽量避免中断整个操作流程。</li>
-<li><strong>重试机制：</strong> Robust I&#x2F;O 可能会实现重试机制，以确保在出现一次性错误时，能够尝试多次重复操作，从而提高操作的成功率。</li>
-</ol>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052239600.png" alt="image-20240405223951531"></p>
-<ul>
-<li><p>rio_t结构体</p>
-<p><img src="https://raw.githubusercontent.com/hioomph/typora_image/main/img/202404052240176.png" alt="image-20240405224031108"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2933,7 +3721,7 @@ mode_t
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2976,12 +3764,12 @@ mode_t
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">103k</span>
+    <span title="站点总字数">162k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">6:16</span>
+    <span title="站点阅读时长">9:49</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
